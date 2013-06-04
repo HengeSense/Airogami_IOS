@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0707232A175E8C2F0017292A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07072329175E8C2F0017292A /* UIKit.framework */; };
+		0707232C175E8C2F0017292A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0707232B175E8C2F0017292A /* Foundation.framework */; };
+		0707232E175E8C2F0017292A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0707232D175E8C2F0017292A /* CoreGraphics.framework */; };
+		07072334175E8C2F0017292A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07072332175E8C2F0017292A /* InfoPlist.strings */; };
+		07072336175E8C2F0017292A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07072335175E8C2F0017292A /* main.m */; };
+		0707233A175E8C2F0017292A /* AGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07072339175E8C2F0017292A /* AGAppDelegate.m */; };
+		0707233C175E8C2F0017292A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707233B175E8C2F0017292A /* Default.png */; };
+		0707233E175E8C2F0017292A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707233D175E8C2F0017292A /* Default@2x.png */; };
+		07072340175E8C2F0017292A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707233F175E8C2F0017292A /* Default-568h@2x.png */; };
+		07072343175E8C2F0017292A /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07072341175E8C2F0017292A /* MainStoryboard_iPhone.storyboard */; };
+		07072346175E8C2F0017292A /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07072344175E8C2F0017292A /* MainStoryboard_iPad.storyboard */; };
+		07072349175E8C2F0017292A /* AGFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07072348175E8C2F0017292A /* AGFirstViewController.m */; };
+		0707234B175E8C2F0017292A /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707234A175E8C2F0017292A /* first.png */; };
+		0707234D175E8C2F0017292A /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707234C175E8C2F0017292A /* first@2x.png */; };
+		07072350175E8C2F0017292A /* AGSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707234F175E8C2F0017292A /* AGSecondViewController.m */; };
+		07072352175E8C2F0017292A /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 07072351175E8C2F0017292A /* second.png */; };
+		07072354175E8C2F0017292A /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07072353175E8C2F0017292A /* second@2x.png */; };
+		0707235C175E8C2F0017292A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0707235B175E8C2F0017292A /* SenTestingKit.framework */; };
+		0707235D175E8C2F0017292A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07072329175E8C2F0017292A /* UIKit.framework */; };
+		0707235E175E8C2F0017292A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0707232B175E8C2F0017292A /* Foundation.framework */; };
+		07072366175E8C2F0017292A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07072364175E8C2F0017292A /* InfoPlist.strings */; };
+		07072369175E8C2F0017292A /* AirogamiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 07072368175E8C2F0017292A /* AirogamiTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0707235F175E8C2F0017292A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0707231E175E8C2F0017292A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07072325175E8C2F0017292A;
+			remoteInfo = Airogami;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07072326175E8C2F0017292A /* Airogami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Airogami.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07072329175E8C2F0017292A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0707232B175E8C2F0017292A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0707232D175E8C2F0017292A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		07072331175E8C2F0017292A /* Airogami-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Airogami-Info.plist"; sourceTree = "<group>"; };
+		07072333175E8C2F0017292A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		07072335175E8C2F0017292A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		07072337175E8C2F0017292A /* Airogami-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airogami-Prefix.pch"; sourceTree = "<group>"; };
+		07072338175E8C2F0017292A /* AGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGAppDelegate.h; sourceTree = "<group>"; };
+		07072339175E8C2F0017292A /* AGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGAppDelegate.m; sourceTree = "<group>"; };
+		0707233B175E8C2F0017292A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		0707233D175E8C2F0017292A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0707233F175E8C2F0017292A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		07072342175E8C2F0017292A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		07072345175E8C2F0017292A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		07072347175E8C2F0017292A /* AGFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGFirstViewController.h; sourceTree = "<group>"; };
+		07072348175E8C2F0017292A /* AGFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGFirstViewController.m; sourceTree = "<group>"; };
+		0707234A175E8C2F0017292A /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		0707234C175E8C2F0017292A /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		0707234E175E8C2F0017292A /* AGSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGSecondViewController.h; sourceTree = "<group>"; };
+		0707234F175E8C2F0017292A /* AGSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGSecondViewController.m; sourceTree = "<group>"; };
+		07072351175E8C2F0017292A /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		07072353175E8C2F0017292A /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		0707235A175E8C2F0017292A /* AirogamiTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirogamiTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0707235B175E8C2F0017292A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		07072363175E8C2F0017292A /* AirogamiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AirogamiTests-Info.plist"; sourceTree = "<group>"; };
+		07072365175E8C2F0017292A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		07072367175E8C2F0017292A /* AirogamiTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirogamiTests.h; sourceTree = "<group>"; };
+		07072368175E8C2F0017292A /* AirogamiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirogamiTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07072323175E8C2F0017292A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0707232A175E8C2F0017292A /* UIKit.framework in Frameworks */,
+				0707232C175E8C2F0017292A /* Foundation.framework in Frameworks */,
+				0707232E175E8C2F0017292A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07072356175E8C2F0017292A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0707235C175E8C2F0017292A /* SenTestingKit.framework in Frameworks */,
+				0707235D175E8C2F0017292A /* UIKit.framework in Frameworks */,
+				0707235E175E8C2F0017292A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0707231D175E8C2F0017292A = {
+			isa = PBXGroup;
+			children = (
+				0707232F175E8C2F0017292A /* Airogami */,
+				07072361175E8C2F0017292A /* AirogamiTests */,
+				07072328175E8C2F0017292A /* Frameworks */,
+				07072327175E8C2F0017292A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07072327175E8C2F0017292A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07072326175E8C2F0017292A /* Airogami.app */,
+				0707235A175E8C2F0017292A /* AirogamiTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07072328175E8C2F0017292A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07072329175E8C2F0017292A /* UIKit.framework */,
+				0707232B175E8C2F0017292A /* Foundation.framework */,
+				0707232D175E8C2F0017292A /* CoreGraphics.framework */,
+				0707235B175E8C2F0017292A /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0707232F175E8C2F0017292A /* Airogami */ = {
+			isa = PBXGroup;
+			children = (
+				07072338175E8C2F0017292A /* AGAppDelegate.h */,
+				07072339175E8C2F0017292A /* AGAppDelegate.m */,
+				07072341175E8C2F0017292A /* MainStoryboard_iPhone.storyboard */,
+				07072344175E8C2F0017292A /* MainStoryboard_iPad.storyboard */,
+				07072347175E8C2F0017292A /* AGFirstViewController.h */,
+				07072348175E8C2F0017292A /* AGFirstViewController.m */,
+				0707234A175E8C2F0017292A /* first.png */,
+				0707234C175E8C2F0017292A /* first@2x.png */,
+				0707234E175E8C2F0017292A /* AGSecondViewController.h */,
+				0707234F175E8C2F0017292A /* AGSecondViewController.m */,
+				07072351175E8C2F0017292A /* second.png */,
+				07072353175E8C2F0017292A /* second@2x.png */,
+				07072330175E8C2F0017292A /* Supporting Files */,
+			);
+			path = Airogami;
+			sourceTree = "<group>";
+		};
+		07072330175E8C2F0017292A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07072331175E8C2F0017292A /* Airogami-Info.plist */,
+				07072332175E8C2F0017292A /* InfoPlist.strings */,
+				07072335175E8C2F0017292A /* main.m */,
+				07072337175E8C2F0017292A /* Airogami-Prefix.pch */,
+				0707233B175E8C2F0017292A /* Default.png */,
+				0707233D175E8C2F0017292A /* Default@2x.png */,
+				0707233F175E8C2F0017292A /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		07072361175E8C2F0017292A /* AirogamiTests */ = {
+			isa = PBXGroup;
+			children = (
+				07072367175E8C2F0017292A /* AirogamiTests.h */,
+				07072368175E8C2F0017292A /* AirogamiTests.m */,
+				07072362175E8C2F0017292A /* Supporting Files */,
+			);
+			path = AirogamiTests;
+			sourceTree = "<group>";
+		};
+		07072362175E8C2F0017292A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				07072363175E8C2F0017292A /* AirogamiTests-Info.plist */,
+				07072364175E8C2F0017292A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07072325175E8C2F0017292A /* Airogami */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0707236C175E8C2F0017292A /* Build configuration list for PBXNativeTarget "Airogami" */;
+			buildPhases = (
+				07072322175E8C2F0017292A /* Sources */,
+				07072323175E8C2F0017292A /* Frameworks */,
+				07072324175E8C2F0017292A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Airogami;
+			productName = Airogami;
+			productReference = 07072326175E8C2F0017292A /* Airogami.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07072359175E8C2F0017292A /* AirogamiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0707236F175E8C2F0017292A /* Build configuration list for PBXNativeTarget "AirogamiTests" */;
+			buildPhases = (
+				07072355175E8C2F0017292A /* Sources */,
+				07072356175E8C2F0017292A /* Frameworks */,
+				07072357175E8C2F0017292A /* Resources */,
+				07072358175E8C2F0017292A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07072360175E8C2F0017292A /* PBXTargetDependency */,
+			);
+			name = AirogamiTests;
+			productName = AirogamiTests;
+			productReference = 0707235A175E8C2F0017292A /* AirogamiTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0707231E175E8C2F0017292A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AG;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Airogami;
+			};
+			buildConfigurationList = 07072321175E8C2F0017292A /* Build configuration list for PBXProject "Airogami" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0707231D175E8C2F0017292A;
+			productRefGroup = 07072327175E8C2F0017292A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07072325175E8C2F0017292A /* Airogami */,
+				07072359175E8C2F0017292A /* AirogamiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07072324175E8C2F0017292A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07072334175E8C2F0017292A /* InfoPlist.strings in Resources */,
+				0707233C175E8C2F0017292A /* Default.png in Resources */,
+				0707233E175E8C2F0017292A /* Default@2x.png in Resources */,
+				07072340175E8C2F0017292A /* Default-568h@2x.png in Resources */,
+				07072343175E8C2F0017292A /* MainStoryboard_iPhone.storyboard in Resources */,
+				07072346175E8C2F0017292A /* MainStoryboard_iPad.storyboard in Resources */,
+				0707234B175E8C2F0017292A /* first.png in Resources */,
+				0707234D175E8C2F0017292A /* first@2x.png in Resources */,
+				07072352175E8C2F0017292A /* second.png in Resources */,
+				07072354175E8C2F0017292A /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07072357175E8C2F0017292A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07072366175E8C2F0017292A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		07072358175E8C2F0017292A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07072322175E8C2F0017292A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07072336175E8C2F0017292A /* main.m in Sources */,
+				0707233A175E8C2F0017292A /* AGAppDelegate.m in Sources */,
+				07072349175E8C2F0017292A /* AGFirstViewController.m in Sources */,
+				07072350175E8C2F0017292A /* AGSecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07072355175E8C2F0017292A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07072369175E8C2F0017292A /* AirogamiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07072360175E8C2F0017292A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07072325175E8C2F0017292A /* Airogami */;
+			targetProxy = 0707235F175E8C2F0017292A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07072332175E8C2F0017292A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07072333175E8C2F0017292A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		07072341175E8C2F0017292A /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07072342175E8C2F0017292A /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		07072344175E8C2F0017292A /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07072345175E8C2F0017292A /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		07072364175E8C2F0017292A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07072365175E8C2F0017292A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0707236A175E8C2F0017292A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0707236B175E8C2F0017292A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0707236D175E8C2F0017292A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Airogami/Airogami-Prefix.pch";
+				INFOPLIST_FILE = "Airogami/Airogami-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0707236E175E8C2F0017292A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Airogami/Airogami-Prefix.pch";
+				INFOPLIST_FILE = "Airogami/Airogami-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		07072370175E8C2F0017292A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Airogami.app/Airogami";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Airogami/Airogami-Prefix.pch";
+				INFOPLIST_FILE = "AirogamiTests/AirogamiTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		07072371175E8C2F0017292A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Airogami.app/Airogami";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Airogami/Airogami-Prefix.pch";
+				INFOPLIST_FILE = "AirogamiTests/AirogamiTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07072321175E8C2F0017292A /* Build configuration list for PBXProject "Airogami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0707236A175E8C2F0017292A /* Debug */,
+				0707236B175E8C2F0017292A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0707236C175E8C2F0017292A /* Build configuration list for PBXNativeTarget "Airogami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0707236D175E8C2F0017292A /* Debug */,
+				0707236E175E8C2F0017292A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0707236F175E8C2F0017292A /* Build configuration list for PBXNativeTarget "AirogamiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07072370175E8C2F0017292A /* Debug */,
+				07072371175E8C2F0017292A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0707231E175E8C2F0017292A /* Project object */;
+}
