@@ -7,12 +7,21 @@
 //
 
 #import "AGAppDelegate.h"
+#import "AGKeyboardScroll.h"
+
+
+@interface AGAppDelegate()
+{
+    AGKeyboardScroll* scroll;
+}
+@end
 
 @implementation AGAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [AGKeyboardScroll initialize];
     return YES;
 }
 							

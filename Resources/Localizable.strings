@@ -1,0 +1,23 @@
+/* 
+  Localized.strings
+  Airogami
+
+  Created by Tianhu Yang on 6/13/13.
+  Copyright (c) 2013 Airogami. All rights reserved.
+*/
+//signup
+"error.signup.name.short" = "Screen name is too short";
+"error.signup.password.short" = "Password is too short";
+"error.signup.location.empty" = "Please choose your location";
+"error.signup.email.invalid" = "Please input a valid email";
+"error.signup.location.choose.invalid" = "Please specify your city";
+//signin
+"error.signin.account.invalid" = "Account and password don't match";
+//google auto complete
+"error.googleplacesautocomplete.fetch" = "Could not fetch Places";
+"error.googleplacesautocomplete.map" = "Could not map selected Place";
+"text.googleplacesautocomplete.search" = "Search or Address";
+//main tabbar
+"main.tabbar.title_0" = "Compose";
+"main.tabbar.title_1" = "Pickup";
+"main.tabbar.title_2" = "Plane";
