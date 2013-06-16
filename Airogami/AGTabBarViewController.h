@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AGTabBarViewController : UITabBarController
--(void) selectTab:(int)tabID;
+
 @end

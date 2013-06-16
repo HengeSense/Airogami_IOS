@@ -106,10 +106,12 @@ enum{
     UIStoryboard *composeStoryBaord = [UIStoryboard storyboardWithName:@"AGComposeStoryboard" bundle:nil];
     UIStoryboard *pickupStoryBaord = [UIStoryboard storyboardWithName:@"AGPickupStoryboard" bundle:nil];
     UIStoryboard *planeStoryBaord = [UIStoryboard storyboardWithName:@"AGPlaneStoryboard" bundle:nil];
+    UIStoryboard *settingStoryBaord = [UIStoryboard storyboardWithName:@"AGSettingStoryboard" bundle:nil];
     UIViewController *composeViewController = [composeStoryBaord instantiateViewControllerWithIdentifier:@"ComposeRootViewController"];
     UIViewController *pickupViewController = [pickupStoryBaord instantiateViewControllerWithIdentifier:@"PickupRootViewController"];
     UIViewController *planeViewController = [planeStoryBaord instantiateViewControllerWithIdentifier:@"PlaneRootViewController"];
-    viewControllers = [NSArray arrayWithObjects:composeViewController, pickupViewController, planeViewController, nil];
+    UIViewController *settingViewController = [settingStoryBaord instantiateViewControllerWithIdentifier:@"SettingRootViewController"];
+    viewControllers = [NSArray arrayWithObjects:composeViewController, pickupViewController, planeViewController, settingViewController, nil];
 }
 
 - (void) navigateToSign

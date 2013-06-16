@@ -25,9 +25,6 @@
 		07072399175EB58F0017292A /* signup_bgrd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07072398175EB58F0017292A /* signup_bgrd@2x.png */; };
 		0707239D175EB75C0017292A /* signup_account_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707239B175EB75C0017292A /* signup_account_normal@2x.png */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
-		073250ED176A71E600487B9E /* AGUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250EC176A71E600487B9E /* AGUIUtils.m */; };
-		073250F2176A7D3000487B9E /* error_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250F1176A7D3000487B9E /* error_bar@2x.png */; };
-		073250F5176A8E3500487B9E /* AGUIErrorAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F4176A8E3500487B9E /* AGUIErrorAnimation.m */; };
 		073250F7176A976A00487B9E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 073250F6176A976A00487B9E /* Localizable.strings */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
 		078A1F5D176CDE2B00A69AE3 /* AGComposeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F5C176CDE2B00A69AE3 /* AGComposeStoryboard.storyboard */; };
@@ -52,13 +49,36 @@
 		078A1F8D176D234400A69AE3 /* AGComposeLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1F8C176D234400A69AE3 /* AGComposeLocationViewController.m */; };
 		078A1F90176D258D00A69AE3 /* AGComposeEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1F8F176D258D00A69AE3 /* AGComposeEditViewController.m */; };
 		078A1F93176D271D00A69AE3 /* AGComposePaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1F92176D271C00A69AE3 /* AGComposePaperViewController.m */; };
+		078A1F95176D342F00A69AE3 /* AGSettingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F94176D342F00A69AE3 /* AGSettingStoryboard.storyboard */; };
+		078A1FCC176D355C00A69AE3 /* AGLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1F99176D355C00A69AE3 /* AGLocation.m */; };
+		078A1FCD176D355C00A69AE3 /* AGLocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1F9B176D355C00A69AE3 /* AGLocationUtils.m */; };
+		078A1FCE176D355C00A69AE3 /* CLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1F9D176D355C00A69AE3 /* CLController.m */; };
+		078A1FCF176D355C00A69AE3 /* AGProfileImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FA0176D355C00A69AE3 /* AGProfileImage.m */; };
+		078A1FD0176D355C00A69AE3 /* AGProfileImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FA2176D355C00A69AE3 /* AGProfileImageButton.m */; };
+		078A1FD1176D355C00A69AE3 /* AGResignButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FA4176D355C00A69AE3 /* AGResignButton.m */; };
+		078A1FD2176D355C00A69AE3 /* AGSlideSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FA6176D355C00A69AE3 /* AGSlideSegue.m */; };
+		078A1FD3176D355C00A69AE3 /* AGUIErrorAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FA8176D355C00A69AE3 /* AGUIErrorAnimation.m */; };
+		078A1FD4176D355C00A69AE3 /* AGUIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FAA176D355C00A69AE3 /* AGUIUtils.m */; };
+		078A1FD5176D355C00A69AE3 /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FAD176D355C00A69AE3 /* DCRoundSwitch.m */; };
+		078A1FD6176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FAF176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m */; };
+		078A1FD7176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FB1176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.m */; };
+		078A1FD8176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FB3176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m */; };
+		078A1FD9176D355C00A69AE3 /* error_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FB5176D355C00A69AE3 /* error_bar@2x.png */; };
+		078A1FDA176D355C00A69AE3 /* locateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FB7176D355C00A69AE3 /* locateButton.png */; };
+		078A1FDB176D355C00A69AE3 /* locateButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FB8176D355C00A69AE3 /* locateButton@2x.png */; };
+		078A1FDC176D355C00A69AE3 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FB9176D355C00A69AE3 /* location.png */; };
+		078A1FDD176D355C00A69AE3 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FBA176D355C00A69AE3 /* location@2x.png */; };
+		078A1FDE176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FBC176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m */; };
+		078A1FDF176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FBE176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m */; };
+		078A1FE0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FC0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m */; };
+		078A1FE1176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FC2176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m */; };
+		078A1FE2176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FC3176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.xib */; };
+		078A1FE3176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FC5176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m */; };
+		078A1FE4176D355C00A69AE3 /* YTImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FC8176D355C00A69AE3 /* YTImageCropper.m */; };
+		078A1FE5176D355C00A69AE3 /* YTImageCropper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 078A1FC9176D355C00A69AE3 /* YTImageCropper.xib */; };
+		078A1FE6176D355C00A69AE3 /* YTImageCropperMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A1FCB176D355C00A69AE3 /* YTImageCropperMaskView.m */; };
 		078A348B175FC7B700B5A7EB /* signup_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A348A175FC7B700B5A7EB /* signup_title@2x.png */; };
-		078A3490175FE9AD00B5A7EB /* AGProfileImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A348E175FE97200B5A7EB /* AGProfileImage.m */; };
 		078A349F175FF65900B5A7EB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078A349E175FF65900B5A7EB /* QuartzCore.framework */; };
-		078A34A9176001F700B5A7EB /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A34A2176001F700B5A7EB /* DCRoundSwitch.m */; };
-		078A34AA176001F700B5A7EB /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A34A4176001F700B5A7EB /* DCRoundSwitchKnobLayer.m */; };
-		078A34AB176001F700B5A7EB /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A34A6176001F700B5A7EB /* DCRoundSwitchOutlineLayer.m */; };
-		078A34AC176001F700B5A7EB /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A34A8176001F700B5A7EB /* DCRoundSwitchToggleLayer.m */; };
 		078A34AE1760197F00B5A7EB /* signup_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078A34AD1760197F00B5A7EB /* signup_location@2x.png */; };
 		078D951B1761107B00663FDE /* signup_account_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D95191761107B00663FDE /* signup_account_name@2x.png */; };
 		078D951C1761107B00663FDE /* signup_account_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D951A1761107B00663FDE /* signup_account_password@2x.png */; };
@@ -69,8 +89,6 @@
 		078D952617611CA400663FDE /* signup_profile_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D952517611CA400663FDE /* signup_profile_image@2x.png */; };
 		078D952C17612F0800663FDE /* AGKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D952B17612F0800663FDE /* AGKeyboardScroll.m */; };
 		078D952F176145E600663FDE /* AGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D952E176145E600663FDE /* AGUtils.m */; };
-		078D953217615D8F00663FDE /* AGResignButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D953117615D8F00663FDE /* AGResignButton.m */; };
-		078FB5991763D372000C1D53 /* AGSlideSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 078FB5981763D372000C1D53 /* AGSlideSegue.m */; };
 		078FB59F1763E687000C1D53 /* signup_profile_image_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078FB59C1763E687000C1D53 /* signup_profile_image_highlight@2x.png */; };
 		078FB5A1176405BB000C1D53 /* normal_done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078FB5A0176405BA000C1D53 /* normal_done@2x.png */; };
 		078FB5A3176405D2000C1D53 /* normal_done_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078FB5A2176405D2000C1D53 /* normal_done_highlight@2x.png */; };
@@ -80,16 +98,6 @@
 		079046FB176BD45E007E2827 /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 079046F7176BD45E007E2827 /* back_button@2x.png */; };
 		079046FC176BD45E007E2827 /* done_button_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 079046F8176BD45E007E2827 /* done_button_highlight@2x.png */; };
 		079046FD176BD45E007E2827 /* done_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 079046F9176BD45E007E2827 /* done_button@2x.png */; };
-		0799D02C1762A62400B74722 /* locateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0799D0181762A62400B74722 /* locateButton.png */; };
-		0799D02D1762A62400B74722 /* locateButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0799D0191762A62400B74722 /* locateButton@2x.png */; };
-		0799D02E1762A62400B74722 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 0799D01A1762A62400B74722 /* location.png */; };
-		0799D02F1762A62400B74722 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0799D01B1762A62400B74722 /* location@2x.png */; };
-		0799D0321762A62400B74722 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D0201762A62400B74722 /* SPGooglePlacesAutocompletePlace.m */; };
-		0799D0331762A62400B74722 /* SPGooglePlacesAutocompleteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D0221762A62400B74722 /* SPGooglePlacesAutocompleteQuery.m */; };
-		0799D0341762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D0241762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.m */; };
-		0799D0351762A62400B74722 /* SPGooglePlacesAutocompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D0261762A62400B74722 /* SPGooglePlacesAutocompleteViewController.m */; };
-		0799D0361762A62400B74722 /* SPGooglePlacesAutocompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0799D0271762A62400B74722 /* SPGooglePlacesAutocompleteViewController.xib */; };
-		0799D0371762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D0291762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.m */; };
 		0799D0391762B22700B74722 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799D0381762B22700B74722 /* CoreLocation.framework */; };
 		0799D03B1762B24500B74722 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799D03A1762B24500B74722 /* MapKit.framework */; };
 		0799D03E1762B77C00B74722 /* AGSignupLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D03D1762B77C00B74722 /* AGSignupLocationViewController.m */; };
@@ -106,16 +114,9 @@
 		07D16406176BDC7D009675F5 /* signin_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D16405176BDC7D009675F5 /* signin_title@2x.png */; };
 		07D16409176BE866009675F5 /* AGResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D16408176BE866009675F5 /* AGResetPasswordViewController.m */; };
 		07DB923917669867000F0780 /* AGImagePickAndCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB923817669867000F0780 /* AGImagePickAndCrop.m */; };
-		07DB924017669B12000F0780 /* YTImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB923C17669B12000F0780 /* YTImageCropper.m */; };
-		07DB924117669B12000F0780 /* YTImageCropper.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07DB923D17669B12000F0780 /* YTImageCropper.xib */; };
-		07DB924217669B12000F0780 /* YTImageCropperMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB923F17669B12000F0780 /* YTImageCropperMaskView.m */; };
-		07DB92451766B0BA000F0780 /* AGProfileImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB92441766B0BA000F0780 /* AGProfileImageButton.m */; };
 		07DB924A1769294D000F0780 /* powered-by-google-on-non-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 07DB92481769294D000F0780 /* powered-by-google-on-non-white.png */; };
 		07DB924B1769294D000F0780 /* powered-by-google-on-non-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07DB92491769294D000F0780 /* powered-by-google-on-non-white@2x.png */; };
-		07DB924F176935DE000F0780 /* AGLocationUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB924E176935DE000F0780 /* AGLocationUtils.m */; };
-		07DB9252176937F1000F0780 /* CLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB9251176937F1000F0780 /* CLController.m */; };
 		07DB92551769411A000F0780 /* NSArray+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB92541769411A000F0780 /* NSArray+Addition.m */; };
-		07DB925817695798000F0780 /* AGLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB925717695798000F0780 /* AGLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,11 +155,6 @@
 		0707239B175EB75C0017292A /* signup_account_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_normal@2x.png"; sourceTree = "<group>"; };
 		070723A1175EBB440017292A /* AGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGDefines.h; sourceTree = "<group>"; };
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
-		073250EB176A71E600487B9E /* AGUIUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUIUtils.h; sourceTree = "<group>"; };
-		073250EC176A71E600487B9E /* AGUIUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUIUtils.m; sourceTree = "<group>"; };
-		073250F1176A7D3000487B9E /* error_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error_bar@2x.png"; sourceTree = "<group>"; };
-		073250F3176A8E3500487B9E /* AGUIErrorAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUIErrorAnimation.h; sourceTree = "<group>"; };
-		073250F4176A8E3500487B9E /* AGUIErrorAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUIErrorAnimation.m; sourceTree = "<group>"; };
 		073250F6176A976A00487B9E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		073250F9176AB4AB00487B9E /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
@@ -190,18 +186,56 @@
 		078A1F8F176D258D00A69AE3 /* AGComposeEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGComposeEditViewController.m; sourceTree = "<group>"; };
 		078A1F91176D271C00A69AE3 /* AGComposePaperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGComposePaperViewController.h; sourceTree = "<group>"; };
 		078A1F92176D271C00A69AE3 /* AGComposePaperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGComposePaperViewController.m; sourceTree = "<group>"; };
+		078A1F94176D342F00A69AE3 /* AGSettingStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGSettingStoryboard.storyboard; sourceTree = "<group>"; };
+		078A1F98176D355C00A69AE3 /* AGLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLocation.h; sourceTree = "<group>"; };
+		078A1F99176D355C00A69AE3 /* AGLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLocation.m; sourceTree = "<group>"; };
+		078A1F9A176D355C00A69AE3 /* AGLocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLocationUtils.h; sourceTree = "<group>"; };
+		078A1F9B176D355C00A69AE3 /* AGLocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLocationUtils.m; sourceTree = "<group>"; };
+		078A1F9C176D355C00A69AE3 /* CLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLController.h; sourceTree = "<group>"; };
+		078A1F9D176D355C00A69AE3 /* CLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLController.m; sourceTree = "<group>"; };
+		078A1F9F176D355C00A69AE3 /* AGProfileImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfileImage.h; sourceTree = "<group>"; };
+		078A1FA0176D355C00A69AE3 /* AGProfileImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileImage.m; sourceTree = "<group>"; };
+		078A1FA1176D355C00A69AE3 /* AGProfileImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfileImageButton.h; sourceTree = "<group>"; };
+		078A1FA2176D355C00A69AE3 /* AGProfileImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileImageButton.m; sourceTree = "<group>"; };
+		078A1FA3176D355C00A69AE3 /* AGResignButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGResignButton.h; sourceTree = "<group>"; };
+		078A1FA4176D355C00A69AE3 /* AGResignButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGResignButton.m; sourceTree = "<group>"; };
+		078A1FA5176D355C00A69AE3 /* AGSlideSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSlideSegue.h; sourceTree = "<group>"; };
+		078A1FA6176D355C00A69AE3 /* AGSlideSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSlideSegue.m; sourceTree = "<group>"; };
+		078A1FA7176D355C00A69AE3 /* AGUIErrorAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUIErrorAnimation.h; sourceTree = "<group>"; };
+		078A1FA8176D355C00A69AE3 /* AGUIErrorAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUIErrorAnimation.m; sourceTree = "<group>"; };
+		078A1FA9176D355C00A69AE3 /* AGUIUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUIUtils.h; sourceTree = "<group>"; };
+		078A1FAA176D355C00A69AE3 /* AGUIUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUIUtils.m; sourceTree = "<group>"; };
+		078A1FAC176D355C00A69AE3 /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
+		078A1FAD176D355C00A69AE3 /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
+		078A1FAE176D355C00A69AE3 /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
+		078A1FAF176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
+		078A1FB0176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
+		078A1FB1176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
+		078A1FB2176D355C00A69AE3 /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
+		078A1FB3176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
+		078A1FB5176D355C00A69AE3 /* error_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error_bar@2x.png"; sourceTree = "<group>"; };
+		078A1FB7176D355C00A69AE3 /* locateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locateButton.png; sourceTree = "<group>"; };
+		078A1FB8176D355C00A69AE3 /* locateButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locateButton@2x.png"; sourceTree = "<group>"; };
+		078A1FB9176D355C00A69AE3 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		078A1FBA176D355C00A69AE3 /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
+		078A1FBB176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompletePlace.h; sourceTree = "<group>"; };
+		078A1FBC176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompletePlace.m; sourceTree = "<group>"; };
+		078A1FBD176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteQuery.h; sourceTree = "<group>"; };
+		078A1FBE176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteQuery.m; sourceTree = "<group>"; };
+		078A1FBF176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteUtilities.h; sourceTree = "<group>"; };
+		078A1FC0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteUtilities.m; sourceTree = "<group>"; };
+		078A1FC1176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteViewController.h; sourceTree = "<group>"; };
+		078A1FC2176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteViewController.m; sourceTree = "<group>"; };
+		078A1FC3176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPGooglePlacesAutocompleteViewController.xib; sourceTree = "<group>"; };
+		078A1FC4176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesPlaceDetailQuery.h; sourceTree = "<group>"; };
+		078A1FC5176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesPlaceDetailQuery.m; sourceTree = "<group>"; };
+		078A1FC7176D355C00A69AE3 /* YTImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTImageCropper.h; sourceTree = "<group>"; };
+		078A1FC8176D355C00A69AE3 /* YTImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTImageCropper.m; sourceTree = "<group>"; };
+		078A1FC9176D355C00A69AE3 /* YTImageCropper.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTImageCropper.xib; sourceTree = "<group>"; };
+		078A1FCA176D355C00A69AE3 /* YTImageCropperMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTImageCropperMaskView.h; sourceTree = "<group>"; };
+		078A1FCB176D355C00A69AE3 /* YTImageCropperMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTImageCropperMaskView.m; sourceTree = "<group>"; };
 		078A348A175FC7B700B5A7EB /* signup_title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_title@2x.png"; sourceTree = "<group>"; };
-		078A348D175FE97200B5A7EB /* AGProfileImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfileImage.h; sourceTree = "<group>"; };
-		078A348E175FE97200B5A7EB /* AGProfileImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileImage.m; sourceTree = "<group>"; };
 		078A349E175FF65900B5A7EB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		078A34A1176001F700B5A7EB /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
-		078A34A2176001F700B5A7EB /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
-		078A34A3176001F700B5A7EB /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
-		078A34A4176001F700B5A7EB /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
-		078A34A5176001F700B5A7EB /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
-		078A34A6176001F700B5A7EB /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
-		078A34A7176001F700B5A7EB /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
-		078A34A8176001F700B5A7EB /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
 		078A34AD1760197F00B5A7EB /* signup_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location@2x.png"; sourceTree = "<group>"; };
 		078D95191761107B00663FDE /* signup_account_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_name@2x.png"; sourceTree = "<group>"; };
 		078D951A1761107B00663FDE /* signup_account_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_password@2x.png"; sourceTree = "<group>"; };
@@ -214,10 +248,6 @@
 		078D952B17612F0800663FDE /* AGKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeyboardScroll.m; sourceTree = "<group>"; };
 		078D952D176145E600663FDE /* AGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUtils.h; sourceTree = "<group>"; };
 		078D952E176145E600663FDE /* AGUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUtils.m; sourceTree = "<group>"; };
-		078D953017615D8F00663FDE /* AGResignButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGResignButton.h; sourceTree = "<group>"; };
-		078D953117615D8F00663FDE /* AGResignButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGResignButton.m; sourceTree = "<group>"; };
-		078FB5971763D372000C1D53 /* AGSlideSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSlideSegue.h; sourceTree = "<group>"; };
-		078FB5981763D372000C1D53 /* AGSlideSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSlideSegue.m; sourceTree = "<group>"; };
 		078FB59C1763E687000C1D53 /* signup_profile_image_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_profile_image_highlight@2x.png"; sourceTree = "<group>"; };
 		078FB5A0176405BA000C1D53 /* normal_done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "normal_done@2x.png"; sourceTree = "<group>"; };
 		078FB5A2176405D2000C1D53 /* normal_done_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "normal_done_highlight@2x.png"; sourceTree = "<group>"; };
@@ -228,21 +258,6 @@
 		079046F7176BD45E007E2827 /* back_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button@2x.png"; sourceTree = "<group>"; };
 		079046F8176BD45E007E2827 /* done_button_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done_button_highlight@2x.png"; sourceTree = "<group>"; };
 		079046F9176BD45E007E2827 /* done_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done_button@2x.png"; sourceTree = "<group>"; };
-		0799D0181762A62400B74722 /* locateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locateButton.png; sourceTree = "<group>"; };
-		0799D0191762A62400B74722 /* locateButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locateButton@2x.png"; sourceTree = "<group>"; };
-		0799D01A1762A62400B74722 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
-		0799D01B1762A62400B74722 /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
-		0799D01F1762A62400B74722 /* SPGooglePlacesAutocompletePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompletePlace.h; sourceTree = "<group>"; };
-		0799D0201762A62400B74722 /* SPGooglePlacesAutocompletePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompletePlace.m; sourceTree = "<group>"; };
-		0799D0211762A62400B74722 /* SPGooglePlacesAutocompleteQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteQuery.h; sourceTree = "<group>"; };
-		0799D0221762A62400B74722 /* SPGooglePlacesAutocompleteQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteQuery.m; sourceTree = "<group>"; };
-		0799D0231762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteUtilities.h; sourceTree = "<group>"; };
-		0799D0241762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteUtilities.m; sourceTree = "<group>"; };
-		0799D0251762A62400B74722 /* SPGooglePlacesAutocompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteViewController.h; sourceTree = "<group>"; };
-		0799D0261762A62400B74722 /* SPGooglePlacesAutocompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteViewController.m; sourceTree = "<group>"; };
-		0799D0271762A62400B74722 /* SPGooglePlacesAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPGooglePlacesAutocompleteViewController.xib; sourceTree = "<group>"; };
-		0799D0281762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesPlaceDetailQuery.h; sourceTree = "<group>"; };
-		0799D0291762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesPlaceDetailQuery.m; sourceTree = "<group>"; };
 		0799D0381762B22700B74722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0799D03A1762B24500B74722 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0799D03C1762B77C00B74722 /* AGSignupLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSignupLocationViewController.h; sourceTree = "<group>"; };
@@ -262,23 +277,10 @@
 		07D16408176BE866009675F5 /* AGResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGResetPasswordViewController.m; sourceTree = "<group>"; };
 		07DB923717669867000F0780 /* AGImagePickAndCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGImagePickAndCrop.h; sourceTree = "<group>"; };
 		07DB923817669867000F0780 /* AGImagePickAndCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGImagePickAndCrop.m; sourceTree = "<group>"; };
-		07DB923B17669B12000F0780 /* YTImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTImageCropper.h; sourceTree = "<group>"; };
-		07DB923C17669B12000F0780 /* YTImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTImageCropper.m; sourceTree = "<group>"; };
-		07DB923D17669B12000F0780 /* YTImageCropper.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTImageCropper.xib; sourceTree = "<group>"; };
-		07DB923E17669B12000F0780 /* YTImageCropperMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTImageCropperMaskView.h; sourceTree = "<group>"; };
-		07DB923F17669B12000F0780 /* YTImageCropperMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTImageCropperMaskView.m; sourceTree = "<group>"; };
-		07DB92431766B0BA000F0780 /* AGProfileImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfileImageButton.h; sourceTree = "<group>"; };
-		07DB92441766B0BA000F0780 /* AGProfileImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileImageButton.m; sourceTree = "<group>"; };
 		07DB92481769294D000F0780 /* powered-by-google-on-non-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered-by-google-on-non-white.png"; sourceTree = "<group>"; };
 		07DB92491769294D000F0780 /* powered-by-google-on-non-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered-by-google-on-non-white@2x.png"; sourceTree = "<group>"; };
-		07DB924D176935DE000F0780 /* AGLocationUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLocationUtils.h; sourceTree = "<group>"; };
-		07DB924E176935DE000F0780 /* AGLocationUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLocationUtils.m; sourceTree = "<group>"; };
-		07DB9250176937F1000F0780 /* CLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLController.h; sourceTree = "<group>"; };
-		07DB9251176937F1000F0780 /* CLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLController.m; sourceTree = "<group>"; };
 		07DB92531769411A000F0780 /* NSArray+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Addition.h"; sourceTree = "<group>"; };
 		07DB92541769411A000F0780 /* NSArray+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Addition.m"; sourceTree = "<group>"; };
-		07DB925617695798000F0780 /* AGLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLocation.h; sourceTree = "<group>"; };
-		07DB925717695798000F0780 /* AGLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLocation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,14 +313,12 @@
 		0707231D175E8C2F0017292A = {
 			isa = PBXGroup;
 			children = (
+				078A1FE7176D361C00A69AE3 /* Setting */,
+				078A1F96176D355C00A69AE3 /* Logic */,
+				078A1F9E176D355C00A69AE3 /* UIUtils */,
 				078A1F65176CEF6900A69AE3 /* Compose */,
 				078A1F67176CEF6900A69AE3 /* Pickup */,
 				078A1F69176CEF6900A69AE3 /* Plane */,
-				07DB924C176935AA000F0780 /* Location */,
-				07DB923A17669B12000F0780 /* YTImageCropper */,
-				0799D0131762A62400B74722 /* SPGooglePlacesAutocomplete */,
-				078A34A0176001F700B5A7EB /* DCRoundSwitch */,
-				078A348C175FE94300B5A7EB /* UIUtils */,
 				07072390175EB21D0017292A /* Utils */,
 				0707238C175EA7D20017292A /* Sign */,
 				0707237D175EA0260017292A /* Resources */,
@@ -425,6 +425,7 @@
 				078A1F5C176CDE2B00A69AE3 /* AGComposeStoryboard.storyboard */,
 				078A1F5E176CDE6400A69AE3 /* AGPickupStoryboard.storyboard */,
 				078A1F60176CDF0900A69AE3 /* AGPlaneStoryboard.storyboard */,
+				078A1F94176D342F00A69AE3 /* AGSettingStoryboard.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -504,14 +505,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		073250F0176A7D3000487B9E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				073250F1176A7D3000487B9E /* error_bar@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		078A1F65176CEF6900A69AE3 /* Compose */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,86 +559,120 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		078A348C175FE94300B5A7EB /* UIUtils */ = {
+		078A1F96176D355C00A69AE3 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				073250F0176A7D3000487B9E /* Resources */,
-				078FB5971763D372000C1D53 /* AGSlideSegue.h */,
-				078FB5981763D372000C1D53 /* AGSlideSegue.m */,
-				078A348D175FE97200B5A7EB /* AGProfileImage.h */,
-				078A348E175FE97200B5A7EB /* AGProfileImage.m */,
-				078D953017615D8F00663FDE /* AGResignButton.h */,
-				078D953117615D8F00663FDE /* AGResignButton.m */,
-				07DB92431766B0BA000F0780 /* AGProfileImageButton.h */,
-				07DB92441766B0BA000F0780 /* AGProfileImageButton.m */,
-				073250EB176A71E600487B9E /* AGUIUtils.h */,
-				073250EC176A71E600487B9E /* AGUIUtils.m */,
-				073250F3176A8E3500487B9E /* AGUIErrorAnimation.h */,
-				073250F4176A8E3500487B9E /* AGUIErrorAnimation.m */,
+				078A1F97176D355C00A69AE3 /* Location */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		078A1F97176D355C00A69AE3 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				078A1F98176D355C00A69AE3 /* AGLocation.h */,
+				078A1F99176D355C00A69AE3 /* AGLocation.m */,
+				078A1F9A176D355C00A69AE3 /* AGLocationUtils.h */,
+				078A1F9B176D355C00A69AE3 /* AGLocationUtils.m */,
+				078A1F9C176D355C00A69AE3 /* CLController.h */,
+				078A1F9D176D355C00A69AE3 /* CLController.m */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		078A1F9E176D355C00A69AE3 /* UIUtils */ = {
+			isa = PBXGroup;
+			children = (
+				078A1F9F176D355C00A69AE3 /* AGProfileImage.h */,
+				078A1FA0176D355C00A69AE3 /* AGProfileImage.m */,
+				078A1FA1176D355C00A69AE3 /* AGProfileImageButton.h */,
+				078A1FA2176D355C00A69AE3 /* AGProfileImageButton.m */,
+				078A1FA3176D355C00A69AE3 /* AGResignButton.h */,
+				078A1FA4176D355C00A69AE3 /* AGResignButton.m */,
+				078A1FA5176D355C00A69AE3 /* AGSlideSegue.h */,
+				078A1FA6176D355C00A69AE3 /* AGSlideSegue.m */,
+				078A1FA7176D355C00A69AE3 /* AGUIErrorAnimation.h */,
+				078A1FA8176D355C00A69AE3 /* AGUIErrorAnimation.m */,
+				078A1FA9176D355C00A69AE3 /* AGUIUtils.h */,
+				078A1FAA176D355C00A69AE3 /* AGUIUtils.m */,
+				078A1FAB176D355C00A69AE3 /* DCRoundSwitch */,
+				078A1FB4176D355C00A69AE3 /* Resources */,
+				078A1FB6176D355C00A69AE3 /* SPGooglePlacesAutocomplete */,
+				078A1FC6176D355C00A69AE3 /* YTImageCropper */,
 			);
 			path = UIUtils;
 			sourceTree = "<group>";
 		};
-		078A34A0176001F700B5A7EB /* DCRoundSwitch */ = {
+		078A1FAB176D355C00A69AE3 /* DCRoundSwitch */ = {
 			isa = PBXGroup;
 			children = (
-				078A34A1176001F700B5A7EB /* DCRoundSwitch.h */,
-				078A34A2176001F700B5A7EB /* DCRoundSwitch.m */,
-				078A34A3176001F700B5A7EB /* DCRoundSwitchKnobLayer.h */,
-				078A34A4176001F700B5A7EB /* DCRoundSwitchKnobLayer.m */,
-				078A34A5176001F700B5A7EB /* DCRoundSwitchOutlineLayer.h */,
-				078A34A6176001F700B5A7EB /* DCRoundSwitchOutlineLayer.m */,
-				078A34A7176001F700B5A7EB /* DCRoundSwitchToggleLayer.h */,
-				078A34A8176001F700B5A7EB /* DCRoundSwitchToggleLayer.m */,
+				078A1FAC176D355C00A69AE3 /* DCRoundSwitch.h */,
+				078A1FAD176D355C00A69AE3 /* DCRoundSwitch.m */,
+				078A1FAE176D355C00A69AE3 /* DCRoundSwitchKnobLayer.h */,
+				078A1FAF176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m */,
+				078A1FB0176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.h */,
+				078A1FB1176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.m */,
+				078A1FB2176D355C00A69AE3 /* DCRoundSwitchToggleLayer.h */,
+				078A1FB3176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m */,
 			);
 			path = DCRoundSwitch;
 			sourceTree = "<group>";
 		};
-		0799D0131762A62400B74722 /* SPGooglePlacesAutocomplete */ = {
+		078A1FB4176D355C00A69AE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0799D0181762A62400B74722 /* locateButton.png */,
-				0799D0191762A62400B74722 /* locateButton@2x.png */,
-				0799D01A1762A62400B74722 /* location.png */,
-				0799D01B1762A62400B74722 /* location@2x.png */,
-				0799D01F1762A62400B74722 /* SPGooglePlacesAutocompletePlace.h */,
-				0799D0201762A62400B74722 /* SPGooglePlacesAutocompletePlace.m */,
-				0799D0211762A62400B74722 /* SPGooglePlacesAutocompleteQuery.h */,
-				0799D0221762A62400B74722 /* SPGooglePlacesAutocompleteQuery.m */,
-				0799D0231762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.h */,
-				0799D0241762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.m */,
-				0799D0251762A62400B74722 /* SPGooglePlacesAutocompleteViewController.h */,
-				0799D0261762A62400B74722 /* SPGooglePlacesAutocompleteViewController.m */,
-				0799D0271762A62400B74722 /* SPGooglePlacesAutocompleteViewController.xib */,
-				0799D0281762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.h */,
-				0799D0291762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.m */,
+				078A1FB5176D355C00A69AE3 /* error_bar@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		078A1FB6176D355C00A69AE3 /* SPGooglePlacesAutocomplete */ = {
+			isa = PBXGroup;
+			children = (
+				078A1FB7176D355C00A69AE3 /* locateButton.png */,
+				078A1FB8176D355C00A69AE3 /* locateButton@2x.png */,
+				078A1FB9176D355C00A69AE3 /* location.png */,
+				078A1FBA176D355C00A69AE3 /* location@2x.png */,
+				078A1FBB176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.h */,
+				078A1FBC176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m */,
+				078A1FBD176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.h */,
+				078A1FBE176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m */,
+				078A1FBF176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.h */,
+				078A1FC0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m */,
+				078A1FC1176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.h */,
+				078A1FC2176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m */,
+				078A1FC3176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.xib */,
+				078A1FC4176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.h */,
+				078A1FC5176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m */,
 			);
 			path = SPGooglePlacesAutocomplete;
 			sourceTree = "<group>";
 		};
-		07DB923A17669B12000F0780 /* YTImageCropper */ = {
+		078A1FC6176D355C00A69AE3 /* YTImageCropper */ = {
 			isa = PBXGroup;
 			children = (
-				07DB923B17669B12000F0780 /* YTImageCropper.h */,
-				07DB923C17669B12000F0780 /* YTImageCropper.m */,
-				07DB923D17669B12000F0780 /* YTImageCropper.xib */,
-				07DB923E17669B12000F0780 /* YTImageCropperMaskView.h */,
-				07DB923F17669B12000F0780 /* YTImageCropperMaskView.m */,
+				078A1FC7176D355C00A69AE3 /* YTImageCropper.h */,
+				078A1FC8176D355C00A69AE3 /* YTImageCropper.m */,
+				078A1FC9176D355C00A69AE3 /* YTImageCropper.xib */,
+				078A1FCA176D355C00A69AE3 /* YTImageCropperMaskView.h */,
+				078A1FCB176D355C00A69AE3 /* YTImageCropperMaskView.m */,
 			);
 			path = YTImageCropper;
 			sourceTree = "<group>";
 		};
-		07DB924C176935AA000F0780 /* Location */ = {
+		078A1FE7176D361C00A69AE3 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				07DB9250176937F1000F0780 /* CLController.h */,
-				07DB9251176937F1000F0780 /* CLController.m */,
-				07DB924D176935DE000F0780 /* AGLocationUtils.h */,
-				07DB924E176935DE000F0780 /* AGLocationUtils.m */,
-				07DB925617695798000F0780 /* AGLocation.h */,
-				07DB925717695798000F0780 /* AGLocation.m */,
+				078A1FE8176D364000A69AE3 /* Resources */,
 			);
-			path = Location;
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		078A1FE8176D364000A69AE3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -735,19 +762,12 @@
 				078D95231761156000663FDE /* signup_profile_normal@2x.png in Resources */,
 				078D95241761156000663FDE /* signup_profile_words@2x.png in Resources */,
 				078D952617611CA400663FDE /* signup_profile_image@2x.png in Resources */,
-				0799D02C1762A62400B74722 /* locateButton.png in Resources */,
-				0799D02D1762A62400B74722 /* locateButton@2x.png in Resources */,
-				0799D02E1762A62400B74722 /* location.png in Resources */,
-				0799D02F1762A62400B74722 /* location@2x.png in Resources */,
-				0799D0361762A62400B74722 /* SPGooglePlacesAutocompleteViewController.xib in Resources */,
 				078FB59F1763E687000C1D53 /* signup_profile_image_highlight@2x.png in Resources */,
 				078FB5A1176405BB000C1D53 /* normal_done@2x.png in Resources */,
 				078FB5A3176405D2000C1D53 /* normal_done_highlight@2x.png in Resources */,
-				07DB924117669B12000F0780 /* YTImageCropper.xib in Resources */,
 				07DB924A1769294D000F0780 /* powered-by-google-on-non-white.png in Resources */,
 				07DB924B1769294D000F0780 /* powered-by-google-on-non-white@2x.png in Resources */,
 				073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */,
-				073250F2176A7D3000487B9E /* error_bar@2x.png in Resources */,
 				073250F7176A976A00487B9E /* Localizable.strings in Resources */,
 				079046F2176BC6CF007E2827 /* signup_check@2x.png in Resources */,
 				079046FA176BD45E007E2827 /* back_button_highlight@2x.png in Resources */,
@@ -780,6 +800,14 @@
 				078A1F83176CF54B00A69AE3 /* main_tabbar_item_compose@2x.png in Resources */,
 				078A1F85176CF55A00A69AE3 /* main_tabbar_item_pickup@2x.png in Resources */,
 				078A1F87176CF56C00A69AE3 /* main_tabbar_item_plane@2x.png in Resources */,
+				078A1F95176D342F00A69AE3 /* AGSettingStoryboard.storyboard in Resources */,
+				078A1FD9176D355C00A69AE3 /* error_bar@2x.png in Resources */,
+				078A1FDA176D355C00A69AE3 /* locateButton.png in Resources */,
+				078A1FDB176D355C00A69AE3 /* locateButton@2x.png in Resources */,
+				078A1FDC176D355C00A69AE3 /* location.png in Resources */,
+				078A1FDD176D355C00A69AE3 /* location@2x.png in Resources */,
+				078A1FE2176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.xib in Resources */,
+				078A1FE5176D355C00A69AE3 /* YTImageCropper.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,31 +845,11 @@
 				07072336175E8C2F0017292A /* main.m in Sources */,
 				0707233A175E8C2F0017292A /* AGAppDelegate.m in Sources */,
 				0707238F175EA8670017292A /* AGSignupViewController.m in Sources */,
-				078A3490175FE9AD00B5A7EB /* AGProfileImage.m in Sources */,
-				078A34A9176001F700B5A7EB /* DCRoundSwitch.m in Sources */,
-				078A34AA176001F700B5A7EB /* DCRoundSwitchKnobLayer.m in Sources */,
-				078A34AB176001F700B5A7EB /* DCRoundSwitchOutlineLayer.m in Sources */,
-				078A34AC176001F700B5A7EB /* DCRoundSwitchToggleLayer.m in Sources */,
 				078D952C17612F0800663FDE /* AGKeyboardScroll.m in Sources */,
 				078D952F176145E600663FDE /* AGUtils.m in Sources */,
-				078D953217615D8F00663FDE /* AGResignButton.m in Sources */,
-				0799D0321762A62400B74722 /* SPGooglePlacesAutocompletePlace.m in Sources */,
-				0799D0331762A62400B74722 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
-				0799D0341762A62400B74722 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
-				0799D0351762A62400B74722 /* SPGooglePlacesAutocompleteViewController.m in Sources */,
-				0799D0371762A62400B74722 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
 				0799D03E1762B77C00B74722 /* AGSignupLocationViewController.m in Sources */,
-				078FB5991763D372000C1D53 /* AGSlideSegue.m in Sources */,
 				07DB923917669867000F0780 /* AGImagePickAndCrop.m in Sources */,
-				07DB924017669B12000F0780 /* YTImageCropper.m in Sources */,
-				07DB924217669B12000F0780 /* YTImageCropperMaskView.m in Sources */,
-				07DB92451766B0BA000F0780 /* AGProfileImageButton.m in Sources */,
-				07DB924F176935DE000F0780 /* AGLocationUtils.m in Sources */,
-				07DB9252176937F1000F0780 /* CLController.m in Sources */,
 				07DB92551769411A000F0780 /* NSArray+Addition.m in Sources */,
-				07DB925817695798000F0780 /* AGLocation.m in Sources */,
-				073250ED176A71E600487B9E /* AGUIUtils.m in Sources */,
-				073250F5176A8E3500487B9E /* AGUIErrorAnimation.m in Sources */,
 				073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */,
 				079046F5176BD21A007E2827 /* AGSigninViewController.m in Sources */,
 				07D16409176BE866009675F5 /* AGResetPasswordViewController.m in Sources */,
@@ -852,6 +860,26 @@
 				078A1F8D176D234400A69AE3 /* AGComposeLocationViewController.m in Sources */,
 				078A1F90176D258D00A69AE3 /* AGComposeEditViewController.m in Sources */,
 				078A1F93176D271D00A69AE3 /* AGComposePaperViewController.m in Sources */,
+				078A1FCC176D355C00A69AE3 /* AGLocation.m in Sources */,
+				078A1FCD176D355C00A69AE3 /* AGLocationUtils.m in Sources */,
+				078A1FCE176D355C00A69AE3 /* CLController.m in Sources */,
+				078A1FCF176D355C00A69AE3 /* AGProfileImage.m in Sources */,
+				078A1FD0176D355C00A69AE3 /* AGProfileImageButton.m in Sources */,
+				078A1FD1176D355C00A69AE3 /* AGResignButton.m in Sources */,
+				078A1FD2176D355C00A69AE3 /* AGSlideSegue.m in Sources */,
+				078A1FD3176D355C00A69AE3 /* AGUIErrorAnimation.m in Sources */,
+				078A1FD4176D355C00A69AE3 /* AGUIUtils.m in Sources */,
+				078A1FD5176D355C00A69AE3 /* DCRoundSwitch.m in Sources */,
+				078A1FD6176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m in Sources */,
+				078A1FD7176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.m in Sources */,
+				078A1FD8176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m in Sources */,
+				078A1FDE176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m in Sources */,
+				078A1FDF176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
+				078A1FE0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
+				078A1FE1176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m in Sources */,
+				078A1FE3176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
+				078A1FE4176D355C00A69AE3 /* YTImageCropper.m in Sources */,
+				078A1FE6176D355C00A69AE3 /* YTImageCropperMaskView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

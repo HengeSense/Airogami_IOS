@@ -9,14 +9,10 @@
 #import "AGTabBarViewController.h"
 #import "AGUtils.h"
 
-#define kAGTabBarButtonTag_Compose 0
-#define kAGTabBarButtonTag_Pickup 1
-#define kAGTabBarButtonTag_Plane 2
-#define kAGTabBarCount 3
-#define kAGTabBarTitlePrefix @"main.tabbar.title"
+#define kAGTabBarCount 4
 
-static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_compose.png", @"main_tabbar_item_pickup.png",@"main_tabbar_item_plane.png"};
-static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose_select.png", @"main_tabbar_item_pickup_select.png",@"main_tabbar_item_plane_select.png"};
+static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_compose.png", @"main_tabbar_item_pickup.png", @"main_tabbar_item_plane.png", @"main_tabbar_item_setting.png"};
+static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose_select.png", @"main_tabbar_item_pickup_select.png",@"main_tabbar_item_plane_select.png", @"main_tabbar_item_setting.png"};
 
 @interface AGTabBarViewController ()
 {
@@ -70,37 +66,6 @@ static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose_s
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        titleHighlightedColor, UITextAttributeTextColor,
                                                     nil] forState:UIControlStateHighlighted];
-}
-
-- (void)buttonClicked:(UIButton*)sender
-{
-    [self selectTab:sender.tag];
-}
-
-- (void)selectTab:(int)index
-{
-    if (index >= kAGTabBarCount || index < 0) {
-        return;
-    }
-    switch(index)
-    {
-        case kAGTabBarButtonTag_Compose:
-            [tabBarButtons[0] setSelected:true];
-            [tabBarButtons[1] setSelected:false];
-            [tabBarButtons[2] setSelected:false];
-            break;
-        case kAGTabBarButtonTag_Pickup:
-            [tabBarButtons[0] setSelected:false];
-            [tabBarButtons[1] setSelected:true];
-            [tabBarButtons[2] setSelected:false];
-            break;
-        case kAGTabBarButtonTag_Plane:
-            [tabBarButtons[0] setSelected:false];
-            [tabBarButtons[1] setSelected:false];
-            [tabBarButtons[2] setSelected:true];
-            break;
-    }
-    self.selectedIndex = index;
 }
 
 @end
