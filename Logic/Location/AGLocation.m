@@ -9,8 +9,19 @@
 #import "AGLocation.h"
 
 @implementation AGLocation
-@synthesize country, area, subArea;
+@synthesize country, area, subArea, coordinate;
 
+
+- (id) initWithCountry:(NSString*) aCountry area:(NSString*) anArea subArea:(NSString*) aSubArea coordinate:(CLLocationCoordinate2D)aCoordinate
+{
+    if (self = [super init]) {
+        country = aCountry;
+        area = anArea;
+        subArea = aSubArea;
+        coordinate = aCoordinate;
+    }
+    return self;
+}
 
 - (id) initWithCountry:(NSString*) aCountry area:(NSString*) anArea subArea:(NSString*) aSubArea
 {
@@ -57,7 +68,7 @@
             ++count;
         }
     }
-    return [[AGLocation alloc] initWithCountry:places[0] area:places[1] subArea:places[2]];
+    return [[AGLocation alloc] initWithCountry:places[0] area:places[1] subArea:places[2] coordinate:placeMark.location.coordinate];
 }
 
 + (AGLocation*) location

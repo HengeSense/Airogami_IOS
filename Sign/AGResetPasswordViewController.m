@@ -9,6 +9,7 @@
 #import "AGResetPasswordViewController.h"
 #import "NSString+Addition.h"
 #import "AGUIUtils.h"
+#import "AGUIDefines.h"
 
 #define kAGSignupInputTag_Email 1
 
@@ -44,8 +45,10 @@ static NSString * const Reset_Password_Images[] = {@"reset_password_normal.png",
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.backButton setImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.doneButton setImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
+	[self.backButton setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
+    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
+    [self.doneButton setBackgroundImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
+    [self.doneButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
 }
 
 - (void)viewDidUnload {
@@ -66,6 +69,7 @@ static NSString * const Reset_Password_Images[] = {@"reset_password_normal.png",
 - (IBAction)backButtonTouched:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
 

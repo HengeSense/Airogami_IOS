@@ -9,6 +9,7 @@
 
 #import "AGSigninViewController.h"
 #import "AGUIUtils.h"
+#import "AGUIDefines.h"
 
 #define kAGSigninAccountInvalid @"error.signin.account.invalid"
 #define kAGSignupInputTag_Name 1
@@ -47,8 +48,10 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.backButton setImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.doneButton setImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
+	[self.backButton setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
+    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
+    [self.doneButton setBackgroundImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
+    [self.doneButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning

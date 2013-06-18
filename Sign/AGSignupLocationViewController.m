@@ -10,6 +10,7 @@
 #import "AGUtils.h"
 #import "AGSignupViewController.h"
 #import "AGUIUtils.h"
+#import "AGUIDefines.h"
 
 
 #define kSignup_Location_Back_Highlight @"back_button_highlight.png"
@@ -35,8 +36,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.backButton setImage:[UIImage imageNamed:kSignup_Location_Back_Highlight] forState:UIControlStateHighlighted];
-    [self.doneButton setImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
+    [self.backButton setBackgroundImage:[UIImage imageNamed:kSignup_Location_Back_Highlight] forState:UIControlStateHighlighted];
+    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
+    
+    [self.doneButton setBackgroundImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
+    [self.doneButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
     self.location = signupViewController.location;
     self.locationLabel.text = [self.location toString];
 }

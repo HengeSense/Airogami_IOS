@@ -8,6 +8,10 @@
 
 #import "AGRootViewController.h"
 
+static NSString *stories[] = {@"AGComposeStoryboard", @"AGPickupStoryboard",@"AGPlaneStoryboard", @"AGSettingStoryboard"};
+
+static NSString *roots[] = {@"ComposeRootViewController", @"PickupRootViewController",@"PlaneRootViewController", @"SettingRootViewController"};
+
 enum{
     AGRootToSign,
     AGRootToMain
@@ -103,15 +107,13 @@ enum{
 - (void) prepareForMain
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-    UIStoryboard *composeStoryBaord = [UIStoryboard storyboardWithName:@"AGComposeStoryboard" bundle:nil];
-    UIStoryboard *pickupStoryBaord = [UIStoryboard storyboardWithName:@"AGPickupStoryboard" bundle:nil];
-    UIStoryboard *planeStoryBaord = [UIStoryboard storyboardWithName:@"AGPlaneStoryboard" bundle:nil];
-    UIStoryboard *settingStoryBaord = [UIStoryboard storyboardWithName:@"AGSettingStoryboard" bundle:nil];
-    UIViewController *composeViewController = [composeStoryBaord instantiateViewControllerWithIdentifier:@"ComposeRootViewController"];
-    UIViewController *pickupViewController = [pickupStoryBaord instantiateViewControllerWithIdentifier:@"PickupRootViewController"];
-    UIViewController *planeViewController = [planeStoryBaord instantiateViewControllerWithIdentifier:@"PlaneRootViewController"];
-    UIViewController *settingViewController = [settingStoryBaord instantiateViewControllerWithIdentifier:@"SettingRootViewController"];
-    viewControllers = [NSArray arrayWithObjects:composeViewController, pickupViewController, planeViewController, settingViewController, nil];
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < 3; ++i) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:stories[i] bundle:nil];
+        UIViewController *vc = [storyBoard instantiateInitialViewController];
+        [array addObject:vc];
+    }
+    viewControllers = array;
 }
 
 - (void) navigateToSign

@@ -13,4 +13,5 @@
 + (void) alertMessageWithTitle:(NSString *)title error:(NSError *)error;
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
 + (void) buttonImageNormalToHighlight:(UIButton*)button;
++ (void) buttonBackgroundImageNormalToHighlight:(UIButton*)button;
 @end

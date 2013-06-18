@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGTabBarViewController : UITabBarController
+#import "YTTabBarController.h"
+
+@interface AGTabBarViewController : YTTabBarController
 
 @end

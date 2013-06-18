@@ -9,14 +9,12 @@
 #import "AGTabBarViewController.h"
 #import "AGUtils.h"
 
-#define kAGTabBarCount 4
 
-static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_compose.png", @"main_tabbar_item_pickup.png", @"main_tabbar_item_plane.png", @"main_tabbar_item_setting.png"};
-static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose_select.png", @"main_tabbar_item_pickup_select.png",@"main_tabbar_item_plane_select.png", @"main_tabbar_item_setting.png"};
+static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose.png", @"main_tabbar_item_pickup.png", @"main_tabbar_item_plane.png", @"main_tabbar_item_setting.png"};
+static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_compose_selected.png", @"main_tabbar_item_pickup_selected.png",@"main_tabbar_item_plane_selected.png", @"main_tabbar_item_setting_selected.png"};
 
 @interface AGTabBarViewController ()
 {
-    UIButton *tabBarButtons[kAGTabBarCount];
 }
 
 @end
@@ -47,10 +45,11 @@ static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose_s
 -(void)createUI
 {
     UITabBar *tabBar = self.tabBar;
-    UITabBarItem *tabBarItems[kAGTabBarCount];
-    for (int i = 0; i < kAGTabBarCount; ++i) {
-        tabBarItems[i] = [tabBar.items objectAtIndex:i];
-        [tabBarItems[i] setFinishedSelectedImage:[UIImage imageNamed:AGTabBarItemSelectedImages[i]] withFinishedUnselectedImage:[UIImage imageNamed:AGTabBarItemUnselectedImages[i]]];
+    for (int i = 0; i < self.viewControllers.count; ++i) {
+        UITabBarItem *tabBarItem = [tabBar.items objectAtIndex:i];
+        YTTabBarItem *tabBarItemView = [tabBarView.tabBarItems objectAtIndex:i];
+        [tabBarItemView setSelectedImage:[UIImage imageNamed:AGTabBarItemSelectedImages[i]] unseletedImage:[UIImage imageNamed:AGTabBarItemUnselectedImages[i]]];
+        tabBarItemView.text = tabBarItem.title;
     }
     
     // Change the tab bar background

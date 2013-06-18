@@ -203,36 +203,6 @@
         <image name="signup_bgrd.png" width="16" height="16"/>
         <image name="signup_location_box.png" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="AGComposeEditViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGComposeEditViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dummyButtonTouched:" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="AGComposeLocationViewController" superclassName="SPGooglePlacesAutocompleteViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGComposeLocationViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="AGComposePaperViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGComposePaperViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dummyButtonTouched:" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SPGooglePlacesAutocompleteViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SPGooglePlacesAutocompleteViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="recenterMapToUserLocation:"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

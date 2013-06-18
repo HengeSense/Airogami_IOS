@@ -15,6 +15,7 @@
 #import "AGUIUtils.h"
 #import "AGUtils.h"
 #import "NSString+Addition.h"
+#import "AGUIDefines.h"
 
 #define kAGSignupInputNameShort @"error.signup.name.short"
 #define kAGSignupInputPasswordShort @"error.signup.password.short"
@@ -125,17 +126,18 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     self.sexSwitch.offText = @"Female";
     self.sexSwitch.offTintColor = [UIColor colorWithRed:0xf2 / 255.f green:0x7f / 255.f blue:0x7a / 255.f alpha:1.0f];
     self.sexSwitch.onTintColor = [UIColor colorWithRed:0x75 / 255.f green:0xab / 255.f blue:0xd0 / 255.f alpha:1.0f];
+    self.sexSwitch.on = YES;
 
-    UIImage *image = [self.locationButton imageForState:UIControlStateNormal];
-    [self.locationButton setImage:nil forState:UIControlStateNormal];
-    [self.locationButton setBackgroundImage:image forState:UIControlStateHighlighted];
+    [AGUIUtils buttonBackgroundImageNormalToHighlight:self.locationButton];
     self.locationButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     self.locationButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     //highlight
-    [self.profileImageButton setImage:[UIImage imageNamed:Signup_Profile_Image_Highlight] forState:UIControlStateHighlighted];
-    [self.backButton setImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.rightButton setImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
+    [self.profileImageButton setBackgroundImage:[UIImage imageNamed:Signup_Profile_Image_Highlight] forState:UIControlStateHighlighted];
+    [self.backButton setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
+    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
     
+    [self.rightButton setBackgroundImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
+    [self.rightButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning

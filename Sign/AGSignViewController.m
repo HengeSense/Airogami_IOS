@@ -34,8 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[AGUIUtils buttonImageNormalToHighlight:self.signinButton];
-    [AGUIUtils buttonImageNormalToHighlight:self.signupButton];
+	[AGUIUtils buttonBackgroundImageNormalToHighlight:self.signinButton];
+    [AGUIUtils buttonBackgroundImageNormalToHighlight:self.signupButton];
 }
 
 - (void)didReceiveMemoryWarning

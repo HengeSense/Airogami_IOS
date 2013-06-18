@@ -30,16 +30,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sign_box_norml@2x.png" id="wuJ-Cc-TpD">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sign_box_norml.png" id="wuJ-Cc-TpD">
                                 <rect key="frame" x="0.0" y="392" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N9L-6r-gAQ">
-                                <rect key="frame" x="20" y="397" width="280" height="46"/>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N9L-6r-gAQ">
+                                <rect key="frame" x="0.0" y="397" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Sign up">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Sign up" backgroundImage="sign_box_signup.png">
+                                    <color key="titleColor" red="0.098039215690000001" green="0.1450980392" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -49,12 +50,13 @@
                                     <action selector="signTouched:" destination="DPs-4r-jmd" eventType="touchUpInside" id="82N-9x-axc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0S4-2k-5y7">
-                                <rect key="frame" x="20" y="442" width="280" height="44"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0S4-2k-5y7">
+                                <rect key="frame" x="0.0" y="442" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Sign in">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="80" minY="0.0" maxX="0.0" maxY="1"/>
+                                <state key="normal" title="Sign in" backgroundImage="sign_box_signin.png">
+                                    <color key="titleColor" red="0.098039215686274508" green="0.14509803921568626" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -97,7 +99,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="signin_account_normal@2x.png" id="wmz-tC-pjO">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="signin_account_normal.png" id="wmz-tC-pjO">
                                         <rect key="frame" x="0.0" y="55" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -113,7 +115,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" minimumFontSize="17" id="gjT-py-7wq">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" minimumFontSize="17" clearButtonMode="whileEditing" id="gjT-py-7wq">
                                         <rect key="frame" x="59" y="68" width="224" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -125,8 +127,8 @@
                                             <outlet property="delegate" destination="VKg-Of-9fF" id="s9V-ib-bBm"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Passwrod" minimumFontSize="17" id="lAV-dx-dam">
-                                        <rect key="frame" x="59" y="113" width="224" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="lAV-dx-dam">
+                                        <rect key="frame" x="59" y="112" width="224" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -153,7 +155,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9yu-iV-x3V">
-                                        <rect key="frame" x="11" y="35" width="299" height="21"/>
+                                        <rect key="frame" x="11" y="28" width="299" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.92941176469999998" green="0.92156862750000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -167,64 +169,63 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="hMz-dU-gQN">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" id="fl7-zT-kdA">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rS5-y2-UpS">
+                        <barButtonItem key="leftBarButtonItem" id="sAy-eh-AXA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qe2-Kk-IXT">
                                 <rect key="frame" x="5" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="back_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonTouched:" destination="VKg-Of-9fF" eventType="touchUpInside" id="81n-HO-UlQ"/>
+                                    <action selector="backButtonTouched:" destination="VKg-Of-9fF" eventType="touchUpInside" id="Vhn-k1-7Z6"/>
                                 </connections>
                             </button>
-                            <connections>
-                                <action selector="backButtonTouched:" destination="VKg-Of-9fF" id="wil-81-b6m"/>
-                            </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="asj-PU-0nm">
                             <rect key="frame" x="117" y="11" width="86" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="signin_title.png" id="eh6-l8-B1f">
-                                    <rect key="frame" x="0.0" y="0.0" width="85" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hUH-22-fCI">
+                                    <rect key="frame" x="10" y="0.0" width="66" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                    <color key="textColor" red="0.36470588240000001" green="0.36078431370000003" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" id="pNI-7T-h39">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9jB-qg-24t">
-                                <rect key="frame" x="256" y="5" width="59" height="33"/>
+                        <barButtonItem key="rightBarButtonItem" id="MpT-bn-0RA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wl2-oA-p64">
+                                <rect key="frame" x="256" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="done_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                                <state key="normal" title="Done" backgroundImage="done_button.png">
+                                    <color key="titleColor" red="0.098039215690000001" green="0.46274509800000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="doneButtonTouched:" destination="VKg-Of-9fF" eventType="touchUpInside" id="A8j-bT-pXE"/>
+                                    <action selector="doneButtonTouched:" destination="VKg-Of-9fF" eventType="touchUpInside" id="0WD-Yt-E9P"/>
                                 </connections>
                             </button>
-                            <connections>
-                                <action selector="doneButtonTouched:" destination="VKg-Of-9fF" id="Cgy-Wj-L5b"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accountImageView" destination="wmz-tC-pjO" id="OuF-kb-HSQ"/>
-                        <outlet property="backButton" destination="rS5-y2-UpS" id="DqQ-od-QHO"/>
-                        <outlet property="doneButton" destination="9jB-qg-24t" id="rQ8-DP-aAN"/>
+                        <outlet property="backButton" destination="qe2-Kk-IXT" id="9JP-0U-Axz"/>
+                        <outlet property="doneButton" destination="wl2-oA-p64" id="jsC-FG-rZC"/>
                         <outlet property="nameTextField" destination="gjT-py-7wq" id="ABp-5W-40S"/>
                         <outlet property="passwordTextField" destination="lAV-dx-dam" id="c5h-Io-dbb"/>
                         <segue destination="oDV-xL-70c" kind="push" identifier="ToResetPassword" id="PN2-sZ-DdX"/>
@@ -257,9 +258,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12k-Pk-H7q">
                                 <rect key="frame" x="117" y="135" width="87" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="normal_done.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <state key="normal" title="Done" backgroundImage="normal_done.png">
+                                    <color key="titleColor" red="0.098039215690000001" green="0.46274509800000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -269,7 +270,7 @@
                                     <action selector="doneButtonTouched:" destination="oDV-xL-70c" eventType="touchUpInside" id="Efy-WC-kR6"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please input your email" minimumFontSize="17" id="kbM-8V-LZz">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please input your email" minimumFontSize="17" clearButtonMode="whileEditing" id="kbM-8V-LZz">
                                 <rect key="frame" x="54" y="92" width="224" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -291,34 +292,35 @@
                     </view>
                     <navigationItem key="navigationItem" id="bVI-tt-4S7">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" id="SuK-w7-NSN">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7gF-rt-ldG">
+                        <barButtonItem key="leftBarButtonItem" id="xJM-0D-3Gg">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1Ma-KY-9jJ">
                                 <rect key="frame" x="5" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="back_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonTouched:" destination="oDV-xL-70c" eventType="touchUpInside" id="icc-4O-ogI"/>
+                                    <action selector="backButtonTouched:" destination="oDV-xL-70c" eventType="touchUpInside" id="VSy-dU-kaC"/>
                                 </connections>
                             </button>
-                            <connections>
-                                <action selector="backButtonTouched:" destination="VKg-Of-9fF" id="SHo-v0-0GQ"/>
-                            </connections>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="uKT-BH-FAc">
-                            <rect key="frame" x="85" y="11" width="150" height="22"/>
+                            <rect key="frame" x="78" y="11" width="164" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="reset_password_title.png" id="rRU-6D-Ucj">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Reset password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pVc-bE-woU">
+                                    <rect key="frame" x="5" y="0.0" width="155" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                    <color key="textColor" red="0.36470588240000001" green="0.36078431370000003" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -326,7 +328,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="backButton" destination="7gF-rt-ldG" id="2rm-5Q-EB9"/>
+                        <outlet property="backButton" destination="1Ma-KY-9jJ" id="idu-z6-Ye4"/>
                         <outlet property="doneButton" destination="12k-Pk-H7q" id="Uuz-k1-PZW"/>
                         <outlet property="emailCheckImageView" destination="phL-r3-I5y" id="uIn-4P-Y5b"/>
                         <outlet property="emailTextField" destination="kbM-8V-LZz" id="pHF-OU-xKd"/>
@@ -354,14 +356,14 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gKG-Lb-qvr">
-                                        <rect key="frame" x="11" y="11" width="299" height="21"/>
+                                        <rect key="frame" x="11" y="15" width="299" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.92941176469999998" green="0.92156862750000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SbX-oh-LaC">
-                                        <rect key="frame" x="11" y="163" width="289" height="21"/>
+                                        <rect key="frame" x="11" y="167" width="289" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.92941176469999998" green="0.92156862750000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -400,7 +402,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Words about you (optional)" minimumFontSize="17" id="hEI-ZW-FbA">
-                                        <rect key="frame" x="50" y="293" width="234" height="30"/>
+                                        <rect key="frame" x="52" y="292" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -412,7 +414,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" minimumFontSize="17" id="pzF-Bd-Zlk">
-                                        <rect key="frame" x="120" y="51" width="164" height="30"/>
+                                        <rect key="frame" x="123" y="51" width="164" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -425,7 +427,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="bgd-zB-zVQ">
-                                        <rect key="frame" x="120" y="96" width="164" height="30"/>
+                                        <rect key="frame" x="123" y="95" width="164" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -438,7 +440,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" id="xqb-jp-KYw">
-                                        <rect key="frame" x="50" y="250" width="234" height="30"/>
+                                        <rect key="frame" x="52" y="248" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -451,16 +453,16 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" id="IDr-gF-Ddi" customClass="DCRoundSwitch">
-                                        <rect key="frame" x="186" y="347" width="96" height="30"/>
+                                        <rect key="frame" x="191" y="341" width="96" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Qnw-Nx-j4R">
-                                        <rect key="frame" x="0.0" y="196" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="197" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                        <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
-                                        <state key="normal" image="signup_location.png">
+                                        <inset key="titleEdgeInsets" minX="52" minY="0.0" maxX="50" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="signup_location.png">
                                             <color key="titleColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -469,10 +471,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZzK-MB-0pz" customClass="AGProfileImageButton">
-                                        <rect key="frame" x="15" y="57" width="64" height="64"/>
+                                        <rect key="frame" x="15" y="56" width="64" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" image="signup_profile_image.png">
+                                        <state key="normal" backgroundImage="signup_profile_image.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -499,9 +501,10 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tvd-Rh-zzp">
                                 <rect key="frame" x="5" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="back_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.13333333333333333" green="0.23921568627450979" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -516,20 +519,24 @@
                             <rect key="frame" x="117" y="11" width="86" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_title.png" id="yW0-JH-2NQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="85" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sign up" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c1w-xH-Kbj">
+                                    <rect key="frame" x="6" y="0.0" width="75" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                    <color key="textColor" red="0.36470588235294116" green="0.36078431372549019" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="7hp-GE-R1Y">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iBe-eI-MRI">
-                                <rect key="frame" x="256" y="5" width="59" height="33"/>
+                                <rect key="frame" x="256" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="done_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                                <state key="normal" title="Done" backgroundImage="done_button.png">
+                                    <color key="titleColor" red="0.098039215686274508" green="0.46274509803921571" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -592,19 +599,20 @@
                                     <outlet property="delegate" destination="Mqz-KJ-Jdf" id="O9A-ze-FdF"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UXq-ty-kUJ">
-                                <rect key="frame" x="13" y="56" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8wP-5A-Wd8">
+                                <rect key="frame" x="13" y="62" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="back" image="back_button.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonTouched:" destination="Mqz-KJ-Jdf" eventType="touchUpInside" id="WNd-ao-beW"/>
+                                    <action selector="backButtonTouched:" destination="Mqz-KJ-Jdf" eventType="touchUpInside" id="nCJ-gF-G9V"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_location_box.png" id="V80-Hx-s0O">
@@ -621,9 +629,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J26-yr-5si">
                                 <rect key="frame" x="123" y="341" width="75" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="normal_done.png">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                <state key="normal" title="Done" backgroundImage="normal_done.png">
+                                    <color key="titleColor" red="0.098039215690000001" green="0.46274509800000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -642,7 +650,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZYm-b2-uzp"/>
                     <connections>
-                        <outlet property="backButton" destination="UXq-ty-kUJ" id="SN6-Cj-IUV"/>
+                        <outlet property="backButton" destination="8wP-5A-Wd8" id="vSr-E2-ByC"/>
                         <outlet property="doneButton" destination="J26-yr-5si" id="acF-TF-R0k"/>
                         <outlet property="locationLabel" destination="xuA-eD-uNX" id="bUE-kF-GIK"/>
                         <outlet property="mapView" destination="WXW-nc-SEh" id="qIj-Em-lu9"/>
@@ -671,11 +679,11 @@
         <image name="powered-by-google-on-non-white.png" width="104" height="16"/>
         <image name="reset_password_normal.png" width="16" height="16"/>
         <image name="reset_password_prompt@2x.png" width="480" height="70"/>
-        <image name="reset_password_title.png" width="16" height="16"/>
-        <image name="sign_box_norml@2x.png" width="640" height="200"/>
-        <image name="signin_account_normal@2x.png" width="640" height="200"/>
+        <image name="sign_box_norml.png" width="16" height="16"/>
+        <image name="sign_box_signin.png" width="16" height="16"/>
+        <image name="sign_box_signup.png" width="16" height="16"/>
+        <image name="signin_account_normal.png" width="16" height="16"/>
         <image name="signin_forgot_password@2x.png" width="290" height="44"/>
-        <image name="signin_title.png" width="16" height="16"/>
         <image name="signup_account_normal.png" width="16" height="16"/>
         <image name="signup_bgrd.png" width="16" height="16"/>
         <image name="signup_bgrd@2x.png" width="640" height="1136"/>
@@ -685,8 +693,82 @@
         <image name="signup_location_box.png" width="16" height="16"/>
         <image name="signup_profile_image.png" width="16" height="16"/>
         <image name="signup_profile_normal.png" width="16" height="16"/>
-        <image name="signup_title.png" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="AGProfileImageButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImageButton.h"/>
+        </class>
+        <class className="AGResetPasswordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResetPasswordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="resetPasswordImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="AGResignButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>
+        </class>
+        <class className="AGSignViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="signupButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGSigninViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSigninViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AGSignupLocationViewController" superclassName="SPGooglePlacesAutocompleteViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupLocationViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AGSignupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="imageTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descriptionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="locationButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="profileImageButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="rightButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sexSwitch" candidateClass="DCRoundSwitch"/>
+            </relationships>
+        </class>
+        <class className="DCRoundSwitch" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
+        </class>
+        <class className="SPGooglePlacesAutocompleteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SPGooglePlacesAutocompleteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="recenterMapToUserLocation:"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -41,6 +41,13 @@
 {
     UIImage *image = [button imageForState:UIControlStateNormal];
     [button setImage:nil forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateHighlighted];
+}
+
++ (void) buttonBackgroundImageNormalToHighlight:(UIButton *)button
+{
+    UIImage *image = [button backgroundImageForState:UIControlStateNormal];
+    [button setBackgroundImage:nil forState:UIControlStateNormal];
     [button setBackgroundImage:image forState:UIControlStateHighlighted];
 }
 
