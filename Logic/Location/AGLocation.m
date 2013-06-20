@@ -9,7 +9,7 @@
 #import "AGLocation.h"
 
 @implementation AGLocation
-@synthesize country, area, subArea, coordinate;
+@synthesize country, area, subArea, coordinate, position;
 
 
 - (id) initWithCountry:(NSString*) aCountry area:(NSString*) anArea subArea:(NSString*) aSubArea coordinate:(CLLocationCoordinate2D)aCoordinate
@@ -45,6 +45,25 @@
         [string insertString:subArea atIndex:0];
     }
     return string;
+}
+
+- (NSString*) stringAt:(int) index
+{
+    switch (index) {
+        case 0:
+            return self.subArea;
+            break;
+        case 1:
+            return self.area;
+            break;
+        case 2:
+            return self.country;
+            break;
+            
+        default:
+            return nil;
+            break;
+    }
 }
 
 - (BOOL) validate

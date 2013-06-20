@@ -6,13 +6,14 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGComposePaperViewController.h"
+#import "AGWritePaperViewController.h"
 
-@interface AGComposePaperViewController ()
+@interface AGWritePaperViewController ()
 
+@property (strong, nonatomic) IBOutlet UIView *headerView;
 @end
 
-@implementation AGComposePaperViewController
+@implementation AGWritePaperViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,9 +24,35 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [[NSBundle mainBundle] loadNibNamed:@"AGWritePaperHeaderView" owner:self options:nil];
+    }
+    return self;
+}
+
+
+- (void)loadView {
+    [super loadView];
+    UITableView *tv = (UITableView*)self.view;
+    CGRect frame = self.view.frame;
+    self.view= [[UIView alloc] initWithFrame:frame];
+    [self.view addSubview:tv];
+    [self.view addSubview:self.headerView];
+    
+    frame.origin.y = self.headerView.bounds.size.height;
+    frame.size.height -= frame.origin.y;
+    
+    tv.frame = frame;
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //self.tableView.tableHeaderView = self.headerView;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,6 +69,7 @@
 
 #pragma mark - Table view data source
 
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 #warning Potentially incomplete method implementation.
@@ -62,9 +90,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    
     return cell;
-}
+} 
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -123,4 +151,8 @@
     [self performSegueWithIdentifier:@"ToEdit" sender:self];
 }
 
+- (void)viewDidUnload {
+    [self setHeaderView:nil];
+    [super viewDidUnload];
+}
 @end

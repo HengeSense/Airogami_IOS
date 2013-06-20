@@ -13,7 +13,6 @@
 #import "AGUIDefines.h"
 
 
-#define kSignup_Location_Back_Highlight @"back_button_highlight.png"
 #define kSignup_Validate_Error @"error.signup.location.choose.invalid"
 
 @interface AGSignupLocationViewController()
@@ -36,11 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.backButton setBackgroundImage:[UIImage imageNamed:kSignup_Location_Back_Highlight] forState:UIControlStateHighlighted];
-    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
     
-    [self.doneButton setBackgroundImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
-    [self.doneButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
+    [AGUIDefines setNavigationBackButton:self.backButton];
+    [AGUIDefines setNormalDoneButton:self.doneButton];
+
     self.location = signupViewController.location;
     self.locationLabel.text = [self.location toString];
 }
@@ -80,10 +78,11 @@
     
 }
 
-- (void) setAddress:(CLPlacemark*) placeMark
+- (void) setLocation:(AGLocation *)location
 {
-    [super setAddress:placeMark];
-    self.locationLabel.text = [self.location toString];
+    [super setLocation:location];
+    self.locationLabel.text = [location toString];
 }
+
 
 @end

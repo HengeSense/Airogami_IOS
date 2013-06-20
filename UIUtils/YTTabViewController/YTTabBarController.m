@@ -11,24 +11,30 @@
 
 @implementation YTTabBarController
 
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    tabBarView = [[YTTabBar alloc] initWithFrame:self.tabBar.frame count:self.viewControllers.count];
+    CGRect frame = self.tabBar.frame;
+    frame.origin.y = 0;
+    tabBarView = [[YTTabBar alloc] initWithFrame:frame count:self.viewControllers.count selected:self.selectedIndex];
     tabBarView.delegate = self;
-    self.tabBar.hidden = YES;
-    [self.view addSubview:tabBarView];
+    [self.tabBar addSubview:tabBarView];
 }
 
 -(void) onSelect:(int)index
 {
-    //self.selectedIndex = index;
-    self.selectedViewController = [self.viewControllers objectAtIndex:index];
+    self.selectedIndex = index;
 }
 
 - (void) setSelectedIndex:(NSUInteger)selectedIndex
 {
+    super.selectedIndex = selectedIndex;
     [tabBarView selectTab:selectedIndex];
+}
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 @end

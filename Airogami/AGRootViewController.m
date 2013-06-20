@@ -8,9 +8,7 @@
 
 #import "AGRootViewController.h"
 
-static NSString *stories[] = {@"AGComposeStoryboard", @"AGPickupStoryboard",@"AGPlaneStoryboard", @"AGSettingStoryboard"};
-
-static NSString *roots[] = {@"ComposeRootViewController", @"PickupRootViewController",@"PlaneRootViewController", @"SettingRootViewController"};
+static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
 enum{
     AGRootToSign,

@@ -125,7 +125,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "221"
+         endingLineNumber = "221"
+         landmarkName = "-editDidBegin:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sign/AGSignupViewController.m"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "224"
@@ -138,24 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "227"
-         endingLineNumber = "227"
-         landmarkName = "-editDidBegin:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
          landmarkName = "-editDidEnd:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "219"
-         endingLineNumber = "219"
+         startingLineNumber = "216"
+         endingLineNumber = "216"
          landmarkName = "-editDidBegin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "233"
-         endingLineNumber = "233"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
          landmarkName = "-editDidEnd:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "238"
-         endingLineNumber = "238"
+         startingLineNumber = "235"
+         endingLineNumber = "235"
          landmarkName = "-editDidEnd:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -303,11 +303,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
          landmarkName = "-locationButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -537,11 +537,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
          landmarkName = "-backButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -549,38 +549,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Sign/AGSignupLocationViewController.m"
-         timestampString = "393209481.473342"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Sign/AGSignupLocationViewController.m"
-         timestampString = "393209481.473342"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
-         landmarkName = "-setAddress:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
          landmarkName = "-actionSheet:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -602,7 +576,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
+         landmarkName = "-actionSheet:didDismissWithButtonIndex:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sign/AGSignupViewController.m"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "207"
@@ -615,24 +602,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "210"
-         endingLineNumber = "210"
-         landmarkName = "-actionSheet:didDismissWithButtonIndex:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "310"
-         endingLineNumber = "310"
+         startingLineNumber = "307"
+         endingLineNumber = "307"
          landmarkName = "-imagePickAndCrop:didFinishingWithImage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -992,11 +966,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
          landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1005,11 +979,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupLocationViewController.m"
-         timestampString = "393209481.473342"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1031,11 +1005,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "177"
-         endingLineNumber = "177"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
          landmarkName = "-doneButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1173,25 +1147,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Sign/AGSignupLocationViewController.m"
-         timestampString = "393209481.473342"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
-         landmarkName = "-setAddress:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "264"
-         endingLineNumber = "264"
+         startingLineNumber = "261"
+         endingLineNumber = "261"
          landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1200,11 +1161,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "279"
-         endingLineNumber = "279"
+         startingLineNumber = "276"
+         endingLineNumber = "276"
          landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1213,11 +1174,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "259"
+         endingLineNumber = "259"
          landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1226,11 +1187,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "283"
-         endingLineNumber = "283"
+         startingLineNumber = "280"
+         endingLineNumber = "280"
          landmarkName = "-textFieldValueChanged:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1239,11 +1200,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "393209299.330241"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "291"
-         endingLineNumber = "291"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
          landmarkName = "-textFieldValueChanged:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1252,11 +1213,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSigninViewController.m"
-         timestampString = "393209481.473342"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "-doneButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1265,11 +1226,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSigninViewController.m"
-         timestampString = "393209481.473342"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "147"
-         endingLineNumber = "147"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
          landmarkName = "-validate"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1278,11 +1239,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGResetPasswordViewController.m"
-         timestampString = "393210132.579921"
+         timestampString = "393294461.221471"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "115"
-         endingLineNumber = "115"
+         startingLineNumber = "113"
+         endingLineNumber = "113"
          landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1304,12 +1265,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBar.m"
-         timestampString = "393193822.091069"
+         timestampString = "393283326.944395"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "18"
-         endingLineNumber = "18"
-         landmarkName = "-initWithFrame:count:"
+         startingLineNumber = "19"
+         endingLineNumber = "19"
+         landmarkName = "-initWithFrame:count:selected:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1317,12 +1278,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBar.m"
-         timestampString = "393193836.62777"
+         timestampString = "393283326.944395"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "19"
-         endingLineNumber = "19"
-         landmarkName = "-initWithFrame:count:"
+         startingLineNumber = "20"
+         endingLineNumber = "20"
+         landmarkName = "-initWithFrame:count:selected:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1330,11 +1291,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
-         timestampString = "393199339.885445"
+         timestampString = "393380977.582408"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "17"
-         endingLineNumber = "17"
+         startingLineNumber = "20"
+         endingLineNumber = "20"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1343,25 +1304,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBar.m"
-         timestampString = "393194025.096682"
+         timestampString = "393283326.944395"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "22"
-         endingLineNumber = "22"
-         landmarkName = "-initWithFrame:count:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393198489.218022"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "-initWithFrame:index:"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "-initWithFrame:count:selected:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1369,11 +1317,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBar.m"
-         timestampString = "393194786.072645"
+         timestampString = "393283326.944395"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
          landmarkName = "-onSelected:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1382,11 +1330,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
+         timestampString = "393284881.627158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "-onButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1395,103 +1343,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393198489.218022"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "27"
-         endingLineNumber = "27"
-         landmarkName = "-initWithFrame:index:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-setSelectedImage:unseletedImage:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
-         landmarkName = "-onButtonTouched:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
-         timestampString = "393200136.747411"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25"
-         landmarkName = "-onSelect:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
-         landmarkName = "-onButtonTouched:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "43"
-         endingLineNumber = "43"
-         landmarkName = "-setSelectedImage:unseletedImage:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
-         landmarkName = "-onButtonTouched:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
-         timestampString = "393199281.120863"
+         timestampString = "393284881.627158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "41"
          endingLineNumber = "41"
-         landmarkName = "-onSelected:"
+         landmarkName = "-setSelectedImage:unseletedImage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
+         timestampString = "393284881.627158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-onButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1499,7 +1369,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
-         timestampString = "393200136.747411"
+         timestampString = "393380977.582408"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "27"
@@ -1511,12 +1381,77 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
-         timestampString = "393201037.115614"
+         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
+         timestampString = "393284881.627158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
+         landmarkName = "-onButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
+         timestampString = "393284881.627158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "-setSelectedImage:unseletedImage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
+         timestampString = "393284881.627158"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
+         landmarkName = "-onButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
+         timestampString = "393283326.944395"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "-onSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
+         timestampString = "393380977.582408"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "28"
+         endingLineNumber = "28"
+         landmarkName = "-onSelect:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
+         timestampString = "393380977.582408"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
          landmarkName = "-setSelectedIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1524,13 +1459,325 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarItem.m"
-         timestampString = "393201367.971393"
+         filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteViewController.m"
+         timestampString = "393275595.345084"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
-         landmarkName = "-setSelected:"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
+         landmarkName = "-recenterMapToUserLocation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteViewController.m"
+         timestampString = "393275939.363091"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
+         landmarkName = "-setAddress:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sign/AGSignupLocationViewController.m"
+         timestampString = "393294461.221471"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
+         landmarkName = "-setLocation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteViewController.m"
+         timestampString = "393276531.210847"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Location/AGLocation.m"
+         timestampString = "393383069.837446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "+locationWithPlaceMark:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Location/AGLocation.m"
+         timestampString = "393383069.837446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
+         landmarkName = "+locationWithPlaceMark:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompletePlace.m"
+         timestampString = "393276719.773765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "53"
+         endingLineNumber = "53"
+         landmarkName = "-resolveEstablishmentPlaceToPlacemark:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
+         timestampString = "393284673.592245"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "28"
+         endingLineNumber = "28"
+         landmarkName = "-initWithFrame:count:selected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
+         timestampString = "393284685.002611"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
+         landmarkName = "-initWithFrame:count:selected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
+         timestampString = "393284685.687862"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "29"
+         endingLineNumber = "29"
+         landmarkName = "-initWithFrame:count:selected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
+         timestampString = "393284709.823446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
+         landmarkName = "-initWithFrame:count:selected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "393373516.865647"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "30"
+         endingLineNumber = "30"
+         landmarkName = "-layoutSubviews"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "393373935.630455"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
+         landmarkName = "-onButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "393373935.630455"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "-onButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "393373935.630455"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-onButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393366373.580583"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "20"
+         endingLineNumber = "20"
+         landmarkName = "-initWithStyle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393371677.422089"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "393372666.128306"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
+         timestampString = "393380977.582408"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
+         landmarkName = "-viewDidDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

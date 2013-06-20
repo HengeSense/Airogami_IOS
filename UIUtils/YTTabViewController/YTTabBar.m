@@ -14,7 +14,8 @@
 @synthesize tabBarItems, delegate;
 
 
-- (id)initWithFrame:(CGRect)frame count:(int)count {
+- (id)initWithFrame:(CGRect)frame count:(int)count  selected:(int) index
+{
     int itemWidth = frame.size.width / count;
     if ((self = [super initWithFrame:frame])) {
         frame.origin.y = 0;
@@ -23,12 +24,16 @@
         NSMutableArray *array = [NSMutableArray array];
         for (int i = 0; i < count; ++i) {
             YTTabBarItem * tabBarItem = [[YTTabBarItem alloc] initWithFrame:frame index:i];
+            if (i == index) {
+                tabBarItem.selected = YES;
+            }
             [array addObject:tabBarItem];
             [self addSubview:tabBarItem];
             tabBarItem.delegate = self;
             frame.origin.x += itemWidth;
         }
         tabBarItems = array;
+        self.userInteractionEnabled = YES;
     }
     return self;
 }

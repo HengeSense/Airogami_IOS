@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGComposePaperViewController : UITableViewController
+@interface AGWritePaperViewController : UITableViewController<UITableViewDelegate>
 
 @end

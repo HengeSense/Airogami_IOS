@@ -133,11 +133,8 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     self.locationButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     //highlight
     [self.profileImageButton setBackgroundImage:[UIImage imageNamed:Signup_Profile_Image_Highlight] forState:UIControlStateHighlighted];
-    [self.backButton setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
-    
-    [self.rightButton setBackgroundImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.rightButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
+    [AGUIDefines setNavigationBackButton:self.backButton];
+    [AGUIDefines setNavigationDoneButton:self.rightButton];
 }
 
 - (void)didReceiveMemoryWarning

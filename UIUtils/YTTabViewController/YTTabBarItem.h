@@ -14,19 +14,12 @@
 
 @end
 
-@interface YTTabBarItem : UIView
+@interface YTTabBarItem : UIButton
 {
-    UIImage *selectedImage;
-    UIImage *unselectedImage;
-    UIColor *selectedColor;
-    UIColor *unselectedColor;
-    UIButton *button;
-    UILabel *label;
     int index;
 }
 
 @property(nonatomic, assign) NSObject<YTTabBarItemDelegate> *delegate;
-@property(nonatomic, assign) BOOL selected;
 @property(nonatomic, assign) NSString *text;
 
 -(id) initWithFrame:(CGRect)frame index:(int)index;

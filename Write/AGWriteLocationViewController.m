@@ -6,17 +6,18 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGComposeLocationViewController.h"
-#import "AGComposeEditViewController.h"
+#import "AGWriteLocationViewController.h"
+#import "AGWriteEditViewController.h"
 #import "AGUIUtils.h"
 
-@interface AGComposeLocationViewController ()
+@interface AGWriteLocationViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *doneButtons;
+
 @end
 
-@implementation AGComposeLocationViewController
+@implementation AGWriteLocationViewController
 
 @synthesize composeEditViewController;
 
@@ -32,14 +33,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    for (UIButton *button in self.doneButtons) {
+        [AGUIUtils buttonBackgroundImageNormalToHighlight:button];
+    }
 	// Do any additional setup after loading the view.
 }
 
 -(void)viewDidUnload
 {
     [self setBackButton:nil];
-    [self setDoneButton:nil];
+    [self setDoneButtons:nil];
     [super viewDidUnload];
 }
 
@@ -66,20 +69,21 @@
 }
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
-    if ([self.location validate]) {
-        composeEditViewController.location = self.location;
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else{
-        //[AGUIUtils errorMessgeWithTitle:kSignup_Validate_Error view:self.view];
-    }
+    self.location.position = sender.tag;
+    composeEditViewController.location = self.location;
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
 - (void) setAddress:(CLPlacemark*) placeMark
 {
     [super setAddress:placeMark];
-    //self.locationLabel.text = [self.location toString];
+
+    for (UIButton *button in self.doneButtons) {
+        if (button.tag < 3) {
+            [button setTitle:[self.location stringAt:button.tag] forState:UIControlStateNormal];
+        }
+    }
 }
 
 @end

@@ -9,8 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+extern NSString * const Normal_Done_Highlight;
+extern NSString * const Navigation_Back_Button_Highlight;
+
+extern NSString * const Navigation_Done_Button_Highlight;
+
 @interface AGUIDefines : NSObject
 + (void) initialize;
 + (UIColor*) navigationBackHighlightColor;
 + (UIColor*) navigationDoneHighlightColor;
++ (void) setNavigationBackButton:(UIButton*)button;
++ (void) setNavigationDoneButton:(UIButton*)button;
++ (void) setNormalDoneButton:(UIButton*)button;
+
 @end

@@ -8,8 +8,8 @@
 
 #import "SPGooglePlacesAutocompleteViewController.h"
 
-@class AGComposeEditViewController;
+@class AGWriteEditViewController;
 
-@interface AGComposeLocationViewController : SPGooglePlacesAutocompleteViewController
-@property (weak, nonatomic)  AGComposeEditViewController *composeEditViewController;
+@interface AGWriteLocationViewController : SPGooglePlacesAutocompleteViewController
+@property (weak, nonatomic)  AGWriteEditViewController *composeEditViewController;
 @end

@@ -10,8 +10,10 @@
 #import "AGUtils.h"
 
 
-static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_compose.png", @"main_tabbar_item_pickup.png", @"main_tabbar_item_plane.png", @"main_tabbar_item_setting.png"};
-static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_compose_selected.png", @"main_tabbar_item_pickup_selected.png",@"main_tabbar_item_plane_selected.png", @"main_tabbar_item_setting_selected.png"};
+static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_write.png", @"main_tabbar_item_collect.png", @"main_tabbar_item_chat.png", @"main_tabbar_item_setting.png"};
+static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_write_selected.png", @"main_tabbar_item_collect_selected.png",@"main_tabbar_item_chat_selected.png", @"main_tabbar_item_setting_selected.png"};
+
+static NSString * AGTabBarBgrd = @"main_tabbar_bgrd.png";
 
 @interface AGTabBarViewController ()
 {
@@ -51,20 +53,7 @@ static NSString * AGTabBarItemSelectedImages[] = {@"main_tabbar_item_compose_sel
         [tabBarItemView setSelectedImage:[UIImage imageNamed:AGTabBarItemSelectedImages[i]] unseletedImage:[UIImage imageNamed:AGTabBarItemUnselectedImages[i]]];
         tabBarItemView.text = tabBarItem.title;
     }
-    
-    // Change the tab bar background
-    UIImage* tabBarBackground = [UIImage imageNamed:@"tabbar.png"];
-    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
-    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selected.png"]];
-    
-    // Change the title color of tab bar items
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       [UIColor whiteColor], UITextAttributeTextColor,
-                                                       nil] forState:UIControlStateNormal];
-    UIColor *titleHighlightedColor = [UIColor colorWithRed:153/255.0 green:192/255.0 blue:48/255.0 alpha:1.0];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       titleHighlightedColor, UITextAttributeTextColor,
-                                                    nil] forState:UIControlStateHighlighted];
+    tabBarView.image = [UIImage imageNamed:AGTabBarBgrd];
 }
 
 @end

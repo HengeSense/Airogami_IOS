@@ -6,6 +6,4 @@
 
     YTTabBar *tabBarView;
 }
-
-
 @end

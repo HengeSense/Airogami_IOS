@@ -33,11 +33,12 @@
         <!--Navigation Controller - Chats-->
         <scene sceneID="1iS-y8-Mvd">
             <objects>
-                <navigationController storyboardIdentifier="PlaneRootViewController" definesPresentationContext="YES" id="Bep-vj-2ww" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="Chats" image="main_tabbar_item_plane.png" badgeValue="20" id="0Xd-7O-joA"/>
+                <navigationController storyboardIdentifier="ChatRootViewController" definesPresentationContext="YES" id="Bep-vj-2ww" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="Chats" image="main_tabbar_item_plane.png" id="0Xd-7O-joA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="L04-xZ-tun">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.92941176469999998" green="0.92156862750000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="kig-7l-nO0" kind="relationship" relationship="rootViewController" id="h6W-rI-WrW"/>

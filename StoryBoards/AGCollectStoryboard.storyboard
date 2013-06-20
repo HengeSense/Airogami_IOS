@@ -30,14 +30,15 @@
             </objects>
             <point key="canvasLocation" x="223" y="-60"/>
         </scene>
-        <!--Navigation Controller - Pickup-->
+        <!--Navigation Controller - Collect-->
         <scene sceneID="heu-RQ-45j">
             <objects>
-                <navigationController storyboardIdentifier="PickupRootViewController" definesPresentationContext="YES" id="VSZ-z4-I15" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="Pickup" image="main_tabbar_item_pickup.png" id="7XP-la-beW"/>
+                <navigationController storyboardIdentifier="CollectRootViewController" definesPresentationContext="YES" id="VSZ-z4-I15" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="Collect" image="main_tabbar_item_pickup.png" id="7XP-la-beW"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OZt-Th-42B">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.92941176469999998" green="0.92156862750000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="hgx-So-pRf" kind="relationship" relationship="rootViewController" id="vsU-6N-SWk"/>

@@ -10,6 +10,7 @@
 #import "SPGooglePlacesAutocompleteQuery.h"
 #import "SPGooglePlacesAutocompletePlace.h"
 #import "AGUtils.h"
+#import "AGLocationUtils.h"
 
 #define kSPGooglePlacesFetchPlacesFailed @"error.googleplacesautocomplete.fetch"
 #define kSPGooglePlacesMapPlacesFailed @"error.googleplacesautocomplete.map"
@@ -66,6 +67,12 @@
     
     region.span = span;
     region.center = self.mapView.userLocation.coordinate;
+    
+    [AGLocationUtils transformLocation:self.mapView.userLocation.location completion:^(AGLocation *aLocation, NSError *error) {
+        if (error == nil) {
+            self.location = aLocation;
+        }
+    }];
     
     [self.mapView setRegion:region animated:YES];
 }
@@ -140,7 +147,6 @@
             [self recenterMapToPlacemark:placemark];
             [self dismissSearchControllerWhileStayingActive];
             [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
-            //NSLog(@"country: %@\narea: %@\nsubarea: %@\nlocality: %@\nlongitude: %lf\nlatitude: %lf", placemark.country, placemark.administrativeArea, placemark.subAdministrativeArea, placemark.locality, placemark.location.coordinate.longitude, placemark.location.coordinate.latitude);
             [self setAddress:placemark];
             self.searchDisplayController.searchBar.text = [self placeAtIndexPath:indexPath].name;
         }

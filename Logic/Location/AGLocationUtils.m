@@ -55,4 +55,18 @@
         }];
     }
 }
+
++ (void) transformLocation:(CLLocation *)location completion:(AGLocationUtilsResultBlock)block
+{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:location completionHandler:
+     ^(NSArray *placemarks, NSError *error) {
+         if (error) {
+             block(nil, error);
+         } else {
+             CLPlacemark *placemark = [placemarks onlyObject];
+             block([AGLocation locationWithPlaceMark:placemark], error);
+         }
+     }];
+}
 @end

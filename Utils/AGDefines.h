@@ -11,9 +11,5 @@
 #import <UIKit/UIKit.h>
 
 extern const int AGApplicationVersion;
-extern NSString * const Normal_Done_Highlight;
-extern NSString * const Navigation_Back_Button_Highlight;
-
-extern NSString * const Navigation_Done_Button_Highlight;
 
 #endif

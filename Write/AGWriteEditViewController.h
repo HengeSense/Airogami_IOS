@@ -10,6 +10,6 @@
 
 @class AGLocation;
 
-@interface AGComposeEditViewController : UIViewController
+@interface AGWriteEditViewController : UIViewController
 @property(nonatomic, strong) AGLocation *location;
 @end

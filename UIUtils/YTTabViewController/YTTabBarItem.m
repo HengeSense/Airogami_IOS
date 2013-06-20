@@ -8,7 +8,7 @@
 
 #import "YTTabBarItem.h"
 
-#define YTTabBarItemIconWidth 50
+#define YTTabBarItemIconWidth 20
 
 @implementation YTTabBarItem
 
@@ -18,80 +18,52 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        selectedColor = [UIColor whiteColor];
-        unselectedColor = [UIColor grayColor];
         index = anIndex;
-        //button
-        frame.origin.x = 0;
-        button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = frame;
-        [button addTarget:self action:@selector(onButtonTouched:) forControlEvents:UIControlEventTouchDown];
-        frame.origin.x = YTTabBarItemIconWidth;
-        frame.size.width = frame.size.width - frame.origin.x;
-        [self addSubview:button];
-        //label
-        label = [[UILabel alloc] initWithFrame:frame];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = unselectedColor;
-        label.font = [UIFont boldSystemFontOfSize:12];
-        [self addSubview:label];
+        //
+        UIColor *aSelectedColor = [UIColor whiteColor];
+        UIColor *anUnselectedColor = [UIColor grayColor];
+        [self setTitleColor:aSelectedColor forState:UIControlStateSelected];
+        [self setTitleColor:anUnselectedColor forState:UIControlStateNormal];
+        [self setTitleColor:aSelectedColor forState:UIControlStateSelected | UIControlStateHighlighted];
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        //
+        UIEdgeInsets edgeInset = UIEdgeInsetsZero;
+        edgeInset.left = YTTabBarItemIconWidth;
+        self.titleEdgeInsets = edgeInset;
+        //
+        [self addTarget:self action:@selector(onButtonTouched:) forControlEvents:UIControlEventTouchDown];
     }
     return self;
 }
 
 -(void) setSelectedImage:(UIImage*)aSelectedImage unseletedImage:(UIImage*)anUnselectedImage
 {
-    [button setBackgroundImage:selectedImage forState:UIControlStateHighlighted];
-    [button setBackgroundImage:selectedImage = aSelectedImage forState:UIControlStateSelected];
-    [button setBackgroundImage:unselectedImage = anUnselectedImage forState:UIControlStateNormal];
+    [self setBackgroundImage: aSelectedImage forState:UIControlStateSelected];
+    [self setBackgroundImage: aSelectedImage forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self setBackgroundImage: anUnselectedImage forState:UIControlStateNormal];
 }
 
 -(void) setSelectedColor:(UIColor*)aSelectedColor unseletedColor:(UIColor*)anUnselectedColor
 {
     
-    selectedColor = aSelectedColor;
-    unselectedColor = anUnselectedColor;
-    if (button.selected) {
-        label.textColor = aSelectedColor;
-    }
-    else
-    {
-        label.textColor = anUnselectedColor;
-    }
+    [self setTitleColor:aSelectedColor forState:UIControlStateSelected];
+    [self setTitleColor:anUnselectedColor forState:UIControlStateNormal];
+    [self setTitleColor:aSelectedColor forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 - (void) setText:(NSString *)aText
 {
-    label.text = aText;
+    [self setTitle:aText forState:UIControlStateNormal];
 }
 
 - (NSString*) text
 {
-    return label.text;
-}
-
-- (void) setSelected:(BOOL)selected
-{
-    if (selected) {
-        label.textColor = selectedColor;
-        //[button setImage:selectedImage forState:UIControlStateHighlighted];
-    }
-    else{
-        label.textColor = unselectedColor;
-        //[button setImage:unselectedImage forState:UIControlStateHighlighted];
-    }
-    button.selected = selected;
-}
-
-- (BOOL) selected
-{
-    return button.selected;
+    return [self titleForState:UIControlStateNormal];
 }
 
 - (void) onButtonTouched:(UIButton*) sender
 {
     if (sender.selected == NO) {
-        self.selected = YES;
         [delegate onSelected:index];
     }
 

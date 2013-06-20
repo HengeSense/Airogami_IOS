@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGComposeEditViewController.h"
+#import "AGWriteEditViewController.h"
 
-@interface AGComposeEditViewController ()
+@interface AGWriteEditViewController ()
 
 @end
 
-@implementation AGComposeEditViewController
+@implementation AGWriteEditViewController
 
 @synthesize location;
 

@@ -13,5 +13,5 @@ typedef void (^AGLocationUtilsResultBlock)(AGLocation *location, NSError *error)
 
 @interface AGLocationUtils : NSObject
 -(void) getCurrentLocation:(AGLocationUtilsResultBlock)block;
-
++ (void) transformLocation:(CLLocation *)location completion:(AGLocationUtilsResultBlock)block;
 @end

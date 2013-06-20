@@ -45,10 +45,8 @@ static NSString * const Reset_Password_Images[] = {@"reset_password_normal.png",
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.backButton setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
-    [self.doneButton setBackgroundImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
-    [self.doneButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
+	[AGUIDefines setNavigationBackButton:self.backButton];
+    [AGUIDefines setNormalDoneButton:self.doneButton];
 }
 
 - (void)viewDidUnload {

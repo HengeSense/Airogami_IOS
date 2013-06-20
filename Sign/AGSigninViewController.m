@@ -48,10 +48,8 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.backButton setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.backButton setTitleColor:[AGUIDefines navigationBackHighlightColor] forState:UIControlStateHighlighted];
-    [self.doneButton setBackgroundImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
-    [self.doneButton setTitleColor:[AGUIDefines navigationDoneHighlightColor] forState:UIControlStateHighlighted];
+	[AGUIDefines setNavigationBackButton:self.backButton];
+    [AGUIDefines setNavigationDoneButton:self.doneButton];
 }
 
 - (void)didReceiveMemoryWarning

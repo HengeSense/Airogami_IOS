@@ -16,7 +16,7 @@
 //google auto complete
 "error.googleplacesautocomplete.fetch" = "Could not fetch Places";
 "error.googleplacesautocomplete.map" = "Could not map selected Place";
-"text.googleplacesautocomplete.search" = "Search or Address";
+"text.googleplacesautocomplete.search" = "Search your city";
 //main tabbar
 "main.tabbar.title_0" = "Compose";
 "main.tabbar.title_1" = "Pickup";

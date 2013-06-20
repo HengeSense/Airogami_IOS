@@ -11,6 +11,10 @@
 static UIColor*  NavigationBackHighlightColor;
 static UIColor*  NavigationDoneHighlightColor;
 
+NSString * const Normal_Done_Highlight = @"normal_done_highlight.png";
+NSString * const Navigation_Back_Button_Highlight = @"back_button_highlight.png";
+NSString * const Navigation_Done_Button_Highlight = @"done_button_highlight.png";
+
 @implementation AGUIDefines
 
 + (void) initialize
@@ -27,5 +31,23 @@ static UIColor*  NavigationDoneHighlightColor;
 + (UIColor*) navigationDoneHighlightColor
 {
     return NavigationDoneHighlightColor;
+}
+
++ (void) setNavigationBackButton:(UIButton*)button
+{
+    [button setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
+    [button setTitleColor:NavigationBackHighlightColor forState:UIControlStateHighlighted];
+}
+
++ (void) setNavigationDoneButton:(UIButton*)button
+{
+    [button setBackgroundImage:[UIImage imageNamed:Navigation_Done_Button_Highlight] forState:UIControlStateHighlighted];
+    [button setTitleColor:NavigationDoneHighlightColor forState:UIControlStateHighlighted];
+}
+
++ (void) setNormalDoneButton:(UIButton*)button
+{
+    [button setBackgroundImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
+    [button setTitleColor:NavigationDoneHighlightColor forState:UIControlStateHighlighted];
 }
 @end
