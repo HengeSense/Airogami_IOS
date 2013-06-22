@@ -8,8 +8,8 @@
 
 #import "AGWritePaperCell.h"
 
-static NSString *WritePaperCellHighlightImages[] = { @"write_paper_random_highlight",
-    @"write_paper_question_highlight", @"write_paper_confession_highlight", @"write_paper_relationship_highlight", @"write_paper_feeling_highlight", @"write_paper_info_highlight",  @"write_paper_chain_highlight"
+static NSString *WritePaperCellHighlightImages[] = { @"write_paper_random_highlight.png",
+    @"write_paper_question_highlight.png", @"write_paper_confession_highlight.png", @"write_paper_relationship_highlight.png",  @"write_paper_info_highlight.png", @"write_paper_feeling_highlight.png", @"write_paper_chain_highlight.png"
 };
 
 

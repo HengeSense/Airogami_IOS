@@ -9,6 +9,7 @@
 #import "AGAppDelegate.h"
 #import "AGKeyboardScroll.h"
 #import "AGUIDefines.h"
+#import "AGKeyboardResize.h"
 
 
 @interface AGAppDelegate()
@@ -23,6 +24,7 @@
 {
     // Override point for customization after application launch.
     [AGKeyboardScroll initialize];
+    [AGKeyboardResize initialize];
     [AGUIDefines initialize];
     return YES;
 }

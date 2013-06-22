@@ -10,6 +10,6 @@
 
 @class AGLocation;
 
-@interface AGWriteEditViewController : UIViewController
+@interface AGWriteEditViewController : UIViewController<UITextViewDelegate>
 @property(nonatomic, strong) AGLocation *location;
 @end

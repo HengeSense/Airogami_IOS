@@ -27,7 +27,11 @@ static CGSize kbSize;;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
-    
+}
+
+- (void)unregisterForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -67,6 +71,7 @@ static CGSize kbSize;;
       scrollView = nil;
       view = nil;
       activeField = nil;
+    [keyboardScroll unregisterForKeyboardNotifications];
 }
 + (void) setScrollView:(UIScrollView*) aScrollView view:(UIView *)aView  activeField:(UITextField *)anActiveField
 {

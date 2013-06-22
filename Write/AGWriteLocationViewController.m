@@ -11,9 +11,13 @@
 #import "AGUIUtils.h"
 
 @interface AGWriteLocationViewController ()
+{
+    BOOL updated;
+}
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *doneButtons;
+
 
 @end
 
@@ -75,15 +79,28 @@
     
 }
 
-- (void) setAddress:(CLPlacemark*) placeMark
+- (void) setLocation:(AGLocation *)location
 {
-    [super setAddress:placeMark];
-
+    [super setLocation:location];
+    updated = YES;
     for (UIButton *button in self.doneButtons) {
         if (button.tag < 3) {
-            [button setTitle:[self.location stringAt:button.tag] forState:UIControlStateNormal];
+            NSString * addr = [self.location stringAt:button.tag];
+            [button setTitle:addr forState:UIControlStateNormal];
+            button.enabled = addr.length > 0;
         }
     }
 }
+
+#pragma mark - mapView delegate
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    if (updated == NO) {
+        updated = YES;
+        [self searchUserLocation];
+    }
+}
+
 
 @end

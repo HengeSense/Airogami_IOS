@@ -58,6 +58,15 @@
     [super viewDidUnload];
 }
 
+- (void) searchUserLocation
+{
+    [AGLocationUtils transformLocation:self.mapView.userLocation.location completion:^(AGLocation *aLocation, NSError *error) {
+        if (error == nil) {
+            self.location = aLocation;
+        }
+    }];
+}
+
 - (IBAction)recenterMapToUserLocation:(id)sender {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
@@ -67,12 +76,8 @@
     
     region.span = span;
     region.center = self.mapView.userLocation.coordinate;
-    
-    [AGLocationUtils transformLocation:self.mapView.userLocation.location completion:^(AGLocation *aLocation, NSError *error) {
-        if (error == nil) {
-            self.location = aLocation;
-        }
-    }];
+    [self searchUserLocation];
+
     
     [self.mapView setRegion:region animated:YES];
 }
