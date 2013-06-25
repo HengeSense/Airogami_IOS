@@ -21,3 +21,5 @@
 "main.tabbar.title_0" = "Compose";
 "main.tabbar.title_1" = "Pickup";
 "main.tabbar.title_2" = "Plane";
+//write
+"location.randomDestination" = "Random destination";

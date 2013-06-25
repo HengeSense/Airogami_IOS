@@ -11,5 +11,5 @@
 @class AGWriteEditViewController;
 
 @interface AGWriteLocationViewController : SPGooglePlacesAutocompleteViewController
-@property (weak, nonatomic)  AGWriteEditViewController *composeEditViewController;
+@property (weak, nonatomic)  AGWriteEditViewController *writeEditViewController;
 @end

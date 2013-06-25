@@ -23,7 +23,7 @@
 
 @implementation AGWriteLocationViewController
 
-@synthesize composeEditViewController;
+@synthesize writeEditViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +39,9 @@
     [super viewDidLoad];
     for (UIButton *button in self.doneButtons) {
         [AGUIUtils buttonBackgroundImageNormalToHighlight:button];
+    }
+    if ([writeEditViewController.location empty] == NO) {
+        self.location = writeEditViewController.location;
     }
 	// Do any additional setup after loading the view.
 }
@@ -74,7 +77,7 @@
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     self.location.position = sender.tag;
-    composeEditViewController.location = self.location;
+    writeEditViewController.location = self.location;
     [self.navigationController popViewControllerAnimated:YES];
     
 }

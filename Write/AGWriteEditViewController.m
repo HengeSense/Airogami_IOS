@@ -8,11 +8,19 @@
 
 #import "AGWriteEditViewController.h"
 #import "AGKeyboardResize.h"
+#import "AGWriteEditViewAnimation.h"
+#import "AGWriteLocationViewController.h"
 #import <QuartzCore/QuartzCore.h>
+
+#define kAGWriteEditTextMaximum 200
+
+static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"write_edit_male_button.png", @"write_edit_female_button.png"};
 
 @interface AGWriteEditViewController ()
 {
     UIButton *sexAidedButton;
+    AGWriteEditViewAnimation *writeEditViewAnimation;
+    int sex;
 }
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
@@ -47,7 +55,14 @@
 
 - (void) initialize
 {
+    location = [AGLocation location];
+    sexAidedButton = [[UIButton alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [sexAidedButton addTarget:self action:@selector(sexAidedButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
+    for (UIButton *button in self.sexButtons) {
+        [sexAidedButton addSubview:button];
+    }
+    writeEditViewAnimation = [[AGWriteEditViewAnimation alloc] initWithView:sexAidedButton];
 }
 
 - (void)viewDidLoad
@@ -72,9 +87,6 @@
 }
 
 
-- (IBAction)dummyButtonTouched:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"ToLocation" sender:self];
-}
 
 - (void)viewDidUnload {
     [self setBackButton:nil];
@@ -100,125 +112,65 @@
 
 
 - (IBAction)locationButtonTouched:(UIButton *)sender {
+    [self sexButtonFold];
+    [self performSegueWithIdentifier:@"ToLocation" sender:self];
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[AGWriteLocationViewController class]]) {
+        AGWriteLocationViewController * wlvc = segue.destinationViewController;
+        wlvc.writeEditViewController = self;
+        
+    }
+}
+
+-(void) setLocation:(AGLocation *)aLocation
+{
+    location = aLocation;
+    self.locationLabel.text = [location validString];
+}
 
 - (IBAction)sexButtonTouched:(UIButton *)sender {
     
-    UIWindow * window = self.view.window;
-    sexAidedButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sexAidedButton addTarget:self action:@selector(sexAidedButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [window addSubview:sexAidedButton];
-    for (UIButton *button in self.sexButtons) {
-        [sexAidedButton addSubview:button];
-        button.tag = 5;
-        button.alpha = 0.f;
-    }
+    [self sexButtonToggle];
     
-    
-    
-    [self moveUp:@"AGWriteEditSex"];
 }
 
-- (void)earthquake:(UIView*)itemView
+- (IBAction)sexButtonsTouched:(UIButton *)sender {
+    
+    [self sexButtonFold];
+    sex = sender.tag - 1;
+    [self.sexButton setBackgroundImage:[UIImage imageNamed:AGWriteEditSexImages[sex]] forState:UIControlStateNormal];
+    switch (sex) {
+        case 0://both
+            
+            break;
+        case 1://male
+            
+            break;
+        case 2://female
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+- (void) sexButtonToggle
 {
-    CGFloat t = itemView.tag;
-    CGAffineTransform leftQuake  = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -t);
-    CGAffineTransform rightQuake = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, t);
-    
-    itemView.transform = leftQuake;  // starting point
-    
-    [UIView beginAnimations:@"earthquake" context:(__bridge void *)(itemView)];
-    [UIView setAnimationRepeatAutoreverses:YES]; // important
-    [UIView setAnimationRepeatCount:1];
-    [UIView setAnimationDuration:0.07];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(earthquakeEnded:finished:context:)];
-    
-    itemView.transform = rightQuake; // end here & auto-reverse
-    
-    [UIView commitAnimations];
+    CGPoint point = [self.sexButton.superview convertPoint:self.sexButton.center toView:self.view.window];
+    [writeEditViewAnimation toggle:point];
 }
 
-- (void)earthquakeEnded:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+- (void) sexButtonFold
 {
-    UIView *view = (__bridge UIView *)context;
-    int count = view.tag;
-    
-    if (count > 0)
-    {
-        --view.tag;
-        if([finished boolValue]){
-            UIView* item = (__bridge UIView *)context;
-            item.transform = CGAffineTransformIdentity;
-        }
-        
-    }
-    else{
-        [self earthquake:(__bridge UIView*)context];
-    }
+    CGPoint point = [self.sexButton.superview convertPoint:self.sexButton.center toView:self.view.window];
+    [writeEditViewAnimation fold:point];
 }
 
-
-- (void)moveUp:(NSString *)animationID {
-    
-    [UIView animateWithDuration:.2
-                          delay:0.0
-                        options:(UIViewAnimationCurveLinear|UIViewAnimationOptionAllowUserInteraction)
-                     animations:^{
-                          UIWindow * window = self.view.window;
-                         CGPoint point = [self.sexButton.superview convertPoint:self.sexButton.center toView:window];
-                         for (UIButton *button in self.sexButtons) {
-                             button.center = point;
-                             button.transform = CGAffineTransformMakeRotation(M_PI);
-                             button.alpha = .3f;
-                         }
-                         //left
-                         UIButton *button = [self.sexButtons objectAtIndex:0];
-                         point.x -= 50;
-                         point.y -= 50;
-                         button.center = point;
-                         //middle
-                         button = [self.sexButtons objectAtIndex:1];
-                         point.x += 50;
-                         button.center = point;
-                         //right
-                         button = [self.sexButtons objectAtIndex:2];
-                         point.x += 50;
-                         button.center = point;
-                        
-                         
-                         [UIView setAnimationDelegate:self];
-                         [UIView setAnimationDidStopSelector:@selector(rotate:finished:context:)];
-
-                     }
-                     completion:^(BOOL finished){
-                         
-                     }];
-    
-}
-
-- (void) rotate:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    
-    for (UIButton *button in self.sexButtons) {
-       // [self view:button runSpinAnimationWithDuration:.2f];
-       
-    }
-    [UIView animateWithDuration:.2
-                          delay:0.0
-                        options:(UIViewAnimationCurveLinear|UIViewAnimationOptionAllowUserInteraction)
-                     animations:^{
-                         for (UIButton *button in self.sexButtons) {
-                             button.transform = CGAffineTransformMakeRotation( 2 * M_PI);
-                             button.alpha = 1.0f;
-                         }
-                         
-                     }
-                     completion:^(BOOL finished){
-                         
-                     }];
-    
-}
 
 - (void) view:(UIView*)view runSpinAnimationWithDuration:(CGFloat) duration;
 {
@@ -237,7 +189,8 @@
 
 - (void) sexAidedButtonTouched:(UIButton*)sender
 {
-    
+    CGPoint point = [self.sexButton.superview convertPoint:self.sexButton.center toView:self.view.window];
+    [writeEditViewAnimation fold:point];
 }
 
 
@@ -249,7 +202,8 @@
     if (text.length != textView.text.length) {
         textView.text = text;
     }
-    
+    self.countLabel.text = [NSString stringWithFormat:@"%d", kAGWriteEditTextMaximum - textView.text.length];
+    [self sexButtonFold];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{

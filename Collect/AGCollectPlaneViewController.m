@@ -1,20 +1,19 @@
 //
-//  AGComposePaperViewController.m
+//  AGCollectPlaneViewController.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 6/15/13.
+//  Created by Tianhu Yang on 6/24/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGWritePaperViewController.h"
-#import "AGUIDefines.h"
+#import "AGCollectPlaneViewController.h"
 
-@interface AGWritePaperViewController ()
-
+@interface AGCollectPlaneViewController ()
 @property (strong, nonatomic) IBOutlet UIView *headerView;
+
 @end
 
-@implementation AGWritePaperViewController
+@implementation AGCollectPlaneViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,11 +28,10 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"AGWritePaperHeaderView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
     }
     return self;
 }
-
 
 - (void)loadView {
     [super loadView];
@@ -56,7 +54,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.tableView.tableHeaderView = self.headerView;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -73,19 +70,15 @@
 
 #pragma mark - Table view data source
 
-/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,9 +87,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    
     return cell;
-} 
-*/
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -148,14 +141,7 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    [self performSegueWithIdentifier:@"ToEdit" sender:self];
 }
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-}
-
 
 - (void)viewDidUnload {
     [self setHeaderView:nil];

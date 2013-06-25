@@ -16,6 +16,7 @@ extern NSString * const Navigation_Done_Button_Highlight;
 
 @interface AGUIDefines : NSObject
 + (void) initialize;
++ (UIImage*) mainBackgroundImage;
 + (UIColor*) navigationBackHighlightColor;
 + (UIColor*) navigationDoneHighlightColor;
 + (void) setNavigationBackButton:(UIButton*)button;

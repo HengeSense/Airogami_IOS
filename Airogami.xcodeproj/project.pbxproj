@@ -152,6 +152,26 @@
 		07DB924A1769294D000F0780 /* powered-by-google-on-non-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 07DB92481769294D000F0780 /* powered-by-google-on-non-white.png */; };
 		07DB924B1769294D000F0780 /* powered-by-google-on-non-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07DB92491769294D000F0780 /* powered-by-google-on-non-white@2x.png */; };
 		07DB92551769411A000F0780 /* NSArray+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DB92541769411A000F0780 /* NSArray+Addition.m */; };
+		07F82A351778C01A00FAE916 /* AGWriteEditViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F82A341778C01900FAE916 /* AGWriteEditViewAnimation.m */; };
+		07F82A37177906C500FAE916 /* airogami_title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A36177906C500FAE916 /* airogami_title@2x.png */; };
+		07F82A401779093200FAE916 /* plane_chain_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A391779093200FAE916 /* plane_chain_icon@2x.png */; };
+		07F82A411779093200FAE916 /* plane_confession_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A3A1779093200FAE916 /* plane_confession_icon@2x.png */; };
+		07F82A421779093200FAE916 /* plane_feeling_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A3B1779093200FAE916 /* plane_feeling_icon@2x.png */; };
+		07F82A431779093200FAE916 /* plane_location_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A3C1779093200FAE916 /* plane_location_icon@2x.png */; };
+		07F82A441779093200FAE916 /* plane_question_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A3D1779093200FAE916 /* plane_question_icon@2x.png */; };
+		07F82A451779093200FAE916 /* plane_randon_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A3E1779093200FAE916 /* plane_randon_icon@2x.png */; };
+		07F82A461779093200FAE916 /* plane_relation_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A3F1779093200FAE916 /* plane_relation_icon@2x.png */; };
+		07F82A4B1779093C00FAE916 /* collect_planes_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A491779093C00FAE916 /* collect_planes_left@2x.png */; };
+		07F82A4C1779093C00FAE916 /* collect_pull_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A4A1779093C00FAE916 /* collect_pull_down@2x.png */; };
+		07F82A4E17790A7B00FAE916 /* AGCollectPlaneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A4D17790A7B00FAE916 /* AGCollectPlaneHeaderView.xib */; };
+		07F82A5117790A9900FAE916 /* AGCollectPlaneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F82A5017790A9900FAE916 /* AGCollectPlaneViewController.m */; };
+		07F82A5A177910BC00FAE916 /* plane_chain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A53177910BC00FAE916 /* plane_chain@2x.png */; };
+		07F82A5B177910BC00FAE916 /* plane_confession@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A54177910BC00FAE916 /* plane_confession@2x.png */; };
+		07F82A5C177910BC00FAE916 /* plane_feeling@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A55177910BC00FAE916 /* plane_feeling@2x.png */; };
+		07F82A5D177910BC00FAE916 /* plane_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A56177910BC00FAE916 /* plane_location@2x.png */; };
+		07F82A5E177910BC00FAE916 /* plane_question@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A57177910BC00FAE916 /* plane_question@2x.png */; };
+		07F82A5F177910BC00FAE916 /* plane_random@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A58177910BC00FAE916 /* plane_random@2x.png */; };
+		07F82A60177910BC00FAE916 /* plane_relationship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F82A59177910BC00FAE916 /* plane_relationship@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +377,28 @@
 		07DB92491769294D000F0780 /* powered-by-google-on-non-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered-by-google-on-non-white@2x.png"; sourceTree = "<group>"; };
 		07DB92531769411A000F0780 /* NSArray+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Addition.h"; sourceTree = "<group>"; };
 		07DB92541769411A000F0780 /* NSArray+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Addition.m"; sourceTree = "<group>"; };
+		07F82A331778C01900FAE916 /* AGWriteEditViewAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGWriteEditViewAnimation.h; sourceTree = "<group>"; };
+		07F82A341778C01900FAE916 /* AGWriteEditViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGWriteEditViewAnimation.m; sourceTree = "<group>"; };
+		07F82A36177906C500FAE916 /* airogami_title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "airogami_title@2x.png"; sourceTree = "<group>"; };
+		07F82A391779093200FAE916 /* plane_chain_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_chain_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A3A1779093200FAE916 /* plane_confession_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_confession_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A3B1779093200FAE916 /* plane_feeling_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_feeling_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A3C1779093200FAE916 /* plane_location_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_location_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A3D1779093200FAE916 /* plane_question_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_question_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A3E1779093200FAE916 /* plane_randon_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_randon_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A3F1779093200FAE916 /* plane_relation_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_relation_icon@2x.png"; sourceTree = "<group>"; };
+		07F82A491779093C00FAE916 /* collect_planes_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_planes_left@2x.png"; sourceTree = "<group>"; };
+		07F82A4A1779093C00FAE916 /* collect_pull_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_pull_down@2x.png"; sourceTree = "<group>"; };
+		07F82A4D17790A7B00FAE916 /* AGCollectPlaneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGCollectPlaneHeaderView.xib; sourceTree = "<group>"; };
+		07F82A4F17790A9900FAE916 /* AGCollectPlaneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGCollectPlaneViewController.h; sourceTree = "<group>"; };
+		07F82A5017790A9900FAE916 /* AGCollectPlaneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGCollectPlaneViewController.m; sourceTree = "<group>"; };
+		07F82A53177910BC00FAE916 /* plane_chain@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_chain@2x.png"; sourceTree = "<group>"; };
+		07F82A54177910BC00FAE916 /* plane_confession@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_confession@2x.png"; sourceTree = "<group>"; };
+		07F82A55177910BC00FAE916 /* plane_feeling@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_feeling@2x.png"; sourceTree = "<group>"; };
+		07F82A56177910BC00FAE916 /* plane_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_location@2x.png"; sourceTree = "<group>"; };
+		07F82A57177910BC00FAE916 /* plane_question@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_question@2x.png"; sourceTree = "<group>"; };
+		07F82A58177910BC00FAE916 /* plane_random@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_random@2x.png"; sourceTree = "<group>"; };
+		07F82A59177910BC00FAE916 /* plane_relationship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_relationship@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,8 +431,8 @@
 		0707231D175E8C2F0017292A = {
 			isa = PBXGroup;
 			children = (
+				07F82A471779093C00FAE916 /* Collect */,
 				07B8DC2817711753006922FF /* Chat */,
-				07B8DC2A17711753006922FF /* Collect */,
 				07B8DC2C17711754006922FF /* Write */,
 				078A1FE7176D361C00A69AE3 /* Setting */,
 				078A1F96176D355C00A69AE3 /* Logic */,
@@ -475,6 +517,9 @@
 		0707237D175EA0260017292A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07F82A52177910BC00FAE916 /* Planes */,
+				07F82A381779093200FAE916 /* Categories */,
+				07F82A36177906C500FAE916 /* airogami_title@2x.png */,
 				07B8DC22177102B4006922FF /* Default-568h@2x.png */,
 				07B8DC23177102B4006922FF /* Default.png */,
 				07B8DC24177102B4006922FF /* Default@2x.png */,
@@ -750,31 +795,18 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		07B8DC2A17711753006922FF /* Collect */ = {
-			isa = PBXGroup;
-			children = (
-				07B8DC2B17711754006922FF /* Resources */,
-			);
-			path = Collect;
-			sourceTree = "<group>";
-		};
-		07B8DC2B17711754006922FF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		07B8DC2C17711754006922FF /* Write */ = {
 			isa = PBXGroup;
 			children = (
 				07B8DC3617711B93006922FF /* Resources */,
 				07B8DC2D17711754006922FF /* AGWriteEditViewController.h */,
 				07B8DC2E17711754006922FF /* AGWriteEditViewController.m */,
+				07F82A331778C01900FAE916 /* AGWriteEditViewAnimation.h */,
+				07F82A341778C01900FAE916 /* AGWriteEditViewAnimation.m */,
 				07B8DC2F17711754006922FF /* AGWriteLocationViewController.h */,
 				07B8DC3017711754006922FF /* AGWriteLocationViewController.m */,
-				07B8DC3217711754006922FF /* AGWritePaperViewController.m */,
 				07B8DC3117711754006922FF /* AGWritePaperViewController.h */,
+				07B8DC3217711754006922FF /* AGWritePaperViewController.m */,
 				07B0B70817713EF500E598D5 /* AGWritePaperCell.h */,
 				07B0B70917713EF500E598D5 /* AGWritePaperCell.m */,
 				07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */,
@@ -814,6 +846,54 @@
 				07B8DC3717711BA2006922FF /* write_paper_random@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		07F82A381779093200FAE916 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				07F82A391779093200FAE916 /* plane_chain_icon@2x.png */,
+				07F82A3A1779093200FAE916 /* plane_confession_icon@2x.png */,
+				07F82A3B1779093200FAE916 /* plane_feeling_icon@2x.png */,
+				07F82A3C1779093200FAE916 /* plane_location_icon@2x.png */,
+				07F82A3D1779093200FAE916 /* plane_question_icon@2x.png */,
+				07F82A3E1779093200FAE916 /* plane_randon_icon@2x.png */,
+				07F82A3F1779093200FAE916 /* plane_relation_icon@2x.png */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		07F82A471779093C00FAE916 /* Collect */ = {
+			isa = PBXGroup;
+			children = (
+				07F82A481779093C00FAE916 /* Resources */,
+				07F82A4D17790A7B00FAE916 /* AGCollectPlaneHeaderView.xib */,
+				07F82A4F17790A9900FAE916 /* AGCollectPlaneViewController.h */,
+				07F82A5017790A9900FAE916 /* AGCollectPlaneViewController.m */,
+			);
+			path = Collect;
+			sourceTree = "<group>";
+		};
+		07F82A481779093C00FAE916 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				07F82A491779093C00FAE916 /* collect_planes_left@2x.png */,
+				07F82A4A1779093C00FAE916 /* collect_pull_down@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		07F82A52177910BC00FAE916 /* Planes */ = {
+			isa = PBXGroup;
+			children = (
+				07F82A53177910BC00FAE916 /* plane_chain@2x.png */,
+				07F82A54177910BC00FAE916 /* plane_confession@2x.png */,
+				07F82A55177910BC00FAE916 /* plane_feeling@2x.png */,
+				07F82A56177910BC00FAE916 /* plane_location@2x.png */,
+				07F82A57177910BC00FAE916 /* plane_question@2x.png */,
+				07F82A58177910BC00FAE916 /* plane_random@2x.png */,
+				07F82A59177910BC00FAE916 /* plane_relationship@2x.png */,
+			);
+			path = Planes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -978,6 +1058,24 @@
 				0750CF961773B726008E28F0 /* write_edit_destination_label@2x.png in Resources */,
 				0750CF9B1773D049008E28F0 /* write_edit_accessory@2x.png in Resources */,
 				07DA30D31774FE96009CDF6F /* AGWriteEditSexView.xib in Resources */,
+				07F82A37177906C500FAE916 /* airogami_title@2x.png in Resources */,
+				07F82A401779093200FAE916 /* plane_chain_icon@2x.png in Resources */,
+				07F82A411779093200FAE916 /* plane_confession_icon@2x.png in Resources */,
+				07F82A421779093200FAE916 /* plane_feeling_icon@2x.png in Resources */,
+				07F82A431779093200FAE916 /* plane_location_icon@2x.png in Resources */,
+				07F82A441779093200FAE916 /* plane_question_icon@2x.png in Resources */,
+				07F82A451779093200FAE916 /* plane_randon_icon@2x.png in Resources */,
+				07F82A461779093200FAE916 /* plane_relation_icon@2x.png in Resources */,
+				07F82A4B1779093C00FAE916 /* collect_planes_left@2x.png in Resources */,
+				07F82A4C1779093C00FAE916 /* collect_pull_down@2x.png in Resources */,
+				07F82A4E17790A7B00FAE916 /* AGCollectPlaneHeaderView.xib in Resources */,
+				07F82A5A177910BC00FAE916 /* plane_chain@2x.png in Resources */,
+				07F82A5B177910BC00FAE916 /* plane_confession@2x.png in Resources */,
+				07F82A5C177910BC00FAE916 /* plane_feeling@2x.png in Resources */,
+				07F82A5D177910BC00FAE916 /* plane_location@2x.png in Resources */,
+				07F82A5E177910BC00FAE916 /* plane_question@2x.png in Resources */,
+				07F82A5F177910BC00FAE916 /* plane_random@2x.png in Resources */,
+				07F82A60177910BC00FAE916 /* plane_relationship@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1056,6 +1154,8 @@
 				07B8DC3517711754006922FF /* AGWritePaperViewController.m in Sources */,
 				07B0B70A17713EF500E598D5 /* AGWritePaperCell.m in Sources */,
 				0750CF991773C28D008E28F0 /* AGKeyboardResize.m in Sources */,
+				07F82A351778C01A00FAE916 /* AGWriteEditViewAnimation.m in Sources */,
+				07F82A5117790A9900FAE916 /* AGCollectPlaneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

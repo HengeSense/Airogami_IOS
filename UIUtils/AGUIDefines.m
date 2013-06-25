@@ -11,6 +11,8 @@
 static UIColor*  NavigationBackHighlightColor;
 static UIColor*  NavigationDoneHighlightColor;
 
+static NSString * Main_Background_Image = @"signup_bgrd.png";
+
 NSString * const Normal_Done_Highlight = @"normal_done_highlight.png";
 NSString * const Navigation_Back_Button_Highlight = @"back_button_highlight.png";
 NSString * const Navigation_Done_Button_Highlight = @"done_button_highlight.png";
@@ -21,6 +23,11 @@ NSString * const Navigation_Done_Button_Highlight = @"done_button_highlight.png"
 {
     NavigationDoneHighlightColor = [UIColor colorWithRed:15 / 255.0f green:147 / 255.0f  blue:68 / 255.0f  alpha:1.0f];
     NavigationBackHighlightColor = [UIColor colorWithRed:2 / 255.0f green:113 / 255.0f  blue:196 / 255.0f  alpha:1.0f];
+}
+
++ (UIImage*) mainBackgroundImage
+{
+    return [UIImage imageNamed:Main_Background_Image];
 }
 
 + (UIColor*) navigationBackHighlightColor

@@ -47,6 +47,20 @@
     return string;
 }
 
+- (NSString*) validString
+{
+    if (position > 2) {
+        return NSLocalizedString(@"location.randomDestination", @"Random destination");
+    }
+    NSMutableString *string = [NSMutableString stringWithString:country];
+    for (int i = 1; i >= position; --i) {
+        [string insertString:@", " atIndex:0];
+        [string insertString:[self stringAt:i] atIndex:0];
+    }
+    
+    return string;
+}
+
 - (NSString*) stringAt:(int) index
 {
     switch (index) {
@@ -72,6 +86,11 @@
         return YES;
     }
     return NO;
+}
+
+- (BOOL) empty
+{
+    return country.length == 0;
 }
 
 + (AGLocation*) locationWithPlaceMark:(CLPlacemark*) placeMark

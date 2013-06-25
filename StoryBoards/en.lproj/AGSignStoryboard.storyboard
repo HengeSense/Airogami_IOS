@@ -703,7 +703,7 @@
         <image name="signin_forgot_password@2x.png" width="290" height="44"/>
         <image name="signup_account_normal.png" width="16" height="16"/>
         <image name="signup_bgrd.png" width="16" height="16"/>
-        <image name="signup_bgrd@2x.png" width="640" height="1136"/>
+        <image name="signup_bgrd@2x.png" width="640" height="1048"/>
         <image name="signup_check.png" width="16" height="16"/>
         <image name="signup_check@2x.png" width="32" height="26"/>
         <image name="signup_location.png" width="16" height="16"/>
