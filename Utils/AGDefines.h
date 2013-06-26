@@ -10,6 +10,16 @@
 #define Airogami_AGDefines_h
 #import <UIKit/UIKit.h>
 
+enum{
+    kAGCategoryRandom = 0,
+    kAGCategoryQuestion,
+    kAGCategoryConfession,
+    kAGCategoryRelationship,
+    kAGCategoryLocalInformation,
+    kAGCategoryFeeling,
+    kAGCategoryChain
+};
+
 extern const int AGApplicationVersion;
 
 #endif

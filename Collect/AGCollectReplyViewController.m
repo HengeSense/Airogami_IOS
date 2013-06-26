@@ -1,21 +1,18 @@
 //
-//  AGCollectPlaneViewController.m
+//  AGCollectReplyViewController.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 6/24/13.
+//  Created by Tianhu Yang on 6/25/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGCollectPlaneViewController.h"
-#import "AGCollectPlaneCell.h"
-#import "AYUIButton.h"
+#import "AGCollectReplyViewController.h"
 
-@interface AGCollectPlaneViewController ()
-@property (strong, nonatomic) IBOutlet UIView *headerView;
+@interface AGCollectReplyViewController ()
 
 @end
 
-@implementation AGCollectPlaneViewController
+@implementation AGCollectReplyViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -24,33 +21,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
-    }
-    return self;
-}
-
-- (void)loadView {
-    [super loadView];
-    UITableView *tv = (UITableView*)self.view;
-    CGRect frame = self.view.frame;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.image = [AGUIDefines mainBackgroundImage];
-    imageView.userInteractionEnabled = YES;
-    self.view = imageView;
-    [self.view addSubview:tv];
-    [self.view addSubview:self.headerView];
-    
-    frame.origin.y = self.headerView.bounds.size.height;
-    frame.size.height -= frame.origin.y;
-    
-    tv.frame = frame;
-    
 }
 
 - (void)viewDidLoad
@@ -74,22 +44,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
-    return 1;
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    AGCollectPlaneCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.category = indexPath.row;
-    cell.aidedButton.tag = indexPath.row;
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // Configure the cell...
     
     return cell;
 }
@@ -146,8 +118,4 @@
      */
 }
 
-- (void)viewDidUnload {
-    [self setHeaderView:nil];
-    [super viewDidUnload];
-}
 @end

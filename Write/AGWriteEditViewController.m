@@ -103,7 +103,7 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 
 - (IBAction)backButtonTouched:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    
+    //self.textView.inputAccessoryView.hidden = YES;
 }
 
 - (IBAction)sendButtonTouched:(UIButton *)sender {

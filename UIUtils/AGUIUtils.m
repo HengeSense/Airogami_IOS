@@ -11,6 +11,10 @@
 
 #define kAGAlertMessageOK @"OK"
 
+static NSString *planeImages[] = {@"plane_random.png", @"plane_question.png", @"plane_confession.png", @"plane_relationship.png", @"plane_localinfo.png", @"plane_feeling.png", @"plane_chain.png"};
+
+static NSString *categoryImages[] = {@"plane_random_icon.png", @"plane_question_icon.png", @"plane_confession_icon.png", @"plane_relationship_icon.png", @"plane_localinfo_icon.png", @"plane_feeling_icon.png", @"plane_chain_icon.png"};
+
 @implementation AGUIUtils
 
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg
@@ -49,6 +53,21 @@
     UIImage *image = [button backgroundImageForState:UIControlStateNormal];
     [button setBackgroundImage:nil forState:UIControlStateNormal];
     [button setBackgroundImage:image forState:UIControlStateHighlighted];
+}
+
++ (UIImage*) planeImage:(int) category
+{
+    if (category > kAGCategoryChain) {
+        category = kAGCategoryRandom;
+    }
+    return [UIImage imageNamed:planeImages[category]];
+}
++ (UIImage*) categoryImage:(int) category
+{
+    if (category > kAGCategoryChain) {
+        category = kAGCategoryRandom;
+    }
+    return [UIImage imageNamed:categoryImages[category]];
 }
 
 @end

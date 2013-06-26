@@ -14,4 +14,6 @@
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
 + (void) buttonImageNormalToHighlight:(UIButton*)button;
 + (void) buttonBackgroundImageNormalToHighlight:(UIButton*)button;
++ (UIImage*) planeImage:(int) category;
++ (UIImage*) categoryImage:(int) category;
 @end
