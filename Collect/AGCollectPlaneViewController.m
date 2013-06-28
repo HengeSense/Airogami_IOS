@@ -9,13 +9,22 @@
 #import "AGCollectPlaneViewController.h"
 #import "AGCollectPlaneCell.h"
 #import "AYUIButton.h"
+#import "AGWaitView.h"
+#import "AGCollectPlaneReply.h"
 
 @interface AGCollectPlaneViewController ()
 @property (strong, nonatomic) IBOutlet UIView *headerView;
+@property(nonatomic, strong) AGCollectPlanePulldownHeader *pulldownHeader;
+
+@property (strong, nonatomic)  AGWaitView *waitView;
+
+@property (strong, nonatomic)  AGCollectPlaneReply *reply;
 
 @end
 
 @implementation AGCollectPlaneViewController
+
+@synthesize pulldownHeader, waitView, reply;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,7 +39,12 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        waitView = [[AGWaitView alloc] initWithName:@"Layer " count:41];
         [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
+        pulldownHeader = [AGCollectPlanePulldownHeader header];
+        reply = [AGCollectPlaneReply reply];
+       
+        
     }
     return self;
 }
@@ -48,14 +62,18 @@
     
     frame.origin.y = self.headerView.bounds.size.height;
     frame.size.height -= frame.origin.y;
-    
     tv.frame = frame;
     
+    frame = pulldownHeader.pulldownView.frame;
+    frame.origin.y = 52;
+    pulldownHeader.pulldownView.frame = frame;
+    [tv addSubview:pulldownHeader.pulldownView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    pulldownHeader.delegate = self;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -69,6 +87,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void) refresh
+{
+    [waitView start];
+    
+}
+
 
 #pragma mark - Table view data source
 
@@ -137,17 +162,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self.reply show];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	
+    [pulldownHeader scrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[pulldownHeader scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+	
 }
 
 - (void)viewDidUnload {
     [self setHeaderView:nil];
+    [self setWaitView:nil];
     [super viewDidUnload];
 }
 @end

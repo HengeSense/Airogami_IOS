@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGDefines.h"
 
 @interface AGUIUtils : NSObject
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;
@@ -15,5 +16,6 @@
 + (void) buttonImageNormalToHighlight:(UIButton*)button;
 + (void) buttonBackgroundImageNormalToHighlight:(UIButton*)button;
 + (UIImage*) planeImage:(int) category;
-+ (UIImage*) categoryImage:(int) category;
++ (UIImage*) categoryImage:(AGCategory) category;
++ (UIImage*) collectTypeImage:(AGCollectType) type;
 @end

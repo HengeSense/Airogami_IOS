@@ -10,15 +10,20 @@
 #define Airogami_AGDefines_h
 #import <UIKit/UIKit.h>
 
-enum{
-    kAGCategoryRandom = 0,
-    kAGCategoryQuestion,
-    kAGCategoryConfession,
-    kAGCategoryRelationship,
-    kAGCategoryLocalInformation,
-    kAGCategoryFeeling,
-    kAGCategoryChain
-};
+typedef enum{
+    AGCategoryRandom = 0,
+    AGCategoryQuestion,
+    AGCategoryConfession,
+    AGCategoryRelationship,
+    AGCategoryLocalInformation,
+    AGCategoryFeeling,
+    AGCategoryChain
+} AGCategory;
+
+typedef enum{
+    AGCollectTypeReceived = 0,
+    AGCollectTypePickuped
+} AGCollectType;
 
 extern const int AGApplicationVersion;
 

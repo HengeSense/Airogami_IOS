@@ -34,7 +34,7 @@
         <scene sceneID="1iS-y8-Mvd">
             <objects>
                 <navigationController storyboardIdentifier="ChatRootViewController" definesPresentationContext="YES" id="Bep-vj-2ww" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="Chats" image="main_tabbar_item_plane.png" id="0Xd-7O-joA"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Chats" id="0Xd-7O-joA"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="L04-xZ-tun">
                         <autoresizingMask key="autoresizingMask"/>
@@ -49,9 +49,6 @@
             <point key="canvasLocation" x="-276" y="-108"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="main_tabbar_item_plane.png" width="16" height="16"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

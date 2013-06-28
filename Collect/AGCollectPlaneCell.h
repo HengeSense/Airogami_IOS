@@ -19,6 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property (weak, nonatomic) IBOutlet AYUIButton *aidedButton;
 
-@property (nonatomic, assign) int category;
+@property (nonatomic, assign) AGCategory category;
 
 @end

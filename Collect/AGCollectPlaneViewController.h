@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGCollectPlanePulldownHeader.h"
 
-@interface AGCollectPlaneViewController : UITableViewController
+@interface AGCollectPlaneViewController : UITableViewController<AGCollectPlanePulldownHeaderDelegate>
 
 @end

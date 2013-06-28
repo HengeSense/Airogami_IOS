@@ -23,3 +23,6 @@
 "main.tabbar.title_2" = "Plane";
 //write
 "location.randomDestination" = "Random destination";
+//Collect
+"collect.refresh.pull" = "Pull down to find more ...";
+"collect.refresh.release" = "Release to find more ...";

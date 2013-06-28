@@ -15,6 +15,8 @@ static NSString *planeImages[] = {@"plane_random.png", @"plane_question.png", @"
 
 static NSString *categoryImages[] = {@"plane_random_icon.png", @"plane_question_icon.png", @"plane_confession_icon.png", @"plane_relationship_icon.png", @"plane_localinfo_icon.png", @"plane_feeling_icon.png", @"plane_chain_icon.png"};
 
+static NSString *collectTypeImages[] = {@"collect_receive_tag.png", @"collect_found_tag.png"};
+
 @implementation AGUIUtils
 
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg
@@ -57,17 +59,25 @@ static NSString *categoryImages[] = {@"plane_random_icon.png", @"plane_question_
 
 + (UIImage*) planeImage:(int) category
 {
-    if (category > kAGCategoryChain) {
-        category = kAGCategoryRandom;
+    if (category > AGCategoryChain) {
+        category = AGCategoryRandom;
     }
     return [UIImage imageNamed:planeImages[category]];
 }
-+ (UIImage*) categoryImage:(int) category
++ (UIImage*) categoryImage:(AGCategory) category
 {
-    if (category > kAGCategoryChain) {
-        category = kAGCategoryRandom;
+    if (category > AGCategoryChain) {
+        category = AGCategoryRandom;
     }
     return [UIImage imageNamed:categoryImages[category]];
+}
+
++ (UIImage*) collectTypeImage:(AGCollectType) type
+{
+    if (type > AGCollectTypePickuped) {
+        type = AGCollectTypeReceived;
+    }
+    return [UIImage imageNamed:collectTypeImages[type]];
 }
 
 @end
