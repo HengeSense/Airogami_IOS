@@ -122,30 +122,6 @@
             </objects>
             <point key="canvasLocation" x="163" y="-66"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="XNM-AT-Ttl">
-            <objects>
-                <viewController id="NkB-Xw-Om5" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9rs-4B-uwf">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="EKx-th-fbw">
-                                <rect key="frame" x="0.0" y="140" width="320" height="267"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pmj-zm-6lr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="563" y="-66"/>
-        </scene>
         <!--Navigation Controller - Collect-->
         <scene sceneID="heu-RQ-45j">
             <objects>
@@ -171,6 +147,29 @@
         <image name="plane_chain@2x.png" width="90" height="150"/>
         <image name="plane_chain_icon@2x.png" width="50" height="50"/>
     </resources>
+    <classes>
+        <class className="AGCollectPlaneCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneCell.h"/>
+            <relationships>
+                <relationship kind="action" name="aidedButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="aidedButton" candidateClass="AYUIButton"/>
+                <relationship kind="outlet" name="bottomLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="categoryImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="collectTypeImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="planeImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="topLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AGCollectPlaneViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="AYUIButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AYUIButton.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

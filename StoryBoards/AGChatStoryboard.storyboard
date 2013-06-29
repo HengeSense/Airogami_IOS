@@ -4,31 +4,117 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Root View Controller-->
+        <!--Chat Plane View Controller - Root View Controller-->
         <scene sceneID="5ec-El-Lz7">
             <objects>
-                <tableViewController id="kig-7l-nO0" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BF3-p8-bC7">
+                <tableViewController id="kig-7l-nO0" customClass="AGChatPlaneViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="63" sectionHeaderHeight="22" sectionFooterHeight="22" id="BF3-p8-bC7">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Nr3-Lh-rSL">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" rowHeight="64" id="ybB-P1-u1t">
+                                <rect key="frame" x="0.0" y="22" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="R0z-pT-wLs" customClass="AGProfileImage">
+                                            <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Xiangyu Zhang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l1w-W7-xat">
+                                            <rect key="frame" x="79" y="9" width="145" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="yesterday" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJJ-tx-49c">
+                                            <rect key="frame" x="244" y="4" width="68" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="I will come in half an hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sx6-Z7-5Gw">
+                                            <rect key="frame" x="79" y="34" width="228" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="e6e-2n-DCL"/>
+                    <connections>
+                        <segue destination="JCF-y5-YuP" kind="push" identifier="ToChat" id="dCg-Sf-jtO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWo-g5-648" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="258" y="-108"/>
+            <point key="canvasLocation" x="163" y="-108"/>
+        </scene>
+        <!--Chat Chat View Controller-->
+        <scene sceneID="cr8-4k-9f1">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="JCF-y5-YuP" customClass="AGChatChatViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BZa-zi-bIq">
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="oaT-nV-FSU">
+                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="I0C-fN-tBZ" customClass="UIBubbleTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="bubbleDataSource" destination="JCF-y5-YuP" id="Ghd-f6-UXB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="DQO-6n-Bj8">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="0UW-DL-cwe">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nrN-5U-mQE">
+                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="JCF-y5-YuP" eventType="touchUpInside" id="v5w-JN-3Cw"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="backButton" destination="nrN-5U-mQE" id="BzF-JC-qgr"/>
+                        <outlet property="bubbleTable" destination="I0C-fN-tBZ" id="hHn-er-zgp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KKc-1u-qUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="719" y="-66"/>
         </scene>
         <!--Navigation Controller - Chats-->
         <scene sceneID="1iS-y8-Mvd">
@@ -49,6 +135,33 @@
             <point key="canvasLocation" x="-276" y="-108"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="back_button.png" width="16" height="16"/>
+    </resources>
+    <classes>
+        <class className="AGChatChatViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatChatViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButton:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bubbleTable" candidateClass="UIBubbleTableView"/>
+                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textInputView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="AGChatPlaneViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatPlaneViewController.h"/>
+        </class>
+        <class className="AGProfileImage" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImage.h"/>
+        </class>
+        <class className="UIBubbleTableView" superclassName="UITableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIBubbleTableView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bubbleDataSource"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
