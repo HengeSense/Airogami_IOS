@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIBubbleTableViewDataSource.h"
 
-@interface AGChatChatViewController : UIViewController<UIBubbleTableViewDataSource>
+@interface AGChatChatViewController : UIViewController<UIBubbleTableViewDataSource, UITextViewDelegate>
 
 @end

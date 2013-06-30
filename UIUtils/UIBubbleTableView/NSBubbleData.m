@@ -11,6 +11,8 @@
 #import "NSBubbleData.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kConstrainedWidth 220
+
 @implementation NSBubbleData
 
 #pragma mark - Properties
@@ -39,8 +41,8 @@
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
-const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
+const UIEdgeInsets textInsetsMine = {8, 12, 10, 20};
+const UIEdgeInsets textInsetsSomeone = {8, 20, 10, 12};
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -53,9 +55,10 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    UIFont *font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(220, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-    
+    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(kConstrainedWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+
+    //label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     label.numberOfLines = 0;
     label.lineBreakMode = NSLineBreakByWordWrapping;
@@ -73,7 +76,7 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 
 #pragma mark - Image bubble
 
-const UIEdgeInsets imageInsetsMine = {11, 13, 16, 22};
+const UIEdgeInsets imageInsetsMine = {9, 11, 14, 20};
 const UIEdgeInsets imageInsetsSomeone = {11, 18, 16, 14};
 
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type

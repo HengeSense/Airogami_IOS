@@ -10,6 +10,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define kAvartarHeight 48
+#define kCellSpacing 5
+
 typedef enum _NSBubbleType
 {
     BubbleTypeMine = 0,

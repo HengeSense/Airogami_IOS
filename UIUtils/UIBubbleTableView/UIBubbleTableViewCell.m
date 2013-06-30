@@ -12,6 +12,11 @@
 #import "UIBubbleTableViewCell.h"
 #import "NSBubbleData.h"
 
+#define kMineLeftCapWidth 22
+#define kMineTopCapWidth 17
+
+#define kAvatarMargin 4
+
 @interface UIBubbleTableViewCell ()
 
 @property (nonatomic, retain) UIView *customView;
@@ -71,6 +76,11 @@
     
     CGFloat width = self.data.view.frame.size.width;
     CGFloat height = self.data.view.frame.size.height;
+    
+    //important: make the bubble image not too small
+    if (width + self.data.insets.left + self.data.insets.right < 45) {
+        width = 45 - (self.data.insets.left + self.data.insets.right);
+    }
 
     CGFloat x = (type == BubbleTypeSomeoneElse) ? 0 : self.frame.size.width - width - self.data.insets.left - self.data.insets.right;
     CGFloat y = 0;
@@ -84,22 +94,22 @@
 #else
         self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
 #endif
-        self.avatarImage.layer.cornerRadius = 9.0;
+        self.avatarImage.layer.cornerRadius = 5.0;
         self.avatarImage.layer.masksToBounds = YES;
         self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
         self.avatarImage.layer.borderWidth = 1.0;
         
-        CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? 2 : self.frame.size.width - 52;
-        CGFloat avatarY = self.frame.size.height - 50;
+        CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? kAvatarMargin : self.frame.size.width - (kAvartarHeight + kAvatarMargin);
+        CGFloat avatarY = self.frame.size.height - kAvartarHeight;
         
-        self.avatarImage.frame = CGRectMake(avatarX, avatarY, 50, 50);
+        self.avatarImage.frame = CGRectMake(avatarX, avatarY, kAvartarHeight, kAvartarHeight);
         [self addSubview:self.avatarImage];
         
         CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.view.frame.size.height);
         if (delta > 0) y = delta;
         
-        if (type == BubbleTypeSomeoneElse) x += 54;
-        if (type == BubbleTypeMine) x -= 54;
+        if (type == BubbleTypeSomeoneElse) x += (kAvartarHeight + kAvatarMargin * 2);
+        if (type == BubbleTypeMine) x -= (kAvartarHeight + kAvatarMargin * 2);
     }
 
     [self.customView removeFromSuperview];
@@ -113,7 +123,7 @@
 
     }
     else {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:kMineLeftCapWidth topCapHeight:kMineTopCapWidth];
     }
 
     self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);

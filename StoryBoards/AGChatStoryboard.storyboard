@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Chat Plane View Controller - Root View Controller-->
+        <!--Chat Plane View Controller-->
         <scene sceneID="5ec-El-Lz7">
             <objects>
                 <tableViewController id="kig-7l-nO0" customClass="AGChatPlaneViewController" sceneMemberID="viewController">
@@ -52,7 +52,20 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="e6e-2n-DCL"/>
+                    <navigationItem key="navigationItem" id="e6e-2n-DCL">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="BdI-ar-DMj">
+                            <rect key="frame" x="66" y="6" width="188" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="airogami_title@2x.png" id="Axc-iB-mhB">
+                                    <rect key="frame" x="29" y="2" width="130" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <segue destination="JCF-y5-YuP" kind="push" identifier="ToChat" id="dCg-Sf-jtO"/>
                     </connections>
@@ -66,28 +79,60 @@
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="JCF-y5-YuP" customClass="AGChatChatViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BZa-zi-bIq">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="oaT-nV-FSU">
-                                <rect key="frame" x="0.0" y="416" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <view contentMode="scaleToFill" id="OJ8-ad-zxb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="I0C-fN-tBZ" customClass="UIBubbleTableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="451"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="bubbleDataSource" destination="JCF-y5-YuP" id="Ghd-f6-UXB"/>
+                                        </connections>
+                                    </tableView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3fc-X0-mkI" customClass="AGResignButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="452"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <view contentMode="scaleToFill" id="oaT-nV-FSU">
+                                        <rect key="frame" x="0.0" y="459" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qpN-Wq-fOg">
+                                                <rect key="frame" x="42" y="5" width="258" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="JCF-y5-YuP" id="57S-6N-2oD"/>
+                                                </connections>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.1137254902" green="0.1764705882" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="I0C-fN-tBZ" customClass="UIBubbleTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="bubbleDataSource" destination="JCF-y5-YuP" id="Ghd-f6-UXB"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="DQO-6n-Bj8">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="0UW-DL-cwe">
+                        <barButtonItem key="leftBarButtonItem" id="0UW-DL-cwe">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nrN-5U-mQE">
                                 <rect key="frame" x="5" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -106,15 +151,19 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="backButton" destination="nrN-5U-mQE" id="BzF-JC-qgr"/>
                         <outlet property="bubbleTable" destination="I0C-fN-tBZ" id="hHn-er-zgp"/>
+                        <outlet property="inputTextView" destination="qpN-Wq-fOg" id="E9M-4X-dQc"/>
+                        <outlet property="resignButton" destination="3fc-X0-mkI" id="uec-HR-q69"/>
+                        <outlet property="textInputView" destination="oaT-nV-FSU" id="bza-PA-4g3"/>
+                        <outlet property="viewContainer" destination="OJ8-ad-zxb" id="tUj-Ns-vvz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KKc-1u-qUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="719" y="-66"/>
+            <point key="canvasLocation" x="567" y="-69"/>
         </scene>
         <!--Navigation Controller - Chats-->
         <scene sceneID="1iS-y8-Mvd">
@@ -136,6 +185,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="airogami_title@2x.png" width="260" height="60"/>
         <image name="back_button.png" width="16" height="16"/>
     </resources>
     <classes>
@@ -145,8 +195,10 @@
                 <relationship kind="action" name="backButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="bubbleTable" candidateClass="UIBubbleTableView"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="inputTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="resignButton" candidateClass="AGResignButton"/>
                 <relationship kind="outlet" name="textInputView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="viewContainer" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="AGChatPlaneViewController" superclassName="UITableViewController">
@@ -154,6 +206,9 @@
         </class>
         <class className="AGProfileImage" superclassName="UIImageView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImage.h"/>
+        </class>
+        <class className="AGResignButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>
         </class>
         <class className="UIBubbleTableView" superclassName="UITableView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UIBubbleTableView.h"/>

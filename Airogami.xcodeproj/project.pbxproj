@@ -34,7 +34,6 @@
 		0750CF9317739146008E28F0 /* write_edit_publish_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8D17739146008E28F0 /* write_edit_publish_bar@2x.png */; };
 		0750CF9417739146008E28F0 /* write_edit_setting_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8E17739146008E28F0 /* write_edit_setting_button@2x.png */; };
 		0750CF961773B726008E28F0 /* write_edit_destination_label@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF951773B726008E28F0 /* write_edit_destination_label@2x.png */; };
-		0750CF991773C28D008E28F0 /* AGKeyboardResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0750CF981773C28D008E28F0 /* AGKeyboardResize.m */; };
 		0750CF9B1773D049008E28F0 /* write_edit_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF9A1773D049008E28F0 /* write_edit_accessory@2x.png */; };
 		07836CCB177242FF00FCA452 /* AGWritePaperHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */; };
 		07836CCD177250A000FCA452 /* write_paper_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCC177250A000FCA452 /* write_paper_left@2x.png */; };
@@ -130,7 +129,6 @@
 		078D95231761156000663FDE /* signup_profile_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D951F1761156000663FDE /* signup_profile_normal@2x.png */; };
 		078D95241761156000663FDE /* signup_profile_words@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D95201761156000663FDE /* signup_profile_words@2x.png */; };
 		078D952617611CA400663FDE /* signup_profile_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D952517611CA400663FDE /* signup_profile_image@2x.png */; };
-		078D952C17612F0800663FDE /* AGKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D952B17612F0800663FDE /* AGKeyboardScroll.m */; };
 		078D952F176145E600663FDE /* AGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078D952E176145E600663FDE /* AGUtils.m */; };
 		078E3B68177CCE420070D5BA /* collect_reply_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */; };
 		078E3B69177CCE420070D5BA /* collect_reply_reply_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */; };
@@ -138,6 +136,9 @@
 		078E3B6B177CCE420070D5BA /* collect_reply_throwback_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */; };
 		078E3B6E177CE6100070D5BA /* female_symbol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B6C177CE6100070D5BA /* female_symbol@2x.png */; };
 		078E3B6F177CE6100070D5BA /* male_symbo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B6D177CE6100070D5BA /* male_symbo@2x.png */; };
+		078E9AB1177F8212006D7059 /* AGChatKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 078E9AAC177F8212006D7059 /* AGChatKeyboardScroll.m */; };
+		078E9AB2177F8212006D7059 /* AGKeyboardResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 078E9AAE177F8212006D7059 /* AGKeyboardResize.m */; };
+		078E9AB3177F8212006D7059 /* AGKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 078E9AB0177F8212006D7059 /* AGKeyboardScroll.m */; };
 		078FB59F1763E687000C1D53 /* signup_profile_image_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078FB59C1763E687000C1D53 /* signup_profile_image_highlight@2x.png */; };
 		079046F2176BC6CF007E2827 /* signup_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 079046F1176BC6CF007E2827 /* signup_check@2x.png */; };
 		079046F5176BD21A007E2827 /* AGSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079046F4176BD21A007E2827 /* AGSigninViewController.m */; };
@@ -169,7 +170,6 @@
 		07935EF3177A43B100D2D2F8 /* AGCollectPlaneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07935EF2177A43B100D2D2F8 /* AGCollectPlaneCell.m */; };
 		07935EF8177A4CCE00D2D2F8 /* collect_found_tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07935EF7177A4CCE00D2D2F8 /* collect_found_tag@2x.png */; };
 		07935EFC177A6EBD00D2D2F8 /* AYUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 07935EFB177A6EBD00D2D2F8 /* AYUIButton.m */; };
-		07935EFF177A76F200D2D2F8 /* AGCollectReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07935EFE177A76F200D2D2F8 /* AGCollectReplyViewController.m */; };
 		0799D0391762B22700B74722 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799D0381762B22700B74722 /* CoreLocation.framework */; };
 		0799D03B1762B24500B74722 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799D03A1762B24500B74722 /* MapKit.framework */; };
 		0799D03E1762B77C00B74722 /* AGSignupLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0799D03D1762B77C00B74722 /* AGSignupLocationViewController.m */; };
@@ -302,8 +302,6 @@
 		0750CF8D17739146008E28F0 /* write_edit_publish_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_publish_bar@2x.png"; sourceTree = "<group>"; };
 		0750CF8E17739146008E28F0 /* write_edit_setting_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_setting_button@2x.png"; sourceTree = "<group>"; };
 		0750CF951773B726008E28F0 /* write_edit_destination_label@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_destination_label@2x.png"; sourceTree = "<group>"; };
-		0750CF971773C28D008E28F0 /* AGKeyboardResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeyboardResize.h; sourceTree = "<group>"; };
-		0750CF981773C28D008E28F0 /* AGKeyboardResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeyboardResize.m; sourceTree = "<group>"; };
 		0750CF9A1773D049008E28F0 /* write_edit_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_accessory@2x.png"; sourceTree = "<group>"; };
 		07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGWritePaperHeaderView.xib; sourceTree = "<group>"; };
 		07836CCC177250A000FCA452 /* write_paper_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_left@2x.png"; sourceTree = "<group>"; };
@@ -418,8 +416,6 @@
 		078D951F1761156000663FDE /* signup_profile_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_profile_normal@2x.png"; sourceTree = "<group>"; };
 		078D95201761156000663FDE /* signup_profile_words@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_profile_words@2x.png"; sourceTree = "<group>"; };
 		078D952517611CA400663FDE /* signup_profile_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_profile_image@2x.png"; sourceTree = "<group>"; };
-		078D952A17612F0800663FDE /* AGKeyboardScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeyboardScroll.h; sourceTree = "<group>"; };
-		078D952B17612F0800663FDE /* AGKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeyboardScroll.m; sourceTree = "<group>"; };
 		078D952D176145E600663FDE /* AGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUtils.h; sourceTree = "<group>"; };
 		078D952E176145E600663FDE /* AGUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUtils.m; sourceTree = "<group>"; };
 		078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_divider@2x.png"; sourceTree = "<group>"; };
@@ -428,6 +424,12 @@
 		078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_throwback_button@2x.png"; sourceTree = "<group>"; };
 		078E3B6C177CE6100070D5BA /* female_symbol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female_symbol@2x.png"; sourceTree = "<group>"; };
 		078E3B6D177CE6100070D5BA /* male_symbo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male_symbo@2x.png"; sourceTree = "<group>"; };
+		078E9AAB177F8212006D7059 /* AGChatKeyboardScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChatKeyboardScroll.h; sourceTree = "<group>"; };
+		078E9AAC177F8212006D7059 /* AGChatKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChatKeyboardScroll.m; sourceTree = "<group>"; };
+		078E9AAD177F8212006D7059 /* AGKeyboardResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeyboardResize.h; sourceTree = "<group>"; };
+		078E9AAE177F8212006D7059 /* AGKeyboardResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeyboardResize.m; sourceTree = "<group>"; };
+		078E9AAF177F8212006D7059 /* AGKeyboardScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeyboardScroll.h; sourceTree = "<group>"; };
+		078E9AB0177F8212006D7059 /* AGKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeyboardScroll.m; sourceTree = "<group>"; };
 		078FB59C1763E687000C1D53 /* signup_profile_image_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_profile_image_highlight@2x.png"; sourceTree = "<group>"; };
 		079046F1176BC6CF007E2827 /* signup_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_check@2x.png"; sourceTree = "<group>"; };
 		079046F3176BD21A007E2827 /* AGSigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSigninViewController.h; sourceTree = "<group>"; };
@@ -478,8 +480,6 @@
 		07935EF7177A4CCE00D2D2F8 /* collect_found_tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_found_tag@2x.png"; sourceTree = "<group>"; };
 		07935EFA177A6EBD00D2D2F8 /* AYUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AYUIButton.h; sourceTree = "<group>"; };
 		07935EFB177A6EBD00D2D2F8 /* AYUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AYUIButton.m; sourceTree = "<group>"; };
-		07935EFD177A76F200D2D2F8 /* AGCollectReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGCollectReplyViewController.h; sourceTree = "<group>"; };
-		07935EFE177A76F200D2D2F8 /* AGCollectReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGCollectReplyViewController.m; sourceTree = "<group>"; };
 		0799D0381762B22700B74722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0799D03A1762B24500B74722 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0799D03C1762B77C00B74722 /* AGSignupLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSignupLocationViewController.h; sourceTree = "<group>"; };
@@ -738,16 +738,12 @@
 			children = (
 				070723A1175EBB440017292A /* AGDefines.h */,
 				079F8186176BEC9A004234D0 /* AGDefines.m */,
-				078D952A17612F0800663FDE /* AGKeyboardScroll.h */,
-				078D952B17612F0800663FDE /* AGKeyboardScroll.m */,
 				078D952D176145E600663FDE /* AGUtils.h */,
 				078D952E176145E600663FDE /* AGUtils.m */,
 				07DB92531769411A000F0780 /* NSArray+Addition.h */,
 				07DB92541769411A000F0780 /* NSArray+Addition.m */,
 				073250F8176AB4AB00487B9E /* NSString+Addition.h */,
 				073250F9176AB4AB00487B9E /* NSString+Addition.m */,
-				0750CF971773C28D008E28F0 /* AGKeyboardResize.h */,
-				0750CF981773C28D008E28F0 /* AGKeyboardResize.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -825,6 +821,7 @@
 		078A1F9E176D355C00A69AE3 /* UIUtils */ = {
 			isa = PBXGroup;
 			children = (
+				078E9AAA177F8212006D7059 /* KeyboardScroll */,
 				07918481177E5B9400D28C0F /* General */,
 				0791844B177E3C0D00D28C0F /* UIBubbleTableView */,
 				07935EF9177A6EBD00D2D2F8 /* AYButton */,
@@ -955,6 +952,19 @@
 				078A3A33177BB62900FFAF9B /* Layer 9.png */,
 			);
 			path = WaitViewImages;
+			sourceTree = "<group>";
+		};
+		078E9AAA177F8212006D7059 /* KeyboardScroll */ = {
+			isa = PBXGroup;
+			children = (
+				078E9AAB177F8212006D7059 /* AGChatKeyboardScroll.h */,
+				078E9AAC177F8212006D7059 /* AGChatKeyboardScroll.m */,
+				078E9AAD177F8212006D7059 /* AGKeyboardResize.h */,
+				078E9AAE177F8212006D7059 /* AGKeyboardResize.m */,
+				078E9AAF177F8212006D7059 /* AGKeyboardScroll.h */,
+				078E9AB0177F8212006D7059 /* AGKeyboardScroll.m */,
+			);
+			path = KeyboardScroll;
 			sourceTree = "<group>";
 		};
 		0791844B177E3C0D00D28C0F /* UIBubbleTableView */ = {
@@ -1148,8 +1158,6 @@
 				07F82A5017790A9900FAE916 /* AGCollectPlaneViewController.m */,
 				07935EF1177A43B100D2D2F8 /* AGCollectPlaneCell.h */,
 				07935EF2177A43B100D2D2F8 /* AGCollectPlaneCell.m */,
-				07935EFD177A76F200D2D2F8 /* AGCollectReplyViewController.h */,
-				07935EFE177A76F200D2D2F8 /* AGCollectReplyViewController.m */,
 				078A39FE177B77D700FFAF9B /* AGCollectPlanePulldownHeader.h */,
 				078A39FF177B77D700FFAF9B /* AGCollectPlanePulldownHeader.m */,
 				078A39F9177B65D200FFAF9B /* AGCollectPlanePulldownView.xib */,
@@ -1472,7 +1480,6 @@
 				07072336175E8C2F0017292A /* main.m in Sources */,
 				0707233A175E8C2F0017292A /* AGAppDelegate.m in Sources */,
 				0707238F175EA8670017292A /* AGSignupViewController.m in Sources */,
-				078D952C17612F0800663FDE /* AGKeyboardScroll.m in Sources */,
 				078D952F176145E600663FDE /* AGUtils.m in Sources */,
 				0799D03E1762B77C00B74722 /* AGSignupLocationViewController.m in Sources */,
 				07DB923917669867000F0780 /* AGImagePickAndCrop.m in Sources */,
@@ -1505,12 +1512,10 @@
 				07B8DC3417711754006922FF /* AGWriteLocationViewController.m in Sources */,
 				07B8DC3517711754006922FF /* AGWritePaperViewController.m in Sources */,
 				07B0B70A17713EF500E598D5 /* AGWritePaperCell.m in Sources */,
-				0750CF991773C28D008E28F0 /* AGKeyboardResize.m in Sources */,
 				07F82A351778C01A00FAE916 /* AGWriteEditViewAnimation.m in Sources */,
 				07F82A5117790A9900FAE916 /* AGCollectPlaneViewController.m in Sources */,
 				07935EF3177A43B100D2D2F8 /* AGCollectPlaneCell.m in Sources */,
 				07935EFC177A6EBD00D2D2F8 /* AYUIButton.m in Sources */,
-				07935EFF177A76F200D2D2F8 /* AGCollectReplyViewController.m in Sources */,
 				078A3A00177B77D700FFAF9B /* AGCollectPlanePulldownHeader.m in Sources */,
 				078A3A61177BCD1200FFAF9B /* AGCollectPlaneReply.m in Sources */,
 				07918457177E3C0D00D28C0F /* NSBubbleData.m in Sources */,
@@ -1528,6 +1533,9 @@
 				07918497177E5B9400D28C0F /* AGUIErrorAnimation.m in Sources */,
 				07918498177E5B9400D28C0F /* AGUIUtils.m in Sources */,
 				07918499177E5B9400D28C0F /* AGWaitView.m in Sources */,
+				078E9AB1177F8212006D7059 /* AGChatKeyboardScroll.m in Sources */,
+				078E9AB2177F8212006D7059 /* AGKeyboardResize.m in Sources */,
+				078E9AB3177F8212006D7059 /* AGKeyboardScroll.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

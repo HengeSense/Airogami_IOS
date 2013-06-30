@@ -8,6 +8,9 @@
 
 #import "AGUIUtils.h"
 #import "AGUIErrorAnimation.h"
+#import "AGKeyboardScroll.h"
+#import "AGKeyboardResize.h"
+#import "AGChatKeyboardScroll.h"
 
 #define kAGAlertMessageOK @"OK"
 
@@ -18,6 +21,14 @@ static NSString *categoryImages[] = {@"plane_random_icon.png", @"plane_question_
 static NSString *collectTypeImages[] = {@"collect_receive_tag.png", @"collect_found_tag.png"};
 
 @implementation AGUIUtils
+
++ (void) initialize
+{
+    [AGKeyboardScroll initialize];
+    [AGKeyboardResize initialize];
+    [AGChatKeyboardScroll initialize];
+    [AGUIDefines initialize];
+}
 
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg
 {
