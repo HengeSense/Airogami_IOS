@@ -15,4 +15,5 @@
 - (id) initWithName:(NSString *) name count:(int) count;
 - (void) start;
 - (void) stop;
++ (AGWaitView*) radarWaitView;
 @end

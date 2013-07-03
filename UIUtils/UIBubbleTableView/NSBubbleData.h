@@ -11,13 +11,26 @@
 #import <Foundation/Foundation.h>
 
 #define kAvartarHeight 48
-#define kCellSpacing 5
+#define kCellSpacing 10
+#define kAvatarMargin 4
 
 typedef enum _NSBubbleType
 {
     BubbleTypeMine = 0,
     BubbleTypeSomeoneElse = 1
 } NSBubbleType;
+
+typedef enum _NSBubbleCellState
+{
+    BubbleCellStateSending = -2,
+    BubbleCellStateSent = -1,
+    BubbleCellStateSendFailed = 0,
+    BubbleCellStateSentLiked = 1,
+    BubbleCellStateReceivedUnliked = 2,
+    BubbleCellStateReceivedLiked = 3
+} NSBubbleCellState;
+
+#define kBubbleCellStateButtonWidth 40
 
 @interface NSBubbleData : NSObject
 
@@ -26,6 +39,7 @@ typedef enum _NSBubbleType
 @property (readonly, nonatomic, strong) UIView *view;
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, strong) UIImage *avatar;
+@property (nonatomic, assign) NSBubbleCellState state;
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;

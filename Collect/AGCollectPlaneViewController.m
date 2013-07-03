@@ -39,7 +39,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        waitView = [[AGWaitView alloc] initWithName:@"Layer " count:41];
+        waitView = [AGWaitView radarWaitView];
         [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
         pulldownHeader = [AGCollectPlanePulldownHeader header];
         reply = [AGCollectPlaneReply reply];

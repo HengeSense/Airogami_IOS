@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 
 #import "UIBubbleTableViewDataSource.h"
+#import "AGBubbleTableViewDelegate.h"
 #import "UIBubbleTableViewCell.h"
 
 typedef enum _NSBubbleTypingType
@@ -23,8 +24,12 @@ typedef enum _NSBubbleTypingType
 @interface UIBubbleTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, assign) IBOutlet id<UIBubbleTableViewDataSource> bubbleDataSource;
+@property (nonatomic, assign) IBOutlet id<AGBubbleTableViewDelegate> bubbleDelegate;
 @property (nonatomic) NSTimeInterval snapInterval;
 @property (nonatomic) NSBubbleTypingType typingBubble;
 @property (nonatomic) BOOL showAvatars;
+
+- (void) reloadToBottom;
+- (void) didSelectCellAtIndexPath:(NSIndexPath*) indexPath type:(UIBubbleTableViewCellSelectType) type;
 
 @end

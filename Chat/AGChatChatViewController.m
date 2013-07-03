@@ -11,8 +11,12 @@
 #import "AGUIErrorAnimation.h"
 #import "AGChatKeyboardScroll.h"
 #import "AGResignButton.h"
+#import <QuartzCore/QuartzCore.h>
 
-#define kAGChatChatMessageMaxLength 200
+#define kAGChatChatMessageMaxLength 500
+#define kAGChatChatMaxSpacing 50
+
+static float AGInputTextViewMaxHeight = 100;
 
 @interface AGChatChatViewController()
 {
@@ -22,6 +26,7 @@
     __weak IBOutlet UIButton *backButton;
     __weak IBOutlet UIView *viewContainer;
     __weak IBOutlet AGResignButton *resignButton;
+    UITextView *aidedTextView;
     
     NSMutableArray *bubbleData;
 }
@@ -46,10 +51,15 @@
 - (void) initUI
 {
     [AGUIDefines setNavigationBackButton:backButton];
-    //UIButton *button = [[AGResignButton alloc] initWithFrame:viewContainer.frame];
-    //[viewContainer addSubview:button];
-    //viewContainer
-    //bubbleTable.backgroundView = button;
+    aidedTextView = [[UITextView alloc] initWithFrame:inputTextView.frame];
+    aidedTextView.font = inputTextView.font;
+    aidedTextView.hidden = YES;
+    [textInputView addSubview:aidedTextView];
+    //
+    textInputView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.9f];
+    aidedTextView.layer.cornerRadius = inputTextView.layer.cornerRadius = 5.0f;
+    aidedTextView.layer.borderColor = inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    aidedTextView.layer.borderWidth = inputTextView.layer.borderWidth = 2.0f;
 }
 
 - (void)viewDidLoad
@@ -76,9 +86,16 @@
     bubbleTable.showAvatars = YES;
     
     
-    bubbleTable.typingBubble = NSBubbleTypingTypeSomebody;
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     
     [bubbleTable reloadData];
+}
+
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    textInputView.autoresizingMask = UIViewAutoresizingNone;
+    bubbleTable.autoresizingMask = UIViewAutoresizingNone;
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,16 +126,16 @@
 }
 
 - (BOOL)textView:(UITextView *)aTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
+    //send
+    if ([text isEqualToString:@"\n"] && aTextView.text.length > 0) {
         [self send];
         aTextView.text = @"";
         [self relayout];
-        [aTextView resignFirstResponder];
+        //[aTextView resignFirstResponder];
         return NO;
     }
-    NSUInteger newLength = [aTextView.text length] + [text length] - range.length;
-    BOOL should = newLength <= kAGChatChatMessageMaxLength;
-    return should;
+
+    return YES;
 }
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
@@ -136,35 +153,49 @@
 {
     NSString *text = textView.text;
     text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if (text.length > kAGChatChatMessageMaxLength) {
+        text = [text substringToIndex:kAGChatChatMessageMaxLength];
+    }
     if (text.length != textView.text.length) {
         textView.text = text;
     }
-    
     [self relayout];
 }
 
 - (void) relayout
 {
     CGRect textFrame = inputTextView.frame;
-    CGRect frame;
-    CGSize size = inputTextView.contentSize;
-    float diff = size.height - textFrame.size.height;
+    CGRect frame = viewContainer.frame;
+    float diff = textFrame.origin.y * 2;
     CGPoint point = CGPointZero;
-    if (diff != 0.0f) {
+    aidedTextView.text = inputTextView.text;
+    CGSize size = aidedTextView.contentSize;
+    //inputTextView max height
+    //point.x = frame.size.height + frame.origin.y - kAGChatChatMaxSpacing - diff;
+    if (size.height > AGInputTextViewMaxHeight) {
+        size.height = AGInputTextViewMaxHeight;
+    }
+    
+    point.x = size.height - textFrame.size.height;
+    
+    if (point.x != 0.0f) {
+        [UIView beginAnimations:@"RelayoutAnimations" context:nil];
+        //superview
+        frame = inputTextView.superview.frame;
+        frame.size.height = size.height + diff;
+        inputTextView.superview.frame = frame;
         //viewContainer
-        point = inputTextView.superview.frame.origin;
-        point.y += size.height + textFrame.origin.y * 2;
+        point = frame.origin;
+        point.y += size.height + diff;
         frame = viewContainer.frame;
         frame.origin.y = frame.origin.y + frame.size.height - point.y;
         frame.size.height = point.y;
         viewContainer.frame = frame;
-        //superview
-        frame = inputTextView.superview.frame;
-        frame.size.height = size.height + textFrame.origin.y * 2;
-        inputTextView.superview.frame = frame;
         //inputTextView
         textFrame.size = size;
         inputTextView.frame = textFrame;
+        inputTextView.text = aidedTextView.text;
+        [UIView commitAnimations];
     }
 }
 
@@ -182,11 +213,21 @@
     return [bubbleData objectAtIndex:row];
 }
 
+#pragma mark - UIBubbleTableViewDelegate
+
+- (void)bubbleTableView:(UIBubbleTableView *)tableView didSelectCellAtIndexPath:(NSIndexPath*) indexPath type:(UIBubbleTableViewCellSelectType) type
+{
+    
+}
+
 #pragma mark - logic
 
 -(void) send
 {
-    
+    NSBubbleData *sayBubble = [NSBubbleData dataWithText:inputTextView.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+    sayBubble.state = BubbleCellStateReceivedUnliked;
+    [bubbleData addObject:sayBubble];
+    [bubbleTable reloadToBottom];
 }
 
 - (void)viewDidUnload {

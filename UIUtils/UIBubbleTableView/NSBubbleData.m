@@ -11,7 +11,7 @@
 #import "NSBubbleData.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kConstrainedWidth 220
+#define kConstrainedWidth 190
 
 @implementation NSBubbleData
 
@@ -22,6 +22,7 @@
 @synthesize view = _view;
 @synthesize insets = _insets;
 @synthesize avatar = _avatar;
+@synthesize state = _state;
 
 #pragma mark - Lifecycle
 
@@ -41,8 +42,8 @@
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {8, 12, 10, 20};
-const UIEdgeInsets textInsetsSomeone = {8, 20, 10, 12};
+const UIEdgeInsets textInsetsMine = {10, 19 , 11, 22};
+const UIEdgeInsets textInsetsSomeone = {10, 25, 11, 20};
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -55,7 +56,10 @@ const UIEdgeInsets textInsetsSomeone = {8, 20, 10, 12};
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    UIFont *font = [UIFont fontWithName:@"Avenir-Medium" size:15];
+    if (font == nil) {
+        font = [UIFont systemFontOfSize:15];
+    }
     CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(kConstrainedWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
 
     //label

@@ -22,7 +22,7 @@
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
         UIImage *image = nil;
         for (int i = 0; i < count; ++i) {
-            NSString *path = [NSString stringWithFormat:@"%@%d.png", name, i + 1];
+            NSString *path = [NSString stringWithFormat:@"%@%d.png", name, i];
             image = [UIImage imageNamed:path];
             [array addObject:image];
         }
@@ -34,7 +34,7 @@
         imageView = iv;
         imageView.animationImages = array;
         imageView.animationRepeatCount = 0;
-        imageView.animationDuration = 1.0f;
+        imageView.animationDuration = 5.0f;
         [self addSubview:imageView];
     }
     
@@ -52,6 +52,11 @@
 {
     [imageView stopAnimating];
     [self removeFromSuperview];
+}
+
++ (AGWaitView*) radarWaitView
+{
+    return [[AGWaitView alloc] initWithName:@"radarsprite_" count:189];
 }
 
 @end

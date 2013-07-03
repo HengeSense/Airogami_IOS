@@ -174,7 +174,7 @@
     // Now typing
 	if (indexPath.section >= [self.bubbleSection count])
     {
-        return MAX([UIBubbleTypingTableViewCell height], self.showAvatars ? 52 : 0);
+        return MAX([UIBubbleTypingTableViewCell height], self.showAvatars ? kAvartarHeight + kAvatarMargin : 0);
     }
     
     // Header
@@ -184,7 +184,7 @@
     }
     
     NSBubbleData *data = [[self.bubbleSection objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? 52 : 0);
+    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? kAvartarHeight + kAvatarMargin : 0) + kCellSpacing;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -224,10 +224,30 @@
     
     if (cell == nil) cell = [[UIBubbleTableViewCell alloc] init];
     
-    cell.data = data;
     cell.showAvatar = self.showAvatars;
-    
+    cell.data = data;
     return cell;
+}
+
+- (void) didSelectCellAtIndexPath:(NSIndexPath *)indexPath type:(UIBubbleTableViewCellSelectType)type
+{
+    [self.bubbleDelegate bubbleTableView:self didSelectCellAtIndexPath:indexPath type:type];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (void) reloadToBottom
+{
+    [self reloadData];
+    
+    int section = [self numberOfSections] - 1;
+    int row = [self numberOfRowsInSection:section] - 1;
+    NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
+    
+    [self scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 @end

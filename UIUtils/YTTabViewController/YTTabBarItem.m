@@ -25,7 +25,7 @@
         [self setTitleColor:aSelectedColor forState:UIControlStateSelected];
         [self setTitleColor:anUnselectedColor forState:UIControlStateNormal];
         [self setTitleColor:aSelectedColor forState:UIControlStateSelected | UIControlStateHighlighted];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
         //
         UIEdgeInsets edgeInset = UIEdgeInsetsZero;
         edgeInset.left = YTTabBarItemIconWidth;

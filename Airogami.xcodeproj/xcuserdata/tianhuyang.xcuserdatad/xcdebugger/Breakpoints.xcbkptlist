@@ -2305,25 +2305,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243379.088821"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
          landmarkName = "-textViewShouldEndEditing:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243379.088821"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "120"
-         endingLineNumber = "120"
-         landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2370,11 +2357,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243379.088821"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
          landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2383,11 +2370,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394239293.346267"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "104"
-         endingLineNumber = "104"
+         startingLineNumber = "121"
+         endingLineNumber = "121"
          landmarkName = "-textViewDidEndEditing:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2396,11 +2383,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243379.088821"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "-textViewDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2409,11 +2396,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243659.496436"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
+         startingLineNumber = "181"
+         endingLineNumber = "181"
          landmarkName = "-relayout"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2422,12 +2409,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243701.093209"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "-relayout"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
+         landmarkName = "-textViewShouldBeginEditing:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2435,12 +2422,272 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "394243800.578283"
+         timestampString = "394497339.184211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "155"
          endingLineNumber = "155"
+         landmarkName = "-textViewDidChange:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "394497339.184211"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
          landmarkName = "-relayout"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/KeyboardScroll/AGChatKeyboardScroll.m"
+         timestampString = "394406185.614946"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "38"
+         endingLineNumber = "38"
+         landmarkName = "-keyboardWillShow:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "394497339.184211"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
+         landmarkName = "-relayout"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "394497339.184211"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "-relayout"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "394412961.870689"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
+         landmarkName = "-reloadData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "394413668.000654"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "164"
+         endingLineNumber = "164"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "394413739.600602"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "-tableView:numberOfRowsInSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "394485438.082325"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "237"
+         endingLineNumber = "237"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "394485438.082325"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "239"
+         endingLineNumber = "239"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableViewCell.m"
+         timestampString = "394505707.754659"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "184"
+         endingLineNumber = "184"
+         landmarkName = "-setupInternalData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableViewCell.m"
+         timestampString = "394505707.754659"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
+         landmarkName = "-setupInternalData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/NSBubbleData.m"
+         timestampString = "394489913.317723"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-initWithText:date:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/NSBubbleData.m"
+         timestampString = "394489913.317723"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "-initWithText:date:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "394497339.184211"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
+         landmarkName = "-bubbleTableView:didSelectCellAtIndexPath:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "394495124.599726"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "232"
+         endingLineNumber = "232"
+         landmarkName = "-didSelectCellAtIndexPath:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/NSBubbleData.m"
+         timestampString = "394495772.555374"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
+         landmarkName = "-initWithText:date:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/AGBubbleCellStateButton.m"
+         timestampString = "394504078.306853"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "-setCellState:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/AGBubbleCellStateButton.m"
+         timestampString = "394501879.39912"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
+         landmarkName = "-likeReceived"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/AGBubbleCellStateButton.m"
+         timestampString = "394502587.480035"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
+         landmarkName = "-likeReceived"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/AGBubbleCellStateButton.m"
+         timestampString = "394503219.545456"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "-likeReceived"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

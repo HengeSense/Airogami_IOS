@@ -10,18 +10,24 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIBubbleTableViewCell.h"
+#import "UIBubbleTableView.h"
 #import "NSBubbleData.h"
+#import "AGBubbleTableViewDelegate.h"
+#import "AGBubbleCellStateButton.h"
 
 #define kMineLeftCapWidth 22
 #define kMineTopCapWidth 17
 
-#define kAvatarMargin 4
+#define kSomeoneLeftCapWidth 21
+#define kSomeoneTopCapWidth 17
+
 
 @interface UIBubbleTableViewCell ()
 
 @property (nonatomic, retain) UIView *customView;
 @property (nonatomic, retain) UIImageView *bubbleImage;
-@property (nonatomic, retain) UIImageView *avatarImage;
+@property (nonatomic, retain) UIButton *avatarButton;
+@property (nonatomic, retain) AGBubbleCellStateButton *stateButton;
 
 - (void) setupInternalData;
 
@@ -33,12 +39,51 @@
 @synthesize customView = _customView;
 @synthesize bubbleImage = _bubbleImage;
 @synthesize showAvatar = _showAvatar;
-@synthesize avatarImage = _avatarImage;
+@synthesize avatarButton = _avatarButton;
+@synthesize stateButton = _stateButton;
+
+- (id) init
+{
+    self = [super init];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void) initialize
+{
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.avatarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.avatarButton.layer.cornerRadius = 5.0;
+    self.avatarButton.layer.masksToBounds = YES;
+    self.avatarButton.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
+    self.avatarButton.layer.borderWidth = 1.0;
+    [self.avatarButton addTarget:self action:@selector(avatarImageTouched) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:self.avatarButton];
+    //
+#if !__has_feature(objc_arc)
+    self.bubbleImage = [[[UIImageView alloc] init] autorelease];
+#else
+    self.bubbleImage = [[UIImageView alloc] init];
+#endif
+    [self.contentView addSubview:self.bubbleImage];
+    //
+    self.stateButton = [[AGBubbleCellStateButton alloc] init];
+    [self.stateButton addTarget:self action:@selector(stateImageTouched) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:self.stateButton];
+    
+
+
+}
 
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-	[self setupInternalData];
+    if (self.data) {
+        [self setupInternalData];
+    }
+
 }
 
 #if !__has_feature(objc_arc)
@@ -47,35 +92,72 @@
     self.data = nil;
     self.customView = nil;
     self.bubbleImage = nil;
-    self.avatarImage = nil;
+    self.avatarButton = nil;
     [super dealloc];
 }
 #endif
 
-- (void)setDataInternal:(NSBubbleData *)value
+
+- (void)setData:(NSBubbleData *)data
 {
-	self.data = value;
-	[self setupInternalData];
+    _data = data;
+    
+    NSBubbleType type = data.type;
+    if (self.showAvatar) {
+        self.avatarButton.hidden = NO;
+        UIImage *image = self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"];
+        [self.avatarButton setBackgroundImage:image forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.avatarButton.hidden = YES;
+    }
+    
+    [self.customView removeFromSuperview];
+    self.customView = self.data.view;
+    [self.contentView addSubview:self.customView];
+    if (type == BubbleTypeSomeoneElse)
+    {
+        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:kSomeoneLeftCapWidth topCapHeight:kSomeoneTopCapWidth];
+        
+    }
+    else {
+        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:kMineLeftCapWidth topCapHeight:kMineTopCapWidth];
+    }
+    [self setupInternalData];
+}
+
+- (void) stateImageTouched
+{
+    UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
+    switch (self.data.state) {
+        case BubbleCellStateSendFailed:
+            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] type:UIBubbleCellSelectSendFailed];
+            break;
+        
+        case BubbleCellStateReceivedUnliked:
+            [self.stateButton likeReceived];
+            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] type:UIBubbleCellSelectReceivedLike];
+            break;
+        default:
+            break;
+    }
+
+}
+
+- (void) avatarImageTouched
+{
+    UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
+    [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] type:UIBubbleCellSelectAvatar];
 }
 
 - (void) setupInternalData
 {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    if (!self.bubbleImage)
-    {
-#if !__has_feature(objc_arc)
-        self.bubbleImage = [[[UIImageView alloc] init] autorelease];
-#else
-        self.bubbleImage = [[UIImageView alloc] init];        
-#endif
-        [self addSubview:self.bubbleImage];
-    }
     
     NSBubbleType type = self.data.type;
-    
     CGFloat width = self.data.view.frame.size.width;
     CGFloat height = self.data.view.frame.size.height;
+    CGRect frame;
     
     //important: make the bubble image not too small
     if (width + self.data.insets.left + self.data.insets.right < 45) {
@@ -88,45 +170,34 @@
     // Adjusting the x coordinate for avatar
     if (self.showAvatar)
     {
-        [self.avatarImage removeFromSuperview];
-#if !__has_feature(objc_arc)
-        self.avatarImage = [[[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])] autorelease];
-#else
-        self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
-#endif
-        self.avatarImage.layer.cornerRadius = 5.0;
-        self.avatarImage.layer.masksToBounds = YES;
-        self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
-        self.avatarImage.layer.borderWidth = 1.0;
-        
-        CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? kAvatarMargin : self.frame.size.width - (kAvartarHeight + kAvatarMargin);
-        CGFloat avatarY = self.frame.size.height - kAvartarHeight;
-        
-        self.avatarImage.frame = CGRectMake(avatarX, avatarY, kAvartarHeight, kAvartarHeight);
-        [self addSubview:self.avatarImage];
-        
-        CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.view.frame.size.height);
-        if (delta > 0) y = delta;
-        
         if (type == BubbleTypeSomeoneElse) x += (kAvartarHeight + kAvatarMargin * 2);
         if (type == BubbleTypeMine) x -= (kAvartarHeight + kAvatarMargin * 2);
+        CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? kAvatarMargin : self.frame.size.width - (kAvartarHeight + kAvatarMargin);
+        CGFloat avatarY = self.frame.size.height - kAvartarHeight - kCellSpacing;
+        
+        self.avatarButton.frame = CGRectMake(avatarX, avatarY, kAvartarHeight, kAvartarHeight);
+        
+        CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.view.frame.size.height) - kCellSpacing;
+        if (delta > 0) y = delta;
     }
-
-    [self.customView removeFromSuperview];
-    self.customView = self.data.view;
+        
     self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top, width, height);
-    [self.contentView addSubview:self.customView];
-
-    if (type == BubbleTypeSomeoneElse)
-    {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-
+    frame = self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
+    //state
+    self.stateButton.cellState = self.data.state;
+    if (self.data.state != BubbleCellStateSent) {
+        if (type == BubbleTypeMine) {
+            self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
+            self.stateButton.center = CGPointMake(x - kBubbleCellStateButtonWidth / 2 + 3, y  + self.data.insets.top + height / 2);
+        }
+        else{
+            self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
+            self.stateButton.center = CGPointMake(frame.origin.x + frame.size.width + kBubbleCellStateButtonWidth / 2 - 4, frame.origin.y + frame.size.height / 2);
+        }
+        
     }
-    else {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:kMineLeftCapWidth topCapHeight:kMineTopCapWidth];
-    }
 
-    self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
+    
 }
 
 @end
