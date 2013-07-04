@@ -19,6 +19,7 @@ static NSString *planeImages[] = {@"plane_random.png", @"plane_question.png", @"
 static NSString *categoryImages[] = {@"plane_random_icon.png", @"plane_question_icon.png", @"plane_confession_icon.png", @"plane_relationship_icon.png", @"plane_localinfo_icon.png", @"plane_feeling_icon.png", @"plane_chain_icon.png"};
 
 static NSString *collectTypeImages[] = {@"collect_receive_tag.png", @"collect_found_tag.png"};
+static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Avenir-Heavy"};
 
 @implementation AGUIUtils
 
@@ -89,6 +90,15 @@ static NSString *collectTypeImages[] = {@"collect_receive_tag.png", @"collect_fo
         type = AGCollectTypeReceived;
     }
     return [UIImage imageNamed:collectTypeImages[type]];
+}
+
++ (UIFont*) themeFont:(AGThemeFontStyle)style size:(float)size
+{
+    UIFont *font = [UIFont fontWithName:themeFontNames[style] size:size];
+    if (font == nil) {
+        font = [UIFont systemFontOfSize:size];
+    }
+    return font;
 }
 
 @end

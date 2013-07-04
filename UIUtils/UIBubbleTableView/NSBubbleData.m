@@ -9,6 +9,7 @@
 //
 
 #import "NSBubbleData.h"
+#import "AGUIUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kConstrainedWidth 190
@@ -56,10 +57,8 @@ const UIEdgeInsets textInsetsSomeone = {10, 25, 11, 20};
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    UIFont *font = [UIFont fontWithName:@"Avenir-Medium" size:15];
-    if (font == nil) {
-        font = [UIFont systemFontOfSize:15];
-    }
+    UIFont *font = [AGUIUtils themeFont:AGThemeFontStyleMedium size:15.0f];
+
     CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(kConstrainedWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
 
     //label

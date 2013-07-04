@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "AGDefines.h"
 
+typedef enum  {
+    AGThemeFontStyleMedium = 0,
+    AGThemeFontStyleBlack = 1,
+    AGThemeFontStyleHeavy = 2
+} AGThemeFontStyle;
+
 @interface AGUIUtils : NSObject
 + (void) initialize;
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;
@@ -19,4 +25,5 @@
 + (UIImage*) planeImage:(int) category;
 + (UIImage*) categoryImage:(AGCategory) category;
 + (UIImage*) collectTypeImage:(AGCollectType) type;
++ (UIFont*) themeFont:(AGThemeFontStyle) style size:(float)size;
 @end

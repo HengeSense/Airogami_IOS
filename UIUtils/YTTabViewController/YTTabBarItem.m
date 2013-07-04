@@ -7,6 +7,7 @@
 //
 
 #import "YTTabBarItem.h"
+#import "AGUIUtils.h"
 
 #define YTTabBarItemIconWidth 20
 
@@ -25,7 +26,7 @@
         [self setTitleColor:aSelectedColor forState:UIControlStateSelected];
         [self setTitleColor:anUnselectedColor forState:UIControlStateNormal];
         [self setTitleColor:aSelectedColor forState:UIControlStateSelected | UIControlStateHighlighted];
-        self.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.titleLabel.font = [AGUIUtils themeFont:AGThemeFontStyleMedium size:15.0f];
         //
         UIEdgeInsets edgeInset = UIEdgeInsetsZero;
         edgeInset.left = YTTabBarItemIconWidth;

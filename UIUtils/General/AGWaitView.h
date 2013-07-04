@@ -13,7 +13,6 @@
 @property(nonatomic, weak) UIImageView *imageView;
 
 - (id) initWithName:(NSString *) name count:(int) count;
-- (void) start;
-- (void) stop;
-+ (AGWaitView*) radarWaitView;
+- (void) show;
+- (void) dismiss;
 @end

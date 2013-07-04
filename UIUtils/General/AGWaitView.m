@@ -16,9 +16,9 @@
 {
 
     CGRect frame = [UIScreen mainScreen].bounds;
-    self =  [[AGWaitView alloc] initWithFrame:frame];
+    self =  [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5f];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8f];
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
         UIImage *image = nil;
         for (int i = 0; i < count; ++i) {
@@ -32,6 +32,7 @@
         frame.origin.y -= frame.size.height / 2;
         UIImageView *iv = [[UIImageView alloc] initWithFrame:frame];
         imageView = iv;
+        imageView.backgroundColor = [UIColor blackColor];
         imageView.animationImages = array;
         imageView.animationRepeatCount = 0;
         imageView.animationDuration = 5.0f;
@@ -41,22 +42,43 @@
     return self;
 }
 
-- (void) start
+- (void) show
 {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [window addSubview:self];
     [imageView startAnimating];
+    self.alpha = 0.0f;
+    [UIView beginAnimations:@"WaitViewAnimations" context:nil];
+    [UIView setAnimationDuration:.3f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    self.alpha = 1.0f;
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(easeINDidStop:finished:context:)];
+    [UIView commitAnimations];
 }
 
-- (void) stop
+- (void) dismiss
 {
-    [imageView stopAnimating];
+    [self.imageView stopAnimating];
+    [UIView beginAnimations:@"WaitViewAnimations" context:nil];
+    [UIView setAnimationDuration:.3f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    self.alpha = 0.0f;
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(easeOutDidStop:finished:context:)];
+    [UIView commitAnimations];
+    
+}
+
+-(void) easeOutDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    self.alpha = 1.0f;
     [self removeFromSuperview];
 }
 
-+ (AGWaitView*) radarWaitView
+-(void) easeInDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    return [[AGWaitView alloc] initWithName:@"radarsprite_" count:189];
+    
 }
 
 @end

@@ -9,22 +9,22 @@
 #import "AGCollectPlaneViewController.h"
 #import "AGCollectPlaneCell.h"
 #import "AYUIButton.h"
-#import "AGWaitView.h"
+#import "AGCollectPlanePickupView.h"
 #import "AGCollectPlaneReply.h"
+#import "AGCollectPlaneNumberView.h"
 
 @interface AGCollectPlaneViewController ()
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property(nonatomic, strong) AGCollectPlanePulldownHeader *pulldownHeader;
-
-@property (strong, nonatomic)  AGWaitView *waitView;
-
+@property (strong, nonatomic)  AGCollectPlanePickupView *pickupView;
 @property (strong, nonatomic)  AGCollectPlaneReply *reply;
+@property (strong, nonatomic)  AGCollectPlaneNumberView *numberView;
 
 @end
 
 @implementation AGCollectPlaneViewController
 
-@synthesize pulldownHeader, waitView, reply;
+@synthesize pulldownHeader, pickupView, reply;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,11 +39,10 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        waitView = [AGWaitView radarWaitView];
+        pickupView = [[AGCollectPlanePickupView alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
         pulldownHeader = [AGCollectPlanePulldownHeader header];
         reply = [AGCollectPlaneReply reply];
-       
         
     }
     return self;
@@ -74,12 +73,7 @@
 {
     [super viewDidLoad];
     pulldownHeader.delegate = self;
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //numberView = [AGCollectPlaneNumberView numberView:self.
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,7 +84,7 @@
 
 - (void) refresh
 {
-    [waitView start];
+    [pickupView show];
     
 }
 
@@ -182,7 +176,7 @@
 
 - (void)viewDidUnload {
     [self setHeaderView:nil];
-    [self setWaitView:nil];
+    [self setPickupView:nil];
     [super viewDidUnload];
 }
 @end

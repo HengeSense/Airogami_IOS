@@ -7,6 +7,7 @@
 //
 
 #import "AGChatPlaneViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AGChatPlaneViewController ()
 
@@ -23,15 +24,27 @@
     return self;
 }
 
+- (void)loadView {
+    [super loadView];
+    UITableView *tv = (UITableView*)self.view;
+    CGRect frame = self.view.frame;
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+    imageView.image = [AGUIDefines mainBackgroundImage];
+    imageView.userInteractionEnabled = YES;
+    self.view = imageView;
+    [self.view addSubview:tv];
+
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+    imageView.image = [AGUIDefines mainBackgroundImage];
+    [self.tableView.backgroundView addSubview:imageView];
 }
 
 - (void)didReceiveMemoryWarning
