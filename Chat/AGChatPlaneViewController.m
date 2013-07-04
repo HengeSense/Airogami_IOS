@@ -32,6 +32,8 @@
     imageView.image = [AGUIDefines mainBackgroundImage];
     imageView.userInteractionEnabled = YES;
     self.view = imageView;
+    frame.origin = CGPointZero;
+    tv.frame = frame;
     [self.view addSubview:tv];
 
 }
@@ -115,6 +117,11 @@
     return YES;
 }
 */
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor whiteColor];
+}
 
 #pragma mark - Table view delegate
 
