@@ -10,6 +10,7 @@
 #import "AGKeyboardResize.h"
 #import "AGWriteEditViewAnimation.h"
 #import "AGWriteLocationViewController.h"
+#import "AGPlaneCategory.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGWriteEditTextMaximum 200
@@ -28,11 +29,11 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *sexButtons;
 
@@ -42,7 +43,7 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 
 @implementation AGWriteEditViewController
 
-@synthesize location;
+@synthesize location, planeCategory;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,6 +56,9 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 
 - (void) initialize
 {
+    [AGUIDefines setNavigationBackButton:self.backButton];
+    [AGUIDefines setNavigationDoneButton:self.sendButton];
+    
     location = [AGLocation location];
     sexAidedButton = [[UIButton alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [sexAidedButton addTarget:self action:@selector(sexAidedButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
@@ -63,15 +67,15 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
         [sexAidedButton addSubview:button];
     }
     writeEditViewAnimation = [[AGWriteEditViewAnimation alloc] initWithView:sexAidedButton];
+    self.textView.inputAccessoryView = self.accessoryView;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initialize];
-	[AGUIDefines setNavigationBackButton:self.backButton];
-    [AGUIDefines setNavigationDoneButton:self.sendButton];
-    self.textView.inputAccessoryView = self.accessoryView;
+	self.titleLabel.text = planeCategory.description;
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated

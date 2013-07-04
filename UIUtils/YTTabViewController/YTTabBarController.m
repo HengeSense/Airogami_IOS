@@ -32,9 +32,5 @@
     super.selectedIndex = selectedIndex;
     [tabBarView selectTab:selectedIndex];
 }
-- (void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
 
 @end

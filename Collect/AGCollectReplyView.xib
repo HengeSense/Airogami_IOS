@@ -46,7 +46,7 @@
 							<object class="IBUIButton" id="639097899">
 								<reference key="NSNextResponder" ref="268066914"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 338}, {160, 55}}</string>
+								<string key="NSFrame">{{0, 340}, {160, 55}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="409227990"/>
@@ -60,7 +60,7 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
-								<object class="NSColor" key="IBUINormalTitleColor">
+								<object class="NSColor" key="IBUINormalTitleColor" id="949657986">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
@@ -72,20 +72,22 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">collect_reply_throwback_button@2x.png</string>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="524193393">
-									<int key="type">2</int>
-									<double key="pointSize">15</double>
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="996250489">
+									<string key="name">Avenir-Black</string>
+									<string key="family">Avenir</string>
+									<int key="traits">0</int>
+									<double key="pointSize">16</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="48814014">
-									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">15</double>
+								<object class="NSFont" key="IBUIFont" id="421560710">
+									<string key="NSName">Helvetica</string>
+									<double key="NSSize">16</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
 							<object class="IBUIButton" id="409227990">
 								<reference key="NSNextResponder" ref="268066914"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{160, 338}, {160, 55}}</string>
+								<string key="NSFrame">{{160, 340}, {160, 55}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="723183597"/>
@@ -96,17 +98,14 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUINormalTitle">Reply</string>
 								<reference key="IBUIHighlightedTitleColor" ref="948745382"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-								</object>
+								<reference key="IBUINormalTitleColor" ref="949657986"/>
 								<reference key="IBUINormalTitleShadowColor" ref="890740627"/>
 								<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">collect_reply_reply_button@2x.png</string>
 								</object>
-								<reference key="IBUIFontDescription" ref="524193393"/>
-								<reference key="IBUIFont" ref="48814014"/>
+								<reference key="IBUIFontDescription" ref="996250489"/>
+								<reference key="IBUIFont" ref="421560710"/>
 							</object>
 							<object class="IBUIScrollView" id="169021825">
 								<reference key="NSNextResponder" ref="268066914"/>
@@ -115,10 +114,10 @@
 									<object class="IBUIImageView" id="21364534">
 										<reference key="NSNextResponder" ref="169021825"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{8, 12}, {64, 64}}</string>
+										<string key="NSFrame">{{8, 21}, {64, 64}}</string>
 										<reference key="NSSuperview" ref="169021825"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="80661754"/>
+										<reference key="NSNextKeyView" ref="596678309"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor" id="132667015">
 											<int key="NSColorSpace">3</int>
@@ -130,7 +129,7 @@
 									<object class="IBUILabel" id="596678309">
 										<reference key="NSNextResponder" ref="169021825"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{82, 9}, {228, 21}}</string>
+										<string key="NSFrame">{{85, 17}, {228, 21}}</string>
 										<reference key="NSSuperview" ref="169021825"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="483624063"/>
@@ -140,31 +139,29 @@
 										<int key="IBUIContentMode">7</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<string key="IBUIText">Alexander Alexander Alexander </string>
+										<string key="IBUIText">Alexander Hamilton</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">1</int>
 											<bytes key="NSRGB">MC4yMzUyOTQxMTc2IDAuMjU0OTAxOTYwOCAwLjMzNzI1NDkwMgA</bytes>
 										</object>
 										<nil key="IBUIHighlightedColor"/>
 										<int key="IBUIBaselineAdjustment">0</int>
-										<object class="IBUIFontDescription" key="IBUIFontDescription" id="844418525">
-											<int key="type">1</int>
-											<double key="pointSize">15</double>
+										<object class="IBUIFontDescription" key="IBUIFontDescription">
+											<string key="name">Avenir-Medium</string>
+											<string key="family">Avenir</string>
+											<int key="traits">0</int>
+											<double key="pointSize">16</double>
 										</object>
-										<object class="NSFont" key="IBUIFont" id="989579490">
-											<string key="NSName">Helvetica</string>
-											<double key="NSSize">15</double>
-											<int key="NSfFlags">16</int>
-										</object>
+										<reference key="IBUIFont" ref="421560710"/>
 										<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 									</object>
 									<object class="IBUITextView" id="80661754">
 										<reference key="NSNextResponder" ref="169021825"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{75, 24}, {235, 69}}</string>
+										<string key="NSFrame">{{80, 33}, {233, 69}}</string>
 										<reference key="NSSuperview" ref="169021825"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="596678309"/>
+										<reference key="NSNextKeyView" ref="3019728"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor" id="109453257">
 											<int key="NSColorSpace">3</int>
@@ -174,7 +171,7 @@
 										<bool key="IBUIMultipleTouchEnabled">YES</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<bool key="IBUIEditable">NO</bool>
-										<string key="IBUIText">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor enim ad nisi ut aliquip ex ea commodo consequat. Duis aute irure </string>
+										<string key="IBUIText">I grew up in sunny California. I love to travel and eat. I feel like there's much more to be seen.</string>
 										<object class="NSColor" key="IBUITextColor">
 											<int key="NSColorSpace">1</int>
 											<bytes key="NSRGB">MC4yMzUyOTQxMTc2IDAuMjU0OTAxOTYwOCAwLjMzNzI1NDkwMgA</bytes>
@@ -184,7 +181,9 @@
 											<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										</object>
 										<object class="IBUIFontDescription" key="IBUIFontDescription">
-											<int key="type">1</int>
+											<string key="name">Avenir-Roman</string>
+											<string key="family">Avenir</string>
+											<int key="traits">0</int>
 											<double key="pointSize">12</double>
 										</object>
 										<object class="NSFont" key="IBUIFont">
@@ -200,17 +199,17 @@
 											<object class="IBUITextView" id="389097858">
 												<reference key="NSNextResponder" ref="483624063"/>
 												<int key="NSvFlags">292</int>
-												<string key="NSFrame">{{9, 11}, {302, 88}}</string>
+												<string key="NSFrame">{{5, 23}, {310, 88}}</string>
 												<reference key="NSSuperview" ref="483624063"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="639097899"/>
+												<reference key="NSNextKeyView" ref="80661754"/>
 												<string key="NSReuseIdentifierKey">_NS:9</string>
 												<reference key="IBUIBackgroundColor" ref="109453257"/>
 												<bool key="IBUIClipsSubviews">YES</bool>
 												<bool key="IBUIMultipleTouchEnabled">YES</bool>
 												<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 												<bool key="IBUIEditable">NO</bool>
-												<string key="IBUIText">欢迎光临efewr的博客空间,我于2011年4月29日创建了这个博客空间,目前有260个朋友来过这里,欢迎留下您的笔墨,希望我们能成为吧友,有机会在酒吧里见面聊聊,谢谢</string>
+												<string key="IBUIText">I'm visiting New York next month. What resturants/bars should i check out? I'm on a budget?</string>
 												<object class="NSColor" key="IBUITextColor">
 													<int key="NSColorSpace">3</int>
 													<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
@@ -219,13 +218,18 @@
 													<int key="IBUIAutocapitalizationType">2</int>
 													<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 												</object>
-												<reference key="IBUIFontDescription" ref="844418525"/>
-												<reference key="IBUIFont" ref="989579490"/>
+												<object class="IBUIFontDescription" key="IBUIFontDescription">
+													<string key="name">Avenir-Roman</string>
+													<string key="family">Avenir</string>
+													<int key="traits">0</int>
+													<double key="pointSize">16</double>
+												</object>
+												<reference key="IBUIFont" ref="421560710"/>
 											</object>
 											<object class="IBUIImageView" id="762337346">
 												<reference key="NSNextResponder" ref="483624063"/>
 												<int key="NSvFlags">288</int>
-												<string key="NSFrame">{{18, 0}, {285, 6}}</string>
+												<string key="NSFrame">{{18, 5}, {285, 6}}</string>
 												<reference key="NSSuperview" ref="483624063"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="389097858"/>
@@ -238,7 +242,7 @@
 												</object>
 											</object>
 										</array>
-										<string key="NSFrame">{{0, 116}, {320, 114}}</string>
+										<string key="NSFrame">{{0, 93}, {320, 150}}</string>
 										<reference key="NSSuperview" ref="169021825"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="762337346"/>
@@ -247,7 +251,7 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 								</array>
-								<string key="NSFrame">{{0, 43}, {320, 297}}</string>
+								<string key="NSFrame">{{0, 29}, {320, 311}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="21364534"/>
@@ -259,9 +263,10 @@
 							<object class="IBUIButton" id="723183597">
 								<reference key="NSNextResponder" ref="268066914"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{282, 409}, {31, 10}}</string>
+								<string key="NSFrame">{{282, 406}, {31, 10}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -277,13 +282,20 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">collect_reply_report_button@2x.png</string>
 								</object>
-								<reference key="IBUIFontDescription" ref="524193393"/>
-								<reference key="IBUIFont" ref="48814014"/>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<int key="type">2</int>
+									<double key="pointSize">15</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">15</double>
+									<int key="NSfFlags">16</int>
+								</object>
 							</object>
 							<object class="IBUILabel" id="3019728">
 								<reference key="NSNextResponder" ref="268066914"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{8, 11}, {254, 21}}</string>
+								<string key="NSFrame">{{9, 13}, {254, 21}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="877826803"/>
@@ -296,20 +308,17 @@
 								<string key="IBUIText">What's on your mind?</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAAA</bytes>
-									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
+									<bytes key="NSRGB">MC4xMTM3MjU0OTAyIDAuMTc2NDcwNTg4MiAwLjM1Mjk0MTE3NjUAA</bytes>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="270187466">
-									<int key="type">1</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<string key="name">Avenir-Heavy</string>
+									<string key="family">Avenir</string>
+									<int key="traits">0</int>
 									<double key="pointSize">16</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="382549337">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">16</double>
-									<int key="NSfFlags">16</int>
-								</object>
+								<reference key="IBUIFont" ref="421560710"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 							<object class="IBUIImageView" id="189274038">
@@ -318,7 +327,7 @@
 								<string key="NSFrame">{{293, 10}, {18, 19}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="169021825"/>
+								<reference key="NSNextKeyView" ref="639097899"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -347,15 +356,18 @@
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<reference key="IBUIFontDescription" ref="270187466"/>
-								<reference key="IBUIFont" ref="382549337"/>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<int key="type">1</int>
+									<double key="pointSize">16</double>
+								</object>
+								<reference key="IBUIFont" ref="421560710"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
 						<string key="NSFrame">{{0, 39}, {320, 427}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="3019728"/>
+						<reference key="NSNextKeyView" ref="169021825"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="948745382"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -726,7 +738,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="collect_reply_divider@2x.png">{570, 12}</string>
+			<string key="collect_reply_divider@2x.png">{580, 12}</string>
 			<string key="collect_reply_reply_button@2x.png">{320, 110}</string>
 			<string key="collect_reply_report_button@2x.png">{62, 20}</string>
 			<string key="collect_reply_throwback_button@2x.png">{320, 110}</string>

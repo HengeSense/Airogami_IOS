@@ -8,8 +8,7 @@
 
 #import "AGAppDelegate.h"
 #import "AGUIUtils.h"
-
-
+#import "AGUtils.h"
 
 @interface AGAppDelegate()
 {
@@ -22,6 +21,16 @@
 {
     // Override point for customization after application launch.
     [AGUIUtils initialize];
+    [AGUtils initialize];
+    [self.window addSubview:[[UIImageView alloc] initWithImage:[AGUIDefines mainBackgroundImage]]];
+//    else
+//    {
+//        //Add gradient background
+//        CAGradientLayer *bgLayer = [BackgroundLayer yellowGradient];
+//        bgLayer.frame = self.window.bounds;
+//        [self.window.layer insertSublayer:bgLayer atIndex:0];
+//        
+//    }
     return YES;
 }
 							

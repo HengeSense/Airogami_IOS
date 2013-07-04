@@ -7,8 +7,15 @@
 //
 
 #import "AGUtils.h"
+#import "AGPlaneCategory.h"
 
 @implementation AGUtils
+
++ (void) initialize
+{
+    [AGPlaneCategory initialize];
+}
+
 + (UIImage *)normalizeImage:(UIImage*)image {
     if (image.imageOrientation != UIImageOrientationUp){
         UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);

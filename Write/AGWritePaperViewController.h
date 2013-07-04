@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGWritePaperCell.h"
 
-@interface AGWritePaperViewController : UITableViewController<UITableViewDelegate>
+@interface AGWritePaperViewController : UITableViewController<UITableViewDelegate, AGWritePaperCellDelegate>
 
 @end

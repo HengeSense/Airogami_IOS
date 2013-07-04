@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface AGUtils : NSObject
+
++ (void) initialize;
 + (UIImage *)normalizeImage:(UIImage*)image;
 + (NSArray *)localizedStringArray:(NSString*)prefix count:(int) count;
 @end

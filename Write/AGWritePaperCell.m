@@ -45,13 +45,14 @@ static NSString *WritePaperCellHighlightImages[] = { @"write_paper_random_highli
     UITableView *tableView = (UITableView *) self.superview;
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:button.tag inSection:0];
     [tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
-    [tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+    [self.delegate didSelectRowAtIndexPath:indexPath];
+    //[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

@@ -23,6 +23,14 @@
 "main.tabbar.title_2" = "Plane";
 //write
 "location.randomDestination" = "Random destination";
-//Collect
+//collect
 "collect.refresh.pull" = "Pull down to find more ...";
 "collect.refresh.release" = "Release to find more ...";
+//plane category description
+"plane.category.random" = "Random";
+"plane.category.question" = "Question / Advice";
+"plane.category.confession" = "Confession";
+"plane.category.relationship" = "Relationship";
+"plane.category.localinfo" = "Local infomation";
+"plane.category.feeling" = "What's on your mind?";
+"plane.category.chain" = "Chain Message";

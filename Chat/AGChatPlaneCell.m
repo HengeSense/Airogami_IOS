@@ -14,7 +14,23 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        [self initialize];
+    }
+    return self;
+}
+
+- (void) initialize
+{
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [UIColor colorWithRed:220 / 255.0f green:236 / 255.0f blue:249 / 255.0f alpha:1.0f];
+    self.selectedBackgroundView = selectionColor;
+}
+
+-(id) initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        [self initialize];
     }
     return self;
 }

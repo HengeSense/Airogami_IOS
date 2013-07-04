@@ -1590,11 +1590,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801685.584075"
+         timestampString = "394658293.770732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1603,76 +1603,63 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWritePaperCell.m"
-         timestampString = "393373516.865647"
+         timestampString = "394658293.770732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "30"
-         endingLineNumber = "30"
-         landmarkName = "-layoutSubviews"
-         landmarkType = "5">
+         startingLineNumber = "60"
+         endingLineNumber = "60"
+         landmarkName = "@implementation AGWritePaperCell"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
+         landmarkName = "@implementation AGWritePaperCell"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
+         landmarkName = "@implementation AGWritePaperCell"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
+         landmarkName = "@implementation AGWritePaperCell"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801685.584075"
+         timestampString = "394658293.770732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperCell.m"
-         timestampString = "393373935.630455"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-onButtonTouched:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperCell.m"
-         timestampString = "393373935.630455"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46"
-         landmarkName = "-onButtonTouched:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperCell.m"
-         timestampString = "393373935.630455"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "-onButtonTouched:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801469.336255"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
          landmarkName = "-initWithStyle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1681,11 +1668,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801685.584075"
+         timestampString = "394658293.770732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1694,59 +1681,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801685.584075"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-loadView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801469.336255"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-loadView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801469.336255"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "-loadView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801469.336255"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "38"
-         endingLineNumber = "38"
-         landmarkName = "-loadView"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Write/AGWritePaperViewController.m"
-         timestampString = "393801685.584075"
+         timestampString = "394658293.770732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "50"
@@ -1758,13 +1693,52 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "UIUtils/YTTabViewController/YTTabBarController.m"
-         timestampString = "393380977.582408"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "394658293.770732"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "35"
-         endingLineNumber = "35"
-         landmarkName = "-viewDidDisappear:"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-loadView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperViewController.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1837,11 +1811,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "393802789.540097"
+         timestampString = "394657077.227385"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
          landmarkName = "-textViewDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1902,11 +1876,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "393802789.540097"
+         timestampString = "394657077.227385"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
          landmarkName = "-sexButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1941,11 +1915,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "393802789.540097"
+         timestampString = "394657077.227385"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "193"
-         endingLineNumber = "193"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
          landmarkName = "-sexAidedButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2714,6 +2688,71 @@
          startingLineNumber = "67"
          endingLineNumber = "67"
          landmarkName = "-dismiss"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/AGPlaneCategory.m"
+         timestampString = "394657240.270762"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
+         landmarkName = "+categoryWithId:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWritePaperCell.m"
+         timestampString = "394658293.770732"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "-onButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/YTTabViewController/YTTabBar.m"
+         timestampString = "394658673.173046"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
+         landmarkName = "-initWithFrame:count:selected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/AGBubbleCellStateButton.m"
+         timestampString = "394660185.974635"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "-setCellState:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatPlaneCell.m"
+         timestampString = "394663391.8618"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "16"
+         endingLineNumber = "16"
+         landmarkName = "-initWithStyle:reuseIdentifier:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

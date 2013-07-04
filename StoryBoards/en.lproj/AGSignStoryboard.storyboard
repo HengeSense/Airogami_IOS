@@ -67,7 +67,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VQA-iT-qGo"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -718,11 +717,6 @@
         <class className="AGResetPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResetPasswordViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="editDidBegin:" candidateClass="UITextField"/>
-                <relationship kind="action" name="editDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
@@ -736,7 +730,6 @@
         <class className="AGSignViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignViewController.h"/>
             <relationships>
-                <relationship kind="action" name="signTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="signupButton" candidateClass="UIButton"/>
             </relationships>
@@ -744,11 +737,6 @@
         <class className="AGSigninViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSigninViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="editDidBegin:" candidateClass="UITextField"/>
-                <relationship kind="action" name="editDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="resetPasswordButtonTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
@@ -759,8 +747,6 @@
         <class className="AGSignupLocationViewController" superclassName="SPGooglePlacesAutocompleteViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupLocationViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
@@ -770,8 +756,10 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupViewController.h"/>
             <relationships>
                 <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
                 <relationship kind="action" name="editDidEnd:" candidateClass="UITextField"/>
                 <relationship kind="action" name="locationButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descriptionTextField" candidateClass="UITextField"/>
@@ -795,7 +783,6 @@
         <class className="SPGooglePlacesAutocompleteViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SPGooglePlacesAutocompleteViewController.h"/>
             <relationships>
-                <relationship kind="action" name="recenterMapToUserLocation:"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
             </relationships>
         </class>

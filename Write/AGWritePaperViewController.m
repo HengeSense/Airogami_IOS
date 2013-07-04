@@ -8,8 +8,13 @@
 
 #import "AGWritePaperViewController.h"
 #import "AGUIDefines.h"
+#import "AGWriteEditViewController.h"
+#import "AGPlaneCategory.h"
 
 @interface AGWritePaperViewController ()
+{
+    int selectedCategoryId;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @end
@@ -141,18 +146,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
+}
+
+- (void) didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    selectedCategoryId = indexPath.row + 1;
     [self performSegueWithIdentifier:@"ToEdit" sender:self];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:@"ToEdit"]) {
+        AGWriteEditViewController *awevc = (AGWriteEditViewController*) segue.destinationViewController;
+        awevc.planeCategory =  [AGPlaneCategory categoryWithId: selectedCategoryId];
+
+    }
     
 }
 
