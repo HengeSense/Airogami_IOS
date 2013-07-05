@@ -15,6 +15,8 @@ enum{
     AGRootToMain
 };
 
+static AGSettingMasterViewController *setting;
+
 @interface AGRootViewController ()
 {
     int rootNavigateTo;
@@ -45,7 +47,7 @@ enum{
 
 - (void) initialize
 {
-    rootNavigateTo = AGRootToSign;
+    rootNavigateTo = AGRootToMain;
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self prepareForSign];
@@ -123,6 +125,15 @@ enum{
 - (void) navigateToMain
 {
     [self performSegueWithIdentifier:@"ToMain" sender:self];
+}
+
++ (AGSettingMasterViewController*) setting
+{
+    if (setting == nil) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:stories[3] bundle:nil];
+        setting = [storyBoard instantiateInitialViewController];
+    }
+    return setting;
 }
 
 @end

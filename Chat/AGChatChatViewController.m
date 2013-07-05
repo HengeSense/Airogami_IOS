@@ -217,7 +217,14 @@ static float AGInputTextViewMaxHeight = 100;
 
 - (void)bubbleTableView:(UIBubbleTableView *)tableView didSelectCellAtIndexPath:(NSIndexPath*) indexPath type:(UIBubbleTableViewCellSelectType) type
 {
-    
+    switch (type) {
+        case UIBubbleCellSelectAvatar:
+            [self performSegueWithIdentifier:@"ToProfile" sender:self];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - logic

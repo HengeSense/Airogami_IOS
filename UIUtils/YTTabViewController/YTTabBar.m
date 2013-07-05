@@ -16,7 +16,7 @@
 
 - (id)initWithFrame:(CGRect)frame count:(int)count  selected:(int) index
 {
-    int itemWidth = frame.size.width / count;
+    float itemWidth = frame.size.width / count;
     if ((self = [super initWithFrame:frame])) {
         frame.origin.y = 0;
         frame.origin.x = 0;

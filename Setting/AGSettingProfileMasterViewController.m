@@ -1,19 +1,21 @@
 //
-//  AGChatPlaneViewController.m
+//  AGSettingProfileViewController.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 6/28/13.
+//  Created by Tianhu Yang on 7/4/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGChatPlaneViewController.h"
-#import <QuartzCore/QuartzCore.h>
+#import "AGSettingProfileMasterViewController.h"
 
-@interface AGChatPlaneViewController ()
+@interface AGSettingProfileMasterViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *settingButton;
 
 @end
 
-@implementation AGChatPlaneViewController
+@implementation AGSettingProfileMasterViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -24,15 +26,15 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    //
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
-    imageView.image = [AGUIDefines mainBackgroundImage];
-    [self.tableView.backgroundView addSubview:imageView];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,27 +45,29 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 10;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     
     return cell;
-}
+}*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -104,11 +108,6 @@
 }
 */
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    cell.backgroundColor = [UIColor whiteColor];
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,7 +119,19 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-    [self performSegueWithIdentifier:@"ToChat" sender:self];
 }
+
+- (void)viewDidUnload {
+    [self setBackButton:nil];
+    [self setSettingButton:nil];
+    [super viewDidUnload];
+}
+
+- (IBAction)backButtonTouched:(UIButton *)sender {
+}
+
+- (IBAction)settingButtonTouched:(UIButton *)sender {
+}
+
 
 @end

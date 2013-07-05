@@ -52,10 +52,9 @@
     [super loadView];
     UITableView *tv = (UITableView*)self.view;
     CGRect frame = self.view.frame;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.image = [AGUIDefines mainBackgroundImage];
-    imageView.userInteractionEnabled = YES;
-    self.view = imageView;
+    UIImageView *view = [[UIImageView alloc] initWithFrame:frame];
+    view.userInteractionEnabled = YES;
+    self.view = view;
     [self.view addSubview:tv];
     [self.view addSubview:self.headerView];
     

@@ -263,7 +263,7 @@
 							<object class="IBUIButton" id="723183597">
 								<reference key="NSNextResponder" ref="268066914"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{282, 406}, {31, 10}}</string>
+								<string key="NSFrame">{{281, 403}, {31, 20}}</string>
 								<reference key="NSSuperview" ref="268066914"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -650,20 +650,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">AGCollectPlaneReply</string>
 					<string key="superclassName">NSObject</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="reply:">UIButton</string>
-						<string key="tossBack:">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="reply:">
-							<string key="name">reply:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBActionInfo" key="tossBack:">
-							<string key="name">tossBack:</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="ageLabel">UILabel</string>
 						<string key="containerView">UIView</string>
@@ -740,7 +726,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="collect_reply_divider@2x.png">{580, 12}</string>
 			<string key="collect_reply_reply_button@2x.png">{320, 110}</string>
-			<string key="collect_reply_report_button@2x.png">{62, 20}</string>
+			<string key="collect_reply_report_button@2x.png">{62, 40}</string>
 			<string key="collect_reply_throwback_button@2x.png">{320, 110}</string>
 			<string key="male_symbo@2x.png">{36, 36}</string>
 		</dictionary>

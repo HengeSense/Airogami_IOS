@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGSettingMasterViewController.h"
 
 @interface AGRootViewController : UIViewController
-
++ (AGSettingMasterViewController*) setting;
 @end

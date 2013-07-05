@@ -22,15 +22,12 @@
     // Override point for customization after application launch.
     [AGUIUtils initialize];
     [AGUtils initialize];
-    [self.window addSubview:[[UIImageView alloc] initWithImage:[AGUIDefines mainBackgroundImage]]];
-//    else
-//    {
-//        //Add gradient background
-//        CAGradientLayer *bgLayer = [BackgroundLayer yellowGradient];
-//        bgLayer.frame = self.window.bounds;
-//        [self.window.layer insertSublayer:bgLayer atIndex:0];
-//        
-//    }
+    
+    //main background 
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[AGUIDefines mainBackgroundImage]];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    imageView.frame = [UIScreen mainScreen].bounds;
+    [self.window addSubview:imageView];
     return YES;
 }
 							

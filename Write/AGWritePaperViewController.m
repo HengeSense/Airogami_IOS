@@ -10,6 +10,7 @@
 #import "AGUIDefines.h"
 #import "AGWriteEditViewController.h"
 #import "AGPlaneCategory.h"
+#import "AGRootViewController.h"
 
 @interface AGWritePaperViewController ()
 {
@@ -17,6 +18,9 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
+
+@property (weak, nonatomic) IBOutlet UIButton *profileButton;
+
 @end
 
 @implementation AGWritePaperViewController
@@ -44,10 +48,9 @@
     [super loadView];
     UITableView *tv = (UITableView*)self.view;
     CGRect frame = self.view.frame;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    imageView.image = [AGUIDefines mainBackgroundImage];
-    imageView.userInteractionEnabled = YES;
-    self.view = imageView;
+    UIView *view = [[UIImageView alloc] initWithFrame:frame];
+    view.userInteractionEnabled = YES;
+    self.view = view;
     [self.view addSubview:tv];
     [self.view addSubview:self.headerView];
     
@@ -61,6 +64,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [AGUIDefines setNavigationBackButton:self.profileButton];
     //self.tableView.tableHeaderView = self.headerView;
 
     // Uncomment the following line to preserve selection between presentations.
@@ -68,6 +72,12 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidUnload {
+    [self setHeaderView:nil];
+    [self setProfileButton:nil];
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -165,9 +175,9 @@
     
 }
 
-
-- (void)viewDidUnload {
-    [self setHeaderView:nil];
-    [super viewDidUnload];
+- (IBAction)profileButtonTouched:(UIButton *)sender {
+    [self.navigationController presentModalViewController:[AGRootViewController setting] animated:YES];
 }
+
+
 @end
