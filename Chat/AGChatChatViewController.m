@@ -11,6 +11,7 @@
 #import "AGUIErrorAnimation.h"
 #import "AGChatKeyboardScroll.h"
 #import "AGResignButton.h"
+#import "AGUIUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength 500
@@ -50,6 +51,8 @@ static float AGInputTextViewMaxHeight = 100;
 
 - (void) initUI
 {
+    [AGUIUtils setBackButtonTitle:self];
+    //
     [AGUIDefines setNavigationBackButton:backButton];
     aidedTextView = [[UITextView alloc] initWithFrame:inputTextView.frame];
     aidedTextView.font = inputTextView.font;
@@ -110,8 +113,6 @@ static float AGInputTextViewMaxHeight = 100;
 }
 
 #pragma mark - UITextView delegate
-
-
 
 - (void)textViewDidBeginEditing:(UITextView *)aTextView
 {

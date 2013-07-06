@@ -26,6 +26,9 @@ typedef enum{
 } AGCollectType;
 
 extern const int AGApplicationVersion;
-
+extern const int AGAccountDescriptionMaxLength;
+extern const int AGAccountNameMaxLength;
+extern const int AGAccountAgeMaxLength;
+extern const int AGAccountEmailMaxLength;
 
 #endif

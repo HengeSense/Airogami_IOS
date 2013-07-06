@@ -26,4 +26,5 @@ typedef enum  {
 + (UIImage*) categoryImage:(AGCategory) category;
 + (UIImage*) collectTypeImage:(AGCollectType) type;
 + (UIFont*) themeFont:(AGThemeFontStyle) style size:(float)size;
++ (void) setBackButtonTitle:(UIViewController*)viewController;
 @end

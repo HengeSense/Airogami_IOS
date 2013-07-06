@@ -10,4 +10,5 @@
 
 @interface NSString (Addition)
 -(BOOL) isValidEmail;
+- (BOOL)isNumeric;
 @end

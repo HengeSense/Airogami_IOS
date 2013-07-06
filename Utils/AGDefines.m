@@ -7,3 +7,7 @@
 //
 
 const int AGApplicationVersion = 1;
+const int AGAccountDescriptionMaxLength = 50;
+const int AGAccountNameMaxLength = 100;
+const int AGAccountAgeMaxLength = 2;
+const int AGAccountEmailMaxLength = 256;

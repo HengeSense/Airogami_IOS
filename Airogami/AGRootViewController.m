@@ -10,12 +10,13 @@
 
 static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
+static UIStoryboard *commonStoryBoard;
+
 enum{
     AGRootToSign,
     AGRootToMain
 };
 
-static AGSettingMasterViewController *setting;
 
 @interface AGRootViewController ()
 {
@@ -101,7 +102,7 @@ static AGSettingMasterViewController *setting;
 {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     UIStoryboard *storyBaord = [UIStoryboard storyboardWithName:@"AGSignStoryboard" bundle:nil];
-    viewController = [storyBaord instantiateViewControllerWithIdentifier:@"SignRootViewController"];
+    viewController = [storyBaord instantiateInitialViewController];
 }
 
 - (void) prepareForMain
@@ -127,13 +128,24 @@ static AGSettingMasterViewController *setting;
     [self performSegueWithIdentifier:@"ToMain" sender:self];
 }
 
-+ (AGSettingMasterViewController*) setting
++ (AGSettingProfileMasterViewController*) settingViewController
 {
-    if (setting == nil) {
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:stories[3] bundle:nil];
-        setting = [storyBoard instantiateInitialViewController];
-    }
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:stories[3] bundle:nil];
+    AGSettingProfileMasterViewController  *setting = [storyBoard instantiateViewControllerWithIdentifier:@"AGSettingProfileMasterViewController"];
     return setting;
+}
+
++ (UIStoryboard*) commonStoryBoard
+{
+    if (commonStoryBoard == nil) {
+        commonStoryBoard = [UIStoryboard storyboardWithName:@"AGCommonStoryBoard" bundle:nil];
+    }
+    return commonStoryBoard;
+}
+
++ (AGLocationViewController*) locationViewController
+{
+   return [[AGRootViewController commonStoryBoard] instantiateViewControllerWithIdentifier:@"AGLocationViewController"];
 }
 
 @end

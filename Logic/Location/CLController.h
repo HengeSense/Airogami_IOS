@@ -10,4 +10,5 @@
 
 @property (nonatomic, assign) id <CLControllerDelegate> delegate;
 - (void) start;
+- (void) stop;
 @end

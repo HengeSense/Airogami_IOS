@@ -17,6 +17,7 @@
     CLGeocoder *geocoder;
     CLController *clController;
     AGLocationUtilsResultBlock block;
+    BOOL hasGotCurrentLocation;
 }
 @end
 
@@ -34,6 +35,7 @@
 
 -(void) getCurrentLocation:(AGLocationUtilsResultBlock)aBlock
 {
+    hasGotCurrentLocation = NO;
     block = aBlock;
     [clController start];
 }
@@ -46,12 +48,18 @@
     else{
         [geocoder reverseGeocodeLocation:location completionHandler:
          ^(NSArray *placemarks, NSError *error) {
-            if (error) {
-                block(nil, error);
-            } else {
-                CLPlacemark *placemark = [placemarks onlyObject];
-                block([AGLocation locationWithPlaceMark:placemark], error);
-            }
+             if (hasGotCurrentLocation == NO && block) {
+                 if (error) {
+                     block(nil, error);
+                 } else {
+                     CLPlacemark *placemark = [placemarks onlyObject];
+                     block([AGLocation locationWithPlaceMark:placemark], error);
+                 }
+                 hasGotCurrentLocation = YES;
+                 [clController stop];
+                 block = nil;
+             }
+
         }];
     }
 }

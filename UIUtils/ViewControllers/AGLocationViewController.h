@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SPGooglePlacesAutocompleteViewController.h"
 
-@class AGSignupViewController;
 
-@interface AGSignupLocationViewController : SPGooglePlacesAutocompleteViewController
-@property (weak, nonatomic)  AGSignupViewController *signupViewController;
+@interface AGLocationViewController : SPGooglePlacesAutocompleteViewController
+@property (weak, nonatomic)  UIViewController *fromViewController;
 @end

@@ -11,6 +11,7 @@
 #import "AGWriteEditViewAnimation.h"
 #import "AGWriteLocationViewController.h"
 #import "AGPlaneCategory.h"
+#import "AGUIUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGWriteEditTextMaximum 200
@@ -58,6 +59,7 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 {
     [AGUIDefines setNavigationBackButton:self.backButton];
     [AGUIDefines setNavigationDoneButton:self.sendButton];
+    [AGUIUtils setBackButtonTitle:self];
     
     location = [AGLocation location];
     sexAidedButton = [[UIButton alloc] initWithFrame:[UIScreen mainScreen].bounds];

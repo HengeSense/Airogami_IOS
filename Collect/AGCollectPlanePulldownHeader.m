@@ -69,7 +69,7 @@ typedef enum {
 	
     if(scrollView.isDragging)
     {
-        if (scrollView.contentOffset.y < -45.0f) {
+        if (scrollView.contentOffset.y < -50.0f) {
             if (state != AGCollectPulldownHeaderPulling) {
                 [self setState:AGCollectPulldownHeaderPulling];
             }

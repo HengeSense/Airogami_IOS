@@ -7,15 +7,32 @@
 //
 
 #import "AGSettingProfileMasterViewController.h"
+#import "AGSexSwitch.h"
+#import "NSString+Addition.h"
+#import "AGLocationViewController.h"
+#import "AGRootViewController.h"
 
 @interface AGSettingProfileMasterViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *ageTextField;
+@property (weak, nonatomic) IBOutlet UIButton *regionButton;
+
+@property (weak, nonatomic) IBOutlet AGSexSwitch *sexSwitch;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *descriptionImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *emailImageView;
+
+@property (nonatomic, strong) AGLocation *location;
 
 @end
 
 @implementation AGSettingProfileMasterViewController
+
+@synthesize location;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,12 +46,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,95 +54,147 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void) setLocation:(AGLocation *)aLocation
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    location = aLocation;
+    [self.regionButton setTitle:[location toString] forState:UIControlStateNormal];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITextField delegate
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == self.emailTextField) {
+        self.emailImageView.highlighted = YES;
+    }
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.emailTextField) {
+        self.emailImageView.highlighted = NO;
+    }
+}
+
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.ageTextField) {
+        if ([string isNumeric] == NO) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (IBAction)textFieldEditingChanged:(UITextField *)textField {
+    if (textField == self.nameTextField) {
+        if (textField.text.length > AGAccountNameMaxLength) {
+            textField.text = [textField.text substringToIndex:AGAccountNameMaxLength];
+        }
+    }
+    else if(textField == self.ageTextField)
+    {
+        if (textField.text.length > AGAccountAgeMaxLength) {
+            textField.text = [textField.text substringToIndex:AGAccountAgeMaxLength];
+        }
+    }
+    else if(textField == self.emailTextField)
+    {
+        if (textField.text.length > AGAccountEmailMaxLength) {
+            textField.text = [textField.text substringToIndex:AGAccountAgeMaxLength];
+        }
+    }
+}
+
+#pragma mark - UITextView delegate
+
+- (void) textViewDidBeginEditing:(UITextView *)textView
+{
+    if (textView == self.descriptionTextView) {
+        self.descriptionImageView.highlighted = YES;
+    }
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView == self.descriptionTextView) {
+        self.descriptionImageView.highlighted = NO;
+    }
+}
+
+- (BOOL)textView:(UITextView *)aTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    //return
+    if ([text isEqualToString:@"\n"]) {
+        [aTextView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSString *text = textView.text;
+    text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if (text.length > AGAccountDescriptionMaxLength) {
+        text = [text substringToIndex:AGAccountDescriptionMaxLength];
+    }
+    if (text.length != textView.text.length) {
+        textView.text = text;
+    }
 }
 
 - (void)viewDidUnload {
     [self setBackButton:nil];
     [self setSettingButton:nil];
+    [self setNameTextField:nil];
+    [self setScreenNameLabel:nil];
+    [self setAgeTextField:nil];
+    [self setSexSwitch:nil];
+    [self setDescriptionTextView:nil];
+    [self setEmailTextField:nil];
+    [self setDescriptionImageView:nil];
+    [self setEmailImageView:nil];
+    [self setRegionButton:nil];
     [super viewDidUnload];
 }
 
 - (IBAction)backButtonTouched:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)settingButtonTouched:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"ToSetting" sender:self];
 }
+
+- (IBAction)regionButtonTouched:(UIButton *)sender {
+    AGLocationViewController *slvc = [AGRootViewController locationViewController];
+    slvc.fromViewController = self;
+    [self.navigationController pushViewController:slvc animated:YES];
+}
+
+- (IBAction)passwordButtonTouched:(UIButton *)sender {
+}
+
 
 
 @end

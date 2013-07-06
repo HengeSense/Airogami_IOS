@@ -101,4 +101,13 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
     return font;
 }
 
++ (void) setBackButtonTitle:(UIViewController*)viewController
+{
+    NSArray *array = viewController.navigationController.childViewControllers;
+    int index = array.count > 1 ? array.count - 2 : array.count - 1;
+    UIViewController *vc = [array objectAtIndex:index];
+    UIButton *button = (UIButton *)viewController.navigationItem.leftBarButtonItem.customView;
+    [button setTitle:vc.title forState:UIControlStateNormal];
+}
+
 @end

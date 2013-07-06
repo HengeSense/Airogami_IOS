@@ -176,7 +176,7 @@
 }
 
 - (IBAction)profileButtonTouched:(UIButton *)sender {
-    [self.navigationController presentModalViewController:[AGRootViewController setting] animated:YES];
+    [self.navigationController pushViewController:[AGRootViewController settingViewController] animated:YES];
 }
 
 

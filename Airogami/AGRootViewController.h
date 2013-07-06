@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AGSettingMasterViewController.h"
+#import "AGSettingProfileMasterViewController.h"
+#import "AGLocationViewController.h"
 
 @interface AGRootViewController : UIViewController
-+ (AGSettingMasterViewController*) setting;
++ (AGSettingProfileMasterViewController*) settingViewController;
++ (AGLocationViewController*) locationViewController;
 @end

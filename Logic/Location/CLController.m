@@ -38,4 +38,9 @@
     [self.locationManager startUpdatingLocation];
 }
 
+-(void) stop
+{
+    [self.locationManager stopUpdatingLocation];
+}
+
 @end

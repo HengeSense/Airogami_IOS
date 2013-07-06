@@ -9,7 +9,7 @@
 #import "NSString+Addition.h"
 
 @implementation NSString (Addition)
--(BOOL) isValidEmail
+- (BOOL) isValidEmail
 {
     BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
     NSString *stricterFilterString = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -17,5 +17,16 @@
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self];
+}
+
+- (BOOL)isNumeric{
+    
+    for (int i = 0; i < self.length; ++i) {
+        unichar ch = [self characterAtIndex:i];
+        if (ch < '0' || ch > '9') {
+            return NO;
+        }
+    }
+    return YES;
 }
 @end

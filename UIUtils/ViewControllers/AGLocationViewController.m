@@ -6,16 +6,15 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGSignupLocationViewController.h"
+#import "AGLocationViewController.h"
 #import "AGUtils.h"
-#import "AGSignupViewController.h"
 #import "AGUIUtils.h"
 #import "AGUIDefines.h"
 
 
 #define kSignup_Validate_Error @"error.signup.location.choose.invalid"
 
-@interface AGSignupLocationViewController()
+@interface AGLocationViewController()
 {
 }
 
@@ -28,9 +27,9 @@
 
 @end
 
-@implementation AGSignupLocationViewController
+@implementation AGLocationViewController
 
-@synthesize signupViewController;
+@synthesize fromViewController;
 
 - (void)viewDidLoad
 {
@@ -39,8 +38,7 @@
     [AGUIDefines setNavigationBackButton:self.backButton];
     [AGUIDefines setNormalDoneButton:self.doneButton];
 
-    self.location = signupViewController.location;
-    self.locationLabel.text = [self.location toString];
+    self.location = [fromViewController valueForKey:AGLocationViewControllerLocationKey];
 }
 
 - (void)viewDidUnload {
@@ -69,7 +67,7 @@
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self.location validate]) {
-        signupViewController.location = self.location;
+        [fromViewController setValue:self.location forKey:AGLocationViewControllerLocationKey] ;
         [self.navigationController popViewControllerAnimated:YES];
     }
     else{

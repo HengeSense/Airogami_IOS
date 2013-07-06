@@ -16,6 +16,7 @@ static NSString * Main_Background_Image = @"main_bgrd.png";
 NSString * const Normal_Done_Highlight = @"normal_done_highlight.png";
 NSString * const Navigation_Back_Button_Highlight = @"back_button_highlight.png";
 NSString * const Navigation_Done_Button_Highlight = @"done_button_highlight.png";
+NSString * AGLocationViewControllerLocationKey = @"location";
 
 @implementation AGUIDefines
 
@@ -44,6 +45,7 @@ NSString * const Navigation_Done_Button_Highlight = @"done_button_highlight.png"
 {
     [button setBackgroundImage:[UIImage imageNamed:Navigation_Back_Button_Highlight] forState:UIControlStateHighlighted];
     [button setTitleColor:NavigationBackHighlightColor forState:UIControlStateHighlighted];
+    //button.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 + (void) setNavigationDoneButton:(UIButton*)button

@@ -13,6 +13,7 @@ extern NSString * const Normal_Done_Highlight;
 extern NSString * const Navigation_Back_Button_Highlight;
 
 extern NSString * const Navigation_Done_Button_Highlight;
+extern NSString * AGLocationViewControllerLocationKey;
 
 @interface AGUIDefines : NSObject
 + (void) initialize;

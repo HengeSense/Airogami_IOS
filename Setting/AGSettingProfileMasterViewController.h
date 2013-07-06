@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGSettingProfileMasterViewController : UITableViewController
+@interface AGSettingProfileMasterViewController : UITableViewController<UITextViewDelegate, UITextFieldDelegate>
 
 @end

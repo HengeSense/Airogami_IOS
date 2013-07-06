@@ -47,6 +47,7 @@ static NSString * const Reset_Password_Images[] = {@"reset_password_normal.png",
     [super viewDidLoad];
 	[AGUIDefines setNavigationBackButton:self.backButton];
     [AGUIDefines setNormalDoneButton:self.doneButton];
+    [AGUIUtils setBackButtonTitle:self];
 }
 
 - (void)viewDidUnload {

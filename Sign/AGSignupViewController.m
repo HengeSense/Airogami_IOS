@@ -11,11 +11,13 @@
 #import "AGKeyboardScroll.h"
 #import "AGImagePickAndCrop.h"
 #import "AGLocationUtils.h"
-#import "AGSignupLocationViewController.h"
+#import "AGLocationViewController.h"
 #import "AGUIUtils.h"
 #import "AGUtils.h"
+#import "AGDefines.h"
 #import "NSString+Addition.h"
 #import "AGUIDefines.h"
+#import "AGRootViewController.h"
 
 #define kAGSignupInputNameShort @"error.signup.name.short"
 #define kAGSignupInputPasswordShort @"error.signup.password.short"
@@ -29,7 +31,7 @@
 #define kAGSignupInputMaxLength_Name 30
 #define kAGSignupInputMaxLength_Password 15
 #define kAGSignupInputMaxLength_Email 256
-#define kAGSignupInputMaxLength_Description 50
+#define kAGSignupInputMaxLength_Description AGAccountDescriptionMaxLength
 
 static NSString * const Signup_Profile_Images[] = {@"signup_profile_normal.png", @"signup_profile_location.png", @"signup_profile_email.png", @"signup_profile_words.png"};
 
@@ -108,10 +110,19 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     [locationUtils getCurrentLocation:^(AGLocation *aLocation, NSError *error) {
         //NSLog(@"%@",location);
         dispatch_async(dispatch_get_main_queue(),^ {
-            self.location = aLocation;
+           self.location = aLocation;           
         });
     }];
 }
+
+- (void) setValue:(id)value forKey:(NSString *)key
+{
+    [super setValue:value forKey:key];
+    if ([key isEqualToString:AGLocationViewControllerLocationKey]) {
+        //self.location = value;
+    }
+}
+
 
 - (void) setLocation:(AGLocation *)aLocation
 {
@@ -122,11 +133,6 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.sexSwitch.onText = @"Male";
-    self.sexSwitch.offText = @"Female";
-    self.sexSwitch.offTintColor = [UIColor colorWithRed:0xf2 / 255.f green:0x7f / 255.f blue:0x7a / 255.f alpha:1.0f];
-    self.sexSwitch.onTintColor = [UIColor colorWithRed:0x75 / 255.f green:0xab / 255.f blue:0xd0 / 255.f alpha:1.0f];
-    self.sexSwitch.on = YES;
 
     [AGUIUtils buttonBackgroundImageNormalToHighlight:self.locationButton];
     self.locationButton.titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -178,15 +184,19 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 
 - (IBAction)locationButtonTouched:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"ToLocation" sender:self];
+    //[self performSegueWithIdentifier:@"ToLocation" sender:self];
+    AGLocationViewController *slvc = [AGRootViewController locationViewController];
+    slvc.fromViewController = self;
+    [self.navigationController pushViewController:slvc animated:YES];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier compare:@"ToLocation"] == 0) {
-        AGSignupLocationViewController *slvc = (AGSignupLocationViewController *) segue.destinationViewController;
-        slvc.signupViewController = self;
-    }
+//    if ([segue.identifier compare:@"ToLocation"] == 0) {
+//        
+//        AGLocationViewController *slvc = (AGLocationViewController *) segue.destinationViewController;
+//        slvc.fromViewController = self;
+//    }
 }
 
 
