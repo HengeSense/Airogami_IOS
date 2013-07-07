@@ -19,18 +19,19 @@
 #import "AGUIDefines.h"
 #import "AGRootViewController.h"
 
-#define kAGSignupInputNameShort @"error.signup.name.short"
-#define kAGSignupInputPasswordShort @"error.signup.password.short"
-#define kAGSignupInputLocationEmpty @"error.signup.location.empty"
-#define kAGSignupInputEmailInvalid @"error.signup.email.invalid"
+#define kAGSignupInputScreenNameShort AGAccountScreenNameShortKey
+#define kAGSignupInputPasswordShort AGAccountPasswordShortKey
+#define kAGSignupInputLocationEmpty AGAccountLocationEmptyKey
+#define kAGSignupInputEmailInvalid AGAccountEmailInvalidKey
 #define kAGSignupInputTag_Name 1
 #define kAGSignupInputTag_Password 2
 #define kAGSignupInputTag_Email 3
 #define kAGSignupInputTag_Description 4
 
-#define kAGSignupInputMaxLength_Name 30
-#define kAGSignupInputMaxLength_Password 15
-#define kAGSignupInputMaxLength_Email 256
+#define kAGSignupInputMaxLength_Name AGAccountScreenNameMaxLength
+#define kAGSignupInputMaxLength_Password AGAccountPasswordMaxLength
+#define kAGSignupInputMinLength_Password AGAccountPasswordMinLength
+#define kAGSignupInputMaxLength_Email AGAccountEmailMaxLength
 #define kAGSignupInputMaxLength_Description AGAccountDescriptionMaxLength
 
 static NSString * const Signup_Profile_Images[] = {@"signup_profile_normal.png", @"signup_profile_location.png", @"signup_profile_email.png", @"signup_profile_words.png"};
@@ -248,7 +249,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     [sender resignFirstResponder];
 }
 
--(BOOL)textFieldShouldReturn:(UITextField*)textField;
+-(BOOL)textFieldShouldReturn:(UITextField*)textField
 {
     NSInteger nextTag = textField.tag + 1;
     // Try to find next responder
@@ -323,9 +324,9 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 {
     NSString *error = nil;
     if (self.nameTextField.text.length < 2) {
-        error = kAGSignupInputNameShort;
+        error = kAGSignupInputScreenNameShort;
     }
-    else if(self.passwordTextField.text.length < 6){
+    else if(self.passwordTextField.text.length < kAGSignupInputMinLength_Password){
         error = kAGSignupInputPasswordShort;
     }
     else if (self.locationButton.titleLabel.text.length == 0){

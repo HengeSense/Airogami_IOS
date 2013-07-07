@@ -138,7 +138,7 @@ enum{
 + (UIStoryboard*) commonStoryBoard
 {
     if (commonStoryBoard == nil) {
-        commonStoryBoard = [UIStoryboard storyboardWithName:@"AGCommonStoryBoard" bundle:nil];
+        commonStoryBoard = [UIStoryboard storyboardWithName:@"AGCommonStoryboard" bundle:nil];
     }
     return commonStoryBoard;
 }

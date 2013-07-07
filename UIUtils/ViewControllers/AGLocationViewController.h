@@ -12,4 +12,5 @@
 
 @interface AGLocationViewController : SPGooglePlacesAutocompleteViewController
 @property (weak, nonatomic)  UIViewController *fromViewController;
+@property (nonatomic, assign) BOOL needsUserLocation;
 @end

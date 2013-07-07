@@ -123,24 +123,6 @@
         <image name="powered-by-google-on-non-white.png" width="104" height="16"/>
         <image name="signup_location_box.png" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="AGLocationViewController" superclassName="SPGooglePlacesAutocompleteViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGLocationViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="SPGooglePlacesAutocompleteViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SPGooglePlacesAutocompleteViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

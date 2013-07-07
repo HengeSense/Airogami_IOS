@@ -16,6 +16,7 @@
 
 @interface AGLocationViewController()
 {
+     BOOL updated;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
@@ -29,7 +30,7 @@
 
 @implementation AGLocationViewController
 
-@synthesize fromViewController;
+@synthesize fromViewController, needsUserLocation;
 
 - (void)viewDidLoad
 {
@@ -37,8 +38,10 @@
     
     [AGUIDefines setNavigationBackButton:self.backButton];
     [AGUIDefines setNormalDoneButton:self.doneButton];
-
-    self.location = [fromViewController valueForKey:AGLocationViewControllerLocationKey];
+    if (!needsUserLocation) {
+        self.location = [fromViewController valueForKey:AGLocationViewControllerLocationKey];
+    }
+    
 }
 
 - (void)viewDidUnload {
@@ -78,8 +81,23 @@
 
 - (void) setLocation:(AGLocation *)location
 {
+    updated = YES;
     [super setLocation:location];
     self.locationLabel.text = [location toString];
+}
+
+
+#pragma mark - mapView delegate
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    if (updated == NO) {
+        updated = YES;
+        if (needsUserLocation) {
+            [self searchUserLocation];
+        }
+        
+    }
 }
 
 

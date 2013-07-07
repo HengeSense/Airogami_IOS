@@ -7,6 +7,7 @@
 //
 
 #import "AGCollectPlaneReply.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AGCollectPlaneReply ()
 
@@ -65,7 +66,7 @@
     [UIView setAnimationDuration:.3f];
     self.replyView.alpha = 0.0f;
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animatedImageNamed:duration:)];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView commitAnimations];
     
 }
@@ -88,10 +89,14 @@
 {
     AGCollectPlaneReply *reply = [[AGCollectPlaneReply alloc] init];
     [[NSBundle mainBundle] loadNibNamed:@"AGCollectReplyView" owner:reply options:nil];
+    
     reply.replyView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.7f];
     CGRect frame = [UIScreen mainScreen].bounds;
     reply.replyView.frame = frame;
+    
+    reply.containerView.layer.cornerRadius = 5.0f;
     reply.containerView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2 + 10);
+
     return reply;
 }
 

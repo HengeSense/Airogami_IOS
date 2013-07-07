@@ -4,6 +4,137 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Setting Profile Password View Controller-->
+        <scene sceneID="R0j-AX-eZc">
+            <objects>
+                <viewController id="Qkx-hr-nSj" customClass="AGSettingProfilePasswordViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gmr-Qe-itx">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_change_password_current_box.png" id="Zvp-oi-RtA">
+                                <rect key="frame" x="0.0" y="18" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="11" contentMode="scaleToFill" image="profile_password_icon_current@2x.png" highlightedImage="profile_password_icon_highlight@2x.png" id="fQr-Vx-Dfl">
+                                <rect key="frame" x="19" y="33" width="14" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Current password" minimumFontSize="17" id="qLu-vm-o7m">
+                                <rect key="frame" x="46" y="28" width="246" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="textFieldValueChanged:" destination="Qkx-hr-nSj" eventType="editingChanged" id="fh3-3a-zvY"/>
+                                    <outlet property="delegate" destination="Qkx-hr-nSj" id="e8p-Dc-Tbk"/>
+                                </connections>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_password_email@2x.png" id="njo-LN-foD">
+                                <rect key="frame" x="0.0" y="81" width="320" height="99"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New password" minimumFontSize="17" id="HYS-gC-bf3">
+                                <rect key="frame" x="46" y="92" width="246" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="textFieldValueChanged:" destination="Qkx-hr-nSj" eventType="editingChanged" id="oUd-Tg-Xd6"/>
+                                    <outlet property="delegate" destination="Qkx-hr-nSj" id="6Xb-ZH-BrU"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm new password" minimumFontSize="17" id="J0k-Xn-s3L">
+                                <rect key="frame" x="46" y="136" width="246" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="textFieldValueChanged:" destination="Qkx-hr-nSj" eventType="editingChanged" id="o6d-0e-rR6"/>
+                                    <outlet property="delegate" destination="Qkx-hr-nSj" id="ByI-TR-Kcm"/>
+                                </connections>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" tag="12" contentMode="scaleToFill" image="profile_password_icon@2x.png" highlightedImage="profile_password_icon_highlight@2x.png" id="1UR-CS-Nry">
+                                <rect key="frame" x="19" y="98" width="14" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" tag="13" contentMode="scaleToFill" image="profile_password_icon@2x.png" highlightedImage="profile_password_icon_highlight@2x.png" id="FJo-ms-FXr">
+                                <rect key="frame" x="19" y="142" width="14" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JuF-Go-f4b">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" id="IqS-L7-Goo">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ntb-ze-t2l">
+                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonTouched:" destination="Qkx-hr-nSj" eventType="touchUpInside" id="HA3-ds-Swl"/>
+                                    <action selector="backButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="l8N-Lc-nqr"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="DTJ-yy-wi4">
+                            <rect key="frame" x="72" y="6" width="176" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="68F-ru-9rP">
+                                    <rect key="frame" x="20" y="2" width="148" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="21"/>
+                                    <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <barButtonItem key="rightBarButtonItem" id="Ba3-aw-Fv5">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3k2-1V-OuJ">
+                                <rect key="frame" x="256" y="7" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
+                                <state key="normal" title="Done" backgroundImage="done_button.png">
+                                    <color key="titleColor" red="0.098039215690000001" green="0.46274509800000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonTouched:" destination="Qkx-hr-nSj" eventType="touchUpInside" id="5wu-Zh-tjE"/>
+                                    <action selector="doneButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="wpy-3Z-C6U"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="backButton" destination="Ntb-ze-t2l" id="8Zs-6L-tNK"/>
+                        <outlet property="confirmTextField" destination="J0k-Xn-s3L" id="2cw-uv-8aX"/>
+                        <outlet property="currentTextField" destination="qLu-vm-o7m" id="29r-kC-t6D"/>
+                        <outlet property="doneButton" destination="3k2-1V-OuJ" id="nfO-M9-7Mx"/>
+                        <outlet property="nowTextField" destination="HYS-gC-bf3" id="ZSo-Ot-eCm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wxu-0J-vu0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="186" y="593"/>
+        </scene>
         <!--Setting Master View Controller-->
         <scene sceneID="rKj-Lu-kCn">
             <objects>
@@ -129,10 +260,10 @@
             </objects>
             <point key="canvasLocation" x="659" y="-98"/>
         </scene>
-        <!--Setting Profile Master View Controller-->
+        <!--Setting Profile Master View Controller - Profile-->
         <scene sceneID="ZTj-sz-TR4">
             <objects>
-                <tableViewController storyboardIdentifier="AGSettingProfileMasterViewController" hidesBottomBarWhenPushed="YES" id="bIg-gz-BMF" customClass="AGSettingProfileMasterViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AGSettingProfileMasterViewController" title="Profile" hidesBottomBarWhenPushed="YES" id="bIg-gz-BMF" customClass="AGSettingProfileMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="e0R-5Q-tu6">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,8 +271,17 @@
                         <sections>
                             <tableViewSection id="qaq-06-nYs">
                                 <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="8" id="wdL-GS-ldW">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="8"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="7"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="99" id="XAg-XI-fPJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                        <rect key="frame" x="0.0" y="8" width="320" height="99"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="98"/>
@@ -149,7 +289,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_account@2x.png" id="uES-UD-pX5">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aqb-Rd-AYw">
                                                     <rect key="frame" x="15" y="16" width="64" height="64"/>
@@ -165,20 +305,20 @@
                                                     </state>
                                                 </button>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" id="uNm-Ro-2AW">
-                                                    <rect key="frame" x="97" y="11" width="208" height="30"/>
+                                                    <rect key="frame" x="97" y="13" width="208" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="X21-7W-QSR"/>
                                                         <outlet property="delegate" destination="bIg-gz-BMF" id="T33-Gs-y6j"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="yang_tianhu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZX-sG-9Bq">
-                                                    <rect key="frame" x="97" y="57" width="208" height="21"/>
+                                                    <rect key="frame" x="97" y="59" width="208" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
@@ -186,23 +326,32 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="210" id="gOV-u1-QuF">
-                                        <rect key="frame" x="0.0" y="99" width="320" height="210"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="8" id="U87-ib-eE2">
+                                        <rect key="frame" x="0.0" y="107" width="320" height="8"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="209"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="7"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="gOV-u1-QuF">
+                                        <rect key="frame" x="0.0" y="115" width="320" height="219"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="218"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_information@2x.png" id="YH5-fI-9dP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_information_top@2x.png" id="YH5-fI-9dP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jry-aH-yzV">
-                                                    <rect key="frame" x="7" y="47" width="306" height="45"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="jry-aH-yzV">
+                                                    <rect key="frame" x="7" y="48" width="306" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                                     <inset key="titleEdgeInsets" minX="41" minY="0.0" maxX="50" maxY="0.0"/>
-                                                    <state key="normal" title="Region" backgroundImage="profile_location_icon@2x.png">
+                                                    <state key="normal" title="Location" backgroundImage="profile_location_icon@2x.png">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -214,60 +363,80 @@
                                                     </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" id="gJy-9W-xaf" customClass="AGSexSwitch">
-                                                    <rect key="frame" x="208" y="10" width="96" height="30"/>
+                                                    <rect key="frame" x="207" y="10" width="96" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="On8-X7-nhy">
-                                                    <rect key="frame" x="16" y="14" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24" placeholder="age" textAlignment="center" minimumFontSize="17" id="0YE-xV-1Rm">
-                                                    <rect key="frame" x="48" y="14" width="51" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="IdA-Yi-e1l"/>
-                                                        <outlet property="delegate" destination="bIg-gz-BMF" id="0zK-gh-f1k"/>
-                                                    </connections>
-                                                </textField>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="T1M-Zi-qnO">
-                                                    <rect key="frame" x="16" y="120" width="289" height="75"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="bIg-gz-BMF" id="YHo-ar-4Yj"/>
-                                                    </connections>
-                                                </textView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_description_icon@2x.png" highlightedImage="profile_description_icon_highlight@2x.png" id="NHY-lL-PPU">
-                                                    <rect key="frame" x="16" y="100" width="20" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XnW-hk-aWa">
-                                                    <rect key="frame" x="48" y="97" width="86" height="21"/>
+                                                    <rect key="frame" x="18" y="16" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24" placeholder="age" minimumFontSize="17" id="0YE-xV-1Rm">
+                                                    <rect key="frame" x="63" y="15" width="131" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="IdA-Yi-e1l"/>
+                                                        <outlet property="delegate" destination="bIg-gz-BMF" id="0zK-gh-f1k"/>
+                                                    </connections>
+                                                </textField>
+                                                <view contentMode="scaleToFill" id="6QC-QI-7DI">
+                                                    <rect key="frame" x="0.0" y="92" width="320" height="110"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_information_bottom.png" id="m2Z-48-21W">
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        </imageView>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="T1M-Zi-qnO">
+                                                            <rect key="frame" x="10" y="31" width="301" height="75"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor </string>
+                                                            <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="bIg-gz-BMF" id="YHo-ar-4Yj"/>
+                                                            </connections>
+                                                        </textView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_description_icon@2x.png" highlightedImage="profile_description_icon_highlight@2x.png" id="NHY-lL-PPU">
+                                                            <rect key="frame" x="16" y="14" width="20" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XnW-hk-aWa">
+                                                            <rect key="frame" x="44" y="12" width="86" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="98" id="bAk-e4-qm7">
-                                        <rect key="frame" x="0.0" y="309" width="320" height="98"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="8" id="Jii-cY-Ea3">
+                                        <rect key="frame" x="0.0" y="334" width="320" height="8"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="7"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="149" id="bAk-e4-qm7">
+                                        <rect key="frame" x="0.0" y="342" width="320" height="149"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_password_email@2x.png" id="Vdo-7S-8Ay">
@@ -275,11 +444,11 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="glT-lS-Jme">
-                                                    <rect key="frame" x="7" y="48" width="306" height="45"/>
+                                                    <rect key="frame" x="7" y="46" width="306" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <inset key="titleEdgeInsets" minX="41" minY="0.0" maxX="50" maxY="0.0"/>
-                                                    <state key="normal" title="password" backgroundImage="profile_password_icon@2x.png">
+                                                    <state key="normal" title="password" backgroundImage="profile_password_icon_box@2x.png">
                                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -295,16 +464,43 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tianhuyang@gmail.com" placeholder="Email" minimumFontSize="17" id="v9V-Dl-k1y">
-                                                    <rect key="frame" x="48" y="11" width="251" height="30"/>
+                                                    <rect key="frame" x="48" y="10" width="251" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="3mK-HQ-sBk"/>
                                                         <outlet property="delegate" destination="bIg-gz-BMF" id="kCu-Kv-N1A"/>
                                                     </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9l8-EA-JG6">
+                                                    <rect key="frame" x="0.0" y="480" width="73" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3rL-Wa-1dn">
+                                                    <rect key="frame" x="143" y="101" width="34" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="profile_setting_icon@2x.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="settingButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="UcN-no-Pun"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -353,7 +549,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
-                                <state key="normal" title="Setting" backgroundImage="done_button.png">
+                                <state key="normal" title="Done" backgroundImage="done_button.png">
                                     <color key="titleColor" red="0.098039215690000001" green="0.46274509800000002" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -361,7 +557,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="settingButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="Tiz-sV-WF5"/>
+                                    <action selector="doneButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="ueb-wu-tPn"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -371,14 +567,18 @@
                         <outlet property="backButton" destination="cQ9-O2-agI" id="iTL-Ka-Zdg"/>
                         <outlet property="descriptionImageView" destination="NHY-lL-PPU" id="cyP-W8-r27"/>
                         <outlet property="descriptionTextView" destination="T1M-Zi-qnO" id="U5X-kE-Xxe"/>
+                        <outlet property="doneButton" destination="nGe-f6-SNC" id="S0m-e5-BgQ"/>
                         <outlet property="emailImageView" destination="xLo-yJ-XJX" id="Uyl-6e-b9e"/>
                         <outlet property="emailTextField" destination="v9V-Dl-k1y" id="OJB-UJ-1aF"/>
+                        <outlet property="infoImageView" destination="m2Z-48-21W" id="c19-DY-XqG"/>
+                        <outlet property="locationButton" destination="jry-aH-yzV" id="ACI-bQ-BuN"/>
                         <outlet property="nameTextField" destination="uNm-Ro-2AW" id="JNZ-vh-kXx"/>
-                        <outlet property="regionButton" destination="jry-aH-yzV" id="So7-RF-KGE"/>
+                        <outlet property="passwordButton" destination="glT-lS-Jme" id="DGJ-Ep-boh"/>
                         <outlet property="screenNameLabel" destination="hZX-sG-9Bq" id="cA9-VI-ljf"/>
-                        <outlet property="settingButton" destination="nGe-f6-SNC" id="ZED-Kc-FtK"/>
+                        <outlet property="settingButton" destination="3rL-Wa-1dn" id="AEU-HT-TZ4"/>
                         <outlet property="sexSwitch" destination="gJy-9W-xaf" id="ouA-NP-0Fx"/>
                         <segue destination="mgv-AF-N88" kind="push" identifier="ToSetting" id="yky-Wa-Knp"/>
+                        <segue destination="Qkx-hr-nSj" kind="push" identifier="ToPassword" id="TPC-Jw-VV1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1A-VZ-HFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -424,14 +624,20 @@
         <image name="back_button.png" width="16" height="16"/>
         <image name="done_button.png" width="16" height="16"/>
         <image name="profile_account@2x.png" width="640" height="198"/>
+        <image name="profile_change_password_current_box.png" width="640" height="100"/>
         <image name="profile_description_icon@2x.png" width="40" height="32"/>
         <image name="profile_description_icon_highlight@2x.png" width="40" height="32"/>
         <image name="profile_email_icon@2x.png" width="38" height="28"/>
         <image name="profile_email_icon_highlight@2x.png" width="38" height="28"/>
-        <image name="profile_information@2x.png" width="640" height="420"/>
+        <image name="profile_information_bottom.png" width="16" height="16"/>
+        <image name="profile_information_top@2x.png" width="640" height="185"/>
         <image name="profile_location_icon@2x.png" width="612" height="88"/>
         <image name="profile_password_email@2x.png" width="640" height="198"/>
-        <image name="profile_password_icon@2x.png" width="612" height="88"/>
+        <image name="profile_password_icon@2x.png" width="28" height="34"/>
+        <image name="profile_password_icon_box@2x.png" width="612" height="88"/>
+        <image name="profile_password_icon_current@2x.png" width="28" height="34"/>
+        <image name="profile_password_icon_highlight@2x.png" width="28" height="34"/>
+        <image name="profile_setting_icon@2x.png" width="68" height="68"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

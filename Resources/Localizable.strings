@@ -5,11 +5,16 @@
   Created by Tianhu Yang on 6/13/13.
   Copyright (c) 2013 Airogami. All rights reserved.
 */
+//account
+"error.account.name.short" = "Name is too short";
+"error.account.screenname.short" = "Screen name is too short";
+"error.account.password.short" = "Password is too short";
+"error.account.location.empty" = "Please choose your location";
+"error.account.email.invalid" = "Please input a valid email";
+"error.account.password.nomatch" = "Two new passwords don't match";
+"error.account.currentpassword.short" = "The current password is too short";
+"error.account.newpassword.short" = "The new password is too short";
 //signup
-"error.signup.name.short" = "Screen name is too short";
-"error.signup.password.short" = "Password is too short";
-"error.signup.location.empty" = "Please choose your location";
-"error.signup.email.invalid" = "Please input a valid email";
 "error.signup.location.choose.invalid" = "Please specify your city";
 //signin
 "error.signin.account.invalid" = "Account and password don't match";

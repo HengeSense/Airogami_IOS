@@ -52,8 +52,8 @@ static float AGInputTextViewMaxHeight = 100;
 - (void) initUI
 {
     [AGUIUtils setBackButtonTitle:self];
-    //
     [AGUIDefines setNavigationBackButton:backButton];
+    //
     aidedTextView = [[UITextView alloc] initWithFrame:inputTextView.frame];
     aidedTextView.font = inputTextView.font;
     aidedTextView.hidden = YES;
