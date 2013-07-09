@@ -1,29 +1,20 @@
 //
-//  AGChatProfileViewController.m
+//  AGSettingNotificationViewController.m
 //  Airogami
 //
 //  Created by Tianhu Yang on 7/8/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGChatProfileViewController.h"
-#import "AGProfileImageButton.h"
-#import "AGUIDefines.h"
+#import "AGSettingNotificationViewController.h"
 
-@interface AGChatProfileViewController ()
-@property (weak, nonatomic) IBOutlet AGProfileImageButton *profileImageButton;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *sexImageView;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *descriptionContainer;
+@interface AGSettingNotificationViewController ()
+
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @end
 
-@implementation AGChatProfileViewController
+@implementation AGSettingNotificationViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,7 +29,6 @@
 {
     [super viewDidLoad];
 
-    self.descriptionContainer.image = [self.descriptionContainer.image stretchableImageWithLeftCapWidth:20 topCapHeight:20];
     [AGUIDefines setNavigationBackButton:self.backButton];
 }
 
@@ -49,32 +39,6 @@
 }
 
 #pragma mark - Table view data source
-
-
-
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -128,28 +92,7 @@
      */
 }
 
-- (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 2) {
-        CGRect frame = self.descriptionLabel.frame;
-        frame.size = [self.descriptionLabel sizeThatFits:frame.size];
-        self.descriptionLabel.frame = frame;
-        return frame.origin.y + frame.size.height;
-    }
-    else{
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
-}
-
 - (void)viewDidUnload {
-    [self setProfileImageButton:nil];
-    [self setNameLabel:nil];
-    [self setScreenNameLabel:nil];
-    [self setAgeLabel:nil];
-    [self setSexImageView:nil];
-    [self setLocationLabel:nil];
-    [self setDescriptionLabel:nil];
-    [self setDescriptionContainer:nil];
     [self setBackButton:nil];
     [super viewDidUnload];
 }
@@ -158,11 +101,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)reportButtonTouched:(UIButton *)sender {
+
+- (IBAction)switchValueChanged:(UISwitch *)sender {
+    return;
 }
 
-
-- (IBAction)profileImageButtonTouched:(AGProfileImageButton *)sender {
-}
 
 @end

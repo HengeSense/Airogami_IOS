@@ -1,5 +1,5 @@
 //
-//  AGChatProfileViewController.h
+//  AGPhotoView.h
 //  Airogami
 //
 //  Created by Tianhu Yang on 7/8/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGChatProfileViewController : UITableViewController
+@interface AGPhotoView : UIImageView <UIScrollViewDelegate>
+
+- (void) preview;
 
 @end

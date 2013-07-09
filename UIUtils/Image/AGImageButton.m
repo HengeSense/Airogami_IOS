@@ -1,15 +1,15 @@
 //
-//  AGProfileImageButton.m
+//  AGImageButton.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 6/10/13.
+//  Created by Tianhu Yang on 7/8/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGProfileImageButton.h"
+#import "AGImageButton.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation AGProfileImageButton
+@implementation AGImageButton
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -36,16 +36,7 @@
     CALayer *layer = self.imageView.layer;
     layer.cornerRadius = 6.0f;
     //layer.borderWidth = 1.0f;
-   // layer.borderColor = [UIColor whiteColor].CGColor;
+    // layer.borderColor = [UIColor whiteColor].CGColor;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

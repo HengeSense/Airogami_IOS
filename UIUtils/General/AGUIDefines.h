@@ -23,5 +23,6 @@ extern NSString * AGLocationViewControllerLocationKey;
 + (void) setNavigationBackButton:(UIButton*)button;
 + (void) setNavigationDoneButton:(UIButton*)button;
 + (void) setNormalDoneButton:(UIButton*)button;
++ (UIImage*) sexButtonImage:(BOOL)male;
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGImageButton.h"
 
-@interface AGProfileImageButton : UIButton
+
+@interface AGProfileImageButton : AGImageButton
 
 @end

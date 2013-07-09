@@ -12,6 +12,8 @@ static UIColor*  NavigationBackHighlightColor;
 static UIColor*  NavigationDoneHighlightColor;
 
 static NSString * Main_Background_Image = @"main_bgrd.png";
+static NSString * SexButtonImageMale = @"write_edit_male_button.png";
+static NSString * SexButtonImageFemale = @"write_edit_female_button.png";
 
 NSString * const Normal_Done_Highlight = @"normal_done_highlight.png";
 NSString * const Navigation_Back_Button_Highlight = @"back_button_highlight.png";
@@ -58,5 +60,17 @@ NSString * AGLocationViewControllerLocationKey = @"location";
 {
     [button setBackgroundImage:[UIImage imageNamed:Normal_Done_Highlight] forState:UIControlStateHighlighted];
     [button setTitleColor:NavigationDoneHighlightColor forState:UIControlStateHighlighted];
+}
+
++ (UIImage*) sexButtonImage:(BOOL)male
+{
+    NSString *name;
+    if (male) {
+        name = SexButtonImageMale;
+    }
+    else{
+        name = SexButtonImageFemale;
+    }
+    return [UIImage imageNamed:name];
 }
 @end

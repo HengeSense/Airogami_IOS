@@ -14,7 +14,7 @@
 #import "AGUIUtils.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
-#define kAGSettingProfileLocationHighlight @"profile_location_icon_highlight.png"
+#define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
 #define kAGSettingProfilePasswordHighlight @"profile_password_icon_box_highlight.png"
 
 @interface AGSettingProfileMasterViewController ()
@@ -57,6 +57,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [AGUIDefines setNavigationBackButton:self.backButton];
+    [AGUIDefines setNavigationDoneButton:self.doneButton];
     [self.settingButton setImage:[UIImage imageNamed:kAGSettingProfileSettingHighlight] forState:UIControlStateHighlighted];
     [self.locationButton setBackgroundImage:[UIImage imageNamed:kAGSettingProfileLocationHighlight] forState:UIControlStateHighlighted];
     [self.passwordButton setBackgroundImage:[UIImage imageNamed:kAGSettingProfilePasswordHighlight] forState:UIControlStateHighlighted];

@@ -28,7 +28,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Xiangyu Zhang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l1w-W7-xat">
                                             <rect key="frame" x="77" y="11" width="145" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
@@ -196,100 +196,127 @@
             </objects>
             <point key="canvasLocation" x="542" y="-108"/>
         </scene>
-        <!--Chat Plrofile View Controller-->
+        <!--Chat Profile View Controller-->
         <scene sceneID="6zq-Sf-vFv">
             <objects>
-                <tableViewController id="dW2-9i-At7" customClass="AGChatPlrofileViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Faj-GX-LpQ">
+                <tableViewController id="dW2-9i-At7" customClass="AGChatProfileViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Faj-GX-LpQ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="ePE-L9-CS9">
                                 <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="10" id="TLl-W7-Dfk">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="9"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="189" id="OG8-n3-Odf">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="189"/>
+                                        <rect key="frame" x="0.0" y="10" width="320" height="189"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_view_top@2x.png" id="4QT-O1-lvP">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="189"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="189"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nKv-YM-9uQ">
-                                                    <rect key="frame" x="20" y="120" width="42" height="21"/>
+                                                    <rect key="frame" x="20" y="110" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="yang_tianhu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="grY-dw-T3z">
-                                                    <rect key="frame" x="100" y="69" width="208" height="21"/>
+                                                    <rect key="frame" x="98" y="63" width="208" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V0Z-jX-2S4">
-                                                    <rect key="frame" x="70" y="120" width="61" height="22"/>
+                                                    <rect key="frame" x="60" y="110" width="61" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="tOC-yF-Es6" customClass="AGProfileImage">
-                                                    <rect key="frame" x="14" y="29" width="64" height="64"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="yang_tianhu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bvg-75-V6J">
-                                                    <rect key="frame" x="100" y="32" width="208" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tianhu Yang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bvg-75-V6J">
+                                                    <rect key="frame" x="98" y="19" width="208" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="ULv-YE-dQt">
-                                                    <rect key="frame" x="265" y="115" width="36" height="41"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="write_edit_female_button@2x.png" id="ULv-YE-dQt">
+                                                    <rect key="frame" x="268" y="104" width="34" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Mmh-K9-LC0">
-                                                    <rect key="frame" x="15" y="156" width="35" height="31"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_location_icon@2x.png" id="Mmh-K9-LC0">
+                                                    <rect key="frame" x="20" y="155" width="14" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="los angeles, ca " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bkJ-ms-xlG">
-                                                    <rect key="frame" x="70" y="163" width="238" height="22"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="los angeles, ca, USA " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bkJ-ms-xlG">
+                                                    <rect key="frame" x="60" y="155" width="238" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CyM-hS-MYu" customClass="AGProfileImageButton">
+                                                    <rect key="frame" x="15" y="19" width="64" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="write_edit_male_button@2x.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="profileImageButtonTouched:" destination="dW2-9i-At7" eventType="touchUpInside" id="Ak1-21-1EY"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="116" id="4VG-eq-kQa">
-                                        <rect key="frame" x="0.0" y="189" width="320" height="116"/>
+                                        <rect key="frame" x="0.0" y="199" width="320" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_view_middle@2x.png" id="O8k-QJ-bWv">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="107"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_view_middle.png" id="O8k-QJ-bWv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pkz-xs-Rtf">
-                                                    <rect key="frame" x="51" y="20" width="264" height="82"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mGF-vF-xlg">
+                                                    <rect key="frame" x="60" y="7" width="86" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pkz-xs-Rtf">
+                                                    <rect key="frame" x="20" y="30" width="280" height="62"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <string key="text">matter how hard you try, you will be contrained by your backgroundmatter how hard you try, you will be contrained by your backgroundmatter how hard you try, you will be contrained by your backgroundmatter how hard you try, you will be contrained by your backgroundmatter how hard you try, you will be contrained by your background</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_description_icon@2x.png" id="ZCG-za-aAA">
-                                                    <rect key="frame" x="10" y="18" width="20" height="16"/>
+                                                    <rect key="frame" x="17" y="10" width="20" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -297,7 +324,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="50" id="Bo0-JN-jmW">
-                                        <rect key="frame" x="0.0" y="305" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="315" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -308,7 +335,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8kp-nc-Xnu">
-                                                    <rect key="frame" x="268" y="3" width="31" height="31"/>
+                                                    <rect key="frame" x="268" y="9" width="31" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" backgroundImage="account_report_button@2x.png">
@@ -318,8 +345,20 @@
                                                     <state key="highlighted">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="reportButtonTouched:" destination="dW2-9i-At7" eventType="touchUpInside" id="Svj-Vh-54o"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="gwb-XC-j40">
+                                        <rect key="frame" x="0.0" y="365" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
@@ -331,7 +370,38 @@
                             <outlet property="delegate" destination="dW2-9i-At7" id="IBM-30-JaQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="JFk-wi-BhS"/>
+                    <navigationItem key="navigationItem" id="JFk-wi-BhS">
+                        <barButtonItem key="leftBarButtonItem" id="5Mc-K9-48l">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="X0N-AA-UPQ">
+                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="JCF-y5-YuP" eventType="touchUpInside" id="LxZ-A5-CBF"/>
+                                    <action selector="backButtonTouched:" destination="dW2-9i-At7" eventType="touchUpInside" id="RPg-nm-qS6"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ageLabel" destination="V0Z-jX-2S4" id="hkE-5k-YOm"/>
+                        <outlet property="backButton" destination="X0N-AA-UPQ" id="bYf-wg-6hc"/>
+                        <outlet property="descriptionContainer" destination="O8k-QJ-bWv" id="hNB-Z0-0RH"/>
+                        <outlet property="descriptionLabel" destination="Pkz-xs-Rtf" id="CUz-6Q-b5z"/>
+                        <outlet property="locationLabel" destination="bkJ-ms-xlG" id="Gzr-RP-y4L"/>
+                        <outlet property="nameLabel" destination="Bvg-75-V6J" id="Vcb-3o-yp1"/>
+                        <outlet property="profileImageButton" destination="CyM-hS-MYu" id="iwj-dc-hza"/>
+                        <outlet property="screenNameLabel" destination="grY-dw-T3z" id="HF0-fJ-pJ7"/>
+                        <outlet property="sexImageView" destination="ULv-YE-dQt" id="SUO-Pb-Bld"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LvG-Qu-KXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -360,15 +430,17 @@
         <image name="account_report_button@2x.png" width="62" height="62"/>
         <image name="back_button.png" width="16" height="16"/>
         <image name="profile_description_icon@2x.png" width="40" height="32"/>
+        <image name="profile_location_icon@2x.png" width="28" height="42"/>
         <image name="profile_view_bottom@2x.png" width="640" height="100"/>
-        <image name="profile_view_middle@2x.png" width="80" height="80"/>
+        <image name="profile_view_middle.png" width="16" height="16"/>
         <image name="profile_view_top@2x.png" width="640" height="378"/>
+        <image name="write_edit_female_button@2x.png" width="68" height="68"/>
+        <image name="write_edit_male_button@2x.png" width="68" height="68"/>
     </resources>
     <classes>
         <class className="AGChatChatViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatChatViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="bubbleTable" candidateClass="UIBubbleTableView"/>
                 <relationship kind="outlet" name="inputTextView" candidateClass="UITextView"/>
@@ -389,8 +461,31 @@
         <class className="AGChatPlaneViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatPlaneViewController.h"/>
         </class>
+        <class className="AGChatProfileViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="profileImageButtonTouched:" candidateClass="AGProfileImageButton"/>
+                <relationship kind="action" name="reportButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descriptionContainer" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profileImageButton" candidateClass="AGProfileImageButton"/>
+                <relationship kind="outlet" name="screenNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sexImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="AGImageButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
+        </class>
         <class className="AGProfileImage" superclassName="UIImageView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImage.h"/>
+        </class>
+        <class className="AGProfileImageButton" superclassName="AGImageButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImageButton.h"/>
         </class>
         <class className="AGResignButton" superclassName="UIButton">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>

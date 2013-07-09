@@ -1,5 +1,5 @@
 //
-//  AGChatProfileViewController.h
+//  AGSettingNotificationViewController.h
 //  Airogami
 //
 //  Created by Tianhu Yang on 7/8/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGChatProfileViewController : UITableViewController
+@interface AGSettingNotificationViewController : UITableViewController
 
 @end

@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGProfileImageButton.h"
 
 @interface AGCollectPlaneReply : NSObject
 
 @property (strong, nonatomic) IBOutlet UIView *replyView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet AGProfileImageButton *profileImageButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *sexImageView;
