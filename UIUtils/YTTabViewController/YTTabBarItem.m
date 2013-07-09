@@ -13,7 +13,7 @@
 
 @implementation YTTabBarItem
 
-@synthesize delegate;
+@synthesize delegate, badge;
 
 - (id)initWithFrame:(CGRect)frame index:(int)anIndex
 {
@@ -70,13 +70,34 @@
 
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void) setBadge:(NSString *)aBadge
 {
-    // Drawing code
+    badge = aBadge;
+    if (customBadge == nil) {
+        customBadge = [CustomBadge customBadgeWithString:badge
+                                                       withStringColor:[UIColor whiteColor]
+                                                        withInsetColor:[UIColor redColor]
+                                                        withBadgeFrame:YES
+                                                   withBadgeFrameColor:[UIColor whiteColor] 
+                                                             withScale:1.0
+                                                           withShining:YES];
+        [self addSubview:customBadge];
+    }
+    else{
+        customBadge.badgeText = badge;
+    }
+    
+    if (badge.length == 0) {
+        customBadge.hidden = YES;
+    }
+    else
+    {
+        customBadge.hidden = NO;
+        CGRect frame = customBadge.frame;
+        frame.origin.y = 3;
+        frame.origin.x = self.frame.size.width - frame.size.width - 10;
+        customBadge.frame = frame;
+    }
 }
-*/
 
 @end

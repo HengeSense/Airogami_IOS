@@ -22,8 +22,9 @@
         frame.origin.x = 0;
         frame.size.width = itemWidth;
         NSMutableArray *array = [NSMutableArray array];
+        YTTabBarItem * tabBarItem;
         for (int i = 0; i < count; ++i) {
-            YTTabBarItem * tabBarItem = [[YTTabBarItem alloc] initWithFrame:frame index:i];
+            tabBarItem = [[YTTabBarItem alloc] initWithFrame:frame index:i];
             if (i == index) {
                 tabBarItem.selected = YES;
             }
@@ -33,6 +34,7 @@
             frame.origin.x += itemWidth;
         }
         tabBarItems = array;
+        tabBarItem.badge = @"99";
         self.userInteractionEnabled = YES;
     }
     return self;

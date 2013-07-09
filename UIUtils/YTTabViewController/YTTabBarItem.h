@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomBadge.h"
 
 @protocol YTTabBarItemDelegate <NSObject>
 
@@ -17,10 +18,12 @@
 @interface YTTabBarItem : UIButton
 {
     int index;
+    CustomBadge *customBadge;
 }
 
 @property(nonatomic, assign) NSObject<YTTabBarItemDelegate> *delegate;
 @property(nonatomic, assign) NSString *text;
+@property(nonatomic, strong) NSString *badge;
 
 -(id) initWithFrame:(CGRect)frame index:(int)index;
 -(void) setSelectedImage:(UIImage*)selectedImage unseletedImage:(UIImage*)unselectedImage;

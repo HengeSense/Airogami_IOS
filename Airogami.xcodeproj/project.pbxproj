@@ -164,6 +164,7 @@
 		078A5C77178B95B1000FB7FF /* AGPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C73178B95B1000FB7FF /* AGPhotoView.m */; };
 		078A5C78178B95B1000FB7FF /* AGProfileImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C75178B95B1000FB7FF /* AGProfileImageButton.m */; };
 		078A5C7B178B99F7000FB7FF /* AGSettingNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C7A178B99F7000FB7FF /* AGSettingNotificationViewController.m */; };
+		078A5C7F178C8536000FB7FF /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C7E178C8536000FB7FF /* CustomBadge.m */; };
 		078D951B1761107B00663FDE /* signup_account_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D95191761107B00663FDE /* signup_account_name@2x.png */; };
 		078D951C1761107B00663FDE /* signup_account_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D951A1761107B00663FDE /* signup_account_password@2x.png */; };
 		078D95211761156000663FDE /* signup_profile_email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D951D1761156000663FDE /* signup_profile_email@2x.png */; };
@@ -516,6 +517,8 @@
 		078A5C75178B95B1000FB7FF /* AGProfileImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileImageButton.m; sourceTree = "<group>"; };
 		078A5C79178B99F7000FB7FF /* AGSettingNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSettingNotificationViewController.h; sourceTree = "<group>"; };
 		078A5C7A178B99F7000FB7FF /* AGSettingNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSettingNotificationViewController.m; sourceTree = "<group>"; };
+		078A5C7D178C8536000FB7FF /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
+		078A5C7E178C8536000FB7FF /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
 		078D95191761107B00663FDE /* signup_account_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_name@2x.png"; sourceTree = "<group>"; };
 		078D951A1761107B00663FDE /* signup_account_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_password@2x.png"; sourceTree = "<group>"; };
 		078D951D1761156000663FDE /* signup_profile_email@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_profile_email@2x.png"; sourceTree = "<group>"; };
@@ -998,6 +1001,7 @@
 		078A1F9E176D355C00A69AE3 /* UIUtils */ = {
 			isa = PBXGroup;
 			children = (
+				078A5C7C178C8536000FB7FF /* Badge */,
 				078A5C6F178B95B0000FB7FF /* Image */,
 				078522AD1787A0C800288D7C /* ViewControllers */,
 				078E9AAA177F8212006D7059 /* KeyboardScroll */,
@@ -1129,6 +1133,15 @@
 				078A5C75178B95B1000FB7FF /* AGProfileImageButton.m */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		078A5C7C178C8536000FB7FF /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				078A5C7D178C8536000FB7FF /* CustomBadge.h */,
+				078A5C7E178C8536000FB7FF /* CustomBadge.m */,
+			);
+			path = Badge;
 			sourceTree = "<group>";
 		};
 		078E9AAA177F8212006D7059 /* KeyboardScroll */ = {
@@ -1796,6 +1809,7 @@
 				078A5C77178B95B1000FB7FF /* AGPhotoView.m in Sources */,
 				078A5C78178B95B1000FB7FF /* AGProfileImageButton.m in Sources */,
 				078A5C7B178B99F7000FB7FF /* AGSettingNotificationViewController.m in Sources */,
+				078A5C7F178C8536000FB7FF /* CustomBadge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
