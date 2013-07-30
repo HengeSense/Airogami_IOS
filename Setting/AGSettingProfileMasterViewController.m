@@ -12,19 +12,25 @@
 #import "AGLocationViewController.h"
 #import "AGRootViewController.h"
 #import "AGUIUtils.h"
+#import "AGImagePickAndCrop.h"
+#import "AGProfileImageButton.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
 #define kAGSettingProfilePasswordHighlight @"profile_password_icon_box_highlight.png"
 
-@interface AGSettingProfileMasterViewController ()
+@interface AGSettingProfileMasterViewController ()<AGImagePickAndCropDelegate, UIActionSheetDelegate>
 {
     UITextView * aidedTextView;
+    AGImagePickAndCrop *imagePickAndCrop;
 }
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet AGProfileImageButton *profileImageButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *changeProfileImageButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *screenNameButton;
 @property (weak, nonatomic) IBOutlet UITextField *ageTextField;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
 @property (weak, nonatomic) IBOutlet AGSexSwitch *sexSwitch;
@@ -62,6 +68,8 @@
     [self.settingButton setImage:[UIImage imageNamed:kAGSettingProfileSettingHighlight] forState:UIControlStateHighlighted];
     [self.locationButton setBackgroundImage:[UIImage imageNamed:kAGSettingProfileLocationHighlight] forState:UIControlStateHighlighted];
     [self.passwordButton setBackgroundImage:[UIImage imageNamed:kAGSettingProfilePasswordHighlight] forState:UIControlStateHighlighted];
+    [AGUIUtils buttonBackgroundImageNormalToHighlight:self.screenNameButton];
+    [AGUIUtils buttonBackgroundImageNormalToHighlight:self.changeProfileImageButton];
     //
     [self.locationButton setTitleColor:[UIColor colorWithRed:110 / 255.0f green:110 / 255.0f blue:110 / 255.0f alpha:1.0f] forState:UIControlStateSelected];
     self.infoImageView.image = [self.infoImageView.image stretchableImageWithLeftCapWidth:20 topCapHeight:10];
@@ -101,7 +109,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static float padding = 10;
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         CGRect frame = self.descriptionTextView.frame;
         aidedTextView.text = self.descriptionTextView.text;
         frame.size.height = aidedTextView.contentSize.height;
@@ -230,7 +238,6 @@
     [self setBackButton:nil];
     [self setDoneButton:nil];
     [self setNameTextField:nil];
-    [self setScreenNameLabel:nil];
     [self setAgeTextField:nil];
     [self setSexSwitch:nil];
     [self setDescriptionTextView:nil];
@@ -241,7 +248,45 @@
     [self setInfoImageView:nil];
     [self setSettingButton:nil];
     [self setPasswordButton:nil];
+    [self setScreenNameButton:nil];[self setChangeProfileImageButton:nil];
+    [self setProfileImageButton:nil];
     [super viewDidUnload];
+}
+
+#pragma mark - AGImagePickAndCropDelegate
+
+- (IBAction)profileImageButtonTouched:(UIButton *)sender {
+    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"Add Profile Picture" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Take Photo", @"Choose From Library", nil];
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [sheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    imagePickAndCrop = [[AGImagePickAndCrop alloc] init];
+    imagePickAndCrop.delegate = self;
+    switch (buttonIndex) {
+        case 0:
+            [imagePickAndCrop pickAndCrop:self type:AGImagePickAndCropType_Camera];
+            break;
+        case 1:
+            [imagePickAndCrop pickAndCrop:self type:AGImagePickAndCropType_Library];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - AGImagePickAndCropDelegate
+- (void) imageCropperDidCancel:(AGImagePickAndCrop *)pickAndCrop
+{
+    imagePickAndCrop = nil;
+}
+
+- (void) imagePickAndCrop:(AGImagePickAndCrop *)pickAndCrop didFinishingWithImage:(UIImage *)image
+{
+    [self.profileImageButton setImage:image forState:UIControlStateNormal];
+    imagePickAndCrop = nil;
 }
 
 - (IBAction)backButtonTouched:(UIButton *)sender {
@@ -262,6 +307,11 @@
 - (IBAction)passwordButtonTouched:(UIButton *)sender {
     [self performSegueWithIdentifier:@"ToPassword" sender:self];
 }
+
+- (IBAction)screenNameButtonTouched:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"ToScreenName" sender:self];
+}
+
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {

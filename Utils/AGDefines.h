@@ -30,6 +30,7 @@ extern const int AGAccountDescriptionMaxLength;
 extern const int AGAccountNameMaxLength;
 extern const int AGAccountAgeMaxLength;
 extern const int AGAccountEmailMaxLength;
+extern const int AGAccountScreenNameMinLength;
 extern const int AGAccountScreenNameMaxLength;
 extern const int AGAccountPasswordMaxLength;
 extern const int AGAccountPasswordMinLength;

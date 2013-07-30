@@ -577,67 +577,6 @@
         <image name="signup_profile_image.png" width="16" height="16"/>
         <image name="signup_profile_normal.png" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="AGImageButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
-        </class>
-        <class className="AGResetPasswordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResetPasswordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="resetPasswordImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="AGResignButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>
-        </class>
-        <class className="AGSexSwitch" superclassName="DCRoundSwitch">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSexSwitch.h"/>
-        </class>
-        <class className="AGSignViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="signupButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="AGSigninViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSigninViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AGSignupViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="descriptionTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="locationButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="profileImageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="rightButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="sexSwitch" candidateClass="DCRoundSwitch"/>
-            </relationships>
-        </class>
-        <class className="DCRoundSwitch" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

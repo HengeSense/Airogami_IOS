@@ -7,7 +7,7 @@
 */
 //account
 "error.account.name.short" = "Name is too short";
-"error.account.screenname.short" = "Screen name is too short";
+"error.account.screenname.short" = "Airogami ID is too short";
 "error.account.password.short" = "Password is too short";
 "error.account.location.empty" = "Please choose your location";
 "error.account.email.invalid" = "Please input a valid email";

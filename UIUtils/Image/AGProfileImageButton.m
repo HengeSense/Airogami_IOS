@@ -22,6 +22,7 @@
 - (void) buttonClicked
 {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    [window endEditing:YES];
     CGRect frame = [self.imageView convertRect:self.imageView.bounds toView:window];
 
     AGPhotoView *photoView = [[AGPhotoView alloc] initWithFrame:frame];

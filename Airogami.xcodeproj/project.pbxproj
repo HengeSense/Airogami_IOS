@@ -269,6 +269,11 @@
 		07B8DC4217711BEB006922FF /* write_paper_info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B8DC3C17711BEB006922FF /* write_paper_info@2x.png */; };
 		07B8DC4317711BEB006922FF /* write_paper_question@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B8DC3D17711BEB006922FF /* write_paper_question@2x.png */; };
 		07B8DC4417711BEB006922FF /* write_paper_relationship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B8DC3E17711BEB006922FF /* write_paper_relationship@2x.png */; };
+		07C48F3617A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */; };
+		07C48F3817A6FBE4000D03A8 /* profile_name_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */; };
+		07C48F3B17A6FE3C000D03A8 /* arrow_icon_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3917A6FE3C000D03A8 /* arrow_icon_highlight@2x.png */; };
+		07C48F3C17A6FE3C000D03A8 /* arrow_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3A17A6FE3C000D03A8 /* arrow_icon@2x.png */; };
+		07C48F3E17A6FFB3000D03A8 /* proflle_arrow_box_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3D17A6FFB3000D03A8 /* proflle_arrow_box_highlight@2x.png */; };
 		07D16401176BD784009675F5 /* signin_account_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D163FD176BD784009675F5 /* signin_account_name@2x.png */; };
 		07D16402176BD784009675F5 /* signin_account_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D163FE176BD784009675F5 /* signin_account_normal@2x.png */; };
 		07D16403176BD784009675F5 /* signin_account_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D163FF176BD784009675F5 /* signin_account_password@2x.png */; };
@@ -648,6 +653,12 @@
 		07B8DC3C17711BEB006922FF /* write_paper_info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_info@2x.png"; sourceTree = "<group>"; };
 		07B8DC3D17711BEB006922FF /* write_paper_question@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_question@2x.png"; sourceTree = "<group>"; };
 		07B8DC3E17711BEB006922FF /* write_paper_relationship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_relationship@2x.png"; sourceTree = "<group>"; };
+		07C48F3417A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSettingProfileScreenNameViewController.h; sourceTree = "<group>"; };
+		07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSettingProfileScreenNameViewController.m; sourceTree = "<group>"; };
+		07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_name_box@2x.png"; sourceTree = "<group>"; };
+		07C48F3917A6FE3C000D03A8 /* arrow_icon_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_icon_highlight@2x.png"; sourceTree = "<group>"; };
+		07C48F3A17A6FE3C000D03A8 /* arrow_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_icon@2x.png"; sourceTree = "<group>"; };
+		07C48F3D17A6FFB3000D03A8 /* proflle_arrow_box_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "proflle_arrow_box_highlight@2x.png"; sourceTree = "<group>"; };
 		07D163FD176BD784009675F5 /* signin_account_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin_account_name@2x.png"; sourceTree = "<group>"; };
 		07D163FE176BD784009675F5 /* signin_account_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin_account_normal@2x.png"; sourceTree = "<group>"; };
 		07D163FF176BD784009675F5 /* signin_account_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin_account_password@2x.png"; sourceTree = "<group>"; };
@@ -908,6 +919,8 @@
 		0785226E1786223200288D7C /* General */ = {
 			isa = PBXGroup;
 			children = (
+				07C48F3917A6FE3C000D03A8 /* arrow_icon_highlight@2x.png */,
+				07C48F3A17A6FE3C000D03A8 /* arrow_icon@2x.png */,
 				079C09A61788FED00067FED1 /* account_report_button@2x.png */,
 				0785227B178622E800288D7C /* main_bgrd@2x.png */,
 				0707237E175EA0260017292A /* InfoPlist.strings */,
@@ -936,6 +949,8 @@
 				079C099A1788DC610067FED1 /* AGSettingProfilePasswordViewController.m */,
 				078A5C79178B99F7000FB7FF /* AGSettingNotificationViewController.h */,
 				078A5C7A178B99F7000FB7FF /* AGSettingNotificationViewController.m */,
+				07C48F3417A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.h */,
+				07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -943,7 +958,9 @@
 		0785229017864C8D00288D7C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07C48F3D17A6FFB3000D03A8 /* proflle_arrow_box_highlight@2x.png */,
 				079C099E1788F3D50067FED1 /* profile_change_password_current_box.png */,
+				07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */,
 				079C099F1788F3D50067FED1 /* profile_password_icon_highlight@2x.png */,
 				079C09A01788F3D50067FED1 /* profile_password_icon_current@2x.png */,
 				079C09A11788F3D50067FED1 /* profile_password_icon@2x.png */,
@@ -1701,6 +1718,10 @@
 				079C09AC178904950067FED1 /* profile_view_middle@2x.png in Resources */,
 				079C09AD178904950067FED1 /* profile_view_top@2x.png in Resources */,
 				078A5C62178B6E1E000FB7FF /* profile_location_icon@2x.png in Resources */,
+				07C48F3817A6FBE4000D03A8 /* profile_name_box@2x.png in Resources */,
+				07C48F3B17A6FE3C000D03A8 /* arrow_icon_highlight@2x.png in Resources */,
+				07C48F3C17A6FE3C000D03A8 /* arrow_icon@2x.png in Resources */,
+				07C48F3E17A6FFB3000D03A8 /* proflle_arrow_box_highlight@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1810,6 +1831,7 @@
 				078A5C78178B95B1000FB7FF /* AGProfileImageButton.m in Sources */,
 				078A5C7B178B99F7000FB7FF /* AGSettingNotificationViewController.m in Sources */,
 				078A5C7F178C8536000FB7FF /* CustomBadge.m in Sources */,
+				07C48F3617A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

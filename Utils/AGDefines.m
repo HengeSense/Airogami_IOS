@@ -10,8 +10,9 @@ const int AGApplicationVersion = 1;
 const int AGAccountDescriptionMaxLength = 250;
 const int AGAccountNameMaxLength = 100;
 const int AGAccountScreenNameMaxLength = 100;
+const int AGAccountScreenNameMinLength = 2;
 const int AGAccountAgeMaxLength = 2;
-const int AGAccountEmailMaxLength = 256;
+const int AGAccountEmailMaxLength = 255;
 const int AGAccountPasswordMaxLength = 15;
 const int AGAccountPasswordMinLength = 6;
 
