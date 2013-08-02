@@ -18,6 +18,8 @@
 #import "NSString+Addition.h"
 #import "AGUIDefines.h"
 #import "AGRootViewController.h"
+#import "AGManagerUtils.h"
+#import <CoreLocation/CoreLocation.h>
 
 #define kAGSignupInputScreenNameShort AGAccountScreenNameShortKey
 #define kAGSignupInputPasswordShort AGAccountPasswordShortKey
@@ -179,7 +181,19 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {
-        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:10];
+        [dict setObject:self.emailTextField.text forKey:@"email"];
+        [dict setObject:self.passwordTextField.text forKey:@"password"];
+        [dict setObject:self.sexSwitch.text forKey:@"sex"];
+        [dict setObject:self.nameTextField.text forKey:@"fullName"];
+        [dict setObject:@"" forKey:@"birthday"];
+        CLLocationCoordinate2D coordinate = self.location.coordinate;
+        [dict setObject:[NSString stringWithFormat:@"%lf", coordinate.longitude] forKey:@"longitude"];
+        [dict setObject:[NSString stringWithFormat:@"%lf", coordinate.latitude] forKey:@"latitude"];
+        [dict setObject:self.location.subArea forKey:@"city"];
+        [dict setObject:self.location.area forKey:@"province"];
+        [dict setObject:self.location.country forKey:@"country"];
+        [[AGManagerUtils managerUtils].accountManager signup:dict];
     }
 }
 

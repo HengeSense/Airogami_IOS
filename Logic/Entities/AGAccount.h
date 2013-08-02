@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AGAccountStat.h"
+
+@class AGAccountStat;
 
 @interface AGAccount : NSObject
     

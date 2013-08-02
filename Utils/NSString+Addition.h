@@ -11,4 +11,5 @@
 @interface NSString (Addition)
 -(BOOL) isValidEmail;
 - (BOOL)isNumeric;
+- (NSString*) encodeURIComponent;
 @end

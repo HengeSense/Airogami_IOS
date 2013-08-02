@@ -7,6 +7,9 @@
 //
 
 const int AGApplicationVersion = 1;
+NSString* AGWebServerUrl = @"http://192.168.0.7:8080/";
+NSString* AGDataServerUrl = @"";
+
 const int AGAccountDescriptionMaxLength = 250;
 const int AGAccountNameMaxLength = 100;
 const int AGAccountScreenNameMaxLength = 100;
@@ -24,3 +27,5 @@ NSString * AGAccountLocationEmptyKey = @"error.account.location.empty";
 NSString * AGAccountEmailInvalidKey = @"error.account.email.invalid";
 NSString * AGAccountCurrentPasswordShortKey = @"error.account.currentpassword.short";
 NSString * AGAccountNewPasswordShortKey = @"error.account.newpassword.short";
+//logic
+NSString * AGLogicJSONStatusKey = @"status";

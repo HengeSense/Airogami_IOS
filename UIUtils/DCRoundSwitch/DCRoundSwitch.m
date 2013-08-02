@@ -459,4 +459,16 @@
 	}
 }
 
+- (NSString*) text
+{
+    int num;
+    if (self.on) {
+        num = 1;
+    }
+    else{
+        num = 2;
+    }
+    return [NSString stringWithFormat:@"%d",num];
+}
+
 @end

@@ -16,12 +16,18 @@
 "error.account.newpassword.short" = "The new password is too short";
 //signup
 "error.signup.location.choose.invalid" = "Please specify your city";
+"message.signup.succeed" = "Sign up successfully";
+"message.signup.duplicate" = "The email has been taken by others";
 //signin
 "error.signin.account.invalid" = "Account and password don't match";
 //google auto complete
 "error.googleplacesautocomplete.fetch" = "Could not fetch Places";
 "error.googleplacesautocomplete.map" = "Could not map selected Place";
 "text.googleplacesautocomplete.search" = "Search your city";
+//network
+"error.network.connection" = "Network connect failed";
+//server
+"message.server.unkown" = "Server busy, please try again!";
 //main tabbar
 "main.tabbar.title_0" = "Compose";
 "main.tabbar.title_1" = "Pickup";

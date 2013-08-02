@@ -29,4 +29,15 @@
     }
     return YES;
 }
+
+- (NSString*) encodeURIComponent
+{
+    CFStringRef encodedString = CFURLCreateStringByAddingPercentEscapes(
+                                                                        kCFAllocatorDefault,
+                                                                        (__bridge CFStringRef)(self),
+                                                                        NULL,
+                                                                        CFSTR(":/?#[]@!$&'()*+,;="),
+                                                                        kCFStringEncodingUTF8);
+    return (__bridge NSString *)(encodedString);
+}
 @end

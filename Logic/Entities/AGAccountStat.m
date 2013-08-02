@@ -7,6 +7,7 @@
 //
 
 #import "AGAccountStat.h"
+#import "AGAccount.h"
 
 @implementation AGAccountStat
 

@@ -48,7 +48,7 @@ enum{
 
 - (void) initialize
 {
-    rootNavigateTo = AGRootToMain;
+    rootNavigateTo = AGRootToSign;
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self prepareForSign];

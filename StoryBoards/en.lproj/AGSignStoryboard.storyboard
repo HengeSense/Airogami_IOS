@@ -400,7 +400,7 @@
                                             <outlet property="delegate" destination="nDW-ha-NZ3" id="iWt-0z-suI"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Screen Name" minimumFontSize="17" id="pzF-Bd-Zlk">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Display" placeholder="Display Name" minimumFontSize="17" id="pzF-Bd-Zlk">
                                         <rect key="frame" x="123" y="52" width="164" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -413,7 +413,7 @@
                                             <outlet property="delegate" destination="nDW-ha-NZ3" id="kOa-ZX-and"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="bgd-zB-zVQ">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" placeholder="Password" minimumFontSize="17" id="bgd-zB-zVQ">
                                         <rect key="frame" x="123" y="96" width="164" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -426,7 +426,7 @@
                                             <outlet property="delegate" destination="nDW-ha-NZ3" id="mt8-V9-Exh"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" id="xqb-jp-KYw">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="airogami@gmail.com" placeholder="Email Address" minimumFontSize="17" id="xqb-jp-KYw">
                                         <rect key="frame" x="52" y="249" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -556,7 +556,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2lw-FT-Ptt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="503" y="27"/>
+            <point key="canvasLocation" x="519" y="29"/>
         </scene>
     </scenes>
     <resources>
@@ -577,6 +577,67 @@
         <image name="signup_profile_image.png" width="16" height="16"/>
         <image name="signup_profile_normal.png" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="AGImageButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
+        </class>
+        <class className="AGResetPasswordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResetPasswordViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="resetPasswordImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="AGResignButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>
+        </class>
+        <class className="AGSexSwitch" superclassName="DCRoundSwitch">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSexSwitch.h"/>
+        </class>
+        <class className="AGSignViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="signupButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGSigninViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSigninViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AGSignupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descriptionTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="locationButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordCheckImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="profileImageButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="rightButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="sexSwitch" candidateClass="DCRoundSwitch"/>
+            </relationships>
+        </class>
+        <class className="DCRoundSwitch" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -2552,11 +2552,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "394828592.643222"
+         timestampString = "397098286.281087"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "22"
-         endingLineNumber = "22">
+         startingLineNumber = "24"
+         endingLineNumber = "24">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2621,6 +2621,32 @@
          startingLineNumber = "76"
          endingLineNumber = "76"
          landmarkName = "-setBadge:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Network/AGJSONHttpHandler.m"
+         timestampString = "397099359.527371"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "54"
+         endingLineNumber = "54"
+         landmarkName = "-start:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Network/AGURLConnection.m"
+         timestampString = "397099466.229848"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
+         landmarkName = "-setValue:forUndefinedKey:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -109,7 +109,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static float padding = 10;
-    if (indexPath.row == 4) {
+    if (indexPath.row == 3) {
         CGRect frame = self.descriptionTextView.frame;
         aidedTextView.text = self.descriptionTextView.text;
         frame.size.height = aidedTextView.contentSize.height;

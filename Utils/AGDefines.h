@@ -26,6 +26,9 @@ typedef enum{
 } AGCollectType;
 
 extern const int AGApplicationVersion;
+extern NSString* AGWebServerUrl;
+extern NSString* AGDataServerUrl;
+
 extern const int AGAccountDescriptionMaxLength;
 extern const int AGAccountNameMaxLength;
 extern const int AGAccountAgeMaxLength;
@@ -36,7 +39,7 @@ extern const int AGAccountPasswordMaxLength;
 extern const int AGAccountPasswordMinLength;
 
 
-extern  NSString *AGAccountNameShortKey;
+extern  NSString * AGAccountNameShortKey;
 extern  NSString * AGAccountPasswordShortKey;
 extern  NSString * AGAccountPasswordNoMatchKey;
 extern  NSString * AGAccountCurrentPasswordShortKey;
@@ -44,6 +47,8 @@ extern  NSString * AGAccountNewPasswordShortKey;
 extern  NSString * AGAccountLocationEmptyKey;
 extern  NSString * AGAccountEmailInvalidKey;
 extern  NSString * AGAccountScreenNameShortKey;
+
+extern  NSString * AGLogicJSONStatusKey;
 
 
 #endif
