@@ -10,6 +10,8 @@
 
 @interface AGAccountManager : NSObject
 
-- (void) signup:(NSMutableDictionary*) params;
+- (void) signup:(NSMutableDictionary*) params image:(UIImage*)image;
+
+- (void) signin:(NSMutableDictionary*) params isEmail:(BOOL)isEmail;
 
 @end

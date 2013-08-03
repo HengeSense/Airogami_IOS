@@ -6,13 +6,14 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-const int AGApplicationVersion = 1;
+NSString* AGApplicationVersion = @"1.0";
 NSString* AGWebServerUrl = @"http://192.168.0.7:8080/";
 NSString* AGDataServerUrl = @"";
 
+const CGSize AGAccountIconSize = {256, 256};
 const int AGAccountDescriptionMaxLength = 250;
-const int AGAccountNameMaxLength = 100;
-const int AGAccountScreenNameMaxLength = 100;
+const int AGAccountNameMaxLength = 35;
+const int AGAccountScreenNameMaxLength = 35;
 const int AGAccountScreenNameMinLength = 2;
 const int AGAccountAgeMaxLength = 2;
 const int AGAccountEmailMaxLength = 255;
@@ -25,7 +26,9 @@ NSString * AGAccountPasswordShortKey = @"error.account.password.short";
 NSString * AGAccountPasswordNoMatchKey = @"error.account.password.nomatch";
 NSString * AGAccountLocationEmptyKey = @"error.account.location.empty";
 NSString * AGAccountEmailInvalidKey = @"error.account.email.invalid";
+NSString * AGAccountIconRequireKey = @"error.account.icon.require";
 NSString * AGAccountCurrentPasswordShortKey = @"error.account.currentpassword.short";
 NSString * AGAccountNewPasswordShortKey = @"error.account.newpassword.short";
 //logic
 NSString * AGLogicJSONStatusKey = @"status";
+NSString * AGLogicJSONResultKey = @"result";

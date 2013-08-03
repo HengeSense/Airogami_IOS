@@ -11,6 +11,7 @@
 "error.account.password.short" = "Password is too short";
 "error.account.location.empty" = "Please choose your location";
 "error.account.email.invalid" = "Please input a valid email";
+"error.account.icon.require" = "Please choose an image";
 "error.account.password.nomatch" = "Two new passwords don't match";
 "error.account.currentpassword.short" = "The current password is too short";
 "error.account.newpassword.short" = "The new password is too short";
@@ -19,7 +20,9 @@
 "message.signup.succeed" = "Sign up successfully";
 "message.signup.duplicate" = "The email has been taken by others";
 //signin
-"error.signin.account.invalid" = "Account and password don't match";
+"error.signin.email.invalid" = "Email or screen name is invalid";
+"error.signin.password.invalid" = "The password is invalid";
+"message.signin.notmatch" = "Invalid name or password";
 //google auto complete
 "error.googleplacesautocomplete.fetch" = "Could not fetch Places";
 "error.googleplacesautocomplete.map" = "Could not map selected Place";

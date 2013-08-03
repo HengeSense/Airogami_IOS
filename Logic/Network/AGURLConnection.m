@@ -21,7 +21,7 @@
 -(void) setValue:(id)value forUndefinedKey:(NSString *)key
 {
     if (dict == nil) {
-        dict = [NSMutableDictionary dictionaryWithCapacity:2];
+        dict = [NSMutableDictionary dictionaryWithCapacity:5];
     }
     [dict setObject:value forKey:key];
 }

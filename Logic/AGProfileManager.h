@@ -1,5 +1,5 @@
 //
-//  AGAccount.h
+//  AGProfileManager.h
 //  Airogami
 //
 //  Created by Tianhu Yang on 8/2/13.
@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AGAccount : NSObject
+@interface AGProfileManager : NSObject
 
-@property(nonatomic, strong) NSNumber *accountId;
-@property(nonatomic, strong) NSNumber *updateCount;
+- (void) uploadIcon:(NSMutableDictionary*)params image:(UIImage*)image;
 
 @end

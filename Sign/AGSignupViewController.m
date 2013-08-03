@@ -19,12 +19,14 @@
 #import "AGUIDefines.h"
 #import "AGRootViewController.h"
 #import "AGManagerUtils.h"
+#import "UIImage+Addition.h"
 #import <CoreLocation/CoreLocation.h>
 
 #define kAGSignupInputScreenNameShort AGAccountScreenNameShortKey
 #define kAGSignupInputPasswordShort AGAccountPasswordShortKey
 #define kAGSignupInputLocationEmpty AGAccountLocationEmptyKey
 #define kAGSignupInputEmailInvalid AGAccountEmailInvalidKey
+#define kAGSignupInputIconRequire AGAccountIconRequireKey
 #define kAGSignupInputTag_Name 1
 #define kAGSignupInputTag_Password 2
 #define kAGSignupInputTag_Email 3
@@ -181,6 +183,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {
+        [self.view endEditing:YES];
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:10];
         [dict setObject:self.emailTextField.text forKey:@"email"];
         [dict setObject:self.passwordTextField.text forKey:@"password"];
@@ -193,7 +196,8 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         [dict setObject:self.location.subArea forKey:@"city"];
         [dict setObject:self.location.area forKey:@"province"];
         [dict setObject:self.location.country forKey:@"country"];
-        [[AGManagerUtils managerUtils].accountManager signup:dict];
+        [dict setObject:self.descriptionTextField.text forKey:@"shout"];
+        [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal]];
     }
 }
 
@@ -329,6 +333,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 - (void) imagePickAndCrop:(AGImagePickAndCrop *)pickAndCrop didFinishingWithImage:(UIImage *)image
 {
+    image = [image imageWithSize:AGAccountIconSize];
     [self.profileImageButton setImage:image forState:UIControlStateNormal];
     [self.profileImageButton setImage:nil forState:UIControlStateHighlighted];
     self.imagePickAndCrop = nil;
@@ -348,6 +353,9 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     }
     else if ([self.emailTextField.text isValidEmail] == NO ){
         error = kAGSignupInputEmailInvalid;
+    }
+    else if ([self.profileImageButton imageForState:UIControlStateNormal] == nil ){
+        error = kAGSignupInputIconRequire;
     }
     if (error != nil) {
         [AGUIUtils errorMessgeWithTitle:error view:self.view];

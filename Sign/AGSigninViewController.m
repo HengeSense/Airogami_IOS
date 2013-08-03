@@ -9,14 +9,20 @@
 
 #import "AGSigninViewController.h"
 #import "AGUIUtils.h"
+#import "AGDefines.h"
 #import "AGUIDefines.h"
+#import "AGManagerUtils.h"
+#import "NSString+Addition.h"
 
-#define kAGSigninAccountInvalid @"error.signin.account.invalid"
-#define kAGSignupInputTag_Name 1
-#define kAGSignupInputTag_Password 2
+#define kAGSigninScreenNameInvalid @"error.signin.email.invalid"
+#define kAGSigninPasswordInvalid @"error.signin.password.invalid"
+#define kAGSigninInputTag_Name 1
+#define kAGSigninInputTag_Password 2
 
-#define kAGSignupInputMaxLength_Name 30
-#define kAGSignupInputMaxLength_Password 15
+#define kAGSigninInputMaxLength_ScreenName AGAccountScreenNameMaxLength
+#define kAGSigninInputMaxLength_Email AGAccountEmailMaxLength
+#define kAGSigninInputMinLength_Password AGAccountPasswordMinLength
+#define kAGSigninInputMaxLength_Password AGAccountPasswordMaxLength
 
 static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png", @"signin_account_name.png", @"signin_account_password.png"};
 
@@ -74,7 +80,18 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if([self validate]){
+        [self.view endEditing:YES];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:10];
+        BOOL isEmail = [self.nameTextField.text isValidEmail];
+        if (isEmail) {
+            [dict setObject:self.nameTextField.text forKey:@"email"];
+        }
+        else{
+            [dict setObject:self.nameTextField.text forKey:@"screenName"];
+        }
         
+        [dict setObject:self.passwordTextField.text forKey:@"password"];
+        [[AGManagerUtils managerUtils].accountManager signin:dict isEmail:isEmail];
     }
 }
 
@@ -122,11 +139,11 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     BOOL should = YES;
     switch (textField.tag) {
-        case kAGSignupInputTag_Name:
-            should = newLength <= kAGSignupInputMaxLength_Name;
+        case kAGSigninInputTag_Name:
+            should = newLength <= kAGSigninInputMaxLength_Email;
             break;
-        case kAGSignupInputTag_Password:
-            should = newLength <= kAGSignupInputMaxLength_Password;
+        case kAGSigninInputTag_Password:
+            should = newLength <= kAGSigninInputMaxLength_Password;
             break;
             
         default:
@@ -139,11 +156,14 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
 -(BOOL) validate
 {
     NSString *error = nil;
-    if (self.nameTextField.text.length < 2) {
-        error = kAGSigninAccountInvalid;
+    if ([self.nameTextField.text isValidEmail] == NO) {
+        if (self.nameTextField.text.length > kAGSigninInputMaxLength_ScreenName) {
+            error = kAGSigninScreenNameInvalid;
+        }
+        
     }
-    else if(self.passwordTextField.text.length < 6){
-        error = kAGSigninAccountInvalid;
+    if(error == nil && self.passwordTextField.text.length < kAGSigninInputMinLength_Password){
+        error = kAGSigninPasswordInvalid;
     }
 
     if (error != nil) {

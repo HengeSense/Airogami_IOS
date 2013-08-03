@@ -25,10 +25,11 @@ typedef enum{
     AGCollectTypePickuped
 } AGCollectType;
 
-extern const int AGApplicationVersion;
+extern NSString* AGApplicationVersion;
 extern NSString* AGWebServerUrl;
 extern NSString* AGDataServerUrl;
 
+extern const CGSize AGAccountIconSize;
 extern const int AGAccountDescriptionMaxLength;
 extern const int AGAccountNameMaxLength;
 extern const int AGAccountAgeMaxLength;
@@ -47,8 +48,10 @@ extern  NSString * AGAccountNewPasswordShortKey;
 extern  NSString * AGAccountLocationEmptyKey;
 extern  NSString * AGAccountEmailInvalidKey;
 extern  NSString * AGAccountScreenNameShortKey;
+extern  NSString * AGAccountIconRequireKey ;
 
 extern  NSString * AGLogicJSONStatusKey;
+extern  NSString * AGLogicJSONResultKey;
 
 
 #endif

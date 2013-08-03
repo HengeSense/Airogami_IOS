@@ -46,11 +46,18 @@
 }
 
 
-- (AGURLConnection*) start:(NSString*)path block:(AGHttpJSONHandlerFinishBlock)block
+- (AGURLConnection*) start:(NSString*)path  context:(id)context block:(AGHttpJSONHandlerFinishBlock)block
 {
+    static NSNumber *number;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGWebServerUrl, path]];
-    request.URL = url;
-    AGURLConnection *conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
+    AGURLConnection *conn;
+    @synchronized(number){
+        request.URL = url;
+        conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
+    }
+    if (context) {
+        [conn setValue:context forKey:@"Context"];
+    }
     [conn setValue:block forKey:@"ResultBlock"];
     return conn;
 }
@@ -101,7 +108,8 @@
     [details setValue:desc forKey:NSLocalizedDescriptionKey];
     //NSError *error = [[NSError alloc] initWithDomain:@"Network" code:-1 userInfo:details];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
-    block(nil, nil);
+    id context = [connection valueForKey:@"Context"];
+    block(nil,context, nil);
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -118,7 +126,8 @@
     // inform the user
     NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
-    block(error, nil);
+    id context = [connection valueForKey:@"Context"];
+    block(error,context, nil);
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
@@ -128,17 +137,10 @@
     NSMutableData *data = [connection valueForKey:@"ReceivedData"];
     NSLog(@"Succeeded! Received %d bytes of data",[data length]);
     NSMutableDictionary *dict = nil;
-    @try {
-        dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    }
-    @catch (NSException * e) {
-        NSLog(@"Exception: %@", e);
-    }
-    @finally {
-        // Added to show finally works as well
-    }
+    dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
-    block(nil, dict);
+    id context = [connection valueForKey:@"Context"];
+    block(nil,context, dict);
     
 }
 

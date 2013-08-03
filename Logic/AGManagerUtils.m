@@ -11,11 +11,13 @@
 @implementation AGManagerUtils
 
 @synthesize accountManager;
+@synthesize profileManager;
 
 -(id) init
 {
     if (self = [super init]) {
         accountManager = [[AGAccountManager alloc] init];
+        profileManager = [[AGProfileManager alloc] init];
     }
     return self;
 }

@@ -110,4 +110,31 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
     [button setTitle:vc.title forState:UIControlStateNormal];
 }
 
++(void) startWait:(BOOL)start
+{
+    static NSNumber *number;
+    static UIActivityIndicatorView *activityView;
+    @synchronized(number){
+        if (start) {
+            [activityView stopAnimating];
+            [activityView.superview removeFromSuperview];
+            //
+            UIWindow *window = [[UIApplication sharedApplication].delegate window];
+            UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            view.backgroundColor = [UIColor colorWithWhite:0 alpha:.8];
+            activityView=[[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            [view addSubview:activityView];
+            [window addSubview:view];
+            activityView.center = activityView.superview.center;
+            [activityView startAnimating];
+        }
+        else{
+            [activityView stopAnimating];
+            [activityView.superview removeFromSuperview];
+            activityView = nil;
+        }
+    }
+    
+}
+
 @end

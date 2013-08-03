@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^AGHttpJSONHandlerFinishBlock)(NSError* error, NSMutableDictionary* dict);
+typedef void (^AGHttpJSONHandlerFinishBlock)(NSError* error, id context, NSMutableDictionary* dict);
 
 @interface AGJSONHttpHandler : NSObject
 
 + (AGJSONHttpHandler*) handler;
 
-- (NSURLConnection*) start:(NSString*)path block:(AGHttpJSONHandlerFinishBlock)block;
+- (NSURLConnection*) start:(NSString*)path context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
 
 @end

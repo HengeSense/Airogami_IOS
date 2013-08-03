@@ -42,7 +42,7 @@
 		076E2B1317A8866900A478A3 /* fmdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B0C17A8866900A478A3 /* fmdb.m */; };
 		076E2B1417A8866900A478A3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B0E17A8866900A478A3 /* FMResultSet.m */; };
 		076E2B1617A886AF00A478A3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 076E2B1517A886AF00A478A3 /* libsqlite3.dylib */; };
-		076E2B1A17A8894D00A478A3 /* AGAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B1917A8894D00A478A3 /* AGAccount.m */; };
+		076E2B1A17A8894D00A478A3 /* AGProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B1917A8894D00A478A3 /* AGProfile.m */; };
 		076E2B1D17A88AE900A478A3 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B1C17A88AE900A478A3 /* AGAccountStat.m */; };
 		07836CCB177242FF00FCA452 /* AGWritePaperHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */; };
 		07836CCD177250A000FCA452 /* write_paper_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCC177250A000FCA452 /* write_paper_left@2x.png */; };
@@ -228,6 +228,10 @@
 		079642DE17AB0BA1007B47C8 /* AGJSONHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642DD17AB0BA1007B47C8 /* AGJSONHttpHandler.m */; };
 		079642E517AB358E007B47C8 /* AGManagerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642E417AB358E007B47C8 /* AGManagerUtils.m */; };
 		079642EC17AB3FAD007B47C8 /* AGURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642EB17AB3FAC007B47C8 /* AGURLConnection.m */; };
+		079642EF17AC2847007B47C8 /* AGAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642EE17AC2847007B47C8 /* AGAccount.m */; };
+		079642F217AC5B65007B47C8 /* AGUploadHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642F117AC5B65007B47C8 /* AGUploadHttpHandler.m */; };
+		079642F517AC7042007B47C8 /* UIImage+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642F417AC7042007B47C8 /* UIImage+Addition.m */; };
+		079642F817AC7465007B47C8 /* AGProfileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 079642F717AC7465007B47C8 /* AGProfileManager.m */; };
 		0799D0391762B22700B74722 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799D0381762B22700B74722 /* CoreLocation.framework */; };
 		0799D03B1762B24500B74722 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0799D03A1762B24500B74722 /* MapKit.framework */; };
 		079C09951788A1450067FED1 /* profile_information_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 079C09931788A1450067FED1 /* profile_information_bottom@2x.png */; };
@@ -384,8 +388,8 @@
 		076E2B0D17A8866900A478A3 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		076E2B0E17A8866900A478A3 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		076E2B1517A886AF00A478A3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		076E2B1817A8894D00A478A3 /* AGAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccount.h; sourceTree = "<group>"; };
-		076E2B1917A8894D00A478A3 /* AGAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccount.m; sourceTree = "<group>"; };
+		076E2B1817A8894D00A478A3 /* AGProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfile.h; sourceTree = "<group>"; };
+		076E2B1917A8894D00A478A3 /* AGProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfile.m; sourceTree = "<group>"; };
 		076E2B1B17A88AE900A478A3 /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
 		076E2B1C17A88AE900A478A3 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
 		07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGWritePaperHeaderView.xib; sourceTree = "<group>"; };
@@ -635,6 +639,14 @@
 		079642E417AB358E007B47C8 /* AGManagerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGManagerUtils.m; sourceTree = "<group>"; };
 		079642EA17AB3FAC007B47C8 /* AGURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGURLConnection.h; sourceTree = "<group>"; };
 		079642EB17AB3FAC007B47C8 /* AGURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGURLConnection.m; sourceTree = "<group>"; };
+		079642ED17AC2847007B47C8 /* AGAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccount.h; sourceTree = "<group>"; };
+		079642EE17AC2847007B47C8 /* AGAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccount.m; sourceTree = "<group>"; };
+		079642F017AC5B65007B47C8 /* AGUploadHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGUploadHttpHandler.h; sourceTree = "<group>"; };
+		079642F117AC5B65007B47C8 /* AGUploadHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGUploadHttpHandler.m; sourceTree = "<group>"; };
+		079642F317AC7042007B47C8 /* UIImage+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Addition.h"; sourceTree = "<group>"; };
+		079642F417AC7042007B47C8 /* UIImage+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Addition.m"; sourceTree = "<group>"; };
+		079642F617AC7465007B47C8 /* AGProfileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfileManager.h; sourceTree = "<group>"; };
+		079642F717AC7465007B47C8 /* AGProfileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileManager.m; sourceTree = "<group>"; };
 		0799D0381762B22700B74722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0799D03A1762B24500B74722 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		079C09931788A1450067FED1 /* profile_information_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_information_bottom@2x.png"; sourceTree = "<group>"; };
@@ -977,10 +989,12 @@
 		076E2B1717A888CC00A478A3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				076E2B1817A8894D00A478A3 /* AGAccount.h */,
-				076E2B1917A8894D00A478A3 /* AGAccount.m */,
+				076E2B1817A8894D00A478A3 /* AGProfile.h */,
+				076E2B1917A8894D00A478A3 /* AGProfile.m */,
 				076E2B1B17A88AE900A478A3 /* AGAccountStat.h */,
 				076E2B1C17A88AE900A478A3 /* AGAccountStat.m */,
+				079642ED17AC2847007B47C8 /* AGAccount.h */,
+				079642EE17AC2847007B47C8 /* AGAccount.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1073,6 +1087,8 @@
 				076E2B0117A8804900A478A3 /* AGAccountManager.m */,
 				079642E317AB358E007B47C8 /* AGManagerUtils.h */,
 				079642E417AB358E007B47C8 /* AGManagerUtils.m */,
+				079642F617AC7465007B47C8 /* AGProfileManager.h */,
+				079642F717AC7465007B47C8 /* AGProfileManager.m */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -1223,6 +1239,8 @@
 				078A5C73178B95B1000FB7FF /* AGPhotoView.m */,
 				078A5C74178B95B1000FB7FF /* AGProfileImageButton.h */,
 				078A5C75178B95B1000FB7FF /* AGProfileImageButton.m */,
+				079642F317AC7042007B47C8 /* UIImage+Addition.h */,
+				079642F417AC7042007B47C8 /* UIImage+Addition.m */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1358,6 +1376,8 @@
 				079642DD17AB0BA1007B47C8 /* AGJSONHttpHandler.m */,
 				079642EA17AB3FAC007B47C8 /* AGURLConnection.h */,
 				079642EB17AB3FAC007B47C8 /* AGURLConnection.m */,
+				079642F017AC5B65007B47C8 /* AGUploadHttpHandler.h */,
+				079642F117AC5B65007B47C8 /* AGUploadHttpHandler.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1925,11 +1945,15 @@
 				076E2B1217A8866900A478A3 /* FMDatabaseQueue.m in Sources */,
 				076E2B1317A8866900A478A3 /* fmdb.m in Sources */,
 				076E2B1417A8866900A478A3 /* FMResultSet.m in Sources */,
-				076E2B1A17A8894D00A478A3 /* AGAccount.m in Sources */,
+				076E2B1A17A8894D00A478A3 /* AGProfile.m in Sources */,
 				076E2B1D17A88AE900A478A3 /* AGAccountStat.m in Sources */,
 				079642DE17AB0BA1007B47C8 /* AGJSONHttpHandler.m in Sources */,
 				079642E517AB358E007B47C8 /* AGManagerUtils.m in Sources */,
 				079642EC17AB3FAD007B47C8 /* AGURLConnection.m in Sources */,
+				079642EF17AC2847007B47C8 /* AGAccount.m in Sources */,
+				079642F217AC5B65007B47C8 /* AGUploadHttpHandler.m in Sources */,
+				079642F517AC7042007B47C8 /* UIImage+Addition.m in Sources */,
+				079642F817AC7465007B47C8 /* AGProfileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

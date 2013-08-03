@@ -1,16 +1,15 @@
 //
-//  AGAccount.m
+//  UIImage+Addition.h
 //  Airogami
 //
 //  Created by Tianhu Yang on 8/2/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGAccount.h"
+#import <UIKit/UIKit.h>
 
-@implementation AGAccount
+@interface UIImage (Addition)
 
-@synthesize accountId;
-@synthesize updateCount;
+- (UIImage*)imageWithSize:(CGSize)newSize;
 
 @end

@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "AGAccountManager.h"
+#import "AGProfileManager.h"
 
 @interface AGManagerUtils : NSObject
 
 + (AGManagerUtils*) managerUtils;
 
 @property(nonatomic, strong) AGAccountManager *accountManager;
+@property(nonatomic, strong) AGProfileManager *profileManager;
 
 @end

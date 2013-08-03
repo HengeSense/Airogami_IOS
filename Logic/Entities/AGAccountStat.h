@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class AGAccount;
+@class AGProfile;
 
 @interface AGAccountStat : NSObject
 
 @property(nonatomic, strong) NSNumber *accountId;
 
-@property(nonatomic, strong) AGAccount *account;
+@property(nonatomic, strong) AGProfile *account;
 
 @property(nonatomic, strong) NSDate *lastSigninTime;
 

@@ -41,8 +41,22 @@ static CGSize kbSize;;
     if(scrollView == nil)
         return;
     NSDictionary* info = [aNotification userInfo];
-    kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    //chang loaction
+    CGSize size = scrollView.bounds.size;
+    size.height += kbSize.height;
+    scrollView.contentSize = size;
     
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = view.frame;
+    aRect.size.height -= kbSize.height;
+    CGPoint origin = activeField.frame.origin;
+    origin.y += activeField.frame.size.height;
+    if (!CGRectContainsPoint(aRect, origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, origin.y - aRect.size.height + kAGKeyboardTextFieldGap);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
     
 }
 
@@ -79,8 +93,7 @@ static CGSize kbSize;;
     scrollView = aScrollView;
     view = aView;
     activeField = anActiveField;
-    
-    //chang loaction 
+    //chang loaction
     CGSize size = scrollView.bounds.size;
     size.height += kbSize.height;
     scrollView.contentSize = size;
@@ -95,5 +108,6 @@ static CGSize kbSize;;
         CGPoint scrollPoint = CGPointMake(0.0, origin.y - aRect.size.height + kAGKeyboardTextFieldGap);
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
+    
 }
 @end
