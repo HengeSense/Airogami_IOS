@@ -11,6 +11,8 @@
 #import "AGLocationViewController.h"
 
 @interface AGRootViewController : UIViewController
++ (AGRootViewController*)rootViewController;
 + (AGSettingProfileMasterViewController*) settingViewController;
 + (AGLocationViewController*) locationViewController;
+- (void) switchToMain;
 @end

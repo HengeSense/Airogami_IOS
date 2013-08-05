@@ -13,7 +13,7 @@
 
 #define kAGSignupInputTag_Email 1
 
-#define kAGSignupInputEmailInvalid @"error.signup.email.invalid"
+#define kAGSignupInputEmailInvalid AGAccountEmailInvalidKey
 
 static NSString * const Reset_Password_Images[] = {@"reset_password_normal.png", @"reset_password_email.png"};
 

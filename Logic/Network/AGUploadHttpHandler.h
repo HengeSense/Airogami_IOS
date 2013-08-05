@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^AGHttpUploadHandlerFinishBlock)(NSError* error);
+typedef void (^AGHttpUploadHandlerFinishBlock)(NSError* error, id context);
 
 @class AGURLConnection;
 
@@ -16,6 +16,6 @@ typedef void (^AGHttpUploadHandlerFinishBlock)(NSError* error);
 
 + (AGUploadHttpHandler*) handler;
 
-- (AGURLConnection*) uploadImage:(NSString*)path params:(NSMutableDictionary*)params image:(UIImage*)image block:(AGHttpUploadHandlerFinishBlock)block;
+- (AGURLConnection*) uploadImage:(UIImage*)image params:(NSMutableDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block;
 
 @end

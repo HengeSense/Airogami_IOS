@@ -13,6 +13,7 @@
 #import "AGUIDefines.h"
 #import "AGManagerUtils.h"
 #import "NSString+Addition.h"
+#import "AGRootViewController.h"
 
 #define kAGSigninScreenNameInvalid @"error.signin.email.invalid"
 #define kAGSigninPasswordInvalid @"error.signin.password.invalid"
@@ -91,7 +92,9 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
         }
         
         [dict setObject:self.passwordTextField.text forKey:@"password"];
-        [[AGManagerUtils managerUtils].accountManager signin:dict isEmail:isEmail];
+        [[AGManagerUtils managerUtils].accountManager signin:dict isEmail:isEmail block:^() {
+            [[AGRootViewController rootViewController] switchToMain];
+        }];
     }
 }
 

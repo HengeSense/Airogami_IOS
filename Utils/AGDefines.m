@@ -8,9 +8,10 @@
 
 NSString* AGApplicationVersion = @"1.0";
 NSString* AGWebServerUrl = @"http://192.168.0.7:8080/";
-NSString* AGDataServerUrl = @"";
+NSString* AGDataServerUrl = @"https://airogami-user-bucket.s3-us-west-2.amazonaws.com/";
 
-const CGSize AGAccountIconSize = {256, 256};
+const CGSize AGAccountIconSizeMedium = {256, 256};
+const CGSize AGAccountIconSizeSmall = {64, 64};
 const int AGAccountDescriptionMaxLength = 250;
 const int AGAccountNameMaxLength = 35;
 const int AGAccountScreenNameMaxLength = 35;

@@ -20,6 +20,7 @@
 #import "AGRootViewController.h"
 #import "AGManagerUtils.h"
 #import "UIImage+Addition.h"
+#import "AGRootViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
 #define kAGSignupInputScreenNameShort AGAccountScreenNameShortKey
@@ -197,7 +198,9 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         [dict setObject:self.location.area forKey:@"province"];
         [dict setObject:self.location.country forKey:@"country"];
         [dict setObject:self.descriptionTextField.text forKey:@"shout"];
-        [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal]];
+        [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal] block:^() {
+            [[AGRootViewController rootViewController] switchToMain];
+        }];
     }
 }
 
@@ -333,7 +336,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 - (void) imagePickAndCrop:(AGImagePickAndCrop *)pickAndCrop didFinishingWithImage:(UIImage *)image
 {
-    image = [image imageWithSize:AGAccountIconSize];
+    image = [image imageWithSize:AGAccountIconSizeMedium];
     [self.profileImageButton setImage:image forState:UIControlStateNormal];
     [self.profileImageButton setImage:nil forState:UIControlStateHighlighted];
     self.imagePickAndCrop = nil;

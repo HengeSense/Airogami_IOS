@@ -29,7 +29,8 @@ extern NSString* AGApplicationVersion;
 extern NSString* AGWebServerUrl;
 extern NSString* AGDataServerUrl;
 
-extern const CGSize AGAccountIconSize;
+extern const CGSize AGAccountIconSizeMedium;
+extern const CGSize AGAccountIconSizeSmall;
 extern const int AGAccountDescriptionMaxLength;
 extern const int AGAccountNameMaxLength;
 extern const int AGAccountAgeMaxLength;

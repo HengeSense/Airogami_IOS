@@ -9,7 +9,9 @@
 #import "AGAccountManager.h"
 #import "AGJSONHttpHandler.h"
 #import "NSString+Addition.h"
+#import "AGWaitUtils.h"
 #import "AGUIUtils.h"
+#import "AGWaitUtils.h"
 #import "AGDefines.h"
 #import "AGManagerUtils.h"
 
@@ -19,7 +21,7 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 
 @implementation AGAccountManager
 
-- (void) signup:(NSMutableDictionary*) params image:(UIImage *)image
+- (void) signup:(NSMutableDictionary*) params image:(UIImage *)image block:(AGAccountSignDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:1024];
     [path appendString:SignupPath];
@@ -31,13 +33,13 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
         [path appendString:@"&"];
      
     }];
-   // [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
-   // [path appendString:AGApplicationVersion];
+    [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
+    [path appendString:AGApplicationVersion];
     
-    [AGUIUtils startWait:YES];
+    [AGWaitUtils startWait:@""];
     
     [[AGJSONHttpHandler handler] start:path context:image block:^(NSError *error,id context, NSMutableDictionary *dict) {
-        [AGUIUtils startWait:NO];
+        BOOL stop = YES;
         if (error) {
             [AGUIUtils alertMessageWithTitle:NSLocalizedString(@"error.network.connection", @"error.network.connection") error:error];
         }
@@ -53,10 +55,21 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
                         [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.duplicate", @"msesage.signup.duplicate")];
                     }
                     else{
+                        //succeed
+                        stop = NO;
+                        [AGWaitUtils startWait:NSLocalizedString(@"message.account.signup.uploadingicons", @"message.account.operate.uploadingicons")];
+                        NSMutableDictionary *account = [result objectForKey:@"account"];
                         
-                        [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.succeed", @"msesage.signup.succeed")];
-                        NSLog(@"%@",NSStringFromClass(result.class) );
-                        [[AGManagerUtils managerUtils].profileManager uploadIcon:[result objectForKey:AGLogicJSONResultKey] image:context];
+                        result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                        NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
+                        
+                        [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
+                            [AGWaitUtils startWait:nil];
+                            if (block) {
+                                block(nil);
+                            }
+                        }];
+                        
                     }
                     
                 }
@@ -66,10 +79,15 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
             }
         
         }
+        if (stop) {
+            [AGWaitUtils startWait:nil];
+        }
+        
+     
     }];
 }
 
-- (void) signin:(NSMutableDictionary*) params isEmail:(BOOL)isEmail
+- (void) signin:(NSMutableDictionary*) params isEmail:(BOOL)isEmail block:(AGAccountSignDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:128];
     if (isEmail) {
@@ -90,10 +108,10 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
     [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
     [path appendString:AGApplicationVersion];
     
-    [AGUIUtils startWait:YES];
+    [AGWaitUtils startWait:@""];
     
     [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
-        [AGUIUtils startWait:NO];
+        [AGWaitUtils startWait:nil];
         if (error) {
             [AGUIUtils alertMessageWithTitle:NSLocalizedString(@"error.network.connection", @"error.network.connection") error:error];
         }
@@ -111,6 +129,9 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
                     }
                     else{
                         //succeed
+                        if (block) {
+                            block();
+                        }
                     }
                 }
                 else{
@@ -121,6 +142,7 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
             
             
         }
+        
     }];
 }
 

@@ -8,13 +8,9 @@
 
 #import "AGUploadHttpHandler.h"
 #import "AGURLConnection.h"
+#import "AGDefines.h"
 
 static int AGUploadHttpHandlerDefaultCapacity = 1024;
-
-// the boundary string : a random string, that will not repeat in post data, to separate post data fields.
-static NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
-//static NSString *boundary = @"--s----------V2ymHFg03ehbqgZCaKO6jy";//"--" + BoundaryConstant
-
 
 @interface AGUploadHttpHandler()
 
@@ -37,45 +33,71 @@ static NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
     return sSharedInstance;
 }
 
+- (NSString *)generateBoundaryString
+{
+    CFUUIDRef       uuid;
+    CFStringRef     uuidStr;
+    NSString *      result;
+    
+    uuid = CFUUIDCreate(NULL);
+    assert(uuid != NULL);
+    
+    uuidStr = CFUUIDCreateString(NULL, uuid);
+    assert(uuidStr != NULL);
+    
+    result = [NSString stringWithFormat:@"Boundary-%@", uuidStr];
+    
+    CFRelease(uuidStr);
+    CFRelease(uuid);
+    
+    return result;
+}
+
 -(id)init
 {
     if (self = [super init]) {
         request = [[NSMutableURLRequest alloc] init];
         request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
         [request setHTTPMethod:@"POST"];
-        // set Content-Type in HTTP header
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
-        [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+        
     }
     return self;
 }
 
-- (AGURLConnection*) uploadImage:(NSString*)path params:(NSMutableDictionary*)params image:(UIImage*)image block:(AGHttpUploadHandlerFinishBlock)block
+- (AGURLConnection*) uploadImage:(UIImage*)image  params:(NSMutableDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block
 {
     static NSNumber *number;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGDataServerUrl, path]];
-    
-    NSData *body = [self prepare:params fileParam:@"file" fileType:@"Content-Type: image/jpeg" data:UIImageJPEGRepresentation(image, 1.0)];
+    NSURL *url = [NSURL URLWithString:AGDataServerUrl];
+    NSString *BoundaryConstant = [self generateBoundaryString];
+    NSData *body = [self prepare:params  boundary:BoundaryConstant fileParam:@"file" fileType:@"Content-Type: image/jpeg" data:UIImageJPEGRepresentation(image, 1.0)];
     // set the content-length
     NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
+    
+    // set Content-Type in HTTP header
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
     AGURLConnection *conn;
     @synchronized(number){
         request.URL = url;
-        // setting the body of the post to the request
+        [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
         [request setHTTPBody:body];
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
     }
+    if (block) {
+        [conn setValue:block forKey:@"ResultBlock"];
+    }
+    if (context) {
+         [conn setValue:context forKey:@"Context"];
+    }
     
-    [conn setValue:block forKey:@"ResultBlock"];
     return conn;
 }
 
-- (NSData*) prepare:(NSDictionary*)params fileParam:(NSString*)fileParam fileType:(NSString*)fileType data:(NSData*)data
+- (NSData*) prepare:(NSDictionary*)params boundary:(NSString*)BoundaryConstant fileParam:(NSString*)fileParam fileType:(NSString*)fileType data:(NSData*)data
 {
     // post body
     NSMutableData *body = [NSMutableData dataWithCapacity:1024 * 256];
-    
+    [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]]; 
     // add params (all params are strings)
     for (NSString *param in params) {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -93,7 +115,7 @@ static NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
         [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
     
     return body;
 }
@@ -120,9 +142,7 @@ static NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
         contentTypeHeader = [httpResponse MIMEType];
         if (contentTypeHeader == nil) {
             [self stopConnection:connection description:@"No Content-Type!"];
-        } else if ( ! [contentTypeHeader isEqual:@"application/json"]) {
-            [self stopConnection:connection description:[NSString stringWithFormat:@"Unsupported Content-Type (%@)", contentTypeHeader]];
-        }else{
+        } else{
             NSNumber *number = [httpResponse.allHeaderFields objectForKey:@"Content-Length"];
             int length = 0;
             if (number) {
@@ -144,7 +164,12 @@ static NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
     [details setValue:desc forKey:NSLocalizedDescriptionKey];
     NSError *error = [[NSError alloc] initWithDomain:@"Server Error" code:-1 userInfo:details];
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
-    block(error);
+    //NSLog(@"%@", desc);
+    id context = [connection valueForKey:@"Context"];
+    if(block){
+        block(error, context);
+    }
+       
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -159,21 +184,25 @@ static NSString *BoundaryConstant = @"----------V2ymHFg03ehbqgZCaKO6jy";
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    //NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
-    block(error);
+    id context = [connection valueForKey:@"Context"];
+    if(block){
+        block(error, context);
+    }
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
 {
     // do something with the data
     // data is declared as a method instance elsewhere
-    NSMutableData *data = [connection valueForKey:@"ReceivedData"];
-    NSLog(@"Succeeded! Received %d bytes of data: %@",[data length], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    NSMutableDictionary *dict = nil;
-    dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    //NSLog(@"Succeeded! Received %d bytes of data: %@",[data length], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
-    block(nil);
+    id context = [connection valueForKey:@"Context"];
+    if(block){
+        block(nil, context);
+    }
     
 }
 

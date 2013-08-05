@@ -1,37 +1,32 @@
 //
-//  AGHttpHandler.m
+//  AGDownloadHttpHandler.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/1/13.
+//  Created by Tianhu Yang on 8/4/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGJSONHttpHandler.h"
-#import "AGDefines.h"
-#import "AGURLConnection.h"
+#import "AGDownloadHttpHandler.h"
 
-#define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
+static const int AGDownloadDefaultCapacity = 1024 * 256;
 
-@interface AGJSONHttpHandler()<NSURLConnectionDelegate>
-{
-   
-}
+@interface AGDownloadHttpHandler()<NSURLConnectionDelegate>
 
 @property(nonatomic, strong) NSMutableURLRequest *request;
 
 @end
 
-@implementation AGJSONHttpHandler
+@implementation AGDownloadHttpHandler
 
 @synthesize request;
 
-+ (AGJSONHttpHandler*) handler
++ (AGDownloadHttpHandler*) handler
 {
     static dispatch_once_t  onceToken;
-    static AGJSONHttpHandler * sSharedInstance;
+    static AGDownloadHttpHandler * sSharedInstance;
     
     dispatch_once(&onceToken, ^{
-        sSharedInstance = [[AGJSONHttpHandler alloc] init];
+        sSharedInstance = [[AGDownloadHttpHandler alloc] init];
     });
     return sSharedInstance;
 }
@@ -45,11 +40,11 @@
     return self;
 }
 
-
-- (AGURLConnection*) start:(NSString*)path  context:(id)context block:(AGHttpJSONHandlerFinishBlock)block
+- (NSURLConnection*) start:(NSString*)path context:(id)context block:(AGDownloadHttpHandlerFinishBlock)block
 {
+    
     static NSNumber *number;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGWebServerUrl, path]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGDataServerUrl, path]];
     AGURLConnection *conn;
     @synchronized(number){
         request.URL = url;
@@ -61,6 +56,7 @@
     if (block) {
         [conn setValue:block forKey:@"ResultBlock"];
     }
+    
     return conn;
 }
 
@@ -86,16 +82,14 @@
         contentTypeHeader = [httpResponse MIMEType];
         if (contentTypeHeader == nil) {
             [self stopConnection:connection description:@"No Content-Type!"];
-        } else if ( ! [contentTypeHeader isEqual:@"application/json"]) {
-            [self stopConnection:connection description:[NSString stringWithFormat:@"Unsupported Content-Type (%@)", contentTypeHeader]];
-        }else{
+        } else{
             NSNumber *number = [httpResponse.allHeaderFields objectForKey:@"Content-Length"];
             int length = 0;
             if (number) {
                 length = [number intValue];
             }
             else{
-                length = AGJSONHttpHandlerDefaultCapacity;
+                length = AGDownloadDefaultCapacity;
             }
             NSMutableData *data = [[NSMutableData alloc] initWithCapacity:length];
             [connection setValue:data forKey:@"ReceivedData"];
@@ -109,11 +103,12 @@
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
     [details setValue:desc forKey:NSLocalizedDescriptionKey];
     //NSError *error = [[NSError alloc] initWithDomain:@"Network" code:-1 userInfo:details];
-    AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
+    AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
-    if(block){
-        block(nil,context, nil);
+    if (block) {
+        block(nil, nil, context);
     }
+    
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -128,11 +123,11 @@
   didFailWithError:(NSError *)error
 {
     // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
+    //NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {
-        block(error,context, nil);
+        block(error,nil, context);
     }
     
 }
@@ -140,18 +135,13 @@
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
 {
     // do something with the data
-    // data is declared as a method instance elsewhere
     NSMutableData *data = [connection valueForKey:@"ReceivedData"];
     //NSLog(@"Succeeded! Received %d bytes of data",[data length]);
-    NSMutableDictionary *dict = nil;
-    dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
+    AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {
-         block(nil,context, dict);
+        block(nil, data, context);
     }
-
 }
 
 @end

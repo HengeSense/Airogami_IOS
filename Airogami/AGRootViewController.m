@@ -11,6 +11,7 @@
 static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
 static UIStoryboard *commonStoryBoard;
+static AGRootViewController *rootViewController;
 
 enum{
     AGRootToSign,
@@ -28,6 +29,11 @@ enum{
 @end
 
 @implementation AGRootViewController
+
++ (AGRootViewController*)rootViewController
+{
+    return rootViewController;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,7 +54,7 @@ enum{
 
 - (void) initialize
 {
-    rootNavigateTo = AGRootToSign;
+    /*rootNavigateTo = AGRootToSign;
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self prepareForSign];
@@ -58,7 +64,10 @@ enum{
             break;
         default:
             break;
-    }
+    }*/
+    rootViewController = self;
+    [self prepareForMain];
+    [self prepareForSign];
 }
 
 - (void)viewDidLoad
@@ -105,9 +114,9 @@ enum{
     viewController = [storyBaord instantiateInitialViewController];
 }
 
+
 - (void) prepareForMain
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i < 3; ++i) {
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:stories[i] bundle:nil];
@@ -117,15 +126,27 @@ enum{
     viewControllers = array;
 }
 
+- (void) switchToMain
+{
+    rootNavigateTo = AGRootToMain;
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
 - (void) navigateToSign
 {
     [self presentViewController:viewController animated:NO completion:nil];
     viewController = nil;
 }
 
+
+
 - (void) navigateToMain
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self performSegueWithIdentifier:@"ToMain" sender:self];
+    
 }
 
 + (AGSettingProfileMasterViewController*) settingViewController

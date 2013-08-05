@@ -34,6 +34,8 @@
 		0750CF9417739146008E28F0 /* write_edit_setting_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8E17739146008E28F0 /* write_edit_setting_button@2x.png */; };
 		0750CF961773B726008E28F0 /* write_edit_destination_label@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF951773B726008E28F0 /* write_edit_destination_label@2x.png */; };
 		0750CF9B1773D049008E28F0 /* write_edit_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF9A1773D049008E28F0 /* write_edit_accessory@2x.png */; };
+		076B159117AED9A8005BD910 /* AGWaitUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B159017AED9A8005BD910 /* AGWaitUtils.m */; };
+		076B159417AF0454005BD910 /* AGDownloadHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B159317AF0454005BD910 /* AGDownloadHttpHandler.m */; };
 		076E2B0217A8804900A478A3 /* AGAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B0117A8804900A478A3 /* AGAccountManager.m */; };
 		076E2B0F17A8866900A478A3 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B0517A8866900A478A3 /* FMDatabase.m */; };
 		076E2B1017A8866900A478A3 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 076E2B0717A8866900A478A3 /* FMDatabaseAdditions.m */; };
@@ -374,6 +376,10 @@
 		0750CF8E17739146008E28F0 /* write_edit_setting_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_setting_button@2x.png"; sourceTree = "<group>"; };
 		0750CF951773B726008E28F0 /* write_edit_destination_label@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_destination_label@2x.png"; sourceTree = "<group>"; };
 		0750CF9A1773D049008E28F0 /* write_edit_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_accessory@2x.png"; sourceTree = "<group>"; };
+		076B158F17AED9A8005BD910 /* AGWaitUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGWaitUtils.h; sourceTree = "<group>"; };
+		076B159017AED9A8005BD910 /* AGWaitUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGWaitUtils.m; sourceTree = "<group>"; };
+		076B159217AF0454005BD910 /* AGDownloadHttpHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGDownloadHttpHandler.h; sourceTree = "<group>"; };
+		076B159317AF0454005BD910 /* AGDownloadHttpHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDownloadHttpHandler.m; sourceTree = "<group>"; };
 		076E2B0017A8804900A478A3 /* AGAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountManager.h; sourceTree = "<group>"; };
 		076E2B0117A8804900A478A3 /* AGAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountManager.m; sourceTree = "<group>"; };
 		076E2B0417A8866900A478A3 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -1342,6 +1348,8 @@
 				07918491177E5B9400D28C0F /* AGWaitView.m */,
 				0785225C1784D25B00288D7C /* CALayer+Pause.h */,
 				0785225D1784D25B00288D7C /* CALayer+Pause.m */,
+				076B158F17AED9A8005BD910 /* AGWaitUtils.h */,
+				076B159017AED9A8005BD910 /* AGWaitUtils.m */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1378,6 +1386,8 @@
 				079642EB17AB3FAC007B47C8 /* AGURLConnection.m */,
 				079642F017AC5B65007B47C8 /* AGUploadHttpHandler.h */,
 				079642F117AC5B65007B47C8 /* AGUploadHttpHandler.m */,
+				076B159217AF0454005BD910 /* AGDownloadHttpHandler.h */,
+				076B159317AF0454005BD910 /* AGDownloadHttpHandler.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1954,6 +1964,8 @@
 				079642F217AC5B65007B47C8 /* AGUploadHttpHandler.m in Sources */,
 				079642F517AC7042007B47C8 /* UIImage+Addition.m in Sources */,
 				079642F817AC7465007B47C8 /* AGProfileManager.m in Sources */,
+				076B159117AED9A8005BD910 /* AGWaitUtils.m in Sources */,
+				076B159417AF0454005BD910 /* AGDownloadHttpHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

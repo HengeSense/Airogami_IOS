@@ -262,7 +262,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please input your email" minimumFontSize="17" clearButtonMode="whileEditing" id="kbM-8V-LZz">
-                                <rect key="frame" x="54" y="91" width="224" height="30"/>
+                                <rect key="frame" x="54" y="91" width="246" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
@@ -552,6 +552,7 @@
                         <outlet property="rightButton" destination="iBe-eI-MRI" id="jMk-2M-G4a"/>
                         <outlet property="scrollView" destination="oJm-sg-WIF" id="EfL-bQ-C8V"/>
                         <outlet property="sexSwitch" destination="IDr-gF-Ddi" id="hEJ-1Y-iXU"/>
+                        <segue destination="VKg-Of-9fF" kind="push" identifier="ToSignin" id="rVz-kA-6lA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2lw-FT-Ptt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -584,6 +585,11 @@
         <class className="AGResetPasswordViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResetPasswordViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="editDidBegin:" candidateClass="UITextField"/>
+                <relationship kind="action" name="editDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
@@ -600,6 +606,7 @@
         <class className="AGSignViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignViewController.h"/>
             <relationships>
+                <relationship kind="action" name="signTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="signupButton" candidateClass="UIButton"/>
             </relationships>
@@ -607,6 +614,11 @@
         <class className="AGSigninViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSigninViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="editDidBegin:" candidateClass="UITextField"/>
+                <relationship kind="action" name="editDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="resetPasswordButtonTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
@@ -617,6 +629,13 @@
         <class className="AGSignupViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupViewController.h"/>
             <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="editDidBegin:" candidateClass="UITextField"/>
+                <relationship kind="action" name="editDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="imageTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="locationButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descriptionTextField" candidateClass="UITextField"/>
@@ -643,4 +662,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="rVz-kA-6lA"/>
+    </inferredMetricsTieBreakers>
 </document>

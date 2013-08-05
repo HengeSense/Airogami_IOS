@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^AGUploadIconFinishBlock)(NSError* error, id context);
+
 @interface AGProfileManager : NSObject
 
-- (void) uploadIcon:(NSMutableDictionary*)params image:(UIImage*)image;
+- (void) uploadIcons:(NSMutableDictionary*)params image:(UIImage*)image context:(id)context block:(AGUploadIconFinishBlock)block;
 
 @end
