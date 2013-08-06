@@ -54,7 +54,7 @@ enum{
 
 - (void) initialize
 {
-    /*rootNavigateTo = AGRootToSign;
+    rootViewController = self;
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self prepareForSign];
@@ -64,10 +64,7 @@ enum{
             break;
         default:
             break;
-    }*/
-    rootViewController = self;
-    [self prepareForMain];
-    [self prepareForSign];
+    }
 }
 
 - (void)viewDidLoad
@@ -128,7 +125,18 @@ enum{
 
 - (void) switchToMain
 {
+    
+    [self prepareForMain];
     rootNavigateTo = AGRootToMain;
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
+- (void) switchToSign
+{
+    [self prepareForSign];
+    rootNavigateTo = AGRootToSign;
     if (self.presentedViewController) {
         [self dismissViewControllerAnimated:NO completion:nil];
     }
@@ -139,8 +147,6 @@ enum{
     [self presentViewController:viewController animated:NO completion:nil];
     viewController = nil;
 }
-
-
 
 - (void) navigateToMain
 {

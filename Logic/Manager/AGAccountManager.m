@@ -8,16 +8,17 @@
 
 #import "AGAccountManager.h"
 #import "AGJSONHttpHandler.h"
-#import "NSString+Addition.h"
 #import "AGWaitUtils.h"
-#import "AGUIUtils.h"
+#import "AGMessageUtils.h"
 #import "AGWaitUtils.h"
 #import "AGDefines.h"
 #import "AGManagerUtils.h"
+#import "AGUtils.h"
 
 static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
 static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
+static NSString *SignoutPath = @"account/signout.action?";
 
 @implementation AGAccountManager
 
@@ -25,34 +26,25 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:1024];
     [path appendString:SignupPath];
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString *value = obj;
-        [path appendString:key];
-        [path appendString:@"="];
-        [path appendString:[value encodeURIComponent]];
-        [path appendString:@"&"];
-     
-    }];
-    [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
-    [path appendString:AGApplicationVersion];
+    [AGUtils encodeParams:params path:path device:YES];
     
     [AGWaitUtils startWait:@""];
     
     [[AGJSONHttpHandler handler] start:path context:image block:^(NSError *error,id context, NSMutableDictionary *dict) {
         BOOL stop = YES;
         if (error) {
-            [AGUIUtils alertMessageWithTitle:NSLocalizedString(@"error.network.connection", @"error.network.connection") error:error];
+            [AGMessageUtils errorNetwork:error];
         }
         else{
             if (dict == nil) {
-                [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.server.unkown", @"message.server.unkown")];
+                [AGMessageUtils errorServer];
             }
             else{
                 NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
                 if (status.intValue == 0) {
                     NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
                     if ([result isEqual:[NSNull null]]){
-                        [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.duplicate", @"msesage.signup.duplicate")];
+                        [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.duplicate", @"msesage.signup.duplicate")];
                     }
                     else{
                         //succeed
@@ -74,7 +66,7 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
                     
                 }
                 else{
-                    [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.server.unkown", @"message.server.unkown")];
+                    [AGMessageUtils errorServer];
                 }
             }
         
@@ -97,27 +89,17 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
         [path appendString:ScreenNameSigninPath];
     }
     
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString *value = obj;
-        [path appendString:key];
-        [path appendString:@"="];
-        [path appendString:[value encodeURIComponent]];
-        [path appendString:@"&"];
-        
-    }];
-    [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
-    [path appendString:AGApplicationVersion];
-    
+    [AGUtils encodeParams:params path:path device:YES];
     [AGWaitUtils startWait:@""];
     
     [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
         [AGWaitUtils startWait:nil];
         if (error) {
-            [AGUIUtils alertMessageWithTitle:NSLocalizedString(@"error.network.connection", @"error.network.connection") error:error];
+            [AGMessageUtils errorNetwork:error];
         }
         else{
             if (dict == nil) {
-                [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.server.unkown", @"message.server.unkown")];
+                [AGMessageUtils errorServer];
             }
             else{
                 NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
@@ -125,7 +107,7 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
                 if (status.intValue == 0) {
                     NSDictionary *result = [dict objectForKey:@"result"];
                     if ([result isEqual:[NSNull null]]){
-                        [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signin.notmatch", @"message.signin.notmatch")];
+                        [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signin.notmatch", @"message.signin.notmatch")];
                     }
                     else{
                         //succeed
@@ -135,9 +117,40 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
                     }
                 }
                 else{
-                    [AGUIUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.server.unkown", @"message.server.unkown")];
+                    [AGMessageUtils errorServer];
                 }
 
+            }
+            
+            
+        }
+        
+    }];
+}
+
+-(void) signout
+{
+    NSString *path = SignoutPath;
+    //[AGWaitUtils startWait:@""];
+    
+    [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
+        //[AGWaitUtils startWait:nil];
+        if (error) {
+            //NSLog(@"network error%@", error.localizedDescription);
+        }
+        else{
+            if (dict == nil) {
+                //NSLog(@"server error%@", error.localizedDescription);
+            }
+            else{
+                NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
+                if (status.intValue == 0) {
+                     //NSLog(@"signout succeeded");
+                }
+                else{
+                     //NSLog(@"server error");
+                }
+                
             }
             
             

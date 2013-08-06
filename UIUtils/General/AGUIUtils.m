@@ -7,7 +7,6 @@
 //
 
 #import "AGUIUtils.h"
-#import "AGUIErrorAnimation.h"
 #import "AGKeyboardScroll.h"
 #import "AGKeyboardResize.h"
 #import "AGChatKeyboardScroll.h"
@@ -29,30 +28,6 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
     [AGKeyboardResize initialize];
     [AGChatKeyboardScroll initialize];
     [AGUIDefines initialize];
-}
-
-+ (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg
-{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    alert.title = NSLocalizedString(title, title);
-    alert.message = NSLocalizedString(msg, msg);
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
-    [alert show];
-}
-
-+ (void) alertMessageWithTitle:(NSString *)title error:(NSError *)error
-{
-    UIAlertView *alert = [[UIAlertView alloc] init];
-    alert.title = NSLocalizedString(title, title);
-    alert.message = [error localizedDescription];
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
-    [alert show];
-}
-
-+ (void) errorMessgeWithTitle:(NSString*) title view:(UIView *)view
-{
-    [AGUIErrorAnimation startWithTitle:NSLocalizedString(title, title) view:view];
-    
 }
 
 + (void) buttonImageNormalToHighlight:(UIButton *)button

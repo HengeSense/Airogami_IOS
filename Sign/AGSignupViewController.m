@@ -14,6 +14,7 @@
 #import "AGLocationViewController.h"
 #import "AGUIUtils.h"
 #import "AGUtils.h"
+#import "AGMessageUtils.h"
 #import "AGDefines.h"
 #import "NSString+Addition.h"
 #import "AGUIDefines.h"
@@ -361,7 +362,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         error = kAGSignupInputIconRequire;
     }
     if (error != nil) {
-        [AGUIUtils errorMessgeWithTitle:error view:self.view];
+        [AGMessageUtils errorMessgeWithTitle:error view:self.view];
     }
     
     return error == nil;

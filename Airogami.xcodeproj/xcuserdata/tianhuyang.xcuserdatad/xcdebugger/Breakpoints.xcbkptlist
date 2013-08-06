@@ -927,11 +927,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSigninViewController.m"
-         timestampString = "397354103.431706"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "-doneButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -940,11 +940,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSigninViewController.m"
-         timestampString = "397354103.431706"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
          landmarkName = "-validate"
          landmarkType = "5">
       </FileBreakpoint>
@@ -953,11 +953,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGResetPasswordViewController.m"
-         timestampString = "394746791.951538"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "114"
-         endingLineNumber = "114"
+         startingLineNumber = "115"
+         endingLineNumber = "115"
          landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2487,11 +2487,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/General/AGUIUtils.m"
-         timestampString = "394746626.519913"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
          landmarkName = "+setBackButtonTitle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2513,11 +2513,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/ViewControllers/AGLocationViewController.m"
-         timestampString = "394827698.901088"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
          landmarkName = "-mapView:didUpdateUserLocation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2526,7 +2526,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/ViewControllers/AGLocationViewController.m"
-         timestampString = "394827698.901088"
+         timestampString = "397420743.093482"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
+         landmarkName = "-mapView:didUpdateUserLocation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/ViewControllers/AGLocationViewController.m"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "97"
@@ -2538,25 +2551,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "UIUtils/ViewControllers/AGLocationViewController.m"
-         timestampString = "394827698.901088"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
-         landmarkName = "-mapView:didUpdateUserLocation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "397354014.67683"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "26"
-         endingLineNumber = "26">
+         startingLineNumber = "27"
+         endingLineNumber = "27">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2706,11 +2706,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397353090.244554"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
          landmarkName = "-signin:isEmail:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2719,11 +2719,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397353090.244554"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
          landmarkName = "-signin:isEmail:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2732,11 +2732,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397354221.554075"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "138"
-         endingLineNumber = "138"
+         startingLineNumber = "120"
+         endingLineNumber = "120"
          landmarkName = "-signin:isEmail:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2745,11 +2745,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397353090.244554"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
          landmarkName = "-signin:isEmail:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2758,11 +2758,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397335772.545335"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "59"
-         endingLineNumber = "59"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
          landmarkName = "-signup:image:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2771,11 +2771,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397335772.545335"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
          landmarkName = "-signup:image:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2784,11 +2784,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397352981.279239"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
          landmarkName = "-signup:image:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2823,11 +2823,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397335772.545335"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "-signup:image:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2836,37 +2836,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397335772.545335"
+         timestampString = "397420743.093482"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "44"
+         endingLineNumber = "44"
+         landmarkName = "-signup:image:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/AGAccountManager.m"
+         timestampString = "397420743.093482"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-signup:image:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/AGAccountManager.m"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "52"
          endingLineNumber = "52"
-         landmarkName = "-signup:image:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/AGAccountManager.m"
-         timestampString = "397353090.244554"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
-         landmarkName = "-signup:image:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/AGAccountManager.m"
-         timestampString = "397352981.279239"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
          landmarkName = "-signup:image:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3083,11 +3083,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397353090.244554"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "-signup:image:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3096,11 +3096,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/AGAccountManager.m"
-         timestampString = "397354221.554075"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
          landmarkName = "-signin:isEmail:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3109,11 +3109,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSignupViewController.m"
-         timestampString = "397354247.771697"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "202"
-         endingLineNumber = "202"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
          landmarkName = "-doneButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3122,11 +3122,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sign/AGSigninViewController.m"
-         timestampString = "397354263.420257"
+         timestampString = "397420743.093482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
          landmarkName = "-doneButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3148,11 +3148,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Airogami/AGRootViewController.m"
-         timestampString = "397354865.781616"
+         timestampString = "397418217.485396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
+         startingLineNumber = "155"
+         endingLineNumber = "155"
          landmarkName = "-navigateToMain"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3161,12 +3161,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Airogami/AGRootViewController.m"
-         timestampString = "397354939.88912"
+         timestampString = "397418217.485396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "87"
-         endingLineNumber = "87"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
          landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Utils/AGUtils.m"
+         timestampString = "397420743.093482"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
+         landmarkName = "+encodeParams:path:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -17,9 +17,6 @@ typedef enum  {
 
 @interface AGUIUtils : NSObject
 + (void) initialize;
-+ (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;
-+ (void) alertMessageWithTitle:(NSString *)title error:(NSError *)error;
-+ (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
 + (void) buttonImageNormalToHighlight:(UIButton*)button;
 + (void) buttonBackgroundImageNormalToHighlight:(UIButton*)button;
 + (UIImage*) planeImage:(int) category;

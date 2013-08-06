@@ -12,12 +12,14 @@
 
 @synthesize accountManager;
 @synthesize profileManager;
+@synthesize fileManager;
 
 -(id) init
 {
     if (self = [super init]) {
         accountManager = [[AGAccountManager alloc] init];
         profileManager = [[AGProfileManager alloc] init];
+        fileManager = [[AGFileManager alloc] init];
     }
     return self;
 }

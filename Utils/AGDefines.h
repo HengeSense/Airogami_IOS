@@ -25,6 +25,8 @@ typedef enum{
     AGCollectTypePickuped
 } AGCollectType;
 
+#define IS_DEBUG
+
 extern NSString* AGApplicationVersion;
 extern NSString* AGWebServerUrl;
 extern NSString* AGDataServerUrl;

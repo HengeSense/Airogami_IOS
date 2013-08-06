@@ -14,6 +14,7 @@
 #import "AGManagerUtils.h"
 #import "NSString+Addition.h"
 #import "AGRootViewController.h"
+#import "AGMessageUtils.h"
 
 #define kAGSigninScreenNameInvalid @"error.signin.email.invalid"
 #define kAGSigninPasswordInvalid @"error.signin.password.invalid"
@@ -170,7 +171,7 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
     }
 
     if (error != nil) {
-        [AGUIUtils errorMessgeWithTitle:error view:self.view];
+        [AGMessageUtils errorMessgeWithTitle:error view:self.view];
     }
     
     return error == nil;

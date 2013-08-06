@@ -10,6 +10,7 @@
 #import "AGUtils.h"
 #import "AGUIUtils.h"
 #import "AGUIDefines.h"
+#import "AGMessageUtils.h"
 
 
 #define kSignup_Validate_Error @"error.signup.location.choose.invalid"
@@ -74,7 +75,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else{
-        [AGUIUtils errorMessgeWithTitle:kSignup_Validate_Error view:self.view];
+        [AGMessageUtils errorMessgeWithTitle:kSignup_Validate_Error view:self.view];
     }
     
 }

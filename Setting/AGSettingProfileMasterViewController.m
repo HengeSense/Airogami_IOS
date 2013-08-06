@@ -12,6 +12,7 @@
 #import "AGLocationViewController.h"
 #import "AGRootViewController.h"
 #import "AGUIUtils.h"
+#import "AGMessageUtils.h"
 #import "AGImagePickAndCrop.h"
 #import "AGProfileImageButton.h"
 
@@ -333,7 +334,7 @@
         error = AGAccountEmailInvalidKey;
     }
     if (error != nil) {
-        [AGUIUtils errorMessgeWithTitle:error view:self.view];
+        [AGMessageUtils errorMessgeWithTitle:error view:self.view];
     }
     
     return error == nil;

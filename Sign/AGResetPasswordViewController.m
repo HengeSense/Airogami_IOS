@@ -10,6 +10,7 @@
 #import "NSString+Addition.h"
 #import "AGUIUtils.h"
 #import "AGUIDefines.h"
+#import "AGMessageUtils.h"
 
 #define kAGSignupInputTag_Email 1
 
@@ -123,7 +124,7 @@ static NSString * const Reset_Password_Images[] = {@"reset_password_normal.png",
         error = kAGSignupInputEmailInvalid;
     }
     if (error != nil) {
-        [AGUIUtils errorMessgeWithTitle:error view:self.view];
+        [AGMessageUtils errorMessgeWithTitle:error view:self.view];
     }
     
     return error == nil;

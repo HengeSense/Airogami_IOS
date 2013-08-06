@@ -8,6 +8,7 @@
 
 #import "AGUtils.h"
 #import "AGPlaneCategory.h"
+#import "NSString+Addition.h"
 
 @implementation AGUtils
 
@@ -34,6 +35,23 @@
         [array addObject:NSLocalizedString(key, key)];
     }
     return array;
+}
+
++ (void)encodeParams:(NSDictionary*)params path:(NSMutableString*)path device:(BOOL)yes
+{
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSString *value = obj;
+        [path appendString:key];
+        [path appendString:@"="];
+        [path appendString:[value encodeURIComponent]];
+        [path appendString:@"&"];
+        
+    }];
+    
+    if (yes) {
+        [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
+        [path appendString:AGApplicationVersion];
+    }
 }
 
 @end

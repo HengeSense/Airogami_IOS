@@ -7,6 +7,8 @@
 //
 
 #import "AGSettingMasterViewController.h"
+#import "AGManagerUtils.h"
+#import "AGRootViewController.h"
 
 @interface AGSettingMasterViewController ()
 
@@ -121,7 +123,8 @@
             }
             break;
         case 1:// logout
-            
+            [[AGManagerUtils managerUtils].accountManager signout];
+            [[AGRootViewController rootViewController] switchToSign];
             break;
             
         default:

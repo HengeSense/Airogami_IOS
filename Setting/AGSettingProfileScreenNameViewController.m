@@ -9,6 +9,7 @@
 #import "AGSettingProfileScreenNameViewController.h"
 #import "AGUIUtils.h"
 #import "AGDefines.h"
+#import "AGMessageUtils.h"
 
 @interface AGSettingProfileScreenNameViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
@@ -92,7 +93,7 @@
     }
     
     if (error != nil) {
-        [AGUIUtils errorMessgeWithTitle:error view:self.view];
+        [AGMessageUtils errorMessgeWithTitle:error view:self.view];
     }
     
     return error == nil;

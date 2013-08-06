@@ -16,4 +16,6 @@ typedef void (^AGAccountSignDoneBlock)();
 
 - (void) signin:(NSMutableDictionary*) params isEmail:(BOOL)isEmail block:(AGAccountSignDoneBlock)block;
 
+- (void) signout;
+
 @end
