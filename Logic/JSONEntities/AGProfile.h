@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "JSONModel.h"
 
 @class AGAccount;
 
-@interface AGProfile : NSManagedObject
+@interface AGProfileJSON : JSONModel
 
 @property (nonatomic, retain) NSNumber * accountId;
 @property (nonatomic, retain) NSDate * birthday;

@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "JSONModel.h"
 
 @class AGAccountStat, AGChain, AGChainMessage, AGMessage, AGPlane, AGProfile;
 
-@interface AGAccount : NSManagedObject
+@interface AGAccountJSON : JSONModel
 
 @property (nonatomic, retain) NSNumber * accountId;
 @property (nonatomic, retain) NSNumber * updateCount;
@@ -24,7 +25,7 @@
 @property (nonatomic, retain) AGProfile *profile;
 @end
 
-@interface AGAccount (CoreDataGeneratedAccessors)
+@interface AGAccountJSON (CoreDataGeneratedAccessors)
 
 - (void)addChainMessagesObject:(AGChainMessage *)value;
 - (void)removeChainMessagesObject:(AGChainMessage *)value;

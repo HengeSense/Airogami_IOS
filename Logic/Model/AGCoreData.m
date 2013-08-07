@@ -8,6 +8,7 @@
 
 #import "AGCoreData.h"
 #import "AGManagerUtils.h"
+#import "JSONModel.h"
 
 
 @implementation AGCoreData
@@ -70,22 +71,9 @@
     if (persistentStoreCoordinator != nil) {
         return persistentStoreCoordinator;
     }
-    NSString *DBName = [NSString stringWithFormat:@"Database%@.sqlite", AGApplicationVersion];
+    NSString *DBName = @"Database.sqlite";
 	NSURL *storeUrl = [[AGManagerUtils managerUtils].fileManager urlForDatabase];
     storeUrl = [NSURL URLWithString:DBName relativeToURL:storeUrl];
-    NSString *storePath = [storeUrl absoluteString];
-	/*
-	 Set up the store.
-	 For the sake of illustration, provide a pre-populated default store.
-	 */
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	// If the expected store doesn't exist, copy the default store.
-	if (![fileManager fileExistsAtPath:storePath]) {
-		NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:DBName ofType:@"sqlite"];
-		if (defaultStorePath) {
-			[fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-		}
-	}
 	
 	NSError *error;
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
@@ -109,5 +97,110 @@
     return persistentStoreCoordinator;
 }
 
+
+/*- (NSDictionary*)dataStructureFromManagedObject:(NSManagedObject*)managedObject
+{
+    NSDictionary *attributesByName = [[managedObject entity] attributesByName];
+    NSDictionary *relationshipsByName = [[managedObject entity] relationshipsByName];
+    NSMutableDictionary *valuesDictionary = [[managedObject dictionaryWithValuesForKeys:[attributesByName allKeys]] mutableCopy];
+    [valuesDictionary setObject:[[managedObject entity] name] forKey:@"ManagedObjectName"];
+    for (NSString *relationshipName in [relationshipsByName allKeys]) {
+        NSRelationshipDescription *description = [[[managedObject entity] relationshipsByName] objectForKey:relationshipName];
+        if (![description isToMany]) {
+            NSManagedObject *relationshipObject = [managedObject valueForKey:relationshipName];
+            [valuesDictionary setObject:[self dataStructureForManagedObject:relationshipObject] forKey:relationshipName];
+            continue;
+        }
+        NSSet *relationshipObjects = [managedObject objectForKey:relationshipName];
+        NSMutableArray *relationshipArray = [[NSMutableArray alloc] init];
+        for (NSManagedObject *relationshipObject in relationshipObjects) {
+            [relationshipArray addObject:[self dataStructureForManagedObject:relationshipObject]];
+        }
+        [valuesDictionary setObject:relationshipArray forKey:relationshipName];
+    }
+    return [valuesDictionary autorelease];
+}
+
+- (NSArray*)dataStructuresFromManagedObjects:(NSArray*)managedObjects
+{
+    NSMutableArray *dataArray = [[NSArray alloc] init];
+    for (NSManagedObject *managedObject in managedObjects) {
+        [dataArray addObject:[self dataStructureForManagedObject:managedObject]];
+    }
+    return [dataArray autorelease];
+}*
+
+- (NSString*)jsonStructureFromManagedObjects:(NSArray*)managedObjects
+{
+    NSArray *objectsArray = [self dataStructuresFromManagedObjects:managedObjects];
+    NSString *jsonString = [[CJSONSerializer serializer] serializeArray:objectsArray];
+    return jsonString;
+}
+
+
+
+- (NSManagedObject*)managedObjectFromStructure:(NSDictionary*)structureDictionary withManagedObjectContext:(NSManagedObjectContext*)moc
+{
+    NSString *objectName = [structureDictionary objectForKey:@"ManagedObjectName"];
+    NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:objectName inManagedObjectContext:moc];
+    
+    [managedObject setValuesForKeysWithDictionary:structureDictionary];
+    
+    for (NSString *relationshipName in [[[managedObject entity] relationshipsByName] allKeys]) {
+        NSRelationshipDescription *description = [relationshipsByName objectForKey:relationshipName];
+        if (![description isToMany]) {
+            NSDictionary *childStructureDictionary = [structureDictionary objectForKey:relationshipName];
+            NSManagedObject *childObject = [self managedObjectFromStructure:childStructureDictionary withManagedObjectContext:moc];
+            [managedObject setObject:childObject forKey:relationshipName];
+            continue;
+        }
+        NSMutableSet *relationshipSet = [managedObject mutableSetForKey:relationshipName];
+        NSArray *relationshipArray = [structureDictionary objectForKey:relationshipName];
+        for (NSDictionary *childStructureDictionary in relationshipArray) {
+            NSManagedObject *childObject = [self managedObjectFromStructure:childStructureDictionary withManagedObjectContext:moc];
+            [relationshipSet addObject:childObject];
+        }
+    }
+    return managedObject;
+}
+
+- (NSArray*)managedObjectsFromJSONStructure:(NSString*)json withManagedObjectContext:(NSManagedObjectContext*)moc
+{
+    NSError *error = nil;
+    NSArray *structureArray = [[CJSONDeserializer deserializer] deserializeAsArray:json error:&error];
+    NSAssert2(error == nil, @"Failed to deserialize\n%@\n%@", [error localizedDescription], json);
+    NSMutableArray *objectArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *structureDictionary in structureArray) {
+        [objectArray addObject:[self managedObjectFromStructure:structureDictionary withManagedObjectContext:moc]];
+    }
+    return [objectArray autorelease];
+}*/
+
+- (void) saveOrUpdate:(NSDictionary*)jsonDictionary withClass:(Class)CDClass
+{
+    NSError *error;
+    NSString *objectName = NSStringFromClass(CDClass);
+    Class jsonClass = NSClassFromString([NSString stringWithFormat:@"%@JSON", objectName]);
+    JSONModel *jsonModel = [jsonClass alloc];
+    jsonModel = [jsonModel initWithDictionary:jsonDictionary error:&error];
+    NSDictionary *objectDictionary = [jsonModel toDictionary];
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:objectName inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ = %@", idKey, [objectDictionary objectForKey:idKey]];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSManagedObject *managedObject;
+    if (array.count) {//update
+        managedObject = [array lastObject];
+    }
+    else{//insert
+        managedObject = [NSEntityDescription insertNewObjectForEntityForName:objectName inManagedObjectContext:managedObjectContext];
+    }
+    [managedObject setValuesForKeysWithDictionary:objectDictionary];
+}
 
 @end

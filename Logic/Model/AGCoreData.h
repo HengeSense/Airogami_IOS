@@ -15,5 +15,7 @@
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+//core data class
+- (void) saveOrUpdate:(NSDictionary*)jsonDictionary withClass:(Class)CDClass;
 
 @end

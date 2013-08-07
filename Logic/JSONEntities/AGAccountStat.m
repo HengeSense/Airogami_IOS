@@ -10,7 +10,7 @@
 #import "AGAccount.h"
 
 
-@implementation AGAccountStat
+@implementation AGAccountStatJSON
 
 @dynamic accountId;
 @dynamic lastSigninTime;

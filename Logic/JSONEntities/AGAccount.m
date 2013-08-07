@@ -15,7 +15,7 @@
 #import "AGProfile.h"
 
 
-@implementation AGAccount
+@implementation AGAccountJSON
 
 @dynamic accountId;
 @dynamic updateCount;

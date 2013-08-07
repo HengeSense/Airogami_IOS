@@ -1,5 +1,5 @@
 //
-//  AGAccountStat.h
+//  AGChainMessageId.h
 //  Airogami
 //
 //  Created by Tianhu Yang on 8/6/13.
@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "JSONModel.h"
 
-@class AGAccount;
+@class AGChainMessage;
 
-@interface AGAccountStat : NSManagedObject
+@interface AGChainMessageIdJSON : JSONModel
 
 @property (nonatomic, retain) NSNumber * accountId;
-@property (nonatomic, retain) NSDate * lastSigninTime;
-@property (nonatomic, retain) AGAccount *account;
+@property (nonatomic, retain) NSNumber * chainId;
+@property (nonatomic, retain) AGChainMessage *chainMessage;
 
 @end

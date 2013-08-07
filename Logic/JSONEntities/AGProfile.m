@@ -10,7 +10,7 @@
 #import "AGAccount.h"
 
 
-@implementation AGProfile
+@implementation AGProfileJSON
 
 @dynamic accountId;
 @dynamic birthday;

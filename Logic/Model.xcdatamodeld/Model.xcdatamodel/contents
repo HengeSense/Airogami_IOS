@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AGAccount" representedClassName="AGAccount" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="accountStat" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGAccountStat" inverseName="account" inverseEntity="AGAccountStat" syncable="YES"/>
+        <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="account" inverseEntity="AGChainMessage" syncable="YES"/>
+        <relationship name="chains" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChain" inverseName="account" inverseEntity="AGChain" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="account" inverseEntity="AGMessage" syncable="YES"/>
+        <relationship name="planesForOwnerId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByOwnerId" inverseEntity="AGPlane" syncable="YES"/>
+        <relationship name="planesForTargetId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByTargetId" inverseEntity="AGPlane" syncable="YES"/>
+        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGProfile" inverseName="account" inverseEntity="AGProfile" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGAccountStat" representedClassName="AGAccountStat" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="lastSigninTime" attributeType="Date" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="accountStat" inverseEntity="AGAccount" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGCategory" representedClassName="AGCategory" syncable="YES">
+        <attribute name="categoryId" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="planes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="category" inverseEntity="AGPlane" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="categoryId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGChain" representedClassName="AGChain" syncable="YES">
+        <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="matchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxMatchCount" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxPassCount" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="passCount" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatedTime" attributeType="Date" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chains" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="chain" inverseEntity="AGChainMessage" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="chainId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGChainMessage" representedClassName="AGChainMessage" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" attributeType="Date" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chainMessages" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="chain" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGChain" inverseName="chainMessages" inverseEntity="AGChain" syncable="YES"/>
+        <relationship name="id" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AGChainMessageId" inverseName="chainMessage" inverseEntity="AGChainMessageId" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="id"/>
+        </userInfo>
+    </entity>
+    <entity name="AGChainMessageId" representedClassName="AGChainMessageId" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="chainMessage" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="id" inverseEntity="AGChainMessage" syncable="YES"/>
+        <compoundIndexes>
+            <compoundIndex>
+                <index value="accountId"/>
+                <index value="chainId"/>
+            </compoundIndex>
+        </compoundIndexes>
+        <userInfo>
+            <entry key="key" value="value"/>
+        </userInfo>
+    </entity>
+    <entity name="AGMessage" representedClassName="AGMessage" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="messageId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="messages" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="plane" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="messages" inverseEntity="AGPlane" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="messageId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGPlane" representedClassName="AGPlane" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deletedByOwner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="deletedByTarget" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastMsgIdOfOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastMsgIdOfTarget" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="likedByOwner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="likedByTarget" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="matchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxMatchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="planeId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatedTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="accountByOwnerId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForOwnerId" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="accountByTargetId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForTargetId" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="category" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGCategory" inverseName="planes" inverseEntity="AGCategory" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="plane" inverseEntity="AGMessage" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="planeId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGProfile" representedClassName="AGProfile" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="screenName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="shout" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="profile" inverseEntity="AGAccount" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
+        </userInfo>
+    </entity>
+    <elements>
+        <element name="AGAccountStat" positionX="-414" positionY="-0" width="128" height="90"/>
+        <element name="AGCategory" positionX="-405" positionY="447" width="128" height="90"/>
+        <element name="AGChain" positionX="-182" positionY="-438" width="128" height="285"/>
+        <element name="AGChainMessage" positionX="-407" positionY="-369" width="128" height="150"/>
+        <element name="AGChainMessageId" positionX="-416" positionY="-99" width="128" height="90"/>
+        <element name="AGAccount" positionX="-90" positionY="-9" width="128" height="180"/>
+        <element name="AGMessage" positionX="115" positionY="303" width="128" height="135"/>
+        <element name="AGPlane" positionX="-164" positionY="273" width="128" height="375"/>
+        <element name="AGProfile" positionX="-423" positionY="108" width="128" height="285"/>
+    </elements>
+</model>
