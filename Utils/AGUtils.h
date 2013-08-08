@@ -15,4 +15,8 @@
 + (UIImage *)normalizeImage:(UIImage*)image;
 + (NSArray *)localizedStringArray:(NSString*)prefix count:(int) count;
 + (void)encodeParams:(NSDictionary*)params path:(NSMutableString*)path device:(BOOL)yes;
++ (NSString*) dateToString:(NSDate*)date;
++ (NSDate*) stringToDate:(NSString*)string;
++ (NSString*) birthdayToAge:(NSDate*)birthday;
+
 @end

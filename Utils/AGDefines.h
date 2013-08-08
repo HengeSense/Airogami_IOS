@@ -18,12 +18,18 @@ typedef enum{
     AGCategoryLocalInformation,
     AGCategoryFeeling,
     AGCategoryChain
-} AGCategory;
+} AGPlaneCategoryEnum;
 
 typedef enum{
     AGCollectTypeReceived = 0,
     AGCollectTypePickuped
 } AGCollectType;
+
+typedef enum{
+    AGAccountSexTypeUnkown = 0,
+    AGAccountSexTypeMale,
+    AGAccountSexTypeFemale
+} AGAccountSexType;
 
 #define IS_DEBUG
 

@@ -8,7 +8,7 @@
 
 #import "AGCoreData.h"
 #import "AGManagerUtils.h"
-#import "JSONModel.h"
+#import "AGUtils.h"
 
 
 @implementation AGCoreData
@@ -176,20 +176,20 @@
     return [objectArray autorelease];
 }*/
 
-- (void) saveOrUpdate:(NSDictionary*)jsonDictionary withClass:(Class)CDClass
+- (NSManagedObject*) saveOrUpdate:(NSMutableDictionary*)jsonDictionary withEntityName:(NSString*)entityName
 {
+    if (jsonDictionary == nil || [jsonDictionary isEqual:[NSNull null]]) {
+        return nil;
+    }
     NSError *error;
-    NSString *objectName = NSStringFromClass(CDClass);
-    Class jsonClass = NSClassFromString([NSString stringWithFormat:@"%@JSON", objectName]);
-    JSONModel *jsonModel = [jsonClass alloc];
-    jsonModel = [jsonModel initWithDictionary:jsonDictionary error:&error];
-    NSDictionary *objectDictionary = [jsonModel toDictionary];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
+    NSDictionary *attributesByName = [entityDescription attributesByName];
     
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:objectName inManagedObjectContext:managedObjectContext];
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ = %@", idKey, [objectDictionary objectForKey:idKey]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ = %@", idKey, [[entityDescription propertiesByName] objectForKey:idKey]];
     [fetchRequest setPredicate:predicate];
     
     NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -198,9 +198,65 @@
         managedObject = [array lastObject];
     }
     else{//insert
-        managedObject = [NSEntityDescription insertNewObjectForEntityForName:objectName inManagedObjectContext:managedObjectContext];
+        managedObject = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:managedObjectContext];
     }
-    [managedObject setValuesForKeysWithDictionary:objectDictionary];
+    //set values
+    for (NSString *key in attributesByName.allKeys) {
+        NSAttributeDescription *attributeDescription  = [attributesByName objectForKey:key];
+        NSObject *obj = [jsonDictionary objectForKey:key];
+        if ([obj isEqual:[NSNull null]]) {
+            obj = nil;
+        }
+        else if(attributeDescription.attributeType == NSDateAttributeType){
+           obj = [AGUtils stringToDate:(NSString*)obj];
+        }
+        [managedObject setValue:obj forKey:key];
+    }
+    
+    //relationship
+    NSDictionary *relationshipsByName = [entityDescription relationshipsByName];
+    NSArray *relationshipsKeys = [relationshipsByName allKeys];
+    for (NSString *relationshipName in relationshipsKeys) {
+        NSRelationshipDescription *relationshipDescription = [relationshipsByName objectForKey:relationshipName];
+        NSManagedObject *childObject;
+        if ([relationshipDescription isToMany]) {
+            NSArray *relationshipArray = [jsonDictionary objectForKey:relationshipName];
+            if(relationshipArray != nil && [relationshipArray isEqual:[NSNull null]] == NO)
+            {
+                 NSMutableSet *relationshipSet = [managedObject mutableSetValueForKey:relationshipName];
+                for (NSDictionary *childObjectDictionary in relationshipArray) {
+                    childObject = [self saveOrUpdate:childObjectDictionary withEntityName:relationshipDescription.destinationEntity.name];
+                    if (childObject) {
+                        [relationshipSet addObject:childObject];
+                    }
+                    
+                }
+            }
+            
+        }
+        else{
+            NSDictionary *childJsonDictionary = [jsonDictionary objectForKey:relationshipName];
+            childObject = [self saveOrUpdate:childJsonDictionary withEntityName:relationshipDescription.destinationEntity.name];
+            if (childObject) {
+                [managedObject setValue:childObject forKey:relationshipName];
+            }
+            
+        }
+       
+    }
+    return managedObject;
+}
+
+- (BOOL)save
+{
+    NSError *error;
+    BOOL succeed = [managedObjectContext save:&error];
+#ifdef IS_DEBUG
+    if (succeed == NO) {
+        NSLog(@"%@",error.userInfo);
+    }
+#endif
+    return succeed;
 }
 
 @end

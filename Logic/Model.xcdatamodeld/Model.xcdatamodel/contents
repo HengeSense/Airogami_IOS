@@ -137,14 +137,14 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="AGAccountStat" positionX="-414" positionY="-0" width="128" height="90"/>
-        <element name="AGCategory" positionX="-405" positionY="447" width="128" height="90"/>
-        <element name="AGChain" positionX="-182" positionY="-438" width="128" height="285"/>
-        <element name="AGChainMessage" positionX="-407" positionY="-369" width="128" height="150"/>
-        <element name="AGChainMessageId" positionX="-416" positionY="-99" width="128" height="90"/>
-        <element name="AGAccount" positionX="-90" positionY="-9" width="128" height="180"/>
-        <element name="AGMessage" positionX="115" positionY="303" width="128" height="135"/>
-        <element name="AGPlane" positionX="-164" positionY="273" width="128" height="375"/>
-        <element name="AGProfile" positionX="-423" positionY="108" width="128" height="285"/>
+        <element name="AGAccount" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGAccountStat" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGCategory" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGChain" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGChainMessage" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGChainMessageId" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGMessage" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGPlane" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGProfile" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

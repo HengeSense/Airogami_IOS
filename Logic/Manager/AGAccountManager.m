@@ -14,6 +14,7 @@
 #import "AGDefines.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
+#import "AGAppDelegate.h"
 
 static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
@@ -21,6 +22,8 @@ static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 static NSString *SignoutPath = @"account/signout.action?";
 
 @implementation AGAccountManager
+
+@synthesize account;
 
 - (void) signup:(NSMutableDictionary*) params image:(UIImage *)image block:(AGAccountSignDoneBlock)block
 {
@@ -50,7 +53,8 @@ static NSString *SignoutPath = @"account/signout.action?";
                         //succeed
                         stop = NO;
                         [AGWaitUtils startWait:NSLocalizedString(@"message.account.signup.uploadingicons", @"message.account.operate.uploadingicons")];
-                        NSMutableDictionary *account = [result objectForKey:@"account"];
+                        NSMutableDictionary *accountJson = [result objectForKey:@"account"];
+                        account = [[AGAppDelegate appDelegate].coreDataController saveAccount:accountJson];
                         
                         result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                         NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
@@ -105,12 +109,13 @@ static NSString *SignoutPath = @"account/signout.action?";
                 NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
                 
                 if (status.intValue == 0) {
-                    NSDictionary *result = [dict objectForKey:@"result"];
+                    NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
                     if ([result isEqual:[NSNull null]]){
                         [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signin.notmatch", @"message.signin.notmatch")];
                     }
                     else{
                         //succeed
+                        account = [[AGAppDelegate appDelegate].coreDataController saveAccount:result];
                         if (block) {
                             block();
                         }

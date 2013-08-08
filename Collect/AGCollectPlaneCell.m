@@ -64,7 +64,7 @@
     // Configure the view for the selected state
 }
 
-- (void) setCategory:(AGCategory)aCategory
+- (void) setCategory:(AGPlaneCategoryEnum)aCategory
 {
     category = aCategory;
     self.planeImageView.image = [AGUIUtils planeImage:category];

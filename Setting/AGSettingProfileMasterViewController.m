@@ -15,15 +15,19 @@
 #import "AGMessageUtils.h"
 #import "AGImagePickAndCrop.h"
 #import "AGProfileImageButton.h"
+#import "AGDatePicker.h"
+#import "AGManagerUtils.h"
+#import "AGUtils.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
 #define kAGSettingProfilePasswordHighlight @"profile_password_icon_box_highlight.png"
 
-@interface AGSettingProfileMasterViewController ()<AGImagePickAndCropDelegate, UIActionSheetDelegate>
+@interface AGSettingProfileMasterViewController ()<AGImagePickAndCropDelegate, UIActionSheetDelegate, AGDatePickerDelegate>
 {
     UITextView * aidedTextView;
     AGImagePickAndCrop *imagePickAndCrop;
+    AGAccountManager *accountManager;
 }
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
@@ -31,6 +35,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *changeProfileImageButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *screenNameButton;
 @property (weak, nonatomic) IBOutlet UITextField *ageTextField;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;
@@ -45,18 +51,35 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
 
 @property (nonatomic, strong) AGLocation *location;
+@property(nonatomic, strong) AGDatePicker *datePicker;
 
 @end
 
 @implementation AGSettingProfileMasterViewController
 
-@synthesize location;
+@synthesize location, datePicker;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        [self initialize];
+    }
+    return self;
+}
+
+- (void)initialize
+{
+    datePicker = [[AGDatePicker alloc] init];
+    datePicker.delegate = self;
+    accountManager = [AGManagerUtils managerUtils].accountManager;
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        [self initialize];
     }
     return self;
 }
@@ -80,6 +103,31 @@
     aidedTextView.font = self.descriptionTextView.font;
     aidedTextView.hidden = YES;
     [self.descriptionTextView.superview addSubview:aidedTextView];
+    self.ageTextField.inputView = datePicker.datePicker;
+    self.ageTextField.inputAccessoryView = datePicker.toolBar;
+    [self initData];
+}
+
+- (void) initData
+{
+    AGProfile *profile = accountManager.account.profile;
+    
+    self.likesLabel.text = [profile.likesCount stringValue];
+    self.nameTextField.text = profile.fullName;
+    [self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
+    if (profile.birthday) {
+        self.ageTextField.text = [AGUtils birthdayToAge:profile.birthday];
+    }
+    else{
+        self.ageTextField.text = @"";
+    }
+    self.sexSwitch.sexType = profile.sex.intValue;
+    self.location = [AGLocation locationWithProfile:profile];
+    [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
+    self.descriptionTextView.text = profile.shout;
+    NSURL *url = [[AGManagerUtils managerUtils].dataManager accountIconUrl:profile.accountId small:YES];
+    [self.profileImageButton setImageUrl:url placeImage:nil];
+    //self.emailTextField.text = profile.
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,6 +150,15 @@
     NSString *title = [location toString];
     [self.locationButton setTitle:title forState:UIControlStateNormal];
     self.locationButton.selected = title.length != 0;
+}
+
+- (void) finish:(BOOL)done
+{
+    [self.ageTextField resignFirstResponder];
+    if (done) {
+        self.ageTextField.text = [AGUtils birthdayToAge:datePicker.datePicker.date];
+    }
+
 }
 
 
@@ -128,6 +185,7 @@
     }
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.view endEditing:YES];
@@ -145,6 +203,12 @@
 {
     if (textField == self.emailTextField) {
         self.emailImageView.highlighted = YES;
+    }
+    else if (textField == self.ageTextField){
+        AGProfile *profile = accountManager.account.profile;
+        if (profile.birthday) {
+            datePicker.datePicker.date = profile.birthday;
+        }
     }
 }
 
@@ -251,6 +315,7 @@
     [self setPasswordButton:nil];
     [self setScreenNameButton:nil];[self setChangeProfileImageButton:nil];
     [self setProfileImageButton:nil];
+    [self setLikesLabel:nil];
     [super viewDidUnload];
 }
 

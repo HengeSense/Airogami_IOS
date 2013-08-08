@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGAccount.h"
+#import "AGProfile.h"
 
 typedef void (^AGAccountSignDoneBlock)();
 
 @interface AGAccountManager : NSObject
+
+@property(nonatomic, strong) AGAccount *account;
 
 - (void) signup:(NSMutableDictionary*) params image:(UIImage*)image block:(AGAccountSignDoneBlock)block;
 

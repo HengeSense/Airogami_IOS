@@ -535,7 +535,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="IdA-Yi-e1l"/>
                                                         <outlet property="delegate" destination="bIg-gz-BMF" id="0zK-gh-f1k"/>
@@ -728,6 +728,7 @@
                         <outlet property="emailImageView" destination="xLo-yJ-XJX" id="Uyl-6e-b9e"/>
                         <outlet property="emailTextField" destination="v9V-Dl-k1y" id="OJB-UJ-1aF"/>
                         <outlet property="infoImageView" destination="m2Z-48-21W" id="c19-DY-XqG"/>
+                        <outlet property="likesLabel" destination="sL2-5r-hDP" id="c86-UE-NdJ"/>
                         <outlet property="locationButton" destination="jry-aH-yzV" id="ACI-bQ-BuN"/>
                         <outlet property="nameTextField" destination="uNm-Ro-2AW" id="JNZ-vh-kXx"/>
                         <outlet property="passwordButton" destination="glT-lS-Jme" id="DGJ-Ep-boh"/>
@@ -876,88 +877,6 @@
         <image name="proflle_arrow_box_highlight@2x.png" width="612" height="88"/>
         <image name="write_edit_male_button@2x.png" width="68" height="68"/>
     </resources>
-    <classes>
-        <class className="AGImageButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
-        </class>
-        <class className="AGProfileImageButton" superclassName="AGImageButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImageButton.h"/>
-        </class>
-        <class className="AGSettingMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingMasterViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="AGSettingNotificationViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingNotificationViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="switchValueChanged:" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="AGSettingProfileMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingProfileMasterViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="passwordButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="profileImageButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="regionButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="screenNameButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="settingButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="textFieldEditingChanged:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="changeProfileImageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="descriptionImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="descriptionTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="emailImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="infoImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="locationButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="profileImageButton" candidateClass="AGProfileImageButton"/>
-                <relationship kind="outlet" name="screenNameButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="settingButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="sexSwitch" candidateClass="AGSexSwitch"/>
-            </relationships>
-        </class>
-        <class className="AGSettingProfilePasswordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingProfilePasswordViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="confirmTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="currentTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nowTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AGSettingProfileScreenNameViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingProfileScreenNameViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="screenNameTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AGSexSwitch" superclassName="DCRoundSwitch">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSexSwitch.h"/>
-        </class>
-        <class className="DCRoundSwitch" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

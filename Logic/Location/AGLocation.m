@@ -8,6 +8,7 @@
 
 #import "AGLocation.h"
 
+
 @implementation AGLocation
 @synthesize country, area, subArea, coordinate, position;
 
@@ -91,6 +92,14 @@
 - (BOOL) empty
 {
     return country.length == 0;
+}
+
++ (AGLocation*) locationWithProfile:(AGProfile*) profile
+{
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude = [profile.latitude doubleValue];
+    coordinate.longitude = [profile.longitude doubleValue];
+    return [[AGLocation alloc] initWithCountry:profile.country area:profile.province subArea:profile.city coordinate:coordinate];
 }
 
 + (AGLocation*) locationWithPlaceMark:(CLPlacemark*) placeMark

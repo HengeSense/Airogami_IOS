@@ -20,7 +20,7 @@ typedef enum  {
 + (void) buttonImageNormalToHighlight:(UIButton*)button;
 + (void) buttonBackgroundImageNormalToHighlight:(UIButton*)button;
 + (UIImage*) planeImage:(int) category;
-+ (UIImage*) categoryImage:(AGCategory) category;
++ (UIImage*) categoryImage:(AGPlaneCategoryEnum) category;
 + (UIImage*) collectTypeImage:(AGCollectType) type;
 + (UIFont*) themeFont:(AGThemeFontStyle) style size:(float)size;
 + (void) setBackButtonTitle:(UIViewController*)viewController;

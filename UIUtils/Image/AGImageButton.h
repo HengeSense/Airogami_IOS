@@ -12,4 +12,6 @@
 
 - (void) initialize;
 
+- (void) setImageUrl:(NSURL*)url placeImage:(UIImage*)image;
+
 @end

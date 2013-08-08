@@ -10,11 +10,15 @@
 #import "AGPlaneCategory.h"
 #import "NSString+Addition.h"
 
+static NSDateFormatter *dateFormatter;
+
 @implementation AGUtils
 
 + (void) initialize
 {
     [AGPlaneCategory initialize];
+    dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
 }
 
 + (UIImage *)normalizeImage:(UIImage*)image {
@@ -53,5 +57,28 @@
         [path appendString:AGApplicationVersion];
     }
 }
+
++ (NSString*) dateToString:(NSDate*)date
+{
+    return [dateFormatter stringFromDate:date];
+}
+
++ (NSDate*) stringToDate:(NSString*)string
+{
+    return [dateFormatter dateFromString:string];
+}
+
++ (NSString*) birthdayToAge:(NSDate*)birthday
+{
+    NSDate* now = [NSDate date];
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                       components:NSYearCalendarUnit
+                                       fromDate:birthday
+                                       toDate:now
+                                       options:0];
+    NSInteger age = [ageComponents year];
+    return [NSString stringWithFormat:@"%d",age];
+}
+
 
 @end

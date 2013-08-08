@@ -16,6 +16,8 @@
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 //core data class
-- (void) saveOrUpdate:(NSDictionary*)jsonDictionary withClass:(Class)CDClass;
+- (NSManagedObject*) saveOrUpdate:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName;
+
+- (BOOL) save;
 
 @end

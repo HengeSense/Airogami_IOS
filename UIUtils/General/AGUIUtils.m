@@ -51,7 +51,7 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
     }
     return [UIImage imageNamed:planeImages[category]];
 }
-+ (UIImage*) categoryImage:(AGCategory) category
++ (UIImage*) categoryImage:(AGPlaneCategoryEnum) category
 {
     if (category > AGCategoryChain) {
         category = AGCategoryRandom;

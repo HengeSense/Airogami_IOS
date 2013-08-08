@@ -8,6 +8,7 @@
 
 #import "AGImageButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation AGImageButton
 
@@ -37,6 +38,21 @@
     layer.cornerRadius = 6.0f;
     //layer.borderWidth = 1.0f;
     // layer.borderColor = [UIColor whiteColor].CGColor;
+}
+
+- (void) setImageUrl:(NSURL *)url placeImage:(UIImage *)planeImage
+{
+    UIButton *button = self;
+    [self.imageView setImageWithURL:url placeholderImage:planeImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+#ifdef IS_DEBUG
+        if (error) {
+            NSLog(@"%@", error);
+        }
+#endif
+        if (error == nil && image != nil) {
+            [button setImage:image forState:UIControlStateNormal];
+        }
+    }];
 }
 
 @end

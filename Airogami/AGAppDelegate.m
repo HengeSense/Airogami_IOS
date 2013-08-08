@@ -9,6 +9,7 @@
 #import "AGAppDelegate.h"
 #import "AGUIUtils.h"
 #import "AGUtils.h"
+#import "AGManagerUtils.h"
 
 static AGAppDelegate *AppDelegate;
 
@@ -19,7 +20,7 @@ static AGAppDelegate *AppDelegate;
 
 @implementation AGAppDelegate
 
-@synthesize coreData;
+@synthesize coreDataController;
 
 +(AGAppDelegate*) appDelegate
 {
@@ -30,6 +31,7 @@ static AGAppDelegate *AppDelegate;
 {
     if (self = [super init]) {
         AppDelegate = self;
+        coreDataController = [[AGCoreDataController alloc] init];
     }
     return self;
 }
@@ -45,8 +47,7 @@ static AGAppDelegate *AppDelegate;
     imageView.contentMode = UIViewContentModeScaleToFill;
     imageView.frame = [UIScreen mainScreen].bounds;
     [self.window addSubview:imageView];
-    //initialize instance variables
-    coreData = [[AGCoreData alloc] init];
+    
     return YES;
 }
 							
@@ -76,6 +77,7 @@ static AGAppDelegate *AppDelegate;
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     NSError *error;
+    AGCoreData *coreData = coreDataController.coreData;
     if (coreData.managedObjectContext != nil) {
         if ([coreData.managedObjectContext hasChanges] && ![coreData.managedObjectContext save:&error]) {
 			/*

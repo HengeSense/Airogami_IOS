@@ -7,7 +7,10 @@
 //
 
 #import "DCRoundSwitch.h"
+#import "AGDefines.h"
 
 @interface AGSexSwitch : DCRoundSwitch
+
+@property(nonatomic, assign) AGAccountSexType sexType;
 
 @end
