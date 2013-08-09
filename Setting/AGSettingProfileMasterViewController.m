@@ -18,16 +18,18 @@
 #import "AGDatePicker.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
+#import "AGAppDelegate.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
 #define kAGSettingProfilePasswordHighlight @"profile_password_icon_box_highlight.png"
 
-@interface AGSettingProfileMasterViewController ()<AGImagePickAndCropDelegate, UIActionSheetDelegate, AGDatePickerDelegate>
+@interface AGSettingProfileMasterViewController ()<AGImagePickAndCropDelegate, UIActionSheetDelegate, AGDatePickerDelegate, UIAlertViewDelegate>
 {
     UITextView * aidedTextView;
     AGImagePickAndCrop *imagePickAndCrop;
     AGAccountManager *accountManager;
+    BOOL imageChanged;
 }
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
@@ -106,6 +108,7 @@
     self.ageTextField.inputView = datePicker.datePicker;
     self.ageTextField.inputAccessoryView = datePicker.toolBar;
     [self initData];
+    imageChanged = NO;
 }
 
 - (void) initData
@@ -117,10 +120,12 @@
     [self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
     if (profile.birthday) {
         self.ageTextField.text = [AGUtils birthdayToAge:profile.birthday];
+        datePicker.datePicker.date = profile.birthday;
     }
     else{
         self.ageTextField.text = @"";
     }
+
     self.sexSwitch.sexType = profile.sex.intValue;
     self.location = [AGLocation locationWithProfile:profile];
     [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
@@ -128,6 +133,31 @@
     NSURL *url = [[AGManagerUtils managerUtils].dataManager accountIconUrl:profile.accountId small:YES];
     [self.profileImageButton setImageUrl:url placeImage:nil];
     //self.emailTextField.text = profile.
+}
+
+- (NSMutableDictionary*) obtainData
+{
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:5];
+    AGProfile *profile = accountManager.account.profile;
+    if (![profile.fullName isEqual:self.nameTextField.text]) {
+        [data setObject:self.nameTextField.text forKey:@"fullName"];
+    }
+    if (self.ageTextField.text.length > 0 && ![profile.birthday isEqual:self.datePicker.datePicker.date]) {
+        [data setObject:self.datePicker.datePicker.date forKey:@"birthday"];
+    }
+    if (![profile.shout isEqual:self.descriptionTextView.text]) {
+        [data setObject:self.descriptionTextView.text forKey:@"shout"];
+    }
+    if (![profile.shout isEqual:self.descriptionTextView.text]) {
+        [data setObject:self.descriptionTextView.text forKey:@"shout"];
+    }
+    if (profile.sex.intValue != self.sexSwitch.sexType) {
+        [data setObject:[NSNumber numberWithInt:self.sexSwitch.sexType]  forKey:@"sex"];
+    }
+    if (self.location.coordinate.latitude != profile.latitude.doubleValue || self.location.coordinate.longitude != profile.longitude.doubleValue ) {
+        [self.location appendParam:data];
+    }
+    return data;
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,6 +181,8 @@
     [self.locationButton setTitle:title forState:UIControlStateNormal];
     self.locationButton.selected = title.length != 0;
 }
+
+#pragma mark - AGDatePicker delegate
 
 - (void) finish:(BOOL)done
 {
@@ -205,10 +237,7 @@
         self.emailImageView.highlighted = YES;
     }
     else if (textField == self.ageTextField){
-        AGProfile *profile = accountManager.account.profile;
-        if (profile.birthday) {
-            datePicker.datePicker.date = profile.birthday;
-        }
+        
     }
 }
 
@@ -271,7 +300,6 @@
         [aTextView resignFirstResponder];
         return NO;
     }
-    
     return YES;
 }
 
@@ -351,12 +379,28 @@
 
 - (void) imagePickAndCrop:(AGImagePickAndCrop *)pickAndCrop didFinishingWithImage:(UIImage *)image
 {
+    imageChanged = YES;
     [self.profileImageButton setImage:image forState:UIControlStateNormal];
     imagePickAndCrop = nil;
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (IBAction)backButtonTouched:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    NSDictionary *data = [self obtainData];
+    if (data.count || imageChanged) {
+        [AGMessageUtils modifiedAlertMessage:self];
+    }
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)settingButtonTouched:(UIButton *)sender {
@@ -378,10 +422,23 @@
     [self performSegueWithIdentifier:@"ToScreenName" sender:self];
 }
 
-
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {
-        
+        NSMutableDictionary * data = [self obtainData];
+        if (data.count) {
+            AGProfile *profile = accountManager.account.profile;
+            [[AGManagerUtils managerUtils].profileManager editProfile:data context:data block:^(NSError *error, id context) {
+                if (error == nil) {
+                    [[AGAppDelegate appDelegate].coreDataController editAttributes:(NSMutableDictionary *)context managedObject:profile];
+                    [AGMessageUtils updatedAlertMessage];
+                    
+                }
+            }];
+        }
+        else{
+            [AGMessageUtils updatedAlertMessage];
+        }
+    
     }
 }
 

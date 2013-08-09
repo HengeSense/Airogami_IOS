@@ -36,42 +36,37 @@ static NSString *SignoutPath = @"account/signout.action?";
     [[AGJSONHttpHandler handler] start:path context:image block:^(NSError *error,id context, NSMutableDictionary *dict) {
         BOOL stop = YES;
         if (error) {
-            [AGMessageUtils errorNetwork:error];
+            [AGMessageUtils errorMessageHttpRequest:error];
         }
         else{
-            if (dict == nil) {
-                [AGMessageUtils errorServer];
-            }
-            else{
-                NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
-                if (status.intValue == 0) {
-                    NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
-                    if ([result isEqual:[NSNull null]]){
-                        [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.duplicate", @"msesage.signup.duplicate")];
-                    }
-                    else{
-                        //succeed
-                        stop = NO;
-                        [AGWaitUtils startWait:NSLocalizedString(@"message.account.signup.uploadingicons", @"message.account.operate.uploadingicons")];
-                        NSMutableDictionary *accountJson = [result objectForKey:@"account"];
-                        account = [[AGAppDelegate appDelegate].coreDataController saveAccount:accountJson];
-                        
-                        result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-                        NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
-                        
-                        [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
-                            [AGWaitUtils startWait:nil];
-                            if (block) {
-                                block(nil);
-                            }
-                        }];
-                        
-                    }
-                    
+            NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
+            if (status.intValue == 0) {
+                NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
+                if ([result isEqual:[NSNull null]]){
+                    [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.duplicate", @"msesage.signup.duplicate")];
                 }
                 else{
-                    [AGMessageUtils errorServer];
+                    //succeed
+                    stop = NO;
+                    [AGWaitUtils startWait:NSLocalizedString(@"message.account.signup.uploadingicons", @"message.account.operate.uploadingicons")];
+                    NSMutableDictionary *accountJson = [result objectForKey:@"account"];
+                    account = [[AGAppDelegate appDelegate].coreDataController saveAccount:accountJson];
+                    
+                    result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                    NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
+                    
+                    [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
+                        [AGWaitUtils startWait:nil];
+                        if (block) {
+                            block(nil);
+                        }
+                    }];
+                    
                 }
+                
+            }
+            else{
+                [AGMessageUtils errorMessageServer];
             }
         
         }
@@ -99,35 +94,27 @@ static NSString *SignoutPath = @"account/signout.action?";
     [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
         [AGWaitUtils startWait:nil];
         if (error) {
-            [AGMessageUtils errorNetwork:error];
+            [AGMessageUtils errorMessageHttpRequest:error];
         }
         else{
-            if (dict == nil) {
-                [AGMessageUtils errorServer];
-            }
-            else{
-                NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
-                
-                if (status.intValue == 0) {
-                    NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
-                    if ([result isEqual:[NSNull null]]){
-                        [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signin.notmatch", @"message.signin.notmatch")];
-                    }
-                    else{
-                        //succeed
-                        account = [[AGAppDelegate appDelegate].coreDataController saveAccount:result];
-                        if (block) {
-                            block();
-                        }
-                    }
+            NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
+            
+            if (status.intValue == 0) {
+                NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
+                if ([result isEqual:[NSNull null]]){
+                    [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signin.notmatch", @"message.signin.notmatch")];
                 }
                 else{
-                    [AGMessageUtils errorServer];
+                    //succeed
+                    account = [[AGAppDelegate appDelegate].coreDataController saveAccount:result];
+                    if (block) {
+                        block();
+                    }
                 }
-
             }
-            
-            
+            else{
+                [AGMessageUtils errorMessageServer];
+            }
         }
         
     }];
@@ -141,24 +128,16 @@ static NSString *SignoutPath = @"account/signout.action?";
     [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
         //[AGWaitUtils startWait:nil];
         if (error) {
-            //NSLog(@"network error%@", error.localizedDescription);
+            //NSLog(@"http request error%@", error.localizedDescription);
         }
         else{
-            if (dict == nil) {
-                //NSLog(@"server error%@", error.localizedDescription);
+            NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
+            if (status.intValue == 0) {
+                //NSLog(@"signout succeeded");
             }
             else{
-                NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
-                if (status.intValue == 0) {
-                     //NSLog(@"signout succeeded");
-                }
-                else{
-                     //NSLog(@"server error");
-                }
-                
+                //NSLog(@"server error");
             }
-            
-            
         }
         
     }];

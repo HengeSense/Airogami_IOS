@@ -9,6 +9,7 @@
 #import "AGJSONHttpHandler.h"
 #import "AGDefines.h"
 #import "AGURLConnection.h"
+#import "AGMessageUtils.h"
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
@@ -106,13 +107,11 @@
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
     [connection cancel];
-    NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:desc forKey:NSLocalizedDescriptionKey];
-    //NSError *error = [[NSError alloc] initWithDomain:@"Network" code:-1 userInfo:details];
+    NSError *error = [AGMessageUtils errorServer:-1 key:nil];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if(block){
-        block(nil,context, nil);
+        block(error,context, nil);
     }
 }
 
@@ -146,10 +145,15 @@
     NSMutableDictionary *dict = nil;
     dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    NSError *error = nil;
+    if (dict == nil) {
+         error = [AGMessageUtils errorServer:-1 key:nil];
+    }
+
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {
-         block(nil,context, dict);
+         block(error,context, dict);
     }
 
 }

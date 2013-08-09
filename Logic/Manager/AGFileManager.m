@@ -21,17 +21,24 @@ static NSURL *rootUrl;
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSArray *urls = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
         rootUrl = [urls objectAtIndex:0];
-        DataUrl = [NSURL URLWithString:@"Data" relativeToURL:rootUrl];
-        DatabaseUrl = [NSURL URLWithString:@"Data/DB" relativeToURL:rootUrl];
-        ConfigUrl = [NSURL URLWithString:@"Config" relativeToURL:rootUrl];
-        if (![fileManager fileExistsAtPath:[DataUrl absoluteString]]) {
+        DataUrl = [rootUrl URLByAppendingPathComponent:@"Data"];
+        DatabaseUrl = [rootUrl URLByAppendingPathComponent:@"Data/DB"];
+        ConfigUrl = [rootUrl URLByAppendingPathComponent:@"Config"];
+        if (![fileManager fileExistsAtPath:DataUrl.path]) {
             [fileManager createDirectoryAtURL:DataUrl withIntermediateDirectories:YES attributes:nil error:nil];
         }
-        if (![fileManager fileExistsAtPath:[DatabaseUrl absoluteString]]) {
+        if (![fileManager fileExistsAtPath:DatabaseUrl.path]) {
             [fileManager createDirectoryAtURL:DatabaseUrl withIntermediateDirectories:YES attributes:nil error:nil];
         }
-        if (![fileManager fileExistsAtPath:[ConfigUrl absoluteString]]) {
-            [fileManager createDirectoryAtURL:ConfigUrl withIntermediateDirectories:YES attributes:nil error:nil];
+        if (![fileManager fileExistsAtPath:ConfigUrl.path]) {
+            NSError *error;
+            [fileManager createDirectoryAtURL:ConfigUrl withIntermediateDirectories:YES attributes:nil error:&error];
+#ifdef IS_DEBUG
+            if (error) {
+                NSLog(@"AGFileManager init: %@", error.localizedDescription);
+            }
+            
+#endif
         }
     }
     return self;

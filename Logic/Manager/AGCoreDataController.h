@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "AGCoreData.h"
 #import "AGAccount.h"
+#import "AGProfile.h"
 
 @interface AGCoreDataController : NSObject
 
 @property(nonatomic, strong) AGCoreData * coreData;
 
 - (AGAccount*) saveAccount:(NSMutableDictionary*)jsonDictionary;
+- (BOOL) editAttributes:(NSMutableDictionary*)attributeDictionary managedObject:(NSManagedObject*)managedObject;
 
 @end

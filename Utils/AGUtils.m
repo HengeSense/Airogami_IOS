@@ -44,7 +44,17 @@ static NSDateFormatter *dateFormatter;
 + (void)encodeParams:(NSDictionary*)params path:(NSMutableString*)path device:(BOOL)yes
 {
     [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString *value = obj;
+        NSString *value=@"";
+        if ([obj isKindOfClass:[NSString class]]) {
+            value = obj;
+        }
+        else if([obj isKindOfClass:[NSNumber class]]) {
+            value = [((NSNumber*)obj) stringValue];
+        }
+        else if([obj isKindOfClass:[NSDate class]]) {
+            value = [AGUtils dateToString:obj];
+        }
+        
         [path appendString:key];
         [path appendString:@"="];
         [path appendString:[value encodeURIComponent]];
@@ -56,6 +66,9 @@ static NSDateFormatter *dateFormatter;
         [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
         [path appendString:AGApplicationVersion];
     }
+#ifdef IS_DEBUG
+    NSLog(@"Encode params: %@",path);
+#endif
 }
 
 + (NSString*) dateToString:(NSDate*)date

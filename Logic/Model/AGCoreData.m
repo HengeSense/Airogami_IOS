@@ -73,7 +73,7 @@
     }
     NSString *DBName = @"Database.sqlite";
 	NSURL *storeUrl = [[AGManagerUtils managerUtils].fileManager urlForDatabase];
-    storeUrl = [NSURL URLWithString:DBName relativeToURL:storeUrl];
+    storeUrl = [storeUrl URLByAppendingPathComponent:DBName];
 	
 	NSError *error;
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];

@@ -26,5 +26,6 @@
 - (NSString*) validString;
 - (BOOL) validate;
 - (NSString*) stringAt:(int) index;
+- (void) appendParam:(NSMutableDictionary*)params;
 
 @end

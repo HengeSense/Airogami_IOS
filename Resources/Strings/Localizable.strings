@@ -17,6 +17,12 @@
 "error.account.newpassword.short" = "The new password is too short";
 "message.account.signup.uploadingicons" = "Uploading images";
 "message.account.signin.doing" = "Signin";
+//general
+"message.general.edit.unsaved.message" = "Give up changes you have made?";
+"message.general.edit.unsaved.giveup" = "Give up";
+"message.general.edit.succeed" = "Update successfully";
+"message.general.cancel" = "Cancel";
+"message.general.ok" = "OK";
 //signup
 "error.signup.location.choose.invalid" = "Please specify your city";
 "message.signup.succeed" = "Sign up successfully";

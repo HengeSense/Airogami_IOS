@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^AGUploadIconFinishBlock)(NSError* error, id context);
+typedef void (^AGEditProfileFinishBlock)(NSError* error, id context);
 
 @interface AGProfileManager : NSObject
 
 - (void) uploadIcons:(NSMutableDictionary*)params image:(UIImage*)image context:(id)context block:(AGUploadIconFinishBlock)block;
+
+- (void) editProfile:(NSMutableDictionary*)params context:(id)context block:(AGEditProfileFinishBlock)block;
 
 @end

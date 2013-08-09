@@ -21,6 +21,7 @@
             if (animating == NO) {
                 animating = YES;
                 UIWindow *window = [[UIApplication sharedApplication].delegate window];
+                [window endEditing:YES];
                 CGRect rect = [UIScreen mainScreen].bounds;
                 UIView *view = [[UIView alloc] initWithFrame:rect];
                 view.backgroundColor = [UIColor colorWithWhite:0 alpha:.8];

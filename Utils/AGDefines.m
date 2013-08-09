@@ -32,4 +32,5 @@ NSString * AGAccountCurrentPasswordShortKey = @"error.account.currentpassword.sh
 NSString * AGAccountNewPasswordShortKey = @"error.account.newpassword.short";
 //logic
 NSString * AGLogicJSONStatusKey = @"status";
+NSString * AGLogicJSONMessageKey = @"message";
 NSString * AGLogicJSONResultKey = @"result";

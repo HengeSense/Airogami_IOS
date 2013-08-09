@@ -13,7 +13,9 @@
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;
 + (void) alertMessageWithTitle:(NSString *)title error:(NSError *)error;
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
-+ (void) errorNetwork:(NSError*)error;
-+ (void) errorServer;
-
++ (void) modifiedAlertMessage:(id<UIAlertViewDelegate>)delegate;
++ (void) updatedAlertMessage;
++ (void) errorMessageHttpRequest:(NSError*)error;
++ (void) errorMessageServer;
++ (NSError*) errorServer:(int)code key:(NSString*)key;
 @end

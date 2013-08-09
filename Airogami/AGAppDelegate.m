@@ -21,6 +21,7 @@ static AGAppDelegate *AppDelegate;
 @implementation AGAppDelegate
 
 @synthesize coreDataController;
+@synthesize appConfig;
 
 +(AGAppDelegate*) appDelegate
 {
@@ -31,6 +32,7 @@ static AGAppDelegate *AppDelegate;
 {
     if (self = [super init]) {
         AppDelegate = self;
+        appConfig = [AGAppConfig appConfig];
         coreDataController = [[AGCoreDataController alloc] init];
     }
     return self;

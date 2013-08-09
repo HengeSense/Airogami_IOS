@@ -35,4 +35,12 @@
     return account;
 }
 
+- (BOOL) editAttributes:(NSMutableDictionary*)attributeDictionary managedObject:(NSManagedObject *)managedObject
+{
+    [attributeDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [managedObject setValue:obj forKey:key];
+    }];
+    return [coreData save];
+}
+
 @end

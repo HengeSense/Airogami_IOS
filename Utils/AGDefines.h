@@ -60,6 +60,7 @@ extern  NSString * AGAccountScreenNameShortKey;
 extern  NSString * AGAccountIconRequireKey ;
 
 extern  NSString * AGLogicJSONStatusKey;
+extern  NSString * AGLogicJSONMessageKey;
 extern  NSString * AGLogicJSONResultKey;
 
 

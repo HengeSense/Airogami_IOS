@@ -94,6 +94,22 @@
     return country.length == 0;
 }
 
+- (void) appendParam:(NSMutableDictionary*)params
+{
+    [params setObject:[NSNumber numberWithDouble:self.coordinate.longitude] forKey:@"longitude"];
+    [params setObject:[NSNumber numberWithDouble:self.coordinate.latitude] forKey:@"latitude"];
+    if (country) {
+        [params setObject:country forKey:@"country"];
+    }
+    if (subArea) {
+        [params setObject:subArea forKey:@"city"];
+    }
+    if (area) {
+        [params setObject:area forKey:@"province"];
+    }
+
+}
+
 + (AGLocation*) locationWithProfile:(AGProfile*) profile
 {
     CLLocationCoordinate2D coordinate;

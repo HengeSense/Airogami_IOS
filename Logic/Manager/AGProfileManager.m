@@ -11,6 +11,12 @@
 #import "AGUIUtils.h"
 #import "UIImage+Addition.h"
 #import "AGDefines.h"
+#import "AGUtils.h"
+#import "AGWaitUtils.h"
+#import "AGJSONHttpHandler.h"
+#import "AGMessageUtils.h"
+
+static NSString *EditProfilePath = @"account/editProfile.action?";
 
 
 @implementation AGProfileManager
@@ -78,6 +84,37 @@
         if (block) {
             block(error, context);
         }
+        
+    }];
+}
+
+- (void) editProfile:(NSMutableDictionary*)params context:(id)context block:(AGEditProfileFinishBlock)block
+{
+    NSMutableString *path = [NSMutableString stringWithCapacity:1024];
+    [path appendString:EditProfilePath];
+    
+    [AGUtils encodeParams:params path:path device:NO];
+    [AGWaitUtils startWait:@""];
+    
+    [[AGJSONHttpHandler handler] start:path context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
+        [AGWaitUtils startWait:nil];
+        if (error) {
+            [AGMessageUtils errorMessageHttpRequest:error];;
+        }
+        else{
+            NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
+            if (status.intValue == 0) {
+                //succeed
+#ifdef IS_DEBUG
+                NSLog(@"edit profile successfully");
+#endif
+            }
+            else{
+                error = [AGMessageUtils errorServer:status.intValue key:[dict objectForKey:AGLogicJSONMessageKey]];
+                [AGMessageUtils errorMessageServer];
+            }
+        }
+        block(error, context);
         
     }];
 }
