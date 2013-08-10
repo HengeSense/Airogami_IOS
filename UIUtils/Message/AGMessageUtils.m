@@ -9,7 +9,8 @@
 #import "AGMessageUtils.h"
 #import "AGUIErrorAnimation.h"
 
-static NSString *ServerUnkownMessageKey = @"message.server.unkown";
+static NSString *ServerUnkownMessageKey = @"message.server.unkown.message";
+static NSString *ServerUnkownTitleKey = @"message.server.unkown.title";
 static NSString *UnsavedMessage = @"message.general.edit.unsaved.message";
 static NSString *UnsavedGiveup = @"message.general.edit.unsaved.giveup";
 static NSString *UnsavedCancel = @"message.general.cancel";
@@ -36,12 +37,22 @@ static NSString *OK = @"message.general.ok";
     [alert show];
 }
 
++ (void) alertMessageWithError:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    NSString *title = [error.userInfo objectForKey:AGErrorTitleKey];
+    alert.title = NSLocalizedString(title, title);
+    alert.message = [error localizedDescription];
+    [alert addButtonWithTitle:NSLocalizedString(OK, OK)];
+    [alert show];
+}
+
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView *)view
 {
     [AGUIErrorAnimation startWithTitle:NSLocalizedString(title, title) view:view];
 }
 
-+ (void) updatedAlertMessage
++ (void) alertMessageUpdated
 {
     UIAlertView *alert = [[UIAlertView alloc] init];
     alert.message = NSLocalizedString(UpdateSucceed, UpdateSucceed);
@@ -49,36 +60,34 @@ static NSString *OK = @"message.general.ok";
     [alert show];
 }
 
-+ (void) modifiedAlertMessage:(id<UIAlertViewDelegate>)delegate
++ (void) alertMessageModified:(id<UIAlertViewDelegate>)delegate
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(UnsavedMessage, UnsavedMessage) delegate:delegate cancelButtonTitle:NSLocalizedString(UnsavedCancel, UnsavedCancel) otherButtonTitles:NSLocalizedString(UnsavedGiveup, UnsavedGiveup), nil];
     [alertView show];
-}
+}//error.network.connection
 
-+(void) errorMessageHttpRequest:(NSError*)error
++(NSError*) errorServer:(NSNumber*)number titleKey:(NSString*)titleKey msgKey:(NSString*)msgKey
 {
-    if ([@"Server" isEqual:error.domain]) {
-        [AGMessageUtils alertMessageWithTitle:NSLocalizedString(@"error.network.connection", @"error.network.connection") error:error];
+    if (titleKey == nil) {
+        titleKey = ServerUnkownTitleKey;
     }
-    else{
-        [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"", ServerUnkownMessageKey)];
+    if (msgKey == nil) {
+        msgKey = ServerUnkownMessageKey;
     }
-
+    return [AGMessageUtils error:number.intValue domain:@"Server" titleKey:titleKey msgKey:msgKey];
 }
 
-+(void) errorMessageServer
++ (NSError*) errorServer
 {
-    [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(ServerUnkownMessageKey, ServerUnkownMessageKey)];
+    return [AGMessageUtils errorServer:nil titleKey:nil msgKey:nil];
 }
 
-+(NSError*) errorServer:(int)code key:(NSString*)key
++(NSError*) error:(int)code domain:(NSString*)domain titleKey:(NSString*)titleKey msgKey:(NSString*)msgKey
 {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    if (key == nil) {
-        key = ServerUnkownMessageKey;
-    }
-    [details setValue:NSLocalizedString(key, key) forKey:NSLocalizedDescriptionKey];
-    NSError *error = [[NSError alloc] initWithDomain:@"Server" code:code userInfo:details];
+    [details setValue:NSLocalizedString(msgKey, msgKey) forKey:NSLocalizedDescriptionKey];
+    [details setValue:NSLocalizedString(titleKey, titleKey) forKey:AGErrorTitleKey];
+    NSError *error = [[NSError alloc] initWithDomain:domain code:code userInfo:details];
     return error;
 }
 

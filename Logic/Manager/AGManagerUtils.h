@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "AGAccountManager.h"
 #import "AGProfileManager.h"
-#import "AGFileManager.h"
 #import "AGDataManger.h"
 
 @interface AGManagerUtils : NSObject
@@ -18,7 +17,6 @@
 
 @property(nonatomic, strong) AGAccountManager *accountManager;
 @property(nonatomic, strong) AGProfileManager *profileManager;
-@property(nonatomic, strong) AGFileManager *fileManager;
 @property(nonatomic, strong) AGDataManger *dataManager;
 
 @end

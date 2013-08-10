@@ -19,6 +19,7 @@
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
 #import "AGAppDelegate.h"
+#import "AGAuthenticate.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
@@ -130,8 +131,12 @@
     self.location = [AGLocation locationWithProfile:profile];
     [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
     self.descriptionTextView.text = profile.shout;
-    NSURL *url = [[AGManagerUtils managerUtils].dataManager accountIconUrl:profile.accountId small:YES];
+    self.emailTextField.text = profile.account.authenticate.email;
+    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+    NSURL *url = [dataManager accountIconUrl:profile.accountId small:YES];
     [self.profileImageButton setImageUrl:url placeImage:nil];
+    url = [dataManager accountIconUrl:profile.accountId small:NO];
+    self.profileImageButton.mediumUrl = url;
     //self.emailTextField.text = profile.
 }
 
@@ -396,7 +401,7 @@
 - (IBAction)backButtonTouched:(UIButton *)sender {
     NSDictionary *data = [self obtainData];
     if (data.count || imageChanged) {
-        [AGMessageUtils modifiedAlertMessage:self];
+        [AGMessageUtils alertMessageModified:self];
     }
     else{
         [self.navigationController popViewControllerAnimated:YES];
@@ -430,13 +435,13 @@
             [[AGManagerUtils managerUtils].profileManager editProfile:data context:data block:^(NSError *error, id context) {
                 if (error == nil) {
                     [[AGAppDelegate appDelegate].coreDataController editAttributes:(NSMutableDictionary *)context managedObject:profile];
-                    [AGMessageUtils updatedAlertMessage];
+                    [AGMessageUtils alertMessageUpdated];
                     
                 }
             }];
         }
         else{
-            [AGMessageUtils updatedAlertMessage];
+            [AGMessageUtils alertMessageUpdated];
         }
     
     }

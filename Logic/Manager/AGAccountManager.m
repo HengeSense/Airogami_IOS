@@ -15,17 +15,32 @@
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
 #import "AGAppDelegate.h"
+#import "AGRootViewController.h"
 
 static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
 static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 static NSString *SignoutPath = @"account/signout.action?";
+//
+static NSString *SignupDuplicate = @"message.signup.duplicate";
+static NSString *SignupUploadingIcons = @"message.account.operate.uploadingicons";
+static NSString *SigninNotMatch = @"error.signin.notmatch.message";
+static NSString *SigninNeeded = @"error.signin.need.title";
+static NSString *SigninOther = @"error.signin.other.message";
 
 @implementation AGAccountManager
 
 @synthesize account;
 
-- (void) signup:(NSMutableDictionary*) params image:(UIImage *)image block:(AGAccountSignDoneBlock)block
+- (id)init
+{
+    if (self = [super init]) {
+        account = [[AGAppDelegate appDelegate].appConfig obtainAccount];
+    }
+    return self;
+}
+
+- (void) signup:(NSMutableDictionary*) params image:(UIImage *)image block:(AGAccountSignupDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:1024];
     [path appendString:SignupPath];
@@ -36,19 +51,19 @@ static NSString *SignoutPath = @"account/signout.action?";
     [[AGJSONHttpHandler handler] start:path context:image block:^(NSError *error,id context, NSMutableDictionary *dict) {
         BOOL stop = YES;
         if (error) {
-            [AGMessageUtils errorMessageHttpRequest:error];
+            [AGMessageUtils alertMessageWithError:error];
         }
         else{
             NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
             if (status.intValue == 0) {
                 NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
                 if ([result isEqual:[NSNull null]]){
-                    [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signup.duplicate", @"msesage.signup.duplicate")];
+                    [AGMessageUtils alertMessageWithTitle:@"" message:SignupDuplicate];
                 }
                 else{
                     //succeed
                     stop = NO;
-                    [AGWaitUtils startWait:NSLocalizedString(@"message.account.signup.uploadingicons", @"message.account.operate.uploadingicons")];
+                    [AGWaitUtils startWait:NSLocalizedString(SignupUploadingIcons, SignupUploadingIcons)];
                     NSMutableDictionary *accountJson = [result objectForKey:@"account"];
                     account = [[AGAppDelegate appDelegate].coreDataController saveAccount:accountJson];
                     
@@ -58,7 +73,7 @@ static NSString *SignoutPath = @"account/signout.action?";
                     [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
                         [AGWaitUtils startWait:nil];
                         if (block) {
-                            block(nil);
+                            block(YES);
                         }
                     }];
                     
@@ -66,7 +81,11 @@ static NSString *SignoutPath = @"account/signout.action?";
                 
             }
             else{
-                [AGMessageUtils errorMessageServer];
+#ifdef IS_DEBUG
+                NSLog(@"Sign up error: %@", [dict objectForKey:AGLogicJSONMessageKey]);
+#endif
+                error = [AGMessageUtils errorServer];
+                [AGMessageUtils alertMessageWithError:error];
             }
         
         }
@@ -78,23 +97,33 @@ static NSString *SignoutPath = @"account/signout.action?";
     }];
 }
 
-- (void) signin:(NSMutableDictionary*) params isEmail:(BOOL)isEmail block:(AGAccountSignDoneBlock)block
+- (void) signin:(NSMutableDictionary*) params automatic:(BOOL)automatic animated:(BOOL)animated context:(id)context  block:(AGAccountSigninDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:128];
-    if (isEmail) {
+    if ([params objectForKey:@"email"]) {
         [path appendString:EmailSigninPath];
     }
     else{
         [path appendString:ScreenNameSigninPath];
     }
     
-    [AGUtils encodeParams:params path:path device:YES];
-    [AGWaitUtils startWait:@""];
+    NSString *password = [params objectForKey:@"password"];
     
-    [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
-        [AGWaitUtils startWait:nil];
+    [AGUtils encodeParams:params path:path device:YES];
+    if (animated) {
+        [AGWaitUtils startWait:@""];
+    }
+    
+    [[AGJSONHttpHandler handler] start:path context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
+        if (animated) {
+            [AGWaitUtils startWait:nil];
+        }
+        BOOL succeed = NO;
         if (error) {
-            [AGMessageUtils errorMessageHttpRequest:error];
+            if (animated) {
+                [AGMessageUtils alertMessageWithError:error];
+            }
+        
         }
         else{
             NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
@@ -102,20 +131,47 @@ static NSString *SignoutPath = @"account/signout.action?";
             if (status.intValue == 0) {
                 NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
                 if ([result isEqual:[NSNull null]]){
-                    [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(@"message.signin.notmatch", @"message.signin.notmatch")];
+                    //not match
+                    if (animated) {
+                        [AGMessageUtils alertMessageWithTitle:@"" message:SigninNotMatch];
+                    }
+                    if (automatic) {
+                        [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninNotMatch];
+                        [[AGAppDelegate appDelegate].appConfig resetAppAccount];
+                        [[AGRootViewController rootViewController] switchToSign];
+                    }
+                
                 }
                 else{
                     //succeed
                     account = [[AGAppDelegate appDelegate].coreDataController saveAccount:result];
-                    if (block) {
-                        block();
+                    AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+                    if (automatic) {
+                        //signined at other place
+                        if ([appConfig accountUpdated:account]) {
+                            [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninOther];
+                            [appConfig resetAppAccount];
+                            [[AGRootViewController rootViewController] switchToSign];
+                        }
                     }
+                    else{
+                        [appConfig updateAppAccount:account password:password];
+                    }
+                    succeed = YES;
                 }
             }
             else{
-                [AGMessageUtils errorMessageServer];
+                error = [AGMessageUtils errorServer];
+                if (animated) {
+                    [AGMessageUtils alertMessageWithError:error];
+                }
+            
             }
         }
+        if (block) {
+           block(error, succeed);
+        }
+        
         
     }];
 }
@@ -141,6 +197,20 @@ static NSString *SignoutPath = @"account/signout.action?";
         }
         
     }];
+}
+
+- (void) autoSignin
+{
+    AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+    NSMutableDictionary *params = [appConfig siginParams];
+    if (params.count) {
+        [self signin:params automatic:YES animated:NO context:nil block:^(NSError *error, BOOL succeed) {
+#ifdef IS_DEBUG
+            NSLog(@"autoSignin: succeed=%d", succeed);
+#endif
+        }];
+    }
+
 }
 
 @end

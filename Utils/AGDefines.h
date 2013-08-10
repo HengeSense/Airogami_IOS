@@ -63,5 +63,14 @@ extern  NSString * AGLogicJSONStatusKey;
 extern  NSString * AGLogicJSONMessageKey;
 extern  NSString * AGLogicJSONResultKey;
 
+extern  NSString * AGLogicAccountEmailKey;
+extern  NSString * AGLogicAccountPasswordKey;
+extern  NSString * AGLogicAccountScreenNameKey;
+extern int AGLogicJSONStatusNotSignin;
+
+//error
+extern NSString *AGHttpFailErrorTitleKey;
+extern NSString *AGErrorTitleKey;
+
 
 #endif

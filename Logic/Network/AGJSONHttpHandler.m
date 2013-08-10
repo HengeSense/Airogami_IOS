@@ -107,7 +107,7 @@
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
     [connection cancel];
-    NSError *error = [AGMessageUtils errorServer:-1 key:nil];
+    NSError *error = [AGMessageUtils errorServer];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if(block){
@@ -127,7 +127,10 @@
   didFailWithError:(NSError *)error
 {
     // inform the user
+#ifdef IS_DEBUG
     NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+#endif
+    [[error.userInfo mutableCopy] setObject:AGHttpFailErrorTitleKey forKey:AGErrorTitleKey];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {
@@ -147,9 +150,8 @@
     //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     NSError *error = nil;
     if (dict == nil) {
-         error = [AGMessageUtils errorServer:-1 key:nil];
+         error = [AGMessageUtils errorServer];
     }
-
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {

@@ -33,8 +33,13 @@
 {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [window addSubview:self];
+    CGRect frame;
+    CGSize size = window.bounds.size;
+    frame.size = self.image.size;
+    frame.origin.x = (size.width - frame.size.width) / 2;
+    frame.origin.y = (size.height - frame.size.height) / 2;
     [UIView beginAnimations:@"ProfileImageButtonAnimations" context:nil];
-    self.frame = window.bounds;
+    self.frame = frame;
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(showDidStop:finished:context:)];
     [UIView commitAnimations];

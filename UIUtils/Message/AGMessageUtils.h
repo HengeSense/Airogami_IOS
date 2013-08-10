@@ -12,10 +12,10 @@
 
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;
 + (void) alertMessageWithTitle:(NSString *)title error:(NSError *)error;
++ (void) alertMessageWithError:(NSError *)error;
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
-+ (void) modifiedAlertMessage:(id<UIAlertViewDelegate>)delegate;
-+ (void) updatedAlertMessage;
-+ (void) errorMessageHttpRequest:(NSError*)error;
-+ (void) errorMessageServer;
-+ (NSError*) errorServer:(int)code key:(NSString*)key;
++ (void) alertMessageModified:(id<UIAlertViewDelegate>)delegate;
++ (void) alertMessageUpdated;
++ (NSError*) errorServer:(NSNumber*)code titleKey:(NSString*)titleKey msgKey:(NSString*)key;
++ (NSError*) errorServer;//unknown error
 @end

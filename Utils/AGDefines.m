@@ -10,8 +10,8 @@ NSString* AGApplicationVersion = @"1.0";
 NSString* AGWebServerUrl = @"http://192.168.0.7:8080/";
 NSString* AGDataServerUrl = @"https://airogami-user-bucket.s3-us-west-2.amazonaws.com/";
 
-const CGSize AGAccountIconSizeMedium = {256, 256};
-const CGSize AGAccountIconSizeSmall = {64, 64};
+const CGSize AGAccountIconSizeMedium = {512, 512};
+const CGSize AGAccountIconSizeSmall = {128, 128};
 const int AGAccountDescriptionMaxLength = 250;
 const int AGAccountNameMaxLength = 35;
 const int AGAccountScreenNameMaxLength = 35;
@@ -34,3 +34,12 @@ NSString * AGAccountNewPasswordShortKey = @"error.account.newpassword.short";
 NSString * AGLogicJSONStatusKey = @"status";
 NSString * AGLogicJSONMessageKey = @"message";
 NSString * AGLogicJSONResultKey = @"result";
+int AGLogicJSONStatusNotSignin = 1;
+
+NSString * AGLogicAccountEmailKey = @"email";
+NSString * AGLogicAccountPasswordKey = @"password";
+NSString * AGLogicAccountScreenNameKey = @"screenName";
+
+//error
+NSString *AGHttpFailErrorTitleKey = @"error.connection.fail.title";
+NSString *AGErrorTitleKey = @"title";

@@ -17,7 +17,7 @@
 
 //core data class
 - (NSManagedObject*) saveOrUpdate:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName;
-
+- (NSManagedObject*) findById:(id)objectID withEntityName:(NSString*)entityName;
 - (BOOL) save;
 
 @end

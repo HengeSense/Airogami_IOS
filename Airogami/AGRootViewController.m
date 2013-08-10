@@ -7,6 +7,7 @@
 //
 
 #import "AGRootViewController.h"
+#import "AGAppDelegate.h"
 
 static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
@@ -55,6 +56,12 @@ enum{
 - (void) initialize
 {
     rootViewController = self;
+    if ([[AGAppDelegate appDelegate].appConfig needSignin]) {
+        rootNavigateTo = AGRootToSign;
+    }
+    else{
+        rootNavigateTo = AGRootToMain;
+    }
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self prepareForSign];

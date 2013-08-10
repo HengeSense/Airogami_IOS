@@ -4,6 +4,7 @@
         <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="updateCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="accountStat" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGAccountStat" inverseName="account" inverseEntity="AGAccountStat" syncable="YES"/>
+        <relationship name="authenticate" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAuthenticate" inverseName="account" inverseEntity="AGAuthenticate" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="account" inverseEntity="AGChainMessage" syncable="YES"/>
         <relationship name="chains" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChain" inverseName="account" inverseEntity="AGChain" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="account" inverseEntity="AGMessage" syncable="YES"/>
@@ -16,11 +17,15 @@
     </entity>
     <entity name="AGAccountStat" representedClassName="AGAccountStat" syncable="YES">
         <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="lastSigninTime" attributeType="Date" syncable="YES"/>
+        <attribute name="signinCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="accountStat" inverseEntity="AGAccount" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="accountId"/>
         </userInfo>
+    </entity>
+    <entity name="AGAuthenticate" representedClassName="AGAuthenticate" syncable="YES">
+        <attribute name="email" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="account" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="authenticate" inverseEntity="AGAccount" syncable="YES"/>
     </entity>
     <entity name="AGCategory" representedClassName="AGCategory" syncable="YES">
         <attribute name="categoryId" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
@@ -137,14 +142,15 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="AGAccount" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGAccountStat" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGCategory" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGChain" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGChainMessage" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGChainMessageId" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGMessage" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGPlane" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGProfile" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGAccount" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="AGAccountStat" positionX="-153" positionY="225" width="128" height="90"/>
+        <element name="AGCategory" positionX="-360" positionY="-243" width="128" height="90"/>
+        <element name="AGChain" positionX="142" positionY="0" width="128" height="285"/>
+        <element name="AGChainMessage" positionX="259" positionY="-27" width="128" height="150"/>
+        <element name="AGChainMessageId" positionX="187" positionY="-216" width="128" height="90"/>
+        <element name="AGMessage" positionX="34" positionY="-333" width="128" height="135"/>
+        <element name="AGPlane" positionX="-191" positionY="-288" width="128" height="375"/>
+        <element name="AGProfile" positionX="-441" positionY="18" width="128" height="285"/>
+        <element name="AGAuthenticate" positionX="7" positionY="309" width="128" height="75"/>
     </elements>
 </model>

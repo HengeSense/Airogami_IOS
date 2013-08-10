@@ -43,4 +43,10 @@
     return [coreData save];
 }
 
+- (AGAccount*) findAccount:(NSNumber*)accountId
+{
+    return (AGAccount*)[coreData findById:accountId withEntityName:@"AGAccount"];
+}
+
+
 @end

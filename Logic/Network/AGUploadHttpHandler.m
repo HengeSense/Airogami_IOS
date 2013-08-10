@@ -9,6 +9,7 @@
 #import "AGUploadHttpHandler.h"
 #import "AGURLConnection.h"
 #import "AGDefines.h"
+#import "AGMessageUtils.h"
 
 static int AGUploadHttpHandlerDefaultCapacity = 1024;
 
@@ -160,9 +161,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
     [connection cancel];
-    NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:desc forKey:NSLocalizedDescriptionKey];
-    NSError *error = [[NSError alloc] initWithDomain:@"Server Error" code:-1 userInfo:details];
+    NSError *error = [AGMessageUtils errorServer];
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     //NSLog(@"%@", desc);
     id context = [connection valueForKey:@"Context"];
@@ -183,8 +182,10 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
 - (void)connection:(AGURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    // inform the user
-    //NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+#ifdef IS_DEBUG
+    NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+#endif
+    [[error.userInfo mutableCopy] setObject:AGHttpFailErrorTitleKey forKey:AGErrorTitleKey];
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if(block){

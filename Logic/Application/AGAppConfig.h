@@ -8,13 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "AGAppAccount.h"
+#import "AGObject.h"
+#import "AGAccount.h"
 
-@interface AGAppConfig : NSObject
+@interface AGAppConfig : AGObject
 
 + (AGAppConfig*)appConfig;
 
 @property(nonatomic, assign) BOOL once;
 @property(nonatomic, strong) NSString *appVersion;
 @property(nonatomic, strong) AGAppAccount *appAccount;
+
+- (void) save;
+- (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;
+- (void) resetAppAccount;
+- (BOOL) needSignin;
+- (BOOL) accountUpdated:(AGAccount*)account;
+- (AGAccount*) obtainAccount;
+- (NSMutableDictionary*) siginParams;
 
 @end

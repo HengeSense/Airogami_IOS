@@ -8,10 +8,13 @@
 
 #import "AGProfileImageButton.h"
 #import "AGPhotoView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import <QuartzCore/QuartzCore.h>
 
 @implementation AGProfileImageButton
 
+@synthesize mediumUrl;
 
 - (void)initialize
 {
@@ -26,7 +29,11 @@
     CGRect frame = [self.imageView convertRect:self.imageView.bounds toView:window];
 
     AGPhotoView *photoView = [[AGPhotoView alloc] initWithFrame:frame];
-    photoView.image = self.imageView.image;
+    [photoView setImageWithURL:mediumUrl placeholderImage:self.imageView.image options:SDWebImageProgressiveDownload progress:^(NSUInteger receivedSize, long long expectedSize) {
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        
+    }];
     [photoView preview];
     
 }

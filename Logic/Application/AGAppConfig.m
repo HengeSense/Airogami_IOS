@@ -7,6 +7,11 @@
 //
 
 #import "AGAppConfig.h"
+#import "AGFileManager.h"
+#import "AGAccountStat.h"
+#import "AGAuthenticate.h"
+#import "AGProfile.h"
+#import "AGAppDelegate.h"
 #import "AGManagerUtils.h"
 
 static NSString *configName = @"AppConfig";
@@ -26,14 +31,13 @@ static NSString *path;
 
 + (AGAppConfig*)appConfig
 {
-    NSURL *url = [[AGManagerUtils managerUtils].fileManager urlForConfig];
+    NSURL *url = [[AGFileManager fileManager] urlForConfig];
     url = [url URLByAppendingPathComponent:configName];
     path = url.path;
     AGAppConfig *appConfig = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     if (appConfig == nil) {
         appConfig = [[AGAppConfig alloc] init];
-        BOOL succeed = [NSKeyedArchiver archiveRootObject:appConfig toFile:path];
-        NSLog(@"%@", [NSNumber numberWithBool:succeed]);
+        [NSKeyedArchiver archiveRootObject:appConfig toFile:path];
     }
     else{
         if ([appConfig.appVersion isEqualToString:AGApplicationVersion] == NO) {
@@ -52,6 +56,76 @@ static NSString *path;
         appVersion = AGApplicationVersion;
     }
     return self;
+}
+
+- (NSArray*) codingProperties
+{
+    static NSArray *keys;
+    if (keys == nil) {
+        keys = [self propertyKeys];
+    }
+    return keys;
+}
+
+- (void) save
+{
+    [NSKeyedArchiver archiveRootObject:self toFile:path];
+}
+
+- (void) updateAppAccount:(AGAccount*)account password:(NSString *)password
+{
+    if (appAccount == nil) {
+        appAccount = [[AGAppAccount alloc] init];
+    }
+    appAccount.accountId = account.accountId;
+    appAccount.email = account.authenticate.email;
+    appAccount.screenName = account.profile.screenName;
+    appAccount.password = password;
+    appAccount.signinCount = account.accountStat.signinCount;
+    [self save];
+}
+
+- (void) resetAppAccount
+{
+    self.appAccount = nil;
+    [self save];
+}
+
+- (BOOL) needSignin
+{
+    return [AGManagerUtils managerUtils].accountManager.account == nil;
+}
+
+- (BOOL) accountUpdated:(AGAccount*)account
+{
+    if ([account.accountStat.signinCount isEqual:self.appAccount.signinCount] == NO) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSMutableDictionary*) siginParams
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    if (appAccount) {
+        [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
+        if (appAccount.email.length > 0) {
+            [params setObject:appAccount.email forKey:AGLogicAccountEmailKey];
+        }
+        else{
+            [params setObject:appAccount.screenName forKey:AGLogicAccountScreenNameKey];
+        }
+    }
+    
+    return params;
+}
+
+- (AGAccount*) obtainAccount
+{
+    if (appAccount) {
+        return [[AGAppDelegate appDelegate].coreDataController findAccount:appAccount.accountId];
+    }
+    return nil;
 }
 
 @end

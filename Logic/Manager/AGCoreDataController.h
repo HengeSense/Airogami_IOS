@@ -17,5 +17,5 @@
 
 - (AGAccount*) saveAccount:(NSMutableDictionary*)jsonDictionary;
 - (BOOL) editAttributes:(NSMutableDictionary*)attributeDictionary managedObject:(NSManagedObject*)managedObject;
-
+- (AGAccount*) findAccount:(NSNumber*)accountId;
 @end

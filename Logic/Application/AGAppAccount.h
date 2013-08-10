@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGObject.h"
 
-@interface AGAppAccount : NSObject
+@interface AGAppAccount : AGObject
 
 @property(nonatomic, strong) NSNumber *accountId;
+@property(nonatomic, strong) NSString *email;
+@property(nonatomic, strong) NSString *screenName;
 @property(nonatomic, strong) NSString *password;
-@property(nonatomic, strong) NSString *lastSigninTime;
+@property(nonatomic, strong) NSNumber *signinCount;
 
 @end

@@ -10,4 +10,19 @@
 
 @implementation AGAppAccount
 
+@synthesize accountId;
+@synthesize email;
+@synthesize screenName;
+@synthesize password;
+@synthesize signinCount;
+
+- (NSArray*) codingProperties
+{
+    static NSArray *keys;
+    if (keys == nil) {
+        keys = [self propertyKeys];
+    }
+    return keys;
+}
+
 @end

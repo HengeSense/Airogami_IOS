@@ -199,8 +199,11 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         [dict setObject:self.location.area forKey:@"province"];
         [dict setObject:self.location.country forKey:@"country"];
         [dict setObject:self.descriptionTextField.text forKey:@"shout"];
-        [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal] block:^() {
-            [[AGRootViewController rootViewController] switchToMain];
+        [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal] block:^(BOOL succeed) {
+            if (succeed) {
+                [[AGRootViewController rootViewController] switchToMain];
+            }
+         
         }];
     }
 }

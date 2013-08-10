@@ -7,6 +7,7 @@
 //
 
 #import "AGDownloadHttpHandler.h"
+#import "AGMessageUtils.h"
 
 static const int AGDownloadDefaultCapacity = 1024 * 256;
 
@@ -100,13 +101,11 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
     [connection cancel];
-    NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:desc forKey:NSLocalizedDescriptionKey];
-    //NSError *error = [[NSError alloc] initWithDomain:@"Network" code:-1 userInfo:details];
+    NSError *error = [AGMessageUtils errorServer];
     AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {
-        block(nil, nil, context);
+        block(error, nil, context);
     }
     
 }
@@ -122,8 +121,10 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
 - (void)connection:(AGURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    // inform the user
-    //NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+#ifdef IS_DEBUG
+    NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+#endif
+    [[error.userInfo mutableCopy] setObject:AGHttpFailErrorTitleKey forKey:AGErrorTitleKey];
     AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {

@@ -12,6 +12,7 @@
 #import "UIImage+Addition.h"
 #import "AGDefines.h"
 #import "AGUtils.h"
+#import "AGUIDefines.h"
 #import "AGWaitUtils.h"
 #import "AGJSONHttpHandler.h"
 #import "AGMessageUtils.h"
@@ -68,11 +69,9 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     [[AGUploadHttpHandler handler] uploadImage:image params:params context:dict block:^(NSError *error, id dict) {
         
         if (error) {
-            if ([error.domain isEqualToString:@"Server Error"]) {
-                NSDictionary * info = [NSDictionary dictionaryWithObject:NSLocalizedString(@"message.server.unkown", @"message.server.unkown") forKey:NSLocalizedDescriptionKey];
-                error = [[NSError alloc] initWithDomain:error.domain code:error.code userInfo:info];
-            }
-            //NSLog(@"uploadIcon failed");
+#ifdef IS_DEBUG
+            NSLog(@"uploadIcon Error: %@", error.userInfo);
+#endif
         }
         else{
             //medium succceed
@@ -99,7 +98,7 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     [[AGJSONHttpHandler handler] start:path context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
         [AGWaitUtils startWait:nil];
         if (error) {
-            [AGMessageUtils errorMessageHttpRequest:error];;
+            [AGMessageUtils alertMessageWithError:error];
         }
         else{
             NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
@@ -110,8 +109,11 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
 #endif
             }
             else{
-                error = [AGMessageUtils errorServer:status.intValue key:[dict objectForKey:AGLogicJSONMessageKey]];
-                [AGMessageUtils errorMessageServer];
+                error = [AGMessageUtils errorServer];
+#ifdef IS_DEBUG
+                NSLog(@"editProfile Error: %@", [dict objectForKey:AGLogicJSONMessageKey]);
+#endif
+                [AGMessageUtils alertMessageWithError:error];
             }
         }
         block(error, context);

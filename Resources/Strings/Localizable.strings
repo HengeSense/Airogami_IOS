@@ -15,7 +15,7 @@
 "error.account.password.nomatch" = "Two new passwords don't match";
 "error.account.currentpassword.short" = "The current password is too short";
 "error.account.newpassword.short" = "The new password is too short";
-"message.account.signup.uploadingicons" = "Uploading images";
+"message.account.operate.uploadingicons" = "Uploading images";
 "message.account.signin.doing" = "Signin";
 //general
 "message.general.edit.unsaved.message" = "Give up changes you have made?";
@@ -30,15 +30,18 @@
 //signin
 "error.signin.email.invalid" = "Email or screen name is invalid";
 "error.signin.password.invalid" = "The password is invalid";
-"message.signin.notmatch" = "Invalid name or password";
+"error.signin.notmatch.message" = "Invalid name or password";
+"error.signin.need.title" = "Signin Needed";
+"error.signin.other.message" = "Signin from other place";
 //google auto complete
 "error.googleplacesautocomplete.fetch" = "Could not fetch Places";
 "error.googleplacesautocomplete.map" = "Could not map selected Place";
 "text.googleplacesautocomplete.search" = "Search your city";
 //network
-"error.network.connection" = "Network connect failed";
+"error.connection.fail.title" = "Network connection failed";
 //server
-"message.server.unkown" = "Server busy, please try again!";
+"message.server.unkown.message" = "Server busy, please try again!";
+"message.server.unkown.title" = "Server Error";
 //main tabbar
 "main.tabbar.title_0" = "Compose";
 "main.tabbar.title_1" = "Pickup";

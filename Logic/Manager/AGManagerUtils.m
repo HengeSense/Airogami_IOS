@@ -12,7 +12,6 @@
 
 @synthesize accountManager;
 @synthesize profileManager;
-@synthesize fileManager;
 @synthesize dataManager;
 
 -(id) init
@@ -20,7 +19,6 @@
     if (self = [super init]) {
         accountManager = [[AGAccountManager alloc] init];
         profileManager = [[AGProfileManager alloc] init];
-        fileManager = [[AGFileManager alloc] init];
         dataManager = [[AGDataManger alloc] init];
     }
     return self;

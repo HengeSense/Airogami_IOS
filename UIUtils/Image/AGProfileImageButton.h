@@ -12,4 +12,6 @@
 
 @interface AGProfileImageButton : AGImageButton
 
+@property(nonatomic, strong) NSURL *mediumUrl;
+
 @end

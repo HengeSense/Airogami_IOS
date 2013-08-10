@@ -59,4 +59,13 @@ static NSURL *rootUrl;
     return ConfigUrl;
 }
 
++ (AGFileManager*)fileManager
+{
+    static AGFileManager *fileManager;
+    if (fileManager == nil) {
+        fileManager = [[AGFileManager alloc] init];
+    }
+    return fileManager;
+}
+
 @end

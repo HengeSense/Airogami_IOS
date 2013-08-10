@@ -10,6 +10,8 @@
 
 @interface AGFileManager : NSObject
 
++ (AGFileManager*)fileManager;
+
 - (NSURL*) urlForData;
 - (NSURL*) urlForDatabase;
 - (NSURL*) urlForConfig;

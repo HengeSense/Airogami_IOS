@@ -7,7 +7,7 @@
 //
 
 #import "AGCoreData.h"
-#import "AGManagerUtils.h"
+#import "AGFileManager.h"
 #import "AGUtils.h"
 
 
@@ -72,7 +72,7 @@
         return persistentStoreCoordinator;
     }
     NSString *DBName = @"Database.sqlite";
-	NSURL *storeUrl = [[AGManagerUtils managerUtils].fileManager urlForDatabase];
+	NSURL *storeUrl = [[AGFileManager fileManager] urlForDatabase];
     storeUrl = [storeUrl URLByAppendingPathComponent:DBName];
 	
 	NSError *error;
@@ -189,10 +189,15 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ = %@", idKey, [[entityDescription propertiesByName] objectForKey:idKey]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ = %@", idKey, [jsonDictionary objectForKey:idKey]];
     [fetchRequest setPredicate:predicate];
     
     NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+#ifdef IS_DEBUG
+    if (error) {
+        NSLog(@"%@",error.userInfo);
+    }
+#endif
     NSManagedObject *managedObject;
     if (array.count) {//update
         managedObject = [array lastObject];
@@ -257,6 +262,28 @@
     }
 #endif
     return succeed;
+}
+
+- (NSManagedObject*) findById:(id)objectID withEntityName:(NSString*)entityName
+{
+    NSManagedObject *managedObject = nil;
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", idKey, objectID];
+    [fetchRequest setPredicate:predicate];
+    NSError *error;
+    NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+#ifdef IS_DEBUG
+    if (error) {
+        NSLog(@"%@", error.userInfo);
+    }
+#endif
+    if (array.count) {
+        managedObject = [array lastObject];
+    }
+    return managedObject;
 }
 
 @end

@@ -10,16 +10,19 @@
 #import "AGAccount.h"
 #import "AGProfile.h"
 
-typedef void (^AGAccountSignDoneBlock)();
+typedef void (^AGAccountSigninDoneBlock)(NSError *error, BOOL succeed);
+typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 
 @interface AGAccountManager : NSObject
 
 @property(nonatomic, strong) AGAccount *account;
 
-- (void) signup:(NSMutableDictionary*) params image:(UIImage*)image block:(AGAccountSignDoneBlock)block;
+- (void) signup:(NSMutableDictionary*) params image:(UIImage*)image block:(AGAccountSignupDoneBlock)block;
 
-- (void) signin:(NSMutableDictionary*) params isEmail:(BOOL)isEmail block:(AGAccountSignDoneBlock)block;
+- (void) signin:(NSMutableDictionary*) params automatic:(BOOL)yes animated:(BOOL)animated context:(id)context block:(AGAccountSigninDoneBlock)block;
 
 - (void) signout;
+
+- (void) autoSignin;
 
 @end
