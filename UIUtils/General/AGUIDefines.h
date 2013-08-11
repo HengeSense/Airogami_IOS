@@ -14,6 +14,7 @@ extern NSString * const Navigation_Back_Button_Highlight;
 
 extern NSString * const Navigation_Done_Button_Highlight;
 extern NSString * AGLocationViewControllerLocationKey;
+extern NSString * AGAccountUploadingIcons;
 
 
 @interface AGUIDefines : NSObject

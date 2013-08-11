@@ -10,6 +10,8 @@
 #import "AGDefines.h"
 #import "AGURLConnection.h"
 #import "AGMessageUtils.h"
+#import "AGUtils.h"
+#import "AGWaitUtils.h"
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
@@ -62,6 +64,12 @@
     if (block) {
         [conn setValue:block forKey:@"ResultBlock"];
     }
+    
+    //cookie
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+        NSLog(@"%@", cookie);
+    }
     return conn;
 }
 
@@ -77,6 +85,7 @@
     NSString *          contentTypeHeader;
     
     httpResponse = (NSHTTPURLResponse *) response;
+    //NSLog(@"http response code=%d", httpResponse.statusCode);
     if ((httpResponse.statusCode / 100) != 2) {
         NSString *desc = [NSString stringWithFormat:@"HTTP error %zd", (ssize_t) httpResponse.statusCode];
         [self stopConnection:connection description:desc];
@@ -146,8 +155,9 @@
     NSMutableData *data = [connection valueForKey:@"ReceivedData"];
     //NSLog(@"Succeeded! Received %d bytes of data",[data length]);
     NSMutableDictionary *dict = nil;
-    dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
     NSError *error = nil;
     if (dict == nil) {
          error = [AGMessageUtils errorServer];
@@ -160,4 +170,59 @@
 
 }
 
++ (void) request:(NSDictionary*) params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block
+{
+    NSMutableString *url = [NSMutableString stringWithCapacity:128];
+    [url appendString:path];
+    if (params) {
+        [AGUtils encodeParams:params path:url device:NO];
+    }
+    
+    if (prompt) {
+        [AGWaitUtils startWait:NSLocalizedString(prompt, prompt)];
+    }
+    
+    [[AGJSONHttpHandler handler] start:url context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
+        if (prompt) {
+            [AGWaitUtils startWait:nil];
+        }
+        NSMutableDictionary *result = nil;
+        if (error) {
+            
+        }
+        else{
+            NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
+            
+            if (status.intValue == 0) {
+                result = [dict objectForKey:AGLogicJSONResultKey];
+            }
+            else if(status.intValue == AGLogicJSONStatusNotSignin)
+            {//not signin
+#ifdef IS_DEBUG
+                if (error) {
+                    NSLog(@"AGJSONHttpHandler.request: Not signin");
+                }
+#endif
+                error = [AGMessageUtils errorNotSignin];
+            }
+            else{
+                error = [AGMessageUtils errorServer];
+               
+            }
+        }
+        
+        if (error && prompt) {
+            [AGMessageUtils alertMessageWithError:error];
+        }
+        if (block) {
+            block(error, context, result);
+        }
+#ifdef IS_DEBUG
+        if (error) {
+            NSLog(@"AGJSONHttpHandler.request: %@", error.userInfo);
+        }
+#endif
+        
+    }];
+}
 @end

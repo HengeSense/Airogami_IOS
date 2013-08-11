@@ -12,14 +12,17 @@
 
 typedef void (^AGAccountSigninDoneBlock)(NSError *error, BOOL succeed);
 typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
+typedef void (^AGAccountObtainTokensDoneBlock)(NSError *error, id context, NSMutableDictionary *result);
 
 @interface AGAccountManager : NSObject
 
 @property(nonatomic, strong) AGAccount *account;
 
-- (void) signup:(NSMutableDictionary*) params image:(UIImage*)image block:(AGAccountSignupDoneBlock)block;
+- (void) signup:(NSDictionary*) params image:(UIImage*)image block:(AGAccountSignupDoneBlock)block;
 
-- (void) signin:(NSMutableDictionary*) params automatic:(BOOL)yes animated:(BOOL)animated context:(id)context block:(AGAccountSigninDoneBlock)block;
+- (void) signin:(NSDictionary*) params automatic:(BOOL)yes animated:(BOOL)animated context:(id)context block:(AGAccountSigninDoneBlock)block;
+
+- (void) obtainTokens:(NSDictionary *)params context:(id)context block:(AGAccountObtainTokensDoneBlock)block;
 
 - (void) signout;
 

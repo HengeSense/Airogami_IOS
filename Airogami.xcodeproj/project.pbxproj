@@ -212,6 +212,8 @@
 		078DEE0017B5967F00A969A1 /* AGPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEDFF17B5967F00A969A1 /* AGPlane.m */; };
 		078DEE0317B5967F00A969A1 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE0217B5967F00A969A1 /* AGChain.m */; };
 		078DEE0617B5967F00A969A1 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE0517B5967F00A969A1 /* AGChainMessage.m */; };
+		078DEE0C17B6C61900A969A1 /* JPRadialActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE0917B6C61900A969A1 /* JPRadialActivityIndicator.m */; };
+		078DEE0D17B6C61900A969A1 /* JPRadialProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE0B17B6C61900A969A1 /* JPRadialProgressView.m */; };
 		078E3B68177CCE420070D5BA /* collect_reply_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */; };
 		078E3B69177CCE420070D5BA /* collect_reply_reply_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */; };
 		078E3B6B177CCE420070D5BA /* collect_reply_throwback_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */; };
@@ -645,6 +647,10 @@
 		078DEE0217B5967F00A969A1 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
 		078DEE0417B5967F00A969A1 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
 		078DEE0517B5967F00A969A1 /* AGChainMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessage.m; sourceTree = "<group>"; };
+		078DEE0817B6C61900A969A1 /* JPRadialActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPRadialActivityIndicator.h; sourceTree = "<group>"; };
+		078DEE0917B6C61900A969A1 /* JPRadialActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPRadialActivityIndicator.m; sourceTree = "<group>"; };
+		078DEE0A17B6C61900A969A1 /* JPRadialProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPRadialProgressView.h; sourceTree = "<group>"; };
+		078DEE0B17B6C61900A969A1 /* JPRadialProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPRadialProgressView.m; sourceTree = "<group>"; };
 		078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_divider@2x.png"; sourceTree = "<group>"; };
 		078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_reply_button@2x.png"; sourceTree = "<group>"; };
 		078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_throwback_button@2x.png"; sourceTree = "<group>"; };
@@ -1276,6 +1282,7 @@
 		078A1F9E176D355C00A69AE3 /* UIUtils */ = {
 			isa = PBXGroup;
 			children = (
+				078DEE0717B6C61900A969A1 /* Indicator */,
 				0702F6CC17B4325700B4EBB3 /* Message */,
 				0702F6C317B2F9DB00B4EBB3 /* DatePicker */,
 				078A5C7C178C8536000FB7FF /* Badge */,
@@ -1421,6 +1428,17 @@
 				078A5C7E178C8536000FB7FF /* CustomBadge.m */,
 			);
 			path = Badge;
+			sourceTree = "<group>";
+		};
+		078DEE0717B6C61900A969A1 /* Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				078DEE0817B6C61900A969A1 /* JPRadialActivityIndicator.h */,
+				078DEE0917B6C61900A969A1 /* JPRadialActivityIndicator.m */,
+				078DEE0A17B6C61900A969A1 /* JPRadialProgressView.h */,
+				078DEE0B17B6C61900A969A1 /* JPRadialProgressView.m */,
+			);
+			path = Indicator;
 			sourceTree = "<group>";
 		};
 		078E9AAA177F8212006D7059 /* KeyboardScroll */ = {
@@ -2130,6 +2148,8 @@
 				078DEE0017B5967F00A969A1 /* AGPlane.m in Sources */,
 				078DEE0317B5967F00A969A1 /* AGChain.m in Sources */,
 				078DEE0617B5967F00A969A1 /* AGChainMessage.m in Sources */,
+				078DEE0C17B6C61900A969A1 /* JPRadialActivityIndicator.m in Sources */,
+				078DEE0D17B6C61900A969A1 /* JPRadialProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

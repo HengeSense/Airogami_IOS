@@ -128,4 +128,10 @@ static NSString *path;
     return nil;
 }
 
+- (void) signout
+{
+    [[AGManagerUtils managerUtils].accountManager signout];
+    [self resetAppAccount];
+}
+
 @end

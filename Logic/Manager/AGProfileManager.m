@@ -11,6 +11,7 @@
 #import "AGUIUtils.h"
 #import "UIImage+Addition.h"
 #import "AGDefines.h"
+#import "AGUIDefines.h"
 #import "AGUtils.h"
 #import "AGUIDefines.h"
 #import "AGWaitUtils.h"
@@ -22,32 +23,28 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
 
 @implementation AGProfileManager
 
-- (void) uploadIcons:(NSMutableDictionary *)params image:(UIImage *)image context:(id)context block:(AGUploadIconFinishBlock)block
+//not display error
+- (void) uploadIcons:(NSDictionary *)params image:(UIImage *)image context:(id)context block:(AGUploadIconFinishBlock)block
 {
     NSMutableDictionary *small = [params objectForKey:@"small"];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:4];
-    
-    if (context) {
-        [dict setObject:context forKey:@"Context"];
-    }
-    if (block) {
-        [dict setObject:block forKey:@"Block"];
-    }
-    [dict setObject:[image imageWithSize:AGAccountIconSizeSmall] forKey:@"image"];
-    [dict setObject:small forKey:@"small"];
-    
+    UIImage *sImage = [image imageWithSize:AGAccountIconSizeSmall];
     params = [params objectForKey:@"medium"];
+    [AGWaitUtils startWait:NSLocalizedString(AGAccountUploadingIcons, SignupUploadingIcons)];
     //upload medium icon
-    [self uploadIcon:params image:image context:dict block:^(NSError *error, id dict) {
-        id context = [dict objectForKey:@"Context"];
-        NSMutableDictionary *small = [dict objectForKey:@"small"];
-        AGUploadIconFinishBlock block = [dict objectForKey:@"Block"];
-        UIImage *image = [dict objectForKey:@"image"];
+    [self uploadIcon:params image:image context:context block:^(NSError *error, id context) {
         if (error == nil) {
             //upload small icon
-            [self uploadIcon:small image:image context:context block:block];
+            [self uploadIcon:small image:sImage context:context block:^(NSError *error, id context) {
+                [AGWaitUtils startWait:nil];
+                if (block) {
+                     block(error, context);
+                }
+            }];
         }
         else{
+            
+            [AGWaitUtils startWait:nil];
+            
             if (block) {
                 block(error, context);
             }
@@ -55,7 +52,7 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     }];
 }
 
-- (void) uploadIcon:(NSMutableDictionary *)params image:(UIImage *)image context:(id)context block:(AGUploadIconFinishBlock)block
+- (void) uploadIcon:(NSDictionary *)params image:(UIImage *)image context:(id)context block:(AGUploadIconFinishBlock)block
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
     
@@ -87,36 +84,41 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     }];
 }
 
-- (void) editProfile:(NSMutableDictionary*)params context:(id)context block:(AGEditProfileFinishBlock)block
+- (void) editProfile:(NSDictionary*)pp image:(UIImage*)image context:(id)context block:(AGEditProfileFinishBlock)block
 {
-    NSMutableString *path = [NSMutableString stringWithCapacity:1024];
-    [path appendString:EditProfilePath];
-    
-    [AGUtils encodeParams:params path:path device:NO];
-    [AGWaitUtils startWait:@""];
-    
-    [[AGJSONHttpHandler handler] start:path context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
-        [AGWaitUtils startWait:nil];
+    NSMutableDictionary *params = [pp mutableCopy];
+    if (image) {
+        [params setObject:@"tokens" forKey:@"tokens"];
+    }
+    [AGJSONHttpHandler request:params path:EditProfilePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            if (block) {
+                block(error, context);
+            }
         }
         else{
-            NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
-            if (status.intValue == 0) {
-                //succeed
-#ifdef IS_DEBUG
-                NSLog(@"edit profile successfully");
-#endif
+            if (image) {
+                [params removeObjectForKey:@"tokens"];
+                result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
+                if (tokens) {
+                    [self uploadIcons:tokens image:image context:context block:^(NSError *error, id context) {
+                        if (error) {
+                            [AGMessageUtils alertMessageWithError:error];
+                        }
+                        if (block) {
+                            block(error, context);
+                        }
+                    }];
+                }
+            
             }
             else{
-                error = [AGMessageUtils errorServer];
-#ifdef IS_DEBUG
-                NSLog(@"editProfile Error: %@", [dict objectForKey:AGLogicJSONMessageKey]);
-#endif
-                [AGMessageUtils alertMessageWithError:error];
+                if (block) {
+                    block(error, context);
+                }
             }
         }
-        block(error, context);
         
     }];
 }

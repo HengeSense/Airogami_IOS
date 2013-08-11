@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JPRadialProgressView.h"
 
 @interface AGPhotoView : UIImageView <UIScrollViewDelegate>
 
-- (void) preview;
+- (void) preview:(UIImage*)image url:(NSURL*)url;
+
 
 @end

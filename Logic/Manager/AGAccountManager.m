@@ -12,6 +12,7 @@
 #import "AGMessageUtils.h"
 #import "AGWaitUtils.h"
 #import "AGDefines.h"
+#import "AGUIDefines.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
 #import "AGAppDelegate.h"
@@ -21,9 +22,9 @@ static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
 static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 static NSString *SignoutPath = @"account/signout.action?";
+static NSString *ObtainTokensPath = @"data/dataManager?";
 //
 static NSString *SignupDuplicate = @"message.signup.duplicate";
-static NSString *SignupUploadingIcons = @"message.account.operate.uploadingicons";
 static NSString *SigninNotMatch = @"error.signin.notmatch.message";
 static NSString *SigninNeeded = @"error.signin.need.title";
 static NSString *SigninOther = @"error.signin.other.message";
@@ -40,7 +41,7 @@ static NSString *SigninOther = @"error.signin.other.message";
     return self;
 }
 
-- (void) signup:(NSMutableDictionary*) params image:(UIImage *)image block:(AGAccountSignupDoneBlock)block
+- (void) signup:(NSDictionary*) params image:(UIImage *)image block:(AGAccountSignupDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:1024];
     [path appendString:SignupPath];
@@ -63,19 +64,18 @@ static NSString *SigninOther = @"error.signin.other.message";
                 else{
                     //succeed
                     stop = NO;
-                    [AGWaitUtils startWait:NSLocalizedString(SignupUploadingIcons, SignupUploadingIcons)];
                     NSMutableDictionary *accountJson = [result objectForKey:@"account"];
                     account = [[AGAppDelegate appDelegate].coreDataController saveAccount:accountJson];
                     
                     result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                     NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
-                    
-                    [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
-                        [AGWaitUtils startWait:nil];
-                        if (block) {
-                            block(YES);
-                        }
-                    }];
+                    if (tokens) {
+                        [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
+                            if (block) {
+                                block(YES);
+                            }
+                        }];
+                    }
                     
                 }
                 
@@ -97,7 +97,7 @@ static NSString *SigninOther = @"error.signin.other.message";
     }];
 }
 
-- (void) signin:(NSMutableDictionary*) params automatic:(BOOL)automatic animated:(BOOL)animated context:(id)context  block:(AGAccountSigninDoneBlock)block
+- (void) signin:(NSDictionary*) params automatic:(BOOL)automatic animated:(BOOL)animated context:(id)context  block:(AGAccountSigninDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:128];
     if ([params objectForKey:@"email"]) {
@@ -197,6 +197,13 @@ static NSString *SigninOther = @"error.signin.other.message";
         }
         
     }];
+}
+
+- (void) obtainTokens:(NSMutableDictionary *)params context:(id)context block:(AGAccountObtainTokensDoneBlock)block
+{
+   [AGJSONHttpHandler request:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+       block(error, context, result);
+   }];
 }
 
 - (void) autoSignin

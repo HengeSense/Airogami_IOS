@@ -59,6 +59,8 @@
 "plane.category.localinfo" = "Local infomation";
 "plane.category.feeling" = "What's on your mind?";
 "plane.category.chain" = "Chain Message";
-//UI text
+//client
+"message.client.notsignin.message" = "please sign in";
+"message.client.notsignin.title" = "Not sign in";
 
 

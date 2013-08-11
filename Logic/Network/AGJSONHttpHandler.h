@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^AGHttpJSONHandlerFinishBlock)(NSError* error, id context, NSMutableDictionary* dict);
+typedef void (^AGHttpJSONHandlerRequestFinishBlock)(NSError *error, id context, NSMutableDictionary *result);
 
 @interface AGJSONHttpHandler : NSObject
 
 + (AGJSONHttpHandler*) handler;
+
++ (void) request:(NSDictionary*) params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block;
 
 - (NSURLConnection*) start:(NSString*)path context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
 

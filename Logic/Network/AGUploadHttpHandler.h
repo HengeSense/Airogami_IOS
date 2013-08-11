@@ -16,6 +16,6 @@ typedef void (^AGHttpUploadHandlerFinishBlock)(NSError* error, id context);
 
 + (AGUploadHttpHandler*) handler;
 
-- (AGURLConnection*) uploadImage:(UIImage*)image params:(NSMutableDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block;
+- (AGURLConnection*) uploadImage:(UIImage*)image params:(NSDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block;
 
 @end

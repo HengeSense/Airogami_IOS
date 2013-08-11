@@ -18,4 +18,5 @@
 + (void) alertMessageUpdated;
 + (NSError*) errorServer:(NSNumber*)code titleKey:(NSString*)titleKey msgKey:(NSString*)key;
 + (NSError*) errorServer;//unknown error
++ (NSError*) errorNotSignin;
 @end

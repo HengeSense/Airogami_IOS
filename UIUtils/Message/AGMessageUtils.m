@@ -11,6 +11,8 @@
 
 static NSString *ServerUnkownMessageKey = @"message.server.unkown.message";
 static NSString *ServerUnkownTitleKey = @"message.server.unkown.title";
+static NSString *ClientNotSigninMessageKey = @"message.client.notsignin.message";
+static NSString *ClientNotSigninTitleKey = @"message.client.notsignin.title";
 static NSString *UnsavedMessage = @"message.general.edit.unsaved.message";
 static NSString *UnsavedGiveup = @"message.general.edit.unsaved.giveup";
 static NSString *UnsavedCancel = @"message.general.cancel";
@@ -80,6 +82,11 @@ static NSString *OK = @"message.general.ok";
 + (NSError*) errorServer
 {
     return [AGMessageUtils errorServer:nil titleKey:nil msgKey:nil];
+}
+
++ (NSError*) errorNotSignin
+{
+    return [AGMessageUtils error:AGLogicJSONStatusNotSignin domain:@"Client" titleKey:ClientNotSigninTitleKey msgKey:ClientNotSigninMessageKey];
 }
 
 +(NSError*) error:(int)code domain:(NSString*)domain titleKey:(NSString*)titleKey msgKey:(NSString*)msgKey

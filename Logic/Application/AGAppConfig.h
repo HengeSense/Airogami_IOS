@@ -25,6 +25,7 @@
 - (BOOL) needSignin;
 - (BOOL) accountUpdated:(AGAccount*)account;
 - (AGAccount*) obtainAccount;
+- (void) signout;
 - (NSMutableDictionary*) siginParams;
 
 @end

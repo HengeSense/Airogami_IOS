@@ -65,7 +65,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     return self;
 }
 
-- (AGURLConnection*) uploadImage:(UIImage*)image  params:(NSMutableDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block
+- (AGURLConnection*) uploadImage:(UIImage*)image  params:(NSDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block
 {
     static NSNumber *number;
     NSURL *url = [NSURL URLWithString:AGDataServerUrl];

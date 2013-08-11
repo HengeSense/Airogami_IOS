@@ -19,6 +19,7 @@ NSString * const Normal_Done_Highlight = @"normal_done_highlight.png";
 NSString * const Navigation_Back_Button_Highlight = @"back_button_highlight.png";
 NSString * const Navigation_Done_Button_Highlight = @"done_button_highlight.png";
 NSString * AGLocationViewControllerLocationKey = @"location";
+NSString * AGAccountUploadingIcons = @"message.account.operate.uploadingicons";
 
 @implementation AGUIDefines
 

@@ -13,8 +13,8 @@ typedef void (^AGEditProfileFinishBlock)(NSError* error, id context);
 
 @interface AGProfileManager : NSObject
 
-- (void) uploadIcons:(NSMutableDictionary*)params image:(UIImage*)image context:(id)context block:(AGUploadIconFinishBlock)block;
+- (void) uploadIcons:(NSDictionary*)params image:(UIImage*)image context:(id)context block:(AGUploadIconFinishBlock)block;
 
-- (void) editProfile:(NSMutableDictionary*)params context:(id)context block:(AGEditProfileFinishBlock)block;
+- (void) editProfile:(NSDictionary*)params image:(UIImage*)image context:(id)context block:(AGEditProfileFinishBlock)block;
 
 @end

@@ -115,53 +115,58 @@
 - (void) initData
 {
     AGProfile *profile = accountManager.account.profile;
+    if (profile) {
+        self.likesLabel.text = [profile.likesCount stringValue];
+        self.nameTextField.text = profile.fullName;
+        [self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
+        if (profile.birthday) {
+            self.ageTextField.text = [AGUtils birthdayToAge:profile.birthday];
+            datePicker.datePicker.date = profile.birthday;
+        }
+        else{
+            self.ageTextField.text = @"";
+        }
+        
+        self.sexSwitch.sexType = profile.sex.intValue;
+        self.location = [AGLocation locationWithProfile:profile];
+        [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
+        self.descriptionTextView.text = profile.shout;
+        self.emailTextField.text = profile.account.authenticate.email;
+        AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+        NSURL *url = [dataManager accountIconUrl:profile.accountId small:YES];
+        [self.profileImageButton setImageUrl:url placeImage:nil];
+        url = [dataManager accountIconUrl:profile.accountId small:NO];
+        self.profileImageButton.mediumUrl = url;
+        //self.emailTextField.text = profile.
+    }
     
-    self.likesLabel.text = [profile.likesCount stringValue];
-    self.nameTextField.text = profile.fullName;
-    [self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
-    if (profile.birthday) {
-        self.ageTextField.text = [AGUtils birthdayToAge:profile.birthday];
-        datePicker.datePicker.date = profile.birthday;
-    }
-    else{
-        self.ageTextField.text = @"";
-    }
-
-    self.sexSwitch.sexType = profile.sex.intValue;
-    self.location = [AGLocation locationWithProfile:profile];
-    [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
-    self.descriptionTextView.text = profile.shout;
-    self.emailTextField.text = profile.account.authenticate.email;
-    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
-    NSURL *url = [dataManager accountIconUrl:profile.accountId small:YES];
-    [self.profileImageButton setImageUrl:url placeImage:nil];
-    url = [dataManager accountIconUrl:profile.accountId small:NO];
-    self.profileImageButton.mediumUrl = url;
-    //self.emailTextField.text = profile.
 }
 
 - (NSMutableDictionary*) obtainData
 {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:5];
     AGProfile *profile = accountManager.account.profile;
-    if (![profile.fullName isEqual:self.nameTextField.text]) {
-        [data setObject:self.nameTextField.text forKey:@"fullName"];
+    if (profile) {
+        if (![profile.fullName isEqual:self.nameTextField.text]) {
+            [data setObject:self.nameTextField.text forKey:@"fullName"];
+        }
+        if (self.ageTextField.text.length > 0 && ![profile.birthday isEqual:self.datePicker.datePicker.date]) {
+            [data setObject:self.datePicker.datePicker.date forKey:@"birthday"];
+        }
+        if (![profile.shout isEqual:self.descriptionTextView.text]) {
+            [data setObject:self.descriptionTextView.text forKey:@"shout"];
+        }
+        if (![profile.shout isEqual:self.descriptionTextView.text]) {
+            [data setObject:self.descriptionTextView.text forKey:@"shout"];
+        }
+        if (profile.sex.intValue != self.sexSwitch.sexType) {
+            [data setObject:[NSNumber numberWithInt:self.sexSwitch.sexType]  forKey:@"sex"];
+        }
+        if (self.location.coordinate.latitude != profile.latitude.doubleValue || self.location.coordinate.longitude != profile.longitude.doubleValue ) {
+            [self.location appendParam:data];
+        }
     }
-    if (self.ageTextField.text.length > 0 && ![profile.birthday isEqual:self.datePicker.datePicker.date]) {
-        [data setObject:self.datePicker.datePicker.date forKey:@"birthday"];
-    }
-    if (![profile.shout isEqual:self.descriptionTextView.text]) {
-        [data setObject:self.descriptionTextView.text forKey:@"shout"];
-    }
-    if (![profile.shout isEqual:self.descriptionTextView.text]) {
-        [data setObject:self.descriptionTextView.text forKey:@"shout"];
-    }
-    if (profile.sex.intValue != self.sexSwitch.sexType) {
-        [data setObject:[NSNumber numberWithInt:self.sexSwitch.sexType]  forKey:@"sex"];
-    }
-    if (self.location.coordinate.latitude != profile.latitude.doubleValue || self.location.coordinate.longitude != profile.longitude.doubleValue ) {
-        [self.location appendParam:data];
-    }
+    
     return data;
 }
 
@@ -430,12 +435,17 @@
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {
         NSMutableDictionary * data = [self obtainData];
-        if (data.count) {
+        if (data.count || imageChanged ) {
+            UIImage * image = nil;
+            if (imageChanged) {
+                image = [self.profileImageButton imageForState:UIControlStateNormal];
+            }
             AGProfile *profile = accountManager.account.profile;
-            [[AGManagerUtils managerUtils].profileManager editProfile:data context:data block:^(NSError *error, id context) {
+            [[AGManagerUtils managerUtils].profileManager editProfile:data image:image context:data block:^(NSError *error, id context) {
                 if (error == nil) {
                     [[AGAppDelegate appDelegate].coreDataController editAttributes:(NSMutableDictionary *)context managedObject:profile];
                     [AGMessageUtils alertMessageUpdated];
+                    imageChanged = NO;
                     
                 }
             }];
