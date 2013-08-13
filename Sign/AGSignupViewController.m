@@ -192,12 +192,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         [dict setObject:self.sexSwitch.text forKey:@"sex"];
         [dict setObject:self.nameTextField.text forKey:@"fullName"];
         [dict setObject:@"" forKey:@"birthday"];
-        CLLocationCoordinate2D coordinate = self.location.coordinate;
-        [dict setObject:[NSString stringWithFormat:@"%lf", coordinate.longitude] forKey:@"longitude"];
-        [dict setObject:[NSString stringWithFormat:@"%lf", coordinate.latitude] forKey:@"latitude"];
-        [dict setObject:self.location.subArea forKey:@"city"];
-        [dict setObject:self.location.area forKey:@"province"];
-        [dict setObject:self.location.country forKey:@"country"];
+        [self.location appendParam:dict];
         [dict setObject:self.descriptionTextField.text forKey:@"shout"];
         [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal] block:^(BOOL succeed) {
             if (succeed) {

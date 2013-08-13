@@ -30,6 +30,9 @@ NSString * AGAccountEmailInvalidKey = @"error.account.email.invalid";
 NSString * AGAccountIconRequireKey = @"error.account.icon.require";
 NSString * AGAccountCurrentPasswordShortKey = @"error.account.currentpassword.short";
 NSString * AGAccountNewPasswordShortKey = @"error.account.newpassword.short";
+
+//plane
+NSString *AGPlaneSendPlaneOK = @"message.plane.sendplane.ok";
 //logic
 NSString * AGLogicJSONStatusKey = @"status";
 NSString * AGLogicJSONMessageKey = @"message";
@@ -39,6 +42,7 @@ int AGLogicJSONStatusNotSignin = 1;
 NSString * AGLogicAccountEmailKey = @"email";
 NSString * AGLogicAccountPasswordKey = @"password";
 NSString * AGLogicAccountScreenNameKey = @"screenName";
+NSString * AGLogicAccountUuidKey = @"uuid";
 
 //error
 NSString *AGHttpFailErrorTitleKey = @"error.connection.fail.title";

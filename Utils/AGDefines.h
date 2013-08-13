@@ -17,8 +17,16 @@ typedef enum{
     AGCategoryRelationship,
     AGCategoryLocalInformation,
     AGCategoryFeeling,
-    AGCategoryChain
+    AGCategoryChain,
+    AGCategoryUnknown
 } AGPlaneCategoryEnum;
+
+typedef enum{
+    AGMessageTypeLike = 10,
+    AGMessageTypeText,
+    AGMessageTypeAudio,
+    AGMessageTypeImage,
+} AGMessageTypeEnum;
 
 typedef enum{
     AGCollectTypeReceived = 0,
@@ -59,6 +67,10 @@ extern  NSString * AGAccountEmailInvalidKey;
 extern  NSString * AGAccountScreenNameShortKey;
 extern  NSString * AGAccountIconRequireKey ;
 
+//plane
+
+extern  NSString *AGPlaneSendPlaneOK;
+
 extern  NSString * AGLogicJSONStatusKey;
 extern  NSString * AGLogicJSONMessageKey;
 extern  NSString * AGLogicJSONResultKey;
@@ -66,11 +78,15 @@ extern  NSString * AGLogicJSONResultKey;
 extern  NSString * AGLogicAccountEmailKey;
 extern  NSString * AGLogicAccountPasswordKey;
 extern  NSString * AGLogicAccountScreenNameKey;
+extern  NSString * AGLogicAccountUuidKey;
 extern int AGLogicJSONStatusNotSignin;
 
 //error
 extern NSString *AGHttpFailErrorTitleKey;
 extern NSString *AGErrorTitleKey;
 
+//block
+typedef void (^AGHttpDoneBlock)(NSError *error, id context);
+typedef void (^AGHttpFinishBlock)(NSError *error, id context, NSMutableDictionary *result);
 
 #endif

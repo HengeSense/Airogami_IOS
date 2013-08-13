@@ -24,7 +24,7 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
 @implementation AGProfileManager
 
 //not display error
-- (void) uploadIcons:(NSDictionary *)params image:(UIImage *)image context:(id)context block:(AGUploadIconFinishBlock)block
+- (void) uploadIcons:(NSDictionary *)params image:(UIImage *)image context:(id)context block:(AGHttpDoneBlock)block
 {
     NSMutableDictionary *small = [params objectForKey:@"small"];
     UIImage *sImage = [image imageWithSize:AGAccountIconSizeSmall];
@@ -52,7 +52,7 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     }];
 }
 
-- (void) uploadIcon:(NSDictionary *)params image:(UIImage *)image context:(id)context block:(AGUploadIconFinishBlock)block
+- (void) uploadIcon:(NSDictionary *)params image:(UIImage *)image context:(id)context block:(AGHttpDoneBlock)block
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
     
@@ -76,7 +76,7 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
         }
         
         id context = [dict objectForKey:@"Context"];
-        AGUploadIconFinishBlock block = [dict objectForKey:@"Block"];
+        AGHttpDoneBlock block = [dict objectForKey:@"Block"];
         if (block) {
             block(error, context);
         }
@@ -84,13 +84,13 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     }];
 }
 
-- (void) editProfile:(NSDictionary*)pp image:(UIImage*)image context:(id)context block:(AGEditProfileFinishBlock)block
+- (void) editProfile:(NSDictionary*)pp image:(UIImage*)image context:(id)context block:(AGHttpDoneBlock)block
 {
     NSMutableDictionary *params = [pp mutableCopy];
     if (image) {
         [params setObject:@"tokens" forKey:@"tokens"];
     }
-    [AGJSONHttpHandler request:params path:EditProfilePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+    [AGJSONHttpHandler request:params path:EditProfilePath prompt:@"" context:context block:^(NSError *error, id context, id result) {
         if (error) {
             if (block) {
                 block(error, context);

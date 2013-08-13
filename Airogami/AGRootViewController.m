@@ -60,6 +60,7 @@ enum{
         rootNavigateTo = AGRootToSign;
     }
     else{
+        [[AGAppDelegate appDelegate].appConfig signin];
         rootNavigateTo = AGRootToMain;
     }
     switch (rootNavigateTo) {

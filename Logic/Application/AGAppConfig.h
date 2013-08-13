@@ -18,6 +18,7 @@
 @property(nonatomic, assign) BOOL once;
 @property(nonatomic, strong) NSString *appVersion;
 @property(nonatomic, strong) AGAppAccount *appAccount;
+@property(nonatomic, strong) NSNumber *signinUuid;
 
 - (void) save;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;
@@ -25,6 +26,7 @@
 - (BOOL) needSignin;
 - (BOOL) accountUpdated:(AGAccount*)account;
 - (AGAccount*) obtainAccount;
+- (void) signin;
 - (void) signout;
 - (NSMutableDictionary*) siginParams;
 

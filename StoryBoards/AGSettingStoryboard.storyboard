@@ -491,19 +491,42 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="gOV-u1-QuF">
-                                        <rect key="frame" x="0.0" y="206" width="320" height="219"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="92" id="g7J-xX-n0D">
+                                        <rect key="frame" x="0.0" y="206" width="320" height="92"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="218"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_information_top@2x.png" id="YH5-fI-9dP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_information_top@2x.png" id="UpI-Fz-9Gz">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="jry-aH-yzV">
-                                                    <rect key="frame" x="7" y="48" width="306" height="45"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7t8-1r-GOf">
+                                                    <rect key="frame" x="18" y="15" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24" placeholder="age" minimumFontSize="17" id="MDe-sj-MFq">
+                                                    <rect key="frame" x="68" y="14" width="131" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="cvg-ch-Jow"/>
+                                                        <outlet property="delegate" destination="bIg-gz-BMF" id="aT6-cS-Ebz"/>
+                                                    </connections>
+                                                </textField>
+                                                <view contentMode="scaleToFill" id="BiB-OK-YaL" customClass="AGSexSwitch">
+                                                    <rect key="frame" x="204" y="10" width="96" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="ljX-tD-bhQ">
+                                                    <rect key="frame" x="7" y="46" width="306" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                                     <inset key="titleEdgeInsets" minX="41" minY="0.0" maxX="50" maxY="0.0"/>
@@ -515,34 +538,22 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="regionButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="Hug-rB-iac"/>
+                                                        <action selector="regionButtonTouched:" destination="bIg-gz-BMF" eventType="touchUpInside" id="l1N-Ix-zfc"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" id="gJy-9W-xaf" customClass="AGSexSwitch">
-                                                    <rect key="frame" x="207" y="10" width="96" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="On8-X7-nhy">
-                                                    <rect key="frame" x="18" y="16" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24" placeholder="age" minimumFontSize="17" id="0YE-xV-1Rm">
-                                                    <rect key="frame" x="63" y="15" width="131" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textFieldEditingChanged:" destination="bIg-gz-BMF" eventType="editingChanged" id="IdA-Yi-e1l"/>
-                                                        <outlet property="delegate" destination="bIg-gz-BMF" id="0zK-gh-f1k"/>
-                                                    </connections>
-                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="127" id="gOV-u1-QuF">
+                                        <rect key="frame" x="0.0" y="298" width="320" height="127"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
                                                 <view contentMode="scaleToFill" id="6QC-QI-7DI">
-                                                    <rect key="frame" x="0.0" y="92" width="320" height="110"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="profile_information_bottom.png" id="m2Z-48-21W">
@@ -719,7 +730,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="ageTextField" destination="0YE-xV-1Rm" id="1m1-GM-K1o"/>
+                        <outlet property="ageTextField" destination="MDe-sj-MFq" id="AFX-fK-sOg"/>
                         <outlet property="backButton" destination="cQ9-O2-agI" id="iTL-Ka-Zdg"/>
                         <outlet property="changeProfileImageButton" destination="QRL-4D-Fku" id="P0o-pJ-Ibf"/>
                         <outlet property="descriptionImageView" destination="NHY-lL-PPU" id="cyP-W8-r27"/>
@@ -729,13 +740,13 @@
                         <outlet property="emailTextField" destination="v9V-Dl-k1y" id="OJB-UJ-1aF"/>
                         <outlet property="infoImageView" destination="m2Z-48-21W" id="c19-DY-XqG"/>
                         <outlet property="likesLabel" destination="sL2-5r-hDP" id="c86-UE-NdJ"/>
-                        <outlet property="locationButton" destination="jry-aH-yzV" id="ACI-bQ-BuN"/>
+                        <outlet property="locationButton" destination="ljX-tD-bhQ" id="HPk-X0-hAX"/>
                         <outlet property="nameTextField" destination="uNm-Ro-2AW" id="JNZ-vh-kXx"/>
                         <outlet property="passwordButton" destination="glT-lS-Jme" id="DGJ-Ep-boh"/>
                         <outlet property="profileImageButton" destination="XkC-Xa-TrL" id="2nq-Hl-QWD"/>
                         <outlet property="screenNameButton" destination="DMe-gw-Ydl" id="Ngj-7a-Jam"/>
                         <outlet property="settingButton" destination="3rL-Wa-1dn" id="AEU-HT-TZ4"/>
-                        <outlet property="sexSwitch" destination="gJy-9W-xaf" id="ouA-NP-0Fx"/>
+                        <outlet property="sexSwitch" destination="BiB-OK-YaL" id="Xrk-Qz-htp"/>
                         <segue destination="mgv-AF-N88" kind="push" identifier="ToSetting" id="yky-Wa-Knp"/>
                         <segue destination="Qkx-hr-nSj" kind="push" identifier="ToPassword" id="TPC-Jw-VV1"/>
                         <segue destination="GH8-5z-snk" kind="push" identifier="ToScreenName" id="D6q-gI-v8T"/>
@@ -877,6 +888,89 @@
         <image name="proflle_arrow_box_highlight@2x.png" width="612" height="88"/>
         <image name="write_edit_male_button@2x.png" width="68" height="68"/>
     </resources>
+    <classes>
+        <class className="AGImageButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
+        </class>
+        <class className="AGProfileImageButton" superclassName="AGImageButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImageButton.h"/>
+        </class>
+        <class className="AGSettingMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGSettingNotificationViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingNotificationViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="switchValueChanged:" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGSettingProfileMasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingProfileMasterViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="passwordButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="profileImageButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="regionButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="screenNameButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="settingButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="textFieldEditingChanged:" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="changeProfileImageButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descriptionImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="descriptionTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="emailImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="infoImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="likesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="passwordButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="profileImageButton" candidateClass="AGProfileImageButton"/>
+                <relationship kind="outlet" name="screenNameButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="settingButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="sexSwitch" candidateClass="AGSexSwitch"/>
+            </relationships>
+        </class>
+        <class className="AGSettingProfilePasswordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingProfilePasswordViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="confirmTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="currentTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="nowTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AGSettingProfileScreenNameViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSettingProfileScreenNameViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="doneButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="textFieldValueChanged:" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="screenNameTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="AGSexSwitch" superclassName="DCRoundSwitch">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSexSwitch.h"/>
+        </class>
+        <class className="DCRoundSwitch" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

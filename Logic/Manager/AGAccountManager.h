@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "AGAccount.h"
 #import "AGProfile.h"
+#import "AGDefines.h"
+
 
 typedef void (^AGAccountSigninDoneBlock)(NSError *error, BOOL succeed);
 typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
-typedef void (^AGAccountObtainTokensDoneBlock)(NSError *error, id context, NSMutableDictionary *result);
 
 @interface AGAccountManager : NSObject
 
@@ -22,7 +23,7 @@ typedef void (^AGAccountObtainTokensDoneBlock)(NSError *error, id context, NSMut
 
 - (void) signin:(NSDictionary*) params automatic:(BOOL)yes animated:(BOOL)animated context:(id)context block:(AGAccountSigninDoneBlock)block;
 
-- (void) obtainTokens:(NSDictionary *)params context:(id)context block:(AGAccountObtainTokensDoneBlock)block;
+- (void) obtainTokens:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (void) signout;
 

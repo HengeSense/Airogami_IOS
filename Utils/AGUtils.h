@@ -18,5 +18,6 @@
 + (NSString*) dateToString:(NSDate*)date;
 + (NSDate*) stringToDate:(NSString*)string;
 + (NSString*) birthdayToAge:(NSDate*)birthday;
++ (NSString*) obtainUuid;
 
 @end

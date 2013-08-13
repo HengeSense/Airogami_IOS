@@ -13,6 +13,9 @@
 @synthesize accountManager;
 @synthesize profileManager;
 @synthesize dataManager;
+@synthesize planeManager;
+@synthesize chainManager;
+@synthesize notificationManager;
 
 -(id) init
 {
@@ -20,6 +23,9 @@
         accountManager = [[AGAccountManager alloc] init];
         profileManager = [[AGProfileManager alloc] init];
         dataManager = [[AGDataManger alloc] init];
+        planeManager = [[AGPlaneManager alloc] init];
+        chainManager = [[AGChainManager alloc] init];
+        notificationManager = [[AGNotificationManager alloc] init];
     }
     return self;
 }

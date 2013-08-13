@@ -20,6 +20,7 @@
 #import "AGUtils.h"
 #import "AGAppDelegate.h"
 #import "AGAuthenticate.h"
+#import "UIImage+Addition.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
@@ -209,7 +210,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static float padding = 10;
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         CGRect frame = self.descriptionTextView.frame;
         aidedTextView.text = self.descriptionTextView.text;
         frame.size.height = aidedTextView.contentSize.height;
@@ -390,7 +391,8 @@
 - (void) imagePickAndCrop:(AGImagePickAndCrop *)pickAndCrop didFinishingWithImage:(UIImage *)image
 {
     imageChanged = YES;
-    [self.profileImageButton setImage:image forState:UIControlStateNormal];
+    [self.profileImageButton setImage:[image imageWithSize:AGAccountIconSizeMedium] forState:UIControlStateNormal];
+    self.profileImageButton.mediumUrl = nil;
     imagePickAndCrop = nil;
 }
 

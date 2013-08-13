@@ -59,6 +59,13 @@
 "plane.category.localinfo" = "Local infomation";
 "plane.category.feeling" = "What's on your mind?";
 "plane.category.chain" = "Chain Message";
+"plane.category.unknown" = "New Category";
+
+"message.plane.sendplane.ok" = "Plane sent successfully";
+
+"plane.sendplane.content.empty" = "Please write some words";
+"plane.sendplane.content.long" = "Too many words";
+
 //client
 "message.client.notsignin.message" = "please sign in";
 "message.client.notsignin.title" = "Not sign in";

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^AGHttpJSONHandlerFinishBlock)(NSError* error, id context, NSMutableDictionary* dict);
-typedef void (^AGHttpJSONHandlerRequestFinishBlock)(NSError *error, id context, NSMutableDictionary *result);
+typedef void (^AGHttpJSONHandlerRequestFinishBlock)(NSError *error, id context, id result);
 
 @interface AGJSONHttpHandler : NSObject
 

@@ -43,7 +43,7 @@
 - (void) setImageUrl:(NSURL *)url placeImage:(UIImage *)planeImage
 {
     UIButton *button = self;
-    [self.imageView setImageWithURL:url placeholderImage:planeImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+    [self.imageView setImageWithURL:url placeholderImage:planeImage options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 #ifdef IS_DEBUG
         if (error) {
             NSLog(@"%@", error);

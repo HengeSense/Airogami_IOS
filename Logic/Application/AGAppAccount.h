@@ -15,6 +15,5 @@
 @property(nonatomic, strong) NSString *email;
 @property(nonatomic, strong) NSString *screenName;
 @property(nonatomic, strong) NSString *password;
-@property(nonatomic, strong) NSNumber *signinCount;
 
 @end

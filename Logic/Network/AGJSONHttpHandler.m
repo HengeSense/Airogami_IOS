@@ -12,6 +12,7 @@
 #import "AGMessageUtils.h"
 #import "AGUtils.h"
 #import "AGWaitUtils.h"
+#import "AGManagerUtils.h"
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
@@ -66,10 +67,10 @@
     }
     
     //cookie
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+   /* NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *cookie in [cookieJar cookies]) {
         NSLog(@"%@", cookie);
-    }
+    }*/
     return conn;
 }
 
@@ -204,6 +205,7 @@
                 }
 #endif
                 error = [AGMessageUtils errorNotSignin];
+                [[AGManagerUtils managerUtils].accountManager autoSignin];
             }
             else{
                 error = [AGMessageUtils errorServer];

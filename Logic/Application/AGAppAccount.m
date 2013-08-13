@@ -14,7 +14,6 @@
 @synthesize email;
 @synthesize screenName;
 @synthesize password;
-@synthesize signinCount;
 
 - (NSArray*) codingProperties
 {

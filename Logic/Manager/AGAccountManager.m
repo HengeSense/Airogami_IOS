@@ -97,15 +97,17 @@ static NSString *SigninOther = @"error.signin.other.message";
     }];
 }
 
-- (void) signin:(NSDictionary*) params automatic:(BOOL)automatic animated:(BOOL)animated context:(id)context  block:(AGAccountSigninDoneBlock)block
+- (void) signin:(NSDictionary*) pp automatic:(BOOL)automatic animated:(BOOL)animated context:(id)context  block:(AGAccountSigninDoneBlock)block
 {
     NSMutableString *path = [NSMutableString stringWithCapacity:128];
-    if ([params objectForKey:@"email"]) {
+    if ([pp objectForKey:@"email"]) {
         [path appendString:EmailSigninPath];
     }
     else{
         [path appendString:ScreenNameSigninPath];
     }
+    NSMutableDictionary *params = [pp mutableCopy];
+    [params setObject:[AGAppDelegate appDelegate].appConfig.signinUuid forKey:AGLogicAccountUuidKey];
     
     NSString *password = [params objectForKey:@"password"];
     
@@ -153,6 +155,9 @@ static NSString *SigninOther = @"error.signin.other.message";
                             [appConfig resetAppAccount];
                             [[AGRootViewController rootViewController] switchToSign];
                         }
+                        else{
+                            [appConfig updateAppAccount:account password:password];
+                        }
                     }
                     else{
                         [appConfig updateAppAccount:account password:password];
@@ -199,9 +204,9 @@ static NSString *SigninOther = @"error.signin.other.message";
     }];
 }
 
-- (void) obtainTokens:(NSMutableDictionary *)params context:(id)context block:(AGAccountObtainTokensDoneBlock)block
+- (void) obtainTokens:(NSMutableDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
 {
-   [AGJSONHttpHandler request:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+   [AGJSONHttpHandler request:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, id result) {
        block(error, context, result);
    }];
 }

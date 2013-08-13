@@ -7,7 +7,7 @@
 //
 
 #import "AGUtils.h"
-#import "AGPlaneCategory.h"
+#import "AGCategory.h"
 #import "NSString+Addition.h"
 
 static NSDateFormatter *dateFormatter;
@@ -16,7 +16,7 @@ static NSDateFormatter *dateFormatter;
 
 + (void) initialize
 {
-    [AGPlaneCategory initialize];
+    [AGCategory initialize];
     dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
 }
@@ -91,6 +91,21 @@ static NSDateFormatter *dateFormatter;
                                        options:0];
     NSInteger age = [ageComponents year];
     return [NSString stringWithFormat:@"%d",age];
+}
+
++ (NSString *)obtainUuid
+{
+    CFUUIDRef       uuid;
+    CFStringRef     uuidStr;
+    NSString *      result;
+    
+    uuid = CFUUIDCreate(NULL);
+    uuidStr = CFUUIDCreateString(NULL, uuid);
+    result = [NSString stringWithFormat:@"%@", uuidStr];
+    CFRelease(uuidStr);
+    CFRelease(uuid);
+    
+    return result;
 }
 
 

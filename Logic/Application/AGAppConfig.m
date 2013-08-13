@@ -13,6 +13,7 @@
 #import "AGProfile.h"
 #import "AGAppDelegate.h"
 #import "AGManagerUtils.h"
+#import "AGUtils.h"
 
 static NSString *configName = @"AppConfig";
 static NSString *path;
@@ -28,6 +29,7 @@ static NSString *path;
 @synthesize once;
 @synthesize appAccount;
 @synthesize appVersion;
+@synthesize signinUuid;
 
 + (AGAppConfig*)appConfig
 {
@@ -54,6 +56,7 @@ static NSString *path;
     if (self = [super init]) {
         once = YES;
         appVersion = AGApplicationVersion;
+        signinUuid = [NSNumber numberWithLongLong:[[NSDate date] timeIntervalSince1970] * 1000];
     }
     return self;
 }
@@ -81,7 +84,6 @@ static NSString *path;
     appAccount.email = account.authenticate.email;
     appAccount.screenName = account.profile.screenName;
     appAccount.password = password;
-    appAccount.signinCount = account.accountStat.signinCount;
     [self save];
 }
 
@@ -98,7 +100,7 @@ static NSString *path;
 
 - (BOOL) accountUpdated:(AGAccount*)account
 {
-    if ([account.accountStat.signinCount isEqual:self.appAccount.signinCount] == NO) {
+    if (appAccount && [account.accountStat.signinUuid isEqual:signinUuid] == NO) {
         return YES;
     }
     return NO;
@@ -126,6 +128,11 @@ static NSString *path;
         return [[AGAppDelegate appDelegate].coreDataController findAccount:appAccount.accountId];
     }
     return nil;
+}
+
+- (void) signin
+{
+    [[AGManagerUtils managerUtils].accountManager autoSignin];
 }
 
 - (void) signout

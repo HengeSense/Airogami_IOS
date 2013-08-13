@@ -11,6 +11,9 @@
 @class AYUIButton;
 @interface AGCollectPlaneCell : UITableViewCell
 
+
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *planeImageView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *collectTypeImageView;

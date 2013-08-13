@@ -70,15 +70,14 @@
                                                             <color key="textColor" red="0.63921568627450975" green="0.74901960784313726" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" id="OU5-y2-TZM">
-                                                            <rect key="frame" x="56" y="17" width="233" height="50"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yqb-ai-IkF">
+                                                            <rect key="frame" x="54" y="22" width="233" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </string>
-                                                            <color key="textColor" red="0.27450980390000002" green="0.2784313725" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <string key="text">It depends, if you are receiving or posting notifications that potentially affect all parts of your application, put it in your AppDelegate. If you are receiving/posting notifications that only affect a single class, put it in that class instead.</string>
                                                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
-                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                        </textView>
+                                                            <color key="textColor" red="0.27450980390000002" green="0.2784313725" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -94,6 +93,7 @@
                                     <outlet property="bottomLabel" destination="75f-W3-kQ9" id="6VV-yV-IoZ"/>
                                     <outlet property="categoryImageView" destination="YLb-93-y0U" id="QpQ-rq-g7n"/>
                                     <outlet property="collectTypeImageView" destination="hS1-l2-1ea" id="sSJ-Ju-SZX"/>
+                                    <outlet property="messageLabel" destination="Yqb-ai-IkF" id="8N4-h1-0NC"/>
                                     <outlet property="planeImageView" destination="36L-nQ-DZw" id="5Jw-XP-Gep"/>
                                     <outlet property="topLabel" destination="hjc-XS-UPk" id="mun-Zt-rZa"/>
                                 </connections>

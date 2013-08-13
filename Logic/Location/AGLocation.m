@@ -98,15 +98,17 @@
 {
     [params setObject:[NSNumber numberWithDouble:self.coordinate.longitude] forKey:@"longitude"];
     [params setObject:[NSNumber numberWithDouble:self.coordinate.latitude] forKey:@"latitude"];
-    if (country) {
+    if (country && position <= 2) {
         [params setObject:country forKey:@"country"];
     }
-    if (subArea) {
-        [params setObject:subArea forKey:@"city"];
-    }
-    if (area) {
+    if (area && position <= 1) {
         [params setObject:area forKey:@"province"];
     }
+    
+    if (subArea && position <= 0) {
+        [params setObject:subArea forKey:@"city"];
+    }
+    
 
 }
 

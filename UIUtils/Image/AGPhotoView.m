@@ -41,23 +41,28 @@ static NSString *DownloadNo = @"0";
 {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [window addSubview:self];
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
+    
     NSMutableString *finished = download;
-    if (image) {
-        self.image = image;
+    if (url == nil) {
+        self.image = sImage;
     }
     else{
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
+        if (image == nil) {
+            image = sImage;
+        }
         finished.string = DownloadNo;
         CGRect frame = CGRectMake(0, 0, 50, 50);
         progressView = [[JPRadialProgressView alloc] initWithFrame:frame];
         JPRadialProgressView *rpv = progressView;
-        [self setImageWithURL:url placeholderImage:sImage options:0 progress:^(NSUInteger receivedSize, long long expectedSize) {
+        [self setImageWithURL:url placeholderImage:image options:SDWebImageRefreshCached progress:^(NSUInteger receivedSize, long long expectedSize) {
             rpv.progress = receivedSize / (double)expectedSize;
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             finished.string = DownloadDone;
             [rpv removeFromSuperview];
         }];
+        
     }
     
     CGRect frame;

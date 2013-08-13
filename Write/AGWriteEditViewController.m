@@ -10,13 +10,17 @@
 #import "AGKeyboardResize.h"
 #import "AGWriteEditViewAnimation.h"
 #import "AGWriteLocationViewController.h"
-#import "AGPlaneCategory.h"
+#import "AGCategory+Addition.h"
 #import "AGUIUtils.h"
+#import "AGMessageUtils.h"
+#import "AGManagerUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGWriteEditTextMaximum 200
 
 static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"write_edit_male_button.png", @"write_edit_female_button.png"};
+static NSString *AGContentEmpty = @"plane.sendplane.content.empty";
+static NSString *AGContentLong = @"plane.sendplane.content.long";
 
 @interface AGWriteEditViewController ()
 {
@@ -44,7 +48,7 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 
 @implementation AGWriteEditViewController
 
-@synthesize location, planeCategory;
+@synthesize location, categoryId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,7 +80,7 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
 {
     [super viewDidLoad];
     [self initialize];
-	self.titleLabel.text = planeCategory.description;
+	self.titleLabel.text = [AGCategory title:self.categoryId];
     
 }
 
@@ -112,8 +116,68 @@ static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"writ
     //self.textView.inputAccessoryView.hidden = YES;
 }
 
+
 - (IBAction)sendButtonTouched:(UIButton *)sender {
+    if ([self validate]) {
+        if (categoryId.intValue < AGCategoryChain) {//plane
+            [[AGManagerUtils managerUtils].planeManager sendPlane:[self obtainData] context:nil block:^(NSError *error, id context) {
+                if (error) {
+                    [self.textView becomeFirstResponder];
+                }else{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }];
+        }
+        else{
+            [[AGManagerUtils managerUtils].chainManager sendChain:[self obtainData] context:nil block:^(NSError *error, id context) {
+                if (error) {
+                    [self.textView becomeFirstResponder];
+                }else{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }];
+        }
     
+    }
+}
+
+-(BOOL) validate
+{
+    NSString *error = nil;
+    if (self.textView.text.length < 1) {
+        error = AGContentEmpty;
+    }
+    else if (self.textView.text.length > kAGWriteEditTextMaximum)
+    {
+        error = AGContentLong;
+    }
+    if (error != nil) {
+        [AGMessageUtils errorMessgeWithTitle:error view:self.view];
+    }
+    
+    return error == nil;
+}
+
+- (NSDictionary*) obtainData
+{
+    NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:10];
+    if ([self.location empty] == NO) {
+        [self.location appendParam:data];
+    }
+    [data setObject:[NSNumber numberWithInt:sex] forKey:@"sex"];
+    
+    if (categoryId.intValue < AGCategoryChain) {
+        [data setObject:categoryId forKey:@"categoryVO.categoryId"];
+        [data setObject:self.textView.text forKey:@"messageVO.content"];
+        [data setObject:[NSNumber numberWithInt:AGMessageTypeText] forKey:@"messageVO.type"];
+    }
+    else{
+        [data setObject:self.textView.text forKey:@"chainMessageVO.content"];
+        [data setObject:[NSNumber numberWithInt:AGMessageTypeText] forKey:@"chainMessageVO.type"];
+    }
+    
+    
+    return data;
 }
 
 

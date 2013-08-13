@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class AGLocation;
-@class AGPlaneCategory;
 
 @interface AGWriteEditViewController : UIViewController<UITextViewDelegate>
 @property(nonatomic, strong) AGLocation *location;
-@property(nonatomic, strong) AGPlaneCategory *planeCategory;
+@property(nonatomic, strong) NSNumber *categoryId;
 @end

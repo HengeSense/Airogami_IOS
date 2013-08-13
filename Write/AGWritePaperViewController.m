@@ -9,7 +9,7 @@
 #import "AGWritePaperViewController.h"
 #import "AGUIDefines.h"
 #import "AGWriteEditViewController.h"
-#import "AGPlaneCategory.h"
+#import "AGCategory.h"
 #import "AGRootViewController.h"
 
 @interface AGWritePaperViewController ()
@@ -169,7 +169,7 @@
 {
     if ([segue.identifier isEqualToString:@"ToEdit"]) {
         AGWriteEditViewController *awevc = (AGWriteEditViewController*) segue.destinationViewController;
-        awevc.planeCategory =  [AGPlaneCategory categoryWithId: selectedCategoryId];
+        awevc.categoryId =  [NSNumber numberWithInt:selectedCategoryId];
 
     }
     

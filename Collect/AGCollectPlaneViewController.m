@@ -12,8 +12,15 @@
 #import "AGCollectPlanePickupView.h"
 #import "AGCollectPlaneReply.h"
 #import "AGCollectPlaneNumberView.h"
+#import "AGManagerUtils.h"
+#import "AGPlane.h"
+#import "AGChain.h"
+#import "AGUtils.h"
 
 @interface AGCollectPlaneViewController ()
+{
+    NSMutableArray * data;
+}
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property(nonatomic, strong) AGCollectPlanePulldownHeader *pulldownHeader;
 @property (strong, nonatomic)  AGCollectPlanePickupView *pickupView;
@@ -43,7 +50,7 @@
         [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
         pulldownHeader = [AGCollectPlanePulldownHeader header];
         reply = [AGCollectPlaneReply reply];
-        
+        data = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
@@ -72,7 +79,22 @@
 {
     [super viewDidLoad];
     pulldownHeader.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationCollectedPlanes object:nil];
     //numberView = [AGCollectPlaneNumberView numberView:self.
+}
+
+- (void) collectedPlanes:(NSNotification*) notification
+{
+    NSDictionary * dict = notification.userInfo;
+    NSString *action = [dict objectForKey:@"action"];
+    NSArray *planes = [dict objectForKey:@"planes"];
+    if ([action isEqual:@"prepend"]) {
+        //[data insertObjects:<#(NSArray *)#> atIndexes:<#(NSIndexSet *)#>
+    }
+    else if([action isEqual:@"set"])
+    {
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,7 +120,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,6 +130,19 @@
     cell.category = indexPath.row;
     cell.aidedButton.tag = indexPath.row;
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    /*NSObject *obj = [data objectAtIndex:indexPath.row];
+    if([obj isKindOfClass:[AGPlane class]])
+    {
+        AGPlane *plane = (AGPlane*)obj;
+        cell.topLabel.text = plane.accountByOwnerId.profile.city;
+        cell.bottomLabel.text = [AGUtils dateToString:plane.updatedTime];
+        cell.messageLabel.text = plane.messages.objectEnumerator.nextObject;
+    }
+    else if ([obj isKindOfClass:[AGChain class]])
+    {
+        
+    }*/
+        
     
     return cell;
 }
@@ -173,6 +208,12 @@
 	
 }
 
+-(void) viewWillUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillUnload];
+}
+         
 - (void)viewDidUnload {
     [self setHeaderView:nil];
     [self setPickupView:nil];
