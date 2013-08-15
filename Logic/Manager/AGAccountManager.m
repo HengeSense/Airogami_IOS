@@ -15,8 +15,9 @@
 #import "AGUIDefines.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
-#import "AGAppDelegate.h"
+#import "AGControllerUtils.h"
 #import "AGRootViewController.h"
+#import "AGAppDelegate.h"
 
 static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
@@ -28,6 +29,10 @@ static NSString *SignupDuplicate = @"message.signup.duplicate";
 static NSString *SigninNotMatch = @"error.signin.notmatch.message";
 static NSString *SigninNeeded = @"error.signin.need.title";
 static NSString *SigninOther = @"error.signin.other.message";
+
+@interface AGAccountManager()
+
+@end
 
 @implementation AGAccountManager
 
@@ -65,7 +70,7 @@ static NSString *SigninOther = @"error.signin.other.message";
                     //succeed
                     stop = NO;
                     NSMutableDictionary *accountJson = [result objectForKey:@"account"];
-                    account = [[AGAppDelegate appDelegate].coreDataController saveAccount:accountJson];
+                    account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                     
                     result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                     NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
@@ -132,7 +137,8 @@ static NSString *SigninOther = @"error.signin.other.message";
             
             if (status.intValue == 0) {
                 NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
-                if ([result isEqual:[NSNull null]]){
+                NSMutableDictionary *accountJson = [result objectForKey:@"account"];
+                if (accountJson == nil || [accountJson isEqual:[NSNull null]]){
                     //not match
                     if (animated) {
                         [AGMessageUtils alertMessageWithTitle:@"" message:SigninNotMatch];
@@ -146,7 +152,7 @@ static NSString *SigninOther = @"error.signin.other.message";
                 }
                 else{
                     //succeed
-                    account = [[AGAppDelegate appDelegate].coreDataController saveAccount:result];
+                    account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                     AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
                     if (automatic) {
                         //signined at other place

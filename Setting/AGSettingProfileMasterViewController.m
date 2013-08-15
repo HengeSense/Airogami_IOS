@@ -18,7 +18,7 @@
 #import "AGDatePicker.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
-#import "AGAppDelegate.h"
+#import "AGCoreData.h"
 #import "AGAuthenticate.h"
 #import "UIImage+Addition.h"
 
@@ -445,7 +445,7 @@
             AGProfile *profile = accountManager.account.profile;
             [[AGManagerUtils managerUtils].profileManager editProfile:data image:image context:data block:^(NSError *error, id context) {
                 if (error == nil) {
-                    [[AGAppDelegate appDelegate].coreDataController editAttributes:(NSMutableDictionary *)context managedObject:profile];
+                    [[AGCoreData coreData] editAttributes:(NSMutableDictionary *)context managedObject:profile];
                     [AGMessageUtils alertMessageUpdated];
                     imageChanged = NO;
                     

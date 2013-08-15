@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AGCoreData.h"
-#import "AGCoreDataController.h"
 #import "AGAppConfig.h"
 
 @interface AGAppDelegate : UIResponder <UIApplicationDelegate>
@@ -16,7 +14,6 @@
 +(AGAppDelegate*) appDelegate;
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) AGCoreDataController *coreDataController;
 @property (strong, nonatomic) AGAppConfig *appConfig;
 
 

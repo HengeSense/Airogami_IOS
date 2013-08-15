@@ -10,12 +10,11 @@
 #import "AGCoreData.h"
 #import "AGAccount.h"
 #import "AGProfile.h"
+#import "AGPlane.h"
 
-@interface AGCoreDataController : NSObject
+@interface AGAccountController : NSObject
 
-@property(nonatomic, strong) AGCoreData * coreData;
-
-- (AGAccount*) saveAccount:(NSMutableDictionary*)jsonDictionary;
-- (BOOL) editAttributes:(NSMutableDictionary*)attributeDictionary managedObject:(NSManagedObject*)managedObject;
+- (AGAccount*) saveAccount:(NSDictionary*)jsonDictionary;
 - (AGAccount*) findAccount:(NSNumber*)accountId;
+
 @end

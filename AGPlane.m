@@ -2,7 +2,7 @@
 //  AGPlane.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/12/13.
+//  Created by Tianhu Yang on 8/14/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -32,6 +32,7 @@
 @dynamic sex;
 @dynamic status;
 @dynamic updatedTime;
+@dynamic updateInc;
 @dynamic accountByOwnerId;
 @dynamic accountByTargetId;
 @dynamic category;

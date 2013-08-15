@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *AGNotificationCollectedPlanes;
+extern NSString *AGNotificationReceivePlanes;
 
 @interface AGNotificationManager: NSObject
+
 
 @end

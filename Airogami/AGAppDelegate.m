@@ -10,17 +10,18 @@
 #import "AGUIUtils.h"
 #import "AGUtils.h"
 #import "AGManagerUtils.h"
+#import "AGControllerUtils.h"
 
 static AGAppDelegate *AppDelegate;
 
 @interface AGAppDelegate()
 {
+    AGAccountController *accountController;
 }
 @end
 
 @implementation AGAppDelegate
 
-@synthesize coreDataController;
 @synthesize appConfig;
 
 +(AGAppDelegate*) appDelegate
@@ -33,7 +34,7 @@ static AGAppDelegate *AppDelegate;
     if (self = [super init]) {
         AppDelegate = self;
         appConfig = [AGAppConfig appConfig];
-        coreDataController = [[AGCoreDataController alloc] init];
+        accountController = [[AGAccountController alloc] init];
     }
     return self;
 }
@@ -79,7 +80,7 @@ static AGAppDelegate *AppDelegate;
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     NSError *error;
-    AGCoreData *coreData = coreDataController.coreData;
+    AGCoreData *coreData = [AGCoreData coreData];
     if (coreData.managedObjectContext != nil) {
         if ([coreData.managedObjectContext hasChanges] && ![coreData.managedObjectContext save:&error]) {
 			/*

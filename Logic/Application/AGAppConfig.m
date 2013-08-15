@@ -12,6 +12,7 @@
 #import "AGAuthenticate.h"
 #import "AGProfile.h"
 #import "AGAppDelegate.h"
+#import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
 
@@ -100,9 +101,6 @@ static NSString *path;
 
 - (BOOL) accountUpdated:(AGAccount*)account
 {
-    if (appAccount && [account.accountStat.signinUuid isEqual:signinUuid] == NO) {
-        return YES;
-    }
     return NO;
 }
 
@@ -125,7 +123,7 @@ static NSString *path;
 - (AGAccount*) obtainAccount
 {
     if (appAccount) {
-        return [[AGAppDelegate appDelegate].coreDataController findAccount:appAccount.accountId];
+        return [[AGControllerUtils controllerUtils].accountController findAccount:appAccount.accountId];
     }
     return nil;
 }

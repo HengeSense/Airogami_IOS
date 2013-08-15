@@ -18,6 +18,15 @@
 @synthesize persistentStoreCoordinator;
 
 
++ (AGCoreData*) coreData
+{
+    static AGCoreData* coreData;
+    if (coreData == nil) {
+        coreData = [[AGCoreData alloc] init];
+    }
+    return coreData;
+}
+
 #pragma mark -
 #pragma mark Core Data stack
 
@@ -176,7 +185,7 @@
     return [objectArray autorelease];
 }*/
 
-- (NSManagedObject*) saveOrUpdate:(NSMutableDictionary*)jsonDictionary withEntityName:(NSString*)entityName
+- (NSManagedObject*) saveOrUpdate:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName
 {
     if (jsonDictionary == nil || [jsonDictionary isEqual:[NSNull null]]) {
         return nil;
@@ -252,6 +261,22 @@
     return managedObject;
 }
 
+- (NSMutableArray*) saveOrUpdateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName
+{
+    if (jsonArray == nil || [jsonArray isEqual:[NSNull null]] || jsonArray.count == 0) {
+        return [NSMutableArray arrayWithCapacity:0];
+    }
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:jsonArray.count];
+    for (NSDictionary *dict in jsonArray) {
+        NSManagedObject * managedObject = [self saveOrUpdate:dict withEntityName:entityName];
+        if (managedObject) {
+            [array addObject:managedObject];
+        }
+    }
+    return array;
+}
+
+
 - (BOOL)save
 {
     NSError *error;
@@ -284,6 +309,14 @@
         managedObject = [array lastObject];
     }
     return managedObject;
+}
+
+- (BOOL) editAttributes:(NSDictionary*)attributeDictionary managedObject:(NSManagedObject *)managedObject
+{
+    [attributeDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [managedObject setValue:obj forKey:key];
+    }];
+    return [self save];
 }
 
 @end

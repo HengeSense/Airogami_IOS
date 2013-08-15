@@ -15,8 +15,12 @@
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
++ (AGCoreData*) coreData;
+
 //core data class
 - (NSManagedObject*) saveOrUpdate:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName;
+- (NSMutableArray*) saveOrUpdateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName;
+- (BOOL) editAttributes:(NSDictionary*)attributeDictionary managedObject:(NSManagedObject*)managedObject;
 - (NSManagedObject*) findById:(id)objectID withEntityName:(NSString*)entityName;
 - (BOOL) save;
 

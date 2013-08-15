@@ -1,8 +1,8 @@
 //
-//  AGAccountStat.h
+//  AGAuthenticate.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/12/13.
+//  Created by Tianhu Yang on 8/14/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -11,10 +11,9 @@
 
 @class AGAccount;
 
-@interface AGAccountStat : NSManagedObject
+@interface AGAuthenticate : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * accountId;
-@property (nonatomic, retain) NSNumber * signinUuid;
+@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) AGAccount *account;
 
 @end

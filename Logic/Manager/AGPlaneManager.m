@@ -9,6 +9,7 @@
 #import "AGPlaneManager.h"
 #import "AGJSONHttpHandler.h"
 #import "AGMessageUtils.h"
+#import "AGControllerUtils.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
@@ -44,7 +45,8 @@ static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
             
         }
         else{
-            
+            //succeed
+            [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
         }
         if (block) {
             block(error, context, result);
