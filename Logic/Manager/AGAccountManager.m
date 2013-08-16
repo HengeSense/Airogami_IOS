@@ -46,15 +46,13 @@ static NSString *SigninOther = @"error.signin.other.message";
     return self;
 }
 
-- (void) signup:(NSDictionary*) params image:(UIImage *)image block:(AGAccountSignupDoneBlock)block
+- (void) signup:(NSDictionary*)params image:(UIImage *)image block:(AGAccountSignupDoneBlock)block
 {
-    NSMutableString *path = [NSMutableString stringWithCapacity:1024];
-    [path appendString:SignupPath];
-    [AGUtils encodeParams:params path:path device:YES];
+    NSString *password = [params objectForKey:@"password"];
     
     [AGWaitUtils startWait:@""];
     
-    [[AGJSONHttpHandler handler] start:path context:image block:^(NSError *error,id context, NSMutableDictionary *dict) {
+    [[AGJSONHttpHandler handler] start:SignupPath params:params device:YES context:image block:^(NSError *error,id context, NSMutableDictionary *dict) {
         BOOL stop = YES;
         if (error) {
             [AGMessageUtils alertMessageWithError:error];
@@ -71,6 +69,7 @@ static NSString *SigninOther = @"error.signin.other.message";
                     stop = NO;
                     NSMutableDictionary *accountJson = [result objectForKey:@"account"];
                     account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
+                    [[AGAppDelegate appDelegate].appConfig updateAppAccount:account password:password];
                     
                     result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                     NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
@@ -212,17 +211,25 @@ static NSString *SigninOther = @"error.signin.other.message";
 
 - (void) obtainTokens:(NSMutableDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
 {
-   [AGJSONHttpHandler request:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, id result) {
+    [AGJSONHttpHandler request:YES params:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, id result) {
        block(error, context, result);
    }];
 }
 
 - (void) autoSignin
 {
+    [self autoSignin:nil];
+}
+
+- (void) autoSignin:(NSDictionary*)reqDict
+{
     AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
     NSMutableDictionary *params = [appConfig siginParams];
     if (params.count) {
-        [self signin:params automatic:YES animated:NO context:nil block:^(NSError *error, BOOL succeed) {
+        [self signin:params automatic:YES animated:NO context:reqDict block:^(NSError *error, BOOL succeed) {
+            if (succeed && reqDict) {
+                [[AGJSONHttpHandler handler] start:reqDict];
+            }
 #ifdef IS_DEBUG
             NSLog(@"autoSignin: succeed=%d", succeed);
 #endif

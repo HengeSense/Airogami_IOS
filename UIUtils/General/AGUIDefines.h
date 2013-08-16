@@ -26,5 +26,7 @@ extern NSString * AGAccountUploadingIcons;
 + (void) setNavigationDoneButton:(UIButton*)button;
 + (void) setNormalDoneButton:(UIButton*)button;
 + (UIImage*) sexButtonImage:(BOOL)male;
++ (UIImage*) sexSymbolImage:(BOOL)male;
++ (UIImage*) profileDefaultImage;
 
 @end

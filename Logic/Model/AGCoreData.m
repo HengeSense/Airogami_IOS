@@ -198,7 +198,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@ = %@", idKey, [jsonDictionary objectForKey:idKey]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K = %@", idKey, [jsonDictionary objectForKey:idKey]];
     [fetchRequest setPredicate:predicate];
     
     NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -264,7 +264,7 @@
 - (NSMutableArray*) saveOrUpdateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName
 {
     if (jsonArray == nil || [jsonArray isEqual:[NSNull null]] || jsonArray.count == 0) {
-        return [NSMutableArray arrayWithCapacity:0];
+        return [NSMutableArray array];
     }
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:jsonArray.count];
     for (NSDictionary *dict in jsonArray) {
@@ -283,7 +283,7 @@
     BOOL succeed = [managedObjectContext save:&error];
 #ifdef IS_DEBUG
     if (succeed == NO) {
-        NSLog(@"%@",error.userInfo);
+        NSLog(@"AGCoreDate.save: %@",error.userInfo);
     }
 #endif
     return succeed;

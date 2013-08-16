@@ -49,14 +49,34 @@
     return self;
 }
 
+- (AGURLConnection*) start:(NSString*)path context:(id)context block:(AGHttpJSONHandlerFinishBlock)block
+{
+    return [self start:path params:nil device:NO context:context block:block];
+}
 
-- (AGURLConnection*) start:(NSString*)path  context:(id)context block:(AGHttpJSONHandlerFinishBlock)block
+
+- (AGURLConnection*) start:(NSString*)path params:(NSDictionary*)params device:(BOOL)device context:(id)context block:(AGHttpJSONHandlerFinishBlock)block
 {
     static NSNumber *number;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGWebServerUrl, path]];
+    NSData *body;
+    if (params) {
+        NSMutableString *content = [NSMutableString stringWithCapacity:2048];
+        [AGUtils encodeParams:params path:content device:device];
+        body = [content dataUsingEncoding:NSUTF8StringEncoding];
+    }
     AGURLConnection *conn;
     @synchronized(number){
         request.URL = url;
+        if (params) {
+            [request setHTTPMethod:@"POST"];
+            [request setHTTPBody:body];
+        }
+        else{
+            [request setHTTPMethod:@"GET"];
+            [request setHTTPBody:nil];
+        }
+        
         conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
     }
     if (context) {
@@ -72,6 +92,16 @@
         NSLog(@"%@", cookie);
     }*/
     return conn;
+}
+
+- (NSURLConnection*) start:(NSDictionary*)dict
+{
+    NSAssert(dict != nil, @"dict can't be nil");
+    NSString *path = [dict objectForKey:@"path"];
+    id context = [dict objectForKey:@"context"];
+    AGHttpJSONHandlerFinishBlock block = [dict objectForKey:@"block"];
+    NSDictionary* params = [dict objectForKey:@"params"];
+    return [self start:path params:params device:NO context:context block:block];
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -171,19 +201,21 @@
 
 }
 
-+ (void) request:(NSDictionary*) params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block
+
++ (void) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block
 {
     NSMutableString *url = [NSMutableString stringWithCapacity:128];
     [url appendString:path];
-    if (params) {
+    if (get) {
+        params = nil;
         [AGUtils encodeParams:params path:url device:NO];
     }
     
     if (prompt) {
         [AGWaitUtils startWait:NSLocalizedString(prompt, prompt)];
     }
-    
-    [[AGJSONHttpHandler handler] start:url context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
+    NSMutableString * NotSignin = [NSMutableString stringWithString:@"NO"];
+    [[AGJSONHttpHandler handler] start:url  params:params device:NO context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
         if (prompt) {
             [AGWaitUtils startWait:nil];
         }
@@ -199,13 +231,15 @@
             }
             else if(status.intValue == AGLogicJSONStatusNotSignin)
             {//not signin
-#ifdef IS_DEBUG
-                if (error) {
-                    NSLog(@"AGJSONHttpHandler.request: Not signin");
-                }
-#endif
                 error = [AGMessageUtils errorNotSignin];
-                [[AGManagerUtils managerUtils].accountManager autoSignin];
+                NotSignin.string = @"YES";
+                //
+                NSMutableDictionary * oldDict = [NSMutableDictionary dictionaryWithCapacity:3];
+                [oldDict setObject:url forKey:@"path"];
+                [oldDict setObject:params forKey:@"params"];
+                [oldDict setObject:context forKey:@"context"];
+                [oldDict setObject:block forKey:@"block"];
+                [[AGManagerUtils managerUtils].accountManager autoSignin:oldDict];
             }
             else{
                 error = [AGMessageUtils errorServer];
@@ -213,12 +247,15 @@
             }
         }
         
-        if (error && prompt) {
-            [AGMessageUtils alertMessageWithError:error];
+        if ([NotSignin isEqual:@"NO"]) {
+            if (error && prompt) {
+                [AGMessageUtils alertMessageWithError:error];
+            }
+            if (block) {
+                block(error, context, result);
+            }
         }
-        if (block) {
-            block(error, context, result);
-        }
+        
 #ifdef IS_DEBUG
         if (error) {
             NSLog(@"AGJSONHttpHandler.request: %@", error.userInfo);

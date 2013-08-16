@@ -7,9 +7,13 @@
 //
 
 #import "AGChatPlaneViewController.h"
+#import "AGNotificationManager.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AGChatPlaneViewController ()
+{
+    NSArray * data;
+}
 
 @end
 
@@ -33,12 +37,30 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
     imageView.image = [AGUIDefines mainBackgroundImage];
     [self.tableView.backgroundView addSubview:imageView];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
+}
+
+- (void) viewWillUnload
+{
+    [super viewWillUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) obtainedPlanes:(NSNotification*) notification
+{
+    NSDictionary * dict = notification.userInfo;
+    //NSString *action = [dict objectForKey:@"action"];
+    NSArray *planes = [dict objectForKey:@"planes"];
+    data = planes;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -52,7 +74,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 10;
+    return data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

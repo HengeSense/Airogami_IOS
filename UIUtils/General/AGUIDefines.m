@@ -14,6 +14,9 @@ static UIColor*  NavigationDoneHighlightColor;
 static NSString * Main_Background_Image = @"main_bgrd.png";
 static NSString * SexButtonImageMale = @"write_edit_male_button.png";
 static NSString * SexButtonImageFemale = @"write_edit_female_button.png";
+static NSString * SexSymbolImageMale = @"male_symbol.png";
+static NSString * SexSymbolImageFemale = @"female_symbol.png";
+static NSString * ProfileDefaultImage = @"profile_image_default.png";
 
 NSString * const Normal_Done_Highlight = @"normal_done_highlight.png";
 NSString * const Navigation_Back_Button_Highlight = @"back_button_highlight.png";
@@ -74,4 +77,21 @@ NSString * AGAccountUploadingIcons = @"message.account.operate.uploadingicons";
     }
     return [UIImage imageNamed:name];
 }
+
++ (UIImage*) sexSymbolImage:(BOOL)male
+{
+    NSString *name;
+    if (male) {
+        name = SexSymbolImageMale;
+    }
+    else{
+        name = SexSymbolImageFemale;
+    }
+    return [UIImage imageNamed:name];
+}
++ (UIImage*) profileDefaultImage
+{
+    return [UIImage imageNamed:ProfileDefaultImage];
+}
+
 @end

@@ -1,23 +1,24 @@
 //
-//  AGMessage.h
+//  AGChainMessage.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/14/13.
+//  Created by Tianhu Yang on 8/15/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AGAccount, AGPlane;
+@class AGAccount, AGChain, AGChainMessageId;
 
-@interface AGMessage : NSManagedObject
+@interface AGChainMessage : NSManagedObject
 
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSDate * createdTime;
-@property (nonatomic, retain) NSNumber * messageId;
+@property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) AGAccount *account;
-@property (nonatomic, retain) AGPlane *plane;
+@property (nonatomic, retain) AGChain *chain;
+@property (nonatomic, retain) AGChainMessageId *id;
 
 @end

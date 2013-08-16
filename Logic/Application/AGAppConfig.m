@@ -108,12 +108,15 @@ static NSString *path;
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     if (appAccount) {
-        [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
+        
         if (appAccount.email.length > 0) {
             [params setObject:appAccount.email forKey:AGLogicAccountEmailKey];
         }
-        else{
+        else if(appAccount.screenName.length > 0){
             [params setObject:appAccount.screenName forKey:AGLogicAccountScreenNameKey];
+        }
+        if (params.count) {
+            [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
         }
     }
     

@@ -16,7 +16,7 @@ static NSString *SendChainPath = @"chain/sendChain.action?";
 
 - (void) sendChain:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
 {
-    [AGJSONHttpHandler request:params path:SendChainPath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
+    [AGJSONHttpHandler request:YES params:params path:SendChainPath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
         if (error) {
             
         }

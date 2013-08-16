@@ -63,8 +63,8 @@ static NSDateFormatter *dateFormatter;
     }];
     
     if (yes) {
-        [path appendString:@"clientAgent.deviceName=IOS&clientAgent.clientVersion="];
-        [path appendString:AGApplicationVersion];
+        NSString * deviceString = [NSString stringWithFormat:@"%@=IOS&%@=%@",[@"clientAgent.deviceName" encodeURIComponent],[@"clientAgent.clientVersion" encodeURIComponent],[AGApplicationVersion encodeURIComponent]];
+        [path appendString:deviceString];
     }
 #ifdef IS_DEBUG
     NSLog(@"Encode params: %@",path);
@@ -83,6 +83,9 @@ static NSDateFormatter *dateFormatter;
 
 + (NSString*) birthdayToAge:(NSDate*)birthday
 {
+    if (birthday == nil || [birthday isKindOfClass:[NSDate class]] == NO) {
+        return @"0";
+    }
     NSDate* now = [NSDate date];
     NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
                                        components:NSYearCalendarUnit

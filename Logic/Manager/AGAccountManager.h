@@ -28,5 +28,6 @@ typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 - (void) signout;
 
 - (void) autoSignin;
+- (void) autoSignin:(NSDictionary*)reqDict;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGURLConnection.h"
 
 typedef void (^AGHttpJSONHandlerFinishBlock)(NSError* error, id context, NSMutableDictionary* dict);
 typedef void (^AGHttpJSONHandlerRequestFinishBlock)(NSError *error, id context, id result);
@@ -15,8 +16,13 @@ typedef void (^AGHttpJSONHandlerRequestFinishBlock)(NSError *error, id context, 
 
 + (AGJSONHttpHandler*) handler;
 
-+ (void) request:(NSDictionary*) params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block;
+//get or post (no device)
++ (void) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block;
 
-- (NSURLConnection*) start:(NSString*)path context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
+//GET or POST
+- (AGURLConnection*) start:(NSString*)path params:(NSDictionary*)dict device:(BOOL)device context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
+//GET (no device)
+- (AGURLConnection*) start:(NSString*)path context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
+- (AGURLConnection*) start:(NSDictionary*)dict;
 
 @end

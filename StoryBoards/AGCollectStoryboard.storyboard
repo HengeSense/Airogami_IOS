@@ -71,7 +71,7 @@
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yqb-ai-IkF">
-                                                            <rect key="frame" x="54" y="22" width="233" height="50"/>
+                                                            <rect key="frame" x="57" y="22" width="230" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <string key="text">It depends, if you are receiving or posting notifications that potentially affect all parts of your application, put it in your AppDelegate. If you are receiving/posting notifications that only affect a single class, put it in that class instead.</string>
                                                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
@@ -149,6 +149,30 @@
         <image name="plane_chain@2x.png" width="90" height="150"/>
         <image name="plane_chain_icon@2x.png" width="50" height="50"/>
     </resources>
+    <classes>
+        <class className="AGCollectPlaneCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneCell.h"/>
+            <relationships>
+                <relationship kind="action" name="aidedButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="aidedButton" candidateClass="AYUIButton"/>
+                <relationship kind="outlet" name="bottomLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="categoryImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="collectTypeImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="planeImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="topLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AGCollectPlaneViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="AYUIButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AYUIButton.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

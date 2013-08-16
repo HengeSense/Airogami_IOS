@@ -13,5 +13,8 @@
 
 - (NSMutableArray*) savePlanes:(NSArray*)jsonArray;
 - (NSNumber*) recentPlaneUpdateIncForCollect;
+- (NSArray*) getAllPlanesForCollect;
+- (NSNumber*) recentPlaneUpdateIncForChat;
+- (NSArray*) getAllPlanesForChat;
 
 @end

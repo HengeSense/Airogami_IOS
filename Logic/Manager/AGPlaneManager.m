@@ -13,12 +13,13 @@
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
+static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 
 @implementation AGPlaneManager
 
 - (void) sendPlane:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
 {
-    [AGJSONHttpHandler request:params path:SendPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
+    [AGJSONHttpHandler request:YES params:params path:SendPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
         if (error) {
             
         }
@@ -40,7 +41,24 @@ static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
 
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block
 {
-    [AGJSONHttpHandler request:params path:ReceivePlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+    [AGJSONHttpHandler request:YES params:params path:ReceivePlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+        }
+        if (block) {
+            block(error, context, result);
+        }
+        
+    }];
+}
+
+- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error) {
             
         }

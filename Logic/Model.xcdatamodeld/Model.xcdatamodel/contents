@@ -24,8 +24,12 @@
         </userInfo>
     </entity>
     <entity name="AGAuthenticate" representedClassName="AGAuthenticate" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="email" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="account" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="authenticate" inverseEntity="AGAccount" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
+        </userInfo>
     </entity>
     <entity name="AGCategory" representedClassName="AGCategory" syncable="YES">
         <attribute name="categoryId" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
@@ -95,7 +99,7 @@
         </userInfo>
     </entity>
     <entity name="AGPlane" representedClassName="AGPlane" syncable="YES">
-        <attribute name="city" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deletedByOwner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -146,7 +150,7 @@
     <elements>
         <element name="AGAccount" positionX="0" positionY="0" width="128" height="195"/>
         <element name="AGAccountStat" positionX="-153" positionY="225" width="128" height="90"/>
-        <element name="AGAuthenticate" positionX="7" positionY="309" width="128" height="75"/>
+        <element name="AGAuthenticate" positionX="7" positionY="309" width="128" height="90"/>
         <element name="AGCategory" positionX="-360" positionY="-243" width="128" height="90"/>
         <element name="AGChain" positionX="142" positionY="0" width="128" height="300"/>
         <element name="AGChainMessage" positionX="259" positionY="-27" width="128" height="150"/>

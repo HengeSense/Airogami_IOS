@@ -16,10 +16,13 @@
 #import "AGPlane.h"
 #import "AGChain.h"
 #import "AGUtils.h"
+#import "AGCategory.h"
+#import "AGMessage.h"
 
 @interface AGCollectPlaneViewController ()
 {
-    NSMutableArray * data;
+    NSArray * data;
+    UITableView * tv;
 }
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property(nonatomic, strong) AGCollectPlanePulldownHeader *pulldownHeader;
@@ -57,7 +60,7 @@
 
 - (void)loadView {
     [super loadView];
-    UITableView *tv = (UITableView*)self.view;
+    tv = (UITableView*)self.view;
     CGRect frame = self.view.frame;
     UIImageView *view = [[UIImageView alloc] initWithFrame:frame];
     view.userInteractionEnabled = YES;
@@ -80,21 +83,16 @@
     [super viewDidLoad];
     pulldownHeader.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationCollectedPlanes object:nil];
-    //numberView = [AGCollectPlaneNumberView numberView:self.
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
 }
 
 - (void) collectedPlanes:(NSNotification*) notification
 {
     NSDictionary * dict = notification.userInfo;
-    NSString *action = [dict objectForKey:@"action"];
+    //NSString *action = [dict objectForKey:@"action"];
     NSArray *planes = [dict objectForKey:@"planes"];
-    if ([action isEqual:@"prepend"]) {
-        //[data insertObjects:<#(NSArray *)#> atIndexes:<#(NSIndexSet *)#>
-    }
-    else if([action isEqual:@"set"])
-    {
-        
-    }
+    data = planes;
+    [tv reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,28 +118,30 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     AGCollectPlaneCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.category = indexPath.row;
+    //cell.category = indexPath.row;
     cell.aidedButton.tag = indexPath.row;
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    /*NSObject *obj = [data objectAtIndex:indexPath.row];
+    NSObject *obj = [data objectAtIndex:indexPath.row];
     if([obj isKindOfClass:[AGPlane class]])
     {
         AGPlane *plane = (AGPlane*)obj;
+        cell.category = plane.category.categoryId.intValue;
         cell.topLabel.text = plane.accountByOwnerId.profile.city;
-        cell.bottomLabel.text = [AGUtils dateToString:plane.updatedTime];
-        cell.messageLabel.text = plane.messages.objectEnumerator.nextObject;
+        cell.bottomLabel.text = [AGUtils dateToString:plane.createdTime];
+        AGMessage *message = plane.messages.objectEnumerator.nextObject;
+        cell.messageLabel.text = message.content;
     }
     else if ([obj isKindOfClass:[AGChain class]])
     {
         
-    }*/
+    }
         
     
     return cell;
@@ -190,7 +190,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.reply show];
+    [self.reply show:[data objectAtIndex:indexPath.row]];
 }
 
 #pragma mark -

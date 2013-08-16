@@ -7,7 +7,7 @@
 //
 
 NSString* AGApplicationVersion = @"1.0";
-NSString* AGWebServerUrl = @"http://192.168.0.7:8080/";
+NSString* AGWebServerUrl = @"http://192.168.0.6:8080/";
 NSString* AGDataServerUrl = @"https://airogami-user-bucket.s3-us-west-2.amazonaws.com/";
 
 const CGSize AGAccountIconSizeMedium = {512, 512};

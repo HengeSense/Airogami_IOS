@@ -11,6 +11,9 @@
 
 @interface AGCollectPlaneReply : NSObject
 
+@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+
+
 @property (strong, nonatomic) IBOutlet UIView *replyView;
 
 @property (weak, nonatomic) IBOutlet AGProfileImageButton *profileImageButton;
@@ -23,7 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-- (void) show;
+- (void) show:(id)object;
 
 + (id) reply;
 

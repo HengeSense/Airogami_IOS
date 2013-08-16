@@ -70,4 +70,7 @@
 "message.client.notsignin.message" = "please sign in";
 "message.client.notsignin.title" = "Not sign in";
 
+//UI
+"text.ui.shout.nothing" = "This guy didn't say anything";
+
 

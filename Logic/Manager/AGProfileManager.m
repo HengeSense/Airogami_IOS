@@ -90,7 +90,7 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     if (image) {
         [params setObject:@"tokens" forKey:@"tokens"];
     }
-    [AGJSONHttpHandler request:params path:EditProfilePath prompt:@"" context:context block:^(NSError *error, id context, id result) {
+    [AGJSONHttpHandler request:NO params:params path:EditProfilePath prompt:@"" context:context block:^(NSError *error, id context, id result) {
         if (error) {
             if (block) {
                 block(error, context);

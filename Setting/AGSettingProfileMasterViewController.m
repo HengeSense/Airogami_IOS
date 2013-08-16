@@ -21,6 +21,7 @@
 #import "AGCoreData.h"
 #import "AGAuthenticate.h"
 #import "UIImage+Addition.h"
+#import "AGUIDefines.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
@@ -135,7 +136,7 @@
         self.emailTextField.text = profile.account.authenticate.email;
         AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
         NSURL *url = [dataManager accountIconUrl:profile.accountId small:YES];
-        [self.profileImageButton setImageUrl:url placeImage:nil];
+        [self.profileImageButton setImageUrl:url placeImage:[AGUIDefines profileDefaultImage]];
         url = [dataManager accountIconUrl:profile.accountId small:NO];
         self.profileImageButton.mediumUrl = url;
         //self.emailTextField.text = profile.

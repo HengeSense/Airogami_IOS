@@ -8,6 +8,17 @@
 
 #import "AGCollectPlaneReply.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AGPlane.h"
+#import "AGMessage.h"
+#import "AGCategory+Addition.h"
+#import "AGProfile.h"
+#import "AGUtils.h"
+#import "AGAccount.h"
+#import "AGManagerUtils.h"
+#import "AGUIDefines.h"
+#import "AGDefines.h"
+
+static NSString *ShoutNothing = @"text.ui.shout.nothing";
 
 @interface AGCollectPlaneReply ()
 
@@ -23,6 +34,9 @@
 {
     CGRect frame = self.descriptionTextView.frame;
     frame.size.height = self.descriptionTextView.contentSize.height;
+    if (frame.size.height < 64) {
+        frame.size.height = 64;
+    }
     self.descriptionTextView.frame = frame;
     //
     CGPoint point;
@@ -46,8 +60,9 @@
     self.scrollView.contentSize = frame.size;
 }
 
--(void) show
+-(void) show:(id)object
 {
+    [self initData:object];
     [self layout];
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     self.replyView.alpha = 0.0f;
@@ -57,6 +72,35 @@
     [UIView setAnimationDuration:.3f];
     self.replyView.alpha = 1.0f;
     [UIView commitAnimations];
+}
+
+- (void) initData:(id) object
+{
+    if ([object isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = object;
+        AGProfile *profile = plane.accountByOwnerId.profile;
+        self.categoryLabel.text = [AGCategory title:plane.category.categoryId];
+        self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
+        self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
+        //
+        AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+        NSURL *url = [dataManager accountIconUrl:plane.accountByOwnerId.accountId small:YES];
+        [self.profileImageButton setImageUrl:url placeImage:[AGUIDefines profileDefaultImage]];
+        url = [dataManager accountIconUrl:plane.accountByOwnerId.accountId small:NO];
+        self.profileImageButton.mediumUrl = url;
+        //
+        self.nameLabel.text = profile.fullName;
+        if(profile.shout.length){
+            self.descriptionTextView.text = profile.shout;
+        }
+        else{
+            self.descriptionTextView.text = NSLocalizedString(ShoutNothing, ShoutNothing);
+        }
+        
+        //
+        AGMessage *message = plane.messages.objectEnumerator.nextObject;
+        self.contentTextView.text = message.content;
+    }
 }
      
 - (void) dismiss
