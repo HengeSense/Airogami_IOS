@@ -8,6 +8,15 @@
 
 #import "AGChatPlaneViewController.h"
 #import "AGNotificationManager.h"
+#import "AGChatPlaneCell.h"
+#import "AGPlane.h"
+#import "AGAccount.h"
+#import "AGProfile.h"
+#import "AGUtils.h"
+#import "AGMessage.h"
+#import "AGChain.h"
+#import "AGControllerUtils.h"
+#import "AGManagerUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AGChatPlaneViewController ()
@@ -80,9 +89,33 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    AGChatPlaneCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
+    NSObject *obj = [data objectAtIndex:indexPath.row];
+    if([obj isKindOfClass:[AGPlane class]])
+    {
+        AGPlane *plane = (AGPlane*)obj;
+        AGProfile *profile;
+        if(managerUtils.accountManager.account == plane.accountByOwnerId)
+        {
+            profile = plane.accountByTargetId.profile;
+        }
+        else{
+            profile = plane.accountByOwnerId.profile;
+        }
+        cell.nameLabel.text = profile.fullName;
+        //cell.messageLabel.text = ;
+        cell.timeLabel.text = [AGUtils dateToString:plane.createdTime];
+        AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
+        cell.messageLabel.text = message.content;
+        [cell.profileImageView setImageWithAccountId:profile.accountId];
+    }
+    else if ([obj isKindOfClass:[AGChain class]])
+    {
+        
+    }
+
     
     return cell;
 }

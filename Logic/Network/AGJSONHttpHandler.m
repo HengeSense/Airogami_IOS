@@ -207,8 +207,8 @@
     NSMutableString *url = [NSMutableString stringWithCapacity:128];
     [url appendString:path];
     if (get) {
-        params = nil;
         [AGUtils encodeParams:params path:url device:NO];
+        params = nil;
     }
     
     if (prompt) {
@@ -236,9 +236,17 @@
                 //
                 NSMutableDictionary * oldDict = [NSMutableDictionary dictionaryWithCapacity:3];
                 [oldDict setObject:url forKey:@"path"];
-                [oldDict setObject:params forKey:@"params"];
-                [oldDict setObject:context forKey:@"context"];
-                [oldDict setObject:block forKey:@"block"];
+                if (params) {
+                    [oldDict setObject:params forKey:@"params"];
+                }
+                if (context) {
+                    [oldDict setObject:context forKey:@"context"];
+                }
+                if (block) {
+                    [oldDict setObject:block forKey:@"block"];
+                }
+                
+                
                 [[AGManagerUtils managerUtils].accountManager autoSignin:oldDict];
             }
             else{

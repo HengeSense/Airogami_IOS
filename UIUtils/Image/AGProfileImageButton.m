@@ -8,6 +8,9 @@
 
 #import "AGProfileImageButton.h"
 #import "AGPhotoView.h"
+#import "AGManagerUtils.h"
+#import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 #import <QuartzCore/QuartzCore.h>
@@ -32,6 +35,15 @@
     
     [photoView preview:self.imageView.image url:mediumUrl];
     
+}
+
+- (void) setImageWithAccountId:(NSNumber *)accountId
+{
+    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+    NSURL *url = [dataManager accountIconUrl:accountId small:YES];
+    [self setImageUrl:url placeImage:[AGUIDefines profileDefaultImage]];
+    url = [dataManager accountIconUrl:accountId small:NO];
+    self.mediumUrl = url;
 }
 
 @end

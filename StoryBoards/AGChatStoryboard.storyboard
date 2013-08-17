@@ -33,7 +33,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 day ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJJ-tx-49c">
-                                            <rect key="frame" x="245" y="0.0" width="68" height="21"/>
+                                            <rect key="frame" x="151" y="0.0" width="162" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
                                             <color key="textColor" red="0.63921568630000003" green="0.74901960779999999" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -441,7 +441,6 @@
         <class className="AGChatChatViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatChatViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButton:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="bubbleTable" candidateClass="UIBubbleTableView"/>
                 <relationship kind="outlet" name="inputTextView" candidateClass="UITextView"/>
@@ -465,9 +464,6 @@
         <class className="AGChatProfileViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatProfileViewController.h"/>
             <relationships>
-                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="action" name="profileImageButtonTouched:" candidateClass="AGProfileImageButton"/>
-                <relationship kind="action" name="reportButtonTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="descriptionContainer" candidateClass="UIImageView"/>

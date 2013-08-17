@@ -14,6 +14,7 @@
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
 static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
+static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
 
 @implementation AGPlaneManager
 
@@ -65,6 +66,22 @@ static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
         else{
             //succeed
             [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+        }
+        if (block) {
+            block(error, context, result);
+        }
+        
+    }];
+}
+
+- (void) obtainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (error) {
+            
+        }
+        else{
+            //succeed
         }
         if (block) {
             block(error, context, result);

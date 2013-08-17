@@ -24,6 +24,7 @@ static NSString *EmailSigninPath = @"account/emailSignin.action?";
 static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 static NSString *SignoutPath = @"account/signout.action?";
 static NSString *ObtainTokensPath = @"data/dataManager?";
+static NSString *ObtainProfilePath= @"account/obtainProfile?";
 //
 static NSString *SignupDuplicate = @"message.signup.duplicate";
 static NSString *SigninNotMatch = @"error.signin.notmatch.message";
@@ -214,6 +215,13 @@ static NSString *SigninOther = @"error.signin.other.message";
     [AGJSONHttpHandler request:YES params:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, id result) {
        block(error, context, result);
    }];
+}
+
+- (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainProfilePath prompt:nil context:context block:^(NSError *error, id context, id result) {
+        block(error, context, result);
+    }];
 }
 
 - (void) autoSignin

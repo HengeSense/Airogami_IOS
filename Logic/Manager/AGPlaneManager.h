@@ -18,4 +18,6 @@
 
 - (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
+- (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
+
 @end

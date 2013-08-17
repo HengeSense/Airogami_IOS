@@ -14,4 +14,6 @@
 
 @property(nonatomic, strong) NSURL *mediumUrl;
 
+- (void) setImageWithAccountId:(NSNumber *)accountId;
+
 @end

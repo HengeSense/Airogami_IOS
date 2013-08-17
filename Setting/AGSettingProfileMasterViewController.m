@@ -134,12 +134,7 @@
         [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
         self.descriptionTextView.text = profile.shout;
         self.emailTextField.text = profile.account.authenticate.email;
-        AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
-        NSURL *url = [dataManager accountIconUrl:profile.accountId small:YES];
-        [self.profileImageButton setImageUrl:url placeImage:[AGUIDefines profileDefaultImage]];
-        url = [dataManager accountIconUrl:profile.accountId small:NO];
-        self.profileImageButton.mediumUrl = url;
-        //self.emailTextField.text = profile.
+        [self.profileImageButton setImageWithAccountId:profile.accountId];
     }
     
 }

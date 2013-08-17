@@ -8,6 +8,8 @@
 
 #import "AGDataManger.h"
 #import "AGDefines.h"
+#import "AGUIDefines.h"
+
 
 @implementation AGDataManger
 
@@ -22,5 +24,6 @@
     }
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@accounts/%@/account/icon%@.jpg", AGDataServerUrl, accountId, suffix]];
 }
+
 
 @end

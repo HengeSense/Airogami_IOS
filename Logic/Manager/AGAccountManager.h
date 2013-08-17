@@ -25,6 +25,8 @@ typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 
 - (void) obtainTokens:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
 
+- (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
+
 - (void) signout;
 
 - (void) autoSignin;

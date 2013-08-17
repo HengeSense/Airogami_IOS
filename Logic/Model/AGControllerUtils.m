@@ -12,6 +12,7 @@
 
 @synthesize accountController;
 @synthesize planeController;
+@synthesize messageController;
 
 + (AGControllerUtils*) controllerUtils
 {
@@ -27,6 +28,7 @@
     if (self = [super init]) {
         accountController = [[AGAccountController alloc] init];
         planeController = [[AGPlaneController alloc] init];
+        messageController = [[AGMessageController alloc] init];
     }
     return self;
 }

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AGCoreData.h"
+#import "AGMessage.h"
 
 @interface AGPlaneController : NSObject
 
@@ -16,5 +17,8 @@
 - (NSArray*) getAllPlanesForCollect;
 - (NSNumber*) recentPlaneUpdateIncForChat;
 - (NSArray*) getAllPlanesForChat;
+- (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
+//new means not obtained messages
+- (NSArray*) getAllNewPlanesForChat;
 
 @end

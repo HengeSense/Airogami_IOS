@@ -10,4 +10,6 @@
 
 @interface AGProfileImage : UIImageView
 
+- (void) setImageWithAccountId:(NSNumber*)accountId;
+
 @end

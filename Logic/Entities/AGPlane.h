@@ -2,7 +2,7 @@
 //  AGPlane.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/15/13.
+//  Created by Tianhu Yang on 8/16/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
+@property (nonatomic, retain) NSNumber * isNew;
 @property (nonatomic, retain) AGAccount *accountByOwnerId;
 @property (nonatomic, retain) AGAccount *accountByTargetId;
 @property (nonatomic, retain) AGCategory *category;

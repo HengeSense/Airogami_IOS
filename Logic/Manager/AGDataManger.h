@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGProfileImageButton.h"
+#import "AGProfileImage.h"
 
 @interface AGDataManger : NSObject
 

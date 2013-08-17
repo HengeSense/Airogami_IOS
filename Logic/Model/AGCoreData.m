@@ -218,13 +218,16 @@
     for (NSString *key in attributesByName.allKeys) {
         NSAttributeDescription *attributeDescription  = [attributesByName objectForKey:key];
         NSObject *obj = [jsonDictionary objectForKey:key];
-        if ([obj isEqual:[NSNull null]]) {
-            obj = nil;
+        if (obj) {
+            if ([obj isEqual:[NSNull null]]) {
+                obj = nil;
+            }
+            else if(attributeDescription.attributeType == NSDateAttributeType){
+                obj = [AGUtils stringToDate:(NSString*)obj];
+            }
+            [managedObject setValue:obj forKey:key];
         }
-        else if(attributeDescription.attributeType == NSDateAttributeType){
-           obj = [AGUtils stringToDate:(NSString*)obj];
-        }
-        [managedObject setValue:obj forKey:key];
+        
     }
     
     //relationship

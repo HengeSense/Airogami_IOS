@@ -83,11 +83,7 @@ static NSString *ShoutNothing = @"text.ui.shout.nothing";
         self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
         self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
         //
-        AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
-        NSURL *url = [dataManager accountIconUrl:plane.accountByOwnerId.accountId small:YES];
-        [self.profileImageButton setImageUrl:url placeImage:[AGUIDefines profileDefaultImage]];
-        url = [dataManager accountIconUrl:plane.accountByOwnerId.accountId small:NO];
-        self.profileImageButton.mediumUrl = url;
+        [self.profileImageButton setImageWithAccountId:profile.accountId];
         //
         self.nameLabel.text = profile.fullName;
         if(profile.shout.length){

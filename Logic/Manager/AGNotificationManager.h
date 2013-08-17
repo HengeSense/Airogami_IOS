@@ -16,6 +16,10 @@ extern NSString *AGNotificationObtainedPlanes;
 extern NSString *AGNotificationObtainPlanes;
 extern NSString *AGNotificationGetObtainedPlanes;
 
+extern NSString *AGNotificationObtainedMessages;
+extern NSString *AGNotificationObtainMessages;
+extern NSString *AGNotificationGetObtainedMessages;
+
 @interface AGNotificationManager: NSObject
 
 

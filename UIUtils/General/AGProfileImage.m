@@ -7,7 +7,9 @@
 //
 
 #import "AGProfileImage.h"
+#import "AGManagerUtils.h"
 #import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation AGProfileImage
 - (id)initWithFrame:(CGRect)frame
@@ -50,15 +52,20 @@
 {
     CALayer *layer = self.layer;
     layer.cornerRadius = 3.0f;
+    self.clipsToBounds = YES;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void) setImageWithAccountId:(NSNumber*)accountId
 {
-    // Drawing code
+    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+    NSURL *url = [dataManager accountIconUrl:accountId small:YES];
+    [self setImageWithURL:url placeholderImage:[AGUIDefines profileDefaultImage] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+#ifdef IS_DEBUG
+        if (error) {
+            NSLog(@"AGProfileImage.setImageWithAccountId: %@", error);
+        }
+#endif
+    }];
 }
-*/
 
 @end
