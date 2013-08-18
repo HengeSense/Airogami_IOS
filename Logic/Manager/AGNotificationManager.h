@@ -20,7 +20,13 @@ extern NSString *AGNotificationObtainedMessages;
 extern NSString *AGNotificationObtainMessages;
 extern NSString *AGNotificationGetObtainedMessages;
 
+extern NSString *AGNotificationGetMessagesForPlane;
+extern NSString *AGNotificationGotMessagesForPlane;
+
 @interface AGNotificationManager: NSObject
+
+
+- (void) startTimer;
 
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGAccount.h"
 
 @interface AGChatProfileViewController : UITableViewController
+
+@property(nonatomic, strong) AGAccount *account;
 
 @end

@@ -83,6 +83,7 @@ static NSString *path;
     }
     appAccount.accountId = account.accountId;
     appAccount.email = account.authenticate.email;
+    NSAssert(appAccount.email != nil, @"Invalid email");
     appAccount.screenName = account.profile.screenName;
     appAccount.password = password;
     [self save];

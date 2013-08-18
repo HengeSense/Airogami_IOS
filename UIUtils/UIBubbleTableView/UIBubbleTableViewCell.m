@@ -14,6 +14,9 @@
 #import "NSBubbleData.h"
 #import "AGBubbleTableViewDelegate.h"
 #import "AGBubbleCellStateButton.h"
+#import "AGManagerUtils.h"
+#import "AGUIUtils.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 #define kMineLeftCapWidth 22
 #define kMineTopCapWidth 17
@@ -105,8 +108,22 @@
     NSBubbleType type = data.type;
     if (self.showAvatar) {
         self.avatarButton.hidden = NO;
-        UIImage *image = self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"];
-        [self.avatarButton setBackgroundImage:image forState:UIControlStateNormal];
+        if (data.account) {
+            NSURL *url = [[AGManagerUtils managerUtils].dataManager accountIconUrl:data.account.accountId small:YES];
+            [self.avatarButton setImageWithURL:url forState:UIControlStateNormal placeholderImage:[AGUIDefines profileDefaultImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+#ifdef IS_DEBUG
+                if (error) {
+                    NSLog(@"UIBubbleTableViewCell.setData: %@", error);
+                }
+#endif
+                
+            }];
+        }
+        else{
+            UIImage *image = self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"];
+            [self.avatarButton setBackgroundImage:image forState:UIControlStateNormal];
+        }
+        
     }
     else
     {
@@ -132,12 +149,12 @@
     UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
     switch (self.data.state) {
         case BubbleCellStateSendFailed:
-            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] type:UIBubbleCellSelectSendFailed];
+            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectSendFailed];
             break;
         
         case BubbleCellStateReceivedUnliked:
             [self.stateButton likeReceived];
-            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] type:UIBubbleCellSelectReceivedLike];
+            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data  type:UIBubbleCellSelectReceivedLike];
             break;
         default:
             break;
@@ -148,7 +165,7 @@
 - (void) avatarImageTouched
 {
     UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
-    [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] type:UIBubbleCellSelectAvatar];
+    [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectAvatar];
 }
 
 - (void) setupInternalData

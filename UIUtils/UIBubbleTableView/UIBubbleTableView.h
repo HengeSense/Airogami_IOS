@@ -30,6 +30,6 @@ typedef enum _NSBubbleTypingType
 @property (nonatomic) BOOL showAvatars;
 
 - (void) reloadToBottom;
-- (void) didSelectCellAtIndexPath:(NSIndexPath*) indexPath type:(UIBubbleTableViewCellSelectType) type;
+- (void) didSelectCellAtIndexPath:(NSIndexPath*) indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType) type;
 
 @end

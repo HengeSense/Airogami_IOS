@@ -229,9 +229,9 @@
     return cell;
 }
 
-- (void) didSelectCellAtIndexPath:(NSIndexPath *)indexPath type:(UIBubbleTableViewCellSelectType)type
+- (void) didSelectCellAtIndexPath:(NSIndexPath *)indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType)type
 {
-    [self.bubbleDelegate bubbleTableView:self didSelectCellAtIndexPath:indexPath type:type];
+    [self.bubbleDelegate bubbleTableView:self didSelectCellAtIndexPath:indexPath bubbleData:bubbleData type:type];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

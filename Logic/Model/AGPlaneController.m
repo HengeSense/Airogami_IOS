@@ -38,7 +38,6 @@
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGPlane"];
     for (AGPlane *plane in array) {
-        plane.accountByTargetId = [AGManagerUtils managerUtils].accountManager.account;
         if (plane.isNew == nil) {
             plane.isNew = [NSNumber numberWithBool:YES];
         }

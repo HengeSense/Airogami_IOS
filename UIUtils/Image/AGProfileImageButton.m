@@ -15,25 +15,36 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+@interface AGProfileImageButton()
+
+@property(nonatomic, strong) NSNumber *done;
+
+@end
+
 @implementation AGProfileImageButton
 
 @synthesize mediumUrl;
+@synthesize done;
 
 - (void)initialize
 {
     [super initialize];
+    done = [NSNumber numberWithBool:YES];
     [self addTarget: self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) buttonClicked
 {
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    [window endEditing:YES];
-    CGRect frame = [self.imageView convertRect:self.imageView.bounds toView:window];
-
-    AGPhotoView *photoView = [[AGPhotoView alloc] initWithFrame:frame];
-    
-    [photoView preview:self.imageView.image url:mediumUrl];
+    if (done.boolValue) {
+        done = [NSNumber numberWithBool:NO];
+        UIWindow *window = [[UIApplication sharedApplication].delegate window];
+        [window endEditing:YES];
+        CGRect frame = [self.imageView convertRect:self.imageView.bounds toView:window];
+        
+        AGPhotoView *photoView = [[AGPhotoView alloc] initWithFrame:frame];
+        
+        [photoView preview:self.imageView.image url:mediumUrl soure:self];
+    }
     
 }
 

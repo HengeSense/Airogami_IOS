@@ -16,6 +16,7 @@ static NSString *DownloadNo = @"0";
 {
     JPRadialProgressView *progressView;
     NSMutableString  *download;
+    id source;
 }
 @property(nonatomic, assign) CGRect originalFrame;
 
@@ -37,8 +38,10 @@ static NSString *DownloadNo = @"0";
     return self;
 }
 
-- (void) preview:(UIImage*)sImage url:(NSURL*)url
+- (void) preview:(UIImage*)sImage url:(NSURL*)url soure:(id)aSource
 {
+    source = aSource;
+    self.userInteractionEnabled = NO;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [window addSubview:self];
     
@@ -128,6 +131,7 @@ static NSString *DownloadNo = @"0";
         [window addSubview:progressView];
         progressView.center = progressView.superview.center;
     }
+    self.userInteractionEnabled = YES;
     
 }
 
@@ -137,6 +141,7 @@ static NSString *DownloadNo = @"0";
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    self.userInteractionEnabled = NO;
     UIScrollView *scrollView = (UIScrollView *) self.superview;
     scrollView.zoomScale = 1.0f;
     [UIView beginAnimations:@"ProfileImageButtonAnimations" context:nil];
@@ -151,6 +156,7 @@ static NSString *DownloadNo = @"0";
     [self.superview removeFromSuperview];
     [self removeFromSuperview];
     [progressView removeFromSuperview];
+    [source setValue:[NSNumber numberWithBool:YES] forKey:@"done"];
 }
 
 @end

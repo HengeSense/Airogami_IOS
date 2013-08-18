@@ -9,6 +9,10 @@
 #import "AGChatProfileViewController.h"
 #import "AGProfileImageButton.h"
 #import "AGUIDefines.h"
+#import "AGProfile.h"
+#import "AGLocation.h"
+#import "AGUtils.h"
+#import "AGDefines.h"
 
 @interface AGChatProfileViewController ()
 @property (weak, nonatomic) IBOutlet AGProfileImageButton *profileImageButton;
@@ -25,6 +29,8 @@
 
 @implementation AGChatProfileViewController
 
+@synthesize account;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -40,12 +46,36 @@
 
     self.descriptionContainer.image = [self.descriptionContainer.image stretchableImageWithLeftCapWidth:20 topCapHeight:20];
     [AGUIDefines setNavigationBackButton:self.backButton];
+    //
+    [self initData];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) initData
+{
+    AGProfile *profile = account.profile;
+    if (profile) {
+        //self.likesLabel.text = [profile.likesCount stringValue];
+        self.nameLabel.text = profile.fullName;
+        self.screenNameLabel.text = profile.screenName;
+        self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
+        
+        self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
+        self.locationLabel.text = [[AGLocation locationWithProfile:profile] toString];
+        if(profile.shout.length){
+            self.descriptionLabel.text = profile.shout;
+        }
+        else{
+            self.descriptionLabel.text = NSLocalizedString(AGAccountShoutNothing, AGAccountShoutNothing);
+        }
+        [self.profileImageButton setImageWithAccountId:profile.accountId];
+    }
+    
 }
 
 #pragma mark - Table view data source

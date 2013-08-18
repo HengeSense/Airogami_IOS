@@ -22,6 +22,7 @@
 @interface AGChatPlaneViewController ()
 {
     NSArray * data;
+    int selectedIndex;
 }
 
 @end
@@ -48,6 +49,7 @@
     [self.tableView.backgroundView addSubview:imageView];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
+    [[AGManagerUtils managerUtils].notificationManager startTimer];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
 }
 
@@ -97,7 +99,7 @@
     {
         AGPlane *plane = (AGPlane*)obj;
         AGProfile *profile;
-        if(managerUtils.accountManager.account == plane.accountByOwnerId)
+        if([managerUtils.accountManager.account.accountId isEqual:plane.accountByOwnerId.accountId])
         {
             profile = plane.accountByTargetId.profile;
         }
@@ -175,7 +177,16 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    selectedIndex = indexPath.row;
     [self performSegueWithIdentifier:@"ToChat" sender:self];
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"ToChat"]) {
+        [segue.destinationViewController setValue:[data objectAtIndex:selectedIndex] forKey:@"airogami"];
+    }
 }
 
 @end

@@ -23,6 +23,10 @@ NSString *AGNotificationObtainedMessages = @"notification.obtainedmessages";
 NSString *AGNotificationObtainMessages = @"notification.obtainmessages";
 NSString *AGNotificationGetObtainedMessages = @"notification.getobtainedmessages";
 
+NSString *AGNotificationGetMessagesForPlane = @"notification.getmessagesforplane";
+NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane";
+
+
 @interface AGNotificationManager()
 
 @end
@@ -42,6 +46,9 @@ NSString *AGNotificationGetObtainedMessages = @"notification.getobtainedmessages
         //obtain messages
         [notificationCenter addObserver:self selector:@selector(obtainMessages:) name:AGNotificationObtainMessages object:nil];
         [notificationCenter addObserver:self selector:@selector(obtainedMessages:) name:AGNotificationGetObtainedMessages object:nil];
+        //get messages for plane
+        //obtain messages
+        [notificationCenter addObserver:self selector:@selector(getMessagesForPlane:) name:AGNotificationGetMessagesForPlane object:nil];
     }
     return self;
 }
@@ -154,6 +161,30 @@ NSString *AGNotificationGetObtainedMessages = @"notification.getobtainedmessages
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
     
+}
+
+- (void) getMessagesForPlane:(NSNotification*)notification
+{
+    NSNumber *planeId = [notification.userInfo objectForKey:@"planeId"];
+    NSNumber *startId = [notification.userInfo objectForKey:@"startId"];
+    NSAssert(planeId != nil, @"nil planeId");
+    NSArray *messages = [[AGControllerUtils controllerUtils].messageController getMessagesForPlane:planeId startId:startId];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
+}
+
+- (void) startTimer {
+    [NSTimer scheduledTimerWithTimeInterval:5
+                                     target:self
+                                   selector:@selector(tick:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+- (void) tick:(NSTimer *) timer {
+    //do something here..
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
 }
 
 

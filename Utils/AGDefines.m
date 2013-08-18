@@ -20,6 +20,7 @@ const int AGAccountAgeMaxLength = 2;
 const int AGAccountEmailMaxLength = 255;
 const int AGAccountPasswordMaxLength = 15;
 const int AGAccountPasswordMinLength = 6;
+const int AGAccountMessageContentMaxLength = 255;
 
 NSString * AGAccountNameShortKey = @"error.account.name.short";
 NSString * AGAccountScreenNameShortKey = @"error.account.screenname.short";
@@ -30,6 +31,7 @@ NSString * AGAccountEmailInvalidKey = @"error.account.email.invalid";
 NSString * AGAccountIconRequireKey = @"error.account.icon.require";
 NSString * AGAccountCurrentPasswordShortKey = @"error.account.currentpassword.short";
 NSString * AGAccountNewPasswordShortKey = @"error.account.newpassword.short";
+NSString * AGAccountShoutNothing = @"text.ui.shout.nothing";
 
 //plane
 NSString *AGPlaneSendPlaneOK = @"message.plane.sendplane.ok";

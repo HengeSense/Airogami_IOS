@@ -12,9 +12,13 @@
 #import "AGChatKeyboardScroll.h"
 #import "AGResignButton.h"
 #import "AGUIUtils.h"
+#import "AGDefines.h"
+#import "AGNotificationManager.h"
+#import "AGMessage.h"
+#import "AGManagerUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kAGChatChatMessageMaxLength 500
+#define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
 #define kAGChatChatMaxSpacing 50
 
 static float AGInputTextViewMaxHeight = 100;
@@ -29,16 +33,16 @@ static float AGInputTextViewMaxHeight = 100;
     __weak IBOutlet AGResignButton *resignButton;
     UITextView *aidedTextView;
     
-    NSMutableArray *bubbleData;
+    NSMutableArray *messagesData;
+    
+    NSBubbleData *selectedBubbleData;
 }
 
 @end
 
-@interface AGChatChatViewController ()
-
-@end
-
 @implementation AGChatChatViewController
+
+@synthesize airogami;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,6 +52,15 @@ static float AGInputTextViewMaxHeight = 100;
     }
     return self;
 }
+
+- (id) initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        messagesData = [NSMutableArray arrayWithCapacity:50];
+    }
+    return self;
+}
+
 
 - (void) initUI
 {
@@ -71,7 +84,7 @@ static float AGInputTextViewMaxHeight = 100;
     
     [self initUI];
 	
-    NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
+    /*NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
     heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
     
     NSBubbleData *photoBubble = [NSBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
@@ -81,17 +94,20 @@ static float AGInputTextViewMaxHeight = 100;
     replyBubble.avatar = nil;
     
     bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
-    
+    */
     
     bubbleTable.snapInterval = 120;
-    
-    
     bubbleTable.showAvatars = YES;
-    
-    
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     
-    [bubbleTable reloadData];
+    //notifications
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = airogami;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:plane.planeId forKey:@"planeId"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
+    }
+
 }
 
 - (void) viewDidLayoutSubviews
@@ -105,6 +121,22 @@ static float AGInputTextViewMaxHeight = 100;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) gotMessagesForPlane:(NSNotification*)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    NSArray *messages = [dict objectForKey:@"messages"];
+    for (AGMessage *message in messages) {
+        NSBubbleType bubbleType = BubbleTypeMine;
+        AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
+        if (account != message.account) {
+            bubbleType = BubbleTypeSomeoneElse;
+        }
+        NSBubbleData *bubbleData = [NSBubbleData dataWithText:message.content date:message.createdTime type:bubbleType];
+        bubbleData.account = message.account;
+        [messagesData addObject:bubbleData];
+    }
 }
 
 - (IBAction)backButton:(UIButton *)sender {
@@ -201,23 +233,31 @@ static float AGInputTextViewMaxHeight = 100;
 }
 
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqual:@"ToProfile"]) {
+        [segue.destinationViewController setValue:selectedBubbleData.account forKey:@"account"];
+    }
+}
+
 
 #pragma mark - UIBubbleTableViewDataSource implementation
 
 - (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView
 {
-    return [bubbleData count];
+    return [messagesData count];
 }
 
 - (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
 {
-    return [bubbleData objectAtIndex:row];
+    return [messagesData objectAtIndex:row];
 }
 
 #pragma mark - UIBubbleTableViewDelegate
 
-- (void)bubbleTableView:(UIBubbleTableView *)tableView didSelectCellAtIndexPath:(NSIndexPath*) indexPath type:(UIBubbleTableViewCellSelectType) type
+- (void)bubbleTableView:(UIBubbleTableView *)tableView didSelectCellAtIndexPath:(NSIndexPath*)indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType) type
 {
+    selectedBubbleData = bubbleData;
     switch (type) {
         case UIBubbleCellSelectAvatar:
             [self performSegueWithIdentifier:@"ToProfile" sender:self];
@@ -232,10 +272,29 @@ static float AGInputTextViewMaxHeight = 100;
 
 -(void) send
 {
-    NSBubbleData *sayBubble = [NSBubbleData dataWithText:inputTextView.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
-    sayBubble.state = BubbleCellStateReceivedUnliked;
-    [bubbleData addObject:sayBubble];
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
+    NSBubbleData *sayBubble = [NSBubbleData dataWithText:inputTextView.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+    sayBubble.account = managerUtils.accountManager.account;
+    sayBubble.state = BubbleCellStateSending;
+    [messagesData addObject:sayBubble];
     [bubbleTable reloadToBottom];
+    AGPlane *plane = airogami;
+    NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:inputTextView.text type:AGMessageTypeText];
+    [managerUtils.planeManager replyPlane:params context:nil block:^(NSError *error, id context, AGMessage *result) {
+        if (result) {
+            sayBubble.state = BubbleCellStateSent;
+        }
+        else{
+            sayBubble.state = BubbleCellStateSendFailed;
+        }
+        [bubbleTable reloadToBottom];
+    }];
+}
+
+- (void)viewWillUnload
+{
+    [super viewWillUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidUnload {

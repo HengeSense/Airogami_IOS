@@ -12,9 +12,11 @@
 #import "AGControllerUtils.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
+static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
 static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
+
 
 @implementation AGPlaneManager
 
@@ -35,6 +37,32 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
         }
         if (block) {
             block(error, context);
+        }
+        
+    }];
+}
+
+- (void) replyPlane:(NSDictionary*) params context:(id)context block:(AGReplyPlaneFinishBlock)block
+{
+    [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        AGMessage *message = nil;
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            NSDictionary *dict = [result objectForKey:@"message"];
+            if ([dict isEqual:[NSNull null]] == NO) {
+                message = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
+            }
+            else{
+                NSLog(@"replyPlane failed");
+                abort();
+            }
+        
+        }
+        if (block) {
+            block(error, context, message);
         }
         
     }];
@@ -65,7 +93,10 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
         }
         else{
             //succeed
-            [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+            NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+            for (AGPlane *plane in planes) {
+                plane.isNew = [NSNumber numberWithBool:YES];
+            }
         }
         if (block) {
             block(error, context, result);
@@ -88,6 +119,15 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
         }
         
     }];
+}
+
+- (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:planeId forKey:@"planeId"];
+    [params setObject:content forKey:@"messageVO.content"];
+    [params setObject:[NSNumber numberWithInteger:type] forKey:@"messageVO.type"];
+    return params;
 }
 
 @end

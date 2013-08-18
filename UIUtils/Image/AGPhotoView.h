@@ -11,7 +11,7 @@
 
 @interface AGPhotoView : UIImageView <UIScrollViewDelegate>
 
-- (void) preview:(UIImage*)image url:(NSURL*)url;
+- (void) preview:(UIImage*)image url:(NSURL*)url soure:(id)source;
 
 
 @end

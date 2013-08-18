@@ -13,4 +13,8 @@
 
 - (NSMutableArray*) saveMessages:(NSArray*)jsonArray plane:(AGPlane*) plane;
 
+- (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary;
+
+- (NSArray*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId;
+
 @end

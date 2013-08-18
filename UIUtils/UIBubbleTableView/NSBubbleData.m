@@ -24,6 +24,7 @@
 @synthesize insets = _insets;
 @synthesize avatar = _avatar;
 @synthesize state = _state;
+@synthesize account;
 
 #pragma mark - Lifecycle
 

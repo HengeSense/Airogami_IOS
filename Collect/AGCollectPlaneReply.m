@@ -18,7 +18,6 @@
 #import "AGUIDefines.h"
 #import "AGDefines.h"
 
-static NSString *ShoutNothing = @"text.ui.shout.nothing";
 
 @interface AGCollectPlaneReply ()
 
@@ -90,7 +89,7 @@ static NSString *ShoutNothing = @"text.ui.shout.nothing";
             self.descriptionTextView.text = profile.shout;
         }
         else{
-            self.descriptionTextView.text = NSLocalizedString(ShoutNothing, ShoutNothing);
+            self.descriptionTextView.text = NSLocalizedString(AGAccountShoutNothing, ShoutNothing);
         }
         
         //

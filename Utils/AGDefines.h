@@ -60,6 +60,8 @@ extern const int AGAccountScreenNameMinLength;
 extern const int AGAccountScreenNameMaxLength;
 extern const int AGAccountPasswordMaxLength;
 extern const int AGAccountPasswordMinLength;
+extern const int AGAccountMessageContentMaxLength;
+
 
 
 extern  NSString * AGAccountNameShortKey;
@@ -71,6 +73,7 @@ extern  NSString * AGAccountLocationEmptyKey;
 extern  NSString * AGAccountEmailInvalidKey;
 extern  NSString * AGAccountScreenNameShortKey;
 extern  NSString * AGAccountIconRequireKey ;
+extern  NSString * AGAccountShoutNothing;
 
 //plane
 

@@ -9,6 +9,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGAccount.h"
 
 #define kAvartarHeight 48
 #define kCellSpacing 10
@@ -39,6 +40,7 @@ typedef enum _NSBubbleCellState
 @property (readonly, nonatomic, strong) UIView *view;
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, strong) UIImage *avatar;
+@property (nonatomic, strong) AGAccount *account;
 @property (nonatomic, assign) NSBubbleCellState state;
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
