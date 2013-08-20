@@ -10,6 +10,8 @@
 #import "AGJSONHttpHandler.h"
 #import "AGMessageUtils.h"
 #import "AGControllerUtils.h"
+#import "NSBubbleData.h"
+#import "AGManagerUtils.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
@@ -42,10 +44,15 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
     }];
 }
 
-- (void) replyPlane:(NSDictionary*) params context:(id)context block:(AGReplyPlaneFinishBlock)block
+- (void) replyPlane:(AGMessage*) message context:(id)context block:(AGReplyPlaneFinishBlock)block
 {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:message.plane.planeId forKey:@"planeId"];
+    [params setObject:message.content forKey:@"messageVO.content"];
+    [params setObject:message.type forKey:@"messageVO.type"];
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        AGMessage *message = nil;
+        AGMessage *remoteMessage = nil;
         if (error) {
             
         }
@@ -53,16 +60,23 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
             //succeed
             NSDictionary *dict = [result objectForKey:@"message"];
             if ([dict isEqual:[NSNull null]] == NO) {
-                message = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
+                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
+                
             }
             else{
                 NSLog(@"replyPlane failed");
                 abort();
             }
-        
+        }
+        if (remoteMessage) {
+            [[AGCoreData coreData] remove:message];
+        }
+        else{
+            message.state = [NSNumber numberWithInt:BubbleCellStateSendFailed];
+            [[AGCoreData coreData] save];
         }
         if (block) {
-            block(error, context, message);
+            block(error, context, remoteMessage);
         }
         
     }];
@@ -128,6 +142,21 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
     [params setObject:content forKey:@"messageVO.content"];
     [params setObject:[NSNumber numberWithInteger:type] forKey:@"messageVO.type"];
     return params;
+}
+
+- (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content type:(int)type
+{
+    AGCoreData *coreData = [AGCoreData coreData];
+    AGMessage *message = (AGMessage *)[coreData create:[AGMessage class]];
+    message.account = [AGManagerUtils managerUtils].accountManager.account;
+    message.messageId = [NSNumber numberWithInt:-1];
+    message.createdTime = [NSDate dateWithTimeIntervalSinceNow:0];
+    message.plane = plane;
+    message.content = content;
+    message.type = [NSNumber numberWithInt:type];
+    message.state = [NSNumber numberWithInt:BubbleCellStateSending];
+    [coreData save];
+    return message;
 }
 
 @end

@@ -225,7 +225,10 @@
             else if(attributeDescription.attributeType == NSDateAttributeType){
                 obj = [AGUtils stringToDate:(NSString*)obj];
             }
-            [managedObject setValue:obj forKey:key];
+            [managedObject setValue:obj forKey:key];//9223372036854775785
+            if ([key isEqual:@"updateInc"]) {
+                [managedObject setValue:obj forKey:key];
+            }
         }
         
     }
@@ -290,6 +293,19 @@
     }
 #endif
     return succeed;
+}
+
+- (void) remove:(NSManagedObject *)managedObject
+{
+    if (managedObject) {
+        [managedObjectContext deleteObject:managedObject];
+        [self save];
+    }
+}
+
+- (NSManagedObject*) create:(Class)class
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(class) inManagedObjectContext:managedObjectContext];
 }
 
 - (NSManagedObject*) findById:(id)objectID withEntityName:(NSString*)entityName

@@ -36,6 +36,8 @@ static float AGInputTextViewMaxHeight = 100;
     NSMutableArray *messagesData;
     
     NSBubbleData *selectedBubbleData;
+    
+    BOOL didInitialized;
 }
 
 @end
@@ -96,25 +98,29 @@ static float AGInputTextViewMaxHeight = 100;
     bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
     */
     
-    bubbleTable.snapInterval = 120;
+    //bubbleTable.snapInterval = 120;
     bubbleTable.showAvatars = YES;
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-    
-    //notifications
-    if ([airogami isKindOfClass:[AGPlane class]]) {
-        AGPlane *plane = airogami;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
-        NSDictionary *dict = [NSDictionary dictionaryWithObject:plane.planeId forKey:@"planeId"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
-    }
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
 }
 
 - (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    textInputView.autoresizingMask = UIViewAutoresizingNone;
-    bubbleTable.autoresizingMask = UIViewAutoresizingNone;
+    if (didInitialized == NO) {
+        textInputView.autoresizingMask = UIViewAutoresizingNone;
+        bubbleTable.autoresizingMask = UIViewAutoresizingNone;
+        //notifications
+        if ([airogami isKindOfClass:[AGPlane class]]) {
+            AGPlane *plane = airogami;
+            
+            NSDictionary *dict = [NSDictionary dictionaryWithObject:plane.planeId forKey:@"planeId"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
+        }
+        //didInitialized = YES;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -126,17 +132,25 @@ static float AGInputTextViewMaxHeight = 100;
 - (void) gotMessagesForPlane:(NSNotification*)notification
 {
     NSDictionary *dict = notification.userInfo;
+    NSNumber *planeId = [dict objectForKey:@"planeId"];
+    AGPlane *plane = airogami;
+    if ([planeId isEqual:plane.planeId] == NO) {
+        return;
+    }
     NSArray *messages = [dict objectForKey:@"messages"];
+    AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
     for (AGMessage *message in messages) {
         NSBubbleType bubbleType = BubbleTypeMine;
-        AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
         if (account != message.account) {
             bubbleType = BubbleTypeSomeoneElse;
         }
         NSBubbleData *bubbleData = [NSBubbleData dataWithText:message.content date:message.createdTime type:bubbleType];
         bubbleData.account = message.account;
+        bubbleData.state = message.state.intValue;
+        bubbleData.obj = message;
         [messagesData addObject:bubbleData];
     }
+    [bubbleTable reloadToBottom:didInitialized];
 }
 
 - (IBAction)backButton:(UIButton *)sender {
@@ -273,22 +287,26 @@ static float AGInputTextViewMaxHeight = 100;
 -(void) send
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
-    NSBubbleData *sayBubble = [NSBubbleData dataWithText:inputTextView.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+    
+    AGPlane *plane = airogami;
+    AGMessage *message = [managerUtils.planeManager messageForReplyPlane:plane content:inputTextView.text type:AGMessageTypeText];
+    NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.content date:message.createdTime type:BubbleTypeMine];
     sayBubble.account = managerUtils.accountManager.account;
-    sayBubble.state = BubbleCellStateSending;
+    sayBubble.state = message.state.intValue;
     [messagesData addObject:sayBubble];
     [bubbleTable reloadToBottom];
-    AGPlane *plane = airogami;
-    NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:inputTextView.text type:AGMessageTypeText];
-    [managerUtils.planeManager replyPlane:params context:nil block:^(NSError *error, id context, AGMessage *result) {
+    //
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *result) {
         if (result) {
             sayBubble.state = BubbleCellStateSent;
+            sayBubble.date = result.createdTime;
         }
         else{
             sayBubble.state = BubbleCellStateSendFailed;
         }
-        [bubbleTable reloadToBottom];
+        [bubbleTable reloadData];
     }];
+    
 }
 
 - (void)viewWillUnload

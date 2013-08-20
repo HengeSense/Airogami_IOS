@@ -19,7 +19,7 @@ NSString *AGNotificationObtainedPlanes = @"notification.obtainedplanes";
 NSString *AGNotificationObtainPlanes = @"notification.obtainplanes";
 NSString *AGNotificationGetObtainedPlanes = @"notification.getobtainedplanes";
 
-NSString *AGNotificationObtainedMessages = @"notification.obtainedmessages";
+NSString *AGNotificationObtainedMessagesForPlane = @"notification.obtainedmessagesforplane";
 NSString *AGNotificationObtainMessages = @"notification.obtainmessages";
 NSString *AGNotificationGetObtainedMessages = @"notification.getobtainedmessages";
 
@@ -42,7 +42,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         [notificationCenter addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationGetCollectedPlanes object:nil];
         //obtain planes
         [notificationCenter addObserver:self selector:@selector(obtainPlanes:) name:AGNotificationObtainPlanes object:nil];
-        [notificationCenter addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationGetObtainedPlanes object:nil];
+        [notificationCenter addObserver:self selector:@selector(obtainedPlanes) name:AGNotificationGetObtainedPlanes object:nil];
         //obtain messages
         [notificationCenter addObserver:self selector:@selector(obtainMessages:) name:AGNotificationObtainMessages object:nil];
         [notificationCenter addObserver:self selector:@selector(obtainedMessages:) name:AGNotificationGetObtainedMessages object:nil];
@@ -98,8 +98,12 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
                 NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
                 [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
             }
+            NSArray *array = [result objectForKey:@"planes"];
             
-            [self obtainedPlanes];
+            if (array.count) {
+                [self obtainedPlanes];
+            }
+            
             
         }
     }];
@@ -136,7 +140,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         
         [[AGManagerUtils managerUtils].planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
             if (error == nil) {
-                [[AGControllerUtils controllerUtils].messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
+                NSArray *messages = [[AGControllerUtils controllerUtils].messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
                 
                 NSNumber *more = [result objectForKey:@"more"];
                 if (more.boolValue) {
@@ -145,21 +149,22 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
                 else{
                     [array removeObjectAtIndex:0];
                     plane.isNew = [NSNumber numberWithBool:NO];
+                    [[AGCoreData coreData] save];
                 }
                 [self obtainMessagesForPlanes:array];
-                [self obtainedMessages];
+                if (messages.count) {
+                    [self obtainedMessagesForPlane:plane.planeId];
+                }
+            
             }
         }];
     }
     
 }
 
-- (void) obtainedMessages
+- (void) obtainedMessagesForPlane:(NSNumber*)planeId
 {
-    NSArray *planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForChat];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", nil];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
+    [self gotMessagesForPlane:planeId startId:nil];
     
 }
 
@@ -168,11 +173,24 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
     NSNumber *planeId = [notification.userInfo objectForKey:@"planeId"];
     NSNumber *startId = [notification.userInfo objectForKey:@"startId"];
     NSAssert(planeId != nil, @"nil planeId");
-    NSArray *messages = [[AGControllerUtils controllerUtils].messageController getMessagesForPlane:planeId startId:startId];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", nil];
+    [self gotMessagesForPlane:planeId startId:startId];
+}
+
+- (void) gotMessagesForPlane:(NSNumber*)planeId startId:(NSNumber*)startId
+{
+    AGMessageController *messageController = [AGControllerUtils controllerUtils].messageController;
+    NSArray *doneMessages = [messageController getMessagesForPlane:planeId startId:startId];
+    NSArray *unsentMessages = [messageController getUnsentMessagesForPlane:planeId];
+    NSMutableArray *messages = [NSMutableArray arrayWithCapacity:doneMessages.count + unsentMessages.count];
+    for (int i = doneMessages.count - 1; i > -1; --i) {
+        [messages addObject:[doneMessages objectAtIndex:i]];
+    }
+    [messages addObjectsFromArray:unsentMessages];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }
+
 
 - (void) startTimer {
     [NSTimer scheduledTimerWithTimeInterval:5

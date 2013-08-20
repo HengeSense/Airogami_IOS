@@ -22,6 +22,8 @@
 - (NSMutableArray*) saveOrUpdateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName;
 - (BOOL) editAttributes:(NSDictionary*)attributeDictionary managedObject:(NSManagedObject*)managedObject;
 - (NSManagedObject*) findById:(id)objectID withEntityName:(NSString*)entityName;
+- (void) remove:(NSManagedObject*) managedObject;
+- (NSManagedObject*) create:(Class)class;
 - (BOOL) save;
 
 @end

@@ -25,6 +25,7 @@
 @synthesize avatar = _avatar;
 @synthesize state = _state;
 @synthesize account;
+@synthesize obj;
 
 #pragma mark - Lifecycle
 

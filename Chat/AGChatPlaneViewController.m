@@ -50,7 +50,9 @@
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
     [[AGManagerUtils managerUtils].notificationManager startTimer];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtainedPlanes object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
+    
 }
 
 - (void) viewWillUnload
@@ -68,9 +70,27 @@
 - (void) obtainedPlanes:(NSNotification*) notification
 {
     NSDictionary * dict = notification.userInfo;
-    //NSString *action = [dict objectForKey:@"action"];
-    NSArray *planes = [dict objectForKey:@"planes"];
-    data = planes;
+    NSString *action = [dict objectForKey:@"action"];
+    if ([action isEqual:@"reset"]) {
+        NSArray *planes = [dict objectForKey:@"planes"];
+        data = planes;
+    }
+    else if ([action isEqual:@"one"])
+    {
+        NSNumber *planeId = [dict objectForKey:@"planeId"];
+        for (int i = 0; i< data.count; ++i) {
+            id obj = [data objectAtIndex:i];
+            if([obj isKindOfClass:[AGPlane class]]){
+                AGPlane *plane = obj;
+                if([plane.planeId isEqual:planeId])
+                {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
+            }
+        }
+    }
+    
     [self.tableView reloadData];
 }
 

@@ -2,7 +2,7 @@
 //  AGMessage.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/15/13.
+//  Created by Tianhu Yang on 8/19/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @dynamic createdTime;
 @dynamic messageId;
 @dynamic type;
+@dynamic state;
 @dynamic account;
 @dynamic plane;
 

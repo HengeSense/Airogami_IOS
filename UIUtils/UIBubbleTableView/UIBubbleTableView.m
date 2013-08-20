@@ -117,13 +117,13 @@
             [bubbleData addObject:object];
         }
         
-        [bubbleData sortUsingComparator:^NSComparisonResult(id obj1, id obj2)
+        /*[bubbleData sortUsingComparator:^NSComparisonResult(id obj1, id obj2)
          {
              NSBubbleData *bubbleData1 = (NSBubbleData *)obj1;
              NSBubbleData *bubbleData2 = (NSBubbleData *)obj2;
              
              return [bubbleData1.date compare:bubbleData2.date];            
-         }];
+         }];*/
         
         NSDate *last = [NSDate dateWithTimeIntervalSince1970:0];
         NSMutableArray *currentSection = nil;
@@ -131,8 +131,9 @@
         for (int i = 0; i < count; i++)
         {
             NSBubbleData *data = (NSBubbleData *)[bubbleData objectAtIndex:i];
+            NSTimeInterval timeInterval = [data.date timeIntervalSinceDate:last];
             
-            if ([data.date timeIntervalSinceDate:last] > self.snapInterval)
+            if (timeInterval > self.snapInterval || timeInterval < -self.snapInterval)
             {
 #if !__has_feature(objc_arc)
                 currentSection = [[[NSMutableArray alloc] init] autorelease];
@@ -241,13 +242,18 @@
 
 - (void) reloadToBottom
 {
+    [self reloadToBottom:YES];
+}
+
+- (void) reloadToBottom:(BOOL)animated
+{
     [self reloadData];
-    
     int section = [self numberOfSections] - 1;
     int row = [self numberOfRowsInSection:section] - 1;
     NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
     
-    [self scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    
 }
 
 @end

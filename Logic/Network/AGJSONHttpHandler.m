@@ -13,6 +13,7 @@
 #import "AGUtils.h"
 #import "AGWaitUtils.h"
 #import "AGManagerUtils.h"
+#import "NSDictionary_JSONExtensions.h"
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
@@ -45,6 +46,7 @@
     if (self = [super init]) {
         request = [[NSMutableURLRequest alloc] init];
         request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
+        request.timeoutInterval = 5;
     }
     return self;
 }
@@ -187,7 +189,8 @@
     //NSLog(@"Succeeded! Received %d bytes of data",[data length]);
     NSMutableDictionary *dict = nil;
     //NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    //dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    dict = [[NSDictionary dictionaryWithJSONData:data error:nil] mutableCopy];;
     
     NSError *error = nil;
     if (dict == nil) {

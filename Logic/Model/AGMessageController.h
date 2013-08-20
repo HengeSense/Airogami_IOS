@@ -17,4 +17,8 @@
 
 - (NSArray*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId;
 
+//messageId = -1
+- (NSArray*) getUnsentMessagesForPlane:(NSNumber *)planeId;
+
+
 @end

@@ -48,6 +48,8 @@ static int MessageLimit = 100;
     return message;
 }
 
+//descending
+
 - (NSArray*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -57,6 +59,28 @@ static int MessageLimit = 100;
     [fetchRequest setPredicate:predicate];
     //
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"messageId" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    //
+    [fetchRequest setFetchLimit:MessageLimit];
+    //
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (!array) {
+        array = [NSArray array];
+    }
+    return array;
+}
+
+//ascending
+- (NSArray*) getUnsentMessagesForPlane:(NSNumber *)planeId
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:messageEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and messageId = -1", planeId];
+    [fetchRequest setPredicate:predicate];
+    //
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdTime" ascending:YES];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     //
     [fetchRequest setFetchLimit:MessageLimit];

@@ -41,7 +41,7 @@
         if (plane.isNew == nil) {
             plane.isNew = [NSNumber numberWithBool:YES];
         }
-        //for receive planes
+        //for receive planes -9223372036854775785 9223372036854775808
         for (AGMessage *message in plane.messages) {
             message.plane = plane;
             if (message.account == nil) {

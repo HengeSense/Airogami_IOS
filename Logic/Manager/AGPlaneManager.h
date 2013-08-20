@@ -16,7 +16,7 @@ typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *r
 
 - (void) sendPlane:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
 
-- (void) replyPlane:(NSDictionary*) params context:(id)context block:(AGReplyPlaneFinishBlock)block;
+- (void) replyPlane:(AGMessage*) message context:(id)context block:(AGReplyPlaneFinishBlock)block;
 
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
@@ -25,5 +25,7 @@ typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *r
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type;
+
+- (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content type:(int)type;
 
 @end
