@@ -149,30 +149,6 @@
         <image name="plane_chain@2x.png" width="90" height="150"/>
         <image name="plane_chain_icon@2x.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="AGCollectPlaneCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneCell.h"/>
-            <relationships>
-                <relationship kind="action" name="aidedButtonTouched:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="aidedButton" candidateClass="AYUIButton"/>
-                <relationship kind="outlet" name="bottomLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="categoryImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="collectTypeImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="planeImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="topLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="AGCollectPlaneViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="AYUIButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AYUIButton.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

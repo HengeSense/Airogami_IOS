@@ -17,13 +17,28 @@
 #import "AGManagerUtils.h"
 #import "AGUIDefines.h"
 #import "AGDefines.h"
+#import "AGResignButton.h"
+#import "AGChatKeyboardScroll.h"
 
+#define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
+#define kAGChatChatMaxSpacing 50
+
+static float AGInputTextViewMaxHeight = 100;
 
 @interface AGCollectPlaneReply ()
+{
+     UITextView *aidedTextView;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *contentContainer;
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+
+@property (weak, nonatomic) IBOutlet UIView *inputViewContainer;
+
+@property (weak, nonatomic) IBOutlet UITextView *inputTextView;
+
+@property (weak, nonatomic) IBOutlet AGResignButton *resignButton;
 
 @end
 
@@ -124,18 +139,131 @@
     [self dismiss];
 }
 
+
+- (id)init
+{
+    if (self = [super init]) {
+        [self initialize];
+        //
+        self.inputTextView.inputAccessoryView = self.inputViewContainer;
+        aidedTextView = [[UITextView alloc] initWithFrame:self.inputTextView.frame];
+        aidedTextView.font = self.inputTextView.font;
+        aidedTextView.hidden = YES;
+        [self.inputViewContainer addSubview:aidedTextView];
+        //
+        self.inputViewContainer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.9f];
+        aidedTextView.layer.cornerRadius = self.inputTextView.layer.cornerRadius = 5.0f;
+        aidedTextView.layer.borderColor = self.inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
+        aidedTextView.layer.borderWidth = self.inputTextView.layer.borderWidth = 2.0f;
+    }
+    return self;
+}
+
+
+- (void) initialize
+{
+    [[NSBundle mainBundle] loadNibNamed:@"AGCollectReplyView" owner:self options:nil];
+    
+    self.replyView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.7f];
+    CGRect frame = [UIScreen mainScreen].bounds;
+    self.replyView.frame = frame;
+    
+    self.containerView.layer.cornerRadius = 5.0f;
+    self.containerView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2 + 10);
+}
+
+
+#pragma mark - UITextView delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)aTextView
+{
+    self.resignButton.hidden = NO;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)aTextView
+{
+    [AGChatKeyboardScroll clear];
+    self.resignButton.hidden = YES;
+    
+}
+
+- (BOOL)textView:(UITextView *)aTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    //send
+    if ([text isEqualToString:@"\n"] && aTextView.text.length > 0) {
+        //[self send];
+        aTextView.text = @"";
+        [self relayout];
+        //[aTextView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    [AGChatKeyboardScroll setView:self.inputViewContainer];
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    NSString *text = textView.text;
+    text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if (text.length > kAGChatChatMessageMaxLength) {
+        text = [text substringToIndex:kAGChatChatMessageMaxLength];
+    }
+    if (text.length != textView.text.length) {
+        textView.text = text;
+    }
+    [self relayout];
+}
+
+- (void) relayout
+{
+    CGRect textFrame = self.inputTextView.frame;
+    CGRect frame = self.contentContainer.frame;
+    float diff = textFrame.origin.y * 2;
+    CGPoint point = CGPointZero;
+    aidedTextView.text = self.inputTextView.text;
+    CGSize size = aidedTextView.contentSize;
+    //inputTextView max height
+    //point.x = frame.size.height + frame.origin.y - kAGChatChatMaxSpacing - diff;
+    if (size.height > AGInputTextViewMaxHeight) {
+        size.height = AGInputTextViewMaxHeight;
+    }
+    
+    point.x = size.height - textFrame.size.height;
+    
+    if (point.x != 0.0f) {
+        [UIView beginAnimations:@"RelayoutAnimations" context:nil];
+        //superview
+        frame = self.inputTextView.superview.frame;
+        frame.size.height = size.height + diff;
+        self.inputTextView.superview.frame = frame;
+        //viewContainer
+        /*point = frame.origin;
+        point.y += size.height + diff;
+        frame = viewContainer.frame;
+        frame.origin.y = frame.origin.y + frame.size.height - point.y;
+        frame.size.height = point.y;
+        viewContainer.frame = frame;*/
+        //inputTextView
+        textFrame.size = size;
+        self.inputTextView.frame = textFrame;
+        self.inputTextView.text = aidedTextView.text;
+        [UIView commitAnimations];
+    }
+}
+
 + (id) reply
 {
     AGCollectPlaneReply *reply = [[AGCollectPlaneReply alloc] init];
-    [[NSBundle mainBundle] loadNibNamed:@"AGCollectReplyView" owner:reply options:nil];
-    
-    reply.replyView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.7f];
-    CGRect frame = [UIScreen mainScreen].bounds;
-    reply.replyView.frame = frame;
-    
-    reply.containerView.layer.cornerRadius = 5.0f;
-    reply.containerView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2 + 10);
-
     return reply;
 }
 

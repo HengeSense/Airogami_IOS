@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGNotificationManager.h"
+#import "AGNotificationCenter.h"
 #import "AGManagerUtils.h"
 #import "AGControllerUtils.h"
 #import "AGNumber.h"
@@ -27,11 +27,11 @@ NSString *AGNotificationGetMessagesForPlane = @"notification.getmessagesforplane
 NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane";
 
 
-@interface AGNotificationManager()
+@interface AGNotificationCenter()
 
 @end
 
-@implementation AGNotificationManager
+@implementation AGNotificationCenter
 
 - (id) init
 {
@@ -51,6 +51,15 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         [notificationCenter addObserver:self selector:@selector(getMessagesForPlane:) name:AGNotificationGetMessagesForPlane object:nil];
     }
     return self;
+}
+
++(AGNotificationCenter*) notificationCenter
+{
+    static AGNotificationCenter *notificationCenter;
+    if (notificationCenter == nil) {
+        notificationCenter = [[AGNotificationCenter alloc] init];
+    }
+    return notificationCenter;
 }
 
 - (void) receivePlanes:(NSNotification*) notification
@@ -112,7 +121,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 - (void) obtainedPlanes
 {
     NSArray *planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForChat];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", @"reset", @"action", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
     
@@ -153,7 +162,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
                 }
                 [self obtainMessagesForPlanes:array];
                 if (messages.count) {
-                    [self obtainedMessagesForPlane:plane.planeId];
+                    [self obtainedMessages:messages forPlane:plane.planeId];
                 }
             
             }
@@ -162,9 +171,15 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
     
 }
 
-- (void) obtainedMessagesForPlane:(NSNumber*)planeId
+- (void) obtainedMessages:(NSArray*)messages forPlane:(NSNumber*)planeId
 {
-    [self gotMessagesForPlane:planeId startId:nil];
+    //
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId",@"append",@"action", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
+    //
+    dict = [NSDictionary dictionaryWithObjectsAndKeys:planeId, @"planeId", @"one", @"action", nil];
+    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
     
 }
 
@@ -180,29 +195,46 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 {
     AGMessageController *messageController = [AGControllerUtils controllerUtils].messageController;
     NSArray *doneMessages = [messageController getMessagesForPlane:planeId startId:startId];
-    NSArray *unsentMessages = [messageController getUnsentMessagesForPlane:planeId];
+    NSArray *unsentMessages = nil;
+    if (startId == nil) {
+        unsentMessages = [messageController getUnsentMessagesForPlane:planeId];
+    }
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:doneMessages.count + unsentMessages.count];
     for (int i = doneMessages.count - 1; i > -1; --i) {
         [messages addObject:[doneMessages objectAtIndex:i]];
     }
-    [messages addObjectsFromArray:unsentMessages];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId", nil];
+    if (startId == nil) {
+        
+        [messages addObjectsFromArray:unsentMessages];
+    }
+    
+    NSString *action = @"reset";
+    if (startId) {
+        action = @"prepend";
+    }
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId", action, @"action", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }
 
 
 - (void) startTimer {
-    [NSTimer scheduledTimerWithTimeInterval:5
-                                     target:self
-                                   selector:@selector(tick:)
-                                   userInfo:nil
-                                    repeats:YES];
+    static BOOL started;
+    if (started == NO) {
+        started = YES;
+        [NSTimer scheduledTimerWithTimeInterval:5
+                                         target:self
+                                       selector:@selector(tick:)
+                                       userInfo:nil
+                                        repeats:YES];
+    }
+
 }
 
 - (void) tick:(NSTimer *) timer {
     //do something here..
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
 }
 
 

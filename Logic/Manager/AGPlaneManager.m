@@ -12,6 +12,7 @@
 #import "AGControllerUtils.h"
 #import "NSBubbleData.h"
 #import "AGManagerUtils.h"
+#import "AGNotificationCenter.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
@@ -69,7 +70,9 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
             }
         }
         if (remoteMessage) {
+            [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:message.plane];
             [[AGCoreData coreData] remove:message];
+            [[AGNotificationCenter notificationCenter] obtainedPlanes];
         }
         else{
             message.state = [NSNumber numberWithInt:BubbleCellStateSendFailed];

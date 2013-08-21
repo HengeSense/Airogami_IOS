@@ -11,6 +11,7 @@
 #import "AGUtils.h"
 #import "AGManagerUtils.h"
 #import "AGControllerUtils.h"
+#import "AGNotificationCenter.h"
 
 static AGAppDelegate *AppDelegate;
 
@@ -50,6 +51,9 @@ static AGAppDelegate *AppDelegate;
     imageView.contentMode = UIViewContentModeScaleToFill;
     imageView.frame = [UIScreen mainScreen].bounds;
     [self.window addSubview:imageView];
+    
+    //
+    [[AGNotificationCenter notificationCenter] startTimer];
     
     return YES;
 }

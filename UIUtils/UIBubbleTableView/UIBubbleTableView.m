@@ -14,6 +14,9 @@
 #import "UIBubbleTypingTableViewCell.h"
 
 @interface UIBubbleTableView ()
+{
+    NSIndexPath *cursorIndexPath;
+}
 
 @property (nonatomic, retain) NSMutableArray *bubbleSection;
 
@@ -26,6 +29,8 @@
 @synthesize bubbleSection = _bubbleSection;
 @synthesize typingBubble = _typingBubble;
 @synthesize showAvatars = _showAvatars;
+@synthesize cursorBubbleData;
+@synthesize scrollViewDelegate;
 
 #pragma mark - Initializators
 
@@ -36,6 +41,8 @@
     self.backgroundColor = [UIColor clearColor];
     self.separatorStyle = UITableViewCellSeparatorStyleNone;
     assert(self.style == UITableViewStylePlain);
+    self.showsVerticalScrollIndicator = NO;
+    self.showsHorizontalScrollIndicator = NO;
     
     self.delegate = self;
     self.dataSource = self;
@@ -88,9 +95,6 @@
 
 - (void)reloadData
 {
-    self.showsVerticalScrollIndicator = NO;
-    self.showsHorizontalScrollIndicator = NO;
-    
     // Cleaning up
 	self.bubbleSection = nil;
     
@@ -145,6 +149,10 @@
             
             [currentSection addObject:data];
             last = data.date;
+            //
+            if (data == cursorBubbleData) {
+                cursorIndexPath = [NSIndexPath indexPathForRow:currentSection.count - 1 inSection:self.bubbleSection.count - 1];
+            }
         }
     }
     
@@ -152,6 +160,20 @@
 }
 
 #pragma mark - UITableViewDelegate implementation
+
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	
+    [scrollViewDelegate scrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[scrollViewDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+	
+}
 
 #pragma mark - UITableViewDataSource implementation
 
@@ -254,6 +276,12 @@
     
     [self scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     
+}
+
+- (void) reloadToCursor:(BOOL) animated
+{
+    [self reloadData];
+    [self scrollToRowAtIndexPath:cursorIndexPath atScrollPosition:UITableViewScrollPositionTop animated:animated];
 }
 
 @end

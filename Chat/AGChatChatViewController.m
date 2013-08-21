@@ -13,9 +13,11 @@
 #import "AGResignButton.h"
 #import "AGUIUtils.h"
 #import "AGDefines.h"
-#import "AGNotificationManager.h"
+#import "AGNotificationCenter.h"
 #import "AGMessage.h"
 #import "AGManagerUtils.h"
+#import "AGCategory+Addition.h"
+#import "AGChatChatPullDownHeader.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
@@ -23,7 +25,7 @@
 
 static float AGInputTextViewMaxHeight = 100;
 
-@interface AGChatChatViewController()
+@interface AGChatChatViewController()<AGChatChatPullDownHeaderDelegate>
 {
     __weak IBOutlet UIBubbleTableView *bubbleTable;
     __weak IBOutlet UIView *textInputView;
@@ -31,7 +33,10 @@ static float AGInputTextViewMaxHeight = 100;
     __weak IBOutlet UIButton *backButton;
     __weak IBOutlet UIView *viewContainer;
     __weak IBOutlet AGResignButton *resignButton;
+    __weak IBOutlet UILabel *nameLabel;
+    __weak IBOutlet UILabel *categoryLabel;
     UITextView *aidedTextView;
+    AGChatChatPullDownHeader *chatChatPullDownHeader;
     
     NSMutableArray *messagesData;
     
@@ -59,6 +64,8 @@ static float AGInputTextViewMaxHeight = 100;
 {
     if (self = [super initWithCoder:aDecoder]) {
         messagesData = [NSMutableArray arrayWithCapacity:50];
+        chatChatPullDownHeader = [AGChatChatPullDownHeader header];
+        chatChatPullDownHeader.delegate = self;
     }
     return self;
 }
@@ -78,6 +85,12 @@ static float AGInputTextViewMaxHeight = 100;
     aidedTextView.layer.cornerRadius = inputTextView.layer.cornerRadius = 5.0f;
     aidedTextView.layer.borderColor = inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
     aidedTextView.layer.borderWidth = inputTextView.layer.borderWidth = 2.0f;
+    //
+    bubbleTable.scrollViewDelegate = chatChatPullDownHeader;
+    CGRect frame = chatChatPullDownHeader.pullDownView.frame;
+    frame.origin.y = -frame.size.height;
+    chatChatPullDownHeader.pullDownView.frame = frame;
+    [bubbleTable addSubview:chatChatPullDownHeader.pullDownView];
 }
 
 - (void)viewDidLoad
@@ -101,6 +114,16 @@ static float AGInputTextViewMaxHeight = 100;
     //bubbleTable.snapInterval = 120;
     bubbleTable.showAvatars = YES;
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+    
+    AGPlane *plane = airogami;
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
+        nameLabel.text = plane.accountByTargetId.profile.fullName;
+    }
+    else{
+        nameLabel.text = plane.accountByOwnerId.profile.fullName;
+    }
+    categoryLabel.text = [AGCategory title:plane.category.categoryId];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
 }
@@ -118,7 +141,7 @@ static float AGInputTextViewMaxHeight = 100;
             NSDictionary *dict = [NSDictionary dictionaryWithObject:plane.planeId forKey:@"planeId"];
             [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
         }
-        //didInitialized = YES;
+        didInitialized = YES;
     }
     
 }
@@ -129,6 +152,18 @@ static float AGInputTextViewMaxHeight = 100;
     // Dispose of any resources that can be recreated.
 }
 
+- (void) refresh
+{
+    AGPlane *plane = airogami;
+    NSBubbleData *bubbleData = [messagesData objectAtIndex:0];
+    AGMessage *message = bubbleData.obj;
+    if (message.messageId > 0) {
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId",message.messageId, @"startId", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
+    }
+   
+}
+
 - (void) gotMessagesForPlane:(NSNotification*)notification
 {
     NSDictionary *dict = notification.userInfo;
@@ -137,8 +172,20 @@ static float AGInputTextViewMaxHeight = 100;
     if ([planeId isEqual:plane.planeId] == NO) {
         return;
     }
+    //
+    NSString *action = [dict objectForKey:@"action"];
+    NSAssert(action != nil, @"nil action!");
+    
     NSArray *messages = [dict objectForKey:@"messages"];
+    if (messages.count == 0) {
+        return;
+    }
+    int count = messages.count;
+    if ([action isEqual:@"prepend"]) {
+        count += messagesData.count;
+    }
     AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
     for (AGMessage *message in messages) {
         NSBubbleType bubbleType = BubbleTypeMine;
         if (account != message.account) {
@@ -148,9 +195,36 @@ static float AGInputTextViewMaxHeight = 100;
         bubbleData.account = message.account;
         bubbleData.state = message.state.intValue;
         bubbleData.obj = message;
-        [messagesData addObject:bubbleData];
+        [array addObject:bubbleData];
     }
-    [bubbleTable reloadToBottom:didInitialized];
+    BOOL add = YES;
+    if ([action isEqual:@"reset"]) {
+        [messagesData removeAllObjects];
+        
+    }
+    else if ([action isEqual:@"append"]){
+        [messagesData addObjectsFromArray:array];
+    }
+    else if ([action isEqual:@"prepend"]){
+        add = NO;
+    }
+    if (add) {
+        [messagesData addObjectsFromArray:array];
+        [bubbleTable reloadToBottom:didInitialized];
+    }
+    else{
+        if(messagesData.count){
+            bubbleTable.cursorBubbleData = [messagesData objectAtIndex:0];
+        }
+        else{
+            bubbleTable.cursorBubbleData = [array objectAtIndex:0];
+        }
+        
+        [array addObjectsFromArray:messagesData];
+        messagesData = array;
+        [bubbleTable reloadToCursor:NO];
+    }
+
 }
 
 - (IBAction)backButton:(UIButton *)sender {
@@ -317,6 +391,8 @@ static float AGInputTextViewMaxHeight = 100;
 
 - (void)viewDidUnload {
     resignButton = nil;
+    nameLabel = nil;
+    categoryLabel = nil;
     [super viewDidUnload];
 }
 @end

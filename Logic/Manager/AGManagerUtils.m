@@ -15,7 +15,6 @@
 @synthesize dataManager;
 @synthesize planeManager;
 @synthesize chainManager;
-@synthesize notificationManager;
 
 -(id) init
 {
@@ -25,7 +24,6 @@
         dataManager = [[AGDataManger alloc] init];
         planeManager = [[AGPlaneManager alloc] init];
         chainManager = [[AGChainManager alloc] init];
-        notificationManager = [[AGNotificationManager alloc] init];
     }
     return self;
 }

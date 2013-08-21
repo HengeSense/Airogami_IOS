@@ -144,6 +144,16 @@
     return updateInc;
 }
 
+- (void) increaseUpdateInc:(AGPlane*)plane
+{
+    NSNumber *maxUpdateInc = [self recentPlaneUpdateIncForChat];
+    if (maxUpdateInc == nil) {
+        maxUpdateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
+    }
+    plane.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
+    [coreData save];
+}
+
 - (NSArray*) getAllPlanesForChat
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;

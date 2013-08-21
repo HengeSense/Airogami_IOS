@@ -7,7 +7,7 @@
 //
 
 #import "AGChatPlaneViewController.h"
-#import "AGNotificationManager.h"
+#import "AGNotificationCenter.h"
 #import "AGChatPlaneCell.h"
 #import "AGPlane.h"
 #import "AGAccount.h"
@@ -49,7 +49,6 @@
     [self.tableView.backgroundView addSubview:imageView];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
-    [[AGManagerUtils managerUtils].notificationManager startTimer];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtainedPlanes object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
     
@@ -84,7 +83,7 @@
                 AGPlane *plane = obj;
                 if([plane.planeId isEqual:planeId])
                 {
-                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
                     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
             }
@@ -128,8 +127,8 @@
         }
         cell.nameLabel.text = profile.fullName;
         //cell.messageLabel.text = ;
-        cell.timeLabel.text = [AGUtils dateToString:plane.createdTime];
         AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
+        cell.timeLabel.text = [AGUtils dateToString:message.createdTime];
         cell.messageLabel.text = message.content;
         [cell.profileImageView setImageWithAccountId:profile.accountId];
     }

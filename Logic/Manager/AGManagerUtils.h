@@ -12,7 +12,6 @@
 #import "AGDataManger.h"
 #import "AGPlaneManager.h"
 #import "AGChainManager.h"
-#import "AGNotificationManager.h"
 
 @interface AGManagerUtils : NSObject
 
@@ -23,6 +22,5 @@
 @property(nonatomic, strong) AGDataManger *dataManager;
 @property(nonatomic, strong) AGPlaneManager *planeManager;
 @property(nonatomic, strong) AGChainManager *chainManager;
-@property(nonatomic, strong) AGNotificationManager *notificationManager;
 
 @end

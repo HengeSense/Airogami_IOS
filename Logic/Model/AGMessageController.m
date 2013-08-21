@@ -10,7 +10,7 @@
 #import "AGCoreData.h"
 #import "AGManagerUtils.h"
 
-static int MessageLimit = 100;
+static int MessageLimit = 10;
 
 @interface AGMessageController()
 {

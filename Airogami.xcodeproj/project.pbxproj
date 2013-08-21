@@ -201,7 +201,7 @@
 		078DEE3217B98EBD00A969A1 /* AGCategory+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3117B98EBD00A969A1 /* AGCategory+Addition.m */; };
 		078DEE3517B9A0DF00A969A1 /* AGChainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3417B9A0DE00A969A1 /* AGChainManager.m */; };
 		078DEE3717B9ABAC00A969A1 /* plane_unknown_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078DEE3617B9ABAC00A969A1 /* plane_unknown_icon@2x.png */; };
-		078DEE3A17B9B17300A969A1 /* AGNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3917B9B17300A969A1 /* AGNotificationManager.m */; };
+		078DEE3A17B9B17300A969A1 /* AGNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3917B9B17300A969A1 /* AGNotificationCenter.m */; };
 		078DEE3D17BAA92C00A969A1 /* AGPlaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3C17BAA92C00A969A1 /* AGPlaneController.m */; };
 		078DEE4017BAAAB700A969A1 /* AGControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3F17BAAAB700A969A1 /* AGControllerUtils.m */; };
 		078DEE6717BD596F00A969A1 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE6617BD596F00A969A1 /* AGAccountStat.m */; };
@@ -220,6 +220,8 @@
 		078DEE9A17C2B2C700A969A1 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9517C2B2C700A969A1 /* CJSONSerializer.m */; };
 		078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9817C2B2C700A969A1 /* NSDictionary_JSONExtensions.m */; };
 		078DEE9E17C2D2D300A969A1 /* AGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9D17C2D2D300A969A1 /* AGMessage.m */; };
+		078DEEA117C4066000A969A1 /* AGChatChatPullDownHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEEA017C4065F00A969A1 /* AGChatChatPullDownHeader.m */; };
+		078DEEA317C42A7A00A969A1 /* AGChatChatPullDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 078DEEA217C42A7A00A969A1 /* AGChatChatPullDownView.xib */; };
 		078E3B68177CCE420070D5BA /* collect_reply_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */; };
 		078E3B69177CCE420070D5BA /* collect_reply_reply_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */; };
 		078E3B6B177CCE420070D5BA /* collect_reply_throwback_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */; };
@@ -631,8 +633,8 @@
 		078DEE3317B9A0DE00A969A1 /* AGChainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainManager.h; sourceTree = "<group>"; };
 		078DEE3417B9A0DE00A969A1 /* AGChainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainManager.m; sourceTree = "<group>"; };
 		078DEE3617B9ABAC00A969A1 /* plane_unknown_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_unknown_icon@2x.png"; sourceTree = "<group>"; };
-		078DEE3817B9B17200A969A1 /* AGNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNotificationManager.h; sourceTree = "<group>"; };
-		078DEE3917B9B17300A969A1 /* AGNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNotificationManager.m; sourceTree = "<group>"; };
+		078DEE3817B9B17200A969A1 /* AGNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNotificationCenter.h; sourceTree = "<group>"; };
+		078DEE3917B9B17300A969A1 /* AGNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNotificationCenter.m; sourceTree = "<group>"; };
 		078DEE3B17BAA92C00A969A1 /* AGPlaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlaneController.h; sourceTree = "<group>"; };
 		078DEE3C17BAA92C00A969A1 /* AGPlaneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlaneController.m; sourceTree = "<group>"; };
 		078DEE3E17BAAAB600A969A1 /* AGControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGControllerUtils.h; sourceTree = "<group>"; };
@@ -669,6 +671,9 @@
 		078DEE9817C2B2C700A969A1 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
 		078DEE9C17C2D2D300A969A1 /* AGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGMessage.h; sourceTree = "<group>"; };
 		078DEE9D17C2D2D300A969A1 /* AGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessage.m; sourceTree = "<group>"; };
+		078DEE9F17C4065F00A969A1 /* AGChatChatPullDownHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChatChatPullDownHeader.h; sourceTree = "<group>"; };
+		078DEEA017C4065F00A969A1 /* AGChatChatPullDownHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChatChatPullDownHeader.m; sourceTree = "<group>"; };
+		078DEEA217C42A7A00A969A1 /* AGChatChatPullDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGChatChatPullDownView.xib; sourceTree = "<group>"; };
 		078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_divider@2x.png"; sourceTree = "<group>"; };
 		078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_reply_button@2x.png"; sourceTree = "<group>"; };
 		078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_throwback_button@2x.png"; sourceTree = "<group>"; };
@@ -1138,8 +1143,8 @@
 				078DEE2D17B983BE00A969A1 /* AGPlaneManager.m */,
 				078DEE3317B9A0DE00A969A1 /* AGChainManager.h */,
 				078DEE3417B9A0DE00A969A1 /* AGChainManager.m */,
-				078DEE3817B9B17200A969A1 /* AGNotificationManager.h */,
-				078DEE3917B9B17300A969A1 /* AGNotificationManager.m */,
+				078DEE3817B9B17200A969A1 /* AGNotificationCenter.h */,
+				078DEE3917B9B17300A969A1 /* AGNotificationCenter.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1632,6 +1637,9 @@
 				078522541784B12500288D7C /* AGChatPlaneCell.m */,
 				078A5C63178B722C000FB7FF /* AGChatProfileViewController.h */,
 				078A5C64178B722C000FB7FF /* AGChatProfileViewController.m */,
+				078DEE9F17C4065F00A969A1 /* AGChatChatPullDownHeader.h */,
+				078DEEA017C4065F00A969A1 /* AGChatChatPullDownHeader.m */,
+				078DEEA217C42A7A00A969A1 /* AGChatChatPullDownView.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2043,6 +2051,7 @@
 				0702F6D717B43CF100B4EBB3 /* Localizable.strings in Resources */,
 				078DEE3717B9ABAC00A969A1 /* plane_unknown_icon@2x.png in Resources */,
 				078DEE8117BD8CD900A969A1 /* profile_image_default@2x.png in Resources */,
+				078DEEA317C42A7A00A969A1 /* AGChatChatPullDownView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2176,7 +2185,7 @@
 				078DEE2E17B983BE00A969A1 /* AGPlaneManager.m in Sources */,
 				078DEE3217B98EBD00A969A1 /* AGCategory+Addition.m in Sources */,
 				078DEE3517B9A0DF00A969A1 /* AGChainManager.m in Sources */,
-				078DEE3A17B9B17300A969A1 /* AGNotificationManager.m in Sources */,
+				078DEE3A17B9B17300A969A1 /* AGNotificationCenter.m in Sources */,
 				078DEE3D17BAA92C00A969A1 /* AGPlaneController.m in Sources */,
 				078DEE4017BAAAB700A969A1 /* AGControllerUtils.m in Sources */,
 				078DEE6717BD596F00A969A1 /* AGAccountStat.m in Sources */,
@@ -2194,6 +2203,7 @@
 				078DEE9A17C2B2C700A969A1 /* CJSONSerializer.m in Sources */,
 				078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */,
 				078DEE9E17C2D2D300A969A1 /* AGMessage.m in Sources */,
+				078DEEA117C4066000A969A1 /* AGChatChatPullDownHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
