@@ -46,7 +46,7 @@
 
 - (void) buttonTapped:(UIButton*)button
 {
-     [self.superview endEditing:YES];
+     [self.window endEditing:YES];
 }
 
 @end

@@ -152,6 +152,7 @@ static NSString *SigninOther = @"error.signin.other.message";
                 }
                 else{
                     //succeed
+                    NSAssert([accountJson objectForKey:@"authenticate"] != nil && [accountJson objectForKey:@"authenticate"] != [NSNull null], @"Invalid email");
                     account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                     AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
                     if (automatic) {

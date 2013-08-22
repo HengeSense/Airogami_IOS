@@ -84,7 +84,7 @@
     [super viewDidLoad];
     pulldownHeader.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationCollectedPlanes object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetCollectedPlanes object:nil userInfo:nil];
 }
 
 - (void) collectedPlanes:(NSNotification*) notification

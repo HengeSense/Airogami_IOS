@@ -13,6 +13,7 @@
 @synthesize accountController;
 @synthesize planeController;
 @synthesize messageController;
+@synthesize chainController;
 
 + (AGControllerUtils*) controllerUtils
 {
@@ -29,6 +30,7 @@
         accountController = [[AGAccountController alloc] init];
         planeController = [[AGPlaneController alloc] init];
         messageController = [[AGMessageController alloc] init];
+        chainController = [[AGChainController alloc] init];
     }
     return self;
 }

@@ -10,7 +10,7 @@
 
 @interface AGCollectPlanePickupView: UIView
 
-- (void) showNumber:(int)number;
+- (void) showNumber:(NSNumber*)number;
 - (void) dismiss;
 - (void) show;
 @end

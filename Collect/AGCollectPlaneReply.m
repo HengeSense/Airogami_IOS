@@ -18,16 +18,18 @@
 #import "AGUIDefines.h"
 #import "AGDefines.h"
 #import "AGResignButton.h"
-#import "AGChatKeyboardScroll.h"
+#import "AGCollectKeyboardScroll.h"
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
 #define kAGChatChatMaxSpacing 50
 
-static float AGInputTextViewMaxHeight = 100;
+static float AGInputTextViewMaxHeight = 80;
 
 @interface AGCollectPlaneReply ()
 {
-     UITextView *aidedTextView;
+    UITextView *aidedTextView;
+    CGSize contentSize;
+    __weak id airogami;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *contentContainer;
@@ -71,13 +73,14 @@ static float AGInputTextViewMaxHeight = 100;
     point = [self.contentContainer convertPoint:point toView:self.scrollView];
     frame.size = self.scrollView.contentSize;
     frame.size.height = point.y;
-    self.scrollView.contentSize = frame.size;
+    contentSize = self.scrollView.contentSize = frame.size;
 }
 
 -(void) show:(id)object
 {
-    [self initData:object];
+    [self initData: airogami = object];
     [self layout];
+    self.inputTextView.text = @"";
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     self.replyView.alpha = 0.0f;
     [window addSubview:self.replyView];
@@ -131,21 +134,49 @@ static float AGInputTextViewMaxHeight = 100;
 }
 
 - (IBAction)tossBack:(UIButton *)sender {
-    [self dismiss];
+    [self throw];
 }
 
 
 - (IBAction)reply:(UIButton *)sender {
-    [self dismiss];
+    //[self dismiss];
+    [self.inputTextView becomeFirstResponder];
 }
 
+- (void) throw
+{
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
+    
+    AGPlane *plane = airogami;
+    NSDictionary *params = [managerUtils.planeManager paramsForThrowPlane:plane.planeId];
+    [managerUtils.planeManager throwPlane:params plane:plane context:nil block:^(NSError *error, id context) {
+        if (error == nil) {
+            [self dismiss];
+        }
+    }];
+}
+
+
+- (void) send
+{
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
+    
+    AGPlane *plane = airogami;
+    NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:self.inputTextView.text type:AGMessageTypeText];
+    //
+    [managerUtils.planeManager firstReplyPlane:params plane:plane context:nil block:^(NSError *error, id context, AGMessage *result) {
+        if (result) {
+            [self dismiss];
+        }
+    }];
+}
 
 - (id)init
 {
     if (self = [super init]) {
         [self initialize];
         //
-        self.inputTextView.inputAccessoryView = self.inputViewContainer;
+        //dself.inputTextView.inputAccessoryView = self.inputViewContainer;
         aidedTextView = [[UITextView alloc] initWithFrame:self.inputTextView.frame];
         aidedTextView.font = self.inputTextView.font;
         aidedTextView.hidden = YES;
@@ -169,7 +200,7 @@ static float AGInputTextViewMaxHeight = 100;
     self.replyView.frame = frame;
     
     self.containerView.layer.cornerRadius = 5.0f;
-    self.containerView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2 + 10);
+    //self.containerView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2 + 10);
 }
 
 
@@ -182,18 +213,18 @@ static float AGInputTextViewMaxHeight = 100;
 
 - (void)textViewDidEndEditing:(UITextView *)aTextView
 {
-    [AGChatKeyboardScroll clear];
+    [AGCollectKeyboardScroll clear];
     self.resignButton.hidden = YES;
+    self.inputViewContainer.hidden = YES;
     
 }
 
 - (BOOL)textView:(UITextView *)aTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     //send
     if ([text isEqualToString:@"\n"] && aTextView.text.length > 0) {
-        //[self send];
-        aTextView.text = @"";
-        [self relayout];
-        //[aTextView resignFirstResponder];
+        [self send];
+        //aTextView.text = @"";
+        //[self relayout];
         return NO;
     }
     
@@ -202,7 +233,8 @@ static float AGInputTextViewMaxHeight = 100;
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
-    [AGChatKeyboardScroll setView:self.inputViewContainer];
+    [AGCollectKeyboardScroll setView:self.inputViewContainer scrollView:self.scrollView];
+    self.inputViewContainer.hidden = NO;
     return YES;
 }
 
@@ -242,21 +274,29 @@ static float AGInputTextViewMaxHeight = 100;
     
     if (point.x != 0.0f) {
         [UIView beginAnimations:@"RelayoutAnimations" context:nil];
-        //superview
-        frame = self.inputTextView.superview.frame;
-        frame.size.height = size.height + diff;
-        self.inputTextView.superview.frame = frame;
         //viewContainer
-        /*point = frame.origin;
-        point.y += size.height + diff;
-        frame = viewContainer.frame;
+        point.y = size.height + diff;
+        frame = self.inputViewContainer.frame;
         frame.origin.y = frame.origin.y + frame.size.height - point.y;
         frame.size.height = point.y;
-        viewContainer.frame = frame;*/
+        self.inputViewContainer.frame = frame;
         //inputTextView
         textFrame.size = size;
         self.inputTextView.frame = textFrame;
         self.inputTextView.text = aidedTextView.text;
+        //scroll view
+        CGSize size = contentSize;
+        CGRect rect = [self.scrollView convertRect:self.scrollView.bounds toView:self.inputViewContainer.superview];
+        size.height = size.height + rect.origin.y - frame.origin.y;
+        if (size.height > 0) {
+            size.height += rect.size.height;
+        }
+        else{
+            size.height = contentSize.height;
+        }
+        self.scrollView.contentSize = size;
+        
+        //
         [UIView commitAnimations];
     }
 }

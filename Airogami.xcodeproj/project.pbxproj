@@ -101,6 +101,9 @@
 		078522AC17876F5F00288D7C /* AGSexSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 078522AB17876F5E00288D7C /* AGSexSwitch.m */; };
 		078522B01787A0C800288D7C /* AGLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078522AF1787A0C800288D7C /* AGLocationViewController.m */; };
 		078522B21787A23F00288D7C /* AGCommonStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078522B11787A23F00288D7C /* AGCommonStoryboard.storyboard */; };
+		0787988417C54D0C003AE42F /* AGCollectKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787988317C54D0C003AE42F /* AGCollectKeyboardScroll.m */; };
+		0787988717C583A1003AE42F /* AGChainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787988617C583A1003AE42F /* AGChainController.m */; };
+		0787988A17C58909003AE42F /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787988917C58909003AE42F /* AGChain.m */; };
 		078A1F5D176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F5C176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard */; };
 		078A1F5F176CDE6400A69AE3 /* AGCollectStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F5E176CDE6400A69AE3 /* AGCollectStoryboard.storyboard */; };
 		078A1F61176CDF0900A69AE3 /* AGChatStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F60176CDF0900A69AE3 /* AGChatStoryboard.storyboard */; };
@@ -205,7 +208,6 @@
 		078DEE3D17BAA92C00A969A1 /* AGPlaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3C17BAA92C00A969A1 /* AGPlaneController.m */; };
 		078DEE4017BAAAB700A969A1 /* AGControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3F17BAAAB700A969A1 /* AGControllerUtils.m */; };
 		078DEE6717BD596F00A969A1 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE6617BD596F00A969A1 /* AGAccountStat.m */; };
-		078DEE6D17BD596F00A969A1 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE6C17BD596F00A969A1 /* AGChain.m */; };
 		078DEE7017BD596F00A969A1 /* AGProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE6F17BD596F00A969A1 /* AGProfile.m */; };
 		078DEE7317BD596F00A969A1 /* AGAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE7217BD596F00A969A1 /* AGAccount.m */; };
 		078DEE7617BD596F00A969A1 /* AGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE7517BD596F00A969A1 /* AGCategory.m */; };
@@ -505,6 +507,12 @@
 		078522AE1787A0C800288D7C /* AGLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLocationViewController.h; sourceTree = "<group>"; };
 		078522AF1787A0C800288D7C /* AGLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLocationViewController.m; sourceTree = "<group>"; };
 		078522B11787A23F00288D7C /* AGCommonStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGCommonStoryboard.storyboard; sourceTree = "<group>"; };
+		0787988217C54D0C003AE42F /* AGCollectKeyboardScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGCollectKeyboardScroll.h; sourceTree = "<group>"; };
+		0787988317C54D0C003AE42F /* AGCollectKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGCollectKeyboardScroll.m; sourceTree = "<group>"; };
+		0787988517C583A1003AE42F /* AGChainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainController.h; sourceTree = "<group>"; };
+		0787988617C583A1003AE42F /* AGChainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainController.m; sourceTree = "<group>"; };
+		0787988817C58909003AE42F /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
+		0787988917C58909003AE42F /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
 		078A1F5C176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGWriteStoryboard.storyboard; sourceTree = "<group>"; };
 		078A1F5E176CDE6400A69AE3 /* AGCollectStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGCollectStoryboard.storyboard; sourceTree = "<group>"; };
 		078A1F60176CDF0900A69AE3 /* AGChatStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGChatStoryboard.storyboard; sourceTree = "<group>"; };
@@ -641,8 +649,6 @@
 		078DEE3F17BAAAB700A969A1 /* AGControllerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGControllerUtils.m; sourceTree = "<group>"; };
 		078DEE6517BD596F00A969A1 /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
 		078DEE6617BD596F00A969A1 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
-		078DEE6B17BD596F00A969A1 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
-		078DEE6C17BD596F00A969A1 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
 		078DEE6E17BD596F00A969A1 /* AGProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfile.h; sourceTree = "<group>"; };
 		078DEE6F17BD596F00A969A1 /* AGProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfile.m; sourceTree = "<group>"; };
 		078DEE7117BD596F00A969A1 /* AGAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccount.h; sourceTree = "<group>"; };
@@ -1163,6 +1169,8 @@
 				078DEE3F17BAAAB700A969A1 /* AGControllerUtils.m */,
 				078DEE8217BECAFF00A969A1 /* AGMessageController.h */,
 				078DEE8317BECAFF00A969A1 /* AGMessageController.m */,
+				0787988517C583A1003AE42F /* AGChainController.h */,
+				0787988617C583A1003AE42F /* AGChainController.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1195,8 +1203,6 @@
 				078DEE7217BD596F00A969A1 /* AGAccount.m */,
 				078DEE6E17BD596F00A969A1 /* AGProfile.h */,
 				078DEE6F17BD596F00A969A1 /* AGProfile.m */,
-				078DEE6B17BD596F00A969A1 /* AGChain.h */,
-				078DEE6C17BD596F00A969A1 /* AGChain.m */,
 				078DEE6517BD596F00A969A1 /* AGAccountStat.h */,
 				078DEE6617BD596F00A969A1 /* AGAccountStat.m */,
 				078DEE7D17BD59D900A969A1 /* AGAuthenticate.h */,
@@ -1205,6 +1211,8 @@
 				078DEE8C17BF00F000A969A1 /* AGPlane.m */,
 				078DEE9C17C2D2D300A969A1 /* AGMessage.h */,
 				078DEE9D17C2D2D300A969A1 /* AGMessage.m */,
+				0787988817C58909003AE42F /* AGChain.h */,
+				0787988917C58909003AE42F /* AGChain.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1488,6 +1496,8 @@
 		078E9AAA177F8212006D7059 /* KeyboardScroll */ = {
 			isa = PBXGroup;
 			children = (
+				0787988217C54D0C003AE42F /* AGCollectKeyboardScroll.h */,
+				0787988317C54D0C003AE42F /* AGCollectKeyboardScroll.m */,
 				078E9AAB177F8212006D7059 /* AGChatKeyboardScroll.h */,
 				078E9AAC177F8212006D7059 /* AGChatKeyboardScroll.m */,
 				078E9AAD177F8212006D7059 /* AGKeyboardResize.h */,
@@ -2189,7 +2199,6 @@
 				078DEE3D17BAA92C00A969A1 /* AGPlaneController.m in Sources */,
 				078DEE4017BAAAB700A969A1 /* AGControllerUtils.m in Sources */,
 				078DEE6717BD596F00A969A1 /* AGAccountStat.m in Sources */,
-				078DEE6D17BD596F00A969A1 /* AGChain.m in Sources */,
 				078DEE7017BD596F00A969A1 /* AGProfile.m in Sources */,
 				078DEE7317BD596F00A969A1 /* AGAccount.m in Sources */,
 				078DEE7617BD596F00A969A1 /* AGCategory.m in Sources */,
@@ -2204,6 +2213,9 @@
 				078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */,
 				078DEE9E17C2D2D300A969A1 /* AGMessage.m in Sources */,
 				078DEEA117C4066000A969A1 /* AGChatChatPullDownHeader.m in Sources */,
+				0787988417C54D0C003AE42F /* AGCollectKeyboardScroll.m in Sources */,
+				0787988717C583A1003AE42F /* AGChainController.m in Sources */,
+				0787988A17C58909003AE42F /* AGChain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

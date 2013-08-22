@@ -39,7 +39,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         //collect
         [notificationCenter addObserver:self selector:@selector(receivePlanes:) name:AGNotificationReceivePlanes object:nil];
-        [notificationCenter addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationGetCollectedPlanes object:nil];
+        [notificationCenter addObserver:self selector:@selector(collectedPlanes) name:AGNotificationGetCollectedPlanes object:nil];
         //obtain planes
         [notificationCenter addObserver:self selector:@selector(obtainPlanes:) name:AGNotificationObtainPlanes object:nil];
         [notificationCenter addObserver:self selector:@selector(obtainedPlanes) name:AGNotificationGetObtainedPlanes object:nil];
@@ -75,7 +75,11 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
             if (more.boolValue) {
                 [self receivePlanes:notification];
             }
-            [self collectedPlanes];
+             NSArray *planes = [result objectForKey:@"planes"];
+            if (planes.count) {
+                [self collectedPlanes];
+            }
+        
         }
     }];
 }

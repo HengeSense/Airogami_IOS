@@ -10,6 +10,7 @@
 #import "AGKeyboardScroll.h"
 #import "AGKeyboardResize.h"
 #import "AGChatKeyboardScroll.h"
+#import "AGCollectKeyboardScroll.h"
 
 #define kAGAlertMessageOK @"OK"
 
@@ -28,6 +29,7 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
     [AGKeyboardResize initialize];
     [AGChatKeyboardScroll initialize];
     [AGUIDefines initialize];
+    [AGCollectKeyboardScroll initialize];
 }
 
 + (void) buttonImageNormalToHighlight:(UIButton *)button

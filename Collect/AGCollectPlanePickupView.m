@@ -9,6 +9,8 @@
 #import "AGCollectPlanePickupView.h"
 #import "AGCollectPlaneNumberView.h"
 #import "CALayer+Pause.h"
+#import "AGManagerUtils.h"
+#import "AGMessageUtils.h"
 
 #define kAGCollectPlanePickupCancel @"collect_pickup_cancel_button.png"
 #define kAGCollectPlanePickupRadarDuration 2.0f
@@ -19,6 +21,7 @@
     UIImageView * imageView;
     CABasicAnimation *rotateAnimation;
     CALayer *rotatedLayer;
+    UIButton *cancelButton;
 }
 
 @end
@@ -41,12 +44,12 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8f];
         numberView = [AGCollectPlaneNumberView numberView:self];
         //cancel button
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         UIImage *image = [UIImage imageNamed:kAGCollectPlanePickupCancel];
-        [button setImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(cancelButtonTouched) forControlEvents:UIControlEventTouchUpInside];
-        button.frame = CGRectMake(0, 20, image.size.width + 30, image.size.height + 30);
-        [self addSubview:button];
+        [cancelButton setImage:image forState:UIControlStateNormal];
+        [cancelButton addTarget:self action:@selector(cancelButtonTouched) forControlEvents:UIControlEventTouchUpInside];
+        cancelButton.frame = CGRectMake(0, 20, image.size.width + 30, image.size.height + 30);
+        [self addSubview:cancelButton];
         //image view
         int count = 6;
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
@@ -92,6 +95,7 @@
 {
     numberView.hidden = YES;
     imageView.hidden = NO;
+    cancelButton.hidden = YES;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [window addSubview:self];
     [rotatedLayer addAnimation:rotateAnimation forKey:@"transform.rotation"];
@@ -104,19 +108,42 @@
    [UIView setAnimationDelegate:self];
    [UIView setAnimationDidStopSelector:@selector(easeInDidStop:finished:context:)];
    [UIView commitAnimations];
-   [self performSelector:@selector(showNumber) withObject:self afterDelay:3.0f];
+   //[self performSelector:@selector(showNumber) withObject:self afterDelay:3.0f];
+    [self pickup];
+}
+
+- (void) pickup
+{
+    [[AGManagerUtils managerUtils].planeManager pickupPlaneAndChain:nil context:nil block:^(NSError *error, id context, NSNumber *count) {
+        if (error) {
+            [AGMessageUtils alertMessageWithError:error];
+        }
+        else{
+            
+        }
+        [self showNumber:count];
+        cancelButton.hidden = NO;
+    }];
 }
 
 
 - (void)showNumber
 {
-    [self showNumber:5];
+    [self showNumber:[NSNumber numberWithInt:5]];
+}
+
+- (void) stopAnimating
+{
+    [rotatedLayer removeAllAnimations];
+    [imageView stopAnimating];
+    imageView.alpha = 1.0f;
+    imageView.hidden = YES;
 }
 
 
-- (void) showNumber:(int)number
+- (void) showNumber:(NSNumber*)number
 {
-    numberView.numberLabel.text = [NSString stringWithFormat:@"%d", number];
+    numberView.numberLabel.text = number.stringValue;
     numberView.hidden = NO;
     numberView.alpha = 0.0f;
     [UIView beginAnimations:@"WaitImageViewAnimations" context:nil];
@@ -138,10 +165,7 @@
 
 -(void) animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
-    [rotatedLayer removeAllAnimations];
-    [imageView stopAnimating];
-    imageView.alpha = 1.0f;
-    imageView.hidden = YES;
+    [self stopAnimating];
 }
 
 - (void) dismiss

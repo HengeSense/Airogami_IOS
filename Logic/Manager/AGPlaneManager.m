@@ -16,6 +16,8 @@
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
+static NSString *ThrowPlanePath = @"plane/throwPlane.action?";
+static NSString *PickupPath = @"plane/pickup.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
 static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
@@ -85,6 +87,92 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
     }];
 }
 
+- (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGReplyPlaneFinishBlock)block
+{
+    [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        AGMessage *remoteMessage = nil;
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            NSDictionary *dict = [result objectForKey:@"message"];
+            if ([dict isEqual:[NSNull null]] == NO) {
+                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
+                plane.status = [NSNumber numberWithInt:AGPlaneStatusReplied];
+                [[AGCoreData coreData] save];
+            }
+            else{
+                NSLog(@"firstReplyPlane failed");
+                abort();
+            }
+        }
+        if (remoteMessage) {
+            [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:plane];
+            [[AGNotificationCenter notificationCenter] obtainedPlanes];
+            [[AGNotificationCenter notificationCenter] collectedPlanes];
+        }
+        else{
+
+        }
+        if (block) {
+            block(error, context, remoteMessage);
+        }
+        
+    }];
+}
+
+- (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ThrowPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
+        if (error) {
+            
+        }
+        else{
+            if (result.boolValue) {
+                //[AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(AGPlaneSendPlaneOK, AGPlaneSendPlaneOK)];
+                [[AGCoreData coreData] remove:plane];
+                [[AGNotificationCenter notificationCenter] collectedPlanes];
+            }
+            else{
+                //failed
+                abort();
+            }
+            
+        }
+        if (block) {
+            block(error, context);
+        }
+        
+    }];
+}
+
+- (void) pickupPlaneAndChain:(NSDictionary *)params context:(id)context block:(AGPickupPlaneAndChainFinishBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:PickupPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSNumber *count = [NSNumber numberWithInt:0];
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+            if (planes.count) {
+                [[AGNotificationCenter notificationCenter] collectedPlanes];
+            }
+            NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+            if (chains.count) {
+                //add additional code here
+            }
+            count = [NSNumber numberWithInt:planes.count + chains.count];
+        }
+        if (block) {
+            block(error, context, count);
+        }
+        
+    }];
+}
+
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block
 {
     [AGJSONHttpHandler request:YES params:params path:ReceivePlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
@@ -136,6 +224,13 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
         }
         
     }];
+}
+
+- (NSDictionary*)paramsForThrowPlane:(NSNumber*)planeId
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:planeId forKey:@"planeId"];
+    return params;
 }
 
 - (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type

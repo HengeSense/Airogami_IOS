@@ -11,12 +11,19 @@
 #import "AGMessage.h"
 
 typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *result);
+typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
 
 @interface AGPlaneManager : NSObject
 
 - (void) sendPlane:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
 
 - (void) replyPlane:(AGMessage*) message context:(id)context block:(AGReplyPlaneFinishBlock)block;
+
+- (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGReplyPlaneFinishBlock)block;
+
+- (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block;
+
+- (void) pickupPlaneAndChain:(NSDictionary*) params context:(id)context block:(AGPickupPlaneAndChainFinishBlock)block;
 
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
@@ -25,6 +32,8 @@ typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *r
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type;
+
+- (NSDictionary*)paramsForThrowPlane:(NSNumber*)planeId;
 
 - (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content type:(int)type;
 

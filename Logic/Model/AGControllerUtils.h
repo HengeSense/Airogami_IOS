@@ -10,12 +10,14 @@
 #import "AGAccountController.h"
 #import "AGPlaneController.h"
 #import "AGMessageController.h"
+#import "AGChainController.h"
 
 @interface AGControllerUtils : NSObject
 
 @property(nonatomic, strong) AGAccountController *accountController;
 @property(nonatomic, strong) AGPlaneController *planeController;
 @property(nonatomic, strong) AGMessageController *messageController;
+@property(nonatomic, strong) AGChainController *chainController;
 
 + (AGControllerUtils*) controllerUtils;
 
