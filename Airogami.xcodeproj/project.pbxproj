@@ -222,8 +222,6 @@
 		078DEE9A17C2B2C700A969A1 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9517C2B2C700A969A1 /* CJSONSerializer.m */; };
 		078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9817C2B2C700A969A1 /* NSDictionary_JSONExtensions.m */; };
 		078DEE9E17C2D2D300A969A1 /* AGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9D17C2D2D300A969A1 /* AGMessage.m */; };
-		078DEEA117C4066000A969A1 /* AGChatChatPullDownHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEEA017C4065F00A969A1 /* AGChatChatPullDownHeader.m */; };
-		078DEEA317C42A7A00A969A1 /* AGChatChatPullDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 078DEEA217C42A7A00A969A1 /* AGChatChatPullDownView.xib */; };
 		078E3B68177CCE420070D5BA /* collect_reply_divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */; };
 		078E3B69177CCE420070D5BA /* collect_reply_reply_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */; };
 		078E3B6B177CCE420070D5BA /* collect_reply_throwback_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */; };
@@ -677,9 +675,6 @@
 		078DEE9817C2B2C700A969A1 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
 		078DEE9C17C2D2D300A969A1 /* AGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGMessage.h; sourceTree = "<group>"; };
 		078DEE9D17C2D2D300A969A1 /* AGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessage.m; sourceTree = "<group>"; };
-		078DEE9F17C4065F00A969A1 /* AGChatChatPullDownHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChatChatPullDownHeader.h; sourceTree = "<group>"; };
-		078DEEA017C4065F00A969A1 /* AGChatChatPullDownHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChatChatPullDownHeader.m; sourceTree = "<group>"; };
-		078DEEA217C42A7A00A969A1 /* AGChatChatPullDownView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGChatChatPullDownView.xib; sourceTree = "<group>"; };
 		078E3B64177CCE420070D5BA /* collect_reply_divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_divider@2x.png"; sourceTree = "<group>"; };
 		078E3B65177CCE420070D5BA /* collect_reply_reply_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_reply_button@2x.png"; sourceTree = "<group>"; };
 		078E3B67177CCE420070D5BA /* collect_reply_throwback_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_reply_throwback_button@2x.png"; sourceTree = "<group>"; };
@@ -1647,9 +1642,6 @@
 				078522541784B12500288D7C /* AGChatPlaneCell.m */,
 				078A5C63178B722C000FB7FF /* AGChatProfileViewController.h */,
 				078A5C64178B722C000FB7FF /* AGChatProfileViewController.m */,
-				078DEE9F17C4065F00A969A1 /* AGChatChatPullDownHeader.h */,
-				078DEEA017C4065F00A969A1 /* AGChatChatPullDownHeader.m */,
-				078DEEA217C42A7A00A969A1 /* AGChatChatPullDownView.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2061,7 +2053,6 @@
 				0702F6D717B43CF100B4EBB3 /* Localizable.strings in Resources */,
 				078DEE3717B9ABAC00A969A1 /* plane_unknown_icon@2x.png in Resources */,
 				078DEE8117BD8CD900A969A1 /* profile_image_default@2x.png in Resources */,
-				078DEEA317C42A7A00A969A1 /* AGChatChatPullDownView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2212,7 +2203,6 @@
 				078DEE9A17C2B2C700A969A1 /* CJSONSerializer.m in Sources */,
 				078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */,
 				078DEE9E17C2D2D300A969A1 /* AGMessage.m in Sources */,
-				078DEEA117C4066000A969A1 /* AGChatChatPullDownHeader.m in Sources */,
 				0787988417C54D0C003AE42F /* AGCollectKeyboardScroll.m in Sources */,
 				0787988717C583A1003AE42F /* AGChainController.m in Sources */,
 				0787988A17C58909003AE42F /* AGChain.m in Sources */,

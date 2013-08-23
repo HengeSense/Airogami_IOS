@@ -17,7 +17,6 @@
 #import "AGMessage.h"
 #import "AGManagerUtils.h"
 #import "AGCategory+Addition.h"
-#import "AGChatChatPullDownHeader.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
@@ -25,7 +24,7 @@
 
 static float AGInputTextViewMaxHeight = 100;
 
-@interface AGChatChatViewController()<AGChatChatPullDownHeaderDelegate>
+@interface AGChatChatViewController()
 {
     __weak IBOutlet UIBubbleTableView *bubbleTable;
     __weak IBOutlet UIView *textInputView;
@@ -36,7 +35,6 @@ static float AGInputTextViewMaxHeight = 100;
     __weak IBOutlet UILabel *nameLabel;
     __weak IBOutlet UILabel *categoryLabel;
     UITextView *aidedTextView;
-    AGChatChatPullDownHeader *chatChatPullDownHeader;
     
     NSMutableArray *messagesData;
     
@@ -64,12 +62,18 @@ static float AGInputTextViewMaxHeight = 100;
 {
     if (self = [super initWithCoder:aDecoder]) {
         messagesData = [NSMutableArray arrayWithCapacity:50];
-        chatChatPullDownHeader = [AGChatChatPullDownHeader header];
-        chatChatPullDownHeader.delegate = self;
     }
     return self;
 }
 
+- (void) loadView
+{
+    [super loadView];
+    CGRect frame = bubbleTable.indicator.frame;
+    frame.origin.x = bubbleTable.bounds.size.width / 2;
+    bubbleTable.indicator.frame = frame;
+    //bubbleTable.tableHeaderView = bubbleTable.indicator;
+}
 
 - (void) initUI
 {
@@ -86,11 +90,6 @@ static float AGInputTextViewMaxHeight = 100;
     aidedTextView.layer.borderColor = inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
     aidedTextView.layer.borderWidth = inputTextView.layer.borderWidth = 2.0f;
     //
-    bubbleTable.scrollViewDelegate = chatChatPullDownHeader;
-    CGRect frame = chatChatPullDownHeader.pullDownView.frame;
-    frame.origin.y = -frame.size.height;
-    chatChatPullDownHeader.pullDownView.frame = frame;
-    [bubbleTable addSubview:chatChatPullDownHeader.pullDownView];
 }
 
 - (void)viewDidLoad
@@ -114,6 +113,7 @@ static float AGInputTextViewMaxHeight = 100;
     //bubbleTable.snapInterval = 120;
     bubbleTable.showAvatars = YES;
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+    bubbleTable.refreshable = NO;
     
     AGPlane *plane = airogami;
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
@@ -155,12 +155,21 @@ static float AGInputTextViewMaxHeight = 100;
 - (void) refresh
 {
     AGPlane *plane = airogami;
-    NSBubbleData *bubbleData = [messagesData objectAtIndex:0];
-    AGMessage *message = bubbleData.obj;
-    if (message.messageId > 0) {
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId",message.messageId, @"startId", nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
+    NSDictionary *dict;
+    AGMessage *message = nil;
+    if (messagesData.count) {
+        NSBubbleData *bubbleData = [messagesData objectAtIndex:0];
+        message = bubbleData.obj;
     }
+    
+    if (message.messageId > 0) {
+        dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId",message.messageId, @"startId", nil];
+    }
+    else{
+         dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
    
 }
 
@@ -180,6 +189,11 @@ static float AGInputTextViewMaxHeight = 100;
     if (messages.count == 0) {
         return;
     }
+    NSNumber *more = [dict objectForKey:@"more"];
+    if (more) {
+        bubbleTable.refreshable = more.boolValue;
+    }
+    
     int count = messages.count;
     if ([action isEqual:@"prepend"]) {
         count += messagesData.count;
@@ -210,19 +224,13 @@ static float AGInputTextViewMaxHeight = 100;
     }
     if (add) {
         [messagesData addObjectsFromArray:array];
-        [bubbleTable reloadToBottom:didInitialized];
+        [bubbleTable addData:add animated:didInitialized];
     }
     else{
-        if(messagesData.count){
-            bubbleTable.cursorBubbleData = [messagesData objectAtIndex:0];
-        }
-        else{
-            bubbleTable.cursorBubbleData = [array objectAtIndex:0];
-        }
-        
         [array addObjectsFromArray:messagesData];
         messagesData = array;
-        [bubbleTable reloadToCursor:NO];
+        [bubbleTable addData:add animated:NO];
+
     }
 
 }
@@ -368,7 +376,7 @@ static float AGInputTextViewMaxHeight = 100;
     sayBubble.account = managerUtils.accountManager.account;
     sayBubble.state = message.state.intValue;
     [messagesData addObject:sayBubble];
-    [bubbleTable reloadToBottom];
+    [bubbleTable addData:YES animated:didInitialized];
     //
     [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *result) {
         if (result) {

@@ -215,6 +215,7 @@
             [string appendFormat:@"%@",[jsonDictionary valueForKeyPath:idKey]];
             
         }
+        assert(string.length);
         predicate = [NSPredicate predicateWithFormat:string];
     }
     

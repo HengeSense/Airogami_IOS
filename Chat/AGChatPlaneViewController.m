@@ -50,7 +50,6 @@
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtainedPlanes object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
     
 }
 

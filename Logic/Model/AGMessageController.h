@@ -15,7 +15,7 @@
 
 - (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary;
 
-- (NSArray*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId;
+- (NSDictionary*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId;
 
 //messageId = -1
 - (NSArray*) getUnsentMessagesForPlane:(NSNumber *)planeId;

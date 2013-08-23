@@ -82,8 +82,9 @@
 
 - (void)setFrame:(CGRect)frame
 {
+    CGRect rect = self.frame;
     [super setFrame:frame];
-    if (self.data) {
+    if (self.data && CGRectEqualToRect(rect, frame) == NO) {
         [self setupInternalData];
     }
 
@@ -141,7 +142,7 @@
     else {
         self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:kMineLeftCapWidth topCapHeight:kMineTopCapWidth];
     }
-    [self setupInternalData];
+    //[self setupInternalData];
 }
 
 - (void) stateImageTouched

@@ -28,12 +28,12 @@ typedef enum _NSBubbleTypingType
 @property (nonatomic) NSTimeInterval snapInterval;
 @property (nonatomic) NSBubbleTypingType typingBubble;
 @property (nonatomic) BOOL showAvatars;
-@property (nonatomic, weak) NSBubbleData *cursorBubbleData;
-@property (nonatomic, weak) id<UIScrollViewDelegate> scrollViewDelegate;
+@property(nonatomic, assign) BOOL refreshable;
+@property(nonatomic, strong) UIActivityIndicatorView *indicator;
 
-- (void) reloadToBottom;
-- (void) reloadToBottom:(BOOL)animated;
+//- (void) reloadToBottom;
+//- (void) reloadToBottom:(BOOL)animated;
 - (void) didSelectCellAtIndexPath:(NSIndexPath*) indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType) type;
-- (void) reloadToCursor:(BOOL) animated;
+- (void)addData:(BOOL)append animated:(BOOL)animated;
 
 @end

@@ -198,13 +198,16 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 - (void) gotMessagesForPlane:(NSNumber*)planeId startId:(NSNumber*)startId
 {
     AGMessageController *messageController = [AGControllerUtils controllerUtils].messageController;
-    NSArray *doneMessages = [messageController getMessagesForPlane:planeId startId:startId];
+    NSDictionary *dict = [messageController getMessagesForPlane:planeId startId:startId];;
+    NSArray *doneMessages = [dict objectForKey:@"messages"];
+    NSNumber *more = [dict objectForKey:@"more"];
     NSArray *unsentMessages = nil;
     if (startId == nil) {
         unsentMessages = [messageController getUnsentMessagesForPlane:planeId];
     }
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:doneMessages.count + unsentMessages.count];
-    for (int i = doneMessages.count - 1; i > -1; --i) {
+    int lower = more.boolValue ? 0 : - 1;
+    for (int i = doneMessages.count - 1; i > lower; --i) {
         [messages addObject:[doneMessages objectAtIndex:i]];
     }
     if (startId == nil) {
@@ -216,7 +219,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
     if (startId) {
         action = @"prepend";
     }
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId", action, @"action", nil];
+    dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId", action, @"action", more, @"more", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }

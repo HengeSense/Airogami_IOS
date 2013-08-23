@@ -87,7 +87,9 @@
             </compoundIndex>
         </compoundIndexes>
         <userInfo>
-            <entry key="key" value="value"/>
+            <entry key="IdKey1" value="accountId"/>
+            <entry key="IdKey2" value="chainId"/>
+            <entry key="IdKeyCount" value="2"/>
         </userInfo>
     </entity>
     <entity name="AGMessage" representedClassName="AGMessage" syncable="YES">

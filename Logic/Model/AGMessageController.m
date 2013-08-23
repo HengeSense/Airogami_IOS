@@ -50,25 +50,26 @@ static int MessageLimit = 10;
 
 //descending
 
-- (NSArray*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId
+- (NSDictionary*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:messageEntityDescription];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and (%@ = nil or messageId < %@)", planeId, startId, startId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and messageId > 0 and (%@ = nil or messageId < %@)", planeId, startId, startId];
     [fetchRequest setPredicate:predicate];
     //
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"messageId" ascending:NO];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     //
-    [fetchRequest setFetchLimit:MessageLimit];
+    [fetchRequest setFetchLimit:MessageLimit + 1];
     //
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if (!array) {
         array = [NSArray array];
     }
-    return array;
+    NSNumber *more = [NSNumber numberWithBool:array.count > MessageLimit];
+    return [NSDictionary dictionaryWithObjectsAndKeys:array, @"messages", more, @"more", nil];
 }
 
 //ascending
