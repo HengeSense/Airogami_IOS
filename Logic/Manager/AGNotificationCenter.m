@@ -151,7 +151,8 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         }
         [params setObject:plane.planeId forKey:@"planeId"];
         
-        [[AGManagerUtils managerUtils].planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
+        AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
+        [planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
             if (error == nil) {
                 NSArray *messages = [[AGControllerUtils controllerUtils].messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
                 
@@ -167,6 +168,11 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
                 [self obtainMessagesForPlanes:array];
                 if (messages.count) {
                     [self obtainedMessages:messages forPlane:plane.planeId];
+                    NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;
+                    NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
+                    [planeManager viewedMessages:params context:nil block:^(NSError *error, id context) {
+                        
+                    }];
                 }
             
             }

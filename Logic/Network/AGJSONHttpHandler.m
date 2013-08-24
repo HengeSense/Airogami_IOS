@@ -17,6 +17,8 @@
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
+#define TimeoutInterval 10
+
 @interface AGJSONHttpHandler()<NSURLConnectionDelegate>
 {
    
@@ -46,7 +48,7 @@
     if (self = [super init]) {
         request = [[NSMutableURLRequest alloc] init];
         request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
-        request.timeoutInterval = 5;
+        request.timeoutInterval = TimeoutInterval;
     }
     return self;
 }

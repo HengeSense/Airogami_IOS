@@ -197,6 +197,8 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
+    
+    
     NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
     NSPredicate *predicate;
     if (idKey) {
@@ -335,8 +337,29 @@
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
+    
     NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", idKey, objectID];
+    NSPredicate *predicate;
+    if (idKey) {
+        predicate = [NSPredicate predicateWithFormat:@"%K = %@", idKey, objectID];
+    }
+    else{
+        int idKeyCount = [[entityDescription.userInfo objectForKey:@"IdKeyCount"] intValue];
+        NSMutableString *string = [NSMutableString stringWithCapacity:50];
+        for (int i = 0; i < idKeyCount; ++i) {
+            idKey = [entityDescription.userInfo objectForKey:[NSString stringWithFormat:@"IdKey%d", i + 1]];
+            if (i > 0) {
+                [string appendString:@" and "];
+            }
+            [string appendString:idKey];
+            [string appendString:@" = "];
+            [string appendFormat:@"%@",[objectID valueForKeyPath:idKey]];
+            
+        }
+        assert(string.length);
+        predicate = [NSPredicate predicateWithFormat:string];
+    }
+    
     [fetchRequest setPredicate:predicate];
     NSError *error;
     NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];

@@ -92,6 +92,19 @@
     [self.tableView reloadData];
 }
 
+- (void) deleteAirogami:(int) row
+{
+    id airogami =  [data objectAtIndex:row];
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = airogami;
+        AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
+        NSDictionary *params = [planeManager paramsForDeletePlane:plane];
+        [planeManager deletePlane:params plane:plane context:nil block:^(NSError *error, id context) {
+            
+        }];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -182,6 +195,14 @@
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self deleteAirogami:indexPath.row];
+    }
 }
 
 #pragma mark - Table view delegate

@@ -8,6 +8,7 @@
 
 #import "AGChainController.h"
 #import "AGCoreData.h"
+#import "AGChainMessageId.h"
 
 @interface AGChainController()
 {
@@ -36,13 +37,6 @@
     for (AGChain *chain in array) {
         if (chain.isNew == nil) {
             chain.isNew = [NSNumber numberWithBool:YES];
-        }
-        //for receive planes -9223372036854775785 9223372036854775808
-        for (AGChainMessage *chainMessage in chain.chainMessages) {
-            //
-            if (chainMessage.chain == nil) {
-                chainMessage.chain = chain;
-            }
         }
     }
     [coreData save];

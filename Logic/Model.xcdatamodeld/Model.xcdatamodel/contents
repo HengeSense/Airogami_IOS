@@ -54,7 +54,6 @@
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sex" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="updatedTime" attributeType="Date" syncable="YES"/>
         <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chains" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="chain" inverseEntity="AGChainMessage" syncable="YES"/>
@@ -159,7 +158,7 @@
         <element name="AGAccountStat" positionX="-153" positionY="225" width="128" height="90"/>
         <element name="AGAuthenticate" positionX="7" positionY="309" width="128" height="90"/>
         <element name="AGCategory" positionX="-360" positionY="-243" width="128" height="90"/>
-        <element name="AGChain" positionX="142" positionY="0" width="128" height="315"/>
+        <element name="AGChain" positionX="142" positionY="0" width="128" height="300"/>
         <element name="AGChainMessage" positionX="259" positionY="-27" width="128" height="150"/>
         <element name="AGChainMessageId" positionX="187" positionY="-216" width="128" height="90"/>
         <element name="AGMessage" positionX="34" positionY="-333" width="128" height="150"/>

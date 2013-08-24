@@ -49,7 +49,14 @@ static NSDateFormatter *dateFormatter;
             value = obj;
         }
         else if([obj isKindOfClass:[NSNumber class]]) {
-            value = [((NSNumber*)obj) stringValue];
+            NSNumber *number = obj;
+            if (strcmp(@encode(BOOL), number.objCType) == 0) {
+                value = number.boolValue ? @"true" : @"false";
+            }
+            else{
+                value = [number stringValue];
+            }
+            
         }
         else if([obj isKindOfClass:[NSDate class]]) {
             value = [AGUtils dateToString:obj];

@@ -23,6 +23,8 @@ typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSN
 
 - (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block;
 
+- (void) deletePlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block;
+
 - (void) pickupPlaneAndChain:(NSDictionary*) params context:(id)context block:(AGPickupPlaneAndChainFinishBlock)block;
 
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
@@ -31,9 +33,15 @@ typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSN
 
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
+- (void) viewedMessages:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
+
 - (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type;
 
 - (NSDictionary*)paramsForThrowPlane:(NSNumber*)planeId;
+
+- (NSDictionary*)paramsForDeletePlane:(AGPlane*)plane;
+
+- (NSDictionary*)paramsForViewedMessages:(AGPlane*)plane lastMsgId:(NSNumber*)lastMsgId;
 
 - (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content type:(int)type;
 

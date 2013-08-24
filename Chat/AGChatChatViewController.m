@@ -217,7 +217,7 @@ static float AGInputTextViewMaxHeight = 100;
         
     }
     else if ([action isEqual:@"append"]){
-        [messagesData addObjectsFromArray:array];
+        
     }
     else if ([action isEqual:@"prepend"]){
         add = NO;

@@ -15,12 +15,14 @@
 #import "AGNotificationCenter.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
+static NSString *DeletePlanePath = @"plane/deletePlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
 static NSString *ThrowPlanePath = @"plane/throwPlane.action?";
 static NSString *PickupPath = @"plane/pickup.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
 static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
+static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
 
 
 @implementation AGPlaneManager
@@ -147,6 +149,24 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
     }];
 }
 
+- (void) deletePlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:DeletePlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (error) {
+            
+        }
+        else{
+            [[AGCoreData coreData] remove:plane];
+            [[AGNotificationCenter notificationCenter] obtainedPlanes];
+            
+        }
+        if (block) {
+            block(error, context);
+        }
+        
+    }];
+}
+
 - (void) pickupPlaneAndChain:(NSDictionary *)params context:(id)context block:(AGPickupPlaneAndChainFinishBlock)block
 {
     [AGJSONHttpHandler request:YES params:params path:PickupPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
@@ -226,10 +246,47 @@ static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
     }];
 }
 
+- (void) viewedMessages:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ViewedMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSNumber *result) {
+        if (error) {
+            
+        }
+        else{
+#ifdef IS_DEBUG
+            NSLog(@"PlaneManager.viewedMessages: result = %@", result);
+#endif
+        }
+        if (block) {
+            block(error, context);
+        }
+        
+    }];
+}
+
 - (NSDictionary*)paramsForThrowPlane:(NSNumber*)planeId
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     [params setObject:planeId forKey:@"planeId"];
+    return params;
+}
+
+- (NSDictionary*)paramsForDeletePlane:(AGPlane*)plane
+{
+    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGManagerUtils managerUtils].accountManager.account.accountId];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:plane.planeId forKey:@"planeId"];
+    [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
+    return params;
+}
+
+- (NSDictionary*)paramsForViewedMessages:(AGPlane*)plane lastMsgId:(NSNumber*)lastMsgId
+{
+    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGManagerUtils managerUtils].accountManager.account.accountId];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:plane.planeId forKey:@"planeId"];
+    [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
+    [params setObject:lastMsgId forKey:@"lastMsgId"];
     return params;
 }
 
