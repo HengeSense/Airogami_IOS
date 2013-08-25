@@ -18,11 +18,14 @@
 #import "AGControllerUtils.h"
 #import "AGRootViewController.h"
 #import "AGAppDelegate.h"
+#import "AGAuthenticate.h"
 
 static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
 static NSString *ScreenNameSigninPath = @"account/screenNameSignin.action?";
 static NSString *SignoutPath = @"account/signout.action?";
+static NSString *ChangePasswordPath = @"account/changePassword.action?";
+static NSString *ChangeScreenNamePath = @"account/changeScreenName.action?";
 static NSString *ObtainTokensPath = @"data/dataManager?";
 static NSString *ObtainProfilePath= @"account/obtainProfile?";
 //
@@ -213,16 +216,81 @@ static NSString *SigninOther = @"error.signin.other.message";
 
 - (void) obtainTokens:(NSMutableDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, id result) {
-       block(error, context, result);
+    [AGJSONHttpHandler request:YES params:params path:ObtainTokensPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (block) {
+            block(error, context, result);
+        }
+       
    }];
 }
 
 - (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:ObtainProfilePath prompt:nil context:context block:^(NSError *error, id context, id result) {
-        block(error, context, result);
+    [AGJSONHttpHandler request:YES params:params path:ObtainProfilePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (block) {
+            block(error, context, result);
+        }
     }];
+}
+
+- (void) changePassword:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block
+{
+    NSString *password = [params objectForKey:@"newPassword"];
+    [AGJSONHttpHandler request:YES params:params path:ChangePasswordPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+             NSNumber *number = [result objectForKey:AGLogicJSONSucceedKey];
+             succeed = number.boolValue;
+            if (succeed) {
+                [[AGAppDelegate appDelegate].appConfig updatePassword:password];
+            }
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+        
+    }];
+}
+
+- (void) changeScreenName:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block
+{
+    NSString *screenName = [params objectForKey:@"screenName"];
+    [AGJSONHttpHandler request:YES params:params path:ChangeScreenNamePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            NSNumber *number = [result objectForKey:AGLogicJSONSucceedKey];
+            succeed = number.boolValue;
+            if (succeed) {
+                account.profile.screenName = screenName;
+                [[AGCoreData coreData] save];
+            }
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+        
+    }];
+}
+
+- (NSDictionary*) paramsForChangePassword:(NSString*)oldPassword newPassword:(NSString*)newPassword
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:oldPassword forKey:@"oldPassword"];
+    [params setObject:newPassword forKey:@"newPassword"];
+    return params;
+}
+
+- (NSDictionary*) paramsForChangeScreenName:(NSString*)screenName
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    [params setObject:screenName forKey:@"screenName"];
+    return params;
 }
 
 - (void) autoSignin

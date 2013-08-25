@@ -82,6 +82,7 @@ extern  NSString *AGPlaneSendPlaneOK;
 extern  NSString * AGLogicJSONStatusKey;
 extern  NSString * AGLogicJSONMessageKey;
 extern  NSString * AGLogicJSONResultKey;
+extern  NSString * AGLogicJSONSucceedKey;
 
 extern  NSString * AGLogicAccountEmailKey;
 extern  NSString * AGLogicAccountPasswordKey;
@@ -96,5 +97,6 @@ extern NSString *AGErrorTitleKey;
 //block
 typedef void (^AGHttpDoneBlock)(NSError *error, id context);
 typedef void (^AGHttpFinishBlock)(NSError *error, id context, NSMutableDictionary *result);
+typedef void (^AGHttpSucceedBlock)(NSError *error, id context, BOOL succeed);
 
 #endif

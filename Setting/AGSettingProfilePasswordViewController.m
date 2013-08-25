@@ -8,8 +8,12 @@
 
 #import "AGSettingProfilePasswordViewController.h"
 #import "AGUIUtils.h"
+#import "AGUtils.h"
 #import "AGDefines.h"
 #import "AGMessageUtils.h"
+#import "AGManagerUtils.h"
+
+static NSString *InvalidOldPassword = @"error.account.changepassword.oldpassword.notmatch";
 
 @interface AGSettingProfilePasswordViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
@@ -93,8 +97,23 @@
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {
-        
+        [self changePassword];
     }
+}
+
+- (void) changePassword
+{
+    AGAccountManager *accountManager = [AGManagerUtils managerUtils].accountManager;
+    NSDictionary *params = [accountManager paramsForChangePassword:self.currentTextField.text newPassword:self.nowTextField.text];
+    [accountManager changePassword:params context:nil block:^(NSError *error, id context, BOOL succeed) {
+        if (succeed) {
+            [AGMessageUtils alertMessageUpdated];
+        }
+        else{
+            [AGMessageUtils alertMessageWithTitle:@"" message:AGLS(InvalidOldPassword)];
+        }
+     
+    }];
 }
 
 -(BOOL) validate

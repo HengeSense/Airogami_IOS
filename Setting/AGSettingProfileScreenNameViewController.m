@@ -10,6 +10,9 @@
 #import "AGUIUtils.h"
 #import "AGDefines.h"
 #import "AGMessageUtils.h"
+#import "AGManagerUtils.h"
+
+static NSString *ScreenNameExist = @"error.account.changescreenname.screenname.exist";
 
 @interface AGSettingProfileScreenNameViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
@@ -35,6 +38,13 @@
 	[AGUIDefines setNavigationBackButton:self.backButton];
     [AGUIDefines setNavigationDoneButton:self.doneButton];
 	[AGUIUtils setBackButtonTitle:self];
+    [self initData];
+}
+
+- (void) initData
+{
+    NSString *screenName = [AGManagerUtils managerUtils].accountManager.account.profile.screenName;
+    self.screenNameTextField.text = screenName;
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,8 +91,23 @@
 
 - (IBAction)doneButtonTouched:(UIButton *)sender {
     if ([self validate]) {
-        
+        [self changeScreenName];
     }
+}
+
+- (void) changeScreenName
+{
+    AGAccountManager *accountManager = [AGManagerUtils managerUtils].accountManager;
+    NSDictionary *params = [accountManager paramsForChangeScreenName:self.screenNameTextField.text];
+    [accountManager changeScreenName:params context:nil block:^(NSError *error, id context, BOOL succeed) {
+        if (succeed) {
+            [AGMessageUtils alertMessageUpdated];
+        }
+        else{
+            [AGMessageUtils alertMessageWithTitle:@"" message:AGLS(ScreenNameExist)];
+        }
+        
+    }];
 }
 
 -(BOOL) validate

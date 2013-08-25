@@ -231,16 +231,24 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 }
 
 
-- (void) startTimer {
-    static BOOL started;
-    if (started == NO) {
-        started = YES;
-        [NSTimer scheduledTimerWithTimeInterval:5
-                                         target:self
-                                       selector:@selector(tick:)
-                                       userInfo:nil
-                                        repeats:YES];
+- (void) startTimer:(BOOL)start {
+    static NSTimer *timer;
+    if (start) {
+        if (timer == nil) {
+            timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                     target:self
+                                                   selector:@selector(tick:)
+                                                   userInfo:nil
+                                                    repeats:YES];
+        }
     }
+    else{
+        if (timer) {
+            [timer invalidate];
+            timer = nil;
+        }
+    }
+   
 
 }
 

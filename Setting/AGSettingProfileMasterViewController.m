@@ -120,7 +120,7 @@
     if (profile) {
         self.likesLabel.text = [profile.likesCount stringValue];
         self.nameTextField.text = profile.fullName;
-        [self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
+        //[self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
         if (profile.birthday) {
             self.ageTextField.text = [AGUtils birthdayToAge:profile.birthday];
             datePicker.datePicker.date = profile.birthday;
@@ -136,7 +136,13 @@
         self.emailTextField.text = profile.account.authenticate.email;
         [self.profileImageButton setImageWithAccountId:profile.accountId];
     }
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //To update if change screenName
+    [self.screenNameButton setTitle:accountManager.account.profile.screenName forState:UIControlStateNormal];
 }
 
 - (NSMutableDictionary*) obtainData
@@ -357,9 +363,7 @@
 #pragma mark - AGImagePickAndCropDelegate
 
 - (IBAction)profileImageButtonTouched:(UIButton *)sender {
-    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"Add Profile Picture" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Take Photo", @"Choose From Library", nil];
-    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    [sheet showInView:self.view];
+    [AGUIUtils actionSheetForPickImages:self view:self.view];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex

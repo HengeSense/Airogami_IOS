@@ -27,6 +27,14 @@ typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 
 - (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
 
+- (void) changePassword:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block;
+
+- (void) changeScreenName:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block;
+
+- (NSDictionary*) paramsForChangePassword:(NSString*)oldPassword newPassword:(NSString*)newPassword;
+
+- (NSDictionary*) paramsForChangeScreenName:(NSString*)screenName;
+
 - (void) signout;
 
 - (void) autoSignin;

@@ -167,9 +167,10 @@ typedef enum {
         if (append) {
             count = self.bubbleSections.count;
             [self.bubbleSections addObjectsFromArray:newBubbleSections];
-            [self beginUpdates];
-            [self insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(count, newBubbleSections.count)] withRowAnimation:UITableViewRowAnimationNone];
-            [self endUpdates];
+            //[self beginUpdates];
+            //[self insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(count, newBubbleSections.count)] withRowAnimation:UITableViewRowAnimationNone];
+            //[self endUpdates];
+            [self reloadData];
             [self scrollToBottom:animated];
         }
         else{

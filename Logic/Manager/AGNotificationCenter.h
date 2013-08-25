@@ -27,7 +27,7 @@ extern NSString *AGNotificationGotMessagesForPlane;
 
 +(AGNotificationCenter*) notificationCenter;
 
-- (void) startTimer;
+- (void) startTimer:(BOOL)start;
 - (void) obtainedPlanes;
 - (void) collectedPlanes;
 

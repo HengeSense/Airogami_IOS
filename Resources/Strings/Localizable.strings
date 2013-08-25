@@ -17,6 +17,8 @@
 "error.account.newpassword.short" = "The new password is too short";
 "message.account.operate.uploadingicons" = "Uploading images";
 "message.account.signin.doing" = "Signin";
+"error.account.changepassword.oldpassword.notmatch" = "The current password is invalid";
+"error.account.changescreenname.screenname.exist" = "This ID has been taken by others";
 //general
 "message.general.edit.unsaved.message" = "Give up changes you have made?";
 "message.general.edit.unsaved.giveup" = "Give up";

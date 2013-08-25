@@ -34,6 +34,7 @@
 		0707238B175EA37C0017292A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0707238A175EA37B0017292A /* MainStoryboard.storyboard */; };
 		0707238F175EA8670017292A /* AGSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707238E175EA8670017292A /* AGSignupViewController.m */; };
 		0707239D175EB75C0017292A /* signup_account_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707239B175EB75C0017292A /* signup_account_normal@2x.png */; };
+		070BCC0B17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC0A17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
@@ -408,6 +409,8 @@
 		0707238E175EA8670017292A /* AGSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSignupViewController.m; sourceTree = "<group>"; };
 		0707239B175EB75C0017292A /* signup_account_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_normal@2x.png"; sourceTree = "<group>"; };
 		070723A1175EBB440017292A /* AGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGDefines.h; sourceTree = "<group>"; };
+		070BCC0917C949CE00BB97B7 /* UIActionSheet+ButtonEnable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+ButtonEnable.h"; sourceTree = "<group>"; };
+		070BCC0A17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+ButtonEnable.m"; sourceTree = "<group>"; };
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		073250F9176AB4AB00487B9E /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
@@ -1576,6 +1579,8 @@
 				0785225D1784D25B00288D7C /* CALayer+Pause.m */,
 				076B158F17AED9A8005BD910 /* AGWaitUtils.h */,
 				076B159017AED9A8005BD910 /* AGWaitUtils.m */,
+				070BCC0917C949CE00BB97B7 /* UIActionSheet+ButtonEnable.h */,
+				070BCC0A17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2206,6 +2211,7 @@
 				0787988417C54D0C003AE42F /* AGCollectKeyboardScroll.m in Sources */,
 				0787988717C583A1003AE42F /* AGChainController.m in Sources */,
 				0787988D17C81554003AE42F /* AGChain.m in Sources */,
+				070BCC0B17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

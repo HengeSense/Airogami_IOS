@@ -53,7 +53,6 @@ static AGAppDelegate *AppDelegate;
     [self.window addSubview:imageView];
     
     //
-    [[AGNotificationCenter notificationCenter] startTimer];
     
     return YES;
 }

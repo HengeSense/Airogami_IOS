@@ -8,6 +8,7 @@
 
 #import "AGRootViewController.h"
 #import "AGAppDelegate.h"
+#import "AGNotificationCenter.h"
 
 static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
@@ -87,9 +88,11 @@ enum{
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self navigateToSign];
+            [[AGNotificationCenter notificationCenter] startTimer:NO];
             break;
         case AGRootToMain:
             [self navigateToMain];
+            [[AGNotificationCenter notificationCenter] startTimer:YES];
             break;
         default:
             break;

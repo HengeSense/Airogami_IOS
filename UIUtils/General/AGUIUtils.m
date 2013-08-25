@@ -11,6 +11,7 @@
 #import "AGKeyboardResize.h"
 #import "AGChatKeyboardScroll.h"
 #import "AGCollectKeyboardScroll.h"
+#import "UIActionSheet+ButtonEnable.h"
 
 #define kAGAlertMessageOK @"OK"
 
@@ -85,6 +86,18 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
     UIViewController *vc = [array objectAtIndex:index];
     UIButton *button = (UIButton *)viewController.navigationItem.leftBarButtonItem.customView;
     [button setTitle:vc.title forState:UIControlStateNormal];
+}
+
++(UIActionSheet*) actionSheetForPickImages:(id<UIActionSheetDelegate>)delegate view:(UIView*)view
+{
+    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"Add Profile Picture" delegate:delegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Take Photo", @"Choose From Library", nil];
+    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    BOOL available = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    [sheet setButton:0 enabled:available];
+    available = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+    [sheet setButton:1 enabled:available];
+    [sheet showInView:view];
+    return sheet;
 }
 
 

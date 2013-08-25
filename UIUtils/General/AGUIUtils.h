@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AGDefines.h"
 
+#define AGLS(string) NSLocalizedString(string, string)
+
 typedef enum  {
     AGThemeFontStyleMedium = 0,
     AGThemeFontStyleBlack = 1,
@@ -24,5 +26,6 @@ typedef enum  {
 + (UIImage*) collectTypeImage:(AGCollectType) type;
 + (UIFont*) themeFont:(AGThemeFontStyle) style size:(float)size;
 + (void) setBackButtonTitle:(UIViewController*)viewController;
++ (UIActionSheet*) actionSheetForPickImages:(id<UIActionSheetDelegate>)delegate view:(UIView*)view;
 
 @end

@@ -9,7 +9,7 @@
 #import "AGImageButton.h"
 #import "AGManagerUtils.h"
 #import <QuartzCore/QuartzCore.h>
-#import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIButton+WebCache.h>
 
 @implementation AGImageButton
 
@@ -41,20 +41,16 @@
     // layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
-- (void) setImageUrl:(NSURL *)url placeImage:(UIImage *)planeImage
+- (void) setImageUrl:(NSURL *)url placeImage:(UIImage *)placeImage
 {
-    UIButton *button = self;
-    [button setImage:planeImage forState:UIControlStateNormal];
-    [self.imageView setImageWithURL:url placeholderImage:planeImage options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+    [self setImageWithURL:url forState:UIControlStateNormal placeholderImage:placeImage options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 #ifdef IS_DEBUG
         if (error) {
             NSLog(@"AGImageButton.setImageUrl: %@", error);
         }
 #endif
-        if (error == nil && image != nil) {
-            [button setImage:image forState:UIControlStateNormal];
-        }
     }];
+    
 }
 
 @end

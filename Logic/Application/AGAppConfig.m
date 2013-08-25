@@ -88,6 +88,14 @@ static NSString *path;
     [self save];
 }
 
+- (void) updatePassword:(NSString*)password
+{
+    if (appAccount) {
+        appAccount.password = password;
+    }
+    [self save];
+}
+
 - (void) resetAppAccount
 {
     self.appAccount = nil;

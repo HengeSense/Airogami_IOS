@@ -222,9 +222,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 
 - (IBAction)imageTouched:(UIButton *)sender {
-    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"Add Profile Picture" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Take Photo", @"Choose From Library", nil];
-    sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    [sheet showInView:self.view];
+    [AGUIUtils actionSheetForPickImages:self view:self.view];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex

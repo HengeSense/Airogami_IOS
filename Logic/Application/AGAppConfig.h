@@ -22,6 +22,7 @@
 
 - (void) save;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;
+- (void) updatePassword:(NSString*)password;
 - (void) resetAppAccount;
 - (BOOL) needSignin;
 - (BOOL) accountUpdated:(AGAccount*)account;
