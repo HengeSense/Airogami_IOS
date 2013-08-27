@@ -41,6 +41,8 @@ NSString * AGLogicJSONStatusKey = @"status";
 NSString * AGLogicJSONMessageKey = @"message";
 NSString * AGLogicJSONResultKey = @"result";
 NSString * AGLogicJSONSucceedKey = @"succeed";
+NSString * AGLogicJSONErrorKey = @"error";
+NSString * AGLogicJSONNoneValue = @"none";
 int AGLogicJSONStatusNotSignin = 1;
 
 NSString * AGLogicAccountEmailKey = @"email";

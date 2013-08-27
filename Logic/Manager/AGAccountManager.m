@@ -33,6 +33,7 @@ static NSString *SignupDuplicate = @"message.signup.duplicate";
 static NSString *SigninNotMatch = @"error.signin.notmatch.message";
 static NSString *SigninNeeded = @"error.signin.need.title";
 static NSString *SigninOther = @"error.signin.other.message";
+static NSString *SigninBanned = @"error.account.signin.banned";
 
 @interface AGAccountManager()
 
@@ -141,7 +142,15 @@ static NSString *SigninOther = @"error.signin.other.message";
             if (status.intValue == 0) {
                 NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
                 NSMutableDictionary *accountJson = [result objectForKey:@"account"];
-                if (accountJson == nil || [accountJson isEqual:[NSNull null]]){
+                NSString *str = [result objectForKey:AGLogicJSONErrorKey];
+                if (str) { 
+                    [AGMessageUtils alertMessageWithTitle:nil message:SigninBanned];
+                    if (automatic) {
+                        [[AGAppDelegate appDelegate].appConfig resetAppAccount];
+                        [[AGRootViewController rootViewController] switchToSign];
+                    }
+                }
+                else if (accountJson == nil || [accountJson isEqual:[NSNull null]]){
                     //not match
                     if (animated) {
                         [AGMessageUtils alertMessageWithTitle:@"" message:SigninNotMatch];

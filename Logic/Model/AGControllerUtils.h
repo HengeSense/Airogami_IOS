@@ -11,6 +11,7 @@
 #import "AGPlaneController.h"
 #import "AGMessageController.h"
 #import "AGChainController.h"
+#import "AGChainMessageController.h"
 
 @interface AGControllerUtils : NSObject
 
@@ -18,6 +19,7 @@
 @property(nonatomic, strong) AGPlaneController *planeController;
 @property(nonatomic, strong) AGMessageController *messageController;
 @property(nonatomic, strong) AGChainController *chainController;
+@property(nonatomic, strong) AGChainMessageController *chainMessageController;
 
 + (AGControllerUtils*) controllerUtils;
 

@@ -13,5 +13,5 @@
 @interface AGChainController : NSObject
 
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray;
-
+- (void) increaseUpdateInc:(AGChain*)chain;
 @end

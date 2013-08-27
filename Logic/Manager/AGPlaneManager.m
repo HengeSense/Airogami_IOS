@@ -12,7 +12,7 @@
 #import "AGControllerUtils.h"
 #import "NSBubbleData.h"
 #import "AGManagerUtils.h"
-#import "AGNotificationCenter.h"
+#import "AGPlaneNotification.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *DeletePlanePath = @"plane/deletePlane.action?";
@@ -29,16 +29,17 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
 
 - (void) sendPlane:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:SendPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
+    [AGJSONHttpHandler request:YES params:params path:SendPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {//error,plane
         if (error) {
             
         }
         else{
-            if (result.boolValue) {
-                 [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(AGPlaneSendPlaneOK, AGPlaneSendPlaneOK)];
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                //wait for process
             }
             else{
-                //failed
+                [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(AGPlaneSendPlaneOK, AGPlaneSendPlaneOK)];
             }
         
         }
@@ -58,92 +59,110 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
     [params setObject:message.type forKey:@"messageVO.type"];
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         AGMessage *remoteMessage = nil;
+        BOOL refresh = NO;
         if (error) {
             
         }
         else{
-            //succeed
-            NSDictionary *dict = [result objectForKey:@"message"];
-            if ([dict isEqual:[NSNull null]] == NO) {
-                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
-                
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGCoreData coreData] remove:message.plane];
+                }
+                [[AGPlaneNotification planeNotification] obtainedPlanes];
+                [AGMessageUtils alertMessagePlaneChanged];
+                refresh = YES;
             }
             else{
-                NSLog(@"replyPlane failed");
-                abort();
+                //succeed
+                NSDictionary *dict = [result objectForKey:@"message"];
+                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
+                [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:message.plane];
+                [[AGCoreData coreData] remove:message];
+                [[AGPlaneNotification planeNotification] obtainedPlanes];
             }
-        }
-        if (remoteMessage) {
-            [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:message.plane];
-            [[AGCoreData coreData] remove:message];
-            [[AGNotificationCenter notificationCenter] obtainedPlanes];
-        }
-        else{
-            message.state = [NSNumber numberWithInt:BubbleCellStateSendFailed];
-            [[AGCoreData coreData] save];
+            
         }
         if (block) {
-            block(error, context, remoteMessage);
+            block(error, context, remoteMessage, refresh);
         }
         
     }];
 }
 
-- (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGReplyPlaneFinishBlock)block
+- (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block
 {
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         AGMessage *remoteMessage = nil;
+        BOOL succeed = NO;
         if (error) {
             
         }
         else{
-            //succeed
-            NSDictionary *dict = [result objectForKey:@"message"];
-            if ([dict isEqual:[NSNull null]] == NO) {
+            succeed = YES;
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGCoreData coreData] remove:plane];
+                }
+                [[AGPlaneNotification planeNotification] collectedPlanes];
+                [AGMessageUtils alertMessagePlaneChanged];
+            }
+            else{
+                //succeed
+                NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
                 plane.status = [NSNumber numberWithInt:AGPlaneStatusReplied];
                 [[AGCoreData coreData] save];
-            }
-            else{
-                NSLog(@"firstReplyPlane failed");
-                abort();
+                //
+                [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:plane];
+                [[AGPlaneNotification planeNotification] obtainedPlanes];
+                [[AGPlaneNotification planeNotification] collectedPlanes];
             }
         }
-        if (remoteMessage) {
-            [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:plane];
-            [[AGNotificationCenter notificationCenter] obtainedPlanes];
-            [[AGNotificationCenter notificationCenter] collectedPlanes];
-        }
-        else{
 
-        }
         if (block) {
-            block(error, context, remoteMessage);
+            block(error, context, succeed);
         }
         
     }];
 }
 
-- (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block
+- (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:ThrowPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSNumber *result) {
+    [AGJSONHttpHandler request:YES params:params path:ThrowPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
         if (error) {
             
         }
         else{
-            if (result.boolValue) {
-                //[AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(AGPlaneSendPlaneOK, AGPlaneSendPlaneOK)];
-                [[AGCoreData coreData] remove:plane];
-                [[AGNotificationCenter notificationCenter] collectedPlanes];
+            succeed = YES;
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGCoreData coreData] remove:plane];
+                }
+                NSDictionary *planeJson = [result objectForKey:@"plane"];
+                //changed status, etc
+                if (planeJson) {
+                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
+                    [AGMessageUtils alertMessagePlaneChanged];
+                }
+                [[AGPlaneNotification planeNotification] collectedPlanes];
+                [[AGPlaneNotification planeNotification] obtainedPlanes];
+                
             }
             else{
-                //failed
-                abort();
+                [[AGCoreData coreData] remove:plane];
+                [[AGPlaneNotification planeNotification] collectedPlanes];
             }
             
         }
         if (block) {
-            block(error, context);
+            block(error, context, succeed);
         }
         
     }];
@@ -156,9 +175,25 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             
         }
         else{
-            [[AGCoreData coreData] remove:plane];
-            [[AGNotificationCenter notificationCenter] obtainedPlanes];
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGCoreData coreData] remove:plane];
+                }
+                NSDictionary *planeJson = [result objectForKey:@"plane"];
+                //changed status, etc
+                if (planeJson) {
+                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
+                    [AGMessageUtils alertMessagePlaneChanged];
+                }
+                
+            }
+            else{
+                [[AGCoreData coreData] remove:plane];
+            }
             
+            [[AGPlaneNotification planeNotification] obtainedPlanes];
         }
         if (block) {
             block(error, context);
@@ -178,7 +213,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             //succeed
             NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
             if (planes.count) {
-                [[AGNotificationCenter notificationCenter] collectedPlanes];
+                [[AGPlaneNotification planeNotification] collectedPlanes];
             }
             NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
             if (chains.count) {

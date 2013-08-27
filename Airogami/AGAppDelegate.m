@@ -11,7 +11,7 @@
 #import "AGUtils.h"
 #import "AGManagerUtils.h"
 #import "AGControllerUtils.h"
-#import "AGNotificationCenter.h"
+#import "AGPlaneNotification.h"
 
 static AGAppDelegate *AppDelegate;
 

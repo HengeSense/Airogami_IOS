@@ -14,6 +14,7 @@
 @synthesize planeController;
 @synthesize messageController;
 @synthesize chainController;
+@synthesize chainMessageController;
 
 + (AGControllerUtils*) controllerUtils
 {
@@ -31,6 +32,7 @@
         planeController = [[AGPlaneController alloc] init];
         messageController = [[AGMessageController alloc] init];
         chainController = [[AGChainController alloc] init];
+        chainMessageController = [[AGChainMessageController alloc] init];
     }
     return self;
 }

@@ -19,12 +19,14 @@
 "message.account.signin.doing" = "Signin";
 "error.account.changepassword.oldpassword.notmatch" = "The current password is invalid";
 "error.account.changescreenname.screenname.exist" = "This ID has been taken by others";
+"error.account.signin.banned" = "This account has been banned";
 //general
 "message.general.edit.unsaved.message" = "Give up changes you have made?";
 "message.general.edit.unsaved.giveup" = "Give up";
 "message.general.edit.succeed" = "Update successfully";
 "message.general.cancel" = "Cancel";
 "message.general.ok" = "OK";
+"error.general.planechanged" = "Oops! The plane has been changed";
 //signup
 "error.signup.location.choose.invalid" = "Please specify your city";
 "message.signup.succeed" = "Sign up successfully";

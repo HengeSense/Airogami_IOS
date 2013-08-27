@@ -12,6 +12,7 @@
 
 @interface AGPlaneController : NSObject
 
+- (AGPlane*) savePlane:(NSDictionary*)planeJson;
 - (NSMutableArray*) savePlanes:(NSArray*)jsonArray;
 - (NSNumber*) recentPlaneUpdateIncForCollect;
 - (NSArray*) getAllPlanesForCollect;

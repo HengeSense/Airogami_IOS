@@ -18,7 +18,7 @@
 #import "AGUtils.h"
 #import "AGCategory.h"
 #import "AGMessage.h"
-#import "AGNotificationCenter.h"
+#import "AGPlaneNotification.h"
 
 @interface AGCollectPlaneViewController ()
 {

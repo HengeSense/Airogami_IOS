@@ -8,7 +8,7 @@
 
 #import "AGRootViewController.h"
 #import "AGAppDelegate.h"
-#import "AGNotificationCenter.h"
+#import "AGPlaneNotification.h"
 
 static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
@@ -88,11 +88,11 @@ enum{
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self navigateToSign];
-            [[AGNotificationCenter notificationCenter] startTimer:NO];
+            [[AGPlaneNotification planeNotification] startTimer:NO];
             break;
         case AGRootToMain:
             [self navigateToMain];
-            [[AGNotificationCenter notificationCenter] startTimer:YES];
+            [[AGPlaneNotification planeNotification] startTimer:YES];
             break;
         default:
             break;

@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #import "AGDefines.h"
+#import "AGChainMessage.h"
+#import "AGChain.h"
+
+typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessage *chainMessage, BOOL refresh);
 
 @interface AGChainManager : NSObject
 

@@ -13,7 +13,7 @@
 #import "AGResignButton.h"
 #import "AGUIUtils.h"
 #import "AGDefines.h"
-#import "AGNotificationCenter.h"
+#import "AGPlaneNotification.h"
 #import "AGMessage.h"
 #import "AGManagerUtils.h"
 #import "AGCategory+Addition.h"
@@ -378,15 +378,16 @@ static float AGInputTextViewMaxHeight = 100;
     [messagesData addObject:sayBubble];
     [bubbleTable addData:YES animated:didInitialized];
     //
-    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *result) {
-        if (result) {
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {
+        if (message) {
             sayBubble.state = BubbleCellStateSent;
-            sayBubble.date = result.createdTime;
+            sayBubble.date = message.createdTime;
+            [bubbleTable reloadData];
         }
-        else{
-            sayBubble.state = BubbleCellStateSendFailed;
+        if (refresh) {
+            [self.navigationController popViewControllerAnimated:YES];
         }
-        [bubbleTable reloadData];
+        
     }];
     
 }

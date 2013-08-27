@@ -10,7 +10,7 @@
 #import "AGDefines.h"
 #import "AGMessage.h"
 
-typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *result);
+typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message, BOOL refresh);
 typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
 
 @interface AGPlaneManager : NSObject
@@ -19,9 +19,9 @@ typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSN
 
 - (void) replyPlane:(AGMessage*) message context:(id)context block:(AGReplyPlaneFinishBlock)block;
 
-- (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGReplyPlaneFinishBlock)block;
+- (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block;
 
-- (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block;
+- (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block;
 
 - (void) deletePlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block;
 

@@ -18,6 +18,7 @@ static NSString *UnsavedGiveup = @"message.general.edit.unsaved.giveup";
 static NSString *UnsavedCancel = @"message.general.cancel";
 static NSString *UpdateSucceed = @"message.general.edit.succeed";
 static NSString *OK = @"message.general.ok";
+static NSString *PlaneChanged = @"error.general.planechanged";
 
 @implementation AGMessageUtils
 
@@ -58,6 +59,14 @@ static NSString *OK = @"message.general.ok";
 {
     UIAlertView *alert = [[UIAlertView alloc] init];
     alert.message = NSLocalizedString(UpdateSucceed, UpdateSucceed);
+    [alert addButtonWithTitle:NSLocalizedString(OK, OK)];
+    [alert show];
+}
+
++ (void) alertMessagePlaneChanged
+{
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    alert.message = NSLocalizedString(PlaneChanged, PlaneChanged);
     [alert addButtonWithTitle:NSLocalizedString(OK, OK)];
     [alert show];
 }

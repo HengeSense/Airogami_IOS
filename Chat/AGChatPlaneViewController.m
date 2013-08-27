@@ -7,7 +7,7 @@
 //
 
 #import "AGChatPlaneViewController.h"
-#import "AGNotificationCenter.h"
+#import "AGPlaneNotification.h"
 #import "AGChatPlaneCell.h"
 #import "AGPlane.h"
 #import "AGAccount.h"

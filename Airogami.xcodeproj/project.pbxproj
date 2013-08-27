@@ -35,6 +35,9 @@
 		0707238F175EA8670017292A /* AGSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707238E175EA8670017292A /* AGSignupViewController.m */; };
 		0707239D175EB75C0017292A /* signup_account_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707239B175EB75C0017292A /* signup_account_normal@2x.png */; };
 		070BCC0B17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC0A17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m */; };
+		070BCC0E17CC301700BB97B7 /* AGNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC0D17CC301700BB97B7 /* AGNotificationCenter.m */; };
+		070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1017CC350400BB97B7 /* AGChainMessageController.m */; };
+		070BCC1417CC372100BB97B7 /* AGChainNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1317CC372100BB97B7 /* AGChainNotification.m */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
@@ -205,7 +208,7 @@
 		078DEE3217B98EBD00A969A1 /* AGCategory+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3117B98EBD00A969A1 /* AGCategory+Addition.m */; };
 		078DEE3517B9A0DF00A969A1 /* AGChainManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3417B9A0DE00A969A1 /* AGChainManager.m */; };
 		078DEE3717B9ABAC00A969A1 /* plane_unknown_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078DEE3617B9ABAC00A969A1 /* plane_unknown_icon@2x.png */; };
-		078DEE3A17B9B17300A969A1 /* AGNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3917B9B17300A969A1 /* AGNotificationCenter.m */; };
+		078DEE3A17B9B17300A969A1 /* AGPlaneNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3917B9B17300A969A1 /* AGPlaneNotification.m */; };
 		078DEE3D17BAA92C00A969A1 /* AGPlaneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3C17BAA92C00A969A1 /* AGPlaneController.m */; };
 		078DEE4017BAAAB700A969A1 /* AGControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE3F17BAAAB700A969A1 /* AGControllerUtils.m */; };
 		078DEE6717BD596F00A969A1 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE6617BD596F00A969A1 /* AGAccountStat.m */; };
@@ -411,6 +414,12 @@
 		070723A1175EBB440017292A /* AGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGDefines.h; sourceTree = "<group>"; };
 		070BCC0917C949CE00BB97B7 /* UIActionSheet+ButtonEnable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+ButtonEnable.h"; sourceTree = "<group>"; };
 		070BCC0A17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+ButtonEnable.m"; sourceTree = "<group>"; };
+		070BCC0C17CC301700BB97B7 /* AGNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNotificationCenter.h; sourceTree = "<group>"; };
+		070BCC0D17CC301700BB97B7 /* AGNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNotificationCenter.m; sourceTree = "<group>"; };
+		070BCC0F17CC350400BB97B7 /* AGChainMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessageController.h; sourceTree = "<group>"; };
+		070BCC1017CC350400BB97B7 /* AGChainMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessageController.m; sourceTree = "<group>"; };
+		070BCC1217CC372100BB97B7 /* AGChainNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainNotification.h; sourceTree = "<group>"; };
+		070BCC1317CC372100BB97B7 /* AGChainNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainNotification.m; sourceTree = "<group>"; };
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		073250F9176AB4AB00487B9E /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
@@ -642,8 +651,8 @@
 		078DEE3317B9A0DE00A969A1 /* AGChainManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainManager.h; sourceTree = "<group>"; };
 		078DEE3417B9A0DE00A969A1 /* AGChainManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainManager.m; sourceTree = "<group>"; };
 		078DEE3617B9ABAC00A969A1 /* plane_unknown_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane_unknown_icon@2x.png"; sourceTree = "<group>"; };
-		078DEE3817B9B17200A969A1 /* AGNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNotificationCenter.h; sourceTree = "<group>"; };
-		078DEE3917B9B17300A969A1 /* AGNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNotificationCenter.m; sourceTree = "<group>"; };
+		078DEE3817B9B17200A969A1 /* AGPlaneNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlaneNotification.h; sourceTree = "<group>"; };
+		078DEE3917B9B17300A969A1 /* AGPlaneNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlaneNotification.m; sourceTree = "<group>"; };
 		078DEE3B17BAA92C00A969A1 /* AGPlaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlaneController.h; sourceTree = "<group>"; };
 		078DEE3C17BAA92C00A969A1 /* AGPlaneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlaneController.m; sourceTree = "<group>"; };
 		078DEE3E17BAAAB600A969A1 /* AGControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGControllerUtils.h; sourceTree = "<group>"; };
@@ -1147,8 +1156,12 @@
 				078DEE2D17B983BE00A969A1 /* AGPlaneManager.m */,
 				078DEE3317B9A0DE00A969A1 /* AGChainManager.h */,
 				078DEE3417B9A0DE00A969A1 /* AGChainManager.m */,
-				078DEE3817B9B17200A969A1 /* AGNotificationCenter.h */,
-				078DEE3917B9B17300A969A1 /* AGNotificationCenter.m */,
+				078DEE3817B9B17200A969A1 /* AGPlaneNotification.h */,
+				078DEE3917B9B17300A969A1 /* AGPlaneNotification.m */,
+				070BCC0C17CC301700BB97B7 /* AGNotificationCenter.h */,
+				070BCC0D17CC301700BB97B7 /* AGNotificationCenter.m */,
+				070BCC1217CC372100BB97B7 /* AGChainNotification.h */,
+				070BCC1317CC372100BB97B7 /* AGChainNotification.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1169,6 +1182,8 @@
 				078DEE8317BECAFF00A969A1 /* AGMessageController.m */,
 				0787988517C583A1003AE42F /* AGChainController.h */,
 				0787988617C583A1003AE42F /* AGChainController.m */,
+				070BCC0F17CC350400BB97B7 /* AGChainMessageController.h */,
+				070BCC1017CC350400BB97B7 /* AGChainMessageController.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2191,7 +2206,7 @@
 				078DEE2E17B983BE00A969A1 /* AGPlaneManager.m in Sources */,
 				078DEE3217B98EBD00A969A1 /* AGCategory+Addition.m in Sources */,
 				078DEE3517B9A0DF00A969A1 /* AGChainManager.m in Sources */,
-				078DEE3A17B9B17300A969A1 /* AGNotificationCenter.m in Sources */,
+				078DEE3A17B9B17300A969A1 /* AGPlaneNotification.m in Sources */,
 				078DEE3D17BAA92C00A969A1 /* AGPlaneController.m in Sources */,
 				078DEE4017BAAAB700A969A1 /* AGControllerUtils.m in Sources */,
 				078DEE6717BD596F00A969A1 /* AGAccountStat.m in Sources */,
@@ -2212,6 +2227,9 @@
 				0787988717C583A1003AE42F /* AGChainController.m in Sources */,
 				0787988D17C81554003AE42F /* AGChain.m in Sources */,
 				070BCC0B17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m in Sources */,
+				070BCC0E17CC301700BB97B7 /* AGNotificationCenter.m in Sources */,
+				070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */,
+				070BCC1417CC372100BB97B7 /* AGChainNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

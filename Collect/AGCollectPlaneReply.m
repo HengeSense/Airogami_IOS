@@ -149,8 +149,8 @@ static float AGInputTextViewMaxHeight = 80;
     
     AGPlane *plane = airogami;
     NSDictionary *params = [managerUtils.planeManager paramsForThrowPlane:plane.planeId];
-    [managerUtils.planeManager throwPlane:params plane:plane context:nil block:^(NSError *error, id context) {
-        if (error == nil) {
+    [managerUtils.planeManager throwPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
+        if (succeed) {
             [self dismiss];
         }
     }];
@@ -164,8 +164,8 @@ static float AGInputTextViewMaxHeight = 80;
     AGPlane *plane = airogami;
     NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:self.inputTextView.text type:AGMessageTypeText];
     //
-    [managerUtils.planeManager firstReplyPlane:params plane:plane context:nil block:^(NSError *error, id context, AGMessage *result) {
-        if (result) {
+    [managerUtils.planeManager firstReplyPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
+        if (succeed) {
             [self dismiss];
         }
     }];

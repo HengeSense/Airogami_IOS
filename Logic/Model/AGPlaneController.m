@@ -33,6 +33,13 @@
     return self;
 }
 
+- (AGPlane*) savePlane:(NSDictionary*)planeJson
+{
+    AGPlane *plane = (AGPlane*)[coreData saveOrUpdate:planeJson withEntityName:@"AGPlane"];
+    [coreData save];
+    return plane;
+}
+
 
 - (NSMutableArray*) savePlanes:(NSArray*)jsonArray
 {

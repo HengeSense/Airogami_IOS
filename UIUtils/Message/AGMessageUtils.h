@@ -16,6 +16,7 @@
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
 + (void) alertMessageModified:(id<UIAlertViewDelegate>)delegate;
 + (void) alertMessageUpdated;
++ (void) alertMessagePlaneChanged;
 + (NSError*) errorServer:(NSNumber*)code titleKey:(NSString*)titleKey msgKey:(NSString*)key;
 + (NSError*) errorServer;//unknown error
 + (NSError*) errorNotSignin;
