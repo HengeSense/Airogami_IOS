@@ -18,7 +18,8 @@
 #import "AGUtils.h"
 #import "AGCategory.h"
 #import "AGMessage.h"
-#import "AGPlaneNotification.h"
+#import "AGNotificationCenter.h"
+#import "AGControllerUtils.h"
 
 @interface AGCollectPlaneViewController ()
 {
@@ -83,18 +84,20 @@
 {
     [super viewDidLoad];
     pulldownHeader.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationCollectedPlanes object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetCollectedPlanes object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collected:) name:AGNotificationCollected object:nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"",@"planes",@"",@"chains", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetCollected object:nil userInfo:dict];
 }
 
-- (void) collectedPlanes:(NSNotification*) notification
+- (void) collected:(NSNotification*) notification
 {
     NSDictionary * dict = notification.userInfo;
     //NSString *action = [dict objectForKey:@"action"];
-    NSArray *planes = [dict objectForKey:@"planes"];
-    data = planes;
+    NSArray *collects = [dict objectForKey:@"collects"];
+    data = collects;
     [tv reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -129,10 +132,10 @@
     //cell.category = indexPath.row;
     cell.aidedButton.tag = indexPath.row;
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSObject *obj = [data objectAtIndex:indexPath.row];
+    id obj = [data objectAtIndex:indexPath.row];
     if([obj isKindOfClass:[AGPlane class]])
     {
-        AGPlane *plane = (AGPlane*)obj;
+        AGPlane *plane = obj;
         cell.category = plane.category.categoryId.intValue;
         cell.topLabel.text = plane.accountByOwnerId.profile.city;
         cell.bottomLabel.text = [AGUtils dateToString:plane.createdTime];
@@ -141,7 +144,12 @@
     }
     else if ([obj isKindOfClass:[AGChain class]])
     {
-        
+        AGChain *chain = obj;
+        cell.category = AGCategoryChain;
+        cell.topLabel.text = chain.account.profile.city;
+        AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForCollect:chain.chainId];
+        cell.bottomLabel.text = [AGUtils dateToString:chainMessage.createdTime];
+        cell.messageLabel.text = chainMessage.content;
     }
         
     

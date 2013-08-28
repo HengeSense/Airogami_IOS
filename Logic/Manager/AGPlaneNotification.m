@@ -13,7 +13,7 @@
 
 NSString *AGNotificationCollectedPlanes = @"notification.collectedplanes";
 NSString *AGNotificationReceivePlanes = @"notification.receiveplanes";
-NSString *AGNotificationGetCollectedPlanes = @"notification.getreceivedplanes";
+NSString *AGNotificationGetCollectedPlanes = @"notification.getcollectedplanes";
 
 NSString *AGNotificationObtainedPlanes = @"notification.obtainedplanes";
 NSString *AGNotificationObtainPlanes = @"notification.obtainplanes";
@@ -230,33 +230,6 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }
 
-
-- (void) startTimer:(BOOL)start {
-    static NSTimer *timer;
-    if (start) {
-        if (timer == nil) {
-            timer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                     target:self
-                                                   selector:@selector(tick:)
-                                                   userInfo:nil
-                                                    repeats:YES];
-        }
-    }
-    else{
-        if (timer) {
-            [timer invalidate];
-            timer = nil;
-        }
-    }
-   
-
-}
-
-- (void) tick:(NSTimer *) timer {
-    //do something here..
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
-}
 
 
 @end

@@ -38,6 +38,7 @@
 		070BCC0E17CC301700BB97B7 /* AGNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC0D17CC301700BB97B7 /* AGNotificationCenter.m */; };
 		070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1017CC350400BB97B7 /* AGChainMessageController.m */; };
 		070BCC1417CC372100BB97B7 /* AGChainNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1317CC372100BB97B7 /* AGChainNotification.m */; };
+		070BCC1717CD788D00BB97B7 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1617CD788D00BB97B7 /* AGChain.m */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
@@ -107,7 +108,6 @@
 		078522B21787A23F00288D7C /* AGCommonStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078522B11787A23F00288D7C /* AGCommonStoryboard.storyboard */; };
 		0787988417C54D0C003AE42F /* AGCollectKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787988317C54D0C003AE42F /* AGCollectKeyboardScroll.m */; };
 		0787988717C583A1003AE42F /* AGChainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787988617C583A1003AE42F /* AGChainController.m */; };
-		0787988D17C81554003AE42F /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0787988C17C81554003AE42F /* AGChain.m */; };
 		078A1F5D176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F5C176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard */; };
 		078A1F5F176CDE6400A69AE3 /* AGCollectStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F5E176CDE6400A69AE3 /* AGCollectStoryboard.storyboard */; };
 		078A1F61176CDF0900A69AE3 /* AGChatStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078A1F60176CDF0900A69AE3 /* AGChatStoryboard.storyboard */; };
@@ -420,6 +420,8 @@
 		070BCC1017CC350400BB97B7 /* AGChainMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessageController.m; sourceTree = "<group>"; };
 		070BCC1217CC372100BB97B7 /* AGChainNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainNotification.h; sourceTree = "<group>"; };
 		070BCC1317CC372100BB97B7 /* AGChainNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainNotification.m; sourceTree = "<group>"; };
+		070BCC1517CD788D00BB97B7 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
+		070BCC1617CD788D00BB97B7 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		073250F9176AB4AB00487B9E /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
@@ -521,8 +523,6 @@
 		0787988317C54D0C003AE42F /* AGCollectKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGCollectKeyboardScroll.m; sourceTree = "<group>"; };
 		0787988517C583A1003AE42F /* AGChainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainController.h; sourceTree = "<group>"; };
 		0787988617C583A1003AE42F /* AGChainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainController.m; sourceTree = "<group>"; };
-		0787988B17C81554003AE42F /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
-		0787988C17C81554003AE42F /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
 		078A1F5C176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGWriteStoryboard.storyboard; sourceTree = "<group>"; };
 		078A1F5E176CDE6400A69AE3 /* AGCollectStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGCollectStoryboard.storyboard; sourceTree = "<group>"; };
 		078A1F60176CDF0900A69AE3 /* AGChatStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AGChatStoryboard.storyboard; sourceTree = "<group>"; };
@@ -1224,8 +1224,8 @@
 				078DEE8C17BF00F000A969A1 /* AGPlane.m */,
 				078DEE9C17C2D2D300A969A1 /* AGMessage.h */,
 				078DEE9D17C2D2D300A969A1 /* AGMessage.m */,
-				0787988B17C81554003AE42F /* AGChain.h */,
-				0787988C17C81554003AE42F /* AGChain.m */,
+				070BCC1517CD788D00BB97B7 /* AGChain.h */,
+				070BCC1617CD788D00BB97B7 /* AGChain.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2225,11 +2225,11 @@
 				078DEE9E17C2D2D300A969A1 /* AGMessage.m in Sources */,
 				0787988417C54D0C003AE42F /* AGCollectKeyboardScroll.m in Sources */,
 				0787988717C583A1003AE42F /* AGChainController.m in Sources */,
-				0787988D17C81554003AE42F /* AGChain.m in Sources */,
 				070BCC0B17C949CE00BB97B7 /* UIActionSheet+ButtonEnable.m in Sources */,
 				070BCC0E17CC301700BB97B7 /* AGNotificationCenter.m in Sources */,
 				070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */,
 				070BCC1417CC372100BB97B7 /* AGChainNotification.m in Sources */,
+				070BCC1717CD788D00BB97B7 /* AGChain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

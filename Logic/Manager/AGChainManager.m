@@ -83,7 +83,7 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
                 //succeed
                 NSDictionary *dict = [result objectForKey:@"chainMessage"];
                 remoteChainMessage = [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:dict];
-                [[AGControllerUtils controllerUtils].chainController increaseUpdateInc:chainMessage.chain];
+                [[AGControllerUtils controllerUtils].chainController increaseUpdateIncForChat:chainMessage.chain];
                 [[AGCoreData coreData] remove:chainMessage];
                 [[AGChainNotification chainNotification] obtainedChains];
             }
@@ -94,6 +94,33 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
         }
         
     }];
+}
+
+- (void) obtainChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainChainMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (error) {
+            
+        }
+        else{
+            //succeed
+        }
+        if (block) {
+            block(error, context, result);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForObtainChainMessages:(NSNumber*)chainId last:(NSDate*)last
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:chainId forKey:@"chainId"];
+    if (last) {
+        [params setObject:last forKey:@"last"];
+    }
+    
+    return params;
 }
 
 @end

@@ -13,5 +13,7 @@
 @interface AGChainController : NSObject
 
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray;
-- (void) increaseUpdateInc:(AGChain*)chain;
+- (void) increaseUpdateIncForChat:(AGChain*)chain;
+- (AGChainMessage*) recentChainMessageForCollect:(NSNumber*)chainId;
+- (NSArray*) getAllChainsForCollect;
 @end

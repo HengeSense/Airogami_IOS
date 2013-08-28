@@ -17,7 +17,7 @@
 - (NSNumber*) recentPlaneUpdateIncForCollect;
 - (NSArray*) getAllPlanesForCollect;
 - (NSNumber*) recentPlaneUpdateIncForChat;
-- (void) increaseUpdateInc:(AGPlane*)plane;
+- (void) increaseUpdateIncForChat:(AGPlane*)plane;
 - (NSArray*) getAllPlanesForChat;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
 //new means not obtained messages

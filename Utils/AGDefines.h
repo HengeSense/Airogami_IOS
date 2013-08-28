@@ -34,6 +34,12 @@ typedef enum{
 } AGPlaneStatusEnum;
 
 typedef enum{
+    AGChainMessageStatusNew = 0,
+    AGChainMessageStatusReplied,
+    AGChainMessageStatusDeleted
+} AGChainMessageStatusEnum;
+
+typedef enum{
     AGCollectTypeReceived = 0,
     AGCollectTypePickuped
 } AGCollectType;

@@ -118,5 +118,39 @@ static NSDateFormatter *dateFormatter;
     return result;
 }
 
++ (NSArray*) mergeSortedArray:(NSArray*) first second:(NSArray*)second usingBlock:(AGMergeSortedArrayBlock)block
+{
+    assert(block);
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:first.count + second.count];
+    int i = 0, j = 0;
+    while (YES) {
+        if (i == first.count) {
+            while (j < second.count) {
+                [array addObject:[second objectAtIndex:j]];
+            }
+            break;
+        }
+        
+        if (j == second.count) {
+            while (i < first.count) {
+                [array addObject:[first objectAtIndex:i]];
+            }
+            break;
+        }
+        
+        id obj1 = [first objectAtIndex:i];
+        id obj2 = [second objectAtIndex:j];
+        if (block(obj1, obj2) > 0) {
+            [array addObject:obj1];
+            ++i;
+        }
+        else{
+            [array addObject:obj2];
+            ++j;
+        }
+    }
+    return array;
+}
+
 
 @end

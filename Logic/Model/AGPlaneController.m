@@ -62,39 +62,7 @@
 
 - (NSNumber*)recentPlaneUpdateIncForCollect
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:planeEntityDescription];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@", AGPlaneStatusNew, account.accountId];
-    [fetchRequest setPredicate:predicate];
-    
-    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];
-    NSExpression *maxUpdateIncExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
-    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-    [expressionDescription setName:@"maxUpdateInc"];
-    [expressionDescription setExpression:maxUpdateIncExpression];
-    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSNumber *updateInc = nil;
-    if (error == nil && array.count) {
-        updateInc = [[array objectAtIndex:0] objectForKey:@"maxUpdateInc"];
-    }
-    //check whether empty
-    if (updateInc.longLongValue == 0) {
-        predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@ and updateInc = 0", AGPlaneStatusNew, account.accountId];
-        fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:planeEntityDescription];
-        fetchRequest.predicate = predicate;
-        array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!array.count) {
-            updateInc = nil;
-        }
-    }
-    return updateInc;
+    return [self recentPlaneUpdateInc:YES];
 }
 
 - (NSArray*) getAllPlanesForCollect
@@ -116,42 +84,10 @@
 
 - (NSNumber*)recentPlaneUpdateIncForChat
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:planeEntityDescription];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status = %d and (accountByOwnerId.accountId = %@ or accountByTargetId.accountId = %@)", AGPlaneStatusReplied, account.accountId, account.accountId];
-    [fetchRequest setPredicate:predicate];
-    
-    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];
-    NSExpression *maxUpdateIncExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
-    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-    [expressionDescription setName:@"maxUpdateInc"];
-    [expressionDescription setExpression:maxUpdateIncExpression];
-    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSNumber *updateInc = nil;
-    if (error == nil && array.count) {
-        updateInc = [[array objectAtIndex:0] objectForKey:@"maxUpdateInc"];
-    }
-    //check whether empty
-    if (updateInc.longLongValue == 0) {
-        predicate = [NSPredicate predicateWithFormat:@"status = %d and (accountByOwnerId.accountId = %@ or accountByTargetId.accountId = %@) and updateInc = 0", AGPlaneStatusReplied, account.accountId, account.accountId];
-        fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:planeEntityDescription];
-        fetchRequest.predicate = predicate;
-        array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!array.count) {
-            updateInc = nil;
-        }
-    }
-    return updateInc;
+ return [self recentPlaneUpdateInc:NO];
 }
 
-- (void) increaseUpdateInc:(AGPlane*)plane
+- (void) increaseUpdateIncForChat:(AGPlane*)plane
 {
     NSNumber *maxUpdateInc = [self recentPlaneUpdateIncForChat];
     if (maxUpdateInc == nil) {
@@ -163,19 +99,7 @@
 
 - (NSArray*) getAllPlanesForChat
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:planeEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status = %d and (accountByOwnerId.accountId = %@ or accountByTargetId.accountId = %@)", AGPlaneStatusReplied, account.accountId, account.accountId];
-    [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if (error) {
-        array = [NSArray array];
-    }
-    return array;
+    return [self getAllPlanes:NO];
 }
 
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId
@@ -213,14 +137,71 @@
     return message;
 }
 
-- (NSArray*) getAllNewPlanesForChat
+- (NSNumber*)recentPlaneUpdateInc:(BOOL)forCollect
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:planeEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status = %d and (accountByOwnerId.accountId = %@ or accountByTargetId.accountId = %@) and isNew = YES", AGPlaneStatusReplied, account.accountId, account.accountId];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    
+    NSPredicate *predicate;
+    if (forCollect) {
+        predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@", AGPlaneStatusNew, account.accountId];
+    }
+    else{
+        predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
+    }
+    
     [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
+    
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];
+    NSExpression *maxUpdateIncExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    [expressionDescription setName:@"maxUpdateInc"];
+    [expressionDescription setExpression:maxUpdateIncExpression];
+    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSNumber *updateInc = nil;
+    if (error == nil && array.count) {
+        updateInc = [[array objectAtIndex:0] objectForKey:@"maxUpdateInc"];
+    }
+    //check whether empty
+    if (updateInc.longLongValue == 0) {
+        if (forCollect) {
+            predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@ and updateInc = 0", AGPlaneStatusNew, account.accountId];
+        }
+        else{
+            predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0)) and updateInc = 0", AGPlaneStatusReplied, account.accountId, account.accountId];
+        }
+        
+        fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:planeEntityDescription];
+        fetchRequest.predicate = predicate;
+        array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!array.count) {
+            updateInc = nil;
+        }
+    }
+    return updateInc;
+}
+
+- (NSArray*) getAllNewPlanesForChat
+{
+    return [self getAllPlanes:YES];
+}
+
+- (NSArray*) getAllPlanes:(BOOL) isNew
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:planeEntityDescription];
+    NSPredicate *predicate;
+    predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0)) and (%d = 0 or isNew = YES)", AGPlaneStatusReplied, account.accountId, account.accountId, isNew];
+    
+    [fetchRequest setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:isNew];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];

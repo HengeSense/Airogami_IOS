@@ -18,4 +18,8 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 
 - (void) sendChain:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
 
+- (void) obtainChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
+
+- (NSDictionary*)paramsForObtainChainMessages:(NSNumber*)chainId last:(NSDate*)last;
+
 @end

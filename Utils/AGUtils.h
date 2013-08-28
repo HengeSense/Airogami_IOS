@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef int (^AGMergeSortedArrayBlock)(id obj1, id obj2);
+
 @interface AGUtils : NSObject
 
 + (void) initialize;
@@ -19,5 +21,7 @@
 + (NSDate*) stringToDate:(NSString*)string;
 + (NSString*) birthdayToAge:(NSDate*)birthday;
 + (NSString*) obtainUuid;
+//descend
++ (NSArray*) mergeSortedArray:(NSArray*) first second:(NSArray*)second usingBlock:(AGMergeSortedArrayBlock)block;
 
 @end

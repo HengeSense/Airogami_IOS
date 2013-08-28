@@ -7,15 +7,24 @@
 //
 
 #import "AGNotificationCenter.h"
+#import "AGControllerUtils.h"
+#import "AGUtils.h"
 
 NSString *AGNotificationCollected = @"notification.collected";
 NSString *AGNotificationReceive= @"notification.receive";
-NSString *AGNotificationGetCollected= @"notification.getreceived";
+NSString *AGNotificationGetCollected= @"notification.getcollected";
 
 NSString *AGNotificationObtained = @"notification.obtained";
 NSString *AGNotificationObtain = @"notification.obtain";
 NSString *AGNotificationGetObtained = @"notification.getobtained";
 
+@interface AGNotificationCenter()
+{
+    NSArray *planes;
+    NSArray *chains;
+}
+
+@end
 
 @implementation AGNotificationCenter
 
@@ -24,6 +33,9 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     static AGNotificationCenter *notificationCenter;
     if (notificationCenter == nil) {
         notificationCenter = [[AGNotificationCenter alloc] init];
+        //maybe redundent
+        [AGPlaneNotification planeNotification];
+        [AGChainNotification chainNotification];
     }
     return notificationCenter;
 }
@@ -33,11 +45,11 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     if (self = [super init]) {
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         //collect
-        [notificationCenter addObserver:self selector:@selector(receive:) name:AGNotificationReceive object:nil];
-        [notificationCenter addObserver:self selector:@selector(collected) name:AGNotificationGetCollected object:nil];
+        //[notificationCenter addObserver:self selector:@selector(receive:) name:AGNotificationReceive object:nil];
+        [notificationCenter addObserver:self selector:@selector(getCollected:) name:AGNotificationGetCollected object:nil];
         //obtain planes
-        [notificationCenter addObserver:self selector:@selector(obtain:) name:AGNotificationObtain object:nil];
-        [notificationCenter addObserver:self selector:@selector(obtained) name:AGNotificationGetObtained object:nil];
+        //[notificationCenter addObserver:self selector:@selector(obtain:) name:AGNotificationObtain object:nil];
+        [notificationCenter addObserver:self selector:@selector(getObtained) name:AGNotificationGetObtained object:nil];
     }
     return self;
 }
@@ -62,53 +74,55 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
             
         }
     }];
-}
-
-- (void) collected
-{
-    NSArray *planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForCollect];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", nil];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:dict];
-    
-}
-
-- (void) obtain:(NSNotification*) notification
-{
-    NSNumber * start = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForChat];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:4];
-    if (start) {
-        [params setObject:start forKey:@"start"];
-    }
-    [[AGManagerUtils managerUtils].planeManager obtainPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
-        if (error == nil) {
-            NSNumber *more = [result objectForKey:@"more"];
-            if (more.boolValue) {
-                [self obtainPlanes:notification];
-            }
-            else{
-                NSDictionary *dict = [NSDictionary dictionary];
-                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-                [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
-            }
-            NSArray *array = [result objectForKey:@"planes"];
-            
-            if (array.count) {
-                [self obtainedPlanes];
-            }
-            
-            
-        }
-    }];
-}
-
-- (void) obtained
-{
-    NSArray *planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForChat];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", @"reset", @"action", nil];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
-    
 }*/
+
+- (void) getCollected:(NSNotification*)notification
+{
+    NSString *havePlanes = [notification.userInfo objectForKey:@"planes"];
+    NSString *haveChains = [notification.userInfo objectForKey:@"chains"];
+    if (havePlanes) {
+        planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForCollect];
+    }
+    if (haveChains) {
+        chains = [[AGControllerUtils controllerUtils].chainController getAllChainsForCollect];
+    }
+    NSArray *collects = [AGUtils mergeSortedArray:planes second:chains usingBlock:^int(id obj1, id obj2) {
+        AGPlane *plane = obj1;
+        AGChain *chain = obj2;
+        return [plane.updatedTime compare:chain.updatedTime];
+    }];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:collects, @"collects", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationCollected object:self userInfo:dict];
+    
+}
+
+- (void) startTimer:(BOOL)start {
+    static NSTimer *timer;
+    if (start) {
+        if (timer == nil) {
+            timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                     target:self
+                                                   selector:@selector(tick:)
+                                                   userInfo:nil
+                                                    repeats:YES];
+        }
+    }
+    else{
+        if (timer) {
+            [timer invalidate];
+            timer = nil;
+        }
+    }
+    
+    
+}
+
+- (void) tick:(NSTimer *) timer {
+    //do something here..
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
+}
+
 
 @end

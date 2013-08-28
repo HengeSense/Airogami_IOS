@@ -13,6 +13,7 @@
 #import "NSBubbleData.h"
 #import "AGManagerUtils.h"
 #import "AGPlaneNotification.h"
+#import "AGChainNotification.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *DeletePlanePath = @"plane/deletePlane.action?";
@@ -78,7 +79,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 //succeed
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
-                [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:message.plane];
+                [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:message.plane];
                 [[AGCoreData coreData] remove:message];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
             }
@@ -117,7 +118,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 plane.status = [NSNumber numberWithInt:AGPlaneStatusReplied];
                 [[AGCoreData coreData] save];
                 //
-                [[AGControllerUtils controllerUtils].planeController increaseUpdateInc:plane];
+                [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:plane];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
                 [[AGPlaneNotification planeNotification] collectedPlanes];
             }
@@ -217,7 +218,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             }
             NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
             if (chains.count) {
-                //add additional code here
+                [[AGChainNotification chainNotification] collectedChains];
             }
             count = [NSNumber numberWithInt:planes.count + chains.count];
         }
