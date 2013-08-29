@@ -126,14 +126,14 @@ static NSDateFormatter *dateFormatter;
     while (YES) {
         if (i == first.count) {
             while (j < second.count) {
-                [array addObject:[second objectAtIndex:j]];
+                [array addObject:[second objectAtIndex:j++]];
             }
             break;
         }
         
         if (j == second.count) {
             while (i < first.count) {
-                [array addObject:[first objectAtIndex:i]];
+                [array addObject:[first objectAtIndex:i++]];
             }
             break;
         }

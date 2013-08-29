@@ -12,6 +12,7 @@
 
 typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message, BOOL refresh);
 typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
+typedef void (^AGObtainPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *planes);
 
 @interface AGPlaneManager : NSObject
 
@@ -29,7 +30,7 @@ typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSN
 
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
-- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
+- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGObtainPlanesBlock)block;
 
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 

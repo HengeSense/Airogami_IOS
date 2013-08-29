@@ -17,6 +17,7 @@
     AGCoreData *coreData;
     NSEntityDescription *planeEntityDescription;
     NSEntityDescription *messageEntityDescription;
+    NSEntityDescription *newPlaneEntityDescription;
 }
 
 @end
@@ -29,6 +30,7 @@
         coreData = [AGCoreData coreData];
         planeEntityDescription = [NSEntityDescription entityForName:@"AGPlane" inManagedObjectContext:coreData. managedObjectContext];
         messageEntityDescription = [NSEntityDescription entityForName:@"AGMessage" inManagedObjectContext:coreData. managedObjectContext];
+        newPlaneEntityDescription = [NSEntityDescription entityForName:@"AGNewPlane" inManagedObjectContext:coreData. managedObjectContext];
     }
     return self;
 }
@@ -45,9 +47,6 @@
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGPlane"];
     for (AGPlane *plane in array) {
-        if (plane.isNew == nil) {
-            plane.isNew = [NSNumber numberWithBool:YES];
-        }
         //for receive planes -9223372036854775785 9223372036854775808
         for (AGMessage *message in plane.messages) {
             message.plane = plane;
@@ -72,7 +71,7 @@
     [fetchRequest setEntity:planeEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@", AGPlaneStatusNew, account.accountId];
     [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
      NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -187,9 +186,46 @@
     return updateInc;
 }
 
-- (NSArray*) getAllNewPlanesForChat
+- (AGNewPlane*) getNextNewPlaneForChat
 {
-    return [self getAllPlanes:YES];
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:newPlaneEntityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accountId = %@", account.accountId];
+    [fetchRequest setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [fetchRequest setFetchLimit:1];
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    AGNewPlane *newPlane = nil;
+    if (array.count) {
+        newPlane = [array lastObject];
+    }
+    return newPlane;
+}
+
+- (void) addNewPlanesForChat:(NSArray *)planes
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    for (AGPlane *plane in planes) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+        //[dict setObject:plane forKey:@"plane"];
+        [dict setObject:account.accountId forKey:@"accountId"];
+        [dict setObject:plane.planeId forKey:@"planeId"];
+        [dict setObject:plane.updateInc forKey:@"updateInc"];
+        AGNewPlane *newPlane = (AGNewPlane *)[coreData saveOrUpdate:dict withEntityName:@"AGNewPlane"];
+        newPlane.plane = plane;
+    }
+    [coreData save];
+}
+
+- (void) removeNewPlaneForChat:(AGNewPlane *)newPlane oldUpdateInc:(NSNumber*)updateInc
+{
+    if (newPlane.updateInc.longLongValue == updateInc.longLongValue) {
+        [coreData remove:newPlane];
+    }
+
 }
 
 - (NSArray*) getAllPlanes:(BOOL) isNew
@@ -201,7 +237,7 @@
     predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0)) and (%d = 0 or isNew = YES)", AGPlaneStatusReplied, account.accountId, account.accountId, isNew];
     
     [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:isNew];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:isNew];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];

@@ -16,6 +16,7 @@
     AGCoreData *coreData;
     NSEntityDescription *chainEntityDescription;
     NSEntityDescription *chainMessageEntityDescription;
+    NSEntityDescription *newChainEntityDescription;
 }
 
 @end
@@ -28,6 +29,7 @@
         coreData = [AGCoreData coreData];
         chainEntityDescription = [NSEntityDescription entityForName:@"AGChain" inManagedObjectContext:coreData. managedObjectContext];
         chainMessageEntityDescription = [NSEntityDescription entityForName:@"AGChainMessage" inManagedObjectContext:coreData. managedObjectContext];
+        newChainEntityDescription = [NSEntityDescription entityForName:@"AGNewChain" inManagedObjectContext:coreData. managedObjectContext];
     }
     return self;
 }
@@ -36,9 +38,6 @@
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
     for (AGChain *chain in array) {
-        if (chain.isNew == nil) {
-            chain.isNew = [NSNumber numberWithBool:YES];
-        }
     }
     [coreData save];
     return array;
@@ -72,7 +71,7 @@
     [fetchRequest setEntity:chainEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0 && (account.accountId != %@ || passCount > 0) and (%d != 3 or isNew = YES)", account.accountId, type == 1 ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId, type];
     [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending: type == 3];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending: type == 3];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -180,5 +179,48 @@
     chain.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
     [coreData save];
 }
+
+- (AGNewChain*) getNextNewChain
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:newChainEntityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accountId = %@", account.accountId];
+    [fetchRequest setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [fetchRequest setFetchLimit:1];
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    AGNewChain *newChain = nil;
+    if (array.count) {
+        newChain = [array lastObject];
+    }
+    return newChain;
+}
+
+- (void) addNewChains:(NSArray *)chains
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    for (AGChain *chain in chains) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+        //[dict setObject:chain forKey:@"chain"];
+        [dict setObject:account.accountId forKey:@"accountId"];
+        [dict setObject:chain.chainId forKey:@"chainId"];
+        [dict setObject:chain.updateInc forKey:@"updateInc"];
+        AGNewChain *newChain = (AGNewChain *)[coreData saveOrUpdate:dict withEntityName:@"AGNewChain"];
+        newChain.chain = chain;
+    }
+    [coreData save];
+}
+
+- (void) removeNewChain:(AGNewChain *)newChain oldUpdateInc:(NSNumber*)updateInc
+{
+    if (newChain.updateInc.longLongValue == updateInc.longLongValue) {
+        [coreData remove:newChain];
+    }
+    
+}
+
 
 @end

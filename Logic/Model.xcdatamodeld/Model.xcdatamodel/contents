@@ -44,7 +44,6 @@
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" attributeType="Date" syncable="YES"/>
-        <attribute name="isNew" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="matchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -58,13 +57,14 @@
         <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chains" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="chain" inverseEntity="AGChainMessage" syncable="YES"/>
+        <relationship name="newChain" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNewChain" inverseName="chain" inverseEntity="AGNewChain" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="chainId"/>
         </userInfo>
     </entity>
     <entity name="AGChainMessage" representedClassName="AGChainMessage" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createdTime" attributeType="Date" syncable="YES"/>
+        <attribute name="createdTime" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chainMessages" inverseEntity="AGAccount" syncable="YES"/>
@@ -104,13 +104,30 @@
             <entry key="IdKey" value="messageId"/>
         </userInfo>
     </entity>
+    <entity name="AGNewChain" representedClassName="AGNewChain" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
+        <relationship name="chain" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGChain" inverseName="newChain" inverseEntity="AGChain" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="chainId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGNewPlane" representedClassName="AGNewPlane" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="planeId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
+        <relationship name="plane" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="newPlane" inverseEntity="AGPlane" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="planeId"/>
+        </userInfo>
+    </entity>
     <entity name="AGPlane" representedClassName="AGPlane" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deletedByOwner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="deletedByTarget" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="isNew" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="lastMsgIdOfOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lastMsgIdOfTarget" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -129,6 +146,7 @@
         <relationship name="accountByTargetId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForTargetId" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="category" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGCategory" inverseName="planes" inverseEntity="AGCategory" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="plane" inverseEntity="AGMessage" syncable="YES"/>
+        <relationship name="newPlane" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNewPlane" inverseName="plane" inverseEntity="AGNewPlane" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="planeId"/>
         </userInfo>
@@ -165,5 +183,7 @@
         <element name="AGMessage" positionX="34" positionY="-333" width="128" height="150"/>
         <element name="AGPlane" positionX="-191" positionY="-288" width="128" height="405"/>
         <element name="AGProfile" positionX="-441" positionY="18" width="128" height="285"/>
+        <element name="AGNewPlane" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="AGNewChain" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

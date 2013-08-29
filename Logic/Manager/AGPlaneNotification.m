@@ -28,7 +28,20 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 
 
 @interface AGPlaneNotification()
-
+{
+    //messages
+    BOOL moreMessages;
+    NSNumber *messageMutex;
+    BOOL obtainingMessages;
+    //receive plane
+    BOOL moreReceivePlanes;
+    NSNumber *receivePlaneMutex;
+    BOOL receivingPlanes;
+    //obtain plane
+    BOOL moreObtainPlanes;
+    NSNumber *obtainPlaneMutex;
+    BOOL obtainingPlanes;
+}
 @end
 
 @implementation AGPlaneNotification
@@ -39,7 +52,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         //collect
         [notificationCenter addObserver:self selector:@selector(receivePlanes:) name:AGNotificationReceivePlanes object:nil];
-        [notificationCenter addObserver:self selector:@selector(collectedPlanes) name:AGNotificationGetCollectedPlanes object:nil];
+        //[notificationCenter addObserver:self selector:@selector(collectedPlanes) name:AGNotificationGetCollectedPlanes object:nil];
         //obtain planes
         [notificationCenter addObserver:self selector:@selector(obtainPlanes:) name:AGNotificationObtainPlanes object:nil];
         [notificationCenter addObserver:self selector:@selector(obtainedPlanes) name:AGNotificationGetObtainedPlanes object:nil];
@@ -64,6 +77,31 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 
 - (void) receivePlanes:(NSNotification*) notification
 {
+    NSNumber *number = [notification.userInfo objectForKey:@"updateInc"];
+    NSNumber * maxUpdateInc = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForCollect];
+    if (number && number.longLongValue <= maxUpdateInc.longLongValue) {//notified
+        return;
+    }
+    BOOL shouldReceive = NO;
+    @synchronized(receivePlaneMutex){
+        if (receivingPlanes) {
+            moreReceivePlanes = YES;
+        }
+        else{
+            receivingPlanes = YES;
+            shouldReceive = YES;
+        }
+    }
+    
+    if (shouldReceive) {
+        [self receivePlanes];
+    }
+    
+    
+}
+
+- (void) receivePlanes
+{
     NSNumber * start = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForCollect];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:4];
     if (start) {
@@ -73,51 +111,116 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         if (error == nil) {
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
-                [self receivePlanes:notification];
+                [self receivePlanes];
             }
-             NSArray *planes = [result objectForKey:@"planes"];
+            else{
+                //whether has more
+                BOOL shouldReceive= NO;
+                @synchronized(receivePlaneMutex){
+                    if (moreReceivePlanes) {
+                        moreReceivePlanes = NO;
+                        shouldReceive = YES;
+                    }
+                    else{
+                        receivingPlanes = NO;
+                    }
+                }
+                if (shouldReceive) {
+                    [self receivePlanes];
+                }
+            }
+            NSArray *planes = [result objectForKey:@"planes"];
             if (planes.count) {
                 [self collectedPlanes];
             }
-        
+            
+        }
+        else{
+            //should deal with server error
+            @synchronized(receivePlaneMutex){
+                moreReceivePlanes = NO;
+                receivingPlanes = NO;
+            }
         }
     }];
 }
 
 - (void) collectedPlanes
 {
-    NSArray *planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForCollect];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:dict];
+    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:nil];
     
 }
 
 - (void) obtainPlanes:(NSNotification*) notification
+{
+    NSNumber *number = [notification.userInfo objectForKey:@"updateInc"];
+    NSNumber * maxUpdateInc = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForChat];
+    if (number && number.longLongValue <= maxUpdateInc.longLongValue) {//notified
+        return;
+    }
+    BOOL shouldObtain = NO;
+    @synchronized(obtainPlaneMutex){
+        if (obtainingPlanes) {
+            moreObtainPlanes = YES;
+        }
+        else{
+            obtainingPlanes = YES;
+            shouldObtain = YES;
+        }
+    }
+    
+    if (shouldObtain) {
+        [self obtainPlanes];
+    }
+    
+}
+
+- (void) obtainPlanes
 {
     NSNumber * start = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForChat];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:4];
     if (start) {
         [params setObject:start forKey:@"start"];
     }
-    [[AGManagerUtils managerUtils].planeManager obtainPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
+    [[AGManagerUtils managerUtils].planeManager obtainPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *planes) {
         if (error == nil) {
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
-                [self obtainPlanes:notification];
+                [self obtainPlanes];
             }
             else{
                 NSDictionary *dict = [NSDictionary dictionary];
                 NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
                 [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
+                //whether has more
+                BOOL shouldObtain = NO;
+                @synchronized(obtainPlaneMutex){
+                    if (moreObtainPlanes) {
+                        moreObtainPlanes = NO;
+                        shouldObtain = YES;
+                    }
+                    else{
+                        obtainingPlanes = NO;
+                    }
+                }
+                if (shouldObtain) {
+                    [self obtainPlanes];
+                }
             }
-            NSArray *array = [result objectForKey:@"planes"];
             
-            if (array.count) {
+            if (planes.count) {
+                [[AGControllerUtils controllerUtils].planeController addNewPlanesForChat:planes];
                 [self obtainedPlanes];
             }
             
-            
+        }
+        else{
+            //should deal with server error
+            @synchronized(obtainPlaneMutex){
+                moreObtainPlanes = NO;
+                obtainingPlanes = NO;
+            }
         }
     }];
 }
@@ -133,51 +236,81 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 
 - (void) obtainMessages:(NSNotification*) notification
 {
-    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    NSArray *planes = [controllerUtils.planeController getAllNewPlanesForChat];
-    [self obtainMessagesForPlanes:[planes mutableCopy]];
+    BOOL shouldObtain = NO;
+    @synchronized(messageMutex){
+        if (obtainingMessages) {
+            moreMessages = YES;
+        }
+        else{
+            obtainingMessages = YES;
+            shouldObtain = YES;
+        }
+    }
+    
+    if (shouldObtain) {
+        [self obtainMessages];
+    }
     
 }
 
-- (void) obtainMessagesForPlanes:(NSMutableArray *)array
+- (void) obtainMessages
 {
-    if (array.count) {
-        AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-        AGPlane *plane = [array objectAtIndex:0];
-        NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:2];
-        NSNumber *lastMsgId = [controllerUtils.planeController recentMessageForPlane:plane.planeId].messageId;
-        if (lastMsgId) {
-            [params setObject:lastMsgId forKey:@"startId"];
-        }
-        [params setObject:plane.planeId forKey:@"planeId"];
-        
-        AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
-        [planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
-            if (error == nil) {
-                NSArray *messages = [[AGControllerUtils controllerUtils].messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
-                
-                NSNumber *more = [result objectForKey:@"more"];
-                if (more.boolValue) {
-                    
-                }
-                else{
-                    [array removeObjectAtIndex:0];
-                    plane.isNew = [NSNumber numberWithBool:NO];
-                    [[AGCoreData coreData] save];
-                }
-                [self obtainMessagesForPlanes:array];
-                if (messages.count) {
-                    [self obtainedMessages:messages forPlane:plane.planeId];
-                    NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;
-                    NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
-                    [planeManager viewedMessages:params context:nil block:^(NSError *error, id context) {
-                        
-                    }];
-                }
-            
-            }
-        }];
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    AGNewPlane *newPlane = [controllerUtils.planeController getNextNewPlaneForChat];
+    if (newPlane) {
+        [self obtainMessagesForPlane:newPlane];
     }
+    else{
+        @synchronized(messageMutex){
+            moreMessages = NO;
+            obtainingMessages = NO;
+        }
+    }
+}
+
+- (void) obtainMessagesForPlane:(AGNewPlane*)newPlane
+{
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:2];
+    AGPlane *plane = newPlane.plane;
+    NSNumber *oldUpdateInc = newPlane.updateInc;
+    NSNumber *lastMsgId = [controllerUtils.planeController recentMessageForPlane:plane.planeId].messageId;
+    if (lastMsgId) {
+        [params setObject:lastMsgId forKey:@"startId"];
+    }
+    [params setObject:plane.planeId forKey:@"planeId"];
+    
+    AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
+    [planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (error == nil) {
+            NSArray *messages = [[AGControllerUtils controllerUtils].messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
+            
+            NSNumber *more = [result objectForKey:@"more"];
+            if (more.boolValue) {
+                [self obtainMessagesForPlane:newPlane];
+            }
+            else{
+                [controllerUtils.planeController removeNewPlaneForChat:newPlane oldUpdateInc:oldUpdateInc];
+                [self obtainMessages];
+            }
+            if (messages.count) {
+                [self obtainedMessages:messages forPlane:plane.planeId];
+                NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;
+                NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
+                [planeManager viewedMessages:params context:nil block:^(NSError *error, id context) {
+                    
+                }];
+            }
+            
+        }
+        else{
+            //should deal with server error
+            @synchronized(messageMutex){
+                moreMessages = NO;
+                obtainingMessages = NO;
+            }
+        }
+    }];
     
 }
 

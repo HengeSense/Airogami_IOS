@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AGChain.h"
 #import "AGChainMessage.h"
+#import "AGNewChain.h"
 
 @interface AGChainController : NSObject
 
@@ -16,4 +17,8 @@
 - (void) increaseUpdateIncForChat:(AGChain*)chain;
 - (AGChainMessage*) recentChainMessageForCollect:(NSNumber*)chainId;
 - (NSArray*) getAllChainsForCollect;
+//
+- (AGNewChain*) getNextNewChain;
+- (void) addNewChains:(NSArray*)chains;
+- (void) removeNewChain:(AGNewChain*)chain oldUpdateInc:(NSNumber*)updateInc;
 @end

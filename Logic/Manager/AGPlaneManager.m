@@ -80,6 +80,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
                 [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:message.plane];
+                message.plane.updatedTime = remoteMessage.createdTime;
                 [[AGCoreData coreData] remove:message];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
             }
@@ -116,6 +117,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
                 plane.status = [NSNumber numberWithInt:AGPlaneStatusReplied];
+                plane.updatedTime = remoteMessage.createdTime;
                 [[AGCoreData coreData] save];
                 //
                 [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:plane];
@@ -218,7 +220,8 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             }
             NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
             if (chains.count) {
-                [[AGChainNotification chainNotification] collectedChains];
+                //[[AGChainNotification chainNotification] collectedChains];
+                [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
             }
             count = [NSNumber numberWithInt:planes.count + chains.count];
         }
@@ -246,21 +249,19 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
     }];
 }
 
-- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block
+- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGObtainPlanesBlock)block
 {
     [AGJSONHttpHandler request:YES params:params path:ObtainPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *planes = [NSArray array];
         if (error) {
             
         }
         else{
             //succeed
-            NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
-            for (AGPlane *plane in planes) {
-                plane.isNew = [NSNumber numberWithBool:YES];
-            }
+            planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
         }
         if (block) {
-            block(error, context, result);
+            block(error, context, result, planes);
         }
         
     }];

@@ -38,7 +38,10 @@
 		070BCC0E17CC301700BB97B7 /* AGNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC0D17CC301700BB97B7 /* AGNotificationCenter.m */; };
 		070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1017CC350400BB97B7 /* AGChainMessageController.m */; };
 		070BCC1417CC372100BB97B7 /* AGChainNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1317CC372100BB97B7 /* AGChainNotification.m */; };
-		070BCC1717CD788D00BB97B7 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1617CD788D00BB97B7 /* AGChain.m */; };
+		070BCC2F17CE876700BB97B7 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC2E17CE876700BB97B7 /* AGChain.m */; };
+		070BCC3217CE876800BB97B7 /* AGNewChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC3117CE876800BB97B7 /* AGNewChain.m */; };
+		070BCC3517CE876800BB97B7 /* AGPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC3417CE876800BB97B7 /* AGPlane.m */; };
+		070BCC3817CEB26300BB97B7 /* AGNewPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC3717CEB26300BB97B7 /* AGNewPlane.m */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
@@ -221,7 +224,6 @@
 		078DEE8117BD8CD900A969A1 /* profile_image_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078DEE8017BD8CD900A969A1 /* profile_image_default@2x.png */; };
 		078DEE8417BECAFF00A969A1 /* AGMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE8317BECAFF00A969A1 /* AGMessageController.m */; };
 		078DEE8A17BEE7EE00A969A1 /* AGNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE8917BEE7EE00A969A1 /* AGNumber.m */; };
-		078DEE8D17BF00F000A969A1 /* AGPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE8C17BF00F000A969A1 /* AGPlane.m */; };
 		078DEE9917C2B2C700A969A1 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9317C2B2C700A969A1 /* CJSONDeserializer.m */; };
 		078DEE9A17C2B2C700A969A1 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9517C2B2C700A969A1 /* CJSONSerializer.m */; };
 		078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 078DEE9817C2B2C700A969A1 /* NSDictionary_JSONExtensions.m */; };
@@ -420,8 +422,14 @@
 		070BCC1017CC350400BB97B7 /* AGChainMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessageController.m; sourceTree = "<group>"; };
 		070BCC1217CC372100BB97B7 /* AGChainNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainNotification.h; sourceTree = "<group>"; };
 		070BCC1317CC372100BB97B7 /* AGChainNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainNotification.m; sourceTree = "<group>"; };
-		070BCC1517CD788D00BB97B7 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
-		070BCC1617CD788D00BB97B7 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
+		070BCC2D17CE876700BB97B7 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
+		070BCC2E17CE876700BB97B7 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
+		070BCC3017CE876700BB97B7 /* AGNewChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNewChain.h; sourceTree = "<group>"; };
+		070BCC3117CE876800BB97B7 /* AGNewChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNewChain.m; sourceTree = "<group>"; };
+		070BCC3317CE876800BB97B7 /* AGPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlane.h; sourceTree = "<group>"; };
+		070BCC3417CE876800BB97B7 /* AGPlane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlane.m; sourceTree = "<group>"; };
+		070BCC3617CEB26300BB97B7 /* AGNewPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNewPlane.h; sourceTree = "<group>"; };
+		070BCC3717CEB26300BB97B7 /* AGNewPlane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNewPlane.m; sourceTree = "<group>"; };
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		073250F9176AB4AB00487B9E /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
@@ -676,8 +684,6 @@
 		078DEE8317BECAFF00A969A1 /* AGMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessageController.m; sourceTree = "<group>"; };
 		078DEE8817BEE7EE00A969A1 /* AGNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNumber.h; sourceTree = "<group>"; };
 		078DEE8917BEE7EE00A969A1 /* AGNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNumber.m; sourceTree = "<group>"; };
-		078DEE8B17BF00F000A969A1 /* AGPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlane.h; sourceTree = "<group>"; };
-		078DEE8C17BF00F000A969A1 /* AGPlane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlane.m; sourceTree = "<group>"; };
 		078DEE9217C2B2C700A969A1 /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
 		078DEE9317C2B2C700A969A1 /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
 		078DEE9417C2B2C700A969A1 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
@@ -1220,12 +1226,16 @@
 				078DEE6617BD596F00A969A1 /* AGAccountStat.m */,
 				078DEE7D17BD59D900A969A1 /* AGAuthenticate.h */,
 				078DEE7E17BD59D900A969A1 /* AGAuthenticate.m */,
-				078DEE8B17BF00F000A969A1 /* AGPlane.h */,
-				078DEE8C17BF00F000A969A1 /* AGPlane.m */,
 				078DEE9C17C2D2D300A969A1 /* AGMessage.h */,
 				078DEE9D17C2D2D300A969A1 /* AGMessage.m */,
-				070BCC1517CD788D00BB97B7 /* AGChain.h */,
-				070BCC1617CD788D00BB97B7 /* AGChain.m */,
+				070BCC2D17CE876700BB97B7 /* AGChain.h */,
+				070BCC2E17CE876700BB97B7 /* AGChain.m */,
+				070BCC3017CE876700BB97B7 /* AGNewChain.h */,
+				070BCC3117CE876800BB97B7 /* AGNewChain.m */,
+				070BCC3317CE876800BB97B7 /* AGPlane.h */,
+				070BCC3417CE876800BB97B7 /* AGPlane.m */,
+				070BCC3617CEB26300BB97B7 /* AGNewPlane.h */,
+				070BCC3717CEB26300BB97B7 /* AGNewPlane.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2218,7 +2228,6 @@
 				078DEE7F17BD59D900A969A1 /* AGAuthenticate.m in Sources */,
 				078DEE8417BECAFF00A969A1 /* AGMessageController.m in Sources */,
 				078DEE8A17BEE7EE00A969A1 /* AGNumber.m in Sources */,
-				078DEE8D17BF00F000A969A1 /* AGPlane.m in Sources */,
 				078DEE9917C2B2C700A969A1 /* CJSONDeserializer.m in Sources */,
 				078DEE9A17C2B2C700A969A1 /* CJSONSerializer.m in Sources */,
 				078DEE9B17C2B2C700A969A1 /* NSDictionary_JSONExtensions.m in Sources */,
@@ -2229,7 +2238,10 @@
 				070BCC0E17CC301700BB97B7 /* AGNotificationCenter.m in Sources */,
 				070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */,
 				070BCC1417CC372100BB97B7 /* AGChainNotification.m in Sources */,
-				070BCC1717CD788D00BB97B7 /* AGChain.m in Sources */,
+				070BCC2F17CE876700BB97B7 /* AGChain.m in Sources */,
+				070BCC3217CE876800BB97B7 /* AGNewChain.m in Sources */,
+				070BCC3517CE876800BB97B7 /* AGPlane.m in Sources */,
+				070BCC3817CEB26300BB97B7 /* AGNewPlane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

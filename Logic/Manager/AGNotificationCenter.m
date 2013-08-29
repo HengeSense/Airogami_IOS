@@ -45,7 +45,8 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     if (self = [super init]) {
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         //collect
-        //[notificationCenter addObserver:self selector:@selector(receive:) name:AGNotificationReceive object:nil];
+        [notificationCenter addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationCollectedPlanes object:nil];
+        [notificationCenter addObserver:self selector:@selector(collectedChains:) name:AGNotificationCollectedChains object:nil];
         [notificationCenter addObserver:self selector:@selector(getCollected:) name:AGNotificationGetCollected object:nil];
         //obtain planes
         //[notificationCenter addObserver:self selector:@selector(obtain:) name:AGNotificationObtain object:nil];
@@ -54,36 +55,30 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     return self;
 }
 
-/*- (void) receive:(NSNotification*) notification
+- (void) collectedPlanes:(NSNotification*) notification
 {
-    NSNumber * start = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForCollect];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:4];
-    if (start) {
-        [params setObject:start forKey:@"start"];
-    }
-    [[AGManagerUtils managerUtils].planeManager receivePlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
-        if (error == nil) {
-            NSNumber *more = [result objectForKey:@"more"];
-            if (more.boolValue) {
-                [self receivePlanes:notification];
-            }
-            NSArray *planes = [result objectForKey:@"planes"];
-            if (planes.count) {
-                [self collectedPlanes];
-            }
-            
-        }
-    }];
-}*/
+    [self collectedContainPlanes:YES containChains:NO];
+}
+
+- (void) collectedChains:(NSNotification*) notification
+{
+    [self collectedContainPlanes:NO containChains:YES];
+}
 
 - (void) getCollected:(NSNotification*)notification
 {
-    NSString *havePlanes = [notification.userInfo objectForKey:@"planes"];
-    NSString *haveChains = [notification.userInfo objectForKey:@"chains"];
-    if (havePlanes) {
+    NSString *containPlanes = [notification.userInfo objectForKey:@"planes"];
+    NSString *containChains = [notification.userInfo objectForKey:@"chains"];
+    
+    [self collectedContainPlanes:containPlanes != nil containChains:containChains != nil];
+}
+
+- (void) collectedContainPlanes:(BOOL) containPlanes containChains:(BOOL)containChains
+{
+    if (containPlanes) {
         planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForCollect];
     }
-    if (haveChains) {
+    if (containChains) {
         chains = [[AGControllerUtils controllerUtils].chainController getAllChainsForCollect];
     }
     NSArray *collects = [AGUtils mergeSortedArray:planes second:chains usingBlock:^int(id obj1, id obj2) {
@@ -94,7 +89,6 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:collects, @"collects", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationCollected object:self userInfo:dict];
-    
 }
 
 - (void) startTimer:(BOOL)start {

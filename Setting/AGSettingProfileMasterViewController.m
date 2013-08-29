@@ -156,10 +156,7 @@
         if (self.ageTextField.text.length > 0 && ![profile.birthday isEqual:self.datePicker.datePicker.date]) {
             [data setObject:self.datePicker.datePicker.date forKey:@"birthday"];
         }
-        if (![profile.shout isEqual:self.descriptionTextView.text]) {
-            [data setObject:self.descriptionTextView.text forKey:@"shout"];
-        }
-        if (![profile.shout isEqual:self.descriptionTextView.text]) {
+        if (!((profile.shout == nil && self.descriptionTextView.text.length == 0)||[profile.shout isEqual:self.descriptionTextView.text])) {
             [data setObject:self.descriptionTextView.text forKey:@"shout"];
         }
         if (profile.sex.intValue != self.sexSwitch.sexType) {

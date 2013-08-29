@@ -2,14 +2,14 @@
 //  AGPlane.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/16/13.
+//  Created by Tianhu Yang on 8/28/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AGAccount, AGCategory, AGMessage;
+@class AGAccount, AGCategory, AGMessage, AGNewPlane;
 
 @interface AGPlane : NSManagedObject
 
@@ -32,11 +32,11 @@
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
-@property (nonatomic, retain) NSNumber * isNew;
 @property (nonatomic, retain) AGAccount *accountByOwnerId;
 @property (nonatomic, retain) AGAccount *accountByTargetId;
 @property (nonatomic, retain) AGCategory *category;
 @property (nonatomic, retain) NSSet *messages;
+@property (nonatomic, retain) AGNewPlane *newPlane;
 @end
 
 @interface AGPlane (CoreDataGeneratedAccessors)

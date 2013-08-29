@@ -140,7 +140,7 @@
         cell.nameLabel.text = profile.fullName;
         //cell.messageLabel.text = ;
         AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
-        cell.timeLabel.text = [AGUtils dateToString:message.createdTime];
+        cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
         cell.messageLabel.text = message.content;
         [cell.profileImageView setImageWithAccountId:profile.accountId];
     }
