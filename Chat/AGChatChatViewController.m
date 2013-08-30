@@ -8,12 +8,13 @@
 
 #import "AGChatChatViewController.h"
 #import "UIBubbleTableView.h"
+#import "NSBubbleData.h"
 #import "AGUIErrorAnimation.h"
 #import "AGChatKeyboardScroll.h"
 #import "AGResignButton.h"
 #import "AGUIUtils.h"
 #import "AGDefines.h"
-#import "AGPlaneNotification.h"
+#import "AGNotificationCenter.h"
 #import "AGMessage.h"
 #import "AGManagerUtils.h"
 #import "AGCategory+Addition.h"
@@ -90,6 +91,9 @@ static float AGInputTextViewMaxHeight = 100;
     aidedTextView.layer.borderColor = inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
     aidedTextView.layer.borderWidth = inputTextView.layer.borderWidth = 2.0f;
     //
+    if ([airogami isKindOfClass:[AGChain class]]){
+        textInputView.hidden = YES;
+    }
 }
 
 - (void)viewDidLoad
@@ -115,17 +119,30 @@ static float AGInputTextViewMaxHeight = 100;
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     bubbleTable.refreshable = NO;
     
-    AGPlane *plane = airogami;
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
-    if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
-        nameLabel.text = plane.accountByTargetId.profile.fullName;
-    }
-    else{
-        nameLabel.text = plane.accountByOwnerId.profile.fullName;
-    }
-    categoryLabel.text = [AGCategory title:plane.category.categoryId];
+    [self initData];
+}
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
+- (void) initData
+{
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = airogami;
+        AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+        if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
+            nameLabel.text = plane.accountByTargetId.profile.fullName;
+        }
+        else{
+            nameLabel.text = plane.accountByOwnerId.profile.fullName;
+        }
+        categoryLabel.text = [AGCategory title:plane.category.categoryId];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
+    }
+    else if ([airogami isKindOfClass:[AGChain class]]){
+        AGChain *chain = airogami;
+        nameLabel.text = chain.account.profile.fullName;
+        categoryLabel.text = [AGCategory title:[NSNumber numberWithInt:AGCategoryChain]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotChainMessagesForChain:) name:AGNotificationGotChainMessagesForChain object:nil];
+    }
+    
 }
 
 - (void) viewDidLayoutSubviews
@@ -137,9 +154,13 @@ static float AGInputTextViewMaxHeight = 100;
         //notifications
         if ([airogami isKindOfClass:[AGPlane class]]) {
             AGPlane *plane = airogami;
-            
             NSDictionary *dict = [NSDictionary dictionaryWithObject:plane.planeId forKey:@"planeId"];
             [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
+        }
+        else if([airogami isKindOfClass:[AGChain class]]){
+            AGChain *chain = airogami;
+            NSDictionary *dict = [NSDictionary dictionaryWithObject:chain.chainId forKey:@"chainId"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetChainMessagesForChain object:nil userInfo:dict];
         }
         didInitialized = YES;
     }
@@ -154,22 +175,37 @@ static float AGInputTextViewMaxHeight = 100;
 
 - (void) refresh
 {
-    AGPlane *plane = airogami;
-    NSDictionary *dict;
-    AGMessage *message = nil;
-    if (messagesData.count) {
-        NSBubbleData *bubbleData = [messagesData objectAtIndex:0];
-        message = bubbleData.obj;
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = airogami;
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
+        AGMessage *message = nil;
+        if (messagesData.count) {
+            NSBubbleData *bubbleData = [messagesData objectAtIndex:0];
+            message = bubbleData.obj;
+        }
+        [dict setObject:plane.planeId forKey:@"planeId"];
+        if (message.messageId > 0) {
+            [dict setObject:message.messageId forKey:@"startId"];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
+    }
+    else if ([airogami isKindOfClass:[AGChain class]]){
+        AGChain *chain = airogami;
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];;
+        AGChainMessage *chainMessage = nil;
+        if (messagesData.count) {
+            NSBubbleData *bubbleData = [messagesData objectAtIndex:0];
+            chainMessage = bubbleData.obj;
+        }
+        [dict setObject:chain.chainId forKey:@"chainId"];
+        if (chainMessage) {
+            [dict setObject:chainMessage.createdTime forKey:@"startTime"];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetChainMessagesForChain object:nil userInfo:dict];
     }
     
-    if (message.messageId > 0) {
-        dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId",message.messageId, @"startId", nil];
-    }
-    else{
-         dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetMessagesForPlane object:nil userInfo:dict];
    
 }
 
@@ -233,6 +269,68 @@ static float AGInputTextViewMaxHeight = 100;
 
     }
 
+}
+
+- (void) gotChainMessagesForChain:(NSNotification*)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    NSNumber *chainId = [dict objectForKey:@"chainId"];
+    AGChain *chain = airogami;
+    if ([chainId isEqual:chain.chainId] == NO) {
+        return;
+    }
+    //
+    NSString *action = [dict objectForKey:@"action"];
+    NSAssert(action != nil, @"nil action!");
+    
+    NSArray *chainMessages = [dict objectForKey:@"chainMessages"];
+    if (chainMessages.count == 0) {
+        return;
+    }
+    NSNumber *more = [dict objectForKey:@"more"];
+    if (more) {
+        bubbleTable.refreshable = more.boolValue;
+    }
+    
+    int count = chainMessages.count;
+    if ([action isEqual:@"prepend"]) {
+        count += messagesData.count;
+    }
+    AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
+    for (AGMessage *chainMessage in chainMessages) {
+        NSBubbleType bubbleType = BubbleTypeMine;
+        if (account != chainMessage.account) {
+            bubbleType = BubbleTypeSomeoneElse;
+        }
+        NSBubbleData *bubbleData = [NSBubbleData dataWithText:chainMessage.content date:chainMessage.createdTime type:bubbleType];
+        bubbleData.account = chainMessage.account;
+        bubbleData.state = BubbleCellStateSent;
+        bubbleData.obj = chainMessage;
+        [array addObject:bubbleData];
+    }
+    BOOL add = YES;
+    if ([action isEqual:@"reset"]) {
+        [messagesData removeAllObjects];
+        
+    }
+    else if ([action isEqual:@"append"]){
+        
+    }
+    else if ([action isEqual:@"prepend"]){
+        add = NO;
+    }
+    if (add) {
+        [messagesData addObjectsFromArray:array];
+        [bubbleTable addData:add animated:didInitialized];
+    }
+    else{
+        [array addObjectsFromArray:messagesData];
+        messagesData = array;
+        [bubbleTable addData:add animated:NO];
+        
+    }
+    
 }
 
 - (IBAction)backButton:(UIButton *)sender {

@@ -40,7 +40,7 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
                 //wait for process
             }
             else{
-                [AGMessageUtils alertMessageWithTitle:@"" message:AGPlaneSendPlaneOK];
+                [AGMessageUtils alertMessageWithTitle:@"" message:AGChainSendChainOK];
             }
             
         }
@@ -51,16 +51,158 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
     }];
 }
 
-- (void) replyChain:(AGChainMessage*) chainMessage context:(id)context block:(AGReplyChainFinishBlock)block
+- (void) replyChain:(NSDictionary*)params chain:(AGChain*)chain context:(id)context block:(AGHttpSucceedBlock)block
 {
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:chainMessage.chain.chainId forKey:@"chainId"];
-    [params setObject:chainMessage.content forKey:@"chainMessageVO.content"];
-    [params setObject:chainMessage.type forKey:@"chainMessageVO.type"];
-    [AGJSONHttpHandler request:NO params:params path:ReplyChainPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+    [AGJSONHttpHandler request:NO params:params path:ReplyChainPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         AGChainMessage *remoteChainMessage = nil;
-        BOOL refresh = NO;
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            succeed = YES;
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGCoreData coreData] remove:chain];
+                }
+                [[AGChainNotification chainNotification] collectedChains];
+                [AGMessageUtils alertMessageChainChanged];
+            }
+            else{
+                //succeed
+                NSDictionary *dict = [result objectForKey:@"chainMessage"];
+                remoteChainMessage = [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:dict forChain:chain];
+                chain.updatedTime = remoteChainMessage.createdTime;
+                [[AGCoreData coreData] save];
+                //
+                [[AGControllerUtils controllerUtils].chainController increaseUpdateIncForChat:chain];
+                [[AGChainNotification chainNotification] obtainedChains];
+                [[AGChainNotification chainNotification] collectedChains];
+            }
+        }
+        
+        if (block) {
+            block(error, context, succeed);
+        }
+        
+    }];
+}
+
+
+- (NSDictionary*)paramsForReplyChain:(NSNumber*)chainId content:(NSString*)content type:(int)type
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:chainId forKey:@"chainId"];
+    [params setObject:content forKey:@"chainMessageVO.content"];
+    [params setObject:[NSNumber numberWithInteger:type] forKey:@"chainMessageVO.type"];
+    return params;
+}
+
+- (void) receiveChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ReceiveChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *chains = [NSArray array];
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+        }
+        if (block) {
+            block(error, context, result, chains);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForReceiveChains:(NSNumber*)start
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    if (start) {
+        [params setObject:start forKey:@"start"];
+    }
+    return params;
+}
+
+- (void) obtainChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *chains = [NSArray array];
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+        }
+        if (block) {
+            block(error, context, result, chains);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForObtainChains:(NSNumber*)start
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    if (start) {
+        [params setObject:start forKey:@"start"];
+    }
+    
+    return params;
+}
+
+- (void) throwChain:(NSDictionary*) params chain:(AGChain*)chain context:(id)context block:(AGHttpSucceedBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ThrowChainPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            succeed = YES;
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGCoreData coreData] remove:chain];
+                }
+                NSDictionary *chainJson = [result objectForKey:@"chain"];
+                //changed status, etc
+                if (chainJson) {
+                    [[AGControllerUtils controllerUtils].chainController saveChain:chainJson];
+                    [AGMessageUtils alertMessageChainChanged];
+                }
+                [[AGChainNotification chainNotification] collectedChains];
+                [[AGChainNotification chainNotification] obtainedChains];
+                
+            }
+            else{
+                [[AGCoreData coreData] remove:chain];
+                [[AGChainNotification chainNotification] collectedChains];
+            }
+            
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForThrowChain:(NSNumber*)chainId
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    [params setObject:chainId forKey:@"chainId"];
+    return params;
+}
+
+- (void) deleteChain:(NSDictionary*) params chain:(AGChain*)chain context:(id)context block:(AGHttpDoneBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:DeleteChainPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error) {
             
         }
@@ -69,31 +211,38 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
             if (errorString) {
                 // not exist
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
-                    [[AGCoreData coreData] remove:chainMessage.chain];
+                    [[AGCoreData coreData] remove:chain];
                 }
                 NSDictionary *chainMessageJson = [result objectForKey:@"chainMessage"];
+                //changed status, etc
                 if (chainMessageJson) {
-                    [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:chainMessageJson];
+                    AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:chainMessageJson forChain:chain];
+                    if (chainMessage.status.intValue != AGChainMessageStatusDeleted) {
+                        [AGMessageUtils alertMessageChainChanged];
+                    }
+                
                 }
-                [[AGChainNotification chainNotification] obtainedChains];
-                [AGMessageUtils alertMessagePlaneChanged];
-                refresh = YES;
+                
             }
             else{
-                //succeed
-                NSDictionary *dict = [result objectForKey:@"chainMessage"];
-                remoteChainMessage = [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:dict];
-                [[AGControllerUtils controllerUtils].chainController increaseUpdateIncForChat:chainMessage.chain];
-                [[AGCoreData coreData] remove:chainMessage];
-                [[AGChainNotification chainNotification] obtainedChains];
+                [[AGCoreData coreData] remove:chain];
             }
             
+            [[AGChainNotification chainNotification] obtainedChains];
         }
         if (block) {
-            block(error, context, remoteChainMessage, refresh);
+            block(error, context);
         }
         
     }];
+}
+
+- (NSDictionary*)paramsForDeleteChain:(NSNumber*)chainId
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:chainId forKey:@"chainId"];
+    
+    return params;
 }
 
 - (void) obtainChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block

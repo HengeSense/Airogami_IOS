@@ -55,10 +55,10 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         //[notificationCenter addObserver:self selector:@selector(collectedPlanes) name:AGNotificationGetCollectedPlanes object:nil];
         //obtain planes
         [notificationCenter addObserver:self selector:@selector(obtainPlanes:) name:AGNotificationObtainPlanes object:nil];
-        [notificationCenter addObserver:self selector:@selector(obtainedPlanes) name:AGNotificationGetObtainedPlanes object:nil];
+        //[notificationCenter addObserver:self selector:@selector(obtainedPlanes) name:AGNotificationGetObtainedPlanes object:nil];
         //obtain messages
         [notificationCenter addObserver:self selector:@selector(obtainMessages:) name:AGNotificationObtainMessages object:nil];
-        [notificationCenter addObserver:self selector:@selector(obtainedMessages:) name:AGNotificationGetObtainedMessages object:nil];
+        //[notificationCenter addObserver:self selector:@selector(obtainedMessages:) name:AGNotificationGetObtainedMessages object:nil];
         //get messages for plane
         //obtain messages
         [notificationCenter addObserver:self selector:@selector(getMessagesForPlane:) name:AGNotificationGetMessagesForPlane object:nil];
@@ -147,8 +147,9 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 
 - (void) collectedPlanes
 {
+    NSDictionary *dict = [NSDictionary dictionary];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:nil];
+    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:dict];
     
 }
 
@@ -227,8 +228,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 
 - (void) obtainedPlanes
 {
-    NSArray *planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForChat];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:planes, @"planes", @"reset", @"action", nil];
+    NSDictionary *dict = [NSDictionary dictionary];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
     

@@ -43,6 +43,13 @@
     return array;
 }
 
+- (AGChain*) saveChain:(NSDictionary*)chainJson
+{
+    AGChain *chain = (AGChain*)[coreData saveOrUpdate:chainJson withEntityName:@"AGChain"];
+    [coreData save];
+    return chain;
+}
+
 - (NSNumber*)recentChainUpdateIncForCollect
 {
     return [self recentChainUpdateInc:YES];
@@ -58,18 +65,13 @@
     return [self getAllChains:2];
 }
 
-- (NSArray*) getAllNewChainsForChat
-{
-    return [self getAllChains:3];
-}
-
-//1 = collect; 2 = chat; 3 = new chat
+//1 = collect; 2 = chat;
 - (NSArray*) getAllChains:(int)type
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0 && (account.accountId != %@ || passCount > 0) and (%d != 3 or isNew = YES)", account.accountId, type == 1 ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId, type];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0 && (account.accountId != %@ || passCount > 0)", account.accountId, type == 1 ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending: type == 3];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -79,6 +81,25 @@
         array = [NSArray array];
     }
     return array;
+}
+
+//-1 = unknown; 0 = colleted; 1 = obtained; 2 = deleted
+- (int) chainStatus:(NSNumber*)chainId
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:chainMessageEntityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and account.accountId = %@", chainId, account.accountId];
+    [fetchRequest setPredicate:predicate];
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (!array.count) {
+        return -1;
+    }
+    else{
+        AGChainMessage *chainMessage = array.lastObject;
+        return chainMessage.status.intValue;//status code should start with 0
+    }
 }
 
 
@@ -134,6 +155,7 @@
     return [self recentChainMessage:YES chainId:chainId];
 }
 
+//not include unreplied chainMessage
 - (AGChainMessage*) recentChainMessage:(BOOL) forCollect chainId:(NSNumber*)chainId
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
@@ -141,7 +163,7 @@
     [fetchRequest setEntity:chainMessageEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and (%d = 0 || account.accountId != %@)", chainId, forCollect, account.accountId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and (%d = 0 or account.accountId != %@)", chainId, forCollect, account.accountId];
     [fetchRequest setPredicate:predicate];
     //
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"createdTime"];

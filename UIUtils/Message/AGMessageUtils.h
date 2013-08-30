@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define alertMessageChainChanged alertMessagePlaneChanged
+
 @interface AGMessageUtils : NSObject
 
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;

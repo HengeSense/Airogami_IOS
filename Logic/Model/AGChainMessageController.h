@@ -8,9 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "AGChainMessage.h"
+#import "AGChain.h"
 
 @interface AGChainMessageController : NSObject
 
 - (AGChainMessage*) saveChainMessage:(NSDictionary*)jsonDictionary;
+- (AGChainMessage*) saveChainMessage:(NSDictionary*)jsonDictionary forChain:(AGChain*)chain;
+- (NSMutableArray*) saveChainMessages:(NSArray*)jsonArray chain:(AGChain*) chain;
+//descending
+- (NSDictionary*) getChainMessagesForChain:(NSNumber *)chainId startTime:(NSDate *)startTime;
+- (NSArray*) getChainMessagesForChain:(NSNumber *)chainId;
 
 @end

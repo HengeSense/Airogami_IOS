@@ -7,7 +7,7 @@
 //
 
 #import "AGChatPlaneViewController.h"
-#import "AGPlaneNotification.h"
+#import "AGNotificationCenter.h"
 #import "AGChatPlaneCell.h"
 #import "AGPlane.h"
 #import "AGAccount.h"
@@ -48,8 +48,9 @@
     imageView.image = [AGUIDefines mainBackgroundImage];
     [self.tableView.backgroundView addSubview:imageView];
     //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtainedPlanes object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtained:) name:AGNotificationObtained object:nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"planes", @"planes", @"chains", @"chains", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtained object:nil userInfo:dict];
     
 }
 
@@ -65,28 +66,42 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) obtainedPlanes:(NSNotification*) notification
+- (void) obtained:(NSNotification*) notification
 {
     NSDictionary * dict = notification.userInfo;
     NSString *action = [dict objectForKey:@"action"];
-    if ([action isEqual:@"reset"]) {
-        NSArray *planes = [dict objectForKey:@"planes"];
-        data = planes;
-    }
-    else if ([action isEqual:@"one"])
+    if ([action isEqual:@"one"])
     {
         NSNumber *planeId = [dict objectForKey:@"planeId"];
+        NSNumber *chainId = [dict objectForKey:@"chainId"];
+        Class cls;
+        NSNumber *number = nil;
+        NSString *key;
+        if (planeId) {
+            number = planeId;
+            cls = [AGPlane class];
+            key = @"planeId";
+        }
+        else if(chainId){
+            number = chainId;
+            cls = [AGChain class];
+            key = @"chainId";
+        }
         for (int i = 0; i< data.count; ++i) {
             id obj = [data objectAtIndex:i];
-            if([obj isKindOfClass:[AGPlane class]]){
-                AGPlane *plane = obj;
-                if([plane.planeId isEqual:planeId])
+            if([obj isKindOfClass:cls]){
+                id objId = [obj valueForKey:key];
+                if([objId  isEqual:number])
                 {
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
                     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
             }
         }
+    }
+    else{
+        NSArray *chats = [dict objectForKey:@"chats"];
+        data = chats;
     }
     
     [self.tableView reloadData];
@@ -100,6 +115,14 @@
         AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
         NSDictionary *params = [planeManager paramsForDeletePlane:plane];
         [planeManager deletePlane:params plane:plane context:nil block:^(NSError *error, id context) {
+            
+        }];
+    }
+    else if ([airogami isKindOfClass:[AGChain class]]) {
+        AGChain *chain = airogami;
+        AGChainManager *chainManager = [AGManagerUtils managerUtils].chainManager;
+        NSDictionary *params = [chainManager paramsForDeleteChain:chain.chainId];
+        [chainManager deleteChain:params chain:chain context:nil block:^(NSError *error, id context) {
             
         }];
     }
@@ -125,11 +148,11 @@
     AGChatPlaneCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
-    NSObject *obj = [data objectAtIndex:indexPath.row];
+    id obj = [data objectAtIndex:indexPath.row];
+    AGProfile *profile = nil;
     if([obj isKindOfClass:[AGPlane class]])
     {
-        AGPlane *plane = (AGPlane*)obj;
-        AGProfile *profile;
+        AGPlane *plane = obj;
         if([managerUtils.accountManager.account.accountId isEqual:plane.accountByOwnerId.accountId])
         {
             profile = plane.accountByTargetId.profile;
@@ -137,18 +160,23 @@
         else{
             profile = plane.accountByOwnerId.profile;
         }
-        cell.nameLabel.text = profile.fullName;
         //cell.messageLabel.text = ;
         AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
         cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
         cell.messageLabel.text = message.content;
-        [cell.profileImageView setImageWithAccountId:profile.accountId];
+        
     }
     else if ([obj isKindOfClass:[AGChain class]])
     {
-        
+        AGChain *chain = obj;
+        profile = chain.account.profile;
+        cell.timeLabel.text = [AGUtils dateToString:chain.updatedTime];
+        AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForChat:chain.chainId];
+        cell.messageLabel.text = chainMessage.content;
     }
 
+    [cell.profileImageView setImageWithAccountId:profile.accountId];
+    cell.nameLabel.text = profile.fullName;
     
     return cell;
 }

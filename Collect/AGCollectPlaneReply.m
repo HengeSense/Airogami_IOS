@@ -9,6 +9,7 @@
 #import "AGCollectPlaneReply.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AGPlane.h"
+#import "AGChain.h"
 #import "AGMessage.h"
 #import "AGCategory+Addition.h"
 #import "AGProfile.h"
@@ -19,6 +20,7 @@
 #import "AGDefines.h"
 #import "AGResignButton.h"
 #import "AGCollectKeyboardScroll.h"
+#import "AGControllerUtils.h"
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
 #define kAGChatChatMaxSpacing 50
@@ -93,29 +95,44 @@ static float AGInputTextViewMaxHeight = 80;
 
 - (void) initData:(id) object
 {
+    AGProfile *profile;
     if ([object isKindOfClass:[AGPlane class]]) {
         AGPlane *plane = object;
-        AGProfile *profile = plane.accountByOwnerId.profile;
+        profile = plane.accountByOwnerId.profile;
         self.categoryLabel.text = [AGCategory title:plane.category.categoryId];
-        self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
-        self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
-        //
-        [self.profileImageButton setImageWithAccountId:profile.accountId];
-        //
-        self.nameLabel.text = profile.fullName;
-        if(profile.shout.length){
-            self.descriptionTextView.text = profile.shout;
-        }
-        else{
-            self.descriptionTextView.text = NSLocalizedString(AGAccountShoutNothing, ShoutNothing);
-        }
-        
         //
         AGMessage *message = plane.messages.objectEnumerator.nextObject;
         self.contentTextView.text = message.content;
     }
+    else if ([object isKindOfClass:[AGChain class]]) {
+        AGChain *chain = object;
+        profile = chain.account.profile;
+        self.categoryLabel.text = [AGCategory title:[NSNumber numberWithInt:AGCategoryChain]];
+        NSMutableString *text = [NSMutableString stringWithCapacity:2048];
+        NSArray *chainMessages = [[AGControllerUtils controllerUtils].chainMessageController getChainMessagesForChain:chain.chainId];
+        for (AGChainMessage *chainMessage in chainMessages) {
+            [text appendString:chainMessage.account.profile.fullName];
+            [text appendString:@":\n"];
+            [text appendString:chainMessage.content];
+            [text appendString:@"\n\n"];
+            
+        }
+        self.contentTextView.text = text;
+    }
+    self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
+    self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
+    //
+    [self.profileImageButton setImageWithAccountId:profile.accountId];
+    //
+    self.nameLabel.text = profile.fullName;
+    if(profile.shout.length){
+        self.descriptionTextView.text = profile.shout;
+    }
+    else{
+        self.descriptionTextView.text = NSLocalizedString(AGAccountShoutNothing, ShoutNothing);
+    }
 }
-     
+
 - (void) dismiss
 {
     [UIView beginAnimations:@"ShowAnimation" context:nil];
@@ -147,13 +164,25 @@ static float AGInputTextViewMaxHeight = 80;
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     
-    AGPlane *plane = airogami;
-    NSDictionary *params = [managerUtils.planeManager paramsForThrowPlane:plane.planeId];
-    [managerUtils.planeManager throwPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
-        if (succeed) {
-            [self dismiss];
-        }
-    }];
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = airogami;
+        NSDictionary *params = [managerUtils.planeManager paramsForThrowPlane:plane.planeId];
+        [managerUtils.planeManager throwPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
+            if (succeed) {
+                [self dismiss];
+            }
+        }];
+    }
+    else if ([airogami isKindOfClass:[AGChain class]]) {
+        AGChain *chain = airogami;
+        NSDictionary *params = [managerUtils.chainManager paramsForThrowChain:chain.chainId];
+        [managerUtils.chainManager throwChain:params chain:chain context:nil block:^(NSError *error, id context, BOOL succeed) {
+            if (succeed) {
+                [self dismiss];
+            }
+        }];
+    }
+    
 }
 
 
@@ -161,14 +190,27 @@ static float AGInputTextViewMaxHeight = 80;
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     
-    AGPlane *plane = airogami;
-    NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:self.inputTextView.text type:AGMessageTypeText];
-    //
-    [managerUtils.planeManager firstReplyPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
-        if (succeed) {
-            [self dismiss];
-        }
-    }];
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        AGPlane *plane = airogami;
+        NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:self.inputTextView.text type:AGMessageTypeText];
+        //
+        [managerUtils.planeManager firstReplyPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
+            if (succeed) {
+                [self dismiss];
+            }
+        }];
+    }
+    else if ([airogami isKindOfClass:[AGChain class]]) {
+        AGChain *chain = airogami;
+        NSDictionary *params = [managerUtils.chainManager paramsForReplyChain:chain.chainId content:self.inputTextView.text type:AGMessageTypeText];
+        //
+        [managerUtils.chainManager replyChain:params chain:chain context:nil block:^(NSError *error, id context, BOOL succeed) {
+            if (succeed) {
+                [self dismiss];
+            }
+        }];
+    }
+    
 }
 
 - (id)init

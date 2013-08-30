@@ -92,7 +92,6 @@
 - (void) collected:(NSNotification*) notification
 {
     NSDictionary * dict = notification.userInfo;
-    //NSString *action = [dict objectForKey:@"action"];
     NSArray *collects = [dict objectForKey:@"collects"];
     data = collects;
     [tv reloadData];
@@ -138,7 +137,7 @@
         AGPlane *plane = obj;
         cell.category = plane.category.categoryId.intValue;
         cell.topLabel.text = plane.accountByOwnerId.profile.city;
-        cell.bottomLabel.text = [AGUtils dateToString:plane.createdTime];
+        cell.bottomLabel.text = [AGUtils dateToString:plane.updatedTime];
         AGMessage *message = plane.messages.objectEnumerator.nextObject;
         cell.messageLabel.text = message.content;
     }
@@ -148,7 +147,7 @@
         cell.category = AGCategoryChain;
         cell.topLabel.text = chain.account.profile.city;
         AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForCollect:chain.chainId];
-        cell.bottomLabel.text = [AGUtils dateToString:chainMessage.createdTime];
+        cell.bottomLabel.text = [AGUtils dateToString:chain.updatedTime];
         cell.messageLabel.text = chainMessage.content;
     }
         

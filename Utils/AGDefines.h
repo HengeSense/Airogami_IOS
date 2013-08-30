@@ -84,6 +84,7 @@ extern  NSString * AGAccountShoutNothing;
 //plane
 
 extern  NSString *AGPlaneSendPlaneOK;
+#define AGChainSendChainOK AGPlaneSendPlaneOK
 
 extern  NSString * AGLogicJSONStatusKey;
 extern  NSString * AGLogicJSONMessageKey;
