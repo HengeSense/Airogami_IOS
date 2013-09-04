@@ -94,5 +94,27 @@ static int MessageLimit = 10;
     return array;
 }
 
+- (AGMessage*) getNextUnsentMessage
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:messageEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId = -1"];
+    [fetchRequest setPredicate:predicate];
+    //
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdTime" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    //
+    [fetchRequest setFetchLimit:1];
+    //
+    AGMessage* message = nil;
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count) {
+        message = array.lastObject;
+    }
+    return message;
+}
+
 
 @end

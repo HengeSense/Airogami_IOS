@@ -110,9 +110,6 @@ NSString *AGNotificationGotChainMessagesForChain = @"notification.gotchainmessag
                 [self receiveChains];
             }
             else{
-                NSDictionary *dict = [NSDictionary dictionary];
-                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-                [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:dict];
                 //whether has more
                 BOOL shouldReceive= NO;
                 @synchronized(receiveChainMutex){
@@ -131,6 +128,10 @@ NSString *AGNotificationGotChainMessagesForChain = @"notification.gotchainmessag
             if (chains.count) {
                 [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
                 [self collectedChains];
+                NSDictionary *dict = [NSDictionary dictionary];
+                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+                [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:dict];
+
             }
             
         }
@@ -187,9 +188,7 @@ NSString *AGNotificationGotChainMessagesForChain = @"notification.gotchainmessag
                 [self obtainChains];
             }
             else{
-                NSDictionary *dict = [NSDictionary dictionary];
-                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-                [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:dict];
+                
                 //whether has more
                 BOOL shouldObtain = NO;
                 @synchronized(obtainChainMutex){
@@ -205,10 +204,12 @@ NSString *AGNotificationGotChainMessagesForChain = @"notification.gotchainmessag
                     [self obtainChains];
                 }
             }
-            
             if (chains.count) {
                 [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
                 [self obtainedChains];
+                NSDictionary *dict = [NSDictionary dictionary];
+                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+                [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:dict];
             }
             
         }

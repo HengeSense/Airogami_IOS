@@ -109,7 +109,7 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
         }
         else{
             //succeed
-            [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
         }
         if (block) {
             block(error, context, result, chains);

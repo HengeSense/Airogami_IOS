@@ -198,5 +198,20 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceiveChains object:nil userInfo:nil];
 }
 
+//should run once open the program
+- (void) obtainMessages
+{
+    NSDictionary *dict = [NSDictionary dictionary];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
+    [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:dict];
+}
+
+//should run once the program is active
+- (void) resendMessages
+{
+    
+}
+
 
 @end

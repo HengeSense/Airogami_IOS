@@ -220,8 +220,9 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             }
             NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
             if (chains.count) {
-                //[[AGChainNotification chainNotification] collectedChains];
                 [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
+                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+                [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:nil];
             }
             count = [NSNumber numberWithInt:planes.count + chains.count];
         }

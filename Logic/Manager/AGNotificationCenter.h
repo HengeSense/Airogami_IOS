@@ -23,5 +23,7 @@ extern NSString *AGNotificationGetObtained;
 
 + (AGNotificationCenter*) notificationCenter;
 - (void) startTimer:(BOOL)start;
+//should run after open the program
+- (void) obtainMessages;
 
 @end

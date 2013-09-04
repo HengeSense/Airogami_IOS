@@ -41,6 +41,10 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
     BOOL moreObtainPlanes;
     NSNumber *obtainPlaneMutex;
     BOOL obtainingPlanes;
+    //send messages
+    BOOL moreSendMessages;
+    NSNumber *sendMessageMutex;
+    BOOL sendingMessages;
 }
 @end
 
@@ -191,10 +195,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
                 [self obtainPlanes];
             }
             else{
-                NSDictionary *dict = [NSDictionary dictionary];
-                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-                [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
-                //whether has more
+                 //whether has more
                 BOOL shouldObtain = NO;
                 @synchronized(obtainPlaneMutex){
                     if (moreObtainPlanes) {
@@ -213,6 +214,10 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
             if (planes.count) {
                 [[AGControllerUtils controllerUtils].planeController addNewPlanesForChat:planes];
                 [self obtainedPlanes];
+                NSDictionary *dict = [NSDictionary dictionary];
+                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+                [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
+                
             }
             
         }
@@ -345,8 +350,8 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         unsentMessages = [messageController getUnsentMessagesForPlane:planeId];
     }
     NSMutableArray *messages = [NSMutableArray arrayWithCapacity:doneMessages.count + unsentMessages.count];
-    int lower = more.boolValue ? 0 : - 1;
-    for (int i = doneMessages.count - 1; i > lower; --i) {
+    int start = more.boolValue ? doneMessages.count - 2 : doneMessages.count - 1;
+    for (int i = start; i > -1; --i) {
         [messages addObject:[doneMessages objectAtIndex:i]];
     }
     if (startId == nil) {
@@ -363,6 +368,65 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }
 
+- (void) sendMessages:(NSNotification*) notification
+{
+    BOOL shouldSend = NO;
+    @synchronized(sendMessageMutex){
+        if (sendingMessages) {
+            moreSendMessages = YES;
+        }
+        else{
+            sendingMessages = YES;
+            shouldSend = YES;
+        }
+    }
+    
+    if (shouldSend) {
+        [self sendMessages];
+    }
+    
+}
+
+- (void) sendMessages
+{
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    AGMessage *message = [controllerUtils.messageController getNextUnsentMessage];
+    if (message) {
+        [self sendMessage:message];
+    }
+    else{
+        @synchronized(sendMessageMutex){
+            moreSendMessages = NO;
+            sendingMessages = NO;
+        }
+    }
+}
+
+- (void) sendMessage:(AGMessage*)message
+{
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {
+        
+        if (error == nil) {
+            if (message) {
+                //notification here
+            }
+            if (refresh) {
+                //notification here
+            }
+            
+        }
+        else{
+            //should deal with server error
+            @synchronized(sendMessageMutex){
+                moreSendMessages = NO;
+                sendingMessages = NO;
+            }
+        }
+        
+    }];
+    
+}
 
 
 @end

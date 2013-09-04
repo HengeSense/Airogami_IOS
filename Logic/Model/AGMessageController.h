@@ -20,5 +20,6 @@
 //messageId = -1
 - (NSArray*) getUnsentMessagesForPlane:(NSNumber *)planeId;
 
+- (AGMessage*) getNextUnsentMessage;
 
 @end

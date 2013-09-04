@@ -192,7 +192,7 @@ static float AGInputTextViewMaxHeight = 100;
     }
     else if ([airogami isKindOfClass:[AGChain class]]){
         AGChain *chain = airogami;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];;
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
         AGChainMessage *chainMessage = nil;
         if (messagesData.count) {
             NSBubbleData *bubbleData = [messagesData objectAtIndex:0];

@@ -96,10 +96,6 @@
     [coreData save];
 }
 
-- (NSArray*) getAllPlanesForChat
-{
-    return [self getAllPlanes:NO];
-}
 
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId
 {
@@ -228,16 +224,16 @@
 
 }
 
-- (NSArray*) getAllPlanes:(BOOL) isNew
+- (NSArray*) getAllPlanesForChat
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:planeEntityDescription];
     NSPredicate *predicate;
-    predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0)) and (%d = 0 or isNew = YES)", AGPlaneStatusReplied, account.accountId, account.accountId, isNew];
+    predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
     
     [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:isNew];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
