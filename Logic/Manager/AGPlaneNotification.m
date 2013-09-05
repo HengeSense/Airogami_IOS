@@ -26,6 +26,10 @@ NSString *AGNotificationGetObtainedMessages = @"notification.getobtainedmessages
 NSString *AGNotificationGetMessagesForPlane = @"notification.getmessagesforplane";
 NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane";
 
+NSString *AGNotificationSendMessages = @"notification.sendmessages";
+NSString *AGNotificationSentMessage = @"notification.sentmessage";
+
+
 
 @interface AGPlaneNotification()
 {
@@ -66,6 +70,8 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
         //get messages for plane
         //obtain messages
         [notificationCenter addObserver:self selector:@selector(getMessagesForPlane:) name:AGNotificationGetMessagesForPlane object:nil];
+        // send messages
+        [notificationCenter addObserver:self selector:@selector(sendMessages:) name:AGNotificationSendMessages object:nil];
     }
     return self;
 }
@@ -405,15 +411,21 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 - (void) sendMessage:(AGMessage*)message
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
-    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {
+    AGPlane *plane = message.plane;
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage, BOOL refresh) {
         
         if (error == nil) {
-            if (message) {
-                //notification here
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
+            if (remoteMessage) {
+                [dict setObject:remoteMessage forKey:@"remoteMessage"];
+                [dict setObject:message forKey:@"message"];
+                [dict setObject:plane forKey:@"plane"];
             }
             if (refresh) {
-                //notification here
+                [dict setObject:@"refresh" forKey:@"refresh"];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSentMessage object:nil userInfo:dict];
+            [self sendMessages];
             
         }
         else{

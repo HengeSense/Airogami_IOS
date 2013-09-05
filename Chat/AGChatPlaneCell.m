@@ -7,8 +7,17 @@
 //
 
 #import "AGChatPlaneCell.h"
+#import "CustomBadge.h"
+
+@interface AGChatPlaneCell()
+{
+    CustomBadge *customBadge;
+}
+@end
 
 @implementation AGChatPlaneCell
+
+@synthesize badge;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,6 +33,37 @@
     UIView *selectionColor = [[UIView alloc] init];
     selectionColor.backgroundColor = [UIColor colorWithRed:220 / 255.0f green:236 / 255.0f blue:249 / 255.0f alpha:1.0f];
     self.selectedBackgroundView = selectionColor;
+}
+
+- (void) setBadge:(NSString *)aBadge
+{
+    badge = aBadge;
+    if (customBadge == nil) {
+        customBadge = [CustomBadge customBadgeWithString:badge
+                                         withStringColor:[UIColor whiteColor]
+                                          withInsetColor:[UIColor redColor]
+                                          withBadgeFrame:YES
+                                     withBadgeFrameColor:[UIColor whiteColor]
+                                               withScale:.8f
+                                             withShining:YES];
+        [self addSubview:customBadge];
+    }
+    else{
+        customBadge.badgeText = badge;
+    }
+    
+    if (badge.length == 0) {
+        customBadge.hidden = YES;
+    }
+    else
+    {
+        customBadge.hidden = NO;
+        CGRect frame = customBadge.frame;
+        CGRect outer = self.profileImageView.frame;
+        frame.origin.y = outer.origin.y - 10;
+        frame.origin.x = outer.origin.x + outer.size.width - frame.size.width + 10;
+        customBadge.frame = frame;
+    }
 }
 
 -(id) initWithCoder:(NSCoder *)aDecoder

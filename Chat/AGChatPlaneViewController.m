@@ -177,6 +177,7 @@
 
     [cell.profileImageView setImageWithAccountId:profile.accountId];
     cell.nameLabel.text = profile.fullName;
+    cell.badge = @"99";
     
     return cell;
 }

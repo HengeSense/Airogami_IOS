@@ -11,18 +11,21 @@
 #import "SPGooglePlacesAutocompletePlace.h"
 #import "AGUtils.h"
 #import "AGLocationUtils.h"
+#import "AGUIUtils.h"
 
 #define kSPGooglePlacesFetchPlacesFailed @"error.googleplacesautocomplete.fetch"
 #define kSPGooglePlacesMapPlacesFailed @"error.googleplacesautocomplete.map"
-#define kSPGooglePlacesSearchText @"text.googleplacesautocomplete.search"
+#define kSPGooglePlacesSearchTextCity @"text.googleplacesautocomplete.search.city"
+#define kSPGooglePlacesSearchTextDestionation @"text.googleplacesautocomplete.search.destination"
 
 @interface SPGooglePlacesAutocompleteViewController ()
-
+@property(nonatomic, strong) NSString *type;
 @end
 
 @implementation SPGooglePlacesAutocompleteViewController
 @synthesize mapView;
 @synthesize location;
+@synthesize type;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,7 +53,16 @@
 }
 
 - (void)viewDidLoad {
-    self.searchDisplayController.searchBar.placeholder = NSLocalizedString(kSPGooglePlacesSearchText, kSPGooglePlacesSearchText);
+    NSString *title;
+    if ([@"destination" isEqual:type]) {
+        title = AGLS(kSPGooglePlacesSearchTextDestionation);
+    }
+    else{
+        title = AGLS(kSPGooglePlacesSearchTextCity);
+    }
+    self.searchDisplayController.searchBar.placeholder = title;
+
+    
 }
 
 - (void)viewDidUnload {

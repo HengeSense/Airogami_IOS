@@ -40,7 +40,8 @@
 //google auto complete
 "error.googleplacesautocomplete.fetch" = "Could not fetch Places";
 "error.googleplacesautocomplete.map" = "Could not map selected Place";
-"text.googleplacesautocomplete.search" = "Search your city";
+"text.googleplacesautocomplete.search.city" = "Search your city";
+"text.googleplacesautocomplete.search.destination" = "Search a destionation";
 //network
 "error.connection.fail.title" = "Network connection failed";
 //server

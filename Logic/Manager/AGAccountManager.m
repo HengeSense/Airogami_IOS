@@ -116,6 +116,9 @@ static NSString *SigninBanned = @"error.account.signin.banned";
         [path appendString:ScreenNameSigninPath];
     }
     NSMutableDictionary *params = [pp mutableCopy];
+    if (automatic) {
+        [params setObject:@"true" forKey:@"ifInvalid"];
+    }
     [params setObject:[AGAppDelegate appDelegate].appConfig.signinUuid forKey:AGLogicAccountUuidKey];
     
     NSString *password = [params objectForKey:@"password"];
@@ -143,45 +146,56 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                 NSMutableDictionary *result = [dict objectForKey:AGLogicJSONResultKey];
                 NSMutableDictionary *accountJson = [result objectForKey:@"account"];
                 NSString *str = [result objectForKey:AGLogicJSONErrorKey];
-                if (str) { 
-                    [AGMessageUtils alertMessageWithTitle:nil message:SigninBanned];
-                    if (automatic) {
-                        [[AGAppDelegate appDelegate].appConfig resetAppAccount];
-                        [[AGRootViewController rootViewController] switchToSign];
+                if (str) {
+                    if ([str isEqual:@"banned"]) {
+                        [AGMessageUtils alertMessageWithTitle:nil message:SigninBanned];
+                        if (automatic) {
+                            [[AGAppDelegate appDelegate].appConfig resetAppAccount];
+                            [[AGRootViewController rootViewController] switchToSign];
+                        }
                     }
-                }
-                else if (accountJson == nil || [accountJson isEqual:[NSNull null]]){
-                    //not match
-                    if (animated) {
-                        [AGMessageUtils alertMessageWithTitle:@"" message:SigninNotMatch];
+                    else if([str isEqual:AGLogicJSONNoneValue]){
+                        //not match
+                        if (animated) {
+                            [AGMessageUtils alertMessageWithTitle:@"" message:SigninNotMatch];
+                        }
+                        if (automatic) {
+                            [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninNotMatch];
+                            [[AGAppDelegate appDelegate].appConfig resetAppAccount];
+                            [[AGRootViewController rootViewController] switchToSign];
+                        }
                     }
-                    if (automatic) {
-                        [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninNotMatch];
-                        [[AGAppDelegate appDelegate].appConfig resetAppAccount];
-                        [[AGRootViewController rootViewController] switchToSign];
-                    }
-                
+                    
                 }
                 else{
                     //succeed
-                    NSAssert([accountJson objectForKey:@"authenticate"] != nil && [accountJson objectForKey:@"authenticate"] != [NSNull null], @"Invalid email");
-                    account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
-                    AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
-                    if (automatic) {
-                        //signined at other place
-                        if ([appConfig accountUpdated:account]) {
-                            [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninOther];
-                            [appConfig resetAppAccount];
-                            [[AGRootViewController rootViewController] switchToSign];
+                    succeed = YES;
+                    if (accountJson) {
+                        NSAssert([accountJson objectForKey:@"authenticate"] != nil && [accountJson objectForKey:@"authenticate"] != [NSNull null], @"Invalid email");
+                        account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
+                        AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+                        if (automatic) {
+                            //signined at other place
+                            if ([appConfig accountUpdated:account]) {
+                                [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninOther];
+                                [appConfig resetAppAccount];
+                                [[AGRootViewController rootViewController] switchToSign];
+                            }
+                            else{
+                                [appConfig updateAppAccount:account password:password];
+                            }
                         }
                         else{
                             [appConfig updateAppAccount:account password:password];
                         }
                     }
                     else{
-                        [appConfig updateAppAccount:account password:password];
+                        //already signed in
+#ifdef IS_DEBUG
+                        NSLog(@"Already signed in");
+#endif
                     }
-                    succeed = YES;
+                    
                 }
             }
             else{

@@ -24,7 +24,7 @@
 #import "CustomBadge.h"
 
 static float DefaultHeight = 25.0f;
-static float DefaultPercentage = 3.0f / 4;
+static float DefaultPercentage = 3.0f / 5;
 
 @interface CustomBadge()
 - (void) drawRoundedRectWithContext:(CGContextRef)context withRect:(CGRect)rect;
@@ -88,11 +88,12 @@ static float DefaultPercentage = 3.0f / 4;
 {
 	CGSize retValue;
 	CGFloat rectWidth, rectHeight;
-	CGSize stringSize = [badgeString sizeWithFont:[UIFont boldSystemFontOfSize:DefaultHeight * DefaultPercentage]];
+	CGSize stringSize = [badgeString sizeWithFont:[UIFont boldSystemFontOfSize:DefaultHeight * DefaultPercentage * badgeScaleFactor]];
 	CGFloat flexSpace = 0;
 	if ([badgeString length]>=2) {
-		//flexSpace = [badgeString length];
-		rectWidth = DefaultHeight / 1.5f + (stringSize.width + flexSpace); rectHeight = DefaultHeight;
+		flexSpace = [badgeString length];
+		rectWidth = DefaultHeight / 1.5f + (stringSize.width + flexSpace);
+        rectHeight = DefaultHeight;
 		retValue = CGSizeMake(rectWidth*badgeScaleFactor, rectHeight*badgeScaleFactor);
 	} else {
 		retValue = CGSizeMake(DefaultHeight*badgeScaleFactor, DefaultHeight*badgeScaleFactor);

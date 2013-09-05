@@ -1174,11 +1174,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteViewController.m"
-         timestampString = "393444201.815744"
+         timestampString = "400024829.419811"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "163"
-         endingLineNumber = "163"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
          landmarkName = "-setAddress:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1200,11 +1200,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteViewController.m"
-         timestampString = "393444201.815744"
+         timestampString = "400024829.419811"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
+         startingLineNumber = "167"
+         endingLineNumber = "167"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2162,11 +2162,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatPlaneCell.m"
-         timestampString = "394663391.8618"
+         timestampString = "400028554.347487"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
          landmarkName = "-initWithStyle:reuseIdentifier:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3486,11 +3486,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Model/AGCoreData.m"
-         timestampString = "398989882.088588"
+         timestampString = "400015510.39889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "336"
-         endingLineNumber = "336"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "-findById:withEntityName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3499,11 +3499,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Model/AGCoreData.m"
-         timestampString = "398989882.088588"
+         timestampString = "400015510.39889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "364"
-         endingLineNumber = "364"
+         startingLineNumber = "367"
+         endingLineNumber = "367"
          landmarkName = "-findById:withEntityName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3512,11 +3512,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Model/AGCoreData.m"
-         timestampString = "398989882.088588"
+         timestampString = "400015510.39889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "371"
-         endingLineNumber = "371"
+         startingLineNumber = "374"
+         endingLineNumber = "374"
          landmarkName = "-findById:withEntityName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3564,11 +3564,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Model/AGCoreData.m"
-         timestampString = "398989882.088588"
+         timestampString = "400015510.39889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "312"
-         endingLineNumber = "312"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
          landmarkName = "-save"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3577,11 +3577,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Model/AGCoreData.m"
-         timestampString = "398989882.088588"
+         timestampString = "400015510.39889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "318"
-         endingLineNumber = "318"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
          landmarkName = "-save"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3590,11 +3590,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Model/AGCoreData.m"
-         timestampString = "398989882.088588"
+         timestampString = "400015510.39889"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "374"
-         endingLineNumber = "374"
+         startingLineNumber = "377"
+         endingLineNumber = "377"
          landmarkName = "-findById:withEntityName:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3694,11 +3694,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "398990084.523658"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "240"
-         endingLineNumber = "240"
+         startingLineNumber = "247"
+         endingLineNumber = "247"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3707,11 +3707,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "398990084.523658"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "237"
-         endingLineNumber = "237"
+         startingLineNumber = "244"
+         endingLineNumber = "244"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3720,11 +3720,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "398990084.523658"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "258"
-         endingLineNumber = "258"
+         startingLineNumber = "265"
+         endingLineNumber = "265"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4006,11 +4006,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400020495.196568"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "119"
-         endingLineNumber = "119"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-signin:automatic:animated:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4019,11 +4019,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400020495.196568"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "121"
-         endingLineNumber = "121"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
          landmarkName = "-signin:automatic:animated:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4058,11 +4058,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400021670.877965"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "314"
-         endingLineNumber = "314"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
          landmarkName = "-autoSignin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4220,45 +4220,6 @@
          startingLineNumber = "76"
          endingLineNumber = "76"
          landmarkName = "-save"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "171"
-         endingLineNumber = "171"
-         landmarkName = "-signin:automatic:animated:context:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
-         landmarkName = "-signin:automatic:animated:context:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
-         landmarkName = "-signin:automatic:animated:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4500,11 +4461,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "398990084.523658"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "255"
-         endingLineNumber = "255"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4513,25 +4474,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400021670.877965"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "316"
-         endingLineNumber = "316"
+         startingLineNumber = "330"
+         endingLineNumber = "330"
          landmarkName = "-autoSignin:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
-         landmarkName = "-signin:automatic:animated:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4734,7 +4682,46 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "456"
+         endingLineNumber = "456"
+         landmarkName = "-bubbleTableView:didSelectCellAtIndexPath:bubbleData:type:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "400013496.123119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "433"
+         endingLineNumber = "433"
+         landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "400013496.123119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "247"
+         endingLineNumber = "247"
+         landmarkName = "-gotMessagesForPlane:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "455"
@@ -4747,50 +4734,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "432"
-         endingLineNumber = "432"
-         landmarkName = "-prepareForSegue:sender:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "246"
-         endingLineNumber = "246"
-         landmarkName = "-gotMessagesForPlane:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "454"
-         endingLineNumber = "454"
-         landmarkName = "-bubbleTableView:didSelectCellAtIndexPath:bubbleData:type:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "248"
-         endingLineNumber = "248"
+         startingLineNumber = "249"
+         endingLineNumber = "249"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4799,33 +4747,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
-         landmarkName = "-signin:automatic:animated:context:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
-         landmarkName = "-signin:automatic:animated:context:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400020495.196568"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "169"
@@ -4968,11 +4890,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "217"
-         endingLineNumber = "217"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4981,11 +4903,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400014669.496972"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "480"
-         endingLineNumber = "480"
+         startingLineNumber = "483"
+         endingLineNumber = "483"
          landmarkName = "-send"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4994,11 +4916,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "469"
-         endingLineNumber = "469"
+         startingLineNumber = "470"
+         endingLineNumber = "470"
          landmarkName = "-send"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5007,11 +4929,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
          landmarkName = "-viewDidLayoutSubviews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5020,11 +4942,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "271"
-         endingLineNumber = "271"
+         startingLineNumber = "272"
+         endingLineNumber = "272"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5059,11 +4981,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "237"
-         endingLineNumber = "237"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5098,22 +5020,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGNotificationCenter.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "429"
-         endingLineNumber = "429">
+         startingLineNumber = "431"
+         endingLineNumber = "431">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5122,22 +5044,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGNotificationCenter.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "434"
-         endingLineNumber = "434">
+         startingLineNumber = "436"
+         endingLineNumber = "436">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "251"
-         endingLineNumber = "251"
+         startingLineNumber = "252"
+         endingLineNumber = "252"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5250,11 +5172,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGNotificationCenter.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293">
+         startingLineNumber = "295"
+         endingLineNumber = "295">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5430,11 +5352,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
+         startingLineNumber = "159"
+         endingLineNumber = "159"
          landmarkName = "-viewDidLayoutSubviews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5443,11 +5365,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "167"
-         endingLineNumber = "167"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "-viewDidLayoutSubviews"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5508,11 +5430,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400014669.496972"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "477"
-         endingLineNumber = "477"
+         startingLineNumber = "479"
+         endingLineNumber = "479"
          landmarkName = "-send"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5586,11 +5508,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "230"
-         endingLineNumber = "230"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5599,11 +5521,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "229"
-         endingLineNumber = "229"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5638,33 +5560,33 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGNotificationCenter.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "418"
-         endingLineNumber = "418">
+         startingLineNumber = "420"
+         endingLineNumber = "420">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGNotificationCenter.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "432"
-         endingLineNumber = "432">
+         startingLineNumber = "434"
+         endingLineNumber = "434">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400020495.196568"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "142"
-         endingLineNumber = "142"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
          landmarkName = "-signin:automatic:animated:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5673,11 +5595,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "267"
-         endingLineNumber = "267"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5686,11 +5608,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399515188.810982"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "263"
+         endingLineNumber = "263"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5725,11 +5647,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400021670.877965"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "167"
-         endingLineNumber = "167"
+         startingLineNumber = "198"
+         endingLineNumber = "198"
          landmarkName = "-signin:automatic:animated:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5764,11 +5686,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGAccountManager.m"
-         timestampString = "399234967.199842"
+         timestampString = "400021670.877965"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "279"
-         endingLineNumber = "279"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
          landmarkName = "-changeScreenName:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5816,11 +5738,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "399069353.319357"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "244"
-         endingLineNumber = "244"
+         startingLineNumber = "251"
+         endingLineNumber = "251"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5829,11 +5751,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "399070938.836561"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "239"
-         endingLineNumber = "239"
+         startingLineNumber = "246"
+         endingLineNumber = "246"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5842,11 +5764,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "399070948.616248"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "235"
-         endingLineNumber = "235"
+         startingLineNumber = "237"
+         endingLineNumber = "237"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5855,11 +5777,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Network/AGJSONHttpHandler.m"
-         timestampString = "399070957.288367"
+         timestampString = "400015986.98934"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "236"
-         endingLineNumber = "236"
+         startingLineNumber = "243"
+         endingLineNumber = "243"
          landmarkName = "+request:params:path:prompt:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5972,11 +5894,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGPlaneNotification.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013622.412278"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "+planeNotification"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6479,11 +6401,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399518353.774414"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "187"
-         endingLineNumber = "187"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-refresh"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6492,11 +6414,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399518436.527996"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "224"
-         endingLineNumber = "224"
+         startingLineNumber = "225"
+         endingLineNumber = "225"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6505,11 +6427,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Chat/AGChatChatViewController.m"
-         timestampString = "399518482.839047"
+         timestampString = "400013496.123119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "244"
-         endingLineNumber = "244"
+         startingLineNumber = "245"
+         endingLineNumber = "245"
          landmarkName = "-gotMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6518,37 +6440,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGPlaneNotification.m"
-         timestampString = "399952129.781401"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "348"
-         endingLineNumber = "348"
-         landmarkName = "-gotMessagesForPlane:startId:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGPlaneNotification.m"
-         timestampString = "399952129.781401"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "357"
-         endingLineNumber = "357"
-         landmarkName = "-gotMessagesForPlane:startId:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Logic/Manager/AGPlaneNotification.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013622.412278"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "354"
          endingLineNumber = "354"
+         landmarkName = "-gotMessagesForPlane:startId:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneNotification.m"
+         timestampString = "400013622.412278"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
+         landmarkName = "-gotMessagesForPlane:startId:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneNotification.m"
+         timestampString = "400013622.412278"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "360"
+         endingLineNumber = "360"
          landmarkName = "-gotMessagesForPlane:startId:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6583,11 +6505,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGPlaneNotification.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013622.412278"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
+         startingLineNumber = "295"
+         endingLineNumber = "295"
          landmarkName = "-obtainMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6596,11 +6518,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Logic/Manager/AGPlaneNotification.m"
-         timestampString = "399952129.781401"
+         timestampString = "400013622.412278"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "290"
-         endingLineNumber = "290"
+         startingLineNumber = "296"
+         endingLineNumber = "296"
          landmarkName = "-obtainMessagesForPlane:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6862,6 +6784,149 @@
          startingLineNumber = "286"
          endingLineNumber = "286"
          landmarkName = "-obtainChainMessagesForChain:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneNotification.m"
+         timestampString = "400013686.438921"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "390"
+         endingLineNumber = "390"
+         landmarkName = "-sendMessages:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneNotification.m"
+         timestampString = "400013703.540495"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "400"
+         endingLineNumber = "400"
+         landmarkName = "-sendMessages"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneNotification.m"
+         timestampString = "400014790.979919"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "427"
+         endingLineNumber = "427"
+         landmarkName = "-sendMessage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "400014669.496972"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
+         landmarkName = "-sentMessage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneNotification.m"
+         timestampString = "400014790.979919"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "422"
+         endingLineNumber = "422"
+         landmarkName = "-sendMessage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGAccountManager.m"
+         timestampString = "400022020.575134"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
+         landmarkName = "-signin:automatic:animated:context:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGAccountManager.m"
+         timestampString = "400022027.964899"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
+         landmarkName = "-signin:automatic:animated:context:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGAccountManager.m"
+         timestampString = "400022034.897635"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "149"
+         endingLineNumber = "149"
+         landmarkName = "-signin:automatic:animated:context:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGAccountManager.m"
+         timestampString = "400022056.990345"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
+         landmarkName = "-signin:automatic:animated:context:block:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/SPGooglePlacesAutocomplete/SPGooglePlacesAutocompleteQuery.m"
+         timestampString = "400025525.214456"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
+         landmarkName = "-googleURLString"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Logic/Manager/AGPlaneManager.m"
+         timestampString = "400031987.465798"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
+         landmarkName = "-replyPlane:context:block:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

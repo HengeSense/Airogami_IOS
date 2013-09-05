@@ -233,6 +233,13 @@
             
             if (status.intValue == 0) {
                 result = [dict objectForKey:AGLogicJSONResultKey];
+                if (result == nil) {
+                    error = [AGMessageUtils errorServer];
+#ifdef IS_DEBUG
+                    NSAssert(false, @"Server Error");
+#endif
+                }
+            
             }
             else if(status.intValue == AGLogicJSONStatusNotSignin)
             {//not signin

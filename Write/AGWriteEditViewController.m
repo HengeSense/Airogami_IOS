@@ -191,7 +191,7 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
     if ([segue.destinationViewController isKindOfClass:[AGWriteLocationViewController class]]) {
         AGWriteLocationViewController * wlvc = segue.destinationViewController;
         wlvc.writeEditViewController = self;
-        
+        [wlvc setValue:@"destination" forKey:@"type"];
     }
 }
 

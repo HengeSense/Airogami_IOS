@@ -310,6 +310,9 @@
 {
     NSError *error;
     BOOL succeed = [managedObjectContext save:&error];
+    if (succeed == NO) {
+        [managedObjectContext undo];
+    }
 #ifdef IS_DEBUG
     if (succeed == NO) {
         NSLog(@"AGCoreDate.save: %@",error.userInfo);

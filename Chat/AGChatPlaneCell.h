@@ -15,6 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) NSString *badge;
 @end

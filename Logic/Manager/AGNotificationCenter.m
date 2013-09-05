@@ -210,7 +210,9 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
 //should run once the program is active
 - (void) resendMessages
 {
-    
+    NSDictionary *dict = [NSDictionary dictionary];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationSendMessages object:self userInfo:dict];
 }
 
 

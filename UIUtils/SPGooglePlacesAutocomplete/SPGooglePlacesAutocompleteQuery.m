@@ -8,6 +8,7 @@
 
 #import "SPGooglePlacesAutocompleteQuery.h"
 #import "SPGooglePlacesAutocompletePlace.h"
+#import "NSString+Addition.h"
 
 @interface SPGooglePlacesAutocompleteQuery()
 @property (nonatomic, strong, readwrite) SPGooglePlacesAutocompleteResultBlock resultBlock;
@@ -42,7 +43,7 @@
 
 - (NSString *)googleURLString {
     NSMutableString *url = [NSMutableString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&sensor=%@&key=%@",
-                                                             [input stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                                             [input encodeURIComponent],
                                                              SPBooleanStringForBool(sensor), key];
     if (offset != NSNotFound) {
         [url appendFormat:@"&offset=%u", offset];

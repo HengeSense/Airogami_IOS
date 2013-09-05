@@ -135,6 +135,7 @@ static float AGInputTextViewMaxHeight = 100;
         }
         categoryLabel.text = [AGCategory title:plane.category.categoryId];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sentMessage:) name:AGNotificationSentMessage object:nil];
     }
     else if ([airogami isKindOfClass:[AGChain class]]){
         AGChain *chain = airogami;
@@ -473,20 +474,51 @@ static float AGInputTextViewMaxHeight = 100;
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.content date:message.createdTime type:BubbleTypeMine];
     sayBubble.account = managerUtils.accountManager.account;
     sayBubble.state = message.state.intValue;
+    sayBubble.obj = message;
     [messagesData addObject:sayBubble];
     [bubbleTable addData:YES animated:didInitialized];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSendMessages object:nil userInfo:nil];
     //
-    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {
+    /*[managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {
         if (message) {
             sayBubble.state = BubbleCellStateSent;
             sayBubble.date = message.createdTime;
             [bubbleTable reloadData];
         }
         if (refresh) {
-            [self.navigationController popViewControllerAnimated:YES];
+            
         }
         
-    }];
+    }];*/
+    
+}
+
+-(void) sentMessage:(NSNotification*)notification
+{
+    NSString *refresh = [notification.userInfo objectForKey:@"refresh"];
+    if (refresh) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else{
+        AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
+        if ([plane isEqual:airogami]) {
+            AGMessage *message = [notification.userInfo objectForKey:@"message"];
+            AGMessage *remoteMessage = [notification.userInfo objectForKey:@"remoteMessage"];
+            
+            if (message) {
+                for (NSBubbleData *bubbleData in messagesData) {
+                    AGMessage *msg = bubbleData.obj;
+                    if ([msg isEqual:message]) {
+                        bubbleData.state = BubbleCellStateSent;
+                        bubbleData.date = remoteMessage.createdTime;
+                        [bubbleTable reloadData];
+                        break;
+                    }
+                }
+            }
+        }
+        
+    }
     
 }
 
