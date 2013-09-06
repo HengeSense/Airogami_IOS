@@ -9,6 +9,8 @@
 #import "AGNotificationCenter.h"
 #import "AGControllerUtils.h"
 #import "AGUtils.h"
+#import "AGManagerUtils.h"
+#import "AGAccountStat.h"
 
 NSString *AGNotificationCollected = @"notification.collected";
 NSString *AGNotificationReceive= @"notification.receive";
@@ -17,6 +19,7 @@ NSString *AGNotificationGetCollected= @"notification.getcollected";
 NSString *AGNotificationObtained = @"notification.obtained";
 NSString *AGNotificationObtain = @"notification.obtain";
 NSString *AGNotificationGetObtained = @"notification.getobtained";
+NSString *AGNotificationUnreadMessagesChanged = @"notification.unreadMessagesChanged";
 
 @interface AGNotificationCenter()
 {
@@ -52,6 +55,8 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
         [notificationCenter addObserver:self selector:@selector(obtainedPlanes:) name:AGNotificationObtainedPlanes object:nil];
         [notificationCenter addObserver:self selector:@selector(obtainedChains:) name:AGNotificationObtainedChains object:nil];
         [notificationCenter addObserver:self selector:@selector(getObtained:) name:AGNotificationGetObtained object:nil];
+        //unread messages changed
+        [notificationCenter addObserver:self selector:@selector(unreadMessagesChanged:) name:AGNotificationUnreadMessagesChangedForPlane object:nil];
     }
     return self;
 }
@@ -213,6 +218,16 @@ NSString *AGNotificationGetObtained = @"notification.getobtained";
     NSDictionary *dict = [NSDictionary dictionary];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationSendMessages object:self userInfo:dict];
+}
+
+- (void)unreadMessagesChanged:(NSNotification*)notification
+{
+    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    NSNumber *number = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue];
+    NSMutableDictionary *dict = [notification.userInfo mutableCopy];
+    [dict setObject:number forKey:@"count"];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationUnreadMessagesChanged object:self userInfo:dict];
 }
 
 

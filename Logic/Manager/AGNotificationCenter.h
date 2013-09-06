@@ -18,6 +18,7 @@ extern NSString *AGNotificationGetCollected;
 extern NSString *AGNotificationObtained;
 extern NSString *AGNotificationObtain;
 extern NSString *AGNotificationGetObtained;
+extern NSString *AGNotificationUnreadMessagesChanged;
 
 @interface AGNotificationCenter : NSObject
 

@@ -84,12 +84,14 @@ static NSString *DownloadNo = @"0";
 {
     [super setImage:image];
     if ([self.superview isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *scrollView = (UIScrollView *) self.superview;
+        scrollView.zoomScale = 1.0f;
         CGRect bounds = self.bounds;
         bounds.size = [self adjustSize];
         self.bounds = bounds;
         self.center = self.superview.center;
-        UIScrollView *scrollView = (UIScrollView *) self.superview;
         scrollView.contentSize = bounds.size;
+        
     }
     
 }

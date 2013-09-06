@@ -60,8 +60,8 @@
         customBadge.hidden = NO;
         CGRect frame = customBadge.frame;
         CGRect outer = self.profileImageView.frame;
-        frame.origin.y = outer.origin.y - 10;
-        frame.origin.x = outer.origin.x + outer.size.width - frame.size.width + 10;
+        frame.origin.y = outer.origin.y - 5;
+        frame.origin.x = outer.origin.x + outer.size.width - frame.size.width + 5;
         customBadge.frame = frame;
     }
 }

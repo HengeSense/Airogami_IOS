@@ -11,13 +11,13 @@
 #import <UIKit/UIKit.h>
 
 typedef enum{
-    AGCategoryRandom = 0,
+    AGCategoryChain = 0,
+    AGCategoryRandom,
     AGCategoryQuestion,
     AGCategoryConfession,
     AGCategoryRelationship,
     AGCategoryLocalInformation,
     AGCategoryFeeling,
-    AGCategoryChain,
     AGCategoryUnknown
 } AGPlaneCategoryEnum;
 

@@ -292,6 +292,11 @@ NSString *AGNotificationGotChainMessagesForChain = @"notification.gotchainmessag
             }
             if (chainMessages.count) {
                 [self obtainedChainMessages:chainMessages forChain:chain.chainId];
+                NSDate *last = ((AGChainMessage*)[chainMessages lastObject]).createdTime;
+                NSDictionary *params = [chainManager paramsForViewedChainMessages:chain.chainId last:last];
+                [chainManager viewedChainMessages:params context:nil block:^(NSError *error, id context) {
+                    
+                }];
             }
             
         }

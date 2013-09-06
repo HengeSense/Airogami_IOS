@@ -10,6 +10,7 @@
 #import "AGManagerUtils.h"
 #import <QuartzCore/QuartzCore.h>
 #import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation AGImageButton
 

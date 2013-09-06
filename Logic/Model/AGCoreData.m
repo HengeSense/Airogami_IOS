@@ -311,7 +311,7 @@
     NSError *error;
     BOOL succeed = [managedObjectContext save:&error];
     if (succeed == NO) {
-        [managedObjectContext undo];
+        [managedObjectContext.undoManager undo];
     }
 #ifdef IS_DEBUG
     if (succeed == NO) {

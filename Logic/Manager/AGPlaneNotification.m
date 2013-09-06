@@ -10,6 +10,7 @@
 #import "AGManagerUtils.h"
 #import "AGControllerUtils.h"
 #import "AGNumber.h"
+#import "AGAccountStat.h"
 
 NSString *AGNotificationCollectedPlanes = @"notification.collectedplanes";
 NSString *AGNotificationReceivePlanes = @"notification.receiveplanes";
@@ -29,6 +30,8 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 NSString *AGNotificationSendMessages = @"notification.sendmessages";
 NSString *AGNotificationSentMessage = @"notification.sentmessage";
 
+NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesForPlane";
+NSString *AGNotificationUnreadMessagesChangedForPlane = @"notification.unreadMessagesChangedForPlane";
 
 
 @interface AGPlaneNotification()
@@ -72,6 +75,8 @@ NSString *AGNotificationSentMessage = @"notification.sentmessage";
         [notificationCenter addObserver:self selector:@selector(getMessagesForPlane:) name:AGNotificationGetMessagesForPlane object:nil];
         // send messages
         [notificationCenter addObserver:self selector:@selector(sendMessages:) name:AGNotificationSendMessages object:nil];
+        //viewed messages 
+        [notificationCenter addObserver:self selector:@selector(viewedMessagesForPlane:) name:AGNotificationViewedMessagesForPlane object:nil];
     }
     return self;
 }
@@ -305,12 +310,21 @@ NSString *AGNotificationSentMessage = @"notification.sentmessage";
                 [self obtainMessages];
             }
             if (messages.count) {
+                AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+                accountStat.unreadMessagesCount = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + messages.count];
+                [[AGCoreData coreData] save];
+                //
                 [self obtainedMessages:messages forPlane:plane.planeId];
+                //
+                //NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane, @"plane", nil];
+                //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
+                //
                 NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;
                 NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
                 [planeManager viewedMessages:params context:nil block:^(NSError *error, id context) {
                     
                 }];
+                
             }
             
         }
@@ -438,6 +452,14 @@ NSString *AGNotificationSentMessage = @"notification.sentmessage";
         
     }];
     
+}
+
+- (void)viewedMessagesForPlane:(NSNotification*)notification
+{
+    AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
+    [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane, @"plane", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
 }
 
 

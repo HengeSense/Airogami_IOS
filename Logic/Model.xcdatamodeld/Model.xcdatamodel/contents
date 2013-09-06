@@ -18,6 +18,8 @@
     <entity name="AGAccountStat" representedClassName="AGAccountStat" syncable="YES">
         <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="signinUuid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="unreadChainMessagesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="unreadMessagesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="accountStat" inverseEntity="AGAccount" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="accountId"/>
@@ -65,6 +67,7 @@
     <entity name="AGChainMessage" representedClassName="AGChainMessage" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="lastViewedTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chainMessages" inverseEntity="AGAccount" syncable="YES"/>
@@ -136,10 +139,12 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="matchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="maxMatchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="ownerViewedMsgId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="planeId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="targetViewedMsgId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updatedTime" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="accountByOwnerId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForOwnerId" inverseEntity="AGAccount" syncable="YES"/>
@@ -174,16 +179,16 @@
     </entity>
     <elements>
         <element name="AGAccount" positionX="0" positionY="0" width="128" height="195"/>
-        <element name="AGAccountStat" positionX="-153" positionY="225" width="128" height="90"/>
+        <element name="AGAccountStat" positionX="-153" positionY="225" width="128" height="120"/>
         <element name="AGAuthenticate" positionX="7" positionY="309" width="128" height="90"/>
         <element name="AGCategory" positionX="-360" positionY="-243" width="128" height="90"/>
         <element name="AGChain" positionX="142" positionY="0" width="128" height="315"/>
-        <element name="AGChainMessage" positionX="259" positionY="-27" width="128" height="150"/>
+        <element name="AGChainMessage" positionX="259" positionY="-27" width="128" height="165"/>
         <element name="AGChainMessageId" positionX="187" positionY="-216" width="128" height="90"/>
         <element name="AGMessage" positionX="34" positionY="-333" width="128" height="150"/>
-        <element name="AGPlane" positionX="-191" positionY="-288" width="128" height="405"/>
-        <element name="AGProfile" positionX="-441" positionY="18" width="128" height="285"/>
-        <element name="AGNewPlane" positionX="160" positionY="192" width="128" height="105"/>
         <element name="AGNewChain" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="AGNewPlane" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="AGPlane" positionX="-191" positionY="-288" width="128" height="435"/>
+        <element name="AGProfile" positionX="-441" positionY="18" width="128" height="285"/>
     </elements>
 </model>

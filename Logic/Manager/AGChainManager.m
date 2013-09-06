@@ -24,6 +24,7 @@ static NSString *ThrowChainPath = @"chain/throwChain.action?";
 static NSString *ReceiveChainsPath = @"chain/receiveChains.action?";
 static NSString *ObtainChainsPath = @"chain/obtainChains.action?";
 static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
+static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
 
 
 @implementation AGChainManager
@@ -269,6 +270,32 @@ static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
         [params setObject:last forKey:@"last"];
     }
     
+    return params;
+}
+
+- (void) viewedChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ViewedChainMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSNumber *result) {
+        if (error) {
+            
+        }
+        else{
+#ifdef IS_DEBUG
+            NSLog(@"ChainManager.viewedChainMessages: result = %@", result);
+#endif
+        }
+        if (block) {
+            block(error, context);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForViewedChainMessages:(NSNumber*)chainId last:(NSDate*)last
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:chainId forKey:@"chainId"];
+    [params setObject:last forKey:@"last"];
     return params;
 }
 

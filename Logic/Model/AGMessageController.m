@@ -9,6 +9,9 @@
 #import "AGMessageController.h"
 #import "AGCoreData.h"
 #import "AGManagerUtils.h"
+#import "AGAccountStat.h"
+#import "AGPlane.h"
+#import "AGControllerUtils.h"
 
 static int MessageLimit = 10;
 
@@ -70,6 +73,51 @@ static int MessageLimit = 10;
     }
     NSNumber *more = [NSNumber numberWithBool:array.count > MessageLimit];
     return [NSDictionary dictionaryWithObjectsAndKeys:array, @"messages", more, @"more", nil];
+}
+
+- (int) getUnreadMessageCountForPlane:(NSNumber *)planeId
+{
+    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:messageEntityDescription];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and account.accountId != %@ and ((plane.accountByOwnerId.accountId = %@ and messageId > plane.ownerViewedMsgId) or (plane.accountByTargetId.accountId = %@ and messageId > plane.targetViewedMsgId))", planeId, accountId, accountId, accountId];
+    [fetchRequest setPredicate:predicate];
+    //expression
+    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"messageId"];
+    NSExpression *countExpression = [NSExpression expressionForFunction:@"count:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+    [expressionDescription setName:@"count"];
+    [expressionDescription setExpression:countExpression];
+    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+    //
+    int count = 0;
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count) {
+        NSNumber *number = [[array objectAtIndex:0] objectForKey:@"count"];
+        count = number.intValue;
+    }
+    return count;
+}
+
+-(void) viewedMessagesForPlane:(AGPlane*)plane
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccountStat *accountStat = account.accountStat;
+    int count = accountStat.unreadMessagesCount.intValue - [self getUnreadMessageCountForPlane:plane.planeId];
+    accountStat.unreadMessagesCount = [NSNumber numberWithInt:count];
+     AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
+    if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
+        plane.ownerViewedMsgId = message.messageId;
+    }
+    else{
+        plane.targetViewedMsgId = message.messageId;
+    }
+    [coreData save];
+    
 }
 
 //ascending

@@ -199,6 +199,7 @@
         maxUpdateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
     }
     chain.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
+    NSLog(@"%@",  chain.updateInc);
     [coreData save];
 }
 

@@ -102,9 +102,10 @@
     else{
         NSArray *chats = [dict objectForKey:@"chats"];
         data = chats;
+        [self.tableView reloadData];
     }
     
-    [self.tableView reloadData];
+    
 }
 
 - (void) deleteAirogami:(int) row
@@ -150,6 +151,7 @@
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     id obj = [data objectAtIndex:indexPath.row];
     AGProfile *profile = nil;
+    int count = 0;
     if([obj isKindOfClass:[AGPlane class]])
     {
         AGPlane *plane = obj;
@@ -164,7 +166,7 @@
         AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
         cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
         cell.messageLabel.text = message.content;
-        
+        count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
     }
     else if ([obj isKindOfClass:[AGChain class]])
     {
@@ -177,7 +179,7 @@
 
     [cell.profileImageView setImageWithAccountId:profile.accountId];
     cell.nameLabel.text = profile.fullName;
-    cell.badge = @"99";
+    cell.badge = [NSString stringWithFormat:@"%d", count];
     
     return cell;
 }

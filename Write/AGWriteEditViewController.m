@@ -119,7 +119,7 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
 
 - (IBAction)sendButtonTouched:(UIButton *)sender {
     if ([self validate]) {
-        if (categoryId.intValue < AGCategoryChain) {//plane
+        if (categoryId.intValue != AGCategoryChain) {//plane
             [[AGManagerUtils managerUtils].planeManager sendPlane:[self obtainData] context:nil block:^(NSError *error, id context) {
                 if (error) {
                     [self.textView becomeFirstResponder];
@@ -166,14 +166,14 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
     }
     [data setObject:[NSNumber numberWithInt:sex] forKey:@"sex"];
     
-    if (categoryId.intValue < AGCategoryChain) {
+    if (categoryId.intValue == AGCategoryChain) {
+        [data setObject:self.textView.text forKey:@"chainMessageVO.content"];
+        [data setObject:[NSNumber numberWithInt:AGMessageTypeText] forKey:@"chainMessageVO.type"];
+    }
+    else{
         [data setObject:categoryId forKey:@"categoryVO.categoryId"];
         [data setObject:self.textView.text forKey:@"messageVO.content"];
         [data setObject:[NSNumber numberWithInt:AGMessageTypeText] forKey:@"messageVO.type"];
-    }
-    else{
-        [data setObject:self.textView.text forKey:@"chainMessageVO.content"];
-        [data setObject:[NSNumber numberWithInt:AGMessageTypeText] forKey:@"chainMessageVO.type"];
     }
     
     

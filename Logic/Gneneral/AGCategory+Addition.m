@@ -11,13 +11,14 @@
 static NSDictionary *categoryDict;
 //static NSString* names[] = {@"Random", @"Qustion", @"Confession", @"Relationship", @"LocalInfo", @"Feeling", @"Chain"};
 static NSString* keys[] = {
+    @"plane.category.chain",
     @"plane.category.random",
     @"plane.category.question",
     @"plane.category.confession",
     @"plane.category.relationship",
     @"plane.category.localinfo",
-    @"plane.category.feeling",
-    @"plane.category.chain"
+    @"plane.category.feeling"
+    
 };
 
 static NSString *key = @"plane.category.unknown";

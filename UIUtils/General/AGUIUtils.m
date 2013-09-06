@@ -15,9 +15,9 @@
 
 #define kAGAlertMessageOK @"OK"
 
-static NSString *planeImages[] = {@"plane_random.png", @"plane_question.png", @"plane_confession.png", @"plane_relationship.png", @"plane_localinfo.png", @"plane_feeling.png", @"plane_chain.png", @"plane_random.png"};
+static NSString *planeImages[] = {@"plane_chain.png", @"plane_random.png", @"plane_question.png", @"plane_confession.png", @"plane_relationship.png", @"plane_localinfo.png", @"plane_feeling.png", @"plane_random.png"};
 
-static NSString *categoryImages[] = {@"plane_random_icon.png", @"plane_question_icon.png", @"plane_confession_icon.png", @"plane_relationship_icon.png", @"plane_localinfo_icon.png", @"plane_feeling_icon.png", @"plane_chain_icon.png", @"plane_unknown_icon.png"};
+static NSString *categoryImages[] = { @"plane_chain_icon.png", @"plane_random_icon.png", @"plane_question_icon.png", @"plane_confession_icon.png", @"plane_relationship_icon.png", @"plane_localinfo_icon.png", @"plane_feeling_icon.png", @"plane_unknown_icon.png"};
 
 static NSString *collectTypeImages[] = {@"collect_receive_tag.png", @"collect_found_tag.png"};
 static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Avenir-Heavy"};
@@ -49,14 +49,14 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
 
 + (UIImage*) planeImage:(int) category
 {
-    if (category > AGCategoryChain) {
+    if (category > AGCategoryUnknown) {
         category = AGCategoryUnknown;
     }
     return [UIImage imageNamed:planeImages[category]];
 }
 + (UIImage*) categoryImage:(AGPlaneCategoryEnum) category
 {
-    if (category > AGCategoryChain) {
+    if (category > AGCategoryUnknown) {
         category = AGCategoryUnknown;
     }
     return [UIImage imageNamed:categoryImages[category]];
