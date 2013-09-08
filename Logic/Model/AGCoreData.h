@@ -25,5 +25,6 @@
 - (void) remove:(NSManagedObject*) managedObject;
 - (NSManagedObject*) create:(Class)class;
 - (BOOL) save;
+- (void) resetPath;
 
 @end

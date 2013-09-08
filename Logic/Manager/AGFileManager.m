@@ -7,6 +7,7 @@
 //
 
 #import "AGFileManager.h"
+#import "AGManagerUtils.h"
 
 static NSURL *DataUrl;
 static NSURL *DatabaseUrl;
@@ -14,6 +15,8 @@ static NSURL *ConfigUrl;
 static NSURL *rootUrl;
 
 @implementation AGFileManager
+
+@synthesize accountId;
 
 -(id) init
 {
@@ -51,7 +54,16 @@ static NSURL *rootUrl;
 
 - (NSURL*) urlForDatabase
 {
-    return DatabaseUrl;
+    NSString *str = accountId.stringValue;
+    NSURL *url = nil;
+    if (str) {
+        url = [DatabaseUrl URLByAppendingPathComponent:str];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:url.path]) {
+            [fileManager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+    }
+    return url;
 }
 
 - (NSURL*) urlForConfig

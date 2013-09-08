@@ -17,7 +17,6 @@ static AGAppDelegate *AppDelegate;
 
 @interface AGAppDelegate()
 {
-    AGAccountController *accountController;
 }
 @end
 
@@ -35,7 +34,6 @@ static AGAppDelegate *AppDelegate;
     if (self = [super init]) {
         AppDelegate = self;
         appConfig = [AGAppConfig appConfig];
-        accountController = [[AGAccountController alloc] init];
     }
     return self;
 }

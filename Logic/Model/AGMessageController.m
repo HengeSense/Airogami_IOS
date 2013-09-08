@@ -107,15 +107,27 @@ static int MessageLimit = 10;
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     AGAccountStat *accountStat = account.accountStat;
-    int count = accountStat.unreadMessagesCount.intValue - [self getUnreadMessageCountForPlane:plane.planeId];
+    //old
+    AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
+    if (message) {
+        if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
+            plane.ownerViewedMsgId = message.messageId;
+        }
+        else{
+            plane.targetViewedMsgId = message.messageId;
+        }
+    }
+    [coreData save];
+    //new
+    int newCount = [self getUnreadMessageCountForPlane:plane.planeId];
+    int count = accountStat.unreadMessagesCount.intValue + newCount - plane.unreadMessagesCount.intValue;
+    if(count < 0){
+        count = 0;
+    }
     accountStat.unreadMessagesCount = [NSNumber numberWithInt:count];
-     AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
-    if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
-        plane.ownerViewedMsgId = message.messageId;
-    }
-    else{
-        plane.targetViewedMsgId = message.messageId;
-    }
+    plane.unreadMessagesCount = [NSNumber numberWithInt:newCount];
+    
+    
     [coreData save];
     
 }

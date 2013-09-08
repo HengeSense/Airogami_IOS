@@ -215,16 +215,11 @@
 	[pulldownHeader scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
 	
 }
-
--(void) viewWillUnload
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super viewWillUnload];
-}
          
 - (void)viewDidUnload {
     [self setHeaderView:nil];
     [self setPickupView:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidUnload];
 }
 @end

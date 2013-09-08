@@ -19,6 +19,7 @@
 #import "AGRootViewController.h"
 #import "AGAppDelegate.h"
 #import "AGAuthenticate.h"
+#import "AGFileManager.h"
 
 static NSString *SignupPath = @"account/emailSignup.action?";
 static NSString *EmailSigninPath = @"account/emailSignin.action?";
@@ -46,7 +47,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
 - (id)init
 {
     if (self = [super init]) {
-        account = [[AGAppDelegate appDelegate].appConfig obtainAccount];
+        //account = [[AGAppDelegate appDelegate].appConfig obtainAccount];
     }
     return self;
 }
@@ -172,20 +173,27 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                     succeed = YES;
                     if (accountJson) {
                         NSAssert([accountJson objectForKey:@"authenticate"] != nil && [accountJson objectForKey:@"authenticate"] != [NSNull null], @"Invalid email");
-                        account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                         AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+                        BOOL shouldUpdate = YES;
                         if (automatic) {
                             //signined at other place
                             if ([appConfig accountUpdated:account]) {
                                 [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninOther];
                                 [appConfig resetAppAccount];
+                                account = nil;
                                 [[AGRootViewController rootViewController] switchToSign];
+                                shouldUpdate = NO;
                             }
                             else{
-                                [appConfig updateAppAccount:account password:password];
+                                
                             }
                         }
                         else{
+                            [AGFileManager fileManager].accountId = [accountJson objectForKey:@"accountId"];
+                            [[AGCoreData coreData] resetPath];
+                        }
+                        if(shouldUpdate){
+                            account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                             [appConfig updateAppAccount:account password:password];
                         }
                     }
@@ -216,6 +224,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
 
 -(void) signout
 {
+    account = nil;
     NSString *path = SignoutPath;
     //[AGWaitUtils startWait:@""];
     

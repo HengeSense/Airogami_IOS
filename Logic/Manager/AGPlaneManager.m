@@ -193,6 +193,10 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 
             }
             else{
+                //viewedMessagesForPlane
+                NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
+                //
                 [[AGCoreData coreData] remove:plane];
             }
             
@@ -216,6 +220,12 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             //succeed
             NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
             if (planes.count) {
+                for(AGPlane *plane in planes){
+                    AGMessage *message = plane.messages.objectEnumerator.nextObject;
+                    plane.targetViewedMsgId = message.messageId;
+                }
+                [[AGCoreData coreData] save];
+                //
                 [[AGPlaneNotification planeNotification] collectedPlanes];
             }
             NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
@@ -241,7 +251,12 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
         }
         else{
             //succeed
-            [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+            NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+            for(AGPlane *plane in planes){
+                AGMessage *message = plane.messages.objectEnumerator.nextObject;
+                plane.targetViewedMsgId = message.messageId;
+            }
+            [[AGCoreData coreData] save];
         }
         if (block) {
             block(error, context, result);

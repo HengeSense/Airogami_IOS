@@ -2,7 +2,7 @@
 //  AGPlane.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/5/13.
+//  Created by Tianhu Yang on 9/6/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -26,14 +26,15 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSNumber * matchCount;
 @property (nonatomic, retain) NSNumber * maxMatchCount;
+@property (nonatomic, retain) NSNumber * ownerViewedMsgId;
 @property (nonatomic, retain) NSNumber * planeId;
 @property (nonatomic, retain) NSString * province;
 @property (nonatomic, retain) NSNumber * sex;
 @property (nonatomic, retain) NSNumber * status;
+@property (nonatomic, retain) NSNumber * targetViewedMsgId;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
-@property (nonatomic, retain) NSNumber * ownerViewedMsgId;
-@property (nonatomic, retain) NSNumber * targetViewedMsgId;
+@property (nonatomic, retain) NSNumber * unreadMessagesCount;
 @property (nonatomic, retain) AGAccount *accountByOwnerId;
 @property (nonatomic, retain) AGAccount *accountByTargetId;
 @property (nonatomic, retain) AGCategory *category;

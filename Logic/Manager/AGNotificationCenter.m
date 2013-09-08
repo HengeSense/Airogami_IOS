@@ -19,17 +19,25 @@ NSString *AGNotificationGetCollected= @"notification.getcollected";
 NSString *AGNotificationObtained = @"notification.obtained";
 NSString *AGNotificationObtain = @"notification.obtain";
 NSString *AGNotificationGetObtained = @"notification.getobtained";
-NSString *AGNotificationUnreadMessagesChanged = @"notification.unreadMessagesChanged";
+NSString *AGNotificationGetUnreadMessagesCount = @"notification.getUnreadMessagesCount";
+NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessagesCount";
 
 @interface AGNotificationCenter()
 {
-    NSArray *planes;
-    NSArray *chains;
+    NSArray *planesForCollect;
+    NSArray *chainsForCollect;
+    NSArray *planesForChat;
+    NSArray *chainsForChat;
 }
 
 @end
 
 @implementation AGNotificationCenter
+
++(void) initialize
+{
+    [AGNotificationCenter notificationCenter];
+}
 
 + (AGNotificationCenter*) notificationCenter
 {
@@ -57,6 +65,8 @@ NSString *AGNotificationUnreadMessagesChanged = @"notification.unreadMessagesCha
         [notificationCenter addObserver:self selector:@selector(getObtained:) name:AGNotificationGetObtained object:nil];
         //unread messages changed
         [notificationCenter addObserver:self selector:@selector(unreadMessagesChanged:) name:AGNotificationUnreadMessagesChangedForPlane object:nil];
+        [notificationCenter addObserver:self selector:@selector(unreadMessagesChanged:) name:AGNotificationUnreadChainMessagesChangedForChain object:nil];
+        [notificationCenter addObserver:self selector:@selector(getUnreadMessagesCount:) name:AGNotificationGetUnreadMessagesCount object:nil];
     }
     return self;
 }
@@ -101,12 +111,12 @@ NSString *AGNotificationUnreadMessagesChanged = @"notification.unreadMessagesCha
 - (void) collectedContainPlanes:(BOOL) containPlanes containChains:(BOOL)containChains
 {
     if (containPlanes) {
-        planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForCollect];
+        planesForCollect = [[AGControllerUtils controllerUtils].planeController getAllPlanesForCollect];
     }
     if (containChains) {
-        chains = [[AGControllerUtils controllerUtils].chainController getAllChainsForCollect];
+        chainsForCollect = [[AGControllerUtils controllerUtils].chainController getAllChainsForCollect];
     }
-    NSArray *collects = [AGUtils mergeSortedArray:planes second:chains usingBlock:^int(id obj1, id obj2) {
+    NSArray *collects = [AGUtils mergeSortedArray:planesForCollect second:chainsForCollect usingBlock:^int(id obj1, id obj2) {
         AGPlane *plane = obj1;
         AGChain *chain = obj2;
         return [plane.updatedTime compare:chain.updatedTime];
@@ -158,12 +168,12 @@ NSString *AGNotificationUnreadMessagesChanged = @"notification.unreadMessagesCha
 - (void) obtainedContainPlanes:(BOOL) containPlanes containChains:(BOOL)containChains
 {
     if (containPlanes) {
-        planes = [[AGControllerUtils controllerUtils].planeController getAllPlanesForChat];
+        planesForChat = [[AGControllerUtils controllerUtils].planeController getAllPlanesForChat];
     }
     if (containChains) {
-        chains = [[AGControllerUtils controllerUtils].chainController getAllChainsForChat];
+        chainsForChat = [[AGControllerUtils controllerUtils].chainController getAllChainsForChat];
     }
-    NSArray *chats = [AGUtils mergeSortedArray:planes second:chains usingBlock:^int(id obj1, id obj2) {
+    NSArray *chats = [AGUtils mergeSortedArray:planesForChat second:chainsForChat usingBlock:^int(id obj1, id obj2) {
         AGPlane *plane = obj1;
         AGChain *chain = obj2;
         return [plane.updatedTime compare:chain.updatedTime];
@@ -227,7 +237,36 @@ NSString *AGNotificationUnreadMessagesChanged = @"notification.unreadMessagesCha
     NSMutableDictionary *dict = [notification.userInfo mutableCopy];
     [dict setObject:number forKey:@"count"];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationUnreadMessagesChanged object:self userInfo:dict];
+    [notificationCenter postNotificationName:AGNotificationGotUnreadMessagesCount object:self userInfo:dict];
+    //
+    [dict setObject:@"one" forKey:@"action"];
+    NSNumber *planeId = [dict objectForKey:@"planeId"];
+    NSNumber *chainId = [dict objectForKey:@"chainId"];
+    if (planeId) {
+        [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
+    }
+    else if(chainId){
+        NSString *noObtained = [dict objectForKey:@"NoObtained"];
+        if (noObtained == nil) {
+            [notificationCenter postNotificationName:AGNotificationObtainedChains object:self userInfo:dict];
+        }
+    
+    }
+
+}
+
+- (void)getUnreadMessagesCount:(NSNotification*)notification
+{
+    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    NSNumber *number = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:number, @"count", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationGotUnreadMessagesCount object:self userInfo:dict];
+}
+
+-(void)reset
+{
+    planesForChat = planesForCollect = chainsForChat = chainsForCollect = nil;
 }
 
 

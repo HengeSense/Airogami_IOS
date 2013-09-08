@@ -28,6 +28,7 @@ extern NSString *AGNotificationSentMessage;
 
 extern NSString *AGNotificationViewedMessagesForPlane;
 extern NSString *AGNotificationUnreadMessagesChangedForPlane;
+extern NSString *AGNotificationViewingMessagesForPlane;
 
 @interface AGPlaneNotification: NSObject
 

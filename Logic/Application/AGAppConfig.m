@@ -15,6 +15,7 @@
 #import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
+#import "AGNotificationCenter.h"
 
 static NSString *configName = @"AppConfig";
 static NSString *path;
@@ -104,7 +105,7 @@ static NSString *path;
 
 - (BOOL) needSignin
 {
-    return [AGManagerUtils managerUtils].accountManager.account == nil;
+    return appAccount == nil;
 }
 
 - (BOOL) accountUpdated:(AGAccount*)account
@@ -131,23 +132,23 @@ static NSString *path;
     return params;
 }
 
-- (AGAccount*) obtainAccount
+//appAccount != nil
+- (void) gotoMain
 {
-    if (appAccount) {
-        return [[AGControllerUtils controllerUtils].accountController findAccount:appAccount.accountId];
+    [AGFileManager fileManager].accountId = appAccount.accountId;
+    AGAccountManager *accountManager = [AGManagerUtils managerUtils].accountManager;
+    if (accountManager.account == nil) {
+        accountManager.account = [[AGControllerUtils controllerUtils].accountController findAccount:appAccount.accountId];
     }
-    return nil;
+    
 }
 
-- (void) signin
-{
-    [[AGManagerUtils managerUtils].accountManager autoSignin];
-}
-
-- (void) signout
+- (void) gotoSign
 {
     [[AGManagerUtils managerUtils].accountManager signout];
     [self resetAppAccount];
+    [[AGNotificationCenter notificationCenter] reset];
 }
+
 
 @end

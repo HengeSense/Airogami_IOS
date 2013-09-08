@@ -124,7 +124,7 @@
             }
             break;
         case 1:// logout
-            [[AGAppDelegate appDelegate].appConfig signout];
+            [[AGAppDelegate appDelegate].appConfig gotoSign];
             [[AGRootViewController rootViewController] switchToSign];
             break;
             

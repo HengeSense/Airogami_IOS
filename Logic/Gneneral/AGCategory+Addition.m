@@ -29,7 +29,7 @@ static NSString *key = @"plane.category.unknown";
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:10];
     for (int i = 0 ; i < 7; ++i) {
-        NSNumber *categoryId = [NSNumber numberWithInt:i + 1];
+        NSNumber *categoryId = [NSNumber numberWithInt:i];
         [dict setObject:NSLocalizedString(keys[i], keys[i]) forKey:categoryId];
     }
     categoryDict = dict;

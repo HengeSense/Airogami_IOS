@@ -22,6 +22,11 @@ extern NSString *AGNotificationGetObtainedChainMessages;
 
 extern NSString *AGNotificationGetChainMessagesForChain;
 extern NSString *AGNotificationGotChainMessagesForChain;
+extern NSString *AGNotificationViewingChainMessagesForChain;
+
+extern NSString *AGNotificationViewedChainMessagesForChain;
+extern NSString *AGNotificationUnreadChainMessagesChangedForChain;
+extern NSString *AGNotificationViewingChainMessagesForChain;
 
 @interface AGChainNotification : NSObject
 

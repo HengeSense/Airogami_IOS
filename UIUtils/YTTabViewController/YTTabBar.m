@@ -34,7 +34,7 @@
             frame.origin.x += itemWidth;
         }
         tabBarItems = array;
-        tabBarItem.badge = @"99";
+        //tabBarItem.badge = @"99";
         self.userInteractionEnabled = YES;
     }
     return self;

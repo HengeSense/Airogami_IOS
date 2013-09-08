@@ -8,6 +8,9 @@
 
 #import "AGChainMessageController.h"
 #import "AGCoreData.h"
+#import "AGManagerUtils.h"
+#import "AGAccountStat.h"
+#import "AGControllerUtils.h"
 
 static const int ChainMessageLimit = 10;
 
@@ -98,6 +101,79 @@ static const int ChainMessageLimit = 10;
         array = [NSArray array];
     }
     return array;
+}
+
+- (AGChainMessage*) getChainMessageForChain:(NSNumber *)chainId
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:chainMessageEntityDescription];
+    //
+    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and account.accountId = %@", chainId, accountId];
+    [fetchRequest setPredicate:predicate];
+    //
+    AGChainMessage *chainMessage = nil;
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count) {
+        chainMessage = array.lastObject;
+    }
+    return chainMessage;
+}
+
+//for chat
+- (int) getUnreadChainMessageCountForChain:(NSNumber *)chainId
+{
+    AGChainMessage *chainMessage = [self getChainMessageForChain:chainId];
+    int count = 0;
+    if (chainMessage) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:chainMessageEntityDescription];
+        [fetchRequest setResultType:NSDictionaryResultType];
+        //
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and createdTime > %@", chainId, chainMessage.lastViewedTime];
+        [fetchRequest setPredicate:predicate];
+        //expression
+        NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"status"];
+        NSExpression *countExpression = [NSExpression expressionForFunction:@"count:" arguments:[NSArray arrayWithObject:keyPathExpression]];
+        NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
+        [expressionDescription setName:@"count"];
+        [expressionDescription setExpression:countExpression];
+        [expressionDescription setExpressionResultType:NSInteger64AttributeType];
+        [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
+        //
+        
+        NSError *error;
+        NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (array.count) {
+            NSNumber *number = [[array objectAtIndex:0] objectForKey:@"count"];
+            count = number.intValue;
+        }
+    }
+    
+    return count;
+}
+
+//for chat
+-(void) viewedChainMessagesForChain:(AGChain *)chain
+{
+    AGChainMessage *chainMessage = [self getChainMessageForChain:chain.chainId];
+    if (chainMessage) {
+        AGAccountStat *accountStat = chainMessage.account.accountStat;
+        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessageForChat:chain.chainId];
+        if (cm) {
+            chainMessage.lastViewedTime = cm.createdTime;
+        }
+        [coreData save];
+        int newCount = [self getUnreadChainMessageCountForChain:chain.chainId];
+        int count = accountStat.unreadChainMessagesCount.intValue + newCount - chainMessage.unreadChainMessagesCount.intValue;
+        if(count < 0){
+            count = 0;
+        }
+        accountStat.unreadChainMessagesCount = [NSNumber numberWithInt:count];
+        chainMessage.unreadChainMessagesCount = [NSNumber numberWithInt:newCount];
+        [coreData save];
+    }
 }
 
 @end

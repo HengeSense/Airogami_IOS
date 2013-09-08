@@ -215,6 +215,11 @@ static float DefaultPercentage = 3.0f / 5;
 	CGContextStrokePath(context);
 }
 
+-(void) setBadgeText:(NSString *)badgeText_
+{
+    badgeText = badgeText_;
+    [self setNeedsDisplay];
+}
 
 - (void)drawRect:(CGRect)rect {
 	

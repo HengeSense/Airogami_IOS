@@ -158,12 +158,11 @@
 //not include unreplied chainMessage
 - (AGChainMessage*) recentChainMessage:(BOOL) forCollect chainId:(NSNumber*)chainId
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainMessageEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and (%d = 0 or account.accountId != %@)", chainId, forCollect, account.accountId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and %d = status", chainId, AGChainMessageStatusReplied];
     [fetchRequest setPredicate:predicate];
     //
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"createdTime"];

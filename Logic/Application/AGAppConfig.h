@@ -26,9 +26,8 @@
 - (void) resetAppAccount;
 - (BOOL) needSignin;
 - (BOOL) accountUpdated:(AGAccount*)account;
-- (AGAccount*) obtainAccount;
-- (void) signin;
-- (void) signout;
+- (void) gotoMain;
+- (void) gotoSign;
 - (NSMutableDictionary*) siginParams;
 
 @end

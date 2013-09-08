@@ -10,6 +10,8 @@
 
 @interface AGFileManager : NSObject
 
+@property(nonatomic, strong) NSNumber *accountId;
+
 + (AGFileManager*)fileManager;
 
 - (NSURL*) urlForData;

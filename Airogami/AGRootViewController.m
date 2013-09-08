@@ -61,7 +61,6 @@ enum{
         rootNavigateTo = AGRootToSign;
     }
     else{
-        [[AGAppDelegate appDelegate].appConfig signin];
         rootNavigateTo = AGRootToMain;
     }
     switch (rootNavigateTo) {
@@ -161,6 +160,7 @@ enum{
 
 - (void) navigateToMain
 {
+    [[AGAppDelegate appDelegate].appConfig gotoMain];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self performSegueWithIdentifier:@"ToMain" sender:self];
     

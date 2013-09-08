@@ -54,9 +54,9 @@
     
 }
 
-- (void) viewWillUnload
+- (void) viewDidUnload
 {
-    [super viewWillUnload];
+    [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -94,7 +94,8 @@
                 if([objId  isEqual:number])
                 {
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [self setData:obj forCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+                    //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
             }
         }
@@ -148,8 +149,16 @@
     static NSString *CellIdentifier = @"Cell";
     AGChatPlaneCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
-    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     id obj = [data objectAtIndex:indexPath.row];
+    [self setData:obj forCell:cell];
+    
+    return cell;
+}
+
+-(void) setData:(id)obj forCell:(UITableViewCell*)tableViewCell
+{
+    AGChatPlaneCell *cell = (AGChatPlaneCell *)tableViewCell;
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     AGProfile *profile = nil;
     int count = 0;
     if([obj isKindOfClass:[AGPlane class]])
@@ -166,7 +175,8 @@
         AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
         cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
         cell.messageLabel.text = message.content;
-        count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
+        //count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
+        count = plane.unreadMessagesCount.intValue;
     }
     else if ([obj isKindOfClass:[AGChain class]])
     {
@@ -175,13 +185,21 @@
         cell.timeLabel.text = [AGUtils dateToString:chain.updatedTime];
         AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForChat:chain.chainId];
         cell.messageLabel.text = chainMessage.content;
+        //count = [[AGControllerUtils controllerUtils].chainMessageController getUnreadChainMessageCountForChain:chain.chainId];
+        count = chainMessage.unreadChainMessagesCount.intValue;
     }
-
+    
     [cell.profileImageView setImageWithAccountId:profile.accountId];
     cell.nameLabel.text = profile.fullName;
-    cell.badge = [NSString stringWithFormat:@"%d", count];
-    
-    return cell;
+    if (count == 0) {
+        cell.badge = @"";
+    }
+    else if (count > 99){
+        cell.badge = @"99+";
+    }
+    else{
+        cell.badge = [NSString stringWithFormat:@"%d", count];
+    }
 }
 
 /*

@@ -9,6 +9,7 @@
 #import "AGUtils.h"
 #import "AGCategory.h"
 #import "NSString+Addition.h"
+#import "AGNotificationCenter.h"
 
 static NSDateFormatter *dateFormatter;
 
@@ -19,6 +20,7 @@ static NSDateFormatter *dateFormatter;
     [AGCategory initialize];
     dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    [AGNotificationCenter initialize];
 }
 
 + (UIImage *)normalizeImage:(UIImage*)image {

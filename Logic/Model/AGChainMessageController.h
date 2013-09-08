@@ -18,5 +18,10 @@
 //descending
 - (NSDictionary*) getChainMessagesForChain:(NSNumber *)chainId startTime:(NSDate *)startTime;
 - (NSArray*) getChainMessagesForChain:(NSNumber *)chainId;
+- (AGChainMessage*) getChainMessageForChain:(NSNumber *)chainId;
+
+- (int) getUnreadChainMessageCountForChain:(NSNumber *)chainId;
+
+- (void) viewedChainMessagesForChain:(AGChain*)chain;
 
 @end

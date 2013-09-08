@@ -8,6 +8,7 @@
 
 #import "AGTabBarViewController.h"
 #import "AGUtils.h"
+#import "AGNotificationCenter.h"
 
 
 static NSString * AGTabBarItemUnselectedImages[] = {@"main_tabbar_item_write.png", @"main_tabbar_item_collect.png", @"main_tabbar_item_chat.png", @"main_tabbar_item_setting.png"};
@@ -36,6 +37,8 @@ static NSString * AGTabBarBgrd = @"main_tabbar_bgrd.png";
 {
     [super viewDidLoad];
 	[self createUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotUnreadMessagesCount:) name:AGNotificationGotUnreadMessagesCount object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetUnreadMessagesCount object:nil userInfo:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +57,22 @@ static NSString * AGTabBarBgrd = @"main_tabbar_bgrd.png";
         tabBarItemView.text = tabBarItem.title;
     }
     tabBarView.image = [UIImage imageNamed:AGTabBarBgrd];
+}
+
+-(void)gotUnreadMessagesCount:(NSNotification*)notification
+{
+    NSNumber *number = [notification.userInfo objectForKey:@"count"];
+    YTTabBarItem *tabBarItemView = [tabBarView.tabBarItems objectAtIndex:2];
+    if (number.intValue == 0) {
+        tabBarItemView.badge = @"";
+    }
+    else if (number.intValue > 99){
+        tabBarItemView.badge = @"99+";
+    }
+    else{
+        tabBarItemView.badge = number.stringValue;
+    }
+    
 }
 
 @end

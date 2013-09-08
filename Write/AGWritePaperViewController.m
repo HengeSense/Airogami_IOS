@@ -161,7 +161,7 @@
 
 - (void) didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedCategoryId = indexPath.row + 1;
+    selectedCategoryId = (indexPath.row + 1) % AGCategoryUnknown;
     [self performSegueWithIdentifier:@"ToEdit" sender:self];
 }
 

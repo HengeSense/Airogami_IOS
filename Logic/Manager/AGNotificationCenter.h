@@ -18,13 +18,16 @@ extern NSString *AGNotificationGetCollected;
 extern NSString *AGNotificationObtained;
 extern NSString *AGNotificationObtain;
 extern NSString *AGNotificationGetObtained;
-extern NSString *AGNotificationUnreadMessagesChanged;
+extern NSString *AGNotificationGetUnreadMessagesCount;
+extern NSString *AGNotificationGotUnreadMessagesCount;
 
 @interface AGNotificationCenter : NSObject
 
++(void) initialize;
 + (AGNotificationCenter*) notificationCenter;
 - (void) startTimer:(BOOL)start;
 //should run after open the program
 - (void) obtainMessages;
+- (void) reset;
 
 @end

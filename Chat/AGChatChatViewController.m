@@ -136,12 +136,20 @@ static float AGInputTextViewMaxHeight = 100;
         categoryLabel.text = [AGCategory title:plane.category.categoryId];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sentMessage:) name:AGNotificationSentMessage object:nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
     }
     else if ([airogami isKindOfClass:[AGChain class]]){
         AGChain *chain = airogami;
         nameLabel.text = chain.account.profile.fullName;
         categoryLabel.text = [AGCategory title:[NSNumber numberWithInt:AGCategoryChain]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotChainMessagesForChain:) name:AGNotificationGotChainMessagesForChain object:nil];
+        //
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:chain forKey:@"chain"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedChainMessagesForChain object:nil userInfo:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
     }
     
 }
@@ -522,10 +530,20 @@ static float AGInputTextViewMaxHeight = 100;
     
 }
 
-- (void)viewWillUnload
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillUnload];
+    [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+       NSDictionary *dict = [NSDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
+    }
+    else if([airogami isKindOfClass:[AGChain class]]){
+        NSDictionary *dict = [NSDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
+    }
+    
+    
 }
 
 - (void)viewDidUnload {

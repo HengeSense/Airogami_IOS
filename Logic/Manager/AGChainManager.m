@@ -226,6 +226,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 
             }
             else{
+                [[AGControllerUtils controllerUtils].chainMessageController viewedChainMessagesForChain:chain];
                 [[AGCoreData coreData] remove:chain];
             }
             
