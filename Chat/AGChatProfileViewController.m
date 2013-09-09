@@ -13,6 +13,7 @@
 #import "AGLocation.h"
 #import "AGUtils.h"
 #import "AGDefines.h"
+#import "AGNotificationCenter.h"
 
 @interface AGChatProfileViewController ()
 @property (weak, nonatomic) IBOutlet AGProfileImageButton *profileImageButton;
@@ -48,6 +49,12 @@
     [AGUIDefines setNavigationBackButton:self.backButton];
     //
     [self initData];
+    //
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:account forKey:@"account"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccount object:self userInfo:dict];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileChanged:) name:AGNotificationProfileChanged object:nil];
+    //
+    //[account.profile addObserver:self forKeyPath:<#(NSString *)#> options:<#(NSKeyValueObservingOptions)#> context:<#(void *)#>]
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,6 +83,14 @@
         [self.profileImageButton setImageWithAccountId:profile.accountId];
     }
     
+}
+
+- (void)profileChanged:(NSNotification*)notification
+{
+    NSNumber *accountId = [notification.userInfo objectForKey:@"accountId"];
+    if ([accountId isEqualToNumber:account.accountId]) {
+        [self initData];
+    }
 }
 
 #pragma mark - Table view data source
@@ -169,6 +184,12 @@
     else{
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidUnload {

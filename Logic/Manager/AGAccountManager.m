@@ -28,7 +28,6 @@ static NSString *SignoutPath = @"account/signout.action?";
 static NSString *ChangePasswordPath = @"account/changePassword.action?";
 static NSString *ChangeScreenNamePath = @"account/changeScreenName.action?";
 static NSString *ObtainTokensPath = @"data/dataManager?";
-static NSString *ObtainProfilePath= @"account/obtainProfile?";
 //
 static NSString *SignupDuplicate = @"message.signup.duplicate";
 static NSString *SigninNotMatch = @"error.signin.notmatch.message";
@@ -256,15 +255,6 @@ static NSString *SigninBanned = @"error.account.signin.banned";
    }];
 }
 
-- (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
-{
-    [AGJSONHttpHandler request:YES params:params path:ObtainProfilePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        if (block) {
-            block(error, context, result);
-        }
-    }];
-}
-
 - (void) changePassword:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block
 {
     NSString *password = [params objectForKey:@"newPassword"];
@@ -324,6 +314,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     [params setObject:screenName forKey:@"screenName"];
     return params;
 }
+
 
 - (void) autoSignin
 {

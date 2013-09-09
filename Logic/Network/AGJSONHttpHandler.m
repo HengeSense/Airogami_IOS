@@ -262,6 +262,9 @@
                 [[AGManagerUtils managerUtils].accountManager autoSignin:oldDict];
             }
             else{
+#ifdef IS_DEBUG
+                NSLog(@"JSON.message = %@", [dict objectForKey:@"message"]);
+#endif
                 error = [AGMessageUtils errorServer];
                
             }

@@ -2,7 +2,7 @@
 //  AGChain.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/28/13.
+//  Created by Tianhu Yang on 9/9/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -28,6 +28,7 @@
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
+@property (nonatomic, retain) NSNumber * collected;
 @property (nonatomic, retain) AGAccount *account;
 @property (nonatomic, retain) NSSet *chainMessages;
 @property (nonatomic, retain) AGNewChain *newChain;

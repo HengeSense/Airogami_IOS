@@ -47,6 +47,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
         //maybe redundent
         [AGPlaneNotification planeNotification];
         [AGChainNotification chainNotification];
+        [AGAccountNotification accountNotification];
     }
     return notificationCenter;
 }
@@ -132,9 +133,15 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     NSString *action = [notification.userInfo objectForKey:@"action"];
     if ([action isEqual:@"one"]) {
         [self obtained:notification.userInfo];
+#ifdef IS_DEBUG
+        NSLog(@"obtainedPlanes(one)");
+#endif
     }
     else{
         [self obtainedContainPlanes:YES containChains:NO];
+#ifdef IS_DEBUG
+        NSLog(@"obtainedPlanes");
+#endif
     }
     
 }
@@ -144,9 +151,15 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     NSString *action = [notification.userInfo objectForKey:@"action"];
     if ([action isEqual:@"one"]) {
         [self obtained:notification.userInfo];
+#ifdef IS_DEBUG
+        NSLog(@"obtainedChains(one)");
+#endif
     }
     else{
         [self obtainedContainPlanes:NO containChains:YES];
+#ifdef IS_DEBUG
+        NSLog(@"obtainedChains");
+#endif
     }
     
 }

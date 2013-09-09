@@ -104,7 +104,7 @@
     [fetchRequest setEntity:messageEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@", planeId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and messageId != -1", planeId];
     [fetchRequest setPredicate:predicate];
     //
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"messageId"];

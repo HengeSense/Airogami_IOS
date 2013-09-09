@@ -110,7 +110,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
         }
         else{
             //succeed
-            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:YES];
         }
         if (block) {
             block(error, context, result, chains);
@@ -137,7 +137,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
         }
         else{
             //succeed
-            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:NO];
         }
         if (block) {
             block(error, context, result, chains);

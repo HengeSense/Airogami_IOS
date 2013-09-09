@@ -27,4 +27,7 @@
 - (BOOL) save;
 - (void) resetPath;
 
+-(void) registerObserverForEntityName:(NSString*)entityName forKey:(NSString*)key count:(int) count;
+-(NSArray*) unregisterObserver;
+
 @end

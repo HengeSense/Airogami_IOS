@@ -34,10 +34,11 @@
     return self;
 }
 
-- (NSMutableArray*) saveChains:(NSArray*)jsonArray
+- (NSMutableArray*) saveChains:(NSArray*)jsonArray forCollect:(BOOL)collected
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
     for (AGChain *chain in array) {
+        chain.collected = [NSNumber numberWithChar:collected];
     }
     [coreData save];
     return array;
@@ -114,8 +115,8 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0 && (account.accountId != %@ || passCount > 0)", account.accountId, forCollect ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId];
+    //SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"collected = %d && (account.accountId != %@ || passCount > 0)", forCollect, account.accountId];
     [fetchRequest setPredicate:predicate];
     
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];

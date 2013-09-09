@@ -439,13 +439,12 @@
             if (imageChanged) {
                 image = [self.profileImageButton imageForState:UIControlStateNormal];
             }
-            AGProfile *profile = accountManager.account.profile;
-            [[AGManagerUtils managerUtils].profileManager editProfile:data image:image context:data block:^(NSError *error, id context) {
+            //AGProfile *profile = accountManager.account.profile;
+            [[AGManagerUtils managerUtils].profileManager editProfile:data image:image context:data block:^(NSError *error, id context, BOOL profileDone, BOOL imageDone) {
                 if (error == nil) {
-                    [[AGCoreData coreData] editAttributes:(NSMutableDictionary *)context managedObject:profile];
+                    //[[AGCoreData coreData] editAttributes:(NSMutableDictionary *)context managedObject:profile];
                     [AGMessageUtils alertMessageUpdated];
                     imageChanged = NO;
-                    
                 }
             }];
         }

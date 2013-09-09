@@ -11,6 +11,14 @@
 #import "AGUtils.h"
 #import "AGAppDelegate.h"
 
+@interface AGCoreData()
+{
+    NSString *observedEntityName;
+    NSString *observedEntityKey;
+    NSMutableArray *changedEntities;
+}
+
+@end
 
 @implementation AGCoreData
 
@@ -246,6 +254,7 @@
     else{//insert
         managedObject = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:managedObjectContext];
     }
+    BOOL shouldObserve = [observedEntityName isEqualToString:entityName];
     //set values
     for (NSString *key in attributesByName.allKeys) {
         NSAttributeDescription *attributeDescription  = [attributesByName objectForKey:key];
@@ -257,10 +266,14 @@
             else if(attributeDescription.attributeType == NSDateAttributeType){
                 obj = [AGUtils stringToDate:(NSString*)obj];
             }
-            [managedObject setValue:obj forKey:key];//9223372036854775785
-            if ([key isEqual:@"updateInc"]) {
-                [managedObject setValue:obj forKey:key];
+            if (shouldObserve && [observedEntityKey isEqualToString:key]) {
+                id oldObj = [managedObject valueForKey:key];
+                if ([oldObj isEqual:obj] == NO) {
+                    [changedEntities addObject:managedObject];
+                }
             }
+            
+            [managedObject setValue:obj forKey:key];//9223372036854775785
         }
         
     }
@@ -392,6 +405,22 @@
         [managedObject setValue:obj forKey:key];
     }];
     return [self save];
+}
+
+-(void) registerObserverForEntityName:(NSString*)entityName forKey:(NSString*)key count:(int) count
+{
+    observedEntityName = entityName;
+    observedEntityKey = key;
+    changedEntities = [NSMutableArray arrayWithCapacity:count];
+}
+
+
+- (NSArray*)unregisterObserver
+{
+    observedEntityName = observedEntityKey = nil;
+    NSArray* array = changedEntities;
+    changedEntities = nil;
+    return array;
 }
 
 @end

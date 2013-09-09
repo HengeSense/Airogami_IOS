@@ -17,8 +17,10 @@
 #import "AGWaitUtils.h"
 #import "AGJSONHttpHandler.h"
 #import "AGMessageUtils.h"
+#import "AGControllerUtils.h"
 
 static NSString *EditProfilePath = @"account/editProfile.action?";
+static NSString *ObtainProfilePath= @"account/obtainProfile.action?";
 
 
 @implementation AGProfileManager
@@ -84,43 +86,98 @@ static NSString *EditProfilePath = @"account/editProfile.action?";
     }];
 }
 
-- (void) editProfile:(NSDictionary*)pp image:(UIImage*)image context:(id)context block:(AGHttpDoneBlock)block
+- (void) editProfile:(NSDictionary*)pp image:(UIImage*)image context:(id)context block:(AGEditProfileDoneBlock)block
 {
     NSMutableDictionary *params = [pp mutableCopy];
     if (image) {
         [params setObject:@"tokens" forKey:@"tokens"];
     }
     [AGJSONHttpHandler request:NO params:params path:EditProfilePath prompt:@"" context:context block:^(NSError *error, id context, id result) {
+        BOOL imageDone = NO, profileDone = NO;
         if (error) {
             if (block) {
-                block(error, context);
+                block(error, context, profileDone, imageDone);
             }
         }
         else{
+            NSDictionary *profileJson = [result objectForKey:@"profile"];
+            AGProfile *profile = [[AGControllerUtils controllerUtils].accountController saveProfile:profileJson];
+            profileDone = profile != nil;
             if (image) {
-                [params removeObjectForKey:@"tokens"];
-                result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-                NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
-                if (tokens) {
-                    [self uploadIcons:tokens image:image context:context block:^(NSError *error, id context) {
-                        if (error) {
-                            [AGMessageUtils alertMessageWithError:error];
-                        }
+                //[params removeObjectForKey:@"tokens"];
+                NSString *tokensString = [result objectForKey:@"tokens"];
+                if (tokensString && [tokensString isEqual:[NSNull null]] == NO) {
+                    result = [NSJSONSerialization JSONObjectWithData:[tokensString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                    NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
+                    if (tokens && [tokens isEqual:[NSNull null]] == NO) {
+                        [self uploadIcons:tokens image:image context:context block:^(NSError *error, id context) {
+                            BOOL imageDone = NO;
+                            if (error) {
+                                [AGMessageUtils alertMessageWithError:error];
+                            }
+                            else{
+                                imageDone = YES;
+                            }
+                            if (block) {
+                                block(error, context, profileDone, imageDone);
+                            }
+                        }];
+                    }
+                    else{
+                        error = [AGMessageUtils errorServer];
+                        [AGMessageUtils alertMessageWithError:error];
                         if (block) {
-                            block(error, context);
+                            block(error, context, profileDone, imageDone);
                         }
-                    }];
+                    }
                 }
+                else{
+                    error = [AGMessageUtils errorServer];
+                    [AGMessageUtils alertMessageWithError:error];
+                    if (block) {
+                        block(error, context, profileDone, imageDone);
+                    }
+                }
+                
             
             }
             else{
                 if (block) {
-                    block(error, context);
+                    block(error, context, profileDone, imageDone);
                 }
             }
         }
         
     }];
+}
+
+- (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainProfilePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            NSDictionary *profileJson = [result objectForKey:@"profile"];
+            AGProfile *profile = [[AGControllerUtils controllerUtils].accountController saveProfile:profileJson];
+            succeed = profile != nil;
+        
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+    }];
+}
+
+- (NSDictionary*) paramsForObtainProfile:(NSNumber*)accountId updateCount:(NSNumber*)updateCount
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:accountId forKey:@"accountId"];
+    if(updateCount){
+        [params setObject:updateCount forKey:@"updateCount"];
+    }
+    return params;
 }
 
 @end

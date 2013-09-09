@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^AGEditProfileDoneBlock)(NSError *error, id context, BOOL profileDone, BOOL imageDone);
+
 @interface AGProfileManager : NSObject
 
 - (void) uploadIcons:(NSDictionary*)params image:(UIImage*)image context:(id)context block:(AGHttpDoneBlock)block;
 
-- (void) editProfile:(NSDictionary*)params image:(UIImage*)image context:(id)context block:(AGHttpDoneBlock)block;
+- (void) editProfile:(NSDictionary*)params image:(UIImage*)image context:(id)context block:(AGEditProfileDoneBlock)block;
+
+- (void) obtainProfile:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block;
+- (NSDictionary*) paramsForObtainProfile:(NSNumber*)accountId updateCount:(NSNumber*)updateCount;
 
 @end

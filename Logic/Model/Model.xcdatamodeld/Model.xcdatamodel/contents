@@ -2,12 +2,13 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AGAccount" representedClassName="AGAccount" syncable="YES">
         <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="-1" syncable="YES"/>
         <relationship name="accountStat" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGAccountStat" inverseName="account" inverseEntity="AGAccountStat" syncable="YES"/>
         <relationship name="authenticate" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAuthenticate" inverseName="account" inverseEntity="AGAuthenticate" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="account" inverseEntity="AGChainMessage" syncable="YES"/>
         <relationship name="chains" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChain" inverseName="account" inverseEntity="AGChain" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="account" inverseEntity="AGMessage" syncable="YES"/>
+        <relationship name="newAccount" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNewAccount" inverseName="account" inverseEntity="AGNewAccount" syncable="YES"/>
         <relationship name="planesForOwnerId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByOwnerId" inverseEntity="AGPlane" syncable="YES"/>
         <relationship name="planesForTargetId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByTargetId" inverseEntity="AGPlane" syncable="YES"/>
         <relationship name="profile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGProfile" inverseName="account" inverseEntity="AGProfile" syncable="YES"/>
@@ -44,6 +45,7 @@
     <entity name="AGChain" representedClassName="AGChain" syncable="YES">
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collected" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" attributeType="Date" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -106,6 +108,14 @@
         <relationship name="plane" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="messages" inverseEntity="AGPlane" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="messageId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGNewAccount" representedClassName="AGNewAccount" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="newAccount" inverseEntity="AGAccount" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
         </userInfo>
     </entity>
     <entity name="AGNewChain" representedClassName="AGNewChain" syncable="YES">
@@ -180,14 +190,15 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="AGAccount" positionX="0" positionY="0" width="128" height="195"/>
+        <element name="AGAccount" positionX="0" positionY="0" width="128" height="210"/>
         <element name="AGAccountStat" positionX="-153" positionY="225" width="128" height="120"/>
         <element name="AGAuthenticate" positionX="7" positionY="309" width="128" height="90"/>
         <element name="AGCategory" positionX="-360" positionY="-243" width="128" height="90"/>
-        <element name="AGChain" positionX="142" positionY="0" width="128" height="315"/>
+        <element name="AGChain" positionX="142" positionY="0" width="128" height="330"/>
         <element name="AGChainMessage" positionX="259" positionY="-27" width="128" height="180"/>
         <element name="AGChainMessageId" positionX="187" positionY="-216" width="128" height="90"/>
         <element name="AGMessage" positionX="34" positionY="-333" width="128" height="150"/>
+        <element name="AGNewAccount" positionX="160" positionY="192" width="128" height="90"/>
         <element name="AGNewChain" positionX="160" positionY="192" width="128" height="105"/>
         <element name="AGNewPlane" positionX="160" positionY="192" width="128" height="105"/>
         <element name="AGPlane" positionX="-191" positionY="-288" width="128" height="450"/>

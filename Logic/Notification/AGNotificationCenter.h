@@ -10,6 +10,7 @@
 
 #import "AGPlaneNotification.h"
 #import "AGChainNotification.h"
+#import "AGAccountNotification.h"
 
 extern NSString *AGNotificationCollected;
 extern NSString *AGNotificationReceive;

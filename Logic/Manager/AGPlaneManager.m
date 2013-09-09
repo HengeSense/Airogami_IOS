@@ -12,8 +12,7 @@
 #import "AGControllerUtils.h"
 #import "NSBubbleData.h"
 #import "AGManagerUtils.h"
-#import "AGPlaneNotification.h"
-#import "AGChainNotification.h"
+#import "AGNotificationCenter.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *DeletePlanePath = @"plane/deletePlane.action?";
@@ -228,7 +227,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 //
                 [[AGPlaneNotification planeNotification] collectedPlanes];
             }
-            NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"]];
+            NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:YES];
             if (chains.count) {
                 [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
                 NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -274,7 +273,17 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
         }
         else{
             //succeed
-            planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+            NSArray *planesJson = [result objectForKey:@"planes"];
+            AGCoreData *coreData = [AGCoreData coreData];
+            [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:planesJson.count];
+            planes = [[AGControllerUtils controllerUtils].planeController savePlanes:planesJson];
+            NSArray *changedAccounts = [coreData unregisterObserver];
+            if (changedAccounts.count) {
+                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
+                [accountController addNewAccounts:changedAccounts];
+                NSDictionary *dict = [NSDictionary dictionary];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
+            }
         }
         if (block) {
             block(error, context, result, planes);

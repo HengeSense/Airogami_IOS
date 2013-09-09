@@ -303,7 +303,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
     [planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error == nil) {
-            NSArray *messages = [[AGControllerUtils controllerUtils].messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
+            NSArray *messages = [controllerUtils.messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
             
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
