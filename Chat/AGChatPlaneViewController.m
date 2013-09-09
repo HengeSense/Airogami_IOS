@@ -186,7 +186,8 @@
         AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForChat:chain.chainId];
         cell.messageLabel.text = chainMessage.content;
         //count = [[AGControllerUtils controllerUtils].chainMessageController getUnreadChainMessageCountForChain:chain.chainId];
-        count = chainMessage.unreadChainMessagesCount.intValue;
+        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainMessageController getChainMessageForChain:chain.chainId];
+        count = cm.unreadChainMessagesCount.intValue;
     }
     
     [cell.profileImageView setImageWithAccountId:profile.accountId];

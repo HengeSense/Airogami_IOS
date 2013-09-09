@@ -228,6 +228,12 @@ static float AGInputTextViewMaxHeight = 80;
         aidedTextView.layer.cornerRadius = self.inputTextView.layer.cornerRadius = 5.0f;
         aidedTextView.layer.borderColor = self.inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
         aidedTextView.layer.borderWidth = self.inputTextView.layer.borderWidth = 2.0f;
+        //first adjust height
+        aidedTextView.text = @"0";
+        CGSize size = aidedTextView.contentSize;
+        CGRect frame = self.inputTextView.frame;
+        frame.size.height = size.height;
+        self.inputTextView.frame = frame;
     }
     return self;
 }

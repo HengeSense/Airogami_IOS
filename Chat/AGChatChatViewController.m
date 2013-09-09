@@ -94,6 +94,13 @@ static float AGInputTextViewMaxHeight = 100;
     if ([airogami isKindOfClass:[AGChain class]]){
         textInputView.hidden = YES;
     }
+    else{
+        aidedTextView.text = @"0";
+        CGSize size = aidedTextView.contentSize;
+        CGRect frame = inputTextView.frame;
+        frame.size.height = size.height;
+        inputTextView.frame = frame;
+    }
 }
 
 - (void)viewDidLoad
