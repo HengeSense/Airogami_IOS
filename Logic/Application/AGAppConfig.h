@@ -16,9 +16,8 @@
 + (AGAppConfig*)appConfig;
 
 @property(nonatomic, assign) BOOL once;
-@property(nonatomic, strong) NSString *appVersion;
+@property(nonatomic, assign) int appVersion;
 @property(nonatomic, strong) AGAppAccount *appAccount;
-@property(nonatomic, strong) NSNumber *signinUuid;
 
 - (void) save;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;

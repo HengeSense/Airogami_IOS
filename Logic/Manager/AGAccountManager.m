@@ -119,7 +119,6 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     if (automatic) {
         [params setObject:@"true" forKey:@"ifInvalid"];
     }
-    [params setObject:[AGAppDelegate appDelegate].appConfig.signinUuid forKey:AGLogicAccountUuidKey];
     
     NSString *password = [params objectForKey:@"password"];
     

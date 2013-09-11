@@ -402,9 +402,9 @@
 		07072337175E8C2F0017292A /* Airogami-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Airogami-Prefix.pch"; sourceTree = "<group>"; };
 		07072338175E8C2F0017292A /* AGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGAppDelegate.h; sourceTree = "<group>"; };
 		07072339175E8C2F0017292A /* AGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AGAppDelegate.m; sourceTree = "<group>"; };
-		0707235A175E8C2F0017292A /* AirogamiTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirogamiTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0707235A175E8C2F0017292A /* Airogami.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Airogami.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0707235B175E8C2F0017292A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		07072363175E8C2F0017292A /* AirogamiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AirogamiTests-Info.plist"; sourceTree = "<group>"; };
+		07072363175E8C2F0017292A /* airogamiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "airogamiTests-Info.plist"; sourceTree = "<group>"; };
 		07072365175E8C2F0017292A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		07072367175E8C2F0017292A /* AirogamiTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirogamiTests.h; sourceTree = "<group>"; };
 		07072368175E8C2F0017292A /* AirogamiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirogamiTests.m; sourceTree = "<group>"; };
@@ -958,7 +958,7 @@
 			isa = PBXGroup;
 			children = (
 				07072326175E8C2F0017292A /* Airogami.app */,
-				0707235A175E8C2F0017292A /* AirogamiTests.octest */,
+				0707235A175E8C2F0017292A /* Airogami.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1018,7 +1018,7 @@
 		07072362175E8C2F0017292A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				07072363175E8C2F0017292A /* AirogamiTests-Info.plist */,
+				07072363175E8C2F0017292A /* airogamiTests-Info.plist */,
 				07072364175E8C2F0017292A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1820,9 +1820,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		07072325175E8C2F0017292A /* Airogami */ = {
+		07072325175E8C2F0017292A /* airogami */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0707236C175E8C2F0017292A /* Build configuration list for PBXNativeTarget "Airogami" */;
+			buildConfigurationList = 0707236C175E8C2F0017292A /* Build configuration list for PBXNativeTarget "airogami" */;
 			buildPhases = (
 				07072322175E8C2F0017292A /* Sources */,
 				07072323175E8C2F0017292A /* Frameworks */,
@@ -1832,14 +1832,14 @@
 			);
 			dependencies = (
 			);
-			name = Airogami;
+			name = airogami;
 			productName = Airogami;
 			productReference = 07072326175E8C2F0017292A /* Airogami.app */;
 			productType = "com.apple.product-type.application";
 		};
-		07072359175E8C2F0017292A /* AirogamiTests */ = {
+		07072359175E8C2F0017292A /* airogamiTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0707236F175E8C2F0017292A /* Build configuration list for PBXNativeTarget "AirogamiTests" */;
+			buildConfigurationList = 0707236F175E8C2F0017292A /* Build configuration list for PBXNativeTarget "airogamiTests" */;
 			buildPhases = (
 				07072355175E8C2F0017292A /* Sources */,
 				07072356175E8C2F0017292A /* Frameworks */,
@@ -1851,9 +1851,9 @@
 			dependencies = (
 				07072360175E8C2F0017292A /* PBXTargetDependency */,
 			);
-			name = AirogamiTests;
+			name = airogamiTests;
 			productName = AirogamiTests;
-			productReference = 0707235A175E8C2F0017292A /* AirogamiTests.octest */;
+			productReference = 0707235A175E8C2F0017292A /* Airogami.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1878,8 +1878,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				07072325175E8C2F0017292A /* Airogami */,
-				07072359175E8C2F0017292A /* AirogamiTests */,
+				07072325175E8C2F0017292A /* airogami */,
+				07072359175E8C2F0017292A /* airogamiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2278,7 +2278,7 @@
 /* Begin PBXTargetDependency section */
 		07072360175E8C2F0017292A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 07072325175E8C2F0017292A /* Airogami */;
+			target = 07072325175E8C2F0017292A /* airogami */;
 			targetProxy = 0707235F175E8C2F0017292A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2338,6 +2338,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Airogami;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2363,6 +2364,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = Airogami;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2372,6 +2374,8 @@
 		0707236D175E8C2F0017292A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2381,7 +2385,9 @@
 				INFOPLIST_FILE = "Airogami/Airogami-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Airogami;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2389,6 +2395,8 @@
 		0707236E175E8C2F0017292A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2398,7 +2406,9 @@
 				INFOPLIST_FILE = "Airogami/Airogami-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Airogami;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2413,8 +2423,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Airogami/Airogami-Prefix.pch";
-				INFOPLIST_FILE = "AirogamiTests/AirogamiTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "AirogamiTests/airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist";
+				PRODUCT_NAME = Airogami;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2430,8 +2440,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Airogami/Airogami-Prefix.pch";
-				INFOPLIST_FILE = "AirogamiTests/AirogamiTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "AirogamiTests/airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests-Info.plist";
+				PRODUCT_NAME = Airogami;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -2449,7 +2459,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0707236C175E8C2F0017292A /* Build configuration list for PBXNativeTarget "Airogami" */ = {
+		0707236C175E8C2F0017292A /* Build configuration list for PBXNativeTarget "airogami" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0707236D175E8C2F0017292A /* Debug */,
@@ -2458,7 +2468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0707236F175E8C2F0017292A /* Build configuration list for PBXNativeTarget "AirogamiTests" */ = {
+		0707236F175E8C2F0017292A /* Build configuration list for PBXNativeTarget "airogamiTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				07072370175E8C2F0017292A /* Debug */,

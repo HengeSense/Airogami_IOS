@@ -23,6 +23,7 @@ static AGAppDelegate *AppDelegate;
 @implementation AGAppDelegate
 
 @synthesize appConfig;
+@synthesize deviceToken;
 
 +(AGAppDelegate*) appDelegate
 {
@@ -41,6 +42,12 @@ static AGAppDelegate *AppDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (payload) {
+        NSLog(@"payload: %@", payload);
+    }
+    //
     [AGUIUtils initialize];
     [AGUtils initialize];
     
@@ -49,7 +56,6 @@ static AGAppDelegate *AppDelegate;
     imageView.contentMode = UIViewContentModeScaleToFill;
     imageView.frame = [UIScreen mainScreen].bounds;
     [self.window addSubview:imageView];
-    
     //
     
     return YES;
@@ -95,6 +101,22 @@ static AGAppDelegate *AppDelegate;
 #endif
         }
     }
+}
+
+// Delegation methods
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    if ([devToken isEqualToData:deviceToken] == NO) {
+        deviceToken = devToken;
+        NSLog(@"deviceToken = %@", devToken);
+        //const void *devTokenBytes = [devToken bytes];
+        //self.registered = YES;
+        //[self sendProviderDeviceToken:devTokenBytes]; // custom method
+    }
+    
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    NSLog(@"Error in registration. Error: %@", err);
 }
 
 @end

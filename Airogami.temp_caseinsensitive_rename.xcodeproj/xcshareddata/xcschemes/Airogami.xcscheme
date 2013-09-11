@@ -17,7 +17,7 @@
                BlueprintIdentifier = "07072325175E8C2F0017292A"
                BuildableName = "airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
                BlueprintName = "airogami"
-               ReferencedContainer = "container:Airogami.xcodeproj">
+               ReferencedContainer = "container:Airogami.temp_caseinsensitive_rename.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "07072359175E8C2F0017292A"
                BuildableName = "airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_renameTests.octest"
                BlueprintName = "airogamiTests"
-               ReferencedContainer = "container:Airogami.xcodeproj">
+               ReferencedContainer = "container:Airogami.temp_caseinsensitive_rename.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "07072325175E8C2F0017292A"
             BuildableName = "airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
             BlueprintName = "airogami"
-            ReferencedContainer = "container:Airogami.xcodeproj">
+            ReferencedContainer = "container:Airogami.temp_caseinsensitive_rename.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "07072325175E8C2F0017292A"
             BuildableName = "airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
             BlueprintName = "airogami"
-            ReferencedContainer = "container:Airogami.xcodeproj">
+            ReferencedContainer = "container:Airogami.temp_caseinsensitive_rename.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -89,7 +89,7 @@
             BlueprintIdentifier = "07072325175E8C2F0017292A"
             BuildableName = "airogami.temp_caseinsensitive_rename.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app"
             BlueprintName = "airogami"
-            ReferencedContainer = "container:Airogami.xcodeproj">
+            ReferencedContainer = "container:Airogami.temp_caseinsensitive_rename.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

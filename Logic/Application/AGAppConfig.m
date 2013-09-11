@@ -31,7 +31,6 @@ static NSString *path;
 @synthesize once;
 @synthesize appAccount;
 @synthesize appVersion;
-@synthesize signinUuid;
 
 + (AGAppConfig*)appConfig
 {
@@ -44,7 +43,7 @@ static NSString *path;
         [NSKeyedArchiver archiveRootObject:appConfig toFile:path];
     }
     else{
-        if ([appConfig.appVersion isEqualToString:AGApplicationVersion] == NO) {
+        if (appConfig.appVersion != AGApplicationVersion) {
             appConfig.once = YES;
             appConfig.appVersion = AGApplicationVersion;
             [NSKeyedArchiver archiveRootObject:appConfig toFile:path];
@@ -58,7 +57,6 @@ static NSString *path;
     if (self = [super init]) {
         once = YES;
         appVersion = AGApplicationVersion;
-        signinUuid = [NSNumber numberWithLongLong:[[NSDate date] timeIntervalSince1970] * 1000];
     }
     return self;
 }

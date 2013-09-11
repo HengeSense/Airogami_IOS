@@ -7,7 +7,8 @@
 //
 #import "AGDefines.h"
 
-NSString* AGApplicationVersion = @"1.0";
+const int AGDeviceType = 1;
+const int AGApplicationVersion = 1;
 //http://192.168.0.6:8080/
 NSString* AGWebServerUrl = @"http://192.168.0.6:8080/";//http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/
 NSString* AGDataServerUrl = @"https://airogami-user-bucket.s3-us-west-2.amazonaws.com/";
@@ -49,7 +50,6 @@ int AGLogicJSONStatusNotSignin = 1;
 NSString * AGLogicAccountEmailKey = @"email";
 NSString * AGLogicAccountPasswordKey = @"password";
 NSString * AGLogicAccountScreenNameKey = @"screenName";
-NSString * AGLogicAccountUuidKey = @"uuid";
 
 //error
 NSString *AGHttpFailErrorTitleKey = @"error.connection.fail.title";

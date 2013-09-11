@@ -10,6 +10,7 @@
 #import "AGCategory.h"
 #import "NSString+Addition.h"
 #import "AGNotificationCenter.h"
+#import "AGAppDelegate.h"
 
 static NSDateFormatter *dateFormatter;
 
@@ -72,8 +73,16 @@ static NSDateFormatter *dateFormatter;
     }];
     
     if (yes) {
-        NSString * deviceString = [NSString stringWithFormat:@"%@=IOS&%@=%@",[@"clientAgent.deviceName" encodeURIComponent],[@"clientAgent.clientVersion" encodeURIComponent],[AGApplicationVersion encodeURIComponent]];
+        NSString * deviceString = [NSString stringWithFormat:@"%@=%d&%@=%d",[@"clientAgent.deviceType" encodeURIComponent],AGDeviceType, [@"clientAgent.clientVersion" encodeURIComponent], AGApplicationVersion];
         [path appendString:deviceString];
+        //
+        NSData *deviceToken = [AGAppDelegate appDelegate].deviceToken;
+        if (deviceToken) {
+            [path appendString:[NSString stringWithFormat:@"&clientAgent.deviceToken=%@",[[deviceToken description] encodeURIComponent]]];
+            
+        }
+        
+        
     }
 #ifdef IS_DEBUG
     NSLog(@"Encode params: %@",path);

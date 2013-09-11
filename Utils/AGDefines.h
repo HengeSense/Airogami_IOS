@@ -52,7 +52,8 @@ typedef enum{
 
 #define IS_DEBUG
 
-extern NSString* AGApplicationVersion;
+extern const int AGDeviceType;
+extern const int AGApplicationVersion;
 extern NSString* AGWebServerUrl;
 extern NSString* AGDataServerUrl;
 
