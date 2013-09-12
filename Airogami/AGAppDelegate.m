@@ -42,7 +42,7 @@ static AGAppDelegate *AppDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (payload) {
         NSLog(@"payload: %@", payload);
@@ -107,10 +107,10 @@ static AGAppDelegate *AppDelegate;
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     if ([devToken isEqualToData:deviceToken] == NO) {
         deviceToken = devToken;
+#ifdef IS_DEBUG
         NSLog(@"deviceToken = %@", devToken);
-        //const void *devTokenBytes = [devToken bytes];
-        //self.registered = YES;
-        //[self sendProviderDeviceToken:devTokenBytes]; // custom method
+#endif
+        [[AGManagerUtils managerUtils].accountManager autoSignin];
     }
     
 }

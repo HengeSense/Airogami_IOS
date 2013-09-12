@@ -78,7 +78,9 @@ static NSDateFormatter *dateFormatter;
         //
         NSData *deviceToken = [AGAppDelegate appDelegate].deviceToken;
         if (deviceToken) {
-            [path appendString:[NSString stringWithFormat:@"&clientAgent.deviceToken=%@",[[deviceToken description] encodeURIComponent]]];
+            NSString *token = [[deviceToken description] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+            [path appendString:[NSString stringWithFormat:@"&clientAgent.deviceToken=%@", token]];
             
         }
         
