@@ -17,12 +17,12 @@ typedef void (^AGHttpJSONHandlerRequestFinishBlock)(NSError *error, id context, 
 + (AGJSONHttpHandler*) handler;
 
 //get or post (no device)
-+ (void) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block;
++ (AGURLConnection*) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block;
 
 //GET or POST
 - (AGURLConnection*) start:(NSString*)path params:(NSDictionary*)dict device:(BOOL)device context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
 //GET (no device)
 - (AGURLConnection*) start:(NSString*)path context:(id)context block:(AGHttpJSONHandlerFinishBlock)block;
-- (AGURLConnection*) start:(NSDictionary*)dict;
++ (AGURLConnection*) start:(NSDictionary*)dict;
 
 @end

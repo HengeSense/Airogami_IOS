@@ -22,6 +22,7 @@ static NSString *path;
 
 @interface AGAppConfig()
 {
+    BOOL inMain;
 }
 
 @end
@@ -130,6 +131,13 @@ static NSString *path;
     return params;
 }
 
+- (void) refresh
+{
+    if (inMain) {
+        [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
+    }
+}
+
 //appAccount != nil
 - (void) gotoMain
 {
@@ -138,7 +146,8 @@ static NSString *path;
     if (accountManager.account == nil) {
         accountManager.account = [[AGControllerUtils controllerUtils].accountController findAccount:appAccount.accountId];
     }
-    
+    inMain = YES;
+    [self refresh];
 }
 
 - (void) gotoSign
@@ -146,6 +155,7 @@ static NSString *path;
     [[AGManagerUtils managerUtils].accountManager signout];
     [self resetAppAccount];
     [[AGNotificationCenter notificationCenter] reset];
+    inMain = NO;
 }
 
 

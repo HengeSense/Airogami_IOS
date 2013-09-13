@@ -327,6 +327,9 @@
 		07B8DC4217711BEB006922FF /* write_paper_info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B8DC3C17711BEB006922FF /* write_paper_info@2x.png */; };
 		07B8DC4317711BEB006922FF /* write_paper_question@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B8DC3D17711BEB006922FF /* write_paper_question@2x.png */; };
 		07B8DC4417711BEB006922FF /* write_paper_relationship@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07B8DC3E17711BEB006922FF /* write_paper_relationship@2x.png */; };
+		07C489A517E2390A00DB605F /* AGAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C489A417E2390A00DB605F /* AGAudioManager.m */; };
+		07C489A717E23BB400DB605F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C489A617E23BB300DB605F /* AudioToolbox.framework */; };
+		07C489A917E2A27300DB605F /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C489A817E2A27200DB605F /* app_icon.png */; };
 		07C48F3617A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */; };
 		07C48F3817A6FBE4000D03A8 /* profile_name_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */; };
 		07C48F3B17A6FE3C000D03A8 /* arrow_icon_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3917A6FE3C000D03A8 /* arrow_icon_highlight@2x.png */; };
@@ -820,6 +823,10 @@
 		07B8DC3C17711BEB006922FF /* write_paper_info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_info@2x.png"; sourceTree = "<group>"; };
 		07B8DC3D17711BEB006922FF /* write_paper_question@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_question@2x.png"; sourceTree = "<group>"; };
 		07B8DC3E17711BEB006922FF /* write_paper_relationship@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_relationship@2x.png"; sourceTree = "<group>"; };
+		07C489A317E2390A00DB605F /* AGAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAudioManager.h; sourceTree = "<group>"; };
+		07C489A417E2390A00DB605F /* AGAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAudioManager.m; sourceTree = "<group>"; };
+		07C489A617E23BB300DB605F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		07C489A817E2A27200DB605F /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_icon.png; path = ../../app_icon.png; sourceTree = "<group>"; };
 		07C48F3417A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSettingProfileScreenNameViewController.h; sourceTree = "<group>"; };
 		07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSettingProfileScreenNameViewController.m; sourceTree = "<group>"; };
 		07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_name_box@2x.png"; sourceTree = "<group>"; };
@@ -867,6 +874,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C489A717E23BB400DB605F /* AudioToolbox.framework in Frameworks */,
 				076B15A517B07F04005BD910 /* CoreData.framework in Frameworks */,
 				076B159E17B03AEC005BD910 /* ImageIO.framework in Frameworks */,
 				076E2B1617A886AF00A478A3 /* libsqlite3.dylib in Frameworks */,
@@ -966,6 +974,7 @@
 		07072328175E8C2F0017292A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07C489A617E23BB300DB605F /* AudioToolbox.framework */,
 				076B15A417B07F04005BD910 /* CoreData.framework */,
 				076B159F17B03D1A005BD910 /* SDWebImage.framework */,
 				076B159D17B03AEB005BD910 /* ImageIO.framework */,
@@ -1175,14 +1184,16 @@
 				076B15B817B088C1005BD910 /* AGFileManager.m */,
 				076B15BB17B088C1005BD910 /* AGProfileManager.h */,
 				076B15BC17B088C1005BD910 /* AGProfileManager.m */,
-				076B15B917B088C1005BD910 /* AGManagerUtils.h */,
-				076B15BA17B088C1005BD910 /* AGManagerUtils.m */,
 				0702F6C917B3199F00B4EBB3 /* AGDataManger.h */,
 				0702F6CA17B3199F00B4EBB3 /* AGDataManger.m */,
 				078DEE2C17B983BE00A969A1 /* AGPlaneManager.h */,
 				078DEE2D17B983BE00A969A1 /* AGPlaneManager.m */,
 				078DEE3317B9A0DE00A969A1 /* AGChainManager.h */,
 				078DEE3417B9A0DE00A969A1 /* AGChainManager.m */,
+				07C489A317E2390A00DB605F /* AGAudioManager.h */,
+				07C489A417E2390A00DB605F /* AGAudioManager.m */,
+				076B15B917B088C1005BD910 /* AGManagerUtils.h */,
+				076B15BA17B088C1005BD910 /* AGManagerUtils.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1260,6 +1271,7 @@
 		0785226E1786223200288D7C /* General */ = {
 			isa = PBXGroup;
 			children = (
+				07C489A817E2A27200DB605F /* app_icon.png */,
 				078DEE8017BD8CD900A969A1 /* profile_image_default@2x.png */,
 				07C48F3917A6FE3C000D03A8 /* arrow_icon_highlight@2x.png */,
 				07C48F3A17A6FE3C000D03A8 /* arrow_icon@2x.png */,
@@ -2101,6 +2113,7 @@
 				0702F6D717B43CF100B4EBB3 /* Localizable.strings in Resources */,
 				078DEE3717B9ABAC00A969A1 /* plane_unknown_icon@2x.png in Resources */,
 				078DEE8117BD8CD900A969A1 /* profile_image_default@2x.png in Resources */,
+				07C489A917E2A27300DB605F /* app_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2262,6 +2275,7 @@
 				0743FF9717DD534C005A9261 /* Model.xcdatamodeld in Sources */,
 				0743FF9D17DD5958005A9261 /* AGNewAccount.m in Sources */,
 				0743FFA017DE7106005A9261 /* AGChain.m in Sources */,
+				07C489A517E2390A00DB605F /* AGAudioManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

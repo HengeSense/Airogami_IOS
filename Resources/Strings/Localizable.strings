@@ -26,7 +26,7 @@
 "message.general.edit.succeed" = "Update successfully";
 "message.general.cancel" = "Cancel";
 "message.general.ok" = "OK";
-"error.general.planechanged" = "Oops! The plane hass changed";
+"error.general.planechanged" = "Oops! The plane has changed";
 //signup
 "error.signup.location.choose.invalid" = "Please specify your city";
 "message.signup.succeed" = "Sign up successfully";
@@ -78,4 +78,10 @@
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";
 
+//notificaion
+"LKRP" = "You got a new plane";//LocKeyReceivedPlane
+"LKRC" = "You got a new chain plane";//LocKeyReceivedChain
+"LKRPM" = "%@: %@";//LocKeyReceivedPlaneMessage
+"LKRCM" = "%@: %@";//LocKeyReceivedChainMessage
+"LKLPM" = "%@ liked your plane";//LocKeyLikedPlaneMessage
 

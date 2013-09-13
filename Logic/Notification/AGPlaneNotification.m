@@ -441,7 +441,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage, BOOL refresh) {
         
         if (error == nil) {
-            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
             if (remoteMessage) {
                 [dict setObject:remoteMessage forKey:@"remoteMessage"];
                 [dict setObject:message forKey:@"message"];

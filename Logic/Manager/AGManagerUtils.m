@@ -15,6 +15,7 @@
 @synthesize dataManager;
 @synthesize planeManager;
 @synthesize chainManager;
+@synthesize audioManager;
 
 -(id) init
 {
@@ -24,6 +25,7 @@
         dataManager = [[AGDataManger alloc] init];
         planeManager = [[AGPlaneManager alloc] init];
         chainManager = [[AGChainManager alloc] init];
+        audioManager = [[AGAudioManager alloc] init];
     }
     return self;
 }

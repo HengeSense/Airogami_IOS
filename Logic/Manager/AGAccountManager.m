@@ -325,9 +325,11 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
     NSMutableDictionary *params = [appConfig siginParams];
     if (params.count) {
-        [self signin:params automatic:YES animated:NO context:reqDict block:^(NSError *error, BOOL succeed) {
+        NSString *prompt = [reqDict objectForKey:@"prompt"];
+        BOOL animated = prompt != nil;
+        [self signin:params automatic:YES animated:animated context:reqDict block:^(NSError *error, BOOL succeed) {
             if (succeed && reqDict) {
-                [[AGJSONHttpHandler handler] start:reqDict];
+                [AGJSONHttpHandler start:reqDict];
             }
 #ifdef IS_DEBUG
             NSLog(@"autoSignin: succeed=%d", succeed);

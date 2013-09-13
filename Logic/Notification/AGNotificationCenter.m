@@ -219,6 +219,15 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 
 - (void) tick:(NSTimer *) timer {
     //do something here..
+    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
+    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainChains object:nil userInfo:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceiveChains object:nil userInfo:nil];
+}
+
+- (void) obtainPlanesAndChains
+{
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
     

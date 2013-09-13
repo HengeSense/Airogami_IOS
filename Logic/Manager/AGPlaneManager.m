@@ -76,6 +76,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
             }
             else{
                 //succeed
+                //result = [result objectForKey:AGLogicJSONErrorKey];
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
                 [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:message.plane];

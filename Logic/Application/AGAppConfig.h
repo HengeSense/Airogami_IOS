@@ -28,5 +28,6 @@
 - (void) gotoMain;
 - (void) gotoSign;
 - (NSMutableDictionary*) siginParams;
+- (void) refresh;
 
 @end

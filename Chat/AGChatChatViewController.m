@@ -374,7 +374,6 @@ static float AGInputTextViewMaxHeight = 100;
         [self send];
         aTextView.text = @"";
         [self relayout];
-        //[aTextView resignFirstResponder];
         return NO;
     }
 
@@ -391,6 +390,7 @@ static float AGInputTextViewMaxHeight = 100;
 {
     return YES;
 }
+
 
 - (void)textViewDidChange:(UITextView *)textView
 {

@@ -11,7 +11,7 @@
 #import "AGUtils.h"
 #import "AGManagerUtils.h"
 #import "AGControllerUtils.h"
-#import "AGPlaneNotification.h"
+#import "AGNotificationCenter.h"
 
 static AGAppDelegate *AppDelegate;
 
@@ -81,6 +81,7 @@ static AGAppDelegate *AppDelegate;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [appConfig refresh];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -110,13 +111,26 @@ static AGAppDelegate *AppDelegate;
 #ifdef IS_DEBUG
         NSLog(@"deviceToken = %@", devToken);
 #endif
-        [[AGManagerUtils managerUtils].accountManager autoSignin];
+        //[[AGManagerUtils managerUtils].accountManager autoSignin];
     }
     
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSLog(@"Error in registration. Error: %@", err);
+}
+
+- (void)application:(UIApplication *)app didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+#ifdef IS_DEBUG
+    NSLog(@"remoteNotification = %@", userInfo);
+#endif
+    if (app.applicationState == UIApplicationStateActive) {
+        [appConfig refresh];
+        [[AGManagerUtils managerUtils].audioManager playMessage];
+    }
+    
+    
 }
 
 @end

@@ -29,6 +29,7 @@ extern NSString *AGNotificationGotUnreadMessagesCount;
 - (void) startTimer:(BOOL)start;
 //should run after open the program
 - (void) obtainMessages;
+- (void) obtainPlanesAndChains;
 - (void) reset;
 
 @end

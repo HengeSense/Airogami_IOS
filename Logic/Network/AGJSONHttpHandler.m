@@ -98,14 +98,16 @@
     return conn;
 }
 
-- (NSURLConnection*) start:(NSDictionary*)dict
++ (NSURLConnection*) start:(NSDictionary*)dict
 {
     NSAssert(dict != nil, @"dict can't be nil");
     NSString *path = [dict objectForKey:@"path"];
     id context = [dict objectForKey:@"context"];
     AGHttpJSONHandlerFinishBlock block = [dict objectForKey:@"block"];
     NSDictionary* params = [dict objectForKey:@"params"];
-    return [self start:path params:params device:NO context:context block:block];
+    NSNumber *number = [dict objectForKey:@"get"];
+    NSString *prompt = [dict objectForKey:@"prompt"];
+    return [self request:number.boolValue params:params path:path prompt:prompt context:context block:block];
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -207,7 +209,7 @@
 }
 
 
-+ (void) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block
++ (AGURLConnection*) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block
 {
     NSMutableString *url = [NSMutableString stringWithCapacity:128];
     [url appendString:path];
@@ -220,10 +222,8 @@
         [AGWaitUtils startWait:NSLocalizedString(prompt, prompt)];
     }
     NSMutableString * NotSignin = [NSMutableString stringWithString:@"NO"];
-    [[AGJSONHttpHandler handler] start:url  params:params device:NO context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
-        if (prompt) {
-            [AGWaitUtils startWait:nil];
-        }
+    return [[AGJSONHttpHandler handler] start:url  params:params device:NO context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
+        
         NSMutableDictionary *result = nil;
         if (error) {
             
@@ -258,12 +258,16 @@
                     [oldDict setObject:block forKey:@"block"];
                 }
                 
+                [oldDict setObject:[NSNumber numberWithBool:get] forKey:@"get"];
+                if (prompt) {
+                    [oldDict setObject:prompt forKey:@"prompt"];
+                }
                 
                 [[AGManagerUtils managerUtils].accountManager autoSignin:oldDict];
             }
             else{
 #ifdef IS_DEBUG
-                NSLog(@"JSON.message = %@", [dict objectForKey:@"message"]);
+                NSLog(@"JSON.message = %@", [dict objectForKey:AGLogicJSONMessageKey]);
 #endif
                 error = [AGMessageUtils errorServer];
                
@@ -276,6 +280,9 @@
             }
             if (block) {
                 block(error, context, result);
+            }
+            if (prompt) {
+                [AGWaitUtils startWait:nil];
             }
         }
         

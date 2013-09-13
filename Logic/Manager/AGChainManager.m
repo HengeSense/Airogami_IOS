@@ -68,6 +68,11 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
                     [[AGCoreData coreData] remove:chain];
                 }
+                else{
+                    NSDictionary *chainMessageJson = [result objectForKey:@"chainMessage"];
+                    [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:chainMessageJson forChain:chain];
+                    [[AGChainNotification chainNotification] obtainedChains];
+                }
                 [[AGChainNotification chainNotification] collectedChains];
                 [AGMessageUtils alertMessageChainChanged];
             }
