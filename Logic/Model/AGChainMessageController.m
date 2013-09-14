@@ -43,6 +43,17 @@ static const int ChainMessageLimit = 10;
     return chainMessage;
 }
 
+- (AGChainMessage*) updateChainMessage:(NSDictionary*)jsonDictionary forChain:(AGChain*)chain
+{
+    AGChainMessage *chainMessage = (AGChainMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGChainMessage"];
+    if (chainMessage) {
+        chainMessage.chain = chain;
+        chain.collected = [NSNumber numberWithBool:chainMessage.status.intValue == AGChainMessageStatusNew];
+    }
+    [coreData save];
+    return chainMessage;
+}
+
 - (AGChainMessage*) saveChainMessage:(NSDictionary*)jsonDictionary
 {
     AGChainMessage *chainMessage = (AGChainMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGChainMessage"];
@@ -121,7 +132,7 @@ static const int ChainMessageLimit = 10;
     return chainMessage;
 }
 
-//for chat
+// this is for chat
 - (int) getUnreadChainMessageCountForChain:(NSNumber *)chainId
 {
     AGChainMessage *chainMessage = [self getChainMessageForChain:chainId];
@@ -131,7 +142,7 @@ static const int ChainMessageLimit = 10;
         [fetchRequest setEntity:chainMessageEntityDescription];
         [fetchRequest setResultType:NSDictionaryResultType];
         //
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and createdTime > %@", chainId, chainMessage.lastViewedTime];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and createdTime > %@ and status >= %d", chainId, chainMessage.lastViewedTime, AGChainMessageStatusReplied];
         [fetchRequest setPredicate:predicate];
         //expression
         NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"status"];

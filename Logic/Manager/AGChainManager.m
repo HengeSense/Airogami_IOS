@@ -70,7 +70,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 }
                 else{
                     NSDictionary *chainMessageJson = [result objectForKey:@"chainMessage"];
-                    [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:chainMessageJson forChain:chain];
+                    [[AGControllerUtils controllerUtils].chainMessageController updateChainMessage:chainMessageJson forChain:chain];
                     [[AGChainNotification chainNotification] obtainedChains];
                 }
                 [[AGChainNotification chainNotification] collectedChains];
@@ -176,15 +176,13 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
                     [[AGCoreData coreData] remove:chain];
                 }
-                NSDictionary *chainJson = [result objectForKey:@"chain"];
-                //changed status, etc
-                if (chainJson) {
-                    [[AGControllerUtils controllerUtils].chainController saveChain:chainJson];
-                    [AGMessageUtils alertMessageChainChanged];
+                else{//changed status, etc
+                    NSDictionary *chainMessageJson = [result objectForKey:@"chainMessage"];
+                    [[AGControllerUtils controllerUtils].chainMessageController updateChainMessage:chainMessageJson forChain:chain];
+                    [[AGChainNotification chainNotification] obtainedChains];
                 }
                 [[AGChainNotification chainNotification] collectedChains];
-                [[AGChainNotification chainNotification] obtainedChains];
-                
+                [AGMessageUtils alertMessageChainChanged];
             }
             else{
                 [[AGCoreData coreData] remove:chain];

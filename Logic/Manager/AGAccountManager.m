@@ -117,7 +117,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     }
     NSMutableDictionary *params = [pp mutableCopy];
     if (automatic) {
-        [params setObject:@"true" forKey:@"ifInvalid"];
+        [params setObject:@"true" forKey:@"automatic"];
     }
     
     NSString *password = [params objectForKey:@"password"];

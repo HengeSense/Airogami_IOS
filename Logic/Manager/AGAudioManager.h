@@ -12,4 +12,6 @@
 
 - (void) playMessage;
 
+- (void) playNotification;
+
 @end

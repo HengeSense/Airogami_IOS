@@ -72,7 +72,7 @@
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0 && (account.accountId != %@ || passCount > 0)", account.accountId, type == 1 ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count > 0 && (account.accountId != %@ || passCount > 0)", account.accountId, type == 1 ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending: type == 3];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -134,7 +134,7 @@
     }
     //check whether empty
     if (updateInc.longLongValue == 0) {
-        predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0 && (account.accountId != %@ || passCount > 0) and updateInc = 0", account.accountId, forCollect ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId];
+        predicate = [NSPredicate predicateWithFormat:@"collected = %d && (account.accountId != %@ || passCount > 0) && updateInc = 0", forCollect, account.accountId];
         fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:chainEntityDescription];
         fetchRequest.predicate = predicate;
@@ -163,7 +163,7 @@
     [fetchRequest setEntity:chainMessageEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and %d = status", chainId, AGChainMessageStatusReplied];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and status >= %d", chainId, AGChainMessageStatusReplied];
     [fetchRequest setPredicate:predicate];
     //
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"createdTime"];

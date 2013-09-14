@@ -9,35 +9,43 @@
 #import "AGAudioManager.h"
 #include <AudioToolbox/AudioToolbox.h>
 
-@interface AGAudioManager()
+static const SystemSoundID ReceivedMessage = 1003;
+static const SystemSoundID Notification = 1307;
 
-@property(nonatomic) SystemSoundID messageSound;
+@interface AGAudioManager()
+{
+}
+
 
 @end
 
 @implementation AGAudioManager
 
-@synthesize messageSound;
 
 -(id)init
 {
     if (self = [super init]) {
         //NSURL *url = [[NSBundle bundleWithIdentifier:@"com.apple.UIKit"] URLForResource:@"ReceivedMessage" withExtension:@"caf"];
         //AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &messageSound);
-        messageSound = 1003;
     }
     return self;
 }
 
 - (void) playMessage
 {
-    AudioServicesPlayAlertSound(messageSound);
+    AudioServicesPlayAlertSound(ReceivedMessage);
+    //AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+}
+
+- (void) playNotification
+{
+    AudioServicesPlayAlertSound(Notification);
     //AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
 }
 
 - (void) dealloc {
     
-    AudioServicesDisposeSystemSoundID (messageSound);
+    //AudioServicesDisposeSystemSoundID (messageSound);
 }
 
 @end

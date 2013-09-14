@@ -17,11 +17,10 @@
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
-#define TimeoutInterval 10
+#define TimeoutInterval 30
 
 @interface AGJSONHttpHandler()<NSURLConnectionDelegate>
 {
-   
 }
 
 @property(nonatomic, strong) NSMutableURLRequest *request;
