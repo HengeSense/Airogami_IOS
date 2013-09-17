@@ -75,6 +75,9 @@ static NSDateFormatter *dateFormatter;
     if (yes) {
         NSString * deviceString = [NSString stringWithFormat:@"%@=%d&%@=%d",[@"clientAgent.deviceType" encodeURIComponent],AGDeviceType, [@"clientAgent.clientVersion" encodeURIComponent], AGApplicationVersion];
         [path appendString:deviceString];
+        //guid
+        deviceString = [NSString stringWithFormat:@"&%@=%@", [@"clientAgent.guid" encodeURIComponent], [[AGAppDelegate appDelegate].appConfig.guid encodeURIComponent]];
+        [path appendString:deviceString];
         //
         NSData *deviceToken = [AGAppDelegate appDelegate].deviceToken;
         if (deviceToken) {

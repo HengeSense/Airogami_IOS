@@ -11,6 +11,8 @@
 
 static NSString *ServerUnkownMessageKey = @"message.server.unkown.message";
 static NSString *ServerUnkownTitleKey = @"message.server.unkown.title";
+static NSString *ClientUnkownMessageKey = @"message.client.unkown.message";
+static NSString *ClientUnkownTitleKey = @"message.client.unkown.title";
 static NSString *ClientNotSigninMessageKey = @"message.client.notsignin.message";
 static NSString *ClientNotSigninTitleKey = @"message.client.notsignin.title";
 static NSString *UnsavedMessage = @"message.general.edit.unsaved.message";
@@ -88,9 +90,25 @@ static NSString *PlaneChanged = @"error.general.planechanged";
     return [AGMessageUtils error:number.intValue domain:@"Server" titleKey:titleKey msgKey:msgKey];
 }
 
++(NSError*) errorClient:(NSNumber*)number titleKey:(NSString*)titleKey msgKey:(NSString*)msgKey
+{
+    if (titleKey == nil) {
+        titleKey = ClientUnkownTitleKey;
+    }
+    if (msgKey == nil) {
+        msgKey = ClientUnkownMessageKey;
+    }
+    return [AGMessageUtils error:number.intValue domain:@"Client" titleKey:titleKey msgKey:msgKey];
+}
+
 + (NSError*) errorServer
 {
     return [AGMessageUtils errorServer:nil titleKey:nil msgKey:nil];
+}
+
++ (NSError*) errorClient
+{
+    return [AGMessageUtils errorClient:nil titleKey:nil msgKey:nil];
 }
 
 + (NSError*) errorNotSignin

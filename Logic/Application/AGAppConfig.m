@@ -31,6 +31,7 @@ static NSString *path;
 
 @synthesize once;
 @synthesize appAccount;
+@synthesize guid;
 @synthesize appVersion;
 
 + (AGAppConfig*)appConfig
@@ -58,6 +59,9 @@ static NSString *path;
     if (self = [super init]) {
         once = YES;
         appVersion = AGApplicationVersion;
+        if (guid == nil) {
+            guid = [AGUtils obtainUuid];
+        }
     }
     return self;
 }
@@ -112,7 +116,7 @@ static NSString *path;
     return NO;
 }
 
-- (NSMutableDictionary*) siginParams
+- (NSMutableDictionary*) autoSigninParams
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     if (appAccount) {
@@ -125,6 +129,7 @@ static NSString *path;
         }
         if (params.count) {
             [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
+            [params setObject:appAccount.accountId forKey:@"accountId"];
         }
     }
     

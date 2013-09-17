@@ -74,6 +74,8 @@
 //client
 "message.client.notsignin.message" = "please sign in";
 "message.client.notsignin.title" = "Not sign in";
+"message.client.unkown.message" = "Client error";
+"message.client.unkown.title" = "Client Error";
 
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";

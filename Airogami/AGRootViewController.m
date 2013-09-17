@@ -32,6 +32,8 @@ enum{
 
 @implementation AGRootViewController
 
+@synthesize isInMain;
+
 + (AGRootViewController*)rootViewController
 {
     return rootViewController;
@@ -164,6 +166,11 @@ enum{
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self performSegueWithIdentifier:@"ToMain" sender:self];
     
+}
+
+-(BOOL) isInMain
+{
+    return rootNavigateTo == AGRootToMain;
 }
 
 + (AGSettingProfileMasterViewController*) settingViewController

@@ -18,7 +18,7 @@
     </entity>
     <entity name="AGAccountStat" representedClassName="AGAccountStat" syncable="YES">
         <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="signinUuid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="signinCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="unreadChainMessagesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="unreadMessagesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="accountStat" inverseEntity="AGAccount" syncable="YES"/>

@@ -39,7 +39,6 @@
 		070BCC3817CEB26300BB97B7 /* AGNewPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC3717CEB26300BB97B7 /* AGNewPlane.m */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
-		0743FF8117D95749005A9261 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF8017D95748005A9261 /* AGAccountStat.m */; };
 		0743FF8417DAA292005A9261 /* AGPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF8317DAA292005A9261 /* AGPlane.m */; };
 		0743FF8717DAA293005A9261 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF8617DAA293005A9261 /* AGChainMessage.m */; };
 		0743FF8F17DD0CA1005A9261 /* AGChainNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF8A17DD0CA1005A9261 /* AGChainNotification.m */; };
@@ -330,6 +329,7 @@
 		07C489A517E2390A00DB605F /* AGAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C489A417E2390A00DB605F /* AGAudioManager.m */; };
 		07C489A717E23BB400DB605F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C489A617E23BB300DB605F /* AudioToolbox.framework */; };
 		07C489A917E2A27300DB605F /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C489A817E2A27200DB605F /* app_icon.png */; };
+		07C489AC17E77AA200DB605F /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C489AB17E77AA200DB605F /* AGAccountStat.m */; };
 		07C48F3617A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */; };
 		07C48F3817A6FBE4000D03A8 /* profile_name_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */; };
 		07C48F3B17A6FE3C000D03A8 /* arrow_icon_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07C48F3917A6FE3C000D03A8 /* arrow_icon_highlight@2x.png */; };
@@ -429,8 +429,6 @@
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		073250F9176AB4AB00487B9E /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
-		0743FF7F17D95748005A9261 /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
-		0743FF8017D95748005A9261 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
 		0743FF8217DAA292005A9261 /* AGPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlane.h; sourceTree = "<group>"; };
 		0743FF8317DAA292005A9261 /* AGPlane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlane.m; sourceTree = "<group>"; };
 		0743FF8517DAA293005A9261 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
@@ -827,6 +825,8 @@
 		07C489A417E2390A00DB605F /* AGAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAudioManager.m; sourceTree = "<group>"; };
 		07C489A617E23BB300DB605F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		07C489A817E2A27200DB605F /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_icon.png; path = ../../app_icon.png; sourceTree = "<group>"; };
+		07C489AA17E77AA200DB605F /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
+		07C489AB17E77AA200DB605F /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
 		07C48F3417A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSettingProfileScreenNameViewController.h; sourceTree = "<group>"; };
 		07C48F3517A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSettingProfileScreenNameViewController.m; sourceTree = "<group>"; };
 		07C48F3717A6FBE4000D03A8 /* profile_name_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_name_box@2x.png"; sourceTree = "<group>"; };
@@ -1254,8 +1254,6 @@
 				070BCC3117CE876800BB97B7 /* AGNewChain.m */,
 				070BCC3617CEB26300BB97B7 /* AGNewPlane.h */,
 				070BCC3717CEB26300BB97B7 /* AGNewPlane.m */,
-				0743FF7F17D95748005A9261 /* AGAccountStat.h */,
-				0743FF8017D95748005A9261 /* AGAccountStat.m */,
 				0743FF8217DAA292005A9261 /* AGPlane.h */,
 				0743FF8317DAA292005A9261 /* AGPlane.m */,
 				0743FF8517DAA293005A9261 /* AGChainMessage.h */,
@@ -1264,6 +1262,8 @@
 				0743FF9C17DD5958005A9261 /* AGNewAccount.m */,
 				0743FF9E17DE7106005A9261 /* AGChain.h */,
 				0743FF9F17DE7106005A9261 /* AGChain.m */,
+				07C489AA17E77AA200DB605F /* AGAccountStat.h */,
+				07C489AB17E77AA200DB605F /* AGAccountStat.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2265,7 +2265,6 @@
 				070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */,
 				070BCC3217CE876800BB97B7 /* AGNewChain.m in Sources */,
 				070BCC3817CEB26300BB97B7 /* AGNewPlane.m in Sources */,
-				0743FF8117D95749005A9261 /* AGAccountStat.m in Sources */,
 				0743FF8417DAA292005A9261 /* AGPlane.m in Sources */,
 				0743FF8717DAA293005A9261 /* AGChainMessage.m in Sources */,
 				0743FF8F17DD0CA1005A9261 /* AGChainNotification.m in Sources */,
@@ -2276,6 +2275,7 @@
 				0743FF9D17DD5958005A9261 /* AGNewAccount.m in Sources */,
 				0743FFA017DE7106005A9261 /* AGChain.m in Sources */,
 				07C489A517E2390A00DB605F /* AGAudioManager.m in Sources */,
+				07C489AC17E77AA200DB605F /* AGAccountStat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,1 @@
+bug #1: wrong arrangement when reply in chat

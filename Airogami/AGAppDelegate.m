@@ -125,7 +125,9 @@ static AGAppDelegate *AppDelegate;
 #ifdef IS_DEBUG
     NSLog(@"remoteNotification = %@", userInfo);
 #endif
-    if (app.applicationState == UIApplicationStateActive) {
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    NSNumber *accountId = [userInfo objectForKey:@"accountId"];
+    if (app.applicationState == UIApplicationStateActive && [accountId isEqualToNumber:account.accountId]) {
         [appConfig refresh];
         [[AGManagerUtils managerUtils].audioManager playMessage];
     }
