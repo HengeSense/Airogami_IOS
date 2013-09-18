@@ -16,6 +16,7 @@
 #import "AGManagerUtils.h"
 #import "AGUtils.h"
 #import "AGNotificationCenter.h"
+#import "AGRootViewController.h"
 
 static NSString *configName = @"AppConfig";
 static NSString *path;
@@ -31,8 +32,8 @@ static NSString *path;
 
 @synthesize once;
 @synthesize appAccount;
-@synthesize guid;
 @synthesize appVersion;
+@synthesize guid;
 
 + (AGAppConfig*)appConfig
 {
@@ -59,9 +60,7 @@ static NSString *path;
     if (self = [super init]) {
         once = YES;
         appVersion = AGApplicationVersion;
-        if (guid == nil) {
-            guid = [AGUtils obtainUuid];
-        }
+        guid = [AGUtils obtainUuid];
     }
     return self;
 }
@@ -89,6 +88,7 @@ static NSString *path;
     appAccount.email = account.authenticate.email;
     appAccount.screenName = account.profile.screenName;
     appAccount.password = password;
+    appAccount.signinCount = account.accountStat.signinCount;
     [self save];
 }
 
@@ -111,10 +111,6 @@ static NSString *path;
     return appAccount == nil;
 }
 
-- (BOOL) accountUpdated:(AGAccount*)account
-{
-    return NO;
-}
 
 - (NSMutableDictionary*) autoSigninParams
 {
@@ -130,6 +126,7 @@ static NSString *path;
         if (params.count) {
             [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
             [params setObject:appAccount.accountId forKey:@"accountId"];
+            [params setObject:appAccount.signinCount forKey:@"signinCount"];
         }
     }
     
@@ -141,6 +138,16 @@ static NSString *path;
     if (inMain) {
         [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
     }
+}
+
+- (void) kickoff
+{
+    [[AGManagerUtils managerUtils].accountManager autoSignin:nil block:^(NSError *error, id context) {
+        if (error == nil) {
+            [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
+            [[AGNotificationCenter notificationCenter] resendMessages];
+        }
+    }];
 }
 
 //appAccount != nil
@@ -157,10 +164,15 @@ static NSString *path;
 
 - (void) gotoSign
 {
-    [[AGManagerUtils managerUtils].accountManager signout];
-    [self resetAppAccount];
-    [[AGNotificationCenter notificationCenter] reset];
-    inMain = NO;
+    [[AGManagerUtils managerUtils].accountManager signout:nil block:^(NSError *error, id context) {
+        if (error == nil) {
+            inMain = NO;
+            [self resetAppAccount];
+            [[AGNotificationCenter notificationCenter] reset];
+            [[AGRootViewController rootViewController] switchToSign];
+        }
+    }];
+    
 }
 
 

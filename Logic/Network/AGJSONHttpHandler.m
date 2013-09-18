@@ -264,6 +264,12 @@
                 
                 [[AGManagerUtils managerUtils].accountManager autoSignin:oldDict];
             }
+            else if(status.intValue == AGLogicJSONStatusInput){
+#ifdef IS_DEBUG
+                NSLog(@"JSON.message = %@", [dict objectForKey:AGLogicJSONMessageKey]);
+#endif
+                error = [AGMessageUtils errorClient];
+            }
             else{
 #ifdef IS_DEBUG
                 NSLog(@"JSON.message = %@", [dict objectForKey:AGLogicJSONMessageKey]);

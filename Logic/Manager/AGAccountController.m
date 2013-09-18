@@ -8,6 +8,8 @@
 
 #import "AGAccountController.h"
 #import "AGAppDelegate.h"
+#import "AGAccountStat.h"
+#import "AGManagerUtils.h"
 
 
 @interface AGAccountController()
@@ -105,6 +107,12 @@
         [coreData remove:newAccount];
     }
     
+}
+
+- (int) getUnreadMessagesCount
+{
+    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    return accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue;
 }
 
 

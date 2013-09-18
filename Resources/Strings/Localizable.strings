@@ -36,7 +36,7 @@
 "error.signin.password.invalid" = "The password is invalid";
 "error.signin.notmatch.message" = "Invalid name or password";
 "error.signin.need.title" = "Signin Needed";
-"error.signin.other.message" = "Signin from other place";
+"error.signin.other.message" = "Signined elsewhere or confidential changed";
 //google auto complete
 "error.googleplacesautocomplete.fetch" = "Could not fetch Places";
 "error.googleplacesautocomplete.map" = "Could not map selected Place";

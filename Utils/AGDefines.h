@@ -100,6 +100,7 @@ extern  NSString * AGLogicAccountScreenNameKey;
 extern  NSString * AGLogicAccountUuidKey;
 extern int AGLogicJSONStatusNotSignin;
 extern int AGLogicJSONStatusSigninElsewhere;
+extern int AGLogicJSONStatusInput;
 
 //error
 extern NSString *AGHttpFailErrorTitleKey;

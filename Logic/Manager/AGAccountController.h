@@ -22,5 +22,6 @@
 - (void) addNewAccount:(AGAccount *)account;
 - (AGNewAccount*) getNextNewAccount;
 - (void) removeNewAccount:(AGNewAccount *)newAccount oldUpdateCount:(NSNumber*)updateCount;
+- (int) getUnreadMessagesCount;
 
 @end

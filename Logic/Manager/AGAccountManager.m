@@ -131,7 +131,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     NSMutableDictionary *params = [pp mutableCopy];
     if (automatic) {
         [params setObject:@"true" forKey:@"automatic"];
-        [params setObject:account.accountStat.signinCount forKey:@"signinCount"];
+        //[params setObject:account.accountStat.signinCount forKey:@"signinCount"];
     }
     
     NSString *password = [params objectForKey:@"password"];
@@ -168,7 +168,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                             [[AGRootViewController rootViewController] switchToSign];
                         }
                     }
-                    //signined at other place
+                    //signinCount not match
                     else if ([str isEqual:@"elsewhere"]){
                         AGRootViewController *rootViewController = [AGRootViewController rootViewController];
                         if ([rootViewController isInMain]) {
@@ -256,25 +256,43 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     }];
 }
 
--(void) signout
+-(void) signout:(id)context block:(AGHttpDoneBlock)block
 {
-    account = nil;
-    NSString *path = SignoutPath;
-    //[AGWaitUtils startWait:@""];
+    if (account == nil) {
+        if (block) {
+             block(nil, context);
+        }
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:account.accountStat.signinCount forKey:@"signinCount"];
+    [params setObject:account.accountId forKey:@"accountId"];
     
-    [[AGJSONHttpHandler handler] start:path context:nil block:^(NSError *error,id context, NSMutableDictionary *dict) {
-        //[AGWaitUtils startWait:nil];
+    [AGWaitUtils startWait:@""];
+    
+    [[AGJSONHttpHandler handler] start:SignoutPath params:params device:YES  context:context block:^(NSError *error,id context, NSMutableDictionary *dict) {
+        [AGWaitUtils startWait:nil];
         if (error) {
-            //NSLog(@"http request error%@", error.localizedDescription);
+            [AGMessageUtils alertMessageWithError:error];
+#ifdef IS_DEBUG
+            NSLog(@"http request error%@", error);
+#endif
         }
         else{
             NSNumber *status = [dict objectForKey:AGLogicJSONStatusKey];
             if (status.intValue == 0) {
-                //NSLog(@"signout succeeded");
+                //succeed
+                account = nil;
+#ifdef IS_DEBUG
+                NSLog(@"signout.result = %@", [dict objectForKey:AGLogicJSONResultKey]);
+#endif
             }
             else{
-                //NSLog(@"server error");
+                error = [AGMessageUtils errorServer];
             }
+        }
+        if (block) {
+            block(error, context);
         }
         
     }];
@@ -351,9 +369,21 @@ static NSString *SigninBanned = @"error.account.signin.banned";
 }
 
 
-- (void) autoSignin
+//Kickoff autoSignin
+- (void)autoSignin:(id)context block:(AGHttpDoneBlock)block
 {
-    [self autoSignin:nil];
+    AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+    NSMutableDictionary *params = [appConfig autoSigninParams];
+    if (params.count) {
+        [self signin:params automatic:YES animated:NO context:nil block:^(NSError *error, BOOL succeed) {
+#ifdef IS_DEBUG
+            NSLog(@"Kickoff autoSignin: succeed=%d", succeed);
+#endif
+            if (block) {
+                block(error, context);
+            }
+        }];
+    }
 }
 
 - (void) autoSignin:(NSDictionary*)reqDict
@@ -363,7 +393,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     if (params.count) {
         NSString *prompt = [reqDict objectForKey:@"prompt"];
         BOOL animated = prompt != nil;
-        [self signin:params automatic:YES animated:animated context:reqDict block:^(NSError *error, BOOL succeed) {
+        [self signin:params automatic:YES animated:animated context:nil block:^(NSError *error, BOOL succeed) {
             if (reqDict) {
                 if (succeed) {
                     [AGJSONHttpHandler start:reqDict];

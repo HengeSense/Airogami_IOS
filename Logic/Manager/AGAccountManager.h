@@ -33,9 +33,10 @@ typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 
 - (NSDictionary*) paramsForChangeScreenName:(NSString*)screenName;
 
-- (void) signout;
+-(void) signout:(id)context block:(AGHttpDoneBlock)block ;
 
-- (void) autoSignin;
+//Kickoff autoSignin
+- (void) autoSignin:(id)context block:(AGHttpDoneBlock)block;
 - (void) autoSignin:(NSDictionary*)reqDict;
 
 @end
