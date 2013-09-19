@@ -2,7 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AGAccount" representedClassName="AGAccount" syncable="YES">
         <attribute name="accountId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="-1" syncable="YES"/>
+        <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <relationship name="accountStat" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGAccountStat" inverseName="account" inverseEntity="AGAccountStat" syncable="YES"/>
         <relationship name="authenticate" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAuthenticate" inverseName="account" inverseEntity="AGAuthenticate" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="account" inverseEntity="AGChainMessage" syncable="YES"/>
@@ -183,7 +183,7 @@
         <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shout" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="updateCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="profile" inverseEntity="AGAccount" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="accountId"/>

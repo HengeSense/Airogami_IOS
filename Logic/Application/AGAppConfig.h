@@ -19,6 +19,7 @@
 @property(nonatomic, assign) int appVersion;
 @property(nonatomic, readonly) NSString *guid;
 @property(nonatomic, strong) AGAppAccount *appAccount;
+@property(nonatomic, readonly) int badgeNumber;
 
 - (void) save;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;

@@ -36,7 +36,8 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
         else{
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
             if (errorString) {
-                //wait for process
+                error = [AGMessageUtils errorServer];
+                [AGMessageUtils alertMessageWithError:error];
             }
             else{
                 [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(AGPlaneSendPlaneOK, AGPlaneSendPlaneOK)];
@@ -73,6 +74,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
                 [AGMessageUtils alertMessagePlaneChanged];
                 refresh = YES;
+                //error = [AGMessageUtils errorClient];
             }
             else{
                 //succeed
@@ -111,6 +113,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 }
                 [[AGPlaneNotification planeNotification] collectedPlanes];
                 [AGMessageUtils alertMessagePlaneChanged];
+                //error = [AGMessageUtils errorClient];
             }
             else{
                 //succeed
@@ -156,7 +159,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 }
                 [[AGPlaneNotification planeNotification] collectedPlanes];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
-                
+                //error = [AGMessageUtils errorClient];
             }
             else{
                 [[AGCoreData coreData] remove:plane];
@@ -190,7 +193,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                     [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
                     [AGMessageUtils alertMessagePlaneChanged];
                 }
-                
+                //error = [AGMessageUtils errorClient];
             }
             else{
                 //viewedMessagesForPlane

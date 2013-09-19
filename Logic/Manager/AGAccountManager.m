@@ -164,8 +164,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                     if ([str isEqual:@"banned"]) {
                         [AGMessageUtils alertMessageWithTitle:nil message:SigninBanned];
                         if (automatic) {
-                            [[AGAppDelegate appDelegate].appConfig resetAppAccount];
-                            [[AGRootViewController rootViewController] switchToSign];
+                            [self switchToSign];
                         }
                     }
                     //signinCount not match
@@ -173,9 +172,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                         AGRootViewController *rootViewController = [AGRootViewController rootViewController];
                         if ([rootViewController isInMain]) {
                             [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninOther];
-                            [appConfig resetAppAccount];
-                            account = nil;
-                            [rootViewController switchToSign];
+                            [self switchToSign];
                         }
                         
                     }
@@ -186,8 +183,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                         }
                         if (automatic) {
                             [AGMessageUtils alertMessageWithTitle:SigninNeeded message:SigninNotMatch];
-                            [[AGAppDelegate appDelegate].appConfig resetAppAccount];
-                            [[AGRootViewController rootViewController] switchToSign];
+                            [self switchToSign];
                         }
                     }
                     error = [AGMessageUtils errorClient];
@@ -410,6 +406,13 @@ static NSString *SigninBanned = @"error.account.signin.banned";
         }];
     }
 
+}
+
+-(void) switchToSign
+{
+    account = nil;
+    [[AGAppDelegate appDelegate].appConfig resetAppAccount];
+    [[AGRootViewController rootViewController] switchToSign];
 }
 
 @end

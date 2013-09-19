@@ -38,7 +38,8 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
         else{
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
             if (errorString) {
-                //wait for process
+                error = [AGMessageUtils errorServer];
+                [AGMessageUtils alertMessageWithError:error];
             }
             else{
                 [AGMessageUtils alertMessageWithTitle:@"" message:AGChainSendChainOK];
@@ -75,6 +76,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 }
                 [[AGChainNotification chainNotification] collectedChains];
                 [AGMessageUtils alertMessageChainChanged];
+                //error = [AGMessageUtils errorClient];
             }
             else{
                 //succeed

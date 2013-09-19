@@ -34,6 +34,7 @@ static NSString *path;
 @synthesize appAccount;
 @synthesize appVersion;
 @synthesize guid;
+@synthesize badgeNumber;
 
 + (AGAppConfig*)appConfig
 {
@@ -109,6 +110,14 @@ static NSString *path;
 - (BOOL) needSignin
 {
     return appAccount == nil;
+}
+
+-(int) badgeNumber
+{
+    if (inMain) {
+        return [[AGControllerUtils controllerUtils].accountController getUnreadMessagesCount];
+    }
+    return 0;
 }
 
 
