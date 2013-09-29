@@ -19,6 +19,9 @@ static NSString *DeletePlanePath = @"plane/deletePlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
 static NSString *ThrowPlanePath = @"plane/throwPlane.action?";
 static NSString *PickupPath = @"plane/pickup.action?";
+static NSString *GetNewPlanesPath = @"plane/getNewPlanes.action?";
+static NSString *GetPlanesPath = @"plane/getPlanes.action?";
+static NSString *GetOldPlanesPath = @"plane/getOldPlanes.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
 static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
@@ -246,6 +249,83 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
     }];
 }
 
+- (void) getNewPlanes:(NSDictionary*) params context:(id)context block:(AGGetNewPlanesBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:GetNewPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *newPlanes = nil;
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            newPlanes = [[AGControllerUtils controllerUtils].planeController saveNewPlanes:[result objectForKey:@"newPlanes"]];
+            /*for(AGPlane *plane in planes){
+                AGMessage *message = plane.messages.objectEnumerator.nextObject;
+                plane.targetViewedMsgId = message.messageId;
+            }*/
+        }
+        if (block) {
+            block(error, context, result, newPlanes);
+        }
+        
+    }];
+}
+
+- (void) getPlanes:(NSDictionary*) params context:(id)context block:(AGGetPlanesBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:GetPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *planes = nil;
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            NSArray *planesJson = [result objectForKey:@"planes"];
+            AGCoreData *coreData = [AGCoreData coreData];
+            [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:planesJson.count];
+            planes = [[AGControllerUtils controllerUtils].planeController savePlanes:planesJson];
+            NSArray *changedAccounts = [coreData unregisterObserver];
+            if (changedAccounts.count) {
+                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
+                [accountController addNewAccounts:changedAccounts];
+                NSDictionary *dict = [NSDictionary dictionary];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
+            }
+            
+            /*for(AGPlane *plane in planes){
+                if (plane.status.intValue == AGPlaneStatusNew) {
+                    AGMessage *message = plane.messages.objectEnumerator.nextObject;
+                    plane.targetViewedMsgId = message.messageId;
+                }
+             }
+            [[AGCoreData coreData] save];*/
+        }
+        if (block) {
+            block(error, context, result, planes);
+        }
+        
+    }];
+}
+
+- (void) getOldPlanes:(NSDictionary*) params context:(id)context block:(AGGetOldPlanesBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:GetOldPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *oldPlanes = nil;
+        if (error) {
+            [AGMessageUtils alertMessageWithError:error];
+        }
+        else{
+            //succeed
+            NSMutableArray *oldPlanesJson = [result objectForKey:@"oldPlanes"];
+            oldPlanes = [[AGControllerUtils controllerUtils].planeController saveOldPlanes:oldPlanesJson];
+        }
+        if (block) {
+            block(error, context, result, oldPlanes);
+        }
+        
+    }];
+}
+
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block
 {
     [AGJSONHttpHandler request:YES params:params path:ReceivePlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
@@ -328,6 +408,46 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
         }
         
     }];
+}
+
+- (NSDictionary*)paramsForGetNewPlane:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    if (start) {
+        [params setObject:start forKey:@"start"];
+    }
+    if (end) {
+        [params setObject:end forKey:@"end"];
+    }
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    return params;
+}
+
+- (NSDictionary*)paramsForGetPlanes:(NSArray*)planeIds
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:planeIds forKey:@"planeIds"];
+    
+    return params;
+}
+
+- (NSDictionary*)paramsForGetOldPlanes:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    if (start) {
+        [params setObject:start forKey:@"start"];
+    }
+    if (end) {
+        [params setObject:end forKey:@"end"];
+    }
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    return params;
 }
 
 - (NSDictionary*)paramsForThrowPlane:(NSNumber*)planeId

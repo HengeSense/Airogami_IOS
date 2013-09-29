@@ -22,6 +22,7 @@
 @property(nonatomic, readonly) int badgeNumber;
 
 - (void) save;
+- (void) updateAccountId:(NSNumber*)accountId;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;
 - (void) updatePassword:(NSString*)password;
 - (void) resetAppAccount;

@@ -21,6 +21,7 @@
 #import "AGResignButton.h"
 #import "AGCollectKeyboardScroll.h"
 #import "AGControllerUtils.h"
+#import "AGViewManager.h"
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
 #define kAGChatChatMaxSpacing 50
@@ -86,6 +87,7 @@ static float AGInputTextViewMaxHeight = 80;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     self.replyView.alpha = 0.0f;
     [window addSubview:self.replyView];
+    [[AGViewManager viewManager] registerView:self.replyView];
     [UIView beginAnimations:@"ShowAnimation" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDuration:.3f];
@@ -148,6 +150,7 @@ static float AGInputTextViewMaxHeight = 80;
 -(void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     [self.replyView removeFromSuperview];
+    [[AGViewManager viewManager] unregisterView:self.replyView];
 }
 
 - (IBAction)tossBack:(UIButton *)sender {

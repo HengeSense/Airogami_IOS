@@ -12,6 +12,9 @@
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
 
+NSString *AGNotificationGetNewChains = @"notification.getnewchains";
+NSString *AGNotificationGetChains = @"notification.getchains";
+
 NSString *AGNotificationCollectedChains = @"notification.collectedchains";
 NSString *AGNotificationReceiveChains = @"notification.receivechains";
 NSString *AGNotificationGetCollectedChains = @"notification.getcollectedchains";
@@ -37,6 +40,14 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     BOOL moreChainMessages;
     NSNumber *chainMessageMutex;
     BOOL obtainingChainMessages;
+    //get new chain
+    BOOL moreGetNewChains;
+    NSNumber *getNewChainMutex;
+    BOOL gettingNewChains;
+    //get new chain
+    BOOL moreGetChains;
+    NSNumber *getChainMutex;
+    BOOL gettingChains;
     //receive chain
     BOOL moreReceiveChains;
     NSNumber *receiveChainMutex;
@@ -66,6 +77,9 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
 {
     if (self = [super init]) {
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        //
+        [notificationCenter addObserver:self selector:@selector(getNewChains:) name:AGNotificationGetNewChains object:nil];
+        [notificationCenter addObserver:self selector:@selector(getChains:) name:AGNotificationGetChains object:nil];
         //collect
         [notificationCenter addObserver:self selector:@selector(receiveChains:) name:AGNotificationReceiveChains object:nil];
 
@@ -82,6 +96,134 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         [notificationCenter addObserver:self selector:@selector(viewingChainMessagesForChain:) name:AGNotificationViewingChainMessagesForChain object:nil];
     }
     return self;
+}
+
+- (void) getNewChains:(NSNotification*) notification
+{
+    NSNumber *number = [notification.userInfo objectForKey:@"updateInc"];
+    NSNumber * maxUpdateInc = [[AGControllerUtils controllerUtils].chainController recentUpdateInc];
+    if (number && number.longLongValue <= maxUpdateInc.longLongValue) {//notified
+        return;
+    }
+    BOOL shouldGet = NO;
+    @synchronized(getNewChainMutex){
+        if (gettingNewChains) {
+            moreGetNewChains = YES;
+        }
+        else{
+            gettingNewChains = YES;
+            shouldGet = YES;
+        }
+    }
+    
+    if (shouldGet) {
+        [self getNewChains];
+    }
+    
+    
+}
+
+- (void) getNewChains
+{
+    NSNumber * start = [[AGControllerUtils controllerUtils].chainController recentUpdateInc];
+    AGChainManager *chainManager = [AGManagerUtils managerUtils].chainManager;
+    NSDictionary * params = [chainManager paramsForGetNewChains:start];
+    [chainManager getNewChains:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *chains) {
+        if (error == nil) {
+            NSNumber *more = [result objectForKey:@"more"];
+            if (more.boolValue) {
+                [self getNewChains];
+            }
+            else{
+                //whether has more
+                BOOL shouldGet = NO;
+                @synchronized(getNewChainMutex){
+                    if (moreGetNewChains) {
+                        moreGetNewChains = NO;
+                        shouldGet = YES;
+                    }
+                    else{
+                        gettingNewChains = NO;
+                    }
+                }
+                if (shouldGet) {
+                    [self getNewChains];
+                }
+            }
+            [self gotNewChains];
+        }
+        else{
+            //should deal with server error
+            @synchronized(getNewChainMutex){
+                moreGetNewChains = NO;
+                gettingNewChains = NO;
+            }
+        }
+    }];
+}
+
+- (void) gotNewChains
+{
+    NSDictionary *dict = [NSDictionary dictionary];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationGetChains object:self userInfo:dict];
+    
+}
+
+- (void) getChains:(NSNotification*) notification
+{
+    BOOL shouldGet = NO;
+    @synchronized(getChainMutex){
+        if (gettingChains) {
+            moreGetChains = YES;
+        }
+        else{
+            gettingChains = YES;
+            shouldGet = YES;
+        }
+    }
+    
+    if (shouldGet) {
+        [self getChains];
+    }
+    
+}
+
+- (void) getChains
+{
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    NSArray *newChainIds = [controllerUtils.chainController getNewChainIdsForUpdate];
+    if (newChainIds.count) {
+        [self getChainsForNewChainIds:newChainIds];
+    }
+    else{
+        @synchronized(getChainMutex){
+            moreGetChains = NO;
+            gettingChains = NO;
+        }
+        //
+        NSDictionary *dict = [NSDictionary dictionary];
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:dict];
+    }
+}
+
+- (void) getChainsForNewChainIds:(NSArray*)newChainIds
+{
+    AGChainManager *chainManager = [AGManagerUtils managerUtils].chainManager;
+    NSDictionary *params = [chainManager paramsForGetChains:newChainIds];
+    [chainManager getChains:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *chains) {
+        if (error == nil) {
+            [self getChains];
+        }
+        else{
+            //should deal with server error
+            @synchronized(getNewChainMutex){
+                moreGetNewChains = NO;
+                gettingNewChains = NO;
+            }
+        }
+    }];
 }
 
 - (void) receiveChains:(NSNotification*) notification
@@ -263,7 +405,7 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
 - (void) obtainChainMessages
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    AGNewChain *newChain = [controllerUtils.chainController getNextNewChain];
+    AGNewChain *newChain = [controllerUtils.chainController getNextNewChainForChainMessage];
     if (newChain) {
         [self obtainChainMessagesForChain:newChain];
     }

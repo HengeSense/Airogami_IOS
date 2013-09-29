@@ -8,6 +8,7 @@
 
 #import "AGFileManager.h"
 #import "AGManagerUtils.h"
+#import "AGAppDelegate.h"
 
 static NSURL *DataUrl;
 static NSURL *DatabaseUrl;
@@ -16,7 +17,6 @@ static NSURL *rootUrl;
 
 @implementation AGFileManager
 
-@synthesize accountId;
 
 -(id) init
 {
@@ -54,6 +54,7 @@ static NSURL *rootUrl;
 
 - (NSURL*) urlForDatabase
 {
+    NSNumber *accountId = [AGAppDelegate appDelegate].appConfig.appAccount.accountId;
     NSString *str = accountId.stringValue;
     NSURL *url = nil;
     if (str) {

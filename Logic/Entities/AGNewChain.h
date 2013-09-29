@@ -2,7 +2,7 @@
 //  AGNewChain.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/28/13.
+//  Created by Tianhu Yang on 9/25/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 
 @interface AGNewChain : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * updateInc;
 @property (nonatomic, retain) NSNumber * chainId;
-@property (nonatomic, retain) NSNumber * accountId;
+@property (nonatomic, retain) NSNumber * updateInc;
+@property (nonatomic, retain) NSNumber * updateCount;
 @property (nonatomic, retain) AGChain *chain;
 
 @end

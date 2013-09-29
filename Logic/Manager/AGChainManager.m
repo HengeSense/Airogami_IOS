@@ -15,16 +15,20 @@
 #import "AGCoreData.h"
 #import "AGControllerUtils.h"
 #import "AGChainMessageController.h"
-#import "AGChainNotification.h"
+#import "AGNotificationCenter.h"
 
 static NSString *SendChainPath = @"chain/sendChain.action?";
 static NSString *DeleteChainPath = @"chain/deleteChain.action?";
 static NSString *ReplyChainPath = @"chain/replyChain.action?";
+static NSString *GetNewChainsPath = @"chain/getNewChains.action?";
+static NSString *GetChainsPath = @"chain/getChains.action?";
+static NSString *GetOldChainsPath = @"chain/getOldChains.action?";
 static NSString *ThrowChainPath = @"chain/throwChain.action?";
 static NSString *ReceiveChainsPath = @"chain/receiveChains.action?";
 static NSString *ObtainChainsPath = @"chain/obtainChains.action?";
 static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
 static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
+
 
 
 @implementation AGChainManager
@@ -106,6 +110,104 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
     [params setObject:content forKey:@"chainMessageVO.content"];
     [params setObject:[NSNumber numberWithInteger:type] forKey:@"chainMessageVO.type"];
     return params;
+}
+
+- (void) getNewChains:(NSDictionary*) params context:(id)context block:(AGGetNewChainsBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:GetNewChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *newChains = nil;
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            newChains = [[AGControllerUtils controllerUtils].chainController saveNewChains:[result objectForKey:@"newChains"]];
+        }
+        if (block) {
+            block(error, context, result, newChains);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForGetOldChains:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    if (start) {
+        [params setObject:start forKey:@"start"];
+    }
+    if (end) {
+        [params setObject:end forKey:@"end"];
+    }
+    if (limit) {
+        [params setObject:limit forKey:@"limit"];
+    }
+    
+    return params;
+}
+
+- (NSDictionary*)paramsForGetNewChains:(NSNumber*)start
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    if (start) {
+        [params setObject:start forKey:@"start"];
+    }
+    return params;
+}
+
+- (void) getChains:(NSDictionary*) params context:(id)context block:(AGGetChainsBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:GetChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *chains = nil;
+        if (error) {
+            
+        }
+        else{
+            //succeed
+            NSArray *chainsJson = [result objectForKey:@"chains"];
+            AGCoreData *coreData = [AGCoreData coreData];
+            [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:chainsJson.count];
+            chains = [[AGControllerUtils controllerUtils].chainController saveChains:chainsJson];
+            NSArray *changedAccounts = [coreData unregisterObserver];
+            if (changedAccounts.count) {
+                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
+                [accountController addNewAccounts:changedAccounts];
+                NSDictionary *dict = [NSDictionary dictionary];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
+            }
+        }
+        if (block) {
+            block(error, context, result, chains);
+        }
+        
+    }];
+}
+
+- (NSDictionary*)paramsForGetChains:(NSArray*)chainIds
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    [params setObject:chainIds forKey:@"chainIds"];
+    
+    return params;
+}
+
+- (void) getOldChains:(NSDictionary*) params context:(id)context block:(AGGetOldChainsBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:GetOldChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *oldChains = nil;
+        if (error) {
+            [AGMessageUtils alertMessageWithError:error];
+        }
+        else{
+            //succeed
+            NSArray *oldChainsJson = [result objectForKey:@"oldChains"];
+            oldChains = [[AGControllerUtils controllerUtils].chainController saveOldChains:oldChainsJson];
+        }
+        if (block) {
+            block(error, context, result, oldChains);
+        }
+        
+    }];
 }
 
 - (void) receiveChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block

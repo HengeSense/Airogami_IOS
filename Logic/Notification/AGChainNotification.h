@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *AGNotificationGetNewChains;
+extern NSString *AGNotificationGetChains;
+
 extern NSString *AGNotificationCollectedChains;
 extern NSString *AGNotificationReceiveChains;
 extern NSString *AGNotificationGetCollectedChains;

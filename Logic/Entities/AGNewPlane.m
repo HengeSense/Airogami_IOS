@@ -2,7 +2,7 @@
 //  AGNewPlane.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/28/13.
+//  Created by Tianhu Yang on 9/19/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -12,9 +12,10 @@
 
 @implementation AGNewPlane
 
-@dynamic updateInc;
 @dynamic accountId;
 @dynamic planeId;
+@dynamic updateInc;
+@dynamic updateCount;
 @dynamic plane;
 
 @end

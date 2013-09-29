@@ -84,11 +84,13 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                     stop = NO;
                     NSMutableDictionary *accountJson = [result objectForKey:@"account"];
                     //
-                    [AGFileManager fileManager].accountId = [accountJson objectForKey:@"accountId"];
+                    AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+                    [appConfig updateAccountId:[accountJson objectForKey:@"accountId"]];
                     [[AGCoreData coreData] resetPath];
                     //
+                    
                     account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
-                    [[AGAppDelegate appDelegate].appConfig updateAppAccount:account password:password];
+                    [appConfig updateAppAccount:account password:password];
                     
                     result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                     NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
@@ -195,32 +197,37 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                     if (accountJson) {
                         //
                         AGCoreData *coreData;
+                        NSNumber *signinCount = nil;
                         if (automatic) {
                             coreData = [AGCoreData coreData];
                             [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:1];
                         }
                         else{
-                            [AGFileManager fileManager].accountId = [accountJson objectForKey:@"accountId"];
+                            NSNumber *accountId = [accountJson objectForKey:@"accountId"];;
+                            [appConfig updateAccountId:accountId];
                             [[AGCoreData coreData] resetPath];
+                            signinCount = [[AGControllerUtils controllerUtils].accountController findAccountStat:accountId].signinCount;
+                            if (signinCount) {
+                                signinCount = [NSNumber numberWithInt:signinCount.intValue + 1];
+                            }
                         }
                         //
                         account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                         //
+                        AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
                         if (automatic) {
                             NSArray *changedAccounts = [coreData unregisterObserver];
                             if (changedAccounts.count) {
-                                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
                                 [accountController addNewAccounts:changedAccounts];
                                 NSDictionary *dict = [NSDictionary dictionary];
                                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
                             }
                         }
-                        //
-                        if (automatic) {
-
-                        }
                         else{
                             [appConfig updateAppAccount:account password:password];
+                            if (signinCount && [signinCount isEqualToNumber:account.accountStat.signinCount] == NO) {
+                                [accountController setSynchronizing:YES];
+                            }
                         }
                         
                     }
@@ -406,6 +413,15 @@ static NSString *SigninBanned = @"error.account.signin.banned";
         }];
     }
 
+}
+
+- (AGAccount*)account
+{
+    if (account == nil) {
+        AGAppConfig *appConfig = [AGAppDelegate appDelegate].appConfig;
+        account = [[AGControllerUtils controllerUtils].accountController findAccount:appConfig.appAccount.accountId];
+    }
+    return account;
 }
 
 -(void) switchToSign

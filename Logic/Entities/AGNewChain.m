@@ -2,7 +2,7 @@
 //  AGNewChain.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/28/13.
+//  Created by Tianhu Yang on 9/25/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -12,9 +12,9 @@
 
 @implementation AGNewChain
 
-@dynamic updateInc;
 @dynamic chainId;
-@dynamic accountId;
+@dynamic updateInc;
+@dynamic updateCount;
 @dynamic chain;
 
 @end

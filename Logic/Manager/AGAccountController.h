@@ -17,11 +17,13 @@
 
 - (AGAccount*) saveAccount:(NSDictionary*)jsonDictionary;
 - (AGProfile *) saveProfile:(NSDictionary*)jsonDictionary;
+- (AGAccountStat*) findAccountStat:(NSNumber *)accountId;
 - (AGAccount*) findAccount:(NSNumber*)accountId;
 - (void) addNewAccounts:(NSArray *)accounts;
 - (void) addNewAccount:(AGAccount *)account;
 - (AGNewAccount*) getNextNewAccount;
 - (void) removeNewAccount:(AGNewAccount *)newAccount oldUpdateCount:(NSNumber*)updateCount;
 - (int) getUnreadMessagesCount;
+- (void) setSynchronizing:(BOOL)sychronizing;
 
 @end

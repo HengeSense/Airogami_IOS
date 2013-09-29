@@ -327,6 +327,129 @@
     return array;
 }
 
+- (NSManagedObject*) update:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName
+{
+    if (jsonDictionary == nil || [jsonDictionary isEqual:[NSNull null]]) {
+        return nil;
+    }
+    NSError *error;
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
+    NSDictionary *attributesByName = [entityDescription attributesByName];
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    
+    
+    NSString *idKey = [entityDescription.userInfo objectForKey:@"IdKey"];
+    NSPredicate *predicate;
+    if (idKey) {
+        predicate = [NSPredicate predicateWithFormat:@"%K = %@", idKey, [jsonDictionary objectForKey:idKey]];
+    }
+    else{
+        int idKeyCount = [[entityDescription.userInfo objectForKey:@"IdKeyCount"] intValue];
+        NSMutableString *string = [NSMutableString stringWithCapacity:50];
+        for (int i = 0; i < idKeyCount; ++i) {
+            idKey = [entityDescription.userInfo objectForKey:[NSString stringWithFormat:@"IdKey%d", i + 1]];
+            if (i > 0) {
+                [string appendString:@" and "];
+            }
+            [string appendString:idKey];
+            [string appendString:@" = "];
+            [string appendFormat:@"%@",[jsonDictionary valueForKeyPath:idKey]];
+            
+        }
+        assert(string.length);
+        predicate = [NSPredicate predicateWithFormat:string];
+    }
+    
+    
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+#ifdef IS_DEBUG
+    if (error) {
+        NSLog(@"%@",error.userInfo);
+    }
+#endif
+    NSManagedObject *managedObject;
+    if (array.count) {//update
+        managedObject = [array lastObject];
+        BOOL shouldObserve = [observedEntityName isEqualToString:entityName];
+        //set values
+        for (NSString *key in attributesByName.allKeys) {
+            NSAttributeDescription *attributeDescription  = [attributesByName objectForKey:key];
+            NSObject *obj = [jsonDictionary objectForKey:key];
+            if (obj) {
+                if ([obj isEqual:[NSNull null]]) {
+                    obj = nil;
+                }
+                else if(attributeDescription.attributeType == NSDateAttributeType){
+                    obj = [AGUtils stringToDate:(NSString*)obj];
+                }
+                if (shouldObserve && [observedEntityKey isEqualToString:key]) {
+                    id oldObj = [managedObject valueForKey:key];
+                    if ([oldObj isEqual:obj] == NO) {
+                        [changedEntities addObject:managedObject];
+                    }
+                }
+                
+                [managedObject setValue:obj forKey:key];//9223372036854775785
+            }
+            
+        }
+        
+        //relationship
+        NSDictionary *relationshipsByName = [entityDescription relationshipsByName];
+        NSArray *relationshipsKeys = [relationshipsByName allKeys];
+        for (NSString *relationshipName in relationshipsKeys) {
+            NSRelationshipDescription *relationshipDescription = [relationshipsByName objectForKey:relationshipName];
+            NSManagedObject *childObject;
+            if ([relationshipDescription isToMany]) {
+                NSArray *relationshipArray = [jsonDictionary objectForKey:relationshipName];
+                if(relationshipArray != nil && [relationshipArray isEqual:[NSNull null]] == NO)
+                {
+                    NSMutableSet *relationshipSet = [managedObject mutableSetValueForKey:relationshipName];
+                    for (NSDictionary *childObjectDictionary in relationshipArray) {
+                        childObject = [self saveOrUpdate:childObjectDictionary withEntityName:relationshipDescription.destinationEntity.name];
+                        if (childObject) {
+                            [relationshipSet addObject:childObject];
+                        }
+                        
+                    }
+                }
+                
+            }
+            else{
+                NSDictionary *childJsonDictionary = [jsonDictionary objectForKey:relationshipName];
+                childObject = [self saveOrUpdate:childJsonDictionary withEntityName:relationshipDescription.destinationEntity.name];
+                if (childObject) {
+                    [managedObject setValue:childObject forKey:relationshipName];
+                }
+                
+            }
+            
+        }
+    }
+    
+    return managedObject;
+}
+
+- (NSMutableArray*) updateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName
+{
+    if (jsonArray == nil || [jsonArray isEqual:[NSNull null]] || jsonArray.count == 0) {
+        return [NSMutableArray array];
+    }
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:jsonArray.count];
+    for (NSDictionary *dict in jsonArray) {
+        NSManagedObject * managedObject = [self update:dict withEntityName:entityName];
+        if (managedObject) {
+            [array addObject:managedObject];
+        }
+    }
+    return array;
+}
+
 
 - (BOOL)save
 {
@@ -349,6 +472,14 @@
         [managedObjectContext deleteObject:managedObject];
         [self save];
     }
+}
+
+- (void) removeAll:(NSArray *)array
+{
+    for (NSManagedObject *managedObject in array) {
+         [managedObjectContext deleteObject:managedObject];
+    }
+    [self save];
 }
 
 - (NSManagedObject*) create:(Class)class

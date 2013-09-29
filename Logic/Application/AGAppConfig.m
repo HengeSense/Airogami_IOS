@@ -62,6 +62,7 @@ static NSString *path;
         once = YES;
         appVersion = AGApplicationVersion;
         guid = [AGUtils obtainUuid];
+        appAccount = [[AGAppAccount alloc] init];
     }
     return self;
 }
@@ -80,11 +81,13 @@ static NSString *path;
     [NSKeyedArchiver archiveRootObject:self toFile:path];
 }
 
+- (void) updateAccountId:(NSNumber*)accountId
+{
+    appAccount.accountId = accountId;
+}
+
 - (void) updateAppAccount:(AGAccount*)account password:(NSString *)password
 {
-    if (appAccount == nil) {
-        appAccount = [[AGAppAccount alloc] init];
-    }
     appAccount.accountId = account.accountId;
     appAccount.email = account.authenticate.email;
     appAccount.screenName = account.profile.screenName;
@@ -95,21 +98,19 @@ static NSString *path;
 
 - (void) updatePassword:(NSString*)password
 {
-    if (appAccount) {
-        appAccount.password = password;
-    }
+    appAccount.password = password;
     [self save];
 }
 
 - (void) resetAppAccount
 {
-    self.appAccount = nil;
+    appAccount.password = nil;
     [self save];
 }
 
 - (BOOL) needSignin
 {
-    return appAccount == nil;
+    return appAccount.password == nil;
 }
 
 -(int) badgeNumber
@@ -124,19 +125,19 @@ static NSString *path;
 - (NSMutableDictionary*) autoSigninParams
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-    if (appAccount) {
-        
+    if (appAccount.password.length > 0) {
         if (appAccount.email.length > 0) {
             [params setObject:appAccount.email forKey:AGLogicAccountEmailKey];
         }
         else if(appAccount.screenName.length > 0){
             [params setObject:appAccount.screenName forKey:AGLogicAccountScreenNameKey];
         }
-        if (params.count) {
-            [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
-            [params setObject:appAccount.accountId forKey:@"accountId"];
-            [params setObject:appAccount.signinCount forKey:@"signinCount"];
-        }
+    }
+    
+    if (params.count) {
+        [params setObject:appAccount.password forKey:AGLogicAccountPasswordKey];
+        [params setObject:appAccount.accountId forKey:@"accountId"];
+        [params setObject:appAccount.signinCount forKey:@"signinCount"];
     }
     
     return params;
@@ -162,11 +163,6 @@ static NSString *path;
 //appAccount != nil
 - (void) gotoMain
 {
-    [AGFileManager fileManager].accountId = appAccount.accountId;
-    AGAccountManager *accountManager = [AGManagerUtils managerUtils].accountManager;
-    if (accountManager.account == nil) {
-        accountManager.account = [[AGControllerUtils controllerUtils].accountController findAccount:appAccount.accountId];
-    }
     inMain = YES;
     [self refresh];
 }

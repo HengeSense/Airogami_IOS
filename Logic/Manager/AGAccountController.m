@@ -57,6 +57,11 @@
     return profile;
 }
 
+- (AGAccountStat*) findAccountStat:(NSNumber *)accountId
+{
+    return (AGAccountStat*)[coreData findById:accountId withEntityName:@"AGAccountStat"];
+}
+
 - (AGAccount*) findAccount:(NSNumber*)accountId
 {
     return (AGAccount*)[coreData findById:accountId withEntityName:@"AGAccount"];
@@ -113,6 +118,13 @@
 {
     AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
     return accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue;
+}
+
+-(void) setSynchronizing:(BOOL)sychronizing
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    account.accountStat.synchronizing = [NSNumber numberWithBool:sychronizing];
+    [coreData save];
 }
 
 

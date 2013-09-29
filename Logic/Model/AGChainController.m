@@ -10,6 +10,10 @@
 #import "AGCoreData.h"
 #import "AGChainMessageId.h"
 #import "AGManagerUtils.h"
+#import "AGAccountStat.h"
+#import "AGControllerUtils.h"
+
+static const int MaxNewChainIds = 50;
 
 @interface AGChainController()
 {
@@ -34,6 +38,58 @@
     return self;
 }
 
+- (NSMutableArray*) saveNewChains:(NSArray*)jsonArray
+{
+    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGNewChain"];
+    long long max = LONG_LONG_MIN;
+    for (AGNewChain *newChain in array) {
+        if (newChain.updateInc.longLongValue > max) {
+            max = newChain.updateInc.longLongValue;
+        }
+        if (newChain.chain == nil) {
+            AGChain *chain = (AGChain *)[coreData findById:newChain.chainId withEntityName:@"AGChain"];
+            if (chain != nil) {
+                newChain.chain = chain;
+            }
+        }
+    }
+    
+    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    if (accountStat.chainUpdateInc == nil || max > accountStat.chainUpdateInc.longLongValue) {
+        accountStat.chainUpdateInc = [NSNumber numberWithLongLong:max];
+    }
+    [coreData save];
+    return array;
+}
+
+- (NSMutableArray*) saveOldChains:(NSArray*)jsonArray
+{
+    AGChainMessageController *chainMessageController = [AGControllerUtils controllerUtils].chainMessageController;
+    for (NSMutableDictionary *oldChainJson in jsonArray) {
+        NSNumber *chainId = [oldChainJson objectForKey:@"chainId"];
+        AGChainMessage *chainMessage = [chainMessageController getChainMessageForChain:chainId];
+        chainMessage.status = [oldChainJson objectForKey:@"status"];
+        [oldChainJson removeObjectForKey:@"status"];
+        [oldChainJson setObject:[NSNumber numberWithBool:NO] forKey:@"deleted"];
+    }
+    NSMutableArray *array = [coreData updateArray:jsonArray withEntityName:@"AGChain"];
+    [coreData save];
+    return array;
+}
+
+- (NSMutableArray*) saveChains:(NSArray*)jsonArray
+{
+    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
+    for (AGChain *chain in array) {
+        AGNewChain *newChain = (AGNewChain *)[coreData findById:chain.chainId withEntityName:@"AGNewChain"];
+        if (newChain != nil && newChain.chain == nil) {
+            newChain.chain = chain;
+        }
+    }
+    [coreData save];
+    return array;
+}
+
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray forCollect:(BOOL)collected
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
@@ -49,6 +105,16 @@
     AGChain *chain = (AGChain*)[coreData saveOrUpdate:chainJson withEntityName:@"AGChain"];
     [coreData save];
     return chain;
+}
+
+- (NSNumber*)recentUpdateInc
+{
+    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    NSNumber *updateInc = account.accountStat.chainUpdateInc;
+    if (updateInc == nil) {
+        updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
+    }
+    return updateInc;
 }
 
 - (NSNumber*)recentChainUpdateIncForCollect
@@ -203,12 +269,36 @@
     [coreData save];
 }
 
-- (AGNewChain*) getNextNewChain
+- (NSArray*) getNewChainIdsForUpdate
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:newChainEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accountId = %@", account.accountId];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain == nil || updateCount > chain.updateCount"];
+    [fetchRequest setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"chainId" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [fetchRequest setFetchLimit:MaxNewChainIds];
+    //
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"chainId"]];
+    //
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray *chainIds = nil;
+    if (array) {
+        chainIds = [NSMutableArray arrayWithCapacity:array.count];
+        for (NSDictionary *dict in array) {
+            [chainIds addObject:[dict objectForKey:@"chainId"]];
+        }
+    }
+    return chainIds;
+}
+
+- (AGNewChain*) getNextNewChainForChainMessage
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:newChainEntityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain != nil && updateCount <= chain.updateCount"];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -239,10 +329,34 @@
 
 - (void) removeNewChain:(AGNewChain *)newChain oldUpdateInc:(NSNumber*)updateInc
 {
-    if (newChain.updateInc.longLongValue == updateInc.longLongValue) {
+    if ([newChain.updateInc isEqualToNumber:updateInc] && newChain.chain != nil && newChain.updateCount.intValue <= newChain.chain.updateCount.intValue) {
         [coreData remove:newChain];
     }
     
+}
+
+- (void) resetForSync
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:chainEntityDescription];
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    [array makeObjectsPerformSelector:@selector(setDeleted:) withObject:[NSNumber numberWithBool:YES]];
+}
+
+- (void) deleteForSync
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:chainEntityDescription];
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray *deletedArray = [NSMutableArray arrayWithCapacity:array.count];
+    for (AGChain *chain in array) {
+        if (chain.deleted.boolValue == YES) {
+            [deletedArray addObject:chain];
+        }
+    }
+    [coreData removeAll:deletedArray];
 }
 
 

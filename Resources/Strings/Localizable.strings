@@ -79,6 +79,7 @@
 
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";
+"message.synchronize.title" = "Synchronizing";
 
 //notificaion
 "LKRP" = "You got a new plane";//LocKeyReceivedPlane

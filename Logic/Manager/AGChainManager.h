@@ -12,6 +12,10 @@
 #import "AGChainMessage.h"
 #import "AGChain.h"
 
+typedef void (^AGGetNewChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *newChains);
+typedef void (^AGGetChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *chains);
+typedef void (^AGGetOldChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *oldChains);
+
 typedef void (^AGChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *chains);
 
 typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessage *chainMessage, BOOL refresh);
@@ -21,6 +25,12 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 - (void) sendChain:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
 
 - (void) replyChain:(NSDictionary*)params chain:(AGChain*)chain context:(id)context block:(AGHttpSucceedBlock)block;
+
+- (void) getNewChains:(NSDictionary*) params context:(id)context block:(AGGetNewChainsBlock)block;
+
+- (void) getChains:(NSDictionary*) params context:(id)context block:(AGGetChainsBlock)block;
+
+- (void) getOldChains:(NSDictionary*) params context:(id)context block:(AGGetOldChainsBlock)block;
 
 - (void) obtainChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
 
@@ -37,6 +47,12 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 - (void) viewedChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block;
 
 - (NSDictionary*)paramsForReplyChain:(NSNumber*)chainId content:(NSString*)content type:(int)type;
+
+- (NSDictionary*)paramsForGetNewChains:(NSNumber*)start;
+
+- (NSDictionary*)paramsForGetOldChains:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
+
+- (NSDictionary*)paramsForGetChains:(NSArray*)chainIds;
 
 - (NSDictionary*)paramsForReceiveChains:(NSNumber*)start;
 

@@ -20,9 +20,12 @@
 //core data class
 - (NSManagedObject*) saveOrUpdate:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName;
 - (NSMutableArray*) saveOrUpdateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName;
+- (NSManagedObject*) update:(NSDictionary*)jsonDictionary withEntityName:(NSString*)entityName;
+- (NSMutableArray*) updateArray:(NSArray*)jsonArray withEntityName:(NSString*)entityName;
 - (BOOL) editAttributes:(NSDictionary*)attributeDictionary managedObject:(NSManagedObject*)managedObject;
 - (NSManagedObject*) findById:(id)objectID withEntityName:(NSString*)entityName;
 - (void) remove:(NSManagedObject*) managedObject;
+- (void) removeAll:(NSArray *)array;
 - (NSManagedObject*) create:(Class)class;
 - (BOOL) save;
 - (void) resetPath;

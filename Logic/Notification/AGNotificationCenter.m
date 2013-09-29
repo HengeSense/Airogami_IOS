@@ -228,11 +228,14 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 
 - (void) obtainPlanesAndChains
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
+    /*[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainChains object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceiveChains object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceiveChains object:nil userInfo:nil];*/
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetNewPlanes object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetNewChains object:nil userInfo:nil];
 }
 
 //should run once open the program

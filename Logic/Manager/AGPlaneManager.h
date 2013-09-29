@@ -13,6 +13,9 @@
 typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message, BOOL refresh);
 typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
 typedef void (^AGObtainPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *planes);
+typedef void (^AGGetNewPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *newPlanes);
+typedef void (^AGGetOldPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *oldPlanes);
+typedef void (^AGGetPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *planes);
 
 @interface AGPlaneManager : NSObject
 
@@ -30,11 +33,23 @@ typedef void (^AGObtainPlanesBlock)(NSError *error, id context, NSMutableDiction
 
 - (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
+- (void) getNewPlanes:(NSDictionary*) params context:(id)context block:(AGGetNewPlanesBlock)block;
+
+- (void) getPlanes:(NSDictionary*) params context:(id)context block:(AGGetPlanesBlock)block;
+
+- (void) getOldPlanes:(NSDictionary*) params context:(id)context block:(AGGetOldPlanesBlock)block;
+
 - (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGObtainPlanesBlock)block;
 
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (void) viewedMessages:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
+
+- (NSDictionary*)paramsForGetNewPlane:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
+
+- (NSDictionary*)paramsForGetPlanes:(NSArray*)planeIds;
+
+- (NSDictionary*)paramsForGetOldPlanes:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
 
 - (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type;
 

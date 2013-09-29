@@ -7,6 +7,7 @@
 //
 
 #import "AGWaitUtils.h"
+#import "AGUIUtils.h"
 
 @implementation AGWaitUtils
 
@@ -43,7 +44,7 @@
             else{
                 label = (UILabel *)[activityView.superview viewWithTag:1];
             }
-            label.text = message;
+            label.text = AGLS(message);
             
         }
         else{

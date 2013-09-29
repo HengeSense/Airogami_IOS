@@ -44,31 +44,44 @@ static NSDateFormatter *dateFormatter;
     return array;
 }
 
+static void encode(NSMutableString *path, id key, id obj)
+{
+    NSString *value=@"";
+    if ([obj isKindOfClass:[NSString class]]) {
+        value = obj;
+    }
+    else if([obj isKindOfClass:[NSNumber class]]) {
+        NSNumber *number = obj;
+        if (strcmp(@encode(BOOL), number.objCType) == 0) {
+            value = number.boolValue ? @"true" : @"false";
+        }
+        else{
+            value = [number stringValue];
+        }
+        
+    }
+    else if([obj isKindOfClass:[NSDate class]]) {
+        value = [AGUtils dateToString:obj];
+    }
+    
+    [path appendString:key];
+    [path appendString:@"="];
+    [path appendString:[value encodeURIComponent]];
+    [path appendString:@"&"];
+}
+
 + (void)encodeParams:(NSDictionary*)params path:(NSMutableString*)path device:(BOOL)yes
 {
     [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString *value=@"";
-        if ([obj isKindOfClass:[NSString class]]) {
-            value = obj;
-        }
-        else if([obj isKindOfClass:[NSNumber class]]) {
-            NSNumber *number = obj;
-            if (strcmp(@encode(BOOL), number.objCType) == 0) {
-                value = number.boolValue ? @"true" : @"false";
+        if([obj isKindOfClass:[NSArray class]]) {
+            NSArray *array = obj;
+            for (id object in array) {
+                encode(path, key, object);
             }
-            else{
-                value = [number stringValue];
-            }
-            
         }
-        else if([obj isKindOfClass:[NSDate class]]) {
-            value = [AGUtils dateToString:obj];
+        else{
+            encode(path, key, obj);
         }
-        
-        [path appendString:key];
-        [path appendString:@"="];
-        [path appendString:[value encodeURIComponent]];
-        [path appendString:@"&"];
         
     }];
     

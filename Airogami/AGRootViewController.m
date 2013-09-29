@@ -9,6 +9,8 @@
 #import "AGRootViewController.h"
 #import "AGAppDelegate.h"
 #import "AGNotificationCenter.h"
+#import "AGViewManager.h"
+#import "AGSynchronize.h"
 
 static NSString *stories[] = {@"AGWriteStoryboard", @"AGCollectStoryboard",@"AGChatStoryboard", @"AGSettingStoryboard"};
 
@@ -21,11 +23,12 @@ enum{
 };
 
 
-@interface AGRootViewController ()
+@interface AGRootViewController ()<AGSynchronizeDelegate>
 {
     int rootNavigateTo;
     UIViewController *viewController;
     NSArray *viewControllers;
+    AGSynchronize *synchronize;
 }
 
 @end
@@ -58,6 +61,9 @@ enum{
 
 - (void) initialize
 {
+    synchronize = [[AGSynchronize alloc] init];
+    synchronize.delegate = self;
+    //
     rootViewController = self;
     if ([[AGAppDelegate appDelegate].appConfig needSignin]) {
         rootNavigateTo = AGRootToSign;
@@ -89,11 +95,17 @@ enum{
     switch (rootNavigateTo) {
         case AGRootToSign:
             [self navigateToSign];
-            [[AGNotificationCenter notificationCenter] startTimer:NO];
+            //[[AGNotificationCenter notificationCenter] startTimer:NO];
             break;
         case AGRootToMain:
-            [self navigateToMain];
-            [[AGNotificationCenter notificationCenter] startTimer:YES];
+            if ([synchronize shouldSynchronize]) {
+                [synchronize synchronize];
+            }
+            else{
+                [self navigateToMain];
+            }
+            
+            //[[AGNotificationCenter notificationCenter] startTimer:YES];
             break;
         default:
             break;
@@ -105,6 +117,13 @@ enum{
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) didFinish:(BOOL)succeed
+{
+    if (succeed) {
+        [self navigateToMain];
+    }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -147,6 +166,7 @@ enum{
 
 - (void) switchToSign
 {
+    [[AGViewManager viewManager] removeAllViews];
     [self prepareForSign];
     rootNavigateTo = AGRootToSign;
     if (self.presentedViewController) {

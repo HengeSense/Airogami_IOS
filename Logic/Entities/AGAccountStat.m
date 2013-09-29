@@ -2,7 +2,7 @@
 //  AGAccountStat.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/16/13.
+//  Created by Tianhu Yang on 9/28/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -13,9 +13,12 @@
 @implementation AGAccountStat
 
 @dynamic accountId;
+@dynamic chainUpdateInc;
+@dynamic planeUpdateInc;
 @dynamic signinCount;
 @dynamic unreadChainMessagesCount;
 @dynamic unreadMessagesCount;
+@dynamic synchronizing;
 @dynamic account;
 
 @end
