@@ -12,6 +12,9 @@
 #import "AGChainNotification.h"
 #import "AGAccountNotification.h"
 
+extern NSString *AGNotificationRefreshed;
+extern NSString *AGNotificationRefresh;
+
 extern NSString *AGNotificationCollected;
 extern NSString *AGNotificationReceive;
 extern NSString *AGNotificationGetCollected;
@@ -26,7 +29,6 @@ extern NSString *AGNotificationGotUnreadMessagesCount;
 
 +(void) initialize;
 + (AGNotificationCenter*) notificationCenter;
-- (void) startTimer:(BOOL)start;
 //should run after open the program
 - (void) resendMessages;
 - (void) obtainPlanesAndChains;

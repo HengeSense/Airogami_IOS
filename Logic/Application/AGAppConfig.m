@@ -152,19 +152,22 @@ static NSString *path;
 
 - (void) kickoff
 {
-    [[AGManagerUtils managerUtils].accountManager autoSignin:nil block:^(NSError *error, id context) {
-        if (error == nil) {
-            [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
-            [[AGNotificationCenter notificationCenter] resendMessages];
-        }
-    }];
+    if (inMain) {
+        [[AGManagerUtils managerUtils].accountManager autoSignin:nil block:^(NSError *error, id context) {
+            if (error == nil) {
+                [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
+                [[AGNotificationCenter notificationCenter] resendMessages];
+            }
+        }];
+    }
+
 }
 
 //appAccount != nil
 - (void) gotoMain
 {
     inMain = YES;
-    [self refresh];
+    [self kickoff];
 }
 
 - (void) gotoSign

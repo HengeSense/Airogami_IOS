@@ -14,6 +14,7 @@
 
 NSString *AGNotificationGetNewPlanes = @"notification.getnewplanes";
 NSString *AGNotificationGetPlanes = @"notification.getplanes";
+NSString *AGNotificationPlaneRefreshed = @"notification.planerefreshed";
 
 NSString *AGNotificationCollectedPlanes = @"notification.collectedplanes";
 NSString *AGNotificationReceivePlanes = @"notification.receiveplanes";
@@ -161,6 +162,9 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 if (shouldGet) {
                     [self getNewPlanes];
                 }
+                else{
+                    [self refreshed];
+                }
             }
             //
             [self gotNewPlanes];
@@ -172,6 +176,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 moreGetNewPlanes = NO;
                 gettingNewPlanes = NO;
             }
+            [self refreshed];
         }
     }];
 }
@@ -181,6 +186,12 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     NSDictionary *dict = [NSDictionary dictionary];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGetPlanes object:self userInfo:dict];
+}
+
+- (void)refreshed
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"plane" forKey:@"source"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRefreshed object:self userInfo:dict];
 }
 
 - (void) getPlanes:(NSNotification*) notification

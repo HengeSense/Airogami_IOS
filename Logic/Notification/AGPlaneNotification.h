@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *AGNotificationGetNewPlanes;
+extern NSString *AGNotificationPlaneRefreshed;
 
 extern NSString *AGNotificationCollectedPlanes;
 extern NSString *AGNotificationReceivePlanes;

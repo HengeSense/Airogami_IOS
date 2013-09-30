@@ -27,7 +27,7 @@
     UITableView * tv;
 }
 @property (strong, nonatomic) IBOutlet UIView *headerView;
-@property(nonatomic, strong) AGCollectPlanePulldownHeader *pulldownHeader;
+@property(nonatomic, strong) AGRefreshPulldownHeader *pulldownHeader;
 @property (strong, nonatomic)  AGCollectPlanePickupView *pickupView;
 @property (strong, nonatomic)  AGCollectPlaneReply *reply;
 @property (strong, nonatomic)  AGCollectPlaneNumberView *numberView;
@@ -53,7 +53,7 @@
     if (self) {
         pickupView = [[AGCollectPlanePickupView alloc] init];
         [[NSBundle mainBundle] loadNibNamed:@"AGCollectPlaneHeaderView" owner:self options:nil];
-        pulldownHeader = [AGCollectPlanePulldownHeader header];
+        pulldownHeader = [AGRefreshPulldownHeader header];
         reply = [AGCollectPlaneReply reply];
         data = [NSMutableArray arrayWithCapacity:10];
     }
@@ -72,12 +72,21 @@
     
     frame.origin.y = self.headerView.bounds.size.height;
     frame.size.height -= frame.origin.y;
+    frame.origin.x = 6.0f;
+    frame.size.width -= frame.origin.x * 2;
     tv.frame = frame;
-    
+    //
+    frame = tv.bounds;
+    frame.origin.y = -frame.size.height;
+    UIView* grayView = [[UIView alloc] initWithFrame:frame];
+    grayView.backgroundColor = [UIColor colorWithRed:47 / 255.0f green:89 / 255.0f blue:130 / 255.0f alpha:1.0f];
+    [tv addSubview:grayView];
+    //
     frame = pulldownHeader.pulldownView.frame;
     frame.origin.y = 52;
     pulldownHeader.pulldownView.frame = frame;
     [tv addSubview:pulldownHeader.pulldownView];
+    pulldownHeader.scrollView = tv;
 }
 
 - (void)viewDidLoad
@@ -106,10 +115,13 @@
 
 - (void) refresh
 {
-    [pickupView show];
+    //[pickupView show];
     
 }
 
+- (IBAction)getMoreTouched:(UIButton *)sender {
+    [pickupView show];
+}
 
 #pragma mark - Table view data source
 

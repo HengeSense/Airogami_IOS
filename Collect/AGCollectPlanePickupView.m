@@ -11,6 +11,7 @@
 #import "CALayer+Pause.h"
 #import "AGManagerUtils.h"
 #import "AGMessageUtils.h"
+#import "AGViewManager.h"
 
 #define kAGCollectPlanePickupCancel @"collect_pickup_cancel_button.png"
 #define kAGCollectPlanePickupRadarDuration 2.0f
@@ -98,6 +99,7 @@
     cancelButton.hidden = YES;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     [window addSubview:self];
+    [[AGViewManager viewManager] registerView:self];
     [rotatedLayer addAnimation:rotateAnimation forKey:@"transform.rotation"];
     [imageView startAnimating];
     self.alpha = 0.0f;
@@ -185,6 +187,7 @@
 -(void) easeOutDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     [self removeFromSuperview];
+    [[AGViewManager viewManager] unregisterView:self];
 }
 
 -(void) easeInDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context

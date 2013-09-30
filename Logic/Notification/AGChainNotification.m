@@ -14,6 +14,7 @@
 
 NSString *AGNotificationGetNewChains = @"notification.getnewchains";
 NSString *AGNotificationGetChains = @"notification.getchains";
+NSString *AGNotificationChainRefreshed = @"notification.chainrefreshed";
 
 NSString *AGNotificationCollectedChains = @"notification.collectedchains";
 NSString *AGNotificationReceiveChains = @"notification.receivechains";
@@ -120,7 +121,6 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         [self getNewChains];
     }
     
-    
 }
 
 - (void) getNewChains
@@ -149,6 +149,9 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
                 if (shouldGet) {
                     [self getNewChains];
                 }
+                else{
+                    [self refreshed];
+                }
             }
             [self gotNewChains];
         }
@@ -158,6 +161,7 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
                 moreGetNewChains = NO;
                 gettingNewChains = NO;
             }
+            [self refreshed];
         }
     }];
 }
@@ -167,7 +171,12 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     NSDictionary *dict = [NSDictionary dictionary];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGetChains object:self userInfo:dict];
-    
+}
+
+- (void)refreshed
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"chain" forKey:@"source"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationChainRefreshed object:self userInfo:dict];
 }
 
 - (void) getChains:(NSNotification*) notification

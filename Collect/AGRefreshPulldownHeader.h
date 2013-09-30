@@ -8,19 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol AGCollectPlanePulldownHeaderDelegate <NSObject>
+@protocol AGRefreshPulldownHeaderDelegate <NSObject>
 
 - (void) refresh;
 
 @end
 
-@interface AGCollectPlanePulldownHeader : NSObject
+@interface AGRefreshPulldownHeader : NSObject
 
 @property (strong, nonatomic) IBOutlet UIView *pulldownView;
-@property(nonatomic, weak) id<AGCollectPlanePulldownHeaderDelegate> delegate;
+@property(nonatomic, weak) id<AGRefreshPulldownHeaderDelegate> delegate;
+@property(nonatomic, weak) UIScrollView *scrollView;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView;
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
+- (void) stop;
 
 + (id) header;
 @end

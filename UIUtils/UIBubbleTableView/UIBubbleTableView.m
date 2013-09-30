@@ -136,7 +136,15 @@ typedef enum {
          return [bubbleData1.date compare:bubbleData2.date];
          }];*/
         
-        NSDate *last = [NSDate dateWithTimeIntervalSince1970:0];
+        NSDate *last = nil;
+        if(append && bubbleDataCount){
+            NSBubbleData *data = [self.bubbleDataSource bubbleTableView:self dataForRow:bubbleDataCount];
+            last = data.date;
+        }
+        else{
+            last = [NSDate dateWithTimeIntervalSince1970:0];
+        }
+        //
         NSMutableArray *currentSection = nil;
         if (append) {
             count = [self.bubbleDataSource rowsForBubbleTable:self];
@@ -157,6 +165,9 @@ typedef enum {
                 currentSection = [[NSMutableArray alloc] init];
 #endif
                 [newBubbleSections addObject:currentSection];
+            }
+            else if (currentSection == nil){
+                currentSection = self.bubbleSections.lastObject;
             }
             
             [currentSection addObject:data];

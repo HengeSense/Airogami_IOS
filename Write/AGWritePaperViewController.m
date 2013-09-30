@@ -64,6 +64,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    /*UIEdgeInsets contentInsets = self.tableView.contentInset;
+    contentInsets.top = 2.0f;
+    self.tableView.contentInset = contentInsets;
+    */
     [AGUIDefines setNavigationBackButton:self.profileButton];
     //self.tableView.tableHeaderView = self.headerView;
 

@@ -53,9 +53,6 @@
 "main.tabbar.title_2" = "Plane";
 //write
 "location.randomDestination" = "Random destination";
-//collect
-"collect.refresh.pull" = "Pull down to find more ...";
-"collect.refresh.release" = "Release to find more ...";
 //plane category description
 "plane.category.random" = "Random";
 "plane.category.question" = "Question / Advice";
@@ -80,6 +77,9 @@
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";
 "message.synchronize.title" = "Synchronizing";
+"ui.refresh.pull" = "Pull down to refresh ...";
+"ui.refresh.release" = "Release to refresh ...";
+"ui.refresh.refreshing" = "Refreshing ...";
 
 //notificaion
 "LKRP" = "You got a new plane";//LocKeyReceivedPlane

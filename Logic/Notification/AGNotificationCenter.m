@@ -12,9 +12,12 @@
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
 
+NSString *AGNotificationRefreshed = @"notification.refreshed";
+NSString *AGNotificationRefresh = @"notification.refresh";
+
 NSString *AGNotificationCollected = @"notification.collected";
-NSString *AGNotificationReceive= @"notification.receive";
-NSString *AGNotificationGetCollected= @"notification.getcollected";
+NSString *AGNotificationReceive = @"notification.receive";
+NSString *AGNotificationGetCollected = @"notification.getcollected";
 
 NSString *AGNotificationObtained = @"notification.obtained";
 NSString *AGNotificationObtain = @"notification.obtain";
@@ -28,6 +31,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     NSArray *chainsForCollect;
     NSArray *planesForChat;
     NSArray *chainsForChat;
+    BOOL planeRefreshed, chainRefreshed;
 }
 
 @end
@@ -56,6 +60,10 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 {
     if (self = [super init]) {
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        //refresh
+        [notificationCenter addObserver:self selector:@selector(refresh:) name:AGNotificationRefresh object:nil];
+        [notificationCenter addObserver:self selector:@selector(refreshed:) name:AGNotificationPlaneRefreshed object:nil];
+        [notificationCenter addObserver:self selector:@selector(refreshed:) name:AGNotificationChainRefreshed object:nil];
         //collect
         [notificationCenter addObserver:self selector:@selector(collectedPlanes:) name:AGNotificationCollectedPlanes object:nil];
         [notificationCenter addObserver:self selector:@selector(collectedChains:) name:AGNotificationCollectedChains object:nil];
@@ -196,34 +204,23 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     [notificationCenter postNotificationName:AGNotificationObtained object:self userInfo:dict];
 }
 
-- (void) startTimer:(BOOL)start {
-    static NSTimer *timer;
-    if (start) {
-        if (timer == nil) {
-            timer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                     target:self
-                                                   selector:@selector(tick:)
-                                                   userInfo:nil
-                                                    repeats:YES];
-        }
-    }
-    else{
-        if (timer) {
-            [timer invalidate];
-            timer = nil;
-        }
-    }
-    
-    
+- (void) refresh:(NSNotification*)notification
+{
+    [self obtainPlanesAndChains];
 }
 
-- (void) tick:(NSTimer *) timer {
-    //do something here..
-    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainPlanes object:nil userInfo:nil];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceivePlanes object:nil userInfo:nil];
-    
-    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainChains object:nil userInfo:nil];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceiveChains object:nil userInfo:nil];
+- (void) refreshed:(NSNotification*)notification
+{
+    NSString *source = [notification.userInfo objectForKey:@"source"];
+    if ([source isEqualToString:@"plane"]) {
+        planeRefreshed = YES;
+    }
+    else if ([source isEqualToString:@"chain"]){
+        chainRefreshed = YES;
+    }
+    if (planeRefreshed && chainRefreshed) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationRefreshed object:self userInfo:nil];
+    }
 }
 
 - (void) obtainPlanesAndChains
@@ -233,6 +230,8 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainChains object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReceiveChains object:nil userInfo:nil];*/
+    
+    planeRefreshed = chainRefreshed = NO;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetNewPlanes object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetNewChains object:nil userInfo:nil];

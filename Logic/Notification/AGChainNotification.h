@@ -10,6 +10,7 @@
 
 extern NSString *AGNotificationGetNewChains;
 extern NSString *AGNotificationGetChains;
+extern NSString *AGNotificationChainRefreshed;
 
 extern NSString *AGNotificationCollectedChains;
 extern NSString *AGNotificationReceiveChains;
