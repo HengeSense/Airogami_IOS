@@ -80,6 +80,11 @@
 "ui.refresh.pull" = "Pull down to refresh ...";
 "ui.refresh.release" = "Release to refresh ...";
 "ui.refresh.refreshing" = "Refreshing ...";
+"text.ui.year" = "y";
+"text.ui.month" = "m";
+"text.ui.day" = "d";
+"text.ui.hour" = "h";
+"text.ui.minute" = "m";
 
 //notificaion
 "LKRP" = "You got a new plane";//LocKeyReceivedPlane

@@ -23,6 +23,7 @@
 - (NSNumber*) recentPlaneUpdateIncForChat;
 - (void) increaseUpdateIncForChat:(AGPlane*)plane;
 - (NSArray*) getAllPlanesForChat;
+- (void) updateMessage:(AGPlane*)plane;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
 - (NSArray*) getNewPlaneIdsForUpdate;
 - (AGNewPlane*) getNextNewPlaneForMessages;

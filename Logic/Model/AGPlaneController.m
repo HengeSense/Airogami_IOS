@@ -172,6 +172,13 @@ static const int MaxNewPlaneIds = 50;
     [coreData save];
 }
 
+- (void) updateMessage:(AGPlane*)plane
+{
+    AGMessage *message = [self recentMessageForPlane:plane.planeId];
+    plane.message = message;
+    plane.updatedTime = message.createdTime;
+    [coreData save];
+}
 
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId
 {

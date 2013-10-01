@@ -432,7 +432,7 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:2];
     AGChain *chain = newChain.chain;
     NSNumber *oldUpdateInc = newChain.updateInc;
-    NSDate *last = [controllerUtils.chainController recentChainMessageForChat:chain.chainId].createdTime;
+    NSDate *last = [controllerUtils.chainController recentChainMessage:chain.chainId].createdTime;
     if (last) {
         [params setObject:last forKey:@"last"];
     }
@@ -452,6 +452,8 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
                 [self obtainChainMessages];
             }
             if (chainMessages.count) {
+                [controllerUtils.chainController updateChainMessage:chain];
+                //
                 [self obtainedChainMessages:chainMessages forChain:chain];
                 NSDate *last = ((AGChainMessage*)[chainMessages lastObject]).createdTime;
                 NSDictionary *params = [chainManager paramsForViewedChainMessages:chain.chainId last:last];
@@ -482,7 +484,7 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     int status = [[AGControllerUtils controllerUtils].chainController chainStatus:chain.chainId];
     AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainMessageController getChainMessageForChain:chain.chainId];
     if (status == AGChainMessageStatusNew) {
-        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessageForCollect:chain.chainId];
+        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessage:chain.chainId];
         if (chainMessage) {
             chainMessage.lastViewedTime = cm.createdTime;
             [[AGCoreData coreData] save];

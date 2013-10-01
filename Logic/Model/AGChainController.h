@@ -22,8 +22,8 @@
 - (NSNumber*)recentUpdateInc;
 - (NSNumber*)recentChainUpdateIncForCollect;
 - (NSNumber*)recentChainUpdateIncForChat;
-- (AGChainMessage*) recentChainMessageForCollect:(NSNumber*)chainId;
-- (AGChainMessage*) recentChainMessageForChat:(NSNumber*)chainId;
+- (void) updateChainMessage:(AGChain*)chain;
+- (AGChainMessage*) recentChainMessage:(NSNumber*)chainId;
 - (NSArray*) getAllChainsForCollect;
 - (NSArray*) getAllChainsForChat;
 //-1 = unknown; 0 = colleted; 1 = obtained; 2 = deleted

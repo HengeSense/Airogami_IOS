@@ -17,4 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) NSString *badge;
+@property (strong, nonatomic) NSDate *date;
+
+- (void) updateDate;
+
 @end

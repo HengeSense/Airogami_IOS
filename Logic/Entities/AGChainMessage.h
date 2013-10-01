@@ -2,7 +2,7 @@
 //  AGChainMessage.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/6/13.
+//  Created by Tianhu Yang on 9/30/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSNumber * unreadChainMessagesCount;
+@property (nonatomic, retain) NSNumber * source;
 @property (nonatomic, retain) AGAccount *account;
 @property (nonatomic, retain) AGChain *chain;
 @property (nonatomic, retain) AGChainMessageId *id;

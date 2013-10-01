@@ -280,7 +280,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
                                         <connections>
                                             <outlet property="delegate" destination="FET-Of-0Ed" id="s5Y-n4-biZ"/>
                                         </connections>
@@ -673,6 +673,57 @@
         <image name="write_paper_random@2x.png" width="640" height="108"/>
         <image name="write_paper_relationship@2x.png" width="640" height="108"/>
     </resources>
+    <classes>
+        <class className="AGWriteEditViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGWriteEditViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="locationButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="sendButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="sexButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="sexButtonsTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="accessoryView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="countLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sendButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="sexButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+                <relationship kind="outletCollection" name="sexButtons" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGWriteLocationViewController" superclassName="SPGooglePlacesAutocompleteViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGWriteLocationViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outletCollection" name="doneButtons" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGWritePaperCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGWritePaperCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="delegate"/>
+                <relationship kind="outlet" name="titleButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="AGWritePaperViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGWritePaperViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="profileButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="headerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="profileButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="SPGooglePlacesAutocompleteViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SPGooglePlacesAutocompleteViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="recenterMapToUserLocation:"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -87,15 +87,29 @@
     pulldownHeader.pulldownView.frame = frame;
     [tv addSubview:pulldownHeader.pulldownView];
     pulldownHeader.scrollView = tv;
+    pulldownHeader.delegate = self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    pulldownHeader.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDate) name:AGNotificationUpdateDate object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(collected:) name:AGNotificationCollected object:nil];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"",@"planes",@"",@"chains", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetCollected object:nil userInfo:dict];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void) updateDate
+{
+    for (AGCollectPlaneCell *cell in tv.visibleCells) {
+        [cell updateDate];
+    }
 }
 
 - (void) collected:(NSNotification*) notification
@@ -104,13 +118,6 @@
     NSArray *collects = [dict objectForKey:@"collects"];
     data = collects;
     [tv reloadData];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) refresh
@@ -147,9 +154,11 @@
     if([obj isKindOfClass:[AGPlane class]])
     {
         AGPlane *plane = obj;
+        cell.collectType = plane.source.intValue;
         cell.category = plane.category.categoryId.intValue;
         cell.topLabel.text = plane.accountByOwnerId.profile.city;
-        cell.bottomLabel.text = [AGUtils dateToString:plane.updatedTime];
+        cell.date = plane.updatedTime;
+        //cell.bottomLabel.text = [AGUtils dateToString:plane.updatedTime];
         AGMessage *message = plane.messages.objectEnumerator.nextObject;
         cell.messageLabel.text = message.content;
     }
@@ -158,8 +167,10 @@
         AGChain *chain = obj;
         cell.category = AGCategoryChain;
         cell.topLabel.text = chain.account.profile.city;
-        AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForCollect:chain.chainId];
-        cell.bottomLabel.text = [AGUtils dateToString:chain.updatedTime];
+        AGChainMessage *chainMessage = chain.chainMessage;
+        cell.collectType = chainMessage.source.intValue;
+        cell.date = chain.updatedTime;
+        //cell.bottomLabel.text = [AGUtils dateToString:chain.updatedTime];
         cell.messageLabel.text = chainMessage.content;
     }
         

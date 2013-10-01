@@ -8,6 +8,7 @@
 
 #import "AGChatPlaneCell.h"
 #import "CustomBadge.h"
+#import "AGUtils.h"
 
 @interface AGChatPlaneCell()
 {
@@ -18,6 +19,7 @@
 @implementation AGChatPlaneCell
 
 @synthesize badge;
+@synthesize date;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -80,6 +82,17 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void) setDate:(NSDate *)date_
+{
+    date = date_;
+    self.timeLabel.text = [AGUtils dateTillNowToString:date];
+}
+
+- (void) updateDate
+{
+    self.date = date;
 }
 
 @end

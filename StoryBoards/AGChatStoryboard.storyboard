@@ -33,7 +33,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 day ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJJ-tx-49c">
-                                            <rect key="frame" x="151" y="0.0" width="162" height="21"/>
+                                            <rect key="frame" x="147" y="0.0" width="162" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
                                             <color key="textColor" red="0.63921568630000003" green="0.74901960779999999" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,6 +57,9 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="delegate" destination="kig-7l-nO0" id="j1t-H4-Io9"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="e6e-2n-DCL">
                         <nil key="title"/>
@@ -439,6 +442,69 @@
         <image name="profile_view_top@2x.png" width="640" height="378"/>
         <image name="write_edit_female_button@2x.png" width="68" height="68"/>
     </resources>
+    <classes>
+        <class className="AGChatChatViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatChatViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="bubbleTable" candidateClass="UIBubbleTableView"/>
+                <relationship kind="outlet" name="categoryLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="inputTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="resignButton" candidateClass="AGResignButton"/>
+                <relationship kind="outlet" name="textInputView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="viewContainer" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="AGChatPlaneCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatPlaneCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profileImageView" candidateClass="AGProfileImage"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="AGChatPlaneViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatPlaneViewController.h"/>
+        </class>
+        <class className="AGChatProfileViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGChatProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="backButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="action" name="profileImageButtonTouched:" candidateClass="AGProfileImageButton"/>
+                <relationship kind="action" name="reportButtonTouched:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="descriptionContainer" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="descriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="profileImageButton" candidateClass="AGProfileImageButton"/>
+                <relationship kind="outlet" name="screenNameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="sexImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="AGImageButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
+        </class>
+        <class className="AGProfileImage" superclassName="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImage.h"/>
+        </class>
+        <class className="AGProfileImageButton" superclassName="AGImageButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGProfileImageButton.h"/>
+        </class>
+        <class className="AGResignButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>
+        </class>
+        <class className="UIBubbleTableView" superclassName="UITableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIBubbleTableView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bubbleDataSource"/>
+                <relationship kind="outlet" name="bubbleDelegate"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

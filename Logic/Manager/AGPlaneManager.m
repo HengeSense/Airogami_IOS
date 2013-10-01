@@ -86,6 +86,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
                 [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:message.plane];
                 message.plane.updatedTime = remoteMessage.createdTime;
+                [[AGControllerUtils controllerUtils].planeController updateMessage:message.plane];
                 [[AGCoreData coreData] remove:message];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
             }
@@ -126,6 +127,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 plane.updatedTime = remoteMessage.createdTime;
                 [[AGCoreData coreData] save];
                 //
+                [[AGControllerUtils controllerUtils].planeController updateMessage:plane];
                 [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:plane];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
                 [[AGPlaneNotification planeNotification] collectedPlanes];
@@ -229,6 +231,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
                 for(AGPlane *plane in planes){
                     AGMessage *message = plane.messages.objectEnumerator.nextObject;
                     plane.targetViewedMsgId = message.messageId;
+                    plane.message = message;
                 }
                 [[AGCoreData coreData] save];
                 //

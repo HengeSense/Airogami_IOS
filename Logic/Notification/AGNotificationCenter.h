@@ -12,6 +12,8 @@
 #import "AGChainNotification.h"
 #import "AGAccountNotification.h"
 
+extern NSString *AGNotificationUpdateDate;
+
 extern NSString *AGNotificationRefreshed;
 extern NSString *AGNotificationRefresh;
 

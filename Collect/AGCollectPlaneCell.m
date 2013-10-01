@@ -9,6 +9,7 @@
 #import "AGCollectPlaneCell.h"
 #import "AGUIUtils.h"
 #import "AYUIButton.h"
+#import "AGUtils.h"
 
 @interface AGCollectPlaneCell()
 
@@ -19,6 +20,8 @@
 @implementation AGCollectPlaneCell
 
 @synthesize category;
+@synthesize collectType;
+@synthesize date;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -69,6 +72,23 @@
     category = aCategory;
     self.planeImageView.image = [AGUIUtils planeImage:category];
     self.categoryImageView.image = [AGUIUtils categoryImage:category];
+}
+
+- (void) setCollectType:(AGCollectType)collectType_
+{
+    collectType = collectType_;
+    self.sourceImageView.image = [AGUIUtils collectTypeImage:collectType];
+}
+
+- (void) setDate:(NSDate *)date_
+{
+    date = date_;
+    self.bottomLabel.text = [AGUtils dateTillNowToString:date];
+}
+
+- (void) updateDate
+{
+    self.date = date;
 }
 
 @end

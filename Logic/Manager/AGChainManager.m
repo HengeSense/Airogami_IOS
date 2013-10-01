@@ -87,7 +87,8 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 NSDictionary *dict = [result objectForKey:@"chainMessage"];
                 remoteChainMessage = [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:dict forChain:chain];
                 chain.updatedTime = remoteChainMessage.createdTime;
-                [[AGCoreData coreData] save];
+                [[AGControllerUtils controllerUtils].chainController updateChainMessage:chain];
+                //[[AGCoreData coreData] save];
                 //
                 [[AGControllerUtils controllerUtils].chainController increaseUpdateIncForChat:chain];
                 [[AGChainNotification chainNotification] obtainedChains];

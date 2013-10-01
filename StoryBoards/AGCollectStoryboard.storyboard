@@ -45,11 +45,11 @@
                                                             </connections>
                                                         </button>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="collect_found_tag@2x.png" id="hS1-l2-1ea">
-                                                            <rect key="frame" x="7" y="6" width="10" height="10"/>
+                                                            <rect key="frame" x="7" y="7" width="12" height="12"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="plane_chain_icon@2x.png" id="YLb-93-y0U">
-                                                            <rect key="frame" x="281" y="3" width="25" height="25"/>
+                                                            <rect key="frame" x="277" y="3" width="25" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="plane_chain@2x.png" id="36L-nQ-DZw">
@@ -65,7 +65,7 @@
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="15 days ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="75f-W3-kQ9">
-                                                            <rect key="frame" x="71" y="66" width="232" height="21"/>
+                                                            <rect key="frame" x="67" y="66" width="232" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                                             <color key="textColor" red="0.63921568627450975" green="0.74901960784313726" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,6 +96,7 @@
                                     <outlet property="collectTypeImageView" destination="hS1-l2-1ea" id="sSJ-Ju-SZX"/>
                                     <outlet property="messageLabel" destination="Yqb-ai-IkF" id="8N4-h1-0NC"/>
                                     <outlet property="planeImageView" destination="36L-nQ-DZw" id="5Jw-XP-Gep"/>
+                                    <outlet property="sourceImageView" destination="hS1-l2-1ea" id="NgW-Ei-w5d"/>
                                     <outlet property="topLabel" destination="hjc-XS-UPk" id="mun-Zt-rZa"/>
                                 </connections>
                             </tableViewCell>
@@ -147,7 +148,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="collect_found_tag@2x.png" width="20" height="20"/>
+        <image name="collect_found_tag@2x.png" width="24" height="24"/>
         <image name="plane_chain@2x.png" width="90" height="150"/>
         <image name="plane_chain_icon@2x.png" width="50" height="50"/>
     </resources>
@@ -155,13 +156,13 @@
         <class className="AGCollectPlaneCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AGCollectPlaneCell.h"/>
             <relationships>
-                <relationship kind="action" name="aidedButtonTouched:" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="aidedButton" candidateClass="AYUIButton"/>
                 <relationship kind="outlet" name="bottomLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="categoryImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="collectTypeImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="messageLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="planeImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="sourceImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="topLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

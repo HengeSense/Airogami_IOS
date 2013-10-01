@@ -33,8 +33,9 @@ static float AGInputTextViewMaxHeight = 80;
     UITextView *aidedTextView;
     CGSize contentSize;
     __weak id airogami;
+    UIColor *maleColor, *femaleColor;
 }
-
+@property (weak, nonatomic) IBOutlet UIView *outlineView;
 @property (weak, nonatomic) IBOutlet UIView *contentContainer;
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -42,7 +43,6 @@ static float AGInputTextViewMaxHeight = 80;
 @property (weak, nonatomic) IBOutlet UIView *inputViewContainer;
 
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
-
 @property (weak, nonatomic) IBOutlet AGResignButton *resignButton;
 
 @end
@@ -121,6 +121,7 @@ static float AGInputTextViewMaxHeight = 80;
         }
         self.contentTextView.text = text;
     }
+    self.ageLabel.textColor = profile.sex.intValue == AGAccountSexTypeMale ? maleColor : femaleColor;
     self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
     self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
     //
@@ -137,6 +138,9 @@ static float AGInputTextViewMaxHeight = 80;
 
 - (void) dismiss
 {
+    self.inputTextView.text = @"";
+    [self relayout];
+    //
     [UIView beginAnimations:@"ShowAnimation" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:.3f];
@@ -244,11 +248,20 @@ static float AGInputTextViewMaxHeight = 80;
 
 - (void) initialize
 {
+    maleColor = [UIColor colorWithRed:114.0f / 255.0f green:167 / 255.0f blue:197 / 255.0f alpha:1.0f];
+    femaleColor = [UIColor colorWithRed:239.0f / 255.0f green:163 / 255.0f blue:163 / 255.0f alpha:1.0f];
+    //
     [[NSBundle mainBundle] loadNibNamed:@"AGCollectReplyView" owner:self options:nil];
     
     self.replyView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.7f];
     CGRect frame = [UIScreen mainScreen].bounds;
     self.replyView.frame = frame;
+    //adjust for iphone 4
+    if (frame.size.height <= 480.0f) {
+        frame = self.outlineView.frame;
+        frame.origin.y = 20.0f;
+        self.outlineView.frame = frame;
+    }
     
     self.containerView.layer.cornerRadius = 5.0f;
     //self.containerView.center = CGPointMake(frame.size.width / 2, frame.size.height / 2 + 10);

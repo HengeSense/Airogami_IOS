@@ -12,6 +12,7 @@
 @interface AGCollectPlaneCell : UITableViewCell
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *sourceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *planeImageView;
@@ -23,5 +24,9 @@
 @property (weak, nonatomic) IBOutlet AYUIButton *aidedButton;
 
 @property (nonatomic, assign) AGPlaneCategoryEnum category;
+@property (nonatomic, assign) AGCollectType collectType;
+@property (nonatomic, strong) NSDate *date;
+
+- (void) updateDate;
 
 @end

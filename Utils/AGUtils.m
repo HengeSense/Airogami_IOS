@@ -11,8 +11,15 @@
 #import "NSString+Addition.h"
 #import "AGNotificationCenter.h"
 #import "AGAppDelegate.h"
+#import "AGUIUtils.h"
 
 static NSDateFormatter *dateFormatter;
+
+static NSString *Year = @"text.ui.year";
+static NSString *Month = @"text.ui.month";
+static NSString *Day = @"text.ui.day";
+static NSString *Hour = @"text.ui.hour";
+static NSString *Minute = @"text.ui.minute";
 
 @implementation AGUtils
 
@@ -115,6 +122,35 @@ static void encode(NSMutableString *path, id key, id obj)
 + (NSDate*) stringToDate:(NSString*)string
 {
     return [dateFormatter dateFromString:string];
+}
+
++ (NSString*) dateTillNowToString:(NSDate*)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    unsigned flag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit |NSMinuteCalendarUnit;
+    NSDateComponents *dateComponents = [calendar components:flag fromDate:date toDate:now options:0];
+    NSString *string = nil;
+    if (dateComponents.year) {
+        string = [NSString stringWithFormat:@"%d %@", dateComponents.year, AGLS(Year)];
+    }
+    else if (dateComponents.month)
+    {
+        string = [NSString stringWithFormat:@"%d %@", dateComponents.month, AGLS(Month)];
+    }
+    else if (dateComponents.day)
+    {
+        string = [NSString stringWithFormat:@"%d %@", dateComponents.day, AGLS(Day)];
+    }
+    else if (dateComponents.hour)
+    {
+        string = [NSString stringWithFormat:@"%d %@", dateComponents.hour, AGLS(Hour)];
+    }
+    else if (dateComponents.minute)
+    {
+        string = [NSString stringWithFormat:@"%d %@", dateComponents.minute, AGLS(Minute)];
+    }
+    return string;
 }
 
 + (NSString*) birthdayToAge:(NSDate*)birthday

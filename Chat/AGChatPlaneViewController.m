@@ -17,6 +17,7 @@
 #import "AGChain.h"
 #import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
+#import "AGRefreshPulldownHeader.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AGChatPlaneViewController ()
@@ -25,9 +26,13 @@
     int selectedIndex;
 }
 
+@property(nonatomic, strong) AGRefreshPulldownHeader *pulldownHeader;
+
 @end
 
 @implementation AGChatPlaneViewController
+
+@synthesize pulldownHeader;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,6 +41,26 @@
         // Custom initialization
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        pulldownHeader = [AGRefreshPulldownHeader header];
+    }
+    return self;
+}
+
+- (void) loadView
+{
+    [super loadView];
+    CGRect frame = pulldownHeader.pulldownView.frame;
+    frame.origin.y = 52;
+    pulldownHeader.pulldownView.frame = frame;
+    pulldownHeader.scrollView = self.tableView;
+    [self.tableView addSubview:pulldownHeader.pulldownView];
+    
 }
 
 
@@ -48,6 +73,7 @@
     imageView.image = [AGUIDefines mainBackgroundImage];
     [self.tableView.backgroundView addSubview:imageView];
     //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDate) name:AGNotificationUpdateDate object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtained:) name:AGNotificationObtained object:nil];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"planes", @"planes", @"chains", @"chains", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtained object:nil userInfo:dict];
@@ -64,6 +90,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) updateDate
+{
+    for (AGChatPlaneCell *cell in self.tableView.visibleCells) {
+        [cell updateDate];
+    }
 }
 
 - (void) obtained:(NSNotification*) notification
@@ -172,8 +205,9 @@
             profile = plane.accountByOwnerId.profile;
         }
         //cell.messageLabel.text = ;
-        AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
-        cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
+        AGMessage *message = plane.message;
+        cell.date = plane.updatedTime;
+        //cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
         cell.messageLabel.text = message.content;
         //count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
         count = plane.unreadMessagesCount.intValue;
@@ -182,8 +216,9 @@
     {
         AGChain *chain = obj;
         profile = chain.account.profile;
-        cell.timeLabel.text = [AGUtils dateToString:chain.updatedTime];
-        AGChainMessage *chainMessage = [[AGControllerUtils controllerUtils].chainController recentChainMessageForChat:chain.chainId];
+        cell.date = chain.updatedTime;
+        //cell.timeLabel.text = [AGUtils dateToString:chain.updatedTime];
+        AGChainMessage *chainMessage = chain.chainMessage;
         cell.messageLabel.text = chainMessage.content;
         //count = [[AGControllerUtils controllerUtils].chainMessageController getUnreadChainMessageCountForChain:chain.chainId];
         AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainMessageController getChainMessageForChain:chain.chainId];
@@ -276,6 +311,20 @@
     if ([segue.identifier isEqual:@"ToChat"]) {
         [segue.destinationViewController setValue:[data objectAtIndex:selectedIndex] forKey:@"airogami"];
     }
+}
+
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	
+    [pulldownHeader scrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[pulldownHeader scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+	
 }
 
 @end

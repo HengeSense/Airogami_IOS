@@ -65,7 +65,7 @@ static NSString * themeFontNames[] = {@"Avenir-Medium", @"Avenir-Black", @"Aveni
 + (UIImage*) collectTypeImage:(AGCollectType) type
 {
     if (type > AGCollectTypePickuped) {
-        type = AGCollectTypeReceived;
+        type = AGCollectTypePickuped;
     }
     return [UIImage imageNamed:collectTypeImages[type]];
 }

@@ -12,6 +12,8 @@
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
 
+NSString *AGNotificationUpdateDate = @"notification.updatedate";
+
 NSString *AGNotificationRefreshed = @"notification.refreshed";
 NSString *AGNotificationRefresh = @"notification.refresh";
 
@@ -76,6 +78,8 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
         [notificationCenter addObserver:self selector:@selector(unreadMessagesChanged:) name:AGNotificationUnreadMessagesChangedForPlane object:nil];
         [notificationCenter addObserver:self selector:@selector(unreadMessagesChanged:) name:AGNotificationUnreadChainMessagesChangedForChain object:nil];
         [notificationCenter addObserver:self selector:@selector(getUnreadMessagesCount:) name:AGNotificationGetUnreadMessagesCount object:nil];
+        //
+        [self startUpdateDate];
     }
     return self;
 }
@@ -221,6 +225,16 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     if (planeRefreshed && chainRefreshed) {
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationRefreshed object:self userInfo:nil];
     }
+}
+
+- (void) startUpdateDate
+{
+    [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(updateDateTick:) userInfo:nil repeats:YES];
+}
+
+- (void) updateDateTick:(NSTimer*)timer
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUpdateDate object:self];
 }
 
 - (void) obtainPlanesAndChains

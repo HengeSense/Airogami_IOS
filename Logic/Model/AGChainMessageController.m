@@ -171,7 +171,7 @@ static const int ChainMessageLimit = 10;
     AGChainMessage *chainMessage = [self getChainMessageForChain:chain.chainId];
     if (chainMessage) {
         AGAccountStat *accountStat = chainMessage.account.accountStat;
-        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessageForChat:chain.chainId];
+        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessage:chain.chainId];
         if (cm) {
             chainMessage.lastViewedTime = cm.createdTime;
         }

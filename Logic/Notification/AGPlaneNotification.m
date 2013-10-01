@@ -480,6 +480,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 [self obtainMessages];
             }
             if (messages.count) {
+                [controllerUtils.planeController updateMessage:plane];
+                //
                 [self obtainedMessages:messages forPlane:plane];
                 //#warning this may be set after plane change status
                 NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;

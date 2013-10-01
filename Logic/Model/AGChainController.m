@@ -212,18 +212,16 @@ static const int MaxNewChainIds = 50;
     return updateInc;
 }
 
-- (AGChainMessage*) recentChainMessageForChat:(NSNumber*)chainId
+- (void) updateChainMessage:(AGChain*)chain
 {
-    return [self recentChainMessage:NO chainId:chainId];
-}
-
-- (AGChainMessage*) recentChainMessageForCollect:(NSNumber*)chainId
-{
-    return [self recentChainMessage:YES chainId:chainId];
+    AGChainMessage *chainMessage = [self recentChainMessage:chain.chainId];
+    chain.chainMessage = chainMessage;
+    chain.updatedTime = chainMessage.createdTime;
+    [coreData save];
 }
 
 //not include unreplied chainMessage
-- (AGChainMessage*) recentChainMessage:(BOOL) forCollect chainId:(NSNumber*)chainId
+- (AGChainMessage*) recentChainMessage:(NSNumber*)chainId
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainMessageEntityDescription];

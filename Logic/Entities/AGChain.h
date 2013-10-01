@@ -2,7 +2,7 @@
 //  AGChain.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/27/13.
+//  Created by Tianhu Yang on 9/30/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * collected;
 @property (nonatomic, retain) NSString * country;
 @property (nonatomic, retain) NSDate * createdTime;
+@property (nonatomic, retain) NSNumber * deleted;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSNumber * matchCount;
@@ -30,10 +31,10 @@
 @property (nonatomic, retain) NSNumber * updateCount;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
-@property (nonatomic, retain) NSNumber * deleted;
 @property (nonatomic, retain) AGAccount *account;
 @property (nonatomic, retain) NSSet *chainMessages;
 @property (nonatomic, retain) AGNewChain *newChain;
+@property (nonatomic, retain) AGChainMessage *chainMessage;
 @end
 
 @interface AGChain (CoreDataGeneratedAccessors)

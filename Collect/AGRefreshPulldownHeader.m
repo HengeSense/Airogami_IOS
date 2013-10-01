@@ -135,6 +135,7 @@ typedef enum {
     [UIView commitAnimations];
     
     state = AGCollectPulldownHeaderNormal;
+    self.arrowImageView.transform = CGAffineTransformIdentity;
     self.titleLabel.text = NSLocalizedString(@"ui.refresh.pull", @"Pull down to refresh ...");
     
     //
