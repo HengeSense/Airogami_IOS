@@ -124,7 +124,7 @@
             }
             break;
         case 1:// logout
-            [[AGAppDelegate appDelegate].appConfig gotoSign];
+            [[AGAppDelegate appDelegate].appConfig signout];
             break;
             
         default:

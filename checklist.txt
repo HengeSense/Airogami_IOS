@@ -1,2 +1,6 @@
-bug #1: wrong arrangement when reply in chat
-bug #2: location separate
+task #1: wrong arrangement when reply in chat
+task #2: location consitency
+task #3: chitchat input and collect reply input display problem
+task #4: app version out of date
+task #5: emotion problem
+task #6: trim input

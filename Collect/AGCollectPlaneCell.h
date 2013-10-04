@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property (weak, nonatomic) IBOutlet AYUIButton *aidedButton;
+@property (weak, nonatomic) UITableView *tableView;
 
 @property (nonatomic, assign) AGPlaneCategoryEnum category;
 @property (nonatomic, assign) AGCollectType collectType;

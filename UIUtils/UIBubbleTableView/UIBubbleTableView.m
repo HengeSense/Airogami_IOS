@@ -138,7 +138,7 @@ typedef enum {
         
         NSDate *last = nil;
         if(append && bubbleDataCount){
-            NSBubbleData *data = [self.bubbleDataSource bubbleTableView:self dataForRow:bubbleDataCount];
+            NSBubbleData *data = [self.bubbleDataSource bubbleTableView:self dataForRow:bubbleDataCount - 1];
             last = data.date;
         }
         else{
@@ -290,6 +290,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *tableViewCell = nil;
     // Now typing
 	if (indexPath.section >= [self.bubbleSections count])
     {
@@ -300,12 +301,9 @@ typedef enum {
 
         cell.type = self.typingBubble;
         cell.showAvatar = self.showAvatars;
-        
-        return cell;
+        tableViewCell = cell;
     }
-
-    // Header with date and time
-    if (indexPath.row == 0)
+    else if (indexPath.row == 0) // Header with date and time
     {
         static NSString *cellId = @"tblBubbleHeaderCell";
         UIBubbleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -314,20 +312,22 @@ typedef enum {
         if (cell == nil) cell = [[UIBubbleHeaderTableViewCell alloc] init];
 
         cell.date = data.date;
-       
-        return cell;
+        tableViewCell = cell;
+    }
+    else{// Standard bubble
+        static NSString *cellId = @"tblBubbleCell";
+        UIBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        NSBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
+        
+        if (cell == nil) cell = [[UIBubbleTableViewCell alloc] init];
+        
+        cell.showAvatar = self.showAvatars;
+        cell.data = data;
+        cell.bubbleTableView = self;
+        tableViewCell = cell;
     }
     
-    // Standard bubble    
-    static NSString *cellId = @"tblBubbleCell";
-    UIBubbleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    NSBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    
-    if (cell == nil) cell = [[UIBubbleTableViewCell alloc] init];
-    
-    cell.showAvatar = self.showAvatars;
-    cell.data = data;
-    return cell;
+    return tableViewCell;
 }
 
 - (void) didSelectCellAtIndexPath:(NSIndexPath *)indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType)type

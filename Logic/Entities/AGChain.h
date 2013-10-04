@@ -2,7 +2,7 @@
 //  AGChain.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/30/13.
+//  Created by Tianhu Yang on 10/1/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -31,10 +31,12 @@
 @property (nonatomic, retain) NSNumber * updateCount;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
+@property (nonatomic, retain) NSDate * birthdayLower;
+@property (nonatomic, retain) NSDate * birthdayUpper;
 @property (nonatomic, retain) AGAccount *account;
+@property (nonatomic, retain) AGChainMessage *chainMessage;
 @property (nonatomic, retain) NSSet *chainMessages;
 @property (nonatomic, retain) AGNewChain *newChain;
-@property (nonatomic, retain) AGChainMessage *chainMessage;
 @end
 
 @interface AGChain (CoreDataGeneratedAccessors)

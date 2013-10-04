@@ -34,7 +34,7 @@
     [destinationController.navigationController.view.layer addAnimation:transition
                                            forKey:kCATransition];
     
-    [sourceViewController presentModalViewController:destinationController animated:NO];
+    [sourceViewController presentViewController:destinationController animated:NO completion:nil];
     
     
 }

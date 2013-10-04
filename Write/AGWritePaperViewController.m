@@ -11,10 +11,12 @@
 #import "AGWriteEditViewController.h"
 #import "AGCategory.h"
 #import "AGRootViewController.h"
+#import "UIView+Addition.h"
 
 @interface AGWritePaperViewController ()
 {
     int selectedCategoryId;
+    UITableView *tv;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
@@ -46,18 +48,19 @@
 
 - (void)loadView {
     [super loadView];
-    UITableView *tv = (UITableView*)self.view;
+    tv = (UITableView*)self.view;
+    //
     CGRect frame = self.view.frame;
-    UIView *view = [[UIImageView alloc] initWithFrame:frame];
+    UIView *view = [[UIView alloc] initWithFrame:frame];
     view.userInteractionEnabled = YES;
-    self.view = view;
-    [self.view addSubview:tv];
-    [self.view addSubview:self.headerView];
-    
+    //
     frame.origin.y = self.headerView.bounds.size.height;
     frame.size.height -= frame.origin.y;
-    
     tv.frame = frame;
+    //
+    [view addSubview:tv];
+    [view addSubview:self.headerView];
+    self.view = view;
     
 }
 
@@ -76,6 +79,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
 }
 
 - (void)viewDidUnload {

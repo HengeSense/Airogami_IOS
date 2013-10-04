@@ -166,11 +166,24 @@ static NSString *path;
 //appAccount != nil
 - (void) gotoMain
 {
-    inMain = YES;
-    [self kickoff];
+    if (inMain == NO) {
+        inMain = YES;
+        [self kickoff];
+    }
 }
 
+//appAccount != nil
 - (void) gotoSign
+{
+    if (inMain) {
+        inMain = NO;
+        [self resetAppAccount];
+        [[AGRootViewController rootViewController] switchToSign];
+    }
+    
+}
+
+- (void) signout
 {
     [[AGManagerUtils managerUtils].accountManager signout:nil block:^(NSError *error, id context) {
         if (error == nil) {

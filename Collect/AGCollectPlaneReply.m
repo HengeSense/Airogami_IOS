@@ -226,7 +226,8 @@ static float AGInputTextViewMaxHeight = 80;
         [self initialize];
         //
         //dself.inputTextView.inputAccessoryView = self.inputViewContainer;
-        aidedTextView = [[UITextView alloc] initWithFrame:self.inputTextView.frame];
+        CGRect frame = self.inputTextView.frame;
+        aidedTextView = [[UITextView alloc] initWithFrame:frame];
         aidedTextView.font = self.inputTextView.font;
         aidedTextView.hidden = YES;
         [self.inputViewContainer addSubview:aidedTextView];
@@ -236,9 +237,8 @@ static float AGInputTextViewMaxHeight = 80;
         aidedTextView.layer.borderColor = self.inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
         aidedTextView.layer.borderWidth = self.inputTextView.layer.borderWidth = 2.0f;
         //first adjust height
-        aidedTextView.text = @"0";
-        CGSize size = aidedTextView.contentSize;
-        CGRect frame = self.inputTextView.frame;
+        aidedTextView.text = @"test";
+        CGSize size = [aidedTextView sizeThatFits:frame.size];
         frame.size.height = size.height;
         self.inputTextView.frame = frame;
     }
@@ -337,7 +337,7 @@ static float AGInputTextViewMaxHeight = 80;
     point.x = size.height - textFrame.size.height;
     
     if (point.x != 0.0f) {
-        [UIView beginAnimations:@"RelayoutAnimations" context:nil];
+        //[UIView beginAnimations:@"RelayoutAnimations" context:nil];
         //viewContainer
         point.y = size.height + diff;
         frame = self.inputViewContainer.frame;
@@ -347,7 +347,7 @@ static float AGInputTextViewMaxHeight = 80;
         //inputTextView
         textFrame.size = size;
         self.inputTextView.frame = textFrame;
-        self.inputTextView.text = aidedTextView.text;
+        //self.inputTextView.text = aidedTextView.text;
         //scroll view
         CGSize size = contentSize;
         CGRect rect = [self.scrollView convertRect:self.scrollView.bounds toView:self.inputViewContainer.superview];
@@ -361,7 +361,7 @@ static float AGInputTextViewMaxHeight = 80;
         self.scrollView.contentSize = size;
         
         //
-        [UIView commitAnimations];
+        //[UIView commitAnimations];
     }
 }
 

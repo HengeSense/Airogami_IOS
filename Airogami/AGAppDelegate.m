@@ -58,7 +58,6 @@ static AGAppDelegate *AppDelegate;
     imageView.frame = [UIScreen mainScreen].bounds;
     [self.window addSubview:imageView];
     //
-    
     return YES;
 }
 							

@@ -25,6 +25,14 @@
     return 40.0;
 }
 
+- (id) init
+{
+    if (self = [super init]) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
 - (void)setType:(NSBubbleTypingType)value
 {
     if (!self.typingImageView)

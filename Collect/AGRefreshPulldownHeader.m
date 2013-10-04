@@ -51,6 +51,10 @@ typedef enum {
     indicator.center = self.arrowImageView.center;
 }
 
+- (void) setScrollView:(UIScrollView *)scrollView_
+{
+    scrollView = scrollView_;
+}
 
 - (void) setState:(AGCollectPulldownHeaderState) aState
 {
@@ -128,10 +132,10 @@ typedef enum {
     self.arrowImageView.hidden = NO;
     [indicator stopAnimating];
     //
-    UIEdgeInsets contentInset = scrollView.contentInset ;
-    contentInset.top = 0.0f;
+    UIEdgeInsets contentInsets = scrollView.contentInset;
+    contentInsets.top = 0.0f;
     [UIView beginAnimations:@"AGCollectPulldownHeaderRefreshing" context:NULL];
-    scrollView.contentInset = contentInset;
+    scrollView.contentInset = contentInsets;
     [UIView commitAnimations];
     
     state = AGCollectPulldownHeaderNormal;

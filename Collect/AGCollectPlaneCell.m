@@ -19,6 +19,7 @@
 
 @implementation AGCollectPlaneCell
 
+@synthesize tableView;
 @synthesize category;
 @synthesize collectType;
 @synthesize date;
@@ -53,8 +54,7 @@
 
 
 - (IBAction)aidedButtonTouched:(UIButton *)button {
-    UITableView *tableView = (UITableView *) self.superview;
-    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:button.tag inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     [tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
     [tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
 

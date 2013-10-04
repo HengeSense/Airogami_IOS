@@ -19,6 +19,8 @@ typedef int (^AGMergeSortedArrayBlock)(id obj1, id obj2);
 + (void)encodeParams:(NSDictionary*)params path:(NSMutableString*)path device:(BOOL)yes;
 + (NSString*) dateToString:(NSDate*)date;
 + (NSDate*) stringToDate:(NSString*)string;
++ (NSString*) birthdayToString:(NSDate*)date;
++ (NSDate*) stringToBirthday:(NSString*)string;
 + (NSString*) dateTillNowToString:(NSDate*)date;
 + (NSString*) birthdayToAge:(NSDate*)birthday;
 + (NSString*) obtainUuid;

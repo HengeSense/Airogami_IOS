@@ -65,6 +65,7 @@ static const int MaxNewPlaneIds = 50;
     for (AGPlane *plane in planes) {
         if (plane.deleted.boolValue == YES) {
             [deletedArray addObject:plane];
+            [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
         }
     }
     [coreData removeAll:deletedArray];

@@ -154,7 +154,8 @@
             [data setObject:self.nameTextField.text forKey:@"fullName"];
         }
         if (self.ageTextField.text.length > 0 && ![profile.birthday isEqual:self.datePicker.datePicker.date]) {
-            [data setObject:self.datePicker.datePicker.date forKey:@"birthday"];
+            //birthday doesn't concern timezone
+            [data setObject:[AGUtils birthdayToString:self.datePicker.datePicker.date] forKey:@"birthday"];
         }
         if (!((profile.shout == nil && self.descriptionTextView.text.length == 0)||[profile.shout isEqual:self.descriptionTextView.text])) {
             [data setObject:self.descriptionTextView.text forKey:@"shout"];
@@ -467,6 +468,8 @@
     }
     else if ([self.emailTextField.text isValidEmail] == NO ){
         error = AGAccountEmailInvalidKey;
+    } else if (self.ageTextField.text.length == 0){
+        error = AGAccountBirthdayRequireKey;
     }
     if (error != nil) {
         [AGMessageUtils errorMessgeWithTitle:error view:self.view];

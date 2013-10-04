@@ -22,17 +22,19 @@
 #import "AGManagerUtils.h"
 #import "UIImage+Addition.h"
 #import "AGRootViewController.h"
+#import "AGDatePicker.h"
 #import <CoreLocation/CoreLocation.h>
 
 #define kAGSignupInputScreenNameShort AGAccountScreenNameShortKey
 #define kAGSignupInputPasswordShort AGAccountPasswordShortKey
 #define kAGSignupInputLocationEmpty AGAccountLocationEmptyKey
 #define kAGSignupInputEmailInvalid AGAccountEmailInvalidKey
+#define kAGSignupInputBirthdayRequire AGAccountBirthdayRequireKey
 #define kAGSignupInputIconRequire AGAccountIconRequireKey
 #define kAGSignupInputTag_Name 1
 #define kAGSignupInputTag_Password 2
 #define kAGSignupInputTag_Email 3
-#define kAGSignupInputTag_Description 4
+#define kAGSignupInputTag_Age 4
 
 #define kAGSignupInputMaxLength_Name AGAccountScreenNameMaxLength
 #define kAGSignupInputMaxLength_Password AGAccountPasswordMaxLength
@@ -47,7 +49,7 @@ static NSString * const Signup_Account_Images[] = {@"signup_account_normal.png",
 static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_highlight.png";
 
 
-@interface AGSignupViewController () <UIActionSheetDelegate, UITextFieldDelegate, AGImagePickAndCropDelegate>
+@interface AGSignupViewController () <UIActionSheetDelegate, UITextFieldDelegate, AGImagePickAndCropDelegate, AGDatePickerDelegate>
 {
     AGLocationUtils *locationUtils;
 }
@@ -80,17 +82,20 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
 
 @property (weak, nonatomic) IBOutlet UIImageView *emailCheckImageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *ageCheckImageView;
 
-@property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
+@property (weak, nonatomic) IBOutlet UITextField *ageTextField;
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property(nonatomic, strong) AGDatePicker *datePicker;
 
 @end
 
 @implementation AGSignupViewController
 
-@synthesize imagePickAndCrop, location;
+@synthesize imagePickAndCrop, location, datePicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -120,6 +125,8 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
            self.location = aLocation;           
         });
     }];
+    datePicker = [[AGDatePicker alloc] init];
+    datePicker.delegate = self;
 }
 
 - (void) setValue:(id)value forKey:(NSString *)key
@@ -148,6 +155,9 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     [self.profileImageButton setBackgroundImage:[UIImage imageNamed:Signup_Profile_Image_Highlight] forState:UIControlStateHighlighted];
     [AGUIDefines setNavigationBackButton:self.backButton];
     [AGUIDefines setNavigationDoneButton:self.rightButton];
+    //
+    self.ageTextField.inputView = datePicker.datePicker;
+    self.ageTextField.inputAccessoryView = datePicker.toolBar;
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,7 +179,7 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     [self setNameTextField:nil];
     [self setPasswordTextField:nil];
     [self setEmailTextField:nil];
-    [self setDescriptionTextField:nil];
+    [self setAgeTextField:nil];
     [self setScrollView:nil];
     [self setNameCheckImageView:nil];
     [self setPasswordCheckImageView:nil];
@@ -191,9 +201,12 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         [dict setObject:self.passwordTextField.text forKey:@"password"];
         [dict setObject:self.sexSwitch.text forKey:@"sex"];
         [dict setObject:self.nameTextField.text forKey:@"fullName"];
-        [dict setObject:@"" forKey:@"birthday"];
+        [dict setObject:[AGUtils birthdayToString:self.datePicker.datePicker.date] forKey:@"birthday"];
         [self.location appendParam:dict];
-        [dict setObject:self.descriptionTextField.text forKey:@"shout"];
+        if (self.ageTextField.text) {
+            //[dict setObject:self.ageTextField.text forKey:@"shout"];
+        }
+        
         [[AGManagerUtils managerUtils].accountManager signup:dict image:[self.profileImageButton imageForState:UIControlStateNormal] block:^(BOOL succeed) {
             if (succeed) {
                 [[AGRootViewController rootViewController] switchToMain];
@@ -295,8 +308,8 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         case kAGSignupInputTag_Email:
             should = newLength <= kAGSignupInputMaxLength_Email;
             break;
-        case kAGSignupInputTag_Description:
-            should = newLength <= kAGSignupInputMaxLength_Description;
+        case kAGSignupInputTag_Age:
+            //should = newLength <= kAGSignupInputMaxLength_Description;
             break;
             
         default:
@@ -316,12 +329,24 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
         case kAGSignupInputTag_Email:
             self.emailCheckImageView.hidden = [textField.text isValidEmail] == NO;
             break;
-        case kAGSignupInputTag_Description:
+        case kAGSignupInputTag_Age:
             break;
             
         default:
             break;
     }
+}
+
+#pragma mark - AGDatePicker delegate
+
+- (void) finish:(BOOL)done
+{
+    [self.ageTextField resignFirstResponder];
+    if (done) {
+        self.ageTextField.text = [AGUtils birthdayToAge:datePicker.datePicker.date];
+        self.ageCheckImageView.hidden = NO;
+    }
+    
 }
 
 
@@ -353,6 +378,9 @@ static NSString * const Signup_Profile_Image_Highlight = @"signup_profile_image_
     }
     else if ([self.emailTextField.text isValidEmail] == NO ){
         error = kAGSignupInputEmailInvalid;
+    }
+    else if (self.ageTextField.text.length == 0){
+        error = kAGSignupInputBirthdayRequire;
     }
     else if ([self.profileImageButton imageForState:UIControlStateNormal] == nil ){
         error = kAGSignupInputIconRequire;

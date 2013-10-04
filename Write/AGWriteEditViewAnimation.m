@@ -8,6 +8,8 @@
 
 #import "AGWriteEditViewAnimation.h"
 
+static int padding = 47;
+
 @interface AGWriteEditViewAnimation()
 {
     CGPoint position;
@@ -63,16 +65,16 @@
                          }
                          //left
                          UIView *button = [self.sexContainer  viewWithTag:2];
-                         point.x -= 50;
-                         point.y -= 70;
+                         point.x -= padding;
+                         point.y -= 66;
                          button.center = point;
                          //middle
                          button = [self.sexContainer  viewWithTag:1];
-                         point.x += 50;
+                         point.x += padding;
                          button.center = point;
                          //right
                          button = [self.sexContainer  viewWithTag:3];
-                         point.x += 50;
+                         point.x += padding;
                          button.center = point;
                          
                          

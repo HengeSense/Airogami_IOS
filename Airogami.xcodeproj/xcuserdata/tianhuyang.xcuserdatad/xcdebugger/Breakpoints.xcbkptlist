@@ -1525,11 +1525,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "398042223.220161"
+         timestampString = "402348494.509779"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "271"
-         endingLineNumber = "271"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
          landmarkName = "-textViewDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1590,11 +1590,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "398042223.220161"
+         timestampString = "402348494.509779"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
          landmarkName = "-sexButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1629,11 +1629,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "398042223.220161"
+         timestampString = "402348494.509779"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "263"
-         endingLineNumber = "263"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
          landmarkName = "-sexAidedButtonTouched:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2862,11 +2862,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "encode()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -3772,11 +3772,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "400117537.744559"
+         timestampString = "402348494.509779"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "171"
-         endingLineNumber = "171"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
          landmarkName = "-obtainData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3785,11 +3785,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Write/AGWriteEditViewController.m"
-         timestampString = "400117537.744559"
+         timestampString = "402348494.509779"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "174"
-         endingLineNumber = "174"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
          landmarkName = "-obtainData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4032,11 +4032,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "encode()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -5400,11 +5400,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402301487.724155"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
          landmarkName = "+obtainUuid"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7948,11 +7948,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "+encodeParams:path:device:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7961,11 +7961,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
          landmarkName = "+encodeParams:path:device:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7974,37 +7974,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
-         landmarkName = "+encodeParams:path:device:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
-         landmarkName = "+encodeParams:path:device:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "96"
          endingLineNumber = "96"
+         landmarkName = "+encodeParams:path:device:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Utils/AGUtils.m"
+         timestampString = "402298988.446481"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "+encodeParams:path:device:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Utils/AGUtils.m"
+         timestampString = "402298988.446481"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
          landmarkName = "+encodeParams:path:device:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -8221,11 +8221,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "+encodeParams:path:device:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -8234,11 +8234,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "encode()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -8247,11 +8247,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Utils/AGUtils.m"
-         timestampString = "402264061.113077"
+         timestampString = "402298988.446481"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
          landmarkName = "encode()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -8929,6 +8929,71 @@
          startingLineNumber = "261"
          endingLineNumber = "261"
          landmarkName = "-initialize"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIUtils/UIBubbleTableView/UIBubbleTableView.m"
+         timestampString = "402298398.734778"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "160"
+         endingLineNumber = "160"
+         landmarkName = "-addData:animated:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Chat/AGChatChatViewController.m"
+         timestampString = "402298609.655649"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "529"
+         endingLineNumber = "529"
+         landmarkName = "-sentMessage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWriteEditViewController.m"
+         timestampString = "402348494.509779"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "304"
+         endingLineNumber = "304"
+         landmarkName = "-ageButtonTouched:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWriteEditViewController.m"
+         timestampString = "402348634.533434"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "319"
+         endingLineNumber = "319"
+         landmarkName = "-finish:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Write/AGWriteEditViewController.m"
+         timestampString = "402348638.420331"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
+         landmarkName = "-finish:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

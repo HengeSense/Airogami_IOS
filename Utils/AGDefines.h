@@ -79,6 +79,7 @@ extern  NSString * AGAccountNewPasswordShortKey;
 extern  NSString * AGAccountLocationEmptyKey;
 extern  NSString * AGAccountEmailInvalidKey;
 extern  NSString * AGAccountScreenNameShortKey;
+extern  NSString * AGAccountBirthdayRequireKey;
 extern  NSString * AGAccountIconRequireKey ;
 extern  NSString * AGAccountShoutNothing;
 

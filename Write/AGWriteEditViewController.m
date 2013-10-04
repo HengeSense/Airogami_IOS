@@ -14,6 +14,8 @@
 #import "AGUIUtils.h"
 #import "AGMessageUtils.h"
 #import "AGManagerUtils.h"
+#import "AGAgePicker.h"
+#import "AGPlaceholderTextView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGWriteEditTextMaximum 200
@@ -21,18 +23,22 @@
 static NSString *AGWriteEditSexImages[] = {@"write_edit_both_button.png", @"write_edit_male_button.png", @"write_edit_female_button.png"};
 static NSString *AGContentEmpty = @"plane.sendplane.content.empty";
 static NSString *AGContentLong = @"plane.sendplane.content.long";
+static NSString *AgeImages[] = {@"write_edit_age_button.png", @"write_edit_age_selected_button.png"};
 
-@interface AGWriteEditViewController ()
+@interface AGWriteEditViewController ()<AGAgePickerDelegate>
 {
     UIButton *sexAidedButton;
     AGWriteEditViewAnimation *writeEditViewAnimation;
     int sex;
+    AGAgePicker *agePicker;
+    int birthdayUpper, birthdayLower;
+    UIColor *ageButtonColor, *ageButtonSelectedColor;
 }
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
-@property (weak, nonatomic) IBOutlet UIView *accessoryView;
+@property (strong, nonatomic) IBOutlet UIView *accessoryView;
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet AGPlaceholderTextView *textView;
 
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
@@ -43,6 +49,11 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *sexButtons;
 
 @property (weak, nonatomic) IBOutlet UIButton *sexButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *ageButton;
+
+@property (weak, nonatomic) IBOutlet UITextView *aidedTextView;
+
 
 @end
 
@@ -55,6 +66,18 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        agePicker = [AGAgePicker agePicker];
+        agePicker.delegate = self;
+        birthdayLower = birthdayUpper = -1;
+        ageButtonColor = [UIColor colorWithRed:27.0f / 255.0f green:58.0f / 255.0f blue:104.0f / 255.0f alpha:1.0f];
+        ageButtonSelectedColor = [UIColor colorWithRed:26.0f / 255.0f green:168.0f / 255.0f blue:84.0f / 255.0f alpha:1.0f];
     }
     return self;
 }
@@ -74,13 +97,17 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
     }
     writeEditViewAnimation = [[AGWriteEditViewAnimation alloc] initWithView:sexAidedButton];
     self.textView.inputAccessoryView = self.accessoryView;
+    self.textView.aidedTextView = self.aidedTextView;
+    
+    agePicker.view = self.view;
+    self.titleLabel.text = [AGCategory title:self.categoryId];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initialize];
-	self.titleLabel.text = [AGCategory title:self.categoryId];
     
 }
 
@@ -108,6 +135,7 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
     [self setCountLabel:nil];
     [self setSexButtons:nil];
     [self setSexButton:nil];
+    [self setAgeButton:nil];
     [super viewDidUnload];
 }
 
@@ -165,6 +193,13 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
         [self.location appendParam:data];
     }
     [data setObject:[NSNumber numberWithInt:sex] forKey:@"sex"];
+    
+    if (birthdayUpper != -1) {
+        [data setObject:[NSNumber numberWithInt:birthdayUpper] forKey:@"birthdayUpper"];
+    }
+    if (birthdayLower != -1) {
+        [data setObject:[NSNumber numberWithInt:birthdayLower] forKey:@"birthdayLower"];
+    }
     
     if (categoryId.intValue == AGCategoryChain) {
         [data setObject:self.textView.text forKey:@"chainMessageVO.content"];
@@ -263,7 +298,42 @@ static NSString *AGContentLong = @"plane.sendplane.content.long";
     [writeEditViewAnimation fold:point];
 }
 
+#pragma mark - age
 
+- (void) setAgeSelected
+{
+    BOOL selected = birthdayLower != -1 || birthdayUpper != -1;
+    int index =  selected ? 1 : 0;
+    UIColor *color = selected ? ageButtonSelectedColor : ageButtonColor;
+    [self.ageButton setTitleColor:color forState:UIControlStateNormal];
+    [self.ageButton setBackgroundImage:[UIImage imageNamed:AgeImages[index]] forState:UIControlStateNormal];
+}
+
+- (IBAction)ageButtonTouched:(UIButton *)sender {
+    
+    agePicker.end = birthdayLower;
+    agePicker.start = birthdayUpper;
+    //
+    self.textView.inputView = agePicker.pickerView;
+    self.textView.inputAccessoryView = agePicker.toolBar;
+    [self.textView resignFirstResponder];
+    //[self.textView performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:.2];
+    [self.textView becomeFirstResponder];
+}
+
+- (void) finish:(BOOL)done
+{
+    self.textView.inputView = nil;
+    self.textView.inputAccessoryView = self.accessoryView;
+    [self.textView resignFirstResponder];
+    //[self.textView performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:.2];
+    [self.textView becomeFirstResponder];
+    if (done) {
+        birthdayLower = agePicker.end;
+        birthdayUpper = agePicker.start;
+        [self setAgeSelected];
+    }
+}
 
 - (void)textViewDidChange:(UITextView *)textView
 {

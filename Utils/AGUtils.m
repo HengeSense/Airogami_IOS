@@ -13,7 +13,11 @@
 #import "AGAppDelegate.h"
 #import "AGUIUtils.h"
 
+//#warning birthday doesn't neeed this
+//GMT string and NSDate
 static NSDateFormatter *dateFormatter;
+
+static NSDateFormatter *birthdayFormatter;
 
 static NSString *Year = @"text.ui.year";
 static NSString *Month = @"text.ui.month";
@@ -26,9 +30,14 @@ static NSString *Minute = @"text.ui.minute";
 + (void) initialize
 {
     [AGCategory initialize];
+    [AGNotificationCenter initialize];
     dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    [AGNotificationCenter initialize];
+    dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    //
+    birthdayFormatter = [[NSDateFormatter alloc] init];
+    birthdayFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    //
 }
 
 + (UIImage *)normalizeImage:(UIImage*)image {
@@ -114,14 +123,26 @@ static void encode(NSMutableString *path, id key, id obj)
 #endif
 }
 
+//NSDate to GMT string
 + (NSString*) dateToString:(NSDate*)date
 {
     return [dateFormatter stringFromDate:date];
 }
 
+//GMT string to NSDate
 + (NSDate*) stringToDate:(NSString*)string
 {
     return [dateFormatter dateFromString:string];
+}
+
++ (NSString*) birthdayToString:(NSDate*)date
+{
+    return [birthdayFormatter stringFromDate:date];
+}
+
++ (NSDate*) stringToBirthday:(NSString*)string
+{
+    return [birthdayFormatter dateFromString:string];
 }
 
 + (NSString*) dateTillNowToString:(NSDate*)date
@@ -149,6 +170,9 @@ static void encode(NSMutableString *path, id key, id obj)
     else if (dateComponents.minute)
     {
         string = [NSString stringWithFormat:@"%d %@", dateComponents.minute, AGLS(Minute)];
+    }
+    else{
+        string = [NSString stringWithFormat:@"1 %@", AGLS(Minute)];
     }
     return string;
 }

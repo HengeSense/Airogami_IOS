@@ -25,10 +25,11 @@
 - (void) updateAccountId:(NSNumber*)accountId;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;
 - (void) updatePassword:(NSString*)password;
-- (void) resetAppAccount;
+//- (void) resetAppAccount;
 - (BOOL) needSignin;
-- (void) gotoMain;
 - (void) gotoSign;
+- (void) gotoMain;
+- (void) signout;
 - (NSMutableDictionary*) autoSigninParams;
 - (void) kickoff;
 - (void) refresh;

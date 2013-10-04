@@ -24,6 +24,14 @@
     return 28.0;
 }
 
+- (id) init
+{
+    if (self = [super init]) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
 - (void)setDate:(NSDate *)value
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

@@ -95,9 +95,10 @@ static float AGInputTextViewMaxHeight = 100;
         textInputView.hidden = YES;
     }
     else{
-        aidedTextView.text = @"0";
-        CGSize size = aidedTextView.contentSize;
+        aidedTextView.text = @"test";
+        //
         CGRect frame = inputTextView.frame;
+        CGSize size = [aidedTextView sizeThatFits:frame.size];
         frame.size.height = size.height;
         inputTextView.frame = frame;
     }
@@ -422,7 +423,7 @@ static float AGInputTextViewMaxHeight = 100;
     point.x = size.height - textFrame.size.height;
     
     if (point.x != 0.0f) {
-        [UIView beginAnimations:@"RelayoutAnimations" context:nil];
+        //[UIView beginAnimations:@"RelayoutAnimations" context:nil];
         //superview
         frame = inputTextView.superview.frame;
         frame.size.height = size.height + diff;
@@ -437,8 +438,9 @@ static float AGInputTextViewMaxHeight = 100;
         //inputTextView
         textFrame.size = size;
         inputTextView.frame = textFrame;
-        inputTextView.text = aidedTextView.text;
-        [UIView commitAnimations];
+        //[UIView commitAnimations];
+        //
+        
     }
 }
 
@@ -537,19 +539,9 @@ static float AGInputTextViewMaxHeight = 100;
     
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if ([airogami isKindOfClass:[AGPlane class]]) {
-       NSDictionary *dict = [NSDictionary dictionary];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
-    }
-    else if([airogami isKindOfClass:[AGChain class]]){
-        NSDictionary *dict = [NSDictionary dictionary];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
-    }
-    
+    [super viewWillDisappear:animated];
     
 }
 
@@ -558,5 +550,18 @@ static float AGInputTextViewMaxHeight = 100;
     nameLabel = nil;
     categoryLabel = nil;
     [super viewDidUnload];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        NSDictionary *dict = [NSDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
+    }
+    else if([airogami isKindOfClass:[AGChain class]]){
+        NSDictionary *dict = [NSDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
+    }
 }
 @end

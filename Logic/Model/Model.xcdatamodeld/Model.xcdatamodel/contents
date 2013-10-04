@@ -46,6 +46,8 @@
         </userInfo>
     </entity>
     <entity name="AGChain" representedClassName="AGChain" syncable="YES">
+        <attribute name="birthdayLower" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="birthdayUpper" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="collected" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
@@ -144,6 +146,8 @@
         </userInfo>
     </entity>
     <entity name="AGPlane" representedClassName="AGPlane" syncable="YES">
+        <attribute name="birthdayLower" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="birthdayUpper" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
@@ -205,14 +209,14 @@
         <element name="AGAccountStat" positionX="0" positionY="0" width="128" height="165"/>
         <element name="AGAuthenticate" positionX="0" positionY="0" width="128" height="90"/>
         <element name="AGCategory" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="AGChain" positionX="0" positionY="0" width="128" height="375"/>
+        <element name="AGChain" positionX="0" positionY="0" width="128" height="405"/>
         <element name="AGChainMessage" positionX="0" positionY="0" width="128" height="195"/>
         <element name="AGChainMessageId" positionX="0" positionY="0" width="128" height="90"/>
         <element name="AGMessage" positionX="7" positionY="381" width="128" height="150"/>
         <element name="AGNewAccount" positionX="0" positionY="0" width="128" height="90"/>
         <element name="AGNewChain" positionX="0" positionY="0" width="128" height="105"/>
         <element name="AGNewPlane" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="AGPlane" positionX="-261" positionY="12" width="128" height="510"/>
+        <element name="AGPlane" positionX="-261" positionY="12" width="128" height="540"/>
         <element name="AGProfile" positionX="241" positionY="3" width="128" height="285"/>
     </elements>
 </model>

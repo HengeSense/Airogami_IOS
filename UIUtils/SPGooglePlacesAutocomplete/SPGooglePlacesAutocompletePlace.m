@@ -9,6 +9,7 @@
 #import "SPGooglePlacesAutocompletePlace.h"
 #import "SPGooglePlacesPlaceDetailQuery.h"
 #import "NSArray+Addition.h"
+#import "NSString+Addition.h"
 
 @interface SPGooglePlacesAutocompletePlace()
 @property (nonatomic, strong, readwrite) NSString *name;

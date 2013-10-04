@@ -37,7 +37,7 @@ static AGUIErrorAnimation *uiErrorAnimation;
     if ([AGUIErrorAnimation uiErrorAnimation].active) {
         return;
     }
-    superview = superview.superview;
+    superview = superview;
     //
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:kAGErrorBar]];
     CGRect rect = imageView.frame;

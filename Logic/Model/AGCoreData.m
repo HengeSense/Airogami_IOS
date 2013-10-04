@@ -264,7 +264,12 @@
                 obj = nil;
             }
             else if(attributeDescription.attributeType == NSDateAttributeType){
-                obj = [AGUtils stringToDate:(NSString*)obj];
+                if ([key isEqualToString:@"birthday"]) {
+                    obj = [AGUtils stringToBirthday:(NSString*)obj];
+                }
+                else{
+                    obj = [AGUtils stringToDate:(NSString*)obj];
+                }
             }
             if (shouldObserve && [observedEntityKey isEqualToString:key]) {
                 id oldObj = [managedObject valueForKey:key];
@@ -385,7 +390,13 @@
                     obj = nil;
                 }
                 else if(attributeDescription.attributeType == NSDateAttributeType){
-                    obj = [AGUtils stringToDate:(NSString*)obj];
+                    if ([key isEqualToString:@"birthday"]) {
+                        obj = [AGUtils stringToBirthday:(NSString*)obj];
+                    }
+                    else{
+                        obj = [AGUtils stringToDate:(NSString*)obj];
+                    }
+                    
                 }
                 if (shouldObserve && [observedEntityKey isEqualToString:key]) {
                     id oldObj = [managedObject valueForKey:key];

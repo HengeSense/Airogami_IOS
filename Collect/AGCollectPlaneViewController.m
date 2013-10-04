@@ -20,6 +20,7 @@
 #import "AGMessage.h"
 #import "AGNotificationCenter.h"
 #import "AGControllerUtils.h"
+#import "UIView+Addition.h"
 
 @interface AGCollectPlaneViewController ()
 {
@@ -63,18 +64,25 @@
 - (void)loadView {
     [super loadView];
     tv = (UITableView*)self.view;
+    //
     CGRect frame = self.view.frame;
-    UIImageView *view = [[UIImageView alloc] initWithFrame:frame];
+    UIView *view = [[UIView alloc] initWithFrame:frame];
     view.userInteractionEnabled = YES;
     self.view = view;
-    [self.view addSubview:tv];
     [self.view addSubview:self.headerView];
     
     frame.origin.y = self.headerView.bounds.size.height;
     frame.size.height -= frame.origin.y;
     frame.origin.x = 6.0f;
     frame.size.width -= frame.origin.x * 2;
+    view = [[UIView alloc] initWithFrame:frame];
+    view.layer.cornerRadius = 5.0f;
+    view.clipsToBounds = YES;
+    //
+    frame.origin.x = frame.origin.y = 0;
     tv.frame = frame;
+    [view addSubview:tv];
+    [self.view addSubview:view];
     //
     frame = tv.bounds;
     frame.origin.y = -frame.size.height;
@@ -82,12 +90,9 @@
     grayView.backgroundColor = [UIColor colorWithRed:47 / 255.0f green:89 / 255.0f blue:130 / 255.0f alpha:1.0f];
     [tv addSubview:grayView];
     //
-    frame = pulldownHeader.pulldownView.frame;
-    frame.origin.y = 52;
-    pulldownHeader.pulldownView.frame = frame;
-    [tv addSubview:pulldownHeader.pulldownView];
     pulldownHeader.scrollView = tv;
     pulldownHeader.delegate = self;
+    
 }
 
 - (void)viewDidLoad
@@ -99,10 +104,31 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetCollected object:nil userInfo:dict];
 }
 
+- (void) viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    CGRect frame = pulldownHeader.pulldownView.frame;
+    frame.origin.y = -frame.size.height;
+    pulldownHeader.pulldownView.frame = frame;
+    [tv addSubview:pulldownHeader.pulldownView];
+    //[tv setTopRoundedCornerWithRadius:5.0f];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) updateDate
@@ -147,6 +173,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     AGCollectPlaneCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.tableView = tv;
     //cell.category = indexPath.row;
     cell.aidedButton.tag = indexPath.row;
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -242,7 +269,6 @@
 - (void)viewDidUnload {
     [self setHeaderView:nil];
     [self setPickupView:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidUnload];
 }
 @end

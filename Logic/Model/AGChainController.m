@@ -352,6 +352,7 @@ static const int MaxNewChainIds = 50;
     for (AGChain *chain in array) {
         if (chain.deleted.boolValue == YES) {
             [deletedArray addObject:chain];
+            [[AGControllerUtils controllerUtils].chainMessageController viewedChainMessagesForChain:chain];
         }
     }
     [coreData removeAll:deletedArray];

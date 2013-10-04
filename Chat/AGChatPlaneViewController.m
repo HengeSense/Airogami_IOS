@@ -24,7 +24,10 @@
 {
     NSArray * data;
     int selectedIndex;
+    UITableView *tv;
 }
+
+@property (strong, nonatomic) IBOutlet UIView *headerView;
 
 @property(nonatomic, strong) AGRefreshPulldownHeader *pulldownHeader;
 
@@ -48,6 +51,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         pulldownHeader = [AGRefreshPulldownHeader header];
+        [[NSBundle mainBundle] loadNibNamed:@"AGChatPlaneHeaderView" owner:self options:nil];
     }
     return self;
 }
@@ -55,11 +59,41 @@
 - (void) loadView
 {
     [super loadView];
-    CGRect frame = pulldownHeader.pulldownView.frame;
+    /*CGRect frame = pulldownHeader.pulldownView.frame;
     frame.origin.y = 52;
     pulldownHeader.pulldownView.frame = frame;
     pulldownHeader.scrollView = self.tableView;
-    [self.tableView addSubview:pulldownHeader.pulldownView];
+    [self.tableView addSubview:pulldownHeader.pulldownView];*/
+    
+    tv = (UITableView*)self.view;
+    //
+    CGRect frame = self.view.frame;
+    UIView *view = [[UIView alloc] initWithFrame:frame];
+    view.userInteractionEnabled = YES;
+    self.view = view;
+    [self.view addSubview:self.headerView];
+    
+    frame.origin.y = self.headerView.bounds.size.height;
+    frame.size.height -= frame.origin.y;
+    frame.origin.x = 6.0f;
+    frame.size.width -= frame.origin.x * 2;
+    view = [[UIView alloc] initWithFrame:frame];
+    view.layer.cornerRadius = 5.0f;
+    view.clipsToBounds = YES;
+    //
+    frame.origin.x = frame.origin.y = 0;
+    tv.frame = frame;
+    [view addSubview:tv];
+    [self.view addSubview:view];
+    //
+    frame = tv.bounds;
+    frame.origin.y = -frame.size.height;
+    UIView* grayView = [[UIView alloc] initWithFrame:frame];
+    grayView.backgroundColor = [UIColor colorWithRed:47 / 255.0f green:89 / 255.0f blue:130 / 255.0f alpha:1.0f];
+    [tv addSubview:grayView];
+    //
+    pulldownHeader.scrollView = tv;
+    //pulldownHeader.delegate = self;
     
 }
 
@@ -69,9 +103,9 @@
     [super viewDidLoad];
 
     //
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
-    imageView.image = [AGUIDefines mainBackgroundImage];
-    [self.tableView.backgroundView addSubview:imageView];
+    //UIImageView *imageView = [[UIImageView alloc] initWithFrame:tv.frame];
+    //imageView.image = [AGUIDefines mainBackgroundImage];
+    //[tv.backgroundView addSubview:imageView];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDate) name:AGNotificationUpdateDate object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtained:) name:AGNotificationObtained object:nil];
@@ -80,10 +114,24 @@
     
 }
 
-- (void) viewDidUnload
+- (void) viewDidLayoutSubviews
 {
-    [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidLayoutSubviews];
+    CGRect frame = pulldownHeader.pulldownView.frame;
+    frame.origin.y = -frame.size.height;
+    pulldownHeader.pulldownView.frame = frame;
+    [tv addSubview:pulldownHeader.pulldownView];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [tv deselectRowAtIndexPath:[tv indexPathForSelectedRow] animated:animated];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,9 +140,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) updateDate
 {
-    for (AGChatPlaneCell *cell in self.tableView.visibleCells) {
+    for (AGChatPlaneCell *cell in tv.visibleCells) {
         [cell updateDate];
     }
 }
@@ -127,7 +180,7 @@
                 if([objId  isEqual:number])
                 {
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                    [self setData:obj forCell:[self.tableView cellForRowAtIndexPath:indexPath]];
+                    [self setData:obj forCell:[tv cellForRowAtIndexPath:indexPath]];
                     //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
             }
@@ -136,7 +189,7 @@
     else{
         NSArray *chats = [dict objectForKey:@"chats"];
         data = chats;
-        [self.tableView reloadData];
+        [tv reloadData];
     }
     
     

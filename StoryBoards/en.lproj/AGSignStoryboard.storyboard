@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="EcS-IK-ifz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="EcS-IK-ifz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -9,7 +10,7 @@
             <objects>
                 <navigationController storyboardIdentifier="SignRootViewController" definesPresentationContext="YES" id="EcS-IK-ifz" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="seJ-Nx-LHD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="seJ-Nx-LHD">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.92156862745098034" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -68,6 +69,7 @@
                             </button>
                         </subviews>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="VQA-iT-qGo"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -138,7 +140,7 @@
                                         <rect key="frame" x="162" y="166" width="145" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" image="signin_forgot_password@2x.png">
+                                        <state key="normal" image="signin_forgot_password.png">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -161,12 +163,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="hMz-dU-gQN">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" id="sAy-eh-AXA">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qe2-Kk-IXT">
-                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -198,7 +201,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="MpT-bn-0RA">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wl2-oA-p64">
-                                <rect key="frame" x="256" y="7" width="59" height="30"/>
+                                <rect key="frame" x="245" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
@@ -242,7 +245,7 @@
                                 <rect key="frame" x="0.0" y="82" width="320" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check@2x.png" id="phL-r3-I5y">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check.png" id="phL-r3-I5y">
                                 <rect key="frame" x="287" y="123" width="16" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -274,18 +277,19 @@
                                     <outlet property="delegate" destination="oDV-xL-70c" id="Y7M-Az-hZc"/>
                                 </connections>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="reset_password_prompt@2x.png" id="hwr-JL-pkl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="reset_password_prompt.png" id="hwr-JL-pkl">
                                 <rect key="frame" x="13" y="26" width="240" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="bVI-tt-4S7">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" id="xJM-0D-3Gg">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1Ma-KY-9jJ">
-                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -302,7 +306,7 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="uKT-BH-FAc">
-                            <rect key="frame" x="78" y="11" width="164" height="22"/>
+                            <rect key="frame" x="81" y="11" width="164" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Reset password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pVc-bE-woU">
@@ -333,7 +337,7 @@
         <!--Signup View Controller - Signup-->
         <scene sceneID="lR0-qo-7Hl">
             <objects>
-                <viewController storyboardIdentifier="AGSignupViewController" title="Signup" wantsFullScreenLayout="YES" id="nDW-ha-NZ3" customClass="AGSignupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AGSignupViewController" title="Signup" id="nDW-ha-NZ3" customClass="AGSignupViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kvj-xb-zXB">
                         <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -376,19 +380,19 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check.png" id="yVw-qc-u1d">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check.png" id="yVw-qc-u1d">
                                         <rect key="frame" x="288" y="301" width="16" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check@2x.png" id="UmB-mm-qpZ">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check.png" id="UmB-mm-qpZ">
                                         <rect key="frame" x="288" y="257" width="16" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check@2x.png" id="HST-V6-L0a">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check.png" id="HST-V6-L0a">
                                         <rect key="frame" x="288" y="104" width="16" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Words about you (optional)" minimumFontSize="17" id="hEI-ZW-FbA">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" minimumFontSize="17" id="hEI-ZW-FbA">
                                         <rect key="frame" x="52" y="293" width="234" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -472,7 +476,7 @@
                                             <action selector="imageTouched:" destination="nDW-ha-NZ3" eventType="touchUpInside" id="8Th-j6-TgP"/>
                                         </connections>
                                     </button>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check@2x.png" id="n7y-jJ-GRh">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="signup_check.png" id="n7y-jJ-GRh">
                                         <rect key="frame" x="288" y="59" width="16" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -482,11 +486,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="RPi-B2-Bpi">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" id="cZ5-vp-9lV">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tvd-Rh-zzp">
-                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -518,7 +523,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="7hp-GE-R1Y">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iBe-eI-MRI">
-                                <rect key="frame" x="256" y="7" width="59" height="30"/>
+                                <rect key="frame" x="245" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
@@ -535,11 +540,12 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="accountImageView" destination="PGq-mg-9zL" id="HcY-3p-K95"/>
+                        <outlet property="ageCheckImageView" destination="yVw-qc-u1d" id="79j-4D-bpF"/>
+                        <outlet property="ageTextField" destination="hEI-ZW-FbA" id="DQn-64-vpB"/>
                         <outlet property="backButton" destination="Tvd-Rh-zzp" id="Efs-6t-R0o"/>
-                        <outlet property="descriptionTextField" destination="hEI-ZW-FbA" id="Vsj-Yd-kGq"/>
                         <outlet property="emailCheckImageView" destination="UmB-mm-qpZ" id="zVf-cF-42u"/>
                         <outlet property="emailTextField" destination="xqb-jp-KYw" id="dQk-CA-Vil"/>
                         <outlet property="locationButton" destination="Qnw-Nx-j4R" id="PTd-WC-9om"/>
@@ -561,84 +567,22 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back_button.png" width="16" height="16"/>
-        <image name="done_button.png" width="16" height="16"/>
-        <image name="normal_done.png" width="16" height="16"/>
-        <image name="reset_password_normal.png" width="16" height="16"/>
-        <image name="reset_password_prompt@2x.png" width="480" height="70"/>
-        <image name="sign_box_norml.png" width="16" height="16"/>
-        <image name="sign_box_signin.png" width="16" height="16"/>
-        <image name="sign_box_signup.png" width="16" height="16"/>
-        <image name="signin_account_normal.png" width="16" height="16"/>
-        <image name="signin_forgot_password@2x.png" width="290" height="44"/>
-        <image name="signup_account_normal.png" width="16" height="16"/>
-        <image name="signup_check.png" width="16" height="16"/>
-        <image name="signup_check@2x.png" width="32" height="26"/>
-        <image name="signup_location.png" width="16" height="16"/>
-        <image name="signup_profile_image.png" width="16" height="16"/>
-        <image name="signup_profile_normal.png" width="16" height="16"/>
+        <image name="back_button.png" width="59" height="30"/>
+        <image name="done_button.png" width="59" height="30"/>
+        <image name="normal_done.png" width="87" height="33"/>
+        <image name="reset_password_normal.png" width="320" height="98"/>
+        <image name="reset_password_prompt.png" width="240" height="35"/>
+        <image name="sign_box_norml.png" width="320" height="100"/>
+        <image name="sign_box_signin.png" width="320" height="45"/>
+        <image name="sign_box_signup.png" width="320" height="45"/>
+        <image name="signin_account_normal.png" width="320" height="100"/>
+        <image name="signin_forgot_password.png" width="145" height="22"/>
+        <image name="signup_account_normal.png" width="320" height="95"/>
+        <image name="signup_check.png" width="16" height="13"/>
+        <image name="signup_location.png" width="320" height="45"/>
+        <image name="signup_profile_image.png" width="66" height="66"/>
+        <image name="signup_profile_normal.png" width="320" height="195"/>
     </resources>
-    <classes>
-        <class className="AGImageButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGImageButton.h"/>
-        </class>
-        <class className="AGResetPasswordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResetPasswordViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="resetPasswordImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="AGResignButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGResignButton.h"/>
-        </class>
-        <class className="AGSexSwitch" superclassName="DCRoundSwitch">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSexSwitch.h"/>
-        </class>
-        <class className="AGSignViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="signinButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="signupButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="AGSigninViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSigninViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="AGSignupViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AGSignupViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="accountImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="descriptionTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="emailCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="emailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="locationButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passwordCheckImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="passwordTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="profileImageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="rightButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="sexSwitch" candidateClass="DCRoundSwitch"/>
-            </relationships>
-        </class>
-        <class className="DCRoundSwitch" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DCRoundSwitch.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

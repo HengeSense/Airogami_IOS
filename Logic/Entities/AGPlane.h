@@ -2,7 +2,7 @@
 //  AGPlane.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/30/13.
+//  Created by Tianhu Yang on 10/1/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -31,19 +31,21 @@
 @property (nonatomic, retain) NSNumber * planeId;
 @property (nonatomic, retain) NSString * province;
 @property (nonatomic, retain) NSNumber * sex;
+@property (nonatomic, retain) NSNumber * source;
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSNumber * targetViewedMsgId;
 @property (nonatomic, retain) NSNumber * unreadMessagesCount;
 @property (nonatomic, retain) NSNumber * updateCount;
 @property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) NSNumber * updateInc;
-@property (nonatomic, retain) NSNumber * source;
+@property (nonatomic, retain) NSDate * birthdayLower;
+@property (nonatomic, retain) NSDate * birthdayUpper;
 @property (nonatomic, retain) AGAccount *accountByOwnerId;
 @property (nonatomic, retain) AGAccount *accountByTargetId;
 @property (nonatomic, retain) AGCategory *category;
+@property (nonatomic, retain) AGMessage *message;
 @property (nonatomic, retain) NSSet *messages;
 @property (nonatomic, retain) AGNewPlane *newPlane;
-@property (nonatomic, retain) AGMessage *message;
 @end
 
 @interface AGPlane (CoreDataGeneratedAccessors)

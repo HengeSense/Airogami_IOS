@@ -44,6 +44,7 @@
 @synthesize showAvatar = _showAvatar;
 @synthesize avatarButton = _avatarButton;
 @synthesize stateButton = _stateButton;
+@synthesize bubbleTableView;
 
 - (id) init
 {
@@ -75,9 +76,7 @@
     self.stateButton = [[AGBubbleCellStateButton alloc] init];
     [self.stateButton addTarget:self action:@selector(stateImageTouched) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.stateButton];
-    
-
-
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setFrame:(CGRect)frame
@@ -165,8 +164,7 @@
 
 - (void) avatarImageTouched
 {
-    UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
-    [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectAvatar];
+    [bubbleTableView didSelectCellAtIndexPath:[bubbleTableView indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectAvatar];
 }
 
 - (void) setupInternalData

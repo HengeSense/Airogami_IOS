@@ -42,9 +42,9 @@ static NSString *WritePaperCellHighlightImages[] = { @"write_paper_random_highli
 
 - (void) onButtonTouched:(UIButton *)button
 {
-    UITableView *tableView = (UITableView *) self.superview;
+    //UITableView *tableView = (UITableView *) self.superview;
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:button.tag inSection:0];
-    [tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
+    //[tableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionNone];
     [self.delegate didSelectRowAtIndexPath:indexPath];
     //[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
 }

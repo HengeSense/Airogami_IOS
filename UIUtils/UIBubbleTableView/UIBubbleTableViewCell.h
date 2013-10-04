@@ -11,9 +11,12 @@
 #import <UIKit/UIKit.h>
 #import "NSBubbleData.h"
 
+@class UIBubbleTableView;
+
 @interface UIBubbleTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) NSBubbleData *data;
 @property (nonatomic) BOOL showAvatar;
+@property (weak, nonatomic) UIBubbleTableView *bubbleTableView;
 
 @end
