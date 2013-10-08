@@ -142,7 +142,7 @@ static const int ChainMessageLimit = 10;
         [fetchRequest setEntity:chainMessageEntityDescription];
         [fetchRequest setResultType:NSDictionaryResultType];
         //
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and createdTime > %@ and status >= %d", chainId, chainMessage.lastViewedTime, AGChainMessageStatusReplied];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and createdTime > %@ and status >= %d", chainId, chainMessage.mineLastTime, AGChainMessageStatusReplied];
         [fetchRequest setPredicate:predicate];
         //expression
         NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"status"];
@@ -165,15 +165,40 @@ static const int ChainMessageLimit = 10;
     return count;
 }
 
+-(void) updateMineLastTime:(AGChainMessage*)chainMessage chain:(AGChain*)chain
+{
+    if (chainMessage.status.shortValue == AGChainMessageStatusNew) {
+        AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessage:chain.chainId];
+        chainMessage.mineLastTime = cm.createdTime;
+    }
+    else if (chainMessage.status.shortValue == AGChainMessageStatusReplied){
+        chainMessage.mineLastTime = chainMessage.lastViewedTime;
+    }
+    [[AGCoreData coreData] save];
+}
+
+- (void) updateChainMessagesCount:(AGChainMessage*)chainMessage chain:(AGChain*)chain
+{
+    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    int count = [self getUnreadChainMessageCountForChain:chain.chainId];
+    accountStat.unreadChainMessagesCount = [NSNumber numberWithInt:accountStat.unreadChainMessagesCount.intValue + count - chainMessage.unreadChainMessagesCount.intValue];
+    chainMessage.unreadChainMessagesCount = [NSNumber numberWithInt:count];
+    [[AGCoreData coreData] save];
+}
+
 //for chat
--(void) viewedChainMessagesForChain:(AGChain *)chain
+-(NSDate*) viewedChainMessagesForChain:(AGChain *)chain
 {
     AGChainMessage *chainMessage = [self getChainMessageForChain:chain.chainId];
+    NSDate *last = nil;
     if (chainMessage) {
         AGAccountStat *accountStat = chainMessage.account.accountStat;
         AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessage:chain.chainId];
         if (cm) {
-            chainMessage.lastViewedTime = cm.createdTime;
+            chainMessage.mineLastTime = cm.createdTime;
+            if (cm.createdTime.timeIntervalSince1970 > chainMessage.lastViewedTime.timeIntervalSince1970) {
+                last = cm.createdTime;
+            }
         }
         [coreData save];
         int newCount = [self getUnreadChainMessageCountForChain:chain.chainId];
@@ -185,6 +210,7 @@ static const int ChainMessageLimit = 10;
         chainMessage.unreadChainMessagesCount = [NSNumber numberWithInt:newCount];
         [coreData save];
     }
+    return last;
 }
 
 @end

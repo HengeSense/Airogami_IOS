@@ -23,7 +23,8 @@
 - (AGChainMessage*) getChainMessageForChain:(NSNumber *)chainId;
 
 - (int) getUnreadChainMessageCountForChain:(NSNumber *)chainId;
-
-- (void) viewedChainMessagesForChain:(AGChain*)chain;
+- (void) updateMineLastTime:(AGChainMessage*)chainMessage chain:(AGChain*)chain;
+- (void) updateChainMessagesCount:(AGChainMessage*)chainMessage chain:(AGChain*)chain;
+- (NSDate*) viewedChainMessagesForChain:(AGChain*)chain;
 
 @end

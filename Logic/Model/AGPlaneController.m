@@ -425,5 +425,17 @@ static const int MaxNewPlaneIds = 50;
     return newPlane;
 }
 
+- (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane
+{
+    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    if ([plane.accountByOwnerId.accountId isEqualToNumber:accountId]) {
+        plane.lastMsgIdOfOwner = lastMsgId;
+    }
+    else{
+        plane.lastMsgIdOfTarget = lastMsgId;
+    }
+    [coreData save];
+}
+
 
 @end

@@ -37,7 +37,6 @@
 		0716A0B917F3637700E95840 /* AGNewChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0B817F3637700E95840 /* AGNewChain.m */; };
 		0716A0CB17F6591500E95840 /* AGSynchronize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0CA17F6591400E95840 /* AGSynchronize.m */; };
 		0716A0D417F7759700E95840 /* AGViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0D317F7759700E95840 /* AGViewManager.m */; };
-		0716A0D717F77D7A00E95840 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0D617F77D7A00E95840 /* AGAccountStat.m */; };
 		0716A0D917F8AF6100E95840 /* collect_get_more_planes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0716A0D817F8AF6100E95840 /* collect_get_more_planes@2x.png */; };
 		073250EA176A5EA700487B9E /* signup_location_box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 073250E8176A5EA700487B9E /* signup_location_box@2x.png */; };
 		073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 073250F9176AB4AB00487B9E /* NSString+Addition.m */; };
@@ -198,7 +197,6 @@
 		078A5C78178B95B1000FB7FF /* AGProfileImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C75178B95B1000FB7FF /* AGProfileImageButton.m */; };
 		078A5C7B178B99F7000FB7FF /* AGSettingNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C7A178B99F7000FB7FF /* AGSettingNotificationViewController.m */; };
 		078A5C7F178C8536000FB7FF /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 078A5C7E178C8536000FB7FF /* CustomBadge.m */; };
-		078C88DC17F9F89700811534 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 078C88DB17F9F89700811534 /* AGChainMessage.m */; };
 		078C88E717FB39A800811534 /* write_edit_age_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078C88E617FB39A800811534 /* write_edit_age_button@2x.png */; };
 		078C88EB17FB3C8D00811534 /* AGAgePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 078C88EA17FB3C8D00811534 /* AGAgePicker.m */; };
 		078C88ED17FB3CB700811534 /* AGAgePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 078C88EC17FB3CB700811534 /* AGAgePickerView.xib */; };
@@ -310,6 +308,8 @@
 		07B1051A17FCB8C7000DD694 /* UIView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1051217FCB8C6000DD694 /* UIView+Addition.m */; };
 		07B1051D17FCBA20000DD694 /* AGProfileImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1051C17FCBA20000DD694 /* AGProfileImage.m */; };
 		07B1051F17FE0297000DD694 /* AGChatPlaneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B1051E17FE0297000DD694 /* AGChatPlaneHeaderView.xib */; };
+		07B1052218033ADD000DD694 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052118033ADD000DD694 /* AGAccountStat.m */; };
+		07B1052518038762000DD694 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052418038762000DD694 /* AGChainMessage.m */; };
 		07B393F1176FA8C5006FA397 /* YTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 07444997176F8727001CDFB2 /* YTTabBar.m */; };
 		07B393F2176FA8C9006FA397 /* YTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07444999176F8727001CDFB2 /* YTTabBarController.m */; };
 		07B393F3176FA8CD006FA397 /* YTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0744499F176F8BB4001CDFB2 /* YTTabBarItem.m */; };
@@ -435,8 +435,6 @@
 		0716A0CA17F6591400E95840 /* AGSynchronize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSynchronize.m; sourceTree = "<group>"; };
 		0716A0D217F7759700E95840 /* AGViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGViewManager.h; sourceTree = "<group>"; };
 		0716A0D317F7759700E95840 /* AGViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGViewManager.m; sourceTree = "<group>"; };
-		0716A0D517F77D7900E95840 /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
-		0716A0D617F77D7A00E95840 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
 		0716A0D817F8AF6100E95840 /* collect_get_more_planes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect_get_more_planes@2x.png"; sourceTree = "<group>"; };
 		073250E8176A5EA700487B9E /* signup_location_box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_location_box@2x.png"; sourceTree = "<group>"; };
 		073250F8176AB4AB00487B9E /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
@@ -655,8 +653,6 @@
 		078A5C7A178B99F7000FB7FF /* AGSettingNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSettingNotificationViewController.m; sourceTree = "<group>"; };
 		078A5C7D178C8536000FB7FF /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
 		078A5C7E178C8536000FB7FF /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
-		078C88DA17F9F89700811534 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
-		078C88DB17F9F89700811534 /* AGChainMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessage.m; sourceTree = "<group>"; };
 		078C88E617FB39A800811534 /* write_edit_age_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_age_button@2x.png"; sourceTree = "<group>"; };
 		078C88E917FB3C8D00811534 /* AGAgePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAgePicker.h; sourceTree = "<group>"; };
 		078C88EA17FB3C8D00811534 /* AGAgePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAgePicker.m; sourceTree = "<group>"; };
@@ -820,6 +816,10 @@
 		07B1051B17FCBA20000DD694 /* AGProfileImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfileImage.h; sourceTree = "<group>"; };
 		07B1051C17FCBA20000DD694 /* AGProfileImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfileImage.m; sourceTree = "<group>"; };
 		07B1051E17FE0297000DD694 /* AGChatPlaneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGChatPlaneHeaderView.xib; sourceTree = "<group>"; };
+		07B1052018033ADD000DD694 /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
+		07B1052118033ADD000DD694 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
+		07B1052318038762000DD694 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
+		07B1052418038762000DD694 /* AGChainMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessage.m; sourceTree = "<group>"; };
 		07B8DBF317710146006922FF /* main_tabbar_bgrd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_bgrd@2x.png"; sourceTree = "<group>"; };
 		07B8DBF417710146006922FF /* main_tabbar_item_write@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_item_write@2x.png"; sourceTree = "<group>"; };
 		07B8DBF517710146006922FF /* main_tabbar_item_write_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_item_write_selected@2x.png"; sourceTree = "<group>"; };
@@ -1282,14 +1282,14 @@
 				07E1C28E17EBD5A200D2EFCF /* AGNewPlane.m */,
 				0716A0B717F3637700E95840 /* AGNewChain.h */,
 				0716A0B817F3637700E95840 /* AGNewChain.m */,
-				0716A0D517F77D7900E95840 /* AGAccountStat.h */,
-				0716A0D617F77D7A00E95840 /* AGAccountStat.m */,
-				078C88DA17F9F89700811534 /* AGChainMessage.h */,
-				078C88DB17F9F89700811534 /* AGChainMessage.m */,
 				078C88EE17FB44E800811534 /* AGChain.h */,
 				078C88EF17FB44E800811534 /* AGChain.m */,
 				078C88F117FB44E900811534 /* AGPlane.h */,
 				078C88F217FB44E900811534 /* AGPlane.m */,
+				07B1052018033ADD000DD694 /* AGAccountStat.h */,
+				07B1052118033ADD000DD694 /* AGAccountStat.m */,
+				07B1052318038762000DD694 /* AGChainMessage.h */,
+				07B1052418038762000DD694 /* AGChainMessage.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2211,6 +2211,7 @@
 				0707238F175EA8670017292A /* AGSignupViewController.m in Sources */,
 				078D952F176145E600663FDE /* AGUtils.m in Sources */,
 				07DB923917669867000F0780 /* AGImagePickAndCrop.m in Sources */,
+				07B1052518038762000DD694 /* AGChainMessage.m in Sources */,
 				07DB92551769411A000F0780 /* NSArray+Addition.m in Sources */,
 				073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */,
 				079046F5176BD21A007E2827 /* AGSigninViewController.m in Sources */,
@@ -2225,6 +2226,7 @@
 				078A1FD8176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m in Sources */,
 				078A1FDE176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m in Sources */,
 				078A1FDF176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
+				07B1052218033ADD000DD694 /* AGAccountStat.m in Sources */,
 				078A1FE0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				078A1FE1176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m in Sources */,
 				078A1FE3176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
@@ -2334,8 +2336,6 @@
 				0716A0B917F3637700E95840 /* AGNewChain.m in Sources */,
 				0716A0CB17F6591500E95840 /* AGSynchronize.m in Sources */,
 				0716A0D417F7759700E95840 /* AGViewManager.m in Sources */,
-				0716A0D717F77D7A00E95840 /* AGAccountStat.m in Sources */,
-				078C88DC17F9F89700811534 /* AGChainMessage.m in Sources */,
 				07B1051A17FCB8C7000DD694 /* UIView+Addition.m in Sources */,
 				078C88EB17FB3C8D00811534 /* AGAgePicker.m in Sources */,
 				078C88F017FB44E800811534 /* AGChain.m in Sources */,

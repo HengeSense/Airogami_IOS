@@ -68,6 +68,8 @@
 
 "plane.sendplane.content.empty" = "Please write some words";
 "plane.sendplane.content.long" = "Too many words";
+"message.plane.sendplane.limit" = "No more sending planes for today";
+"message.plane.pickup.limit" = "No more planes for today";
 
 //client
 "message.client.notsignin.message" = "please sign in";

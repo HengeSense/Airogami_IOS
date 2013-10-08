@@ -13,6 +13,7 @@
 #import "NSBubbleData.h"
 #import "AGManagerUtils.h"
 #import "AGNotificationCenter.h"
+#import "AGUIUtils.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *DeletePlanePath = @"plane/deletePlane.action?";
@@ -27,6 +28,7 @@ static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
 static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
 
+static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
 
 @implementation AGPlaneManager
 
@@ -34,17 +36,26 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
 {
     [AGJSONHttpHandler request:YES params:params path:SendPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {//error,plane
         if (error) {
-            
+            [AGMessageUtils alertMessageWithError:error];
         }
         else{
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
             if (errorString) {
-                error = [AGMessageUtils errorServer];
-                [AGMessageUtils alertMessageWithError:error];
+                error = [AGMessageUtils errorClient];
+                if ([errorString isEqualToString:@"limit"]) {
+                    [AGMessageUtils alertMessageWithTitle:@"" message:AGPlaneSendPlaneLimit];
+                }
+                else{
+                    [AGMessageUtils alertMessageWithError:error];
+                }
+                
             }
             else{
-                [AGMessageUtils alertMessageWithTitle:@"" message:NSLocalizedString(AGPlaneSendPlaneOK, AGPlaneSendPlaneOK)];
+                [AGMessageUtils alertMessageWithTitle:@"" message:AGPlaneSendPlaneOK];
             }
+            
+            NSDictionary *accountStatJson = [result objectForKey:AGLogicJSONAccountStatLeftKey];
+            [[AGControllerUtils controllerUtils].accountController saveAccountStat:accountStatJson];
         
         }
         if (block) {
@@ -222,28 +233,45 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
     [AGJSONHttpHandler request:YES params:params path:PickupPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSNumber *count = [NSNumber numberWithInt:0];
         if (error) {
-            
+            [AGMessageUtils alertMessageWithError:error];
         }
         else{
+            
             //succeed
-            NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
-            if (planes.count) {
-                for(AGPlane *plane in planes){
-                    AGMessage *message = plane.messages.objectEnumerator.nextObject;
-                    plane.targetViewedMsgId = message.messageId;
-                    plane.message = message;
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                error = [AGMessageUtils errorClient];
+                if ([errorString isEqualToString:@"limit"]) {
+                    [AGMessageUtils alertMessageWithTitle:@"" message:AGPlanePickupLimit];
                 }
-                [[AGCoreData coreData] save];
-                //
-                [[AGPlaneNotification planeNotification] collectedPlanes];
+                else{
+                    [AGMessageUtils alertMessageWithError:error];
+                }
             }
-            NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:YES];
-            if (chains.count) {
-                [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
-                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-                [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:nil];
+            else{
+                NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
+                if (planes.count) {
+                    for(AGPlane *plane in planes){
+                        AGMessage *message = plane.messages.objectEnumerator.nextObject;
+                        plane.targetViewedMsgId = message.messageId;
+                        plane.message = message;
+                    }
+                    [[AGCoreData coreData] save];
+                    //
+                    [[AGPlaneNotification planeNotification] collectedPlanes];
+                }
+                NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:YES];
+                if (chains.count) {
+                    [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
+                    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+                    [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:nil];
+                }
+                count = [NSNumber numberWithInt:planes.count + chains.count];
             }
-            count = [NSNumber numberWithInt:planes.count + chains.count];
+            //update accountStat
+            NSDictionary *accountStatJson = [result objectForKey:AGLogicJSONAccountStatLeftKey];
+            [[AGControllerUtils controllerUtils].accountController saveAccountStat:accountStatJson];
+            
         }
         if (block) {
             block(error, context, count);
@@ -395,9 +423,9 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
     }];
 }
 
-- (void) viewedMessages:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
+- (void) viewedMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:ViewedMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSNumber *result) {
+    [AGJSONHttpHandler request:YES params:params path:ViewedMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error) {
             
         }
@@ -407,7 +435,7 @@ static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
 #endif
         }
         if (block) {
-            block(error, context);
+            block(error, context, result);
         }
         
     }];

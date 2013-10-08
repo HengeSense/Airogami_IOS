@@ -44,7 +44,7 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 
 - (void) deleteChain:(NSDictionary*) params chain:(AGChain*)chain context:(id)context block:(AGHttpDoneBlock)block;
 
-- (void) viewedChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block;
+- (void) viewedChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (NSDictionary*)paramsForReplyChain:(NSNumber*)chainId content:(NSString*)content type:(int)type;
 

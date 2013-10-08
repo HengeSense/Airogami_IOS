@@ -267,6 +267,12 @@ static const int MaxNewChainIds = 50;
     [coreData save];
 }
 
+- (void) updateLastViewedTime:(NSDate *)lastViewedTime chain:(AGChain*)chain
+{
+    chain.chainMessage.lastViewedTime = lastViewedTime;
+    [coreData save];
+}
+
 - (NSArray*) getNewChainIdsForUpdate
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

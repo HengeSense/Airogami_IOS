@@ -39,12 +39,14 @@ NSString * AGAccountShoutNothing = @"text.ui.shout.nothing";
 
 //plane
 NSString *AGPlaneSendPlaneOK = @"message.plane.sendplane.ok";
+NSString *AGPlaneSendPlaneLimit = @"message.plane.sendplane.limit";
 //logic
 NSString * AGLogicJSONStatusKey = @"status";
 NSString * AGLogicJSONMessageKey = @"message";
 NSString * AGLogicJSONResultKey = @"result";
 NSString * AGLogicJSONSucceedKey = @"succeed";
 NSString * AGLogicJSONErrorKey = @"error";
+NSString * AGLogicJSONAccountStatLeftKey = @"accountStatLeft";
 NSString * AGLogicJSONNoneValue = @"none";
 int AGLogicJSONStatusNotSignin = 1;
 int AGLogicJSONStatusSigninElsewhere = 2;

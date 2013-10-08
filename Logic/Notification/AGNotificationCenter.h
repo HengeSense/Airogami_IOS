@@ -33,6 +33,7 @@ extern NSString *AGNotificationGotUnreadMessagesCount;
 + (AGNotificationCenter*) notificationCenter;
 //should run after open the program
 - (void) resendMessages;
+- (void) obtainMessages;
 - (void) obtainPlanesAndChains;
 - (void) reset;
 

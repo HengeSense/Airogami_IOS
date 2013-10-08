@@ -40,6 +40,21 @@
     return account;
 }
 
+- (AGAccountStat *) saveAccountStat:(NSDictionary*)jsonDictionary
+{
+    NSMutableDictionary *dict = [jsonDictionary mutableCopy];
+    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    AGAccountStat *accountStat = nil;
+    if (accountId) {
+        [dict setObject:accountId forKey:@"accountId"];
+        accountStat = (AGAccountStat *)[coreData saveOrUpdate:dict withEntityName:@"AGAccountStat"];
+        [coreData save];
+    }
+    
+    return accountStat;
+}
+
+
 - (AGProfile *) saveProfile:(NSDictionary*)jsonDictionary
 {
     AGProfile *profile = nil;

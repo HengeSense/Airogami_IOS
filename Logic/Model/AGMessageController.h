@@ -24,6 +24,6 @@
 
 - (int) getUnreadMessageCountForPlane:(NSNumber *)planeId;
 
--(void) viewedMessagesForPlane:(AGPlane*)plane;
+- (NSNumber*) viewedMessagesForPlane:(AGPlane*)plane;
 
 @end

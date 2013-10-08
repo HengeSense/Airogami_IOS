@@ -146,7 +146,10 @@ static NSString *path;
 - (void) refresh
 {
     if (inMain) {
-        [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
+        AGNotificationCenter *notificationCenter = [AGNotificationCenter notificationCenter];;
+        [notificationCenter obtainPlanesAndChains];
+        //[notificationCenter obtainMessages];
+        //[notificationCenter resendMessages];
     }
 }
 

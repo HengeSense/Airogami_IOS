@@ -19,6 +19,7 @@
 - (NSMutableArray*) saveNewChains:(NSArray*)jsonArray;
 - (NSMutableArray*) saveOldChains:(NSArray*)jsonArray;
 - (void) increaseUpdateIncForChat:(AGChain*)chain;
+- (void) updateLastViewedTime:(NSDate *)lastViewedTime chain:(AGChain*)chain;
 - (NSNumber*)recentUpdateInc;
 - (NSNumber*)recentChainUpdateIncForCollect;
 - (NSNumber*)recentChainUpdateIncForChat;

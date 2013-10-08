@@ -27,6 +27,7 @@
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
 - (NSArray*) getNewPlaneIdsForUpdate;
 - (AGNewPlane*) getNextNewPlaneForMessages;
+- (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane;
 - (void) resetForSync;
 - (void) deleteForSync;
 //new means not obtained messages

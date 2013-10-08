@@ -37,17 +37,26 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
 {
     [AGJSONHttpHandler request:YES params:params path:SendChainPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {//error, chain
         if (error) {
-            
+            [AGMessageUtils alertMessageWithError:error];
         }
         else{
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
             if (errorString) {
-                error = [AGMessageUtils errorServer];
-                [AGMessageUtils alertMessageWithError:error];
+                error = [AGMessageUtils errorClient];
+                if ([errorString isEqualToString:@"limit"]) {
+                    [AGMessageUtils alertMessageWithTitle:@"" message:AGChainSendChainLimit];
+                }
+                else{
+                    [AGMessageUtils alertMessageWithError:error];
+                }
             }
             else{
                 [AGMessageUtils alertMessageWithTitle:@"" message:AGChainSendChainOK];
             }
+            
+            //update accountStat
+            NSDictionary *accountStatJson = [result objectForKey:AGLogicJSONAccountStatLeftKey];
+            [[AGControllerUtils controllerUtils].accountController saveAccountStat:accountStatJson];
             
         }
         if (block) {
@@ -382,9 +391,9 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
     return params;
 }
 
-- (void) viewedChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpDoneBlock)block
+- (void) viewedChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:ViewedChainMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSNumber *result) {
+    [AGJSONHttpHandler request:YES params:params path:ViewedChainMessagesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error) {
             
         }
@@ -394,7 +403,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
 #endif
         }
         if (block) {
-            block(error, context);
+            block(error, context, result);
         }
         
     }];

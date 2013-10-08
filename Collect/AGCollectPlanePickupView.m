@@ -118,7 +118,7 @@
 {
     [[AGManagerUtils managerUtils].planeManager pickupPlaneAndChain:nil context:nil block:^(NSError *error, id context, NSNumber *count) {
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            //[AGMessageUtils alertMessageWithError:error];
         }
         else{
             

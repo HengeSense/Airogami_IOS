@@ -103,18 +103,25 @@ static int MessageLimit = 10;
     return count;
 }
 
--(void) viewedMessagesForPlane:(AGPlane*)plane
+-(NSNumber*) viewedMessagesForPlane:(AGPlane*)plane
 {
     AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
     AGAccountStat *accountStat = account.accountStat;
+    NSNumber *lastMsgId = nil;
     //old
     AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
     if (message) {
         if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
             plane.ownerViewedMsgId = message.messageId;
+            if (message.messageId.longLongValue > plane.lastMsgIdOfOwner.longLongValue) {
+                lastMsgId = message.messageId;
+            }
         }
         else{
             plane.targetViewedMsgId = message.messageId;
+            if (message.messageId.longLongValue > plane.lastMsgIdOfTarget.longLongValue) {
+                lastMsgId = message.messageId;
+            }
         }
     }
     [coreData save];
@@ -126,10 +133,11 @@ static int MessageLimit = 10;
     }
     accountStat.unreadMessagesCount = [NSNumber numberWithInt:count];
     plane.unreadMessagesCount = [NSNumber numberWithInt:newCount];
-    
-    
+    if (count < 1) {
+        
+    }
     [coreData save];
-    
+    return lastMsgId;
 }
 
 //ascending

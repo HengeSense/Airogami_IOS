@@ -43,7 +43,7 @@ typedef void (^AGGetPlanesBlock)(NSError *error, id context, NSMutableDictionary
 
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
-- (void) viewedMessages:(NSDictionary*) params context:(id)context block:(AGHttpDoneBlock)block;
+- (void) viewedMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (NSDictionary*)paramsForGetNewPlane:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
 

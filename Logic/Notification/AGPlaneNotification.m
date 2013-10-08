@@ -487,12 +487,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;
                 if (plane.status.intValue == AGPlaneStatusNew) {
                     plane.targetViewedMsgId = lastMsgId;
+                    [[AGCoreData coreData] save];
                 }
-                //
-                NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
-                [planeManager viewedMessages:params context:nil block:^(NSError *error, id context) {
-                    
-                }];
                 
             }
             
@@ -647,9 +643,26 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 - (void)viewedMessagesForPlane:(NSNotification*)notification
 {
     AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
-    [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
+    NSNumber *lastMsgId = [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
+    //
+    if (lastMsgId) {
+        AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
+        NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
+        [planeManager viewedMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
+            if (error) {
+                
+            }
+            else{
+                NSNumber *lastMsgId = [result objectForKey:@"lastMsgId"];
+                if (lastMsgId) {
+                    [[AGControllerUtils controllerUtils].planeController updateLastMsgId:lastMsgId plane:plane];
+                }
+            }
+        }];
+    }
+    
 }
 
 - (void) viewingMessagesForPlane:(NSNotification*)notification

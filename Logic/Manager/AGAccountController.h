@@ -16,6 +16,7 @@
 @interface AGAccountController : NSObject
 
 - (AGAccount*) saveAccount:(NSDictionary*)jsonDictionary;
+- (AGAccountStat*) saveAccountStat:(NSDictionary*)jsonDictionary;
 - (AGProfile *) saveProfile:(NSDictionary*)jsonDictionary;
 - (AGAccountStat*) findAccountStat:(NSNumber *)accountId;
 - (AGAccount*) findAccount:(NSNumber*)accountId;

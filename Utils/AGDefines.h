@@ -86,13 +86,16 @@ extern  NSString * AGAccountShoutNothing;
 //plane
 
 extern  NSString *AGPlaneSendPlaneOK;
+extern  NSString *AGPlaneSendPlaneLimit;
 #define AGChainSendChainOK AGPlaneSendPlaneOK
+#define AGChainSendChainLimit AGPlaneSendPlaneLimit
 
 extern  NSString * AGLogicJSONStatusKey;
 extern  NSString * AGLogicJSONMessageKey;
 extern  NSString * AGLogicJSONResultKey;
 extern  NSString * AGLogicJSONSucceedKey;
 extern  NSString * AGLogicJSONErrorKey;
+extern  NSString * AGLogicJSONAccountStatLeftKey;
 extern  NSString * AGLogicJSONNoneValue;
 
 extern  NSString * AGLogicAccountEmailKey;
