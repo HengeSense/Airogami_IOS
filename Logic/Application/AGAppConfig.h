@@ -19,19 +19,12 @@
 @property(nonatomic, assign) int appVersion;
 @property(nonatomic, readonly) NSString *guid;
 @property(nonatomic, strong) AGAppAccount *appAccount;
-@property(nonatomic, readonly) int badgeNumber;
 
 - (void) save;
 - (void) updateAccountId:(NSNumber*)accountId;
 - (void) updateAppAccount:(AGAccount*)account password:(NSString*)password;
 - (void) updatePassword:(NSString*)password;
-//- (void) resetAppAccount;
-- (BOOL) needSignin;
-- (void) gotoSign;
-- (void) gotoMain;
-- (void) signout;
+- (void) resetAppAccount;
 - (NSMutableDictionary*) autoSigninParams;
-- (void) kickoff;
-- (void) refresh;
 
 @end

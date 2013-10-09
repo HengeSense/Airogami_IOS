@@ -10,7 +10,7 @@
 #import "AGCategory.h"
 #import "NSString+Addition.h"
 #import "AGNotificationCenter.h"
-#import "AGAppDelegate.h"
+#import "AGAppDirector.h"
 #import "AGUIUtils.h"
 
 //#warning birthday doesn't neeed this
@@ -105,10 +105,10 @@ static void encode(NSMutableString *path, id key, id obj)
         NSString * deviceString = [NSString stringWithFormat:@"%@=%d&%@=%d",[@"clientAgent.deviceType" encodeURIComponent],AGDeviceType, [@"clientAgent.clientVersion" encodeURIComponent], AGApplicationVersion];
         [path appendString:deviceString];
         //guid
-        deviceString = [NSString stringWithFormat:@"&%@=%@", [@"clientAgent.guid" encodeURIComponent], [[AGAppDelegate appDelegate].appConfig.guid encodeURIComponent]];
+        deviceString = [NSString stringWithFormat:@"&%@=%@", [@"clientAgent.guid" encodeURIComponent], [[AGAppDirector appDirector].appConfig.guid encodeURIComponent]];
         [path appendString:deviceString];
         //
-        NSData *deviceToken = [AGAppDelegate appDelegate].deviceToken;
+        NSData *deviceToken = [AGAppDirector appDirector].deviceToken;
         if (deviceToken) {
             NSString *token = [[deviceToken description] stringByReplacingOccurrencesOfString:@" " withString:@""];
             token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];

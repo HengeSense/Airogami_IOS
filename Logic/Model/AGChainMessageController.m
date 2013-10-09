@@ -11,6 +11,7 @@
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
 #import "AGControllerUtils.h"
+#import "AGAppDirector.h"
 
 static const int ChainMessageLimit = 10;
 
@@ -119,7 +120,7 @@ static const int ChainMessageLimit = 10;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainMessageEntityDescription];
     //
-    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and account.accountId = %@", chainId, accountId];
     [fetchRequest setPredicate:predicate];
     //
@@ -179,7 +180,7 @@ static const int ChainMessageLimit = 10;
 
 - (void) updateChainMessagesCount:(AGChainMessage*)chainMessage chain:(AGChain*)chain
 {
-    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     int count = [self getUnreadChainMessageCountForChain:chain.chainId];
     accountStat.unreadChainMessagesCount = [NSNumber numberWithInt:accountStat.unreadChainMessagesCount.intValue + count - chainMessage.unreadChainMessagesCount.intValue];
     chainMessage.unreadChainMessagesCount = [NSNumber numberWithInt:count];

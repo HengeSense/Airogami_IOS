@@ -11,6 +11,7 @@
 #import "AGChainManager.h"
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
+#import "AGUtils.h"
 
 NSString *AGNotificationGetNewChains = @"notification.getnewchains";
 NSString *AGNotificationGetChains = @"notification.getchains";
@@ -97,6 +98,27 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         [notificationCenter addObserver:self selector:@selector(viewingChainMessagesForChain:) name:AGNotificationViewingChainMessagesForChain object:nil];
     }
     return self;
+}
+
+-(void)reset
+{
+    //chain messages
+    moreChainMessages = NO;
+    obtainingChainMessages = NO;
+    //get new chain
+    moreGetNewChains = NO;
+    gettingNewChains = NO;
+    //get new chain
+    moreGetChains = NO;
+    gettingChains = NO;
+    //receive chain
+    moreReceiveChains = NO;
+    receivingChains = NO;
+    //obtain chain
+    moreObtainChains = NO;
+    obtainingChains = NO;
+    //
+    viewingChainId = nil;
 }
 
 - (void) getNewChains:(NSNotification*) notification
@@ -484,7 +506,8 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         }
         else if (chainMessage.status.shortValue == AGChainMessageStatusReplied) {
             if ([chain.chainId isEqual:viewingChainId]) {
-                [[AGControllerUtils controllerUtils].chainMessageController viewedChainMessagesForChain:chain];
+                dict = [NSDictionary dictionaryWithObjectsAndKeys:chain, @"chain", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedChainMessagesForChain object:nil userInfo:dict];
             }
             else{
                 [[AGControllerUtils controllerUtils].chainMessageController updateChainMessagesCount:chainMessage chain:chain];
@@ -538,19 +561,23 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chain.chainId, @"chainId", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadChainMessagesChangedForChain object:nil userInfo:dict];
     //
-    AGChainManager *chainManager = [AGManagerUtils managerUtils].chainManager;
-    NSDictionary *params = [chainManager paramsForViewedChainMessages:chain.chainId last:last];
-    [chainManager viewedChainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
-        if (error) {
-            
-        }
-        else{
-            NSDate *lastViewedTime = [result objectForKey:@"lastViewedTime"];
-            if (lastViewedTime) {
-                [[AGControllerUtils controllerUtils].chainController updateLastViewedTime:lastViewedTime chain:chain];
+    if (last) {
+        AGChainManager *chainManager = [AGManagerUtils managerUtils].chainManager;
+        NSDictionary *params = [chainManager paramsForViewedChainMessages:chain.chainId last:last];
+        [chainManager viewedChainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
+            if (error) {
+                
             }
-        }
-    }];
+            else{
+                NSString *lastViewedTimeJson = [result objectForKey:@"lastViewedTime"];
+                if (lastViewedTimeJson) {
+                    NSDate *lastViewedTime = [AGUtils stringToDate:lastViewedTimeJson];
+                    [[AGControllerUtils controllerUtils].chainController updateLastViewedTime:lastViewedTime chain:chain];
+                }
+            }
+        }];
+    }
+    
 }
 
 - (void) viewingChainMessagesForChain:(NSNotification*)notification

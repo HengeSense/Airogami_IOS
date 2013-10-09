@@ -11,6 +11,7 @@
 #import "AGUtils.h"
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
+#import "AGAppDirector.h"
 
 NSString *AGNotificationUpdateDate = @"notification.updatedate";
 
@@ -270,7 +271,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 
 - (void)unreadMessagesChanged:(NSNotification*)notification
 {
-    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     NSNumber *number = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue];
     NSMutableDictionary *dict = [notification.userInfo mutableCopy];
     [dict setObject:number forKey:@"count"];
@@ -295,7 +296,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 
 - (void)getUnreadMessagesCount:(NSNotification*)notification
 {
-    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     NSNumber *number = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:number, @"count", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -305,6 +306,9 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 -(void)reset
 {
     planesForChat = planesForCollect = chainsForChat = chainsForCollect = nil;
+    [[AGAccountNotification accountNotification] reset];
+    [[AGPlaneNotification planeNotification] reset];
+    [[AGChainNotification chainNotification] reset];
 }
 
 

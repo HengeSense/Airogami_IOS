@@ -39,5 +39,6 @@ extern NSString *AGNotificationViewingMessagesForPlane;
 
 - (void) obtainedPlanes;
 - (void) collectedPlanes;
+- (void) reset;
 
 @end

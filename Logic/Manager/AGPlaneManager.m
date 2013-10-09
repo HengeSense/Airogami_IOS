@@ -14,6 +14,7 @@
 #import "AGManagerUtils.h"
 #import "AGNotificationCenter.h"
 #import "AGUIUtils.h"
+#import "AGAppDirector.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *DeletePlanePath = @"plane/deletePlane.action?";
@@ -36,7 +37,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
 {
     [AGJSONHttpHandler request:YES params:params path:SendPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {//error,plane
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            
         }
         else{
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
@@ -233,7 +234,10 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     [AGJSONHttpHandler request:YES params:params path:PickupPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSNumber *count = [NSNumber numberWithInt:0];
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            //Client error come from autoSignin or request
+            if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
+                [AGMessageUtils alertMessageWithError:error];
+            }
         }
         else{
             
@@ -343,7 +347,10 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     [AGJSONHttpHandler request:YES params:params path:GetOldPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSArray *oldPlanes = nil;
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            //Client error come from autoSignin or request
+            if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
+                [AGMessageUtils alertMessageWithError:error];
+            }
         }
         else{
             //succeed
@@ -490,7 +497,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
 
 - (NSDictionary*)paramsForDeletePlane:(AGPlane*)plane
 {
-    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGManagerUtils managerUtils].accountManager.account.accountId];
+    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGAppDirector appDirector].account.accountId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     [params setObject:plane.planeId forKey:@"planeId"];
     [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
@@ -499,7 +506,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
 
 - (NSDictionary*)paramsForViewedMessages:(AGPlane*)plane lastMsgId:(NSNumber*)lastMsgId
 {
-    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGManagerUtils managerUtils].accountManager.account.accountId];
+    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGAppDirector appDirector].account.accountId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     [params setObject:plane.planeId forKey:@"planeId"];
     [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
@@ -520,7 +527,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
 {
     AGCoreData *coreData = [AGCoreData coreData];
     AGMessage *message = (AGMessage *)[coreData create:[AGMessage class]];
-    message.account = [AGManagerUtils managerUtils].accountManager.account;
+    message.account = [AGAppDirector appDirector].account;
     message.messageId = [NSNumber numberWithInt:-1];
     message.createdTime = [NSDate dateWithTimeIntervalSinceNow:0];
     message.plane = plane;

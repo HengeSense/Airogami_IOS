@@ -11,6 +11,7 @@
 #import "AGDefines.h"
 #import "AGMessageUtils.h"
 #import "AGManagerUtils.h"
+#import "AGAppDirector.h"
 
 static NSString *ScreenNameExist = @"error.account.changescreenname.screenname.exist";
 
@@ -43,7 +44,7 @@ static NSString *ScreenNameExist = @"error.account.changescreenname.screenname.e
 
 - (void) initData
 {
-    NSString *screenName = [AGManagerUtils managerUtils].accountManager.account.profile.screenName;
+    NSString *screenName = [AGAppDirector appDirector].account.profile.screenName;
     self.screenNameTextField.text = screenName;
 }
 

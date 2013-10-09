@@ -34,7 +34,6 @@ static NSString *path;
 @synthesize appAccount;
 @synthesize appVersion;
 @synthesize guid;
-@synthesize badgeNumber;
 
 + (AGAppConfig*)appConfig
 {
@@ -108,19 +107,6 @@ static NSString *path;
     [self save];
 }
 
-- (BOOL) needSignin
-{
-    return appAccount.password == nil;
-}
-
--(int) badgeNumber
-{
-    if (inMain) {
-        return [[AGControllerUtils controllerUtils].accountController getUnreadMessagesCount];
-    }
-    return 0;
-}
-
 
 - (NSMutableDictionary*) autoSigninParams
 {
@@ -141,62 +127,6 @@ static NSString *path;
     }
     
     return params;
-}
-
-- (void) refresh
-{
-    if (inMain) {
-        AGNotificationCenter *notificationCenter = [AGNotificationCenter notificationCenter];;
-        [notificationCenter obtainPlanesAndChains];
-        //[notificationCenter obtainMessages];
-        //[notificationCenter resendMessages];
-    }
-}
-
-- (void) kickoff
-{
-    if (inMain) {
-        [[AGManagerUtils managerUtils].accountManager autoSignin:nil block:^(NSError *error, id context) {
-            if (error == nil) {
-                [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
-                [[AGNotificationCenter notificationCenter] resendMessages];
-            }
-        }];
-    }
-
-}
-
-//appAccount != nil
-- (void) gotoMain
-{
-    if (inMain == NO) {
-        inMain = YES;
-        [self kickoff];
-    }
-}
-
-//appAccount != nil
-- (void) gotoSign
-{
-    if (inMain) {
-        inMain = NO;
-        [self resetAppAccount];
-        [[AGRootViewController rootViewController] switchToSign];
-    }
-    
-}
-
-- (void) signout
-{
-    [[AGManagerUtils managerUtils].accountManager signout:nil block:^(NSError *error, id context) {
-        if (error == nil) {
-            inMain = NO;
-            [self resetAppAccount];
-            [[AGNotificationCenter notificationCenter] reset];
-            [[AGRootViewController rootViewController] switchToSign];
-        }
-    }];
-    
 }
 
 

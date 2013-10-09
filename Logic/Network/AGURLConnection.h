@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^AGURLConnectionFinishBlock)(NSError *error, id context, id result);
+
 @interface AGURLConnection : NSURLConnection
 
 @end

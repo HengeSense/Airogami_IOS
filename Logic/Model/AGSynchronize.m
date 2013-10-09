@@ -11,6 +11,7 @@
 #import "AGManagerUtils.h"
 #import "AGWaitUtils.h"
 #import "AGAccountStat.h"
+#import "AGAppDirector.h"
 
 static NSString *Title = @"message.synchronize.title";
 
@@ -29,7 +30,7 @@ static NSString *Title = @"message.synchronize.title";
 
 -(BOOL) shouldSynchronize
 {
-    return [AGManagerUtils managerUtils].accountManager.account.accountStat.synchronizing.boolValue;
+    return [AGAppDirector appDirector].account.accountStat.synchronizing.boolValue;
 }
 
 -(void) synchronize

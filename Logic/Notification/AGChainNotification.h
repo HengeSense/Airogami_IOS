@@ -37,5 +37,5 @@ extern NSString *AGNotificationViewingChainMessagesForChain;
 +(AGChainNotification*) chainNotification;
 - (void) obtainedChains;
 - (void) collectedChains;
-
+- (void) reset;
 @end

@@ -15,6 +15,8 @@
 
 - (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary;
 
+- (void) updateMessagesCount:(AGPlane*)plane;
+
 - (NSDictionary*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId;
 
 //messageId = -1

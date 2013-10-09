@@ -10,6 +10,7 @@
 #import "AGAppDelegate.h"
 #import "AGAccountStat.h"
 #import "AGManagerUtils.h"
+#import "AGAppDirector.h"
 
 
 @interface AGAccountController()
@@ -43,7 +44,7 @@
 - (AGAccountStat *) saveAccountStat:(NSDictionary*)jsonDictionary
 {
     NSMutableDictionary *dict = [jsonDictionary mutableCopy];
-    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
     AGAccountStat *accountStat = nil;
     if (accountId) {
         [dict setObject:accountId forKey:@"accountId"];
@@ -131,13 +132,13 @@
 
 - (int) getUnreadMessagesCount
 {
-    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     return accountStat.unreadMessagesCount.intValue + accountStat.unreadChainMessagesCount.intValue;
 }
 
 -(void) setSynchronizing:(BOOL)sychronizing
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     account.accountStat.synchronizing = [NSNumber numberWithBool:sychronizing];
     [coreData save];
 }

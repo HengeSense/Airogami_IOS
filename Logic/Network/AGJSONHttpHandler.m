@@ -14,6 +14,7 @@
 #import "AGWaitUtils.h"
 #import "AGManagerUtils.h"
 #import "NSDictionary_JSONExtensions.h"
+#import "AGManagerUtils.h"
 
 #define AGJSONHttpHandlerDefaultCapacity (16 * 1024)
 
@@ -81,6 +82,7 @@
         }
         
         conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
+        [[AGManagerUtils managerUtils].networkManager addURLConnection:conn];
     }
     if (context) {
         [conn setValue:context forKey:@"Context"];
@@ -158,6 +160,8 @@
     if(block){
         block(error,context, nil);
     }
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -181,7 +185,8 @@
     if (block) {
         block(error,context, nil);
     }
-    
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
@@ -204,11 +209,12 @@
     if (block) {
          block(error,context, dict);
     }
-
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 
-+ (AGURLConnection*) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGHttpJSONHandlerRequestFinishBlock)block
++ (AGURLConnection*) request:(BOOL)get params:(NSDictionary*)params path:(NSString*)path prompt:(NSString*)prompt context:(id)context  block:(AGURLConnectionFinishBlock)block
 {
     NSMutableString *url = [NSMutableString stringWithCapacity:128];
     [url appendString:path];

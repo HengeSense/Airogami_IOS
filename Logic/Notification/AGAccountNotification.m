@@ -37,6 +37,12 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
     return self;
 }
 
+-(void) reset
+{
+    moreAccounts = NO;
+    obtainingAccounts = NO;
+}
+
 +(AGAccountNotification*) accountNotification
 {
     static AGAccountNotification *accountNotification;
@@ -119,6 +125,7 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
         }
     }];
 }
+
 
 
 @end

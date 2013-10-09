@@ -12,18 +12,17 @@
 #import "AGManagerUtils.h"
 #import "AGControllerUtils.h"
 #import "AGNotificationCenter.h"
+#import "AGAppDirector.h"
 
 static AGAppDelegate *AppDelegate;
 
 @interface AGAppDelegate()
 {
+    AGAppDirector *appDirector;
 }
 @end
 
 @implementation AGAppDelegate
-
-@synthesize appConfig;
-@synthesize deviceToken;
 
 +(AGAppDelegate*) appDelegate
 {
@@ -34,7 +33,7 @@ static AGAppDelegate *AppDelegate;
 {
     if (self = [super init]) {
         AppDelegate = self;
-        appConfig = [AGAppConfig appConfig];
+        appDirector = [AGAppDirector appDirector];
     }
     return self;
 }
@@ -71,7 +70,7 @@ static AGAppDelegate *AppDelegate;
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [application setApplicationIconBadgeNumber:appConfig.badgeNumber];
+    [application setApplicationIconBadgeNumber:appDirector.badgeNumber];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -82,7 +81,7 @@ static AGAppDelegate *AppDelegate;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [appConfig kickoff];
+    [appDirector kickoff];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -107,8 +106,8 @@ static AGAppDelegate *AppDelegate;
 
 // Delegation methods
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-    if ([devToken isEqualToData:deviceToken] == NO) {
-        deviceToken = devToken;
+    if ([devToken isEqualToData:appDirector.deviceToken] == NO) {
+        appDirector.deviceToken = devToken;
 #ifdef IS_DEBUG
         NSLog(@"deviceToken = %@", devToken);
 #endif
@@ -127,10 +126,10 @@ static AGAppDelegate *AppDelegate;
 #ifdef IS_DEBUG
     NSLog(@"remoteNotification = %@", userInfo);
 #endif
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = appDirector.account;
     NSNumber *accountId = [userInfo objectForKey:@"accountId"];
     if (app.applicationState == UIApplicationStateActive && [accountId isEqualToNumber:account.accountId]) {
-        [appConfig refresh];
+        [appDirector refresh];
         [[AGManagerUtils managerUtils].audioManager playMessage];
     }
 

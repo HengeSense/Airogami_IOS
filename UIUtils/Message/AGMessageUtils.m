@@ -9,6 +9,8 @@
 #import "AGMessageUtils.h"
 #import "AGUIErrorAnimation.h"
 
+static NSString *CancelMessageKey = @"message.cancel.message";
+static NSString *CancelTitleKey = @"message.cancel.title";
 static NSString *ServerUnkownMessageKey = @"message.server.unkown.message";
 static NSString *ServerUnkownTitleKey = @"message.server.unkown.title";
 static NSString *ClientUnkownMessageKey = @"message.client.unkown.message";
@@ -99,6 +101,11 @@ static NSString *PlaneChanged = @"error.general.planechanged";
         msgKey = ClientUnkownMessageKey;
     }
     return [AGMessageUtils error:number.intValue domain:@"Client" titleKey:titleKey msgKey:msgKey];
+}
+
++ (NSError*) errorCancel
+{
+    return [AGMessageUtils error:-1 domain:@"Cancel" titleKey:CancelTitleKey msgKey:CancelMessageKey];
 }
 
 + (NSError*) errorServer

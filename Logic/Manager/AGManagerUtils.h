@@ -13,6 +13,7 @@
 #import "AGPlaneManager.h"
 #import "AGChainManager.h"
 #import "AGAudioManager.h"
+#import "AGNetworkManager.h"
 
 @interface AGManagerUtils : NSObject
 
@@ -24,5 +25,6 @@
 @property(nonatomic, strong) AGPlaneManager *planeManager;
 @property(nonatomic, strong) AGChainManager *chainManager;
 @property(nonatomic, strong) AGAudioManager *audioManager;
+@property(nonatomic, strong) AGNetworkManager *networkManager;
 
 @end

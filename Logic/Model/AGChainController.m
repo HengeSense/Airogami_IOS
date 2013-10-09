@@ -12,6 +12,7 @@
 #import "AGManagerUtils.h"
 #import "AGAccountStat.h"
 #import "AGControllerUtils.h"
+#import "AGAppDirector.h"
 
 static const int MaxNewChainIds = 50;
 
@@ -54,7 +55,7 @@ static const int MaxNewChainIds = 50;
         }
     }
     
-    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     if (accountStat.chainUpdateInc == nil || max > accountStat.chainUpdateInc.longLongValue) {
         accountStat.chainUpdateInc = [NSNumber numberWithLongLong:max];
     }
@@ -109,7 +110,7 @@ static const int MaxNewChainIds = 50;
 
 - (NSNumber*)recentUpdateInc
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSNumber *updateInc = account.accountStat.chainUpdateInc;
     if (updateInc == nil) {
         updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
@@ -135,7 +136,7 @@ static const int MaxNewChainIds = 50;
 //1 = collect; 2 = chat;
 - (NSArray*) getAllChains:(int)type
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count > 0 && (account.accountId != %@ || passCount > 0)", account.accountId, type == 1 ? AGChainMessageStatusNew : AGChainMessageStatusReplied, account.accountId];
@@ -153,7 +154,7 @@ static const int MaxNewChainIds = 50;
 //-1 = unknown; 0 = colleted; 1 = obtained; 2 = deleted
 - (int) chainStatus:(NSNumber*)chainId
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainMessageEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain.chainId = %@ and account.accountId = %@", chainId, account.accountId];
@@ -177,7 +178,7 @@ static const int MaxNewChainIds = 50;
 
 - (NSNumber*)recentChainUpdateInc:(BOOL)forCollect
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
@@ -318,7 +319,7 @@ static const int MaxNewChainIds = 50;
 
 - (void) addNewChains:(NSArray *)chains
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     for (AGChain *chain in chains) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
         //[dict setObject:chain forKey:@"chain"];

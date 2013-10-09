@@ -18,6 +18,7 @@
 #import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
 #import "AGRefreshPulldownHeader.h"
+#import "AGAppDirector.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface AGChatPlaneViewController ()
@@ -244,13 +245,12 @@
 -(void) setData:(id)obj forCell:(UITableViewCell*)tableViewCell
 {
     AGChatPlaneCell *cell = (AGChatPlaneCell *)tableViewCell;
-    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     AGProfile *profile = nil;
     int count = 0;
     if([obj isKindOfClass:[AGPlane class]])
     {
         AGPlane *plane = obj;
-        if([managerUtils.accountManager.account.accountId isEqual:plane.accountByOwnerId.accountId])
+        if([[AGAppDirector appDirector].account.accountId isEqual:plane.accountByOwnerId.accountId])
         {
             profile = plane.accountByTargetId.profile;
         }

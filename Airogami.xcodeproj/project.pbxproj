@@ -310,6 +310,8 @@
 		07B1051F17FE0297000DD694 /* AGChatPlaneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B1051E17FE0297000DD694 /* AGChatPlaneHeaderView.xib */; };
 		07B1052218033ADD000DD694 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052118033ADD000DD694 /* AGAccountStat.m */; };
 		07B1052518038762000DD694 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052418038762000DD694 /* AGChainMessage.m */; };
+		07B1052818047AB8000DD694 /* AGAppDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052718047AB8000DD694 /* AGAppDirector.m */; };
+		07B1052B1804CAD4000DD694 /* AGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052A1804CAD4000DD694 /* AGNetworkManager.m */; };
 		07B393F1176FA8C5006FA397 /* YTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 07444997176F8727001CDFB2 /* YTTabBar.m */; };
 		07B393F2176FA8C9006FA397 /* YTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07444999176F8727001CDFB2 /* YTTabBarController.m */; };
 		07B393F3176FA8CD006FA397 /* YTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0744499F176F8BB4001CDFB2 /* YTTabBarItem.m */; };
@@ -820,6 +822,10 @@
 		07B1052118033ADD000DD694 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
 		07B1052318038762000DD694 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
 		07B1052418038762000DD694 /* AGChainMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessage.m; sourceTree = "<group>"; };
+		07B1052618047AB8000DD694 /* AGAppDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAppDirector.h; sourceTree = "<group>"; };
+		07B1052718047AB8000DD694 /* AGAppDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAppDirector.m; sourceTree = "<group>"; };
+		07B105291804CAD4000DD694 /* AGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNetworkManager.h; sourceTree = "<group>"; };
+		07B1052A1804CAD4000DD694 /* AGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNetworkManager.m; sourceTree = "<group>"; };
 		07B8DBF317710146006922FF /* main_tabbar_bgrd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_bgrd@2x.png"; sourceTree = "<group>"; };
 		07B8DBF417710146006922FF /* main_tabbar_item_write@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_item_write@2x.png"; sourceTree = "<group>"; };
 		07B8DBF517710146006922FF /* main_tabbar_item_write_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_item_write_selected@2x.png"; sourceTree = "<group>"; };
@@ -962,6 +968,8 @@
 				0702F6DD17B45C3600B4EBB3 /* AGAppConfig.m */,
 				0702F6DF17B45D7B00B4EBB3 /* AGAppAccount.h */,
 				0702F6E017B45D7C00B4EBB3 /* AGAppAccount.m */,
+				07B1052618047AB8000DD694 /* AGAppDirector.h */,
+				07B1052718047AB8000DD694 /* AGAppDirector.m */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1216,6 +1224,8 @@
 				078DEE3417B9A0DE00A969A1 /* AGChainManager.m */,
 				07C489A317E2390A00DB605F /* AGAudioManager.h */,
 				07C489A417E2390A00DB605F /* AGAudioManager.m */,
+				07B105291804CAD4000DD694 /* AGNetworkManager.h */,
+				07B1052A1804CAD4000DD694 /* AGNetworkManager.m */,
 				076B15B917B088C1005BD910 /* AGManagerUtils.h */,
 				076B15BA17B088C1005BD910 /* AGManagerUtils.m */,
 			);
@@ -2222,6 +2232,7 @@
 				078A1F8A176CFA4000A69AE3 /* AGTabBarViewController.m in Sources */,
 				078A1FD5176D355C00A69AE3 /* DCRoundSwitch.m in Sources */,
 				078A1FD6176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m in Sources */,
+				07B1052818047AB8000DD694 /* AGAppDirector.m in Sources */,
 				078A1FD7176D355C00A69AE3 /* DCRoundSwitchOutlineLayer.m in Sources */,
 				078A1FD8176D355C00A69AE3 /* DCRoundSwitchToggleLayer.m in Sources */,
 				078A1FDE176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m in Sources */,
@@ -2295,6 +2306,7 @@
 				076B15D717B088C1005BD910 /* AGURLConnection.m in Sources */,
 				0702F6C217B2CF3A00B4EBB3 /* AGAccountController.m in Sources */,
 				0702F6C617B2F9FA00B4EBB3 /* AGDatePicker.m in Sources */,
+				07B1052B1804CAD4000DD694 /* AGNetworkManager.m in Sources */,
 				0702F6CB17B319A000B4EBB3 /* AGDataManger.m in Sources */,
 				07B1051717FCB8C7000DD694 /* AGTextView.m in Sources */,
 				0702F6D117B4325700B4EBB3 /* AGMessageUtils.m in Sources */,

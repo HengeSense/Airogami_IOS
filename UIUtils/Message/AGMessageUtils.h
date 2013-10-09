@@ -19,6 +19,7 @@
 + (void) alertMessageModified:(id<UIAlertViewDelegate>)delegate;
 + (void) alertMessageUpdated;
 + (void) alertMessagePlaneChanged;
++ (NSError*) errorCancel;
 + (NSError*) errorServer:(NSNumber*)code titleKey:(NSString*)titleKey msgKey:(NSString*)key;
 + (NSError*) errorServer;//unknown error
 + (NSError*) errorClient:(NSNumber*)number titleKey:(NSString*)titleKey msgKey:(NSString*)msgKey;

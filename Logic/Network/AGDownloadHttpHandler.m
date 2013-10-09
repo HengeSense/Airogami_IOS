@@ -8,6 +8,7 @@
 
 #import "AGDownloadHttpHandler.h"
 #import "AGMessageUtils.h"
+#import "AGManagerUtils.h"
 
 static const int AGDownloadDefaultCapacity = 1024 * 256;
 
@@ -50,6 +51,7 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     @synchronized(number){
         request.URL = url;
         conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
+        [[AGManagerUtils managerUtils].networkManager addURLConnection:conn];
     }
     if (context) {
         [conn setValue:context forKey:@"Context"];
@@ -107,7 +109,8 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (block) {
         block(error, nil, context);
     }
-    
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -130,7 +133,8 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (block) {
         block(error,nil, context);
     }
-    
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
@@ -143,6 +147,8 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (block) {
         block(nil, data, context);
     }
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 @end

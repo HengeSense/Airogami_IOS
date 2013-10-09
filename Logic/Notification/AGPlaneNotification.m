@@ -11,6 +11,7 @@
 #import "AGControllerUtils.h"
 #import "AGNumber.h"
 #import "AGAccountStat.h"
+#import "AGAppDirector.h"
 
 NSString *AGNotificationGetNewPlanes = @"notification.getnewplanes";
 NSString *AGNotificationGetPlanes = @"notification.getplanes";
@@ -98,6 +99,30 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         [notificationCenter addObserver:self selector:@selector(viewingMessagesForPlane:) name:AGNotificationViewingMessagesForPlane object:nil];
     }
     return self;
+}
+
+-(void)reset
+{
+    //messages
+    moreMessages = NO;
+    obtainingMessages = NO;
+    //receive plane
+    moreReceivePlanes = NO;
+    receivingPlanes = NO;
+    //get new plane
+    moreGetNewPlanes = NO;
+    gettingNewPlanes = NO;
+    //get plane
+    moreGetPlanes = NO;
+    gettingPlanes = NO;
+    //obtain plane
+    moreObtainPlanes = NO;
+    obtainingPlanes = NO;
+    //send messages
+    moreSendMessages = NO;
+    sendingMessages = NO;
+    //
+    viewingPlaneId = nil;
 }
 
 +(AGPlaneNotification*) planeNotification
@@ -518,17 +543,14 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         //
         if ([plane.planeId isEqual:viewingPlaneId] == NO) {
             //
-            AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
-            int count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
-            accountStat.unreadMessagesCount = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + count - plane.unreadMessagesCount.intValue];
-            plane.unreadMessagesCount = [NSNumber numberWithInt:count];
-            [[AGCoreData coreData] save];
+            [[AGControllerUtils controllerUtils].messageController updateMessagesCount:plane];
             //
-            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
+            dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
         }
         else{
-            [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
+            dict = [NSDictionary dictionaryWithObjectsAndKeys:plane, @"plane", nil];
+            [notificationCenter postNotificationName:AGNotificationViewedMessagesForPlane object:self userInfo:dict];
             //
             dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", @"one", @"action", nil];
             [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];

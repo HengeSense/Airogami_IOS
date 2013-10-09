@@ -17,8 +17,6 @@ typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 
 @interface AGAccountManager : NSObject
 
-@property(nonatomic, strong) AGAccount *account;
-
 - (void) signup:(NSDictionary*) params image:(UIImage*)image block:(AGAccountSignupDoneBlock)block;
 
 - (void) signin:(NSDictionary*) params automatic:(BOOL)yes animated:(BOOL)animated context:(id)context block:(AGAccountSigninDoneBlock)block;

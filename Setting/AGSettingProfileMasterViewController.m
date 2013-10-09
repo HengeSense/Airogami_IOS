@@ -22,6 +22,7 @@
 #import "AGAuthenticate.h"
 #import "UIImage+Addition.h"
 #import "AGUIDefines.h"
+#import "AGAppDirector.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
@@ -116,7 +117,7 @@
 
 - (void) initData
 {
-    AGProfile *profile = accountManager.account.profile;
+    AGProfile *profile = [AGAppDirector appDirector].account.profile;
     if (profile) {
         self.likesLabel.text = [profile.likesCount stringValue];
         self.nameTextField.text = profile.fullName;
@@ -142,13 +143,13 @@
 {
     [super viewWillAppear:animated];
     //To update if change screenName
-    [self.screenNameButton setTitle:accountManager.account.profile.screenName forState:UIControlStateNormal];
+    [self.screenNameButton setTitle:[AGAppDirector appDirector].account.profile.screenName forState:UIControlStateNormal];
 }
 
 - (NSMutableDictionary*) obtainData
 {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:5];
-    AGProfile *profile = accountManager.account.profile;
+    AGProfile *profile = [AGAppDirector appDirector].account.profile;
     if (profile) {
         if (![profile.fullName isEqual:self.nameTextField.text]) {
             [data setObject:self.nameTextField.text forKey:@"fullName"];

@@ -9,7 +9,7 @@
 #import "AGSettingMasterViewController.h"
 #import "AGManagerUtils.h"
 #import "AGRootViewController.h"
-#import "AGAppDelegate.h"
+#import "AGAppDirector.h"
 
 @interface AGSettingMasterViewController ()
 
@@ -124,7 +124,7 @@
             }
             break;
         case 1:// logout
-            [[AGAppDelegate appDelegate].appConfig signout];
+            [[AGAppDirector appDirector] signout];
             break;
             
         default:

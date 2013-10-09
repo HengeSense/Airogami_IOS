@@ -16,4 +16,6 @@ extern NSString *AGNotificationProfileChanged;
 
 +(AGAccountNotification*) accountNotification;
 
+-(void) reset;
+
 @end

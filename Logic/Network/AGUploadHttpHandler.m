@@ -10,6 +10,7 @@
 #import "AGURLConnection.h"
 #import "AGDefines.h"
 #import "AGMessageUtils.h"
+#import "AGManagerUtils.h"
 
 static int AGUploadHttpHandlerDefaultCapacity = 1024;
 
@@ -83,6 +84,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
         [request setHTTPBody:body];
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
+        [[AGManagerUtils managerUtils].networkManager addURLConnection:conn];
     }
     if (block) {
         [conn setValue:block forKey:@"ResultBlock"];
@@ -168,7 +170,8 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     if(block){
         block(error, context);
     }
-       
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -191,6 +194,8 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     if(block){
         block(error, context);
     }
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
@@ -204,7 +209,8 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     if(block){
         block(nil, context);
     }
-    
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 }
 
 @end

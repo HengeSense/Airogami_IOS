@@ -13,6 +13,7 @@
 #import "AGAccount.h"
 #import "AGControllerUtils.h"
 #import "AGAccountStat.h"
+#import "AGAppDirector.h"
 
 static const int MaxNewPlaneIds = 50;
 
@@ -48,7 +49,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (void) resetForSync
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSSet *planes = account.planesForOwnerId;
     [planes makeObjectsPerformSelector:@selector(setDeleted:) withObject:[NSNumber numberWithBool:YES]];
     planes = account.planesForTargetId;
@@ -58,7 +59,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (void) deleteForSync
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     //
     NSSet *planes = account.planesForOwnerId;
     NSMutableArray *deletedArray = [NSMutableArray arrayWithCapacity:planes.count];
@@ -118,7 +119,7 @@ static const int MaxNewPlaneIds = 50;
         }
     }
     
-    AGAccountStat *accountStat = [AGManagerUtils managerUtils].accountManager.account.accountStat;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     if (accountStat.planeUpdateInc == nil || max > accountStat.planeUpdateInc.longLongValue) {
         accountStat.planeUpdateInc = [NSNumber numberWithLongLong:max];
     }
@@ -143,7 +144,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (NSArray*) getAllPlanesForCollect
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:planeEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messages.@count > 0 and status = %d and accountByTargetId.accountId = %@", AGPlaneStatusNew, account.accountId];
@@ -218,7 +219,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (NSNumber*)recentUpdateInc
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSNumber *updateInc = account.accountStat.planeUpdateInc;
     if (updateInc == nil) {
         updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
@@ -264,7 +265,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (NSNumber*)recentPlaneUpdateInc:(BOOL)forCollect
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:planeEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
@@ -314,7 +315,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (AGNewPlane*) getNextNewPlaneForChat
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:newPlaneEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accountId = %@", account.accountId];
@@ -333,7 +334,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (void) addNewPlanesForChat:(NSArray *)planes
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     for (AGPlane *plane in planes) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
         //[dict setObject:plane forKey:@"plane"];
@@ -363,7 +364,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (NSArray*) getAllPlanesForChat
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:planeEntityDescription];
     NSPredicate *predicate;
@@ -427,7 +428,7 @@ static const int MaxNewPlaneIds = 50;
 
 - (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane
 {
-    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
     if ([plane.accountByOwnerId.accountId isEqualToNumber:accountId]) {
         plane.lastMsgIdOfOwner = lastMsgId;
     }

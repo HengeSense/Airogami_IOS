@@ -37,7 +37,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
 {
     [AGJSONHttpHandler request:YES params:params path:SendChainPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {//error, chain
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            
         }
         else{
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
@@ -206,7 +206,10 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
     [AGJSONHttpHandler request:YES params:params path:GetOldChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSArray *oldChains = nil;
         if (error) {
-            [AGMessageUtils alertMessageWithError:error];
+            //Client error come from autoSignin  or request
+            if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
+                [AGMessageUtils alertMessageWithError:error];
+            }
         }
         else{
             //succeed
@@ -343,7 +346,9 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 
             }
             else{
-                [[AGControllerUtils controllerUtils].chainMessageController viewedChainMessagesForChain:chain];
+                //viewedChainMessagesForChain
+                NSDictionary *dict = [NSDictionary dictionaryWithObject:chain forKey:@"chain"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedChainMessagesForChain object:nil userInfo:dict];
                 [[AGCoreData coreData] remove:chain];
             }
             

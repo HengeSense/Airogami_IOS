@@ -113,7 +113,10 @@ static NSString *ObtainProfilePath= @"account/obtainProfile.action?";
                         [self uploadIcons:tokens image:image context:context block:^(NSError *error, id context) {
                             BOOL imageDone = NO;
                             if (error) {
-                                [AGMessageUtils alertMessageWithError:error];
+                                if ([error.domain isEqualToString:@"Cancel"] == NO) {
+                                    [AGMessageUtils alertMessageWithError:error];
+                                }
+                                
                             }
                             else{
                                 imageDone = YES;

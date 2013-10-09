@@ -13,9 +13,8 @@
 #import "AGUIDefines.h"
 #import "AGManagerUtils.h"
 #import "NSString+Addition.h"
-#import "AGRootViewController.h"
 #import "AGMessageUtils.h"
-#import "AGAppDelegate.h"
+#import "AGAppDirector.h"
 
 #define kAGSigninScreenNameInvalid @"error.signin.email.invalid"
 #define kAGSigninPasswordInvalid @"error.signin.password.invalid"
@@ -97,7 +96,7 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
         
         [[AGManagerUtils managerUtils].accountManager signin:dict automatic:NO animated:YES context:nil block:^(NSError *error, BOOL succeed) {
             if (succeed) {
-                [[AGRootViewController rootViewController] switchToMain];
+                [[AGAppDirector appDirector] gotoMiddle];
             }
          
         }];

@@ -12,6 +12,7 @@
 #import "AGAccountStat.h"
 #import "AGPlane.h"
 #import "AGControllerUtils.h"
+#import "AGAppDirector.h"
 
 static int MessageLimit = 10;
 
@@ -51,6 +52,15 @@ static int MessageLimit = 10;
     return message;
 }
 
+- (void) updateMessagesCount:(AGPlane*)plane
+{
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
+    int count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
+    accountStat.unreadMessagesCount = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + count - plane.unreadMessagesCount.intValue];
+    plane.unreadMessagesCount = [NSNumber numberWithInt:count];
+    [[AGCoreData coreData] save];
+}
+
 //descending
 
 - (NSDictionary*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId
@@ -77,7 +87,7 @@ static int MessageLimit = 10;
 
 - (int) getUnreadMessageCountForPlane:(NSNumber *)planeId
 {
-    NSNumber *accountId = [AGManagerUtils managerUtils].accountManager.account.accountId;
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:messageEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
@@ -105,7 +115,7 @@ static int MessageLimit = 10;
 
 -(NSNumber*) viewedMessagesForPlane:(AGPlane*)plane
 {
-    AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount *account = [AGAppDirector appDirector].account;
     AGAccountStat *accountStat = account.accountStat;
     NSNumber *lastMsgId = nil;
     //old

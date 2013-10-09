@@ -18,6 +18,7 @@
 #import "AGMessage.h"
 #import "AGManagerUtils.h"
 #import "AGCategory+Addition.h"
+#import "AGAppDirector.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
@@ -134,7 +135,7 @@ static float AGInputTextViewMaxHeight = 100;
 {
     if ([airogami isKindOfClass:[AGPlane class]]) {
         AGPlane *plane = airogami;
-        AGAccount *account = [AGManagerUtils managerUtils].accountManager.account;
+        AGAccount *account = [AGAppDirector appDirector].account;
         if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
             nameLabel.text = plane.accountByTargetId.profile.fullName;
         }
@@ -251,7 +252,7 @@ static float AGInputTextViewMaxHeight = 100;
     if ([action isEqual:@"prepend"]) {
         count += messagesData.count;
     }
-    AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount * account = [AGAppDirector appDirector].account;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
     for (AGMessage *message in messages) {
         NSBubbleType bubbleType = BubbleTypeMine;
@@ -313,7 +314,7 @@ static float AGInputTextViewMaxHeight = 100;
     if ([action isEqual:@"prepend"]) {
         count += messagesData.count;
     }
-    AGAccount * account = [AGManagerUtils managerUtils].accountManager.account;
+    AGAccount * account = [AGAppDirector appDirector].account;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
     for (AGMessage *chainMessage in chainMessages) {
         NSBubbleType bubbleType = BubbleTypeMine;
@@ -489,7 +490,7 @@ static float AGInputTextViewMaxHeight = 100;
     AGPlane *plane = airogami;
     AGMessage *message = [managerUtils.planeManager messageForReplyPlane:plane content:inputTextView.text type:AGMessageTypeText];
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:message.content date:message.createdTime type:BubbleTypeMine];
-    sayBubble.account = managerUtils.accountManager.account;
+    sayBubble.account = [AGAppDirector appDirector].account;
     sayBubble.state = message.state.intValue;
     sayBubble.obj = message;
     [messagesData addObject:sayBubble];

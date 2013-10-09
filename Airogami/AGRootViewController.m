@@ -7,7 +7,7 @@
 //
 
 #import "AGRootViewController.h"
-#import "AGAppDelegate.h"
+#import "AGAppDirector.h"
 #import "AGNotificationCenter.h"
 #import "AGViewManager.h"
 #import "AGSynchronize.h"
@@ -35,7 +35,6 @@ enum{
 
 @implementation AGRootViewController
 
-@synthesize isInMain;
 
 + (AGRootViewController*)rootViewController
 {
@@ -65,11 +64,13 @@ enum{
     synchronize.delegate = self;
     //
     rootViewController = self;
-    if ([[AGAppDelegate appDelegate].appConfig needSignin]) {
+    //
+    if ([[AGAppDirector appDirector] needSignin]) {
         rootNavigateTo = AGRootToSign;
     }
     else{
         rootNavigateTo = AGRootToMain;
+        [AGAppDirector appDirector].appStatus = AGAppStatusMiddle;
     }
     switch (rootNavigateTo) {
         case AGRootToSign:
@@ -182,15 +183,10 @@ enum{
 
 - (void) navigateToMain
 {
-    [[AGAppDelegate appDelegate].appConfig gotoMain];
+    [[AGAppDirector appDirector] gotoMain];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self performSegueWithIdentifier:@"ToMain" sender:self];
     
-}
-
--(BOOL) isInMain
-{
-    return rootNavigateTo == AGRootToMain;
 }
 
 + (AGSettingProfileMasterViewController*) settingViewController

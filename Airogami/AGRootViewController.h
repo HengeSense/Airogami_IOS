@@ -12,8 +12,6 @@
 
 @interface AGRootViewController : UIViewController
 
-@property(nonatomic, readonly) BOOL isInMain;
-
 + (AGRootViewController*)rootViewController;
 + (AGSettingProfileMasterViewController*) settingViewController;
 + (AGLocationViewController*) locationViewController;

@@ -7,6 +7,7 @@
 //
 
 #import "AGURLConnection.h"
+#import "AGMessageUtils.h"
 
 @interface AGURLConnection()
 
@@ -29,6 +30,17 @@
 -(id) valueForUndefinedKey:(NSString *)key
 {
     return [dict objectForKey:key];
+}
+
+-(void) cancel
+{
+    [super cancel];
+    AGURLConnectionFinishBlock block = [dict valueForKey:@"ResultBlock"];
+    if (block) {
+        NSError *error = [AGMessageUtils errorCancel];
+        id context = [dict valueForKey:@"Context"];
+        block(error, context, nil);
+    }
 }
 
 @end
