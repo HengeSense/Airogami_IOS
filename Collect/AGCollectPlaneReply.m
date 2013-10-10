@@ -199,7 +199,7 @@ static float AGInputTextViewMaxHeight = 80;
     
     if ([airogami isKindOfClass:[AGPlane class]]) {
         AGPlane *plane = airogami;
-        NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane.planeId content:self.inputTextView.text type:AGMessageTypeText];
+        NSDictionary *params = [managerUtils.planeManager paramsForReplyPlane:plane content:self.inputTextView.text type:AGMessageTypeText];
         //
         [managerUtils.planeManager firstReplyPlane:params plane:plane context:nil block:^(NSError *error, id context, BOOL succeed) {
             if (succeed) {

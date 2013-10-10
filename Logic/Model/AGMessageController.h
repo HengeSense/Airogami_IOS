@@ -17,6 +17,8 @@
 
 - (void) updateMessagesCount:(AGPlane*)plane;
 
+- (int) updateMessagesCountForPlane:(AGPlane*)plane;
+
 - (NSDictionary*) getMessagesForPlane:(NSNumber *)planeId startId:(NSNumber *)startId;
 
 //messageId = -1

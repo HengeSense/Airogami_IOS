@@ -2,7 +2,7 @@
 //  AGPlane.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/1/13.
+//  Created by Tianhu Yang on 10/9/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -13,17 +13,19 @@
 
 @interface AGPlane : NSManagedObject
 
+@property (nonatomic, retain) NSDate * birthdayLower;
+@property (nonatomic, retain) NSDate * birthdayUpper;
 @property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSString * country;
 @property (nonatomic, retain) NSDate * createdTime;
 @property (nonatomic, retain) NSNumber * deleted;
-@property (nonatomic, retain) NSNumber * deletedByOwner;
-@property (nonatomic, retain) NSNumber * deletedByTarget;
-@property (nonatomic, retain) NSNumber * lastMsgIdOfOwner;
-@property (nonatomic, retain) NSNumber * lastMsgIdOfTarget;
+@property (nonatomic, retain) NSNumber * deletedByO;
+@property (nonatomic, retain) NSNumber * deletedByT;
+@property (nonatomic, retain) NSNumber * lastMsgIdOfO;
+@property (nonatomic, retain) NSNumber * lastMsgIdOfT;
 @property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * likedByOwner;
-@property (nonatomic, retain) NSNumber * likedByTarget;
+@property (nonatomic, retain) NSNumber * likedByO;
+@property (nonatomic, retain) NSNumber * likedByT;
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSNumber * matchCount;
 @property (nonatomic, retain) NSNumber * maxMatchCount;
@@ -37,9 +39,8 @@
 @property (nonatomic, retain) NSNumber * unreadMessagesCount;
 @property (nonatomic, retain) NSNumber * updateCount;
 @property (nonatomic, retain) NSDate * updatedTime;
-@property (nonatomic, retain) NSNumber * updateInc;
-@property (nonatomic, retain) NSDate * birthdayLower;
-@property (nonatomic, retain) NSDate * birthdayUpper;
+@property (nonatomic, retain) NSNumber * ownerInc;
+@property (nonatomic, retain) NSNumber * targetInc;
 @property (nonatomic, retain) AGAccount *accountByOwnerId;
 @property (nonatomic, retain) AGAccount *accountByTargetId;
 @property (nonatomic, retain) AGCategory *category;

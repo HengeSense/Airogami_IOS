@@ -55,10 +55,17 @@ static int MessageLimit = 10;
 - (void) updateMessagesCount:(AGPlane*)plane
 {
     AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
-    int count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
+    int count = [self getUnreadMessageCountForPlane:plane.planeId];
     accountStat.unreadMessagesCount = [NSNumber numberWithInt:accountStat.unreadMessagesCount.intValue + count - plane.unreadMessagesCount.intValue];
     plane.unreadMessagesCount = [NSNumber numberWithInt:count];
     [[AGCoreData coreData] save];
+}
+
+- (int) updateMessagesCountForPlane:(AGPlane*)plane
+{
+    int count = [self getUnreadMessageCountForPlane:plane.planeId];
+    plane.unreadMessagesCount = [NSNumber numberWithInt:count];
+    return count;
 }
 
 //descending
@@ -123,13 +130,13 @@ static int MessageLimit = 10;
     if (message) {
         if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
             plane.ownerViewedMsgId = message.messageId;
-            if (message.messageId.longLongValue > plane.lastMsgIdOfOwner.longLongValue) {
+            if (message.messageId.longLongValue > plane.lastMsgIdOfO.longLongValue) {
                 lastMsgId = message.messageId;
             }
         }
         else{
             plane.targetViewedMsgId = message.messageId;
-            if (message.messageId.longLongValue > plane.lastMsgIdOfTarget.longLongValue) {
+            if (message.messageId.longLongValue > plane.lastMsgIdOfT.longLongValue) {
                 lastMsgId = message.messageId;
             }
         }

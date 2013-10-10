@@ -70,6 +70,7 @@
 		076B15D617B088C1005BD910 /* AGUploadHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B15C617B088C1005BD910 /* AGUploadHttpHandler.m */; };
 		076B15D717B088C1005BD910 /* AGURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B15C817B088C1005BD910 /* AGURLConnection.m */; };
 		076E2B1617A886AF00A478A3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 076E2B1517A886AF00A478A3 /* libsqlite3.dylib */; };
+		076EE5A51805FF1200E78F64 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 076EE5A41805FF1200E78F64 /* AGChain.m */; };
 		07836CCB177242FF00FCA452 /* AGWritePaperHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */; };
 		07836CCD177250A000FCA452 /* write_paper_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCC177250A000FCA452 /* write_paper_left@2x.png */; };
 		07836CD7177285C400FCA452 /* write_location_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07836CD4177285C400FCA452 /* write_location_location@2x.png */; };
@@ -200,8 +201,6 @@
 		078C88E717FB39A800811534 /* write_edit_age_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078C88E617FB39A800811534 /* write_edit_age_button@2x.png */; };
 		078C88EB17FB3C8D00811534 /* AGAgePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 078C88EA17FB3C8D00811534 /* AGAgePicker.m */; };
 		078C88ED17FB3CB700811534 /* AGAgePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 078C88EC17FB3CB700811534 /* AGAgePickerView.xib */; };
-		078C88F017FB44E800811534 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 078C88EF17FB44E800811534 /* AGChain.m */; };
-		078C88F317FB44E900811534 /* AGPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 078C88F217FB44E900811534 /* AGPlane.m */; };
 		078C88F517FB52FB00811534 /* write_edit_age_selected_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078C88F417FB52FB00811534 /* write_edit_age_selected_button@2x.png */; };
 		078D951B1761107B00663FDE /* signup_account_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D95191761107B00663FDE /* signup_account_name@2x.png */; };
 		078D951C1761107B00663FDE /* signup_account_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D951A1761107B00663FDE /* signup_account_password@2x.png */; };
@@ -309,9 +308,10 @@
 		07B1051D17FCBA20000DD694 /* AGProfileImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1051C17FCBA20000DD694 /* AGProfileImage.m */; };
 		07B1051F17FE0297000DD694 /* AGChatPlaneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B1051E17FE0297000DD694 /* AGChatPlaneHeaderView.xib */; };
 		07B1052218033ADD000DD694 /* AGAccountStat.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052118033ADD000DD694 /* AGAccountStat.m */; };
-		07B1052518038762000DD694 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052418038762000DD694 /* AGChainMessage.m */; };
 		07B1052818047AB8000DD694 /* AGAppDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052718047AB8000DD694 /* AGAppDirector.m */; };
 		07B1052B1804CAD4000DD694 /* AGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052A1804CAD4000DD694 /* AGNetworkManager.m */; };
+		07B1052E1805CAAA000DD694 /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B1052D1805CAAA000DD694 /* AGChainMessage.m */; };
+		07B105311805CAAE000DD694 /* AGPlane.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B105301805CAAE000DD694 /* AGPlane.m */; };
 		07B393F1176FA8C5006FA397 /* YTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 07444997176F8727001CDFB2 /* YTTabBar.m */; };
 		07B393F2176FA8C9006FA397 /* YTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07444999176F8727001CDFB2 /* YTTabBarController.m */; };
 		07B393F3176FA8CD006FA397 /* YTTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0744499F176F8BB4001CDFB2 /* YTTabBarItem.m */; };
@@ -495,6 +495,8 @@
 		076B15C717B088C1005BD910 /* AGURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGURLConnection.h; sourceTree = "<group>"; };
 		076B15C817B088C1005BD910 /* AGURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGURLConnection.m; sourceTree = "<group>"; };
 		076E2B1517A886AF00A478A3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		076EE5A31805FF1200E78F64 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
+		076EE5A41805FF1200E78F64 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
 		07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGWritePaperHeaderView.xib; sourceTree = "<group>"; };
 		07836CCC177250A000FCA452 /* write_paper_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_left@2x.png"; sourceTree = "<group>"; };
 		07836CD4177285C400FCA452 /* write_location_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_location_location@2x.png"; sourceTree = "<group>"; };
@@ -659,10 +661,6 @@
 		078C88E917FB3C8D00811534 /* AGAgePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAgePicker.h; sourceTree = "<group>"; };
 		078C88EA17FB3C8D00811534 /* AGAgePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAgePicker.m; sourceTree = "<group>"; };
 		078C88EC17FB3CB700811534 /* AGAgePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGAgePickerView.xib; sourceTree = "<group>"; };
-		078C88EE17FB44E800811534 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
-		078C88EF17FB44E800811534 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
-		078C88F117FB44E900811534 /* AGPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlane.h; sourceTree = "<group>"; };
-		078C88F217FB44E900811534 /* AGPlane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlane.m; sourceTree = "<group>"; };
 		078C88F417FB52FB00811534 /* write_edit_age_selected_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_age_selected_button@2x.png"; sourceTree = "<group>"; };
 		078D95191761107B00663FDE /* signup_account_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_name@2x.png"; sourceTree = "<group>"; };
 		078D951A1761107B00663FDE /* signup_account_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signup_account_password@2x.png"; sourceTree = "<group>"; };
@@ -820,12 +818,14 @@
 		07B1051E17FE0297000DD694 /* AGChatPlaneHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGChatPlaneHeaderView.xib; sourceTree = "<group>"; };
 		07B1052018033ADD000DD694 /* AGAccountStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountStat.h; sourceTree = "<group>"; };
 		07B1052118033ADD000DD694 /* AGAccountStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountStat.m; sourceTree = "<group>"; };
-		07B1052318038762000DD694 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
-		07B1052418038762000DD694 /* AGChainMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessage.m; sourceTree = "<group>"; };
 		07B1052618047AB8000DD694 /* AGAppDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAppDirector.h; sourceTree = "<group>"; };
 		07B1052718047AB8000DD694 /* AGAppDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAppDirector.m; sourceTree = "<group>"; };
 		07B105291804CAD4000DD694 /* AGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNetworkManager.h; sourceTree = "<group>"; };
 		07B1052A1804CAD4000DD694 /* AGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNetworkManager.m; sourceTree = "<group>"; };
+		07B1052C1805CAAA000DD694 /* AGChainMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessage.h; sourceTree = "<group>"; };
+		07B1052D1805CAAA000DD694 /* AGChainMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessage.m; sourceTree = "<group>"; };
+		07B1052F1805CAAE000DD694 /* AGPlane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPlane.h; sourceTree = "<group>"; };
+		07B105301805CAAE000DD694 /* AGPlane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPlane.m; sourceTree = "<group>"; };
 		07B8DBF317710146006922FF /* main_tabbar_bgrd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_bgrd@2x.png"; sourceTree = "<group>"; };
 		07B8DBF417710146006922FF /* main_tabbar_item_write@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_item_write@2x.png"; sourceTree = "<group>"; };
 		07B8DBF517710146006922FF /* main_tabbar_item_write_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_tabbar_item_write_selected@2x.png"; sourceTree = "<group>"; };
@@ -1292,14 +1292,14 @@
 				07E1C28E17EBD5A200D2EFCF /* AGNewPlane.m */,
 				0716A0B717F3637700E95840 /* AGNewChain.h */,
 				0716A0B817F3637700E95840 /* AGNewChain.m */,
-				078C88EE17FB44E800811534 /* AGChain.h */,
-				078C88EF17FB44E800811534 /* AGChain.m */,
-				078C88F117FB44E900811534 /* AGPlane.h */,
-				078C88F217FB44E900811534 /* AGPlane.m */,
 				07B1052018033ADD000DD694 /* AGAccountStat.h */,
 				07B1052118033ADD000DD694 /* AGAccountStat.m */,
-				07B1052318038762000DD694 /* AGChainMessage.h */,
-				07B1052418038762000DD694 /* AGChainMessage.m */,
+				07B1052C1805CAAA000DD694 /* AGChainMessage.h */,
+				07B1052D1805CAAA000DD694 /* AGChainMessage.m */,
+				07B1052F1805CAAE000DD694 /* AGPlane.h */,
+				07B105301805CAAE000DD694 /* AGPlane.m */,
+				076EE5A31805FF1200E78F64 /* AGChain.h */,
+				076EE5A41805FF1200E78F64 /* AGChain.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -2221,7 +2221,6 @@
 				0707238F175EA8670017292A /* AGSignupViewController.m in Sources */,
 				078D952F176145E600663FDE /* AGUtils.m in Sources */,
 				07DB923917669867000F0780 /* AGImagePickAndCrop.m in Sources */,
-				07B1052518038762000DD694 /* AGChainMessage.m in Sources */,
 				07DB92551769411A000F0780 /* NSArray+Addition.m in Sources */,
 				073250FA176AB4AB00487B9E /* NSString+Addition.m in Sources */,
 				079046F5176BD21A007E2827 /* AGSigninViewController.m in Sources */,
@@ -2264,6 +2263,7 @@
 				0791845B177E3C0D00D28C0F /* UIBubbleTypingTableViewCell.m in Sources */,
 				07918468177E4A7300D28C0F /* AGChatChatViewController.m in Sources */,
 				0791846B177E4B1F00D28C0F /* AGChatPlaneViewController.m in Sources */,
+				076EE5A51805FF1200E78F64 /* AGChain.m in Sources */,
 				07918495177E5B9400D28C0F /* AGSlideSegue.m in Sources */,
 				07918496177E5B9400D28C0F /* AGUIDefines.m in Sources */,
 				07918498177E5B9400D28C0F /* AGUIUtils.m in Sources */,
@@ -2308,6 +2308,7 @@
 				0702F6C617B2F9FA00B4EBB3 /* AGDatePicker.m in Sources */,
 				07B1052B1804CAD4000DD694 /* AGNetworkManager.m in Sources */,
 				0702F6CB17B319A000B4EBB3 /* AGDataManger.m in Sources */,
+				07B1052E1805CAAA000DD694 /* AGChainMessage.m in Sources */,
 				07B1051717FCB8C7000DD694 /* AGTextView.m in Sources */,
 				0702F6D117B4325700B4EBB3 /* AGMessageUtils.m in Sources */,
 				0702F6D217B4325700B4EBB3 /* AGUIErrorAnimation.m in Sources */,
@@ -2340,6 +2341,7 @@
 				0743FF8F17DD0CA1005A9261 /* AGChainNotification.m in Sources */,
 				0743FF9017DD0CA1005A9261 /* AGNotificationCenter.m in Sources */,
 				0743FF9117DD0CA1005A9261 /* AGPlaneNotification.m in Sources */,
+				07B105311805CAAE000DD694 /* AGPlane.m in Sources */,
 				0743FF9417DD475F005A9261 /* AGAccountNotification.m in Sources */,
 				0743FF9717DD534C005A9261 /* Model.xcdatamodeld in Sources */,
 				0743FF9D17DD5958005A9261 /* AGNewAccount.m in Sources */,
@@ -2350,8 +2352,6 @@
 				0716A0D417F7759700E95840 /* AGViewManager.m in Sources */,
 				07B1051A17FCB8C7000DD694 /* UIView+Addition.m in Sources */,
 				078C88EB17FB3C8D00811534 /* AGAgePicker.m in Sources */,
-				078C88F017FB44E800811534 /* AGChain.m in Sources */,
-				078C88F317FB44E900811534 /* AGPlane.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

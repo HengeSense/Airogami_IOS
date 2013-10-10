@@ -11,6 +11,7 @@
 #import "AGMessage.h"
 #import "AGManagerUtils.h"
 #import "AGAccount.h"
+#import "AGAccountStat.h"
 #import "AGControllerUtils.h"
 #import "AGAccountStat.h"
 #import "AGAppDirector.h"
@@ -60,13 +61,18 @@ static const int MaxNewPlaneIds = 50;
 - (void) deleteForSync
 {
     AGAccount *account = [AGAppDirector appDirector].account;
+    AGAccountStat *accountStat = account.accountStat;
+    int unreadMessagesCount = 0;
     //
     NSSet *planes = account.planesForOwnerId;
     NSMutableArray *deletedArray = [NSMutableArray arrayWithCapacity:planes.count];
     for (AGPlane *plane in planes) {
         if (plane.deleted.boolValue == YES) {
             [deletedArray addObject:plane];
-            [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
+            //[[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
+        }
+        else{
+            unreadMessagesCount += [[AGControllerUtils controllerUtils].messageController updateMessagesCountForPlane:plane];
         }
     }
     [coreData removeAll:deletedArray];
@@ -77,8 +83,11 @@ static const int MaxNewPlaneIds = 50;
     for (AGPlane *plane in planes) {
         if (plane.deleted.boolValue == YES) {
             [deletedArray addObject:plane];
+        }else{
+            unreadMessagesCount += [[AGControllerUtils controllerUtils].messageController updateMessagesCountForPlane:plane];
         }
     }
+    accountStat.unreadMessagesCount = [NSNumber numberWithInt:unreadMessagesCount];
     [coreData removeAll:deletedArray];
 }
 
@@ -133,6 +142,10 @@ static const int MaxNewPlaneIds = 50;
         [oldPlaneJson setObject:[NSNumber numberWithBool:NO] forKey:@"deleted"];
     }
     NSMutableArray *array = [coreData updateArray:jsonArray withEntityName:@"AGPlane"];
+    for (AGPlane *plane in array) {
+        plane.ownerViewedMsgId = plane.lastMsgIdOfO;
+        plane.targetViewedMsgId = plane.lastMsgIdOfT;
+    }
     [coreData save];
     return array;
 }
@@ -164,13 +177,25 @@ static const int MaxNewPlaneIds = 50;
  return [self recentPlaneUpdateInc:NO];
 }
 
+-(void) increaseUpdateInc
+{
+    AGAccount *account = [AGAppDirector appDirector].account;
+    NSNumber *updateInc = account.accountStat.planeUpdateInc;
+    if (updateInc == nil) {
+        updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
+    }
+    updateInc = [NSNumber numberWithLongLong:updateInc.longLongValue + 1];
+    account.accountStat.planeUpdateInc = updateInc;
+    [coreData save];
+}
+
 - (void) increaseUpdateIncForChat:(AGPlane*)plane
 {
     NSNumber *maxUpdateInc = [self recentPlaneUpdateIncForChat];
     if (maxUpdateInc == nil) {
         maxUpdateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
     }
-    plane.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
+    //plane.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
     [coreData save];
 }
 
@@ -275,7 +300,7 @@ static const int MaxNewPlaneIds = 50;
         predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@", AGPlaneStatusNew, account.accountId];
     }
     else{
-        predicate = [NSPredicate predicateWithFormat:@"status >= %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
+        predicate = [NSPredicate predicateWithFormat:@"status >= %d and ((accountByOwnerId.accountId = %@ and deletedByO = 0) or (accountByTargetId.accountId = %@ and deletedByT = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
     }
     
     [fetchRequest setPredicate:predicate];
@@ -299,7 +324,7 @@ static const int MaxNewPlaneIds = 50;
             predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@ and updateInc = 0", AGPlaneStatusNew, account.accountId];
         }
         else{
-            predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0)) and updateInc = 0", AGPlaneStatusReplied, account.accountId, account.accountId];
+            predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByO = 0) or (accountByTargetId.accountId = %@ and deletedByT = 0)) and updateInc = 0", AGPlaneStatusReplied, account.accountId, account.accountId];
         }
         
         fetchRequest = [[NSFetchRequest alloc] init];
@@ -340,7 +365,7 @@ static const int MaxNewPlaneIds = 50;
         //[dict setObject:plane forKey:@"plane"];
         [dict setObject:account.accountId forKey:@"accountId"];
         [dict setObject:plane.planeId forKey:@"planeId"];
-        [dict setObject:plane.updateInc forKey:@"updateInc"];
+        //[dict setObject:plane.updateInc forKey:@"updateInc"];
         AGNewPlane *newPlane = (AGNewPlane *)[coreData saveOrUpdate:dict withEntityName:@"AGNewPlane"];
         newPlane.plane = plane;
     }
@@ -368,7 +393,7 @@ static const int MaxNewPlaneIds = 50;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:planeEntityDescription];
     NSPredicate *predicate;
-    predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByOwner = 0) or (accountByTargetId.accountId = %@ and deletedByTarget = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
+    predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByO = 0) or (accountByTargetId.accountId = %@ and deletedByT = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
     
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:NO];
@@ -430,10 +455,10 @@ static const int MaxNewPlaneIds = 50;
 {
     NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
     if ([plane.accountByOwnerId.accountId isEqualToNumber:accountId]) {
-        plane.lastMsgIdOfOwner = lastMsgId;
+        plane.lastMsgIdOfO = lastMsgId;
     }
     else{
-        plane.lastMsgIdOfTarget = lastMsgId;
+        plane.lastMsgIdOfT = lastMsgId;
     }
     [coreData save];
 }

@@ -21,6 +21,7 @@
 - (NSArray*) getAllPlanesForCollect;
 - (NSNumber*) recentUpdateInc;
 - (NSNumber*) recentPlaneUpdateIncForChat;
+-(void) increaseUpdateInc;
 - (void) increaseUpdateIncForChat:(AGPlane*)plane;
 - (NSArray*) getAllPlanesForChat;
 - (void) updateMessage:(AGPlane*)plane;

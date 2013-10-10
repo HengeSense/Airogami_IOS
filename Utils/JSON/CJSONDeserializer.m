@@ -1154,7 +1154,7 @@ static NSNumber *ScanNumber(const char *start, size_t length, NSError **outError
             }
         else
             {
-            if (integer >= INT64_MAX)
+            if (integer > INT64_MAX + 1ULL)
                 {
                 goto fallback;
                 }
@@ -1191,6 +1191,7 @@ fallback: {
         NSString *theString = [[NSString alloc] initWithBytes:start length:length encoding:NSASCIIStringEncoding];
         NSLocale *theLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
         NSDecimalNumber *theDecimalNumber = [NSDecimalNumber decimalNumberWithString:theString locale:theLocale ];
+        //NSNumber *number = [NS num:theString locale:theLocale ];
         return(theDecimalNumber);
         }
 error: {

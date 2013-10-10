@@ -2,7 +2,7 @@
 //  AGChain.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/1/13.
+//  Created by Tianhu Yang on 10/9/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -14,6 +14,8 @@
 
 @implementation AGChain
 
+@dynamic birthdayLower;
+@dynamic birthdayUpper;
 @dynamic chainId;
 @dynamic city;
 @dynamic collected;
@@ -31,9 +33,6 @@
 @dynamic status;
 @dynamic updateCount;
 @dynamic updatedTime;
-@dynamic updateInc;
-@dynamic birthdayLower;
-@dynamic birthdayUpper;
 @dynamic account;
 @dynamic chainMessage;
 @dynamic chainMessages;

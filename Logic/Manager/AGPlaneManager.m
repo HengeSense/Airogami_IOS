@@ -69,8 +69,10 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
 - (void) replyPlane:(AGMessage*) message context:(id)context block:(AGReplyPlaneFinishBlock)block
 {
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    BOOL byOwner = [message.plane.accountByOwnerId.accountId isEqual:[AGAppDirector appDirector].account.accountId];
     [params setObject:message.plane.planeId forKey:@"planeId"];
+    [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
     [params setObject:message.content forKey:@"messageVO.content"];
     [params setObject:message.type forKey:@"messageVO.type"];
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
@@ -96,7 +98,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 //result = [result objectForKey:AGLogicJSONErrorKey];
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
-                [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:message.plane];
+                //[[AGControllerUtils controllerUtils].planeController increaseUpdateInc];
                 message.plane.updatedTime = remoteMessage.createdTime;
                 [[AGControllerUtils controllerUtils].planeController updateMessage:message.plane];
                 [[AGCoreData coreData] remove:message];
@@ -140,7 +142,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 [[AGCoreData coreData] save];
                 //
                 [[AGControllerUtils controllerUtils].planeController updateMessage:plane];
-                [[AGControllerUtils controllerUtils].planeController increaseUpdateIncForChat:plane];
+                //[[AGControllerUtils controllerUtils].planeController increaseUpdateInc];
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
                 [[AGPlaneNotification planeNotification] collectedPlanes];
             }
@@ -514,11 +516,13 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     return params;
 }
 
-- (NSDictionary*)paramsForReplyPlane:(NSNumber*)planeId content:(NSString*)content type:(int)type
+- (NSDictionary*)paramsForReplyPlane:(AGPlane*)plane content:(NSString*)content type:(int)type
 {
+    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGAppDirector appDirector].account.accountId];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:planeId forKey:@"planeId"];
+    [params setObject:plane.planeId forKey:@"planeId"];
     [params setObject:content forKey:@"messageVO.content"];
+    [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
     [params setObject:[NSNumber numberWithInteger:type] forKey:@"messageVO.type"];
     return params;
 }

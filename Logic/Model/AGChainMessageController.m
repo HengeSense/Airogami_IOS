@@ -187,6 +187,14 @@ static const int ChainMessageLimit = 10;
     [[AGCoreData coreData] save];
 }
 
+- (int) updateChainMessagesCountForChain:(AGChain*)chain
+{
+    int count = [self getUnreadChainMessageCountForChain:chain.chainId];
+    AGChainMessage *chainMessage = [self getChainMessageForChain:chain.chainId];
+    chainMessage.unreadChainMessagesCount = [NSNumber numberWithInt:count];
+    return count;
+}
+
 //for chat
 -(NSDate*) viewedChainMessagesForChain:(AGChain *)chain
 {

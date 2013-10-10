@@ -69,7 +69,6 @@
         <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <attribute name="updatedTime" attributeType="Date" indexed="YES" syncable="YES"/>
-        <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chains" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="chainMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGChainMessage" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="chain" inverseEntity="AGChainMessage" syncable="YES"/>
@@ -87,6 +86,7 @@
         <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="unreadChainMessagesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chainMessages" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="chain" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGChain" inverseName="chainMessages" inverseEntity="AGChain" syncable="YES"/>
         <relationship name="id" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AGChainMessageId" inverseName="chainMessage" inverseEntity="AGChainMessageId" syncable="YES"/>
@@ -157,27 +157,28 @@
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="deletedByOwner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="deletedByTarget" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="lastMsgIdOfOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="lastMsgIdOfTarget" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="deletedByO" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="deletedByT" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastMsgIdOfO" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastMsgIdOfT" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="likedByOwner" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="likedByTarget" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="likedByO" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="likedByT" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="matchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="maxMatchCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="ownerInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <attribute name="ownerViewedMsgId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="planeId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="source" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="targetInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <attribute name="targetViewedMsgId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="unreadMessagesCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <attribute name="updatedTime" attributeType="Date" indexed="YES" syncable="YES"/>
-        <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="accountByOwnerId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForOwnerId" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="accountByTargetId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForTargetId" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="category" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGCategory" inverseName="planes" inverseEntity="AGCategory" syncable="YES"/>

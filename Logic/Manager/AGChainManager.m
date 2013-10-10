@@ -99,7 +99,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 [[AGControllerUtils controllerUtils].chainController updateChainMessage:chain];
                 //[[AGCoreData coreData] save];
                 //
-                [[AGControllerUtils controllerUtils].chainController increaseUpdateIncForChat:chain];
+                //[[AGControllerUtils controllerUtils].chainController increaseUpdateInc];
                 [[AGChainNotification chainNotification] obtainedChains];
                 [[AGChainNotification chainNotification] collectedChains];
             }

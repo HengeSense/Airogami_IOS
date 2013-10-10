@@ -13,6 +13,7 @@
 #import "AGAccountStat.h"
 #import "AGControllerUtils.h"
 #import "AGAppDirector.h"
+#import "AGUtils.h"
 
 static const int MaxNewChainIds = 50;
 
@@ -70,7 +71,13 @@ static const int MaxNewChainIds = 50;
         NSNumber *chainId = [oldChainJson objectForKey:@"chainId"];
         AGChainMessage *chainMessage = [chainMessageController getChainMessageForChain:chainId];
         chainMessage.status = [oldChainJson objectForKey:@"status"];
+        NSString *lastViewedTimeJson = [oldChainJson objectForKey:@"lastViewedTime"];
+        if (lastViewedTimeJson) {
+            chainMessage.lastViewedTime = [AGUtils stringToDate:lastViewedTimeJson];
+            chainMessage.mineLastTime = chainMessage.lastViewedTime;
+        }
         [oldChainJson removeObjectForKey:@"status"];
+        [oldChainJson removeObjectForKey:@"lastViewedTime"];
         [oldChainJson setObject:[NSNumber numberWithBool:NO] forKey:@"deleted"];
     }
     NSMutableArray *array = [coreData updateArray:jsonArray withEntityName:@"AGChain"];
@@ -257,14 +264,25 @@ static const int MaxNewChainIds = 50;
     return chainMessage;
 }
 
+- (void) increaseUpdateInc
+{
+    AGAccount *account = [AGAppDirector appDirector].account;
+    NSNumber *updateInc = account.accountStat.chainUpdateInc;
+    if (updateInc == nil) {
+        updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
+    }
+    account.accountStat.chainUpdateInc = [NSNumber numberWithLongLong:updateInc.longLongValue + 1];
+    [coreData save];
+}
+
 - (void) increaseUpdateIncForChat:(AGChain*)chain
 {
     NSNumber *maxUpdateInc = [self recentChainUpdateIncForChat];
     if (maxUpdateInc == nil) {
         maxUpdateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
     }
-    chain.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
-    NSLog(@"%@",  chain.updateInc);
+    //chain.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
+    //NSLog(@"%@",  chain.updateInc);
     [coreData save];
 }
 
@@ -325,7 +343,7 @@ static const int MaxNewChainIds = 50;
         //[dict setObject:chain forKey:@"chain"];
         [dict setObject:account.accountId forKey:@"accountId"];
         [dict setObject:chain.chainId forKey:@"chainId"];
-        [dict setObject:chain.updateInc forKey:@"updateInc"];
+        //[dict setObject:chain.updateInc forKey:@"updateInc"];
         AGNewChain *newChain = (AGNewChain *)[coreData saveOrUpdate:dict withEntityName:@"AGNewChain"];
         newChain.chain = chain;
     }
@@ -351,6 +369,8 @@ static const int MaxNewChainIds = 50;
 
 - (void) deleteForSync
 {
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
+    int unreadChainMessagesCount = 0;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:chainEntityDescription];
     NSError *error;
@@ -359,9 +379,14 @@ static const int MaxNewChainIds = 50;
     for (AGChain *chain in array) {
         if (chain.deleted.boolValue == YES) {
             [deletedArray addObject:chain];
-            [[AGControllerUtils controllerUtils].chainMessageController viewedChainMessagesForChain:chain];
+            //[[AGControllerUtils controllerUtils].chainMessageController viewedChainMessagesForChain:chain];
+        }
+        else{
+            unreadChainMessagesCount += [[AGControllerUtils controllerUtils].chainMessageController updateChainMessagesCountForChain:chain];
+            
         }
     }
+    accountStat.unreadChainMessagesCount = [NSNumber numberWithInt:unreadChainMessagesCount];
     [coreData removeAll:deletedArray];
 }
 

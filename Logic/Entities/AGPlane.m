@@ -2,7 +2,7 @@
 //  AGPlane.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/1/13.
+//  Created by Tianhu Yang on 10/9/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -15,17 +15,19 @@
 
 @implementation AGPlane
 
+@dynamic birthdayLower;
+@dynamic birthdayUpper;
 @dynamic city;
 @dynamic country;
 @dynamic createdTime;
 @dynamic deleted;
-@dynamic deletedByOwner;
-@dynamic deletedByTarget;
-@dynamic lastMsgIdOfOwner;
-@dynamic lastMsgIdOfTarget;
+@dynamic deletedByO;
+@dynamic deletedByT;
+@dynamic lastMsgIdOfO;
+@dynamic lastMsgIdOfT;
 @dynamic latitude;
-@dynamic likedByOwner;
-@dynamic likedByTarget;
+@dynamic likedByO;
+@dynamic likedByT;
 @dynamic longitude;
 @dynamic matchCount;
 @dynamic maxMatchCount;
@@ -39,9 +41,8 @@
 @dynamic unreadMessagesCount;
 @dynamic updateCount;
 @dynamic updatedTime;
-@dynamic updateInc;
-@dynamic birthdayLower;
-@dynamic birthdayUpper;
+@dynamic ownerInc;
+@dynamic targetInc;
 @dynamic accountByOwnerId;
 @dynamic accountByTargetId;
 @dynamic category;

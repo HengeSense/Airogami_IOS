@@ -258,7 +258,7 @@
     //set values
     for (NSString *key in attributesByName.allKeys) {
         NSAttributeDescription *attributeDescription  = [attributesByName objectForKey:key];
-        NSObject *obj = [jsonDictionary objectForKey:key];
+        id obj = [jsonDictionary objectForKey:key];
         if (obj) {
             if ([obj isEqual:[NSNull null]]) {
                 obj = nil;
@@ -271,6 +271,11 @@
                     obj = [AGUtils stringToDate:(NSString*)obj];
                 }
             }
+            else if(attributeDescription.attributeType == NSInteger64AttributeType){
+                obj = [NSNumber numberWithLongLong:((NSNumber*)obj).longLongValue];
+
+            }
+            
             if (shouldObserve && [observedEntityKey isEqualToString:key]) {
                 id oldObj = [managedObject valueForKey:key];
                 if ([oldObj isEqual:obj] == NO) {
