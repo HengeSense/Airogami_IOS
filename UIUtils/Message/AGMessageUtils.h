@@ -15,6 +15,7 @@
 + (void) alertMessageWithTitle:(NSString *)title message:(NSString *)msg;
 + (void) alertMessageWithTitle:(NSString *)title error:(NSError *)error;
 + (void) alertMessageWithError:(NSError *)error;
++ (void) alertMessageWithFilteredError:(NSError *)error;
 + (void) errorMessgeWithTitle:(NSString*) title view:(UIView*)view;
 + (void) alertMessageModified:(id<UIAlertViewDelegate>)delegate;
 + (void) alertMessageUpdated;

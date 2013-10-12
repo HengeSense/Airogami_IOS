@@ -54,7 +54,6 @@
         <attribute name="birthdayUpper" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="collected" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" attributeType="Date" syncable="YES"/>
         <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>

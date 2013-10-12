@@ -44,6 +44,14 @@ static NSString *PlaneChanged = @"error.general.planechanged";
     [alert show];
 }
 
++ (void) alertMessageWithFilteredError:(NSError *)error
+{
+    //Client error come from autoSignin or request
+    if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
+        [AGMessageUtils alertMessageWithError:error];
+    }
+}
+
 + (void) alertMessageWithError:(NSError *)error
 {
     UIAlertView *alert = [[UIAlertView alloc] init];

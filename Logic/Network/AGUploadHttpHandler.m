@@ -162,6 +162,8 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
 
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     [connection cancel];
     NSError *error = [AGMessageUtils errorServer];
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
@@ -170,8 +172,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     if(block){
         block(error, context);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -185,6 +186,8 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
 - (void)connection:(AGURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 #ifdef IS_DEBUG
     NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 #endif
@@ -194,12 +197,13 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     if(block){
         block(error, context);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     // do something with the data
     // data is declared as a method instance elsewhere
     //NSLog(@"Succeeded! Received %d bytes of data: %@",[data length], [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
@@ -209,8 +213,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     if(block){
         block(nil, context);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 @end

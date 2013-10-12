@@ -98,11 +98,18 @@ static const int MaxNewChainIds = 50;
     return array;
 }
 
+- (NSMutableArray*) saveChainsForCollect:(NSArray*)jsonArray
+{
+    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
+    [coreData save];
+    return array;
+}
+
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray forCollect:(BOOL)collected
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
     for (AGChain *chain in array) {
-        chain.collected = [NSNumber numberWithChar:collected];
+        //chain.collected = [NSNumber numberWithChar:collected];
     }
     [coreData save];
     return array;
@@ -334,19 +341,21 @@ static const int MaxNewChainIds = 50;
     }
     return newChain;
 }
-
+//for pickup
 - (void) addNewChains:(NSArray *)chains
 {
-    AGAccount *account = [AGAppDirector appDirector].account;
+    AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
+    long long count = accountStat.chainUpdateInc.longLongValue;
     for (AGChain *chain in chains) {
+        ++count;
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-        //[dict setObject:chain forKey:@"chain"];
-        [dict setObject:account.accountId forKey:@"accountId"];
         [dict setObject:chain.chainId forKey:@"chainId"];
-        //[dict setObject:chain.updateInc forKey:@"updateInc"];
+        [dict setObject:chain.updateCount forKey:@"updateCount"];
+        [dict setObject:[NSNumber numberWithLongLong:count] forKey:@"updateInc"];
         AGNewChain *newChain = (AGNewChain *)[coreData saveOrUpdate:dict withEntityName:@"AGNewChain"];
         newChain.chain = chain;
     }
+    accountStat.chainUpdateInc = [NSNumber numberWithLongLong:count];
     [coreData save];
 }
 

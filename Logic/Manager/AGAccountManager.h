@@ -33,6 +33,7 @@ typedef void (^AGAccountSignupDoneBlock)(BOOL succeed);
 
 -(void) signout:(id)context block:(AGHttpDoneBlock)block ;
 
+- (void) updateDevice;
 //Kickoff autoSignin
 - (void) autoSignin:(id)context block:(AGHttpDoneBlock)block;
 - (void) autoSignin:(NSDictionary*)reqDict;

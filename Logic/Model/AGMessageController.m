@@ -63,7 +63,10 @@ static int MessageLimit = 10;
 
 - (int) updateMessagesCountForPlane:(AGPlane*)plane
 {
-    int count = [self getUnreadMessageCountForPlane:plane.planeId];
+    int count = 0;
+    if (plane.status.shortValue == AGPlaneStatusReplied) {
+        count = [self getUnreadMessageCountForPlane:plane.planeId];
+    }
     plane.unreadMessagesCount = [NSNumber numberWithInt:count];
     return count;
 }

@@ -106,11 +106,15 @@ static NSString *InvalidOldPassword = @"error.account.changepassword.oldpassword
     AGAccountManager *accountManager = [AGManagerUtils managerUtils].accountManager;
     NSDictionary *params = [accountManager paramsForChangePassword:self.currentTextField.text newPassword:self.nowTextField.text];
     [accountManager changePassword:params context:nil block:^(NSError *error, id context, BOOL succeed) {
-        if (succeed) {
-            [AGMessageUtils alertMessageUpdated];
+        if (error) {
         }
         else{
-            [AGMessageUtils alertMessageWithTitle:@"" message:AGLS(InvalidOldPassword)];
+            if (succeed) {
+                [AGMessageUtils alertMessageUpdated];
+            }
+            else{
+                [AGMessageUtils alertMessageWithTitle:@"" message:AGLS(InvalidOldPassword)];
+            }
         }
      
     }];

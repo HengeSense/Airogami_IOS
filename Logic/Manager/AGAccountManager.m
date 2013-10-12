@@ -37,6 +37,7 @@ static NSString *SigninNotMatch = @"error.signin.notmatch.message";
 static NSString *SigninNeeded = @"error.signin.need.title";
 static NSString *SigninOther = @"error.signin.other.message";
 static NSString *SigninBanned = @"error.account.signin.banned";
+static NSString *SigninOut = @"error.account.signin.out";
 
 @interface AGAccountManager()
 {
@@ -164,7 +165,15 @@ static NSString *SigninBanned = @"error.account.signin.banned";
                 NSString *str = [result objectForKey:AGLogicJSONErrorKey];
                 AGAppConfig *appConfig = [AGAppDirector appDirector].appConfig;
                 if (str) {
-                    if ([str isEqual:@"banned"]) {
+                    if ([str isEqual:@"out"]) {
+                        if (automatic || animated) {
+                            [AGMessageUtils alertMessageWithTitle:nil message:SigninOut];
+                        }
+                        if (automatic) {
+                            [appDirector gotoSign];
+                        }
+                    }
+                    else if ([str isEqual:@"banned"]) {
                         if (automatic || animated) {
                             [AGMessageUtils alertMessageWithTitle:nil message:SigninBanned];
                         }
@@ -324,7 +333,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     [AGJSONHttpHandler request:YES params:params path:ChangePasswordPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         BOOL succeed = NO;
         if (error) {
-            
+            [AGMessageUtils alertMessageWithFilteredError:error];
         }
         else{
              NSNumber *number = [result objectForKey:AGLogicJSONSucceedKey];
@@ -346,7 +355,7 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     [AGJSONHttpHandler request:YES params:params path:ChangeScreenNamePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         BOOL succeed = NO;
         if (error) {
-            
+            [AGMessageUtils alertMessageWithFilteredError:error];
         }
         else{
             NSNumber *number = [result objectForKey:AGLogicJSONSucceedKey];
@@ -396,14 +405,28 @@ static NSString *SigninBanned = @"error.account.signin.banned";
     }
 }
 
+- (void) updateDevice
+{
+    AGAppConfig *appConfig = [AGAppDirector appDirector].appConfig;
+    NSMutableDictionary *params = [appConfig autoSigninParams];
+    if (params.count) {
+        [params setObject:[NSNumber numberWithBool:YES] forKey:@"updateDev"];
+        [self signin:params automatic:YES animated:NO context:nil block:^(NSError *error, BOOL succeed) {
+#ifdef IS_DEBUG
+            NSLog(@"updateDevice: succeed=%d", succeed);
+#endif
+        }];
+    }
+}
+
 - (void) autoSignin:(NSDictionary*)reqDict
 {
     AGAppConfig *appConfig = [AGAppDirector appDirector].appConfig;
     NSMutableDictionary *params = [appConfig autoSigninParams];
     if (params.count) {
-        //NSString *prompt = [reqDict objectForKey:@"prompt"];
-        //BOOL animated = prompt != nil;
-        [self signin:params automatic:YES animated:NO context:nil block:^(NSError *error, BOOL succeed) {
+        NSString *prompt = [reqDict objectForKey:@"prompt"];
+        BOOL animated = prompt != nil;
+        [self signin:params automatic:YES animated:animated context:nil block:^(NSError *error, BOOL succeed) {
             if (reqDict) {
                 if (succeed) {
                     [AGJSONHttpHandler start:reqDict];

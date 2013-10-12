@@ -15,6 +15,7 @@
 
 - (AGChain*) saveChain:(NSDictionary*)chainJson;
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray;
+- (NSMutableArray*) saveChainsForCollect:(NSArray*)jsonArray;
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray forCollect:(BOOL)collected;
 - (NSMutableArray*) saveNewChains:(NSArray*)jsonArray;
 - (NSMutableArray*) saveOldChains:(NSArray*)jsonArray;

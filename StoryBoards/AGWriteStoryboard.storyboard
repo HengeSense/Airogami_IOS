@@ -219,13 +219,14 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="TPa-ts-ES6">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="back_button.png" id="wyI-la-fR6">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8S5-P8-D7i">
-                                <rect key="frame" x="16" y="7" width="59" height="30"/>
+                        <barButtonItem key="leftBarButtonItem" id="grg-o1-DT1">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PLW-eD-k0v">
+                                <rect key="frame" x="16" y="11" width="32" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="-20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Profile" backgroundImage="back_button.png">
+                                <state key="normal" backgroundImage="write_paper_profile_button.png">
                                     <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -233,24 +234,23 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="profileButtonTouched:" destination="wiU-l8-62m" eventType="touchUpInside" id="L4x-vz-3lm"/>
+                                    <action selector="profileButtonTouched:" destination="wiU-l8-62m" eventType="touchUpInside" id="G2R-uI-ZkK"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="1Ym-n4-iVe">
-                            <rect key="frame" x="95" y="7" width="130" height="30"/>
+                            <rect key="frame" x="100" y="7" width="120" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="airogami_title.png" id="wWG-YI-ZZT">
-                                    <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <rect key="frame" x="1" y="1" width="120" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </navigationItem>
                     <connections>
-                        <outlet property="profileButton" destination="8S5-P8-D7i" id="Maj-cx-AqZ"/>
                         <segue destination="FET-Of-0Ed" kind="push" identifier="ToEdit" id="WW7-ia-sE9"/>
                     </connections>
                 </tableViewController>
@@ -270,11 +270,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="276"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="UAk-cg-sUl">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="I fall in love with Evelyn Tsou, but I don't know how to tell her." id="UAk-cg-sUl">
                                         <rect key="frame" x="3" y="2" width="314" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -421,13 +420,30 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="6K4-3X-81U">
                         <nil key="title"/>
-                        <barButtonItem key="backBarButtonItem" title="Back" id="rPO-0D-xjC"/>
+                        <barButtonItem key="leftBarButtonItem" id="Uvs-Jo-xem">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cm1-N6-qlH">
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="back_button.png">
+                                    <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonTouched:" destination="FET-Of-0Ed" eventType="touchUpInside" id="aOP-6S-y8b"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="Xum-5k-UdF">
                             <rect key="frame" x="81" y="7" width="158" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="What's on your mind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EGA-3z-SrH">
-                                    <rect key="frame" x="1" y="-7" width="168" height="44"/>
+                                    <rect key="frame" x="0.0" y="-7" width="156" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
                                     <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -474,24 +490,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6to-jZ-fek" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <barButtonItem id="Uvs-Jo-xem">
-                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Cm1-N6-qlH">
-                        <rect key="frame" x="16" y="7" width="59" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
-                        <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="Back" backgroundImage="back_button.png">
-                            <color key="titleColor" red="0.1333333333" green="0.23921568630000001" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <state key="highlighted">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="backButtonTouched:" destination="FET-Of-0Ed" eventType="touchUpInside" id="aOP-6S-y8b"/>
-                        </connections>
-                    </button>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="597" y="-82"/>
         </scene>
@@ -670,7 +668,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="airogami_title.png" width="130" height="30"/>
+        <image name="airogami_title.png" width="120" height="27"/>
         <image name="back_button.png" width="59" height="30"/>
         <image name="done_button.png" width="59" height="30"/>
         <image name="locateButton.png" width="32" height="30"/>
@@ -689,6 +687,7 @@
         <image name="write_paper_confession.png" width="320" height="54"/>
         <image name="write_paper_feeling.png" width="320" height="54"/>
         <image name="write_paper_info.png" width="320" height="54"/>
+        <image name="write_paper_profile_button.png" width="33" height="23"/>
         <image name="write_paper_question.png" width="320" height="54"/>
         <image name="write_paper_random.png" width="320" height="54"/>
         <image name="write_paper_relationship.png" width="320" height="54"/>

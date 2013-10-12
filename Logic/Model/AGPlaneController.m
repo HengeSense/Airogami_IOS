@@ -44,6 +44,12 @@ static const int MaxNewPlaneIds = 50;
 - (AGPlane*) savePlane:(NSDictionary*)planeJson
 {
     AGPlane *plane = (AGPlane*)[coreData saveOrUpdate:planeJson withEntityName:@"AGPlane"];
+    if (plane.ownerViewedMsgId.longLongValue == 0) {
+        plane.ownerViewedMsgId = plane.lastMsgIdOfO;
+    }
+    if (plane.targetViewedMsgId.longLongValue == 0) {
+        plane.targetViewedMsgId = plane.lastMsgIdOfT;
+    }
     [coreData save];
     return plane;
 }
@@ -96,6 +102,12 @@ static const int MaxNewPlaneIds = 50;
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGPlane"];
     for (AGPlane *plane in array) {
+        if (plane.ownerViewedMsgId.longLongValue == 0) {
+            plane.ownerViewedMsgId = plane.lastMsgIdOfO;
+        }
+        if (plane.targetViewedMsgId.longLongValue == 0) {
+            plane.targetViewedMsgId = plane.lastMsgIdOfT;
+        }
         //for pickup planes -9223372036854775785 9223372036854775808
         for (AGMessage *message in plane.messages) {
             message.plane = plane;

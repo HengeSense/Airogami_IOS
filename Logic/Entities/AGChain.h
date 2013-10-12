@@ -2,7 +2,7 @@
 //  AGChain.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/9/13.
+//  Created by Tianhu Yang on 10/11/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -17,7 +17,6 @@
 @property (nonatomic, retain) NSDate * birthdayUpper;
 @property (nonatomic, retain) NSNumber * chainId;
 @property (nonatomic, retain) NSString * city;
-@property (nonatomic, retain) NSNumber * collected;
 @property (nonatomic, retain) NSString * country;
 @property (nonatomic, retain) NSDate * createdTime;
 @property (nonatomic, retain) NSNumber * deleted;

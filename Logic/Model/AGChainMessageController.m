@@ -49,7 +49,7 @@ static const int ChainMessageLimit = 10;
     AGChainMessage *chainMessage = (AGChainMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGChainMessage"];
     if (chainMessage) {
         chainMessage.chain = chain;
-        chain.collected = [NSNumber numberWithBool:chainMessage.status.intValue == AGChainMessageStatusNew];
+        //chain.collected = [NSNumber numberWithBool:chainMessage.status.intValue == AGChainMessageStatusNew];
     }
     [coreData save];
     return chainMessage;
@@ -168,11 +168,14 @@ static const int ChainMessageLimit = 10;
 
 -(void) updateMineLastTime:(AGChainMessage*)chainMessage chain:(AGChain*)chain
 {
-    if (chainMessage.status.shortValue == AGChainMessageStatusNew) {
+    /*if (chainMessage.status.shortValue == AGChainMessageStatusNew) {
         AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainController recentChainMessage:chain.chainId];
         chainMessage.mineLastTime = cm.createdTime;
     }
     else if (chainMessage.status.shortValue == AGChainMessageStatusReplied){
+        chainMessage.mineLastTime = chainMessage.lastViewedTime;
+    }*/
+    if (chainMessage.mineLastTime == nil) {
         chainMessage.mineLastTime = chainMessage.lastViewedTime;
     }
     [[AGCoreData coreData] save];

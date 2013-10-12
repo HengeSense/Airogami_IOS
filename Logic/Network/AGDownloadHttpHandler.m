@@ -102,6 +102,8 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
 
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     [connection cancel];
     NSError *error = [AGMessageUtils errorServer];
     AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
@@ -109,8 +111,7 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (block) {
         block(error, nil, context);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -124,6 +125,8 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
 - (void)connection:(AGURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
 #ifdef IS_DEBUG
     NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 #endif
@@ -133,12 +136,13 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (block) {
         block(error,nil, context);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     // do something with the data
     NSMutableData *data = [connection valueForKey:@"ReceivedData"];
     //NSLog(@"Succeeded! Received %d bytes of data",[data length]);
@@ -147,8 +151,7 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (block) {
         block(nil, data, context);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 @end

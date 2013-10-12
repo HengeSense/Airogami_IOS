@@ -73,7 +73,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" id="IqS-L7-Goo">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ntb-ze-t2l">
-                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -91,11 +91,11 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="DTJ-yy-wi4">
-                            <rect key="frame" x="72" y="6" width="176" height="33"/>
+                            <rect key="frame" x="81" y="6" width="158" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="68F-ru-9rP">
-                                    <rect key="frame" x="20" y="2" width="148" height="29"/>
+                                    <rect key="frame" x="5" y="2" width="148" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="21"/>
                                     <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,7 +106,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="Ba3-aw-Fv5">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3k2-1V-OuJ">
-                                <rect key="frame" x="256" y="7" width="59" height="30"/>
+                                <rect key="frame" x="245" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>
@@ -693,7 +693,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l7G-5U-Zog">
-                                    <rect key="frame" x="20" y="2" width="148" height="29"/>
+                                    <rect key="frame" x="14" y="2" width="131" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="21"/>
                                     <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -797,7 +797,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" id="qV0-tp-ND3">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="20T-Az-zEm">
-                                <rect key="frame" x="5" y="7" width="59" height="30"/>
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -815,11 +815,11 @@
                             </button>
                         </barButtonItem>
                         <view key="titleView" contentMode="scaleToFill" id="6UN-ph-4hQ">
-                            <rect key="frame" x="72" y="6" width="176" height="33"/>
+                            <rect key="frame" x="81" y="6" width="158" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Airogami ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S77-Zg-Obz">
-                                    <rect key="frame" x="20" y="2" width="148" height="29"/>
+                                    <rect key="frame" x="5" y="2" width="148" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="21"/>
                                     <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
@@ -830,7 +830,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="cYI-Lv-lL6">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UNc-jI-Vfp">
-                                <rect key="frame" x="256" y="7" width="59" height="30"/>
+                                <rect key="frame" x="245" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="13"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="2" maxY="0.0"/>

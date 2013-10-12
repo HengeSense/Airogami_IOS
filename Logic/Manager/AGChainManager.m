@@ -84,7 +84,8 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 }
                 else{
                     NSDictionary *chainMessageJson = [result objectForKey:@"chainMessage"];
-                    [[AGControllerUtils controllerUtils].chainMessageController updateChainMessage:chainMessageJson forChain:chain];
+                    //[[AGControllerUtils controllerUtils].chainMessageController updateChainMessage:chainMessageJson forChain:chain];
+                    [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:chainMessageJson forChain:chain];
                     [[AGChainNotification chainNotification] obtainedChains];
                 }
                 [[AGChainNotification chainNotification] collectedChains];
@@ -206,10 +207,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
     [AGJSONHttpHandler request:YES params:params path:GetOldChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSArray *oldChains = nil;
         if (error) {
-            //Client error come from autoSignin  or request
-            if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
-                [AGMessageUtils alertMessageWithError:error];
-            }
+            [AGMessageUtils alertMessageWithFilteredError:error];
         }
         else{
             //succeed
@@ -295,7 +293,8 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
                 }
                 else{//changed status, etc
                     NSDictionary *chainMessageJson = [result objectForKey:@"chainMessage"];
-                    [[AGControllerUtils controllerUtils].chainMessageController updateChainMessage:chainMessageJson forChain:chain];
+                    //[[AGControllerUtils controllerUtils].chainMessageController updateChainMessage:chainMessageJson forChain:chain];
+                    [[AGControllerUtils controllerUtils].chainMessageController saveChainMessage:chainMessageJson forChain:chain];
                     [[AGChainNotification chainNotification] obtainedChains];
                 }
                 [[AGChainNotification chainNotification] collectedChains];

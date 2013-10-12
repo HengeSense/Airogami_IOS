@@ -102,7 +102,7 @@ static void encode(NSMutableString *path, id key, id obj)
     }];
     
     if (yes) {
-        NSString * deviceString = [NSString stringWithFormat:@"%@=%d&%@=%d",[@"clientAgent.deviceType" encodeURIComponent],AGDeviceType, [@"clientAgent.clientVersion" encodeURIComponent], AGApplicationVersion];
+        NSString * deviceString = [NSString stringWithFormat:@"%@=%d&%@=%d",[@"clientAgent.devType" encodeURIComponent],AGDeviceType, [@"clientAgent.devVersion" encodeURIComponent], AGApplicationVersion];
         [path appendString:deviceString];
         //guid
         deviceString = [NSString stringWithFormat:@"&%@=%@", [@"clientAgent.guid" encodeURIComponent], [[AGAppDirector appDirector].appConfig.guid encodeURIComponent]];
@@ -112,7 +112,7 @@ static void encode(NSMutableString *path, id key, id obj)
         if (deviceToken) {
             NSString *token = [[deviceToken description] stringByReplacingOccurrencesOfString:@" " withString:@""];
             token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-            [path appendString:[NSString stringWithFormat:@"&clientAgent.deviceToken=%@", token]];
+            [path appendString:[NSString stringWithFormat:@"&clientAgent.devToken=%@", token]];
             
         }
         

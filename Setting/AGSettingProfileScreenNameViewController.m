@@ -101,11 +101,15 @@ static NSString *ScreenNameExist = @"error.account.changescreenname.screenname.e
     AGAccountManager *accountManager = [AGManagerUtils managerUtils].accountManager;
     NSDictionary *params = [accountManager paramsForChangeScreenName:self.screenNameTextField.text];
     [accountManager changeScreenName:params context:nil block:^(NSError *error, id context, BOOL succeed) {
-        if (succeed) {
-            [AGMessageUtils alertMessageUpdated];
+        if (error) {
         }
         else{
-            [AGMessageUtils alertMessageWithTitle:@"" message:AGLS(ScreenNameExist)];
+            if (succeed) {
+                [AGMessageUtils alertMessageUpdated];
+            }
+            else{
+                [AGMessageUtils alertMessageWithTitle:@"" message:AGLS(ScreenNameExist)];
+            }
         }
         
     }];

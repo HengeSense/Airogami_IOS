@@ -153,6 +153,8 @@
 
 - (void) stopConnection:(AGURLConnection *)connection description:(NSString*)desc
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     [connection cancel];
     NSError *error = [AGMessageUtils errorServer];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
@@ -160,8 +162,7 @@
     if(block){
         block(error,context, nil);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 - (void)connection:(AGURLConnection *)connection didReceiveData:(NSData *)d
@@ -175,6 +176,8 @@
 - (void)connection:(AGURLConnection *)connection
   didFailWithError:(NSError *)error
 {
+    //
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     // inform the user
 #ifdef IS_DEBUG
     NSLog(@"Connection failed! Error - %@ %@",[error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
@@ -185,12 +188,13 @@
     if (block) {
         block(error,context, nil);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 - (void)connectionDidFinishLoading:(AGURLConnection *)connection
 {
+    //must before block to cancel without this connection
+    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     // do something with the data
     // data is declared as a method instance elsewhere
     NSMutableData *data = [connection valueForKey:@"ReceivedData"];
@@ -209,8 +213,7 @@
     if (block) {
          block(error,context, dict);
     }
-    //
-    [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
+    
 }
 
 
@@ -286,15 +289,17 @@
         }
         
         if ([NotSignin isEqual:@"NO"]) {
+            
+            if (prompt) {
+                [AGWaitUtils startWait:nil];
+            }
             if (error && prompt) {
                 [AGMessageUtils alertMessageWithError:error];
             }
             if (block) {
                 block(error, context, result);
             }
-            if (prompt) {
-                [AGWaitUtils startWait:nil];
-            }
+            
         }
         
 #ifdef IS_DEBUG

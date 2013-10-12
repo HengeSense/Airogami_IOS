@@ -236,10 +236,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     [AGJSONHttpHandler request:YES params:params path:PickupPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSNumber *count = [NSNumber numberWithInt:0];
         if (error) {
-            //Client error come from autoSignin or request
-            if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
-                [AGMessageUtils alertMessageWithError:error];
-            }
+            [AGMessageUtils alertMessageWithFilteredError:error];
         }
         else{
             
@@ -259,14 +256,14 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 if (planes.count) {
                     for(AGPlane *plane in planes){
                         AGMessage *message = plane.messages.objectEnumerator.nextObject;
-                        plane.targetViewedMsgId = message.messageId;
+                        //plane.targetViewedMsgId = plane.lastMsgIdOfT;
                         plane.message = message;
                     }
                     [[AGCoreData coreData] save];
                     //
                     [[AGPlaneNotification planeNotification] collectedPlanes];
                 }
-                NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:YES];
+                NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChainsForCollect:[result objectForKey:@"chains"]];
                 if (chains.count) {
                     [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
                     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -349,10 +346,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     [AGJSONHttpHandler request:YES params:params path:GetOldPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         NSArray *oldPlanes = nil;
         if (error) {
-            //Client error come from autoSignin or request
-            if ([error.domain isEqualToString:@"Cancel"] == NO && [error.domain isEqualToString:@"Client"] == NO) {
-                [AGMessageUtils alertMessageWithError:error];
-            }
+            [AGMessageUtils alertMessageWithFilteredError:error];
         }
         else{
             //succeed

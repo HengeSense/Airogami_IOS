@@ -21,6 +21,7 @@
 "error.account.changepassword.oldpassword.notmatch" = "The current password is invalid";
 "error.account.changescreenname.screenname.exist" = "This ID has been taken by others";
 "error.account.signin.banned" = "This account has been banned";
+"error.account.signin.out" = "Please update your Airogami for better service";
 //general
 "message.general.edit.unsaved.message" = "Give up changes you have made?";
 "message.general.edit.unsaved.giveup" = "Give up";

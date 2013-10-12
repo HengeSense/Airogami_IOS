@@ -70,7 +70,10 @@
 		076B15D617B088C1005BD910 /* AGUploadHttpHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B15C617B088C1005BD910 /* AGUploadHttpHandler.m */; };
 		076B15D717B088C1005BD910 /* AGURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 076B15C817B088C1005BD910 /* AGURLConnection.m */; };
 		076E2B1617A886AF00A478A3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 076E2B1517A886AF00A478A3 /* libsqlite3.dylib */; };
-		076EE5A51805FF1200E78F64 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 076EE5A41805FF1200E78F64 /* AGChain.m */; };
+		076EE5A818088A3A00E78F64 /* AGChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 076EE5A718088A3A00E78F64 /* AGChain.m */; };
+		076EE5AC18088FE900E78F64 /* write_edit_sex_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 076EE5AB18088FE900E78F64 /* write_edit_sex_button@2x.png */; };
+		076EE5AE1808913200E78F64 /* write_paper_profile_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 076EE5AD1808913200E78F64 /* write_paper_profile_button@2x.png */; };
+		076EE5B01808A2C600E78F64 /* chat_plane_likes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 076EE5AF1808A2C600E78F64 /* chat_plane_likes@2x.png */; };
 		07836CCB177242FF00FCA452 /* AGWritePaperHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */; };
 		07836CCD177250A000FCA452 /* write_paper_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07836CCC177250A000FCA452 /* write_paper_left@2x.png */; };
 		07836CD7177285C400FCA452 /* write_location_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07836CD4177285C400FCA452 /* write_location_location@2x.png */; };
@@ -495,8 +498,11 @@
 		076B15C717B088C1005BD910 /* AGURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGURLConnection.h; sourceTree = "<group>"; };
 		076B15C817B088C1005BD910 /* AGURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGURLConnection.m; sourceTree = "<group>"; };
 		076E2B1517A886AF00A478A3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		076EE5A31805FF1200E78F64 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
-		076EE5A41805FF1200E78F64 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
+		076EE5A618088A3A00E78F64 /* AGChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChain.h; sourceTree = "<group>"; };
+		076EE5A718088A3A00E78F64 /* AGChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChain.m; sourceTree = "<group>"; };
+		076EE5AB18088FE900E78F64 /* write_edit_sex_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_sex_button@2x.png"; sourceTree = "<group>"; };
+		076EE5AD1808913200E78F64 /* write_paper_profile_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_profile_button@2x.png"; sourceTree = "<group>"; };
+		076EE5AF1808A2C600E78F64 /* chat_plane_likes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_plane_likes@2x.png"; sourceTree = "<group>"; };
 		07836CCA177242FF00FCA452 /* AGWritePaperHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGWritePaperHeaderView.xib; sourceTree = "<group>"; };
 		07836CCC177250A000FCA452 /* write_paper_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_paper_left@2x.png"; sourceTree = "<group>"; };
 		07836CD4177285C400FCA452 /* write_location_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_location_location@2x.png"; sourceTree = "<group>"; };
@@ -1298,8 +1304,8 @@
 				07B1052D1805CAAA000DD694 /* AGChainMessage.m */,
 				07B1052F1805CAAE000DD694 /* AGPlane.h */,
 				07B105301805CAAE000DD694 /* AGPlane.m */,
-				076EE5A31805FF1200E78F64 /* AGChain.h */,
-				076EE5A41805FF1200E78F64 /* AGChain.m */,
+				076EE5A618088A3A00E78F64 /* AGChain.h */,
+				076EE5A718088A3A00E78F64 /* AGChain.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1633,6 +1639,7 @@
 		07918465177E475600D28C0F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				076EE5AF1808A2C600E78F64 /* chat_plane_likes@2x.png */,
 				079C09A8178904950067FED1 /* profile_view_bottom@2x.png */,
 				079C09A9178904950067FED1 /* profile_view_middle@2x.png */,
 				079C09AA178904950067FED1 /* profile_view_top@2x.png */,
@@ -1793,6 +1800,8 @@
 		07B8DC3617711B93006922FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				076EE5AD1808913200E78F64 /* write_paper_profile_button@2x.png */,
+				076EE5AB18088FE900E78F64 /* write_edit_sex_button@2x.png */,
 				078C88F417FB52FB00811534 /* write_edit_age_selected_button@2x.png */,
 				078C88E617FB39A800811534 /* write_edit_age_button@2x.png */,
 				0750CF9A1773D049008E28F0 /* write_edit_accessory@2x.png */,
@@ -1978,6 +1987,7 @@
 				078D95221761156000663FDE /* signup_profile_location@2x.png in Resources */,
 				078D95231761156000663FDE /* signup_profile_normal@2x.png in Resources */,
 				078D95241761156000663FDE /* signup_profile_words@2x.png in Resources */,
+				076EE5AC18088FE900E78F64 /* write_edit_sex_button@2x.png in Resources */,
 				078D952617611CA400663FDE /* signup_profile_image@2x.png in Resources */,
 				078FB59F1763E687000C1D53 /* signup_profile_image_highlight@2x.png in Resources */,
 				07DB924A1769294D000F0780 /* powered-by-google-on-non-white.png in Resources */,
@@ -1989,6 +1999,7 @@
 				07D16403176BD784009675F5 /* signin_account_password@2x.png in Resources */,
 				07D16404176BD784009675F5 /* signin_verify@2x.png in Resources */,
 				07D16406176BDC7D009675F5 /* signin_title@2x.png in Resources */,
+				076EE5B01808A2C600E78F64 /* chat_plane_likes@2x.png in Resources */,
 				079F818A176BEF2C004234D0 /* reset_password_email@2x.png in Resources */,
 				079F818B176BEF2C004234D0 /* reset_password_normal@2x.png in Resources */,
 				079F818D176BF11D004234D0 /* reset_password_title@2x.png in Resources */,
@@ -1999,6 +2010,7 @@
 				078A1F61176CDF0900A69AE3 /* AGChatStoryboard.storyboard in Resources */,
 				078A1F6E176CF09D00A69AE3 /* sign_box_norml@2x.png in Resources */,
 				078A1F6F176CF09D00A69AE3 /* sign_box_signin@2x.png in Resources */,
+				076EE5AE1808913200E78F64 /* write_paper_profile_button@2x.png in Resources */,
 				078A1F70176CF09D00A69AE3 /* sign_box_signup@2x.png in Resources */,
 				078A1F95176D342F00A69AE3 /* AGSettingStoryboard.storyboard in Resources */,
 				078A1FD9176D355C00A69AE3 /* error_bar@2x.png in Resources */,
@@ -2263,7 +2275,7 @@
 				0791845B177E3C0D00D28C0F /* UIBubbleTypingTableViewCell.m in Sources */,
 				07918468177E4A7300D28C0F /* AGChatChatViewController.m in Sources */,
 				0791846B177E4B1F00D28C0F /* AGChatPlaneViewController.m in Sources */,
-				076EE5A51805FF1200E78F64 /* AGChain.m in Sources */,
+				076EE5A818088A3A00E78F64 /* AGChain.m in Sources */,
 				07918495177E5B9400D28C0F /* AGSlideSegue.m in Sources */,
 				07918496177E5B9400D28C0F /* AGUIDefines.m in Sources */,
 				07918498177E5B9400D28C0F /* AGUIUtils.m in Sources */,

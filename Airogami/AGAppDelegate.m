@@ -111,7 +111,7 @@ static AGAppDelegate *AppDelegate;
 #ifdef IS_DEBUG
         NSLog(@"deviceToken = %@", devToken);
 #endif
-        [[AGManagerUtils managerUtils].accountManager  autoSignin:nil];
+        [[AGManagerUtils managerUtils].accountManager  updateDevice];
     }
     
     

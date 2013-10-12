@@ -95,8 +95,8 @@ enum{
     [super viewDidAppear:animated];
     switch (rootNavigateTo) {
         case AGRootToSign:
+            //should keep consistent with switchToSign
             [self navigateToSign];
-            //[[AGNotificationCenter notificationCenter] startTimer:NO];
             break;
         case AGRootToMain:
             if ([synchronize shouldSynchronize]) {
@@ -105,8 +105,6 @@ enum{
             else{
                 [self navigateToMain];
             }
-            
-            //[[AGNotificationCenter notificationCenter] startTimer:YES];
             break;
         default:
             break;
@@ -172,6 +170,10 @@ enum{
     rootNavigateTo = AGRootToSign;
     if (self.presentedViewController) {
         [self dismissViewControllerAnimated:NO completion:nil];
+    }
+    else{
+        //should keep consistent with viewDidApear
+        [self navigateToSign];
     }
 }
 
