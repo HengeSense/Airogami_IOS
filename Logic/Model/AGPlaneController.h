@@ -14,6 +14,7 @@
 @interface AGPlaneController : NSObject
 
 - (AGPlane*) savePlane:(NSDictionary*)planeJson;
+- (void) markDeleted:(AGPlane*)plane;
 - (NSMutableArray*) saveNewPlanes:(NSArray*)jsonArray;
 - (NSMutableArray*) savePlanes:(NSArray*)jsonArray;
 - (NSMutableArray*) saveOldPlanes:(NSArray*)jsonArray;
@@ -33,6 +34,7 @@
 - (void) deleteForSync;
 //new means not obtained messages
 - (AGNewPlane*) getNextNewPlaneForChat;
+- (AGPlane*) getNextUnviewedPlane;
 - (void) addNewPlanesForChat:(NSArray*)planes;
 - (void) removeNewPlaneForChat:(AGNewPlane*)plane oldUpdateInc:(NSNumber*)updateInc;
 - (void) removeNewPlane:(AGNewPlane *)newPlane oldUpdateInc:(NSNumber*)updateInc;

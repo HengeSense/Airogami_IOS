@@ -77,7 +77,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     [params setObject:message.type forKey:@"messageVO.type"];
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         AGMessage *remoteMessage = nil;
-        BOOL refresh = NO;
+        BOOL removed = NO;
         if (error) {
             
         }
@@ -89,8 +89,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                     [[AGCoreData coreData] remove:message.plane];
                 }
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
-                [AGMessageUtils alertMessagePlaneChanged];
-                refresh = YES;
+                removed = YES;
                 //error = [AGMessageUtils errorClient];
             }
             else{
@@ -107,7 +106,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             
         }
         if (block) {
-            block(error, context, remoteMessage, refresh);
+            block(error, context, remoteMessage, removed);
         }
         
     }];
@@ -200,6 +199,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             
         }
         else{
+            AGPlaneController *planeController = [AGControllerUtils controllerUtils].planeController;
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
             if (errorString) {
                 // not exist
@@ -209,12 +209,13 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 NSDictionary *planeJson = [result objectForKey:@"plane"];
                 //changed status, etc
                 if (planeJson) {
-                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
+                    [planeController savePlane:planeJson];
                     [AGMessageUtils alertMessagePlaneChanged];
                 }
                 //error = [AGMessageUtils errorClient];
             }
             else{
+                [planeController markDeleted:plane];
                 //viewedMessagesForPlane
                 NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];

@@ -65,8 +65,7 @@
     if (appStatus == AGAppStatusMain) {
         [[AGManagerUtils managerUtils].accountManager autoSignin:nil block:^(NSError *error, id context) {
             if (error == nil) {
-                [[AGNotificationCenter notificationCenter] obtainPlanesAndChains];
-                [[AGNotificationCenter notificationCenter] resendMessages];
+                [[AGNotificationCenter notificationCenter] kickoff];
             }
         }];
     }

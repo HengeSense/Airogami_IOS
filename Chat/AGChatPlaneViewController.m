@@ -79,6 +79,7 @@
     frame.origin.x = 6.0f;
     frame.size.width -= frame.origin.x * 2;
     view = [[UIView alloc] initWithFrame:frame];
+    view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     view.layer.cornerRadius = 5.0f;
     view.clipsToBounds = YES;
     //
@@ -121,6 +122,12 @@
     CGRect frame = pulldownHeader.pulldownView.frame;
     frame.origin.y = -frame.size.height;
     pulldownHeader.pulldownView.frame = frame;
+    //
+    frame = tv.superview.frame;
+    frame.size.height += 5.0f;
+    tv.autoresizingMask = UIViewAutoresizingNone;
+    tv.superview.frame = frame;
+    //
     [tv addSubview:pulldownHeader.pulldownView];
 }
 

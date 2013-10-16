@@ -10,6 +10,7 @@
 
 extern NSString *AGNotificationGetNewPlanes;
 extern NSString *AGNotificationPlaneRefreshed;
+extern NSString *AGNotificationPlaneRemoved;
 
 extern NSString *AGNotificationCollectedPlanes;
 extern NSString *AGNotificationReceivePlanes;
@@ -29,6 +30,7 @@ extern NSString *AGNotificationGotMessagesForPlane;
 extern NSString *AGNotificationSendMessages;
 extern NSString *AGNotificationSentMessage;
 
+extern NSString *AGNotificationViewMessages;
 extern NSString *AGNotificationViewedMessagesForPlane;
 extern NSString *AGNotificationUnreadMessagesChangedForPlane;
 extern NSString *AGNotificationViewingMessagesForPlane;

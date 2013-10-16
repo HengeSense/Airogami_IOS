@@ -225,4 +225,24 @@ static const int ChainMessageLimit = 10;
     return last;
 }
 
+- (AGChainMessage*) getNextUnviewedChainMessage
+{
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:chainMessageEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"account.accountId = %@ && mineLastTime > lastViewedTime && status = %d", accountId, accountId, AGChainMessageStatusReplied];
+    [fetchRequest setPredicate:predicate];
+    //
+    [fetchRequest setFetchLimit:1];
+    //
+    AGChainMessage* chainMessage = nil;
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count) {
+        chainMessage = array.lastObject;
+    }
+    return chainMessage;
+}
+
 @end

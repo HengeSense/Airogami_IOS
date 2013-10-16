@@ -26,8 +26,8 @@ extern NSString *AGNotificationGetObtainedChainMessages;
 
 extern NSString *AGNotificationGetChainMessagesForChain;
 extern NSString *AGNotificationGotChainMessagesForChain;
-extern NSString *AGNotificationViewingChainMessagesForChain;
 
+extern NSString *AGNotificationViewChainMessages;
 extern NSString *AGNotificationViewedChainMessagesForChain;
 extern NSString *AGNotificationUnreadChainMessagesChangedForChain;
 extern NSString *AGNotificationViewingChainMessagesForChain;

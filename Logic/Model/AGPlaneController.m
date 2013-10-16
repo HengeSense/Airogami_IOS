@@ -54,6 +54,18 @@ static const int MaxNewPlaneIds = 50;
     return plane;
 }
 
+- (void) markDeleted:(AGPlane*)plane
+{
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    if ([plane.accountByOwnerId.accountId isEqualToNumber:accountId]) {
+        plane.deletedByO = [NSNumber numberWithBool:YES];
+    }
+    else{
+        plane.deletedByT = [NSNumber numberWithBool:YES];
+    }
+    [coreData save];
+}
+
 - (void) resetForSync
 {
     AGAccount *account = [AGAppDirector appDirector].account;
@@ -461,6 +473,26 @@ static const int MaxNewPlaneIds = 50;
         newPlane = [array lastObject];
     }
     return newPlane;
+}
+
+- (AGPlane*) getNextUnviewedPlane
+{
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:planeEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"((accountByOwnerId.accountId = %@ && deletedByO = 0 && ownerViewedMsgId > lastMsgIdOfO) || (accountByTargetId.accountId = %@ && deletedByT = 0  && targetViewedMsgId > lastMsgIdOfT)) && status = %d", accountId, accountId, AGPlaneStatusReplied];
+    [fetchRequest setPredicate:predicate];
+    //
+    [fetchRequest setFetchLimit:1];
+    //
+    AGPlane* plane = nil;
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count) {
+        plane = array.lastObject;
+    }
+    return plane;
 }
 
 - (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane

@@ -269,6 +269,15 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     [notificationCenter postNotificationName:AGNotificationSendMessages object:self userInfo:dict];
 }
 
+//should run once the program is active
+- (void) viewedMessages
+{
+    NSDictionary *dict = [NSDictionary dictionary];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationViewMessages object:self userInfo:dict];
+    [notificationCenter postNotificationName:AGNotificationViewChainMessages object:self userInfo:dict];
+}
+
 - (void)unreadMessagesChanged:(NSNotification*)notification
 {
     AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
@@ -309,6 +318,13 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     [[AGAccountNotification accountNotification] reset];
     [[AGPlaneNotification planeNotification] reset];
     [[AGChainNotification chainNotification] reset];
+}
+
+- (void) kickoff
+{
+    [self obtainPlanesAndChains];
+    [self resendMessages];
+    [self viewedMessages];
 }
 
 

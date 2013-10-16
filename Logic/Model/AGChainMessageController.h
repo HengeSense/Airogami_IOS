@@ -27,5 +27,6 @@
 - (void) updateChainMessagesCount:(AGChainMessage*)chainMessage chain:(AGChain*)chain;
 - (int) updateChainMessagesCountForChain:(AGChain*)chain;
 - (NSDate*) viewedChainMessagesForChain:(AGChain*)chain;
+- (AGChainMessage*) getNextUnviewedChainMessage;
 
 @end

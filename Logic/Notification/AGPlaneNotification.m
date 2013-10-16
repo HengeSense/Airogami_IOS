@@ -16,6 +16,7 @@
 NSString *AGNotificationGetNewPlanes = @"notification.getnewplanes";
 NSString *AGNotificationGetPlanes = @"notification.getplanes";
 NSString *AGNotificationPlaneRefreshed = @"notification.planerefreshed";
+NSString *AGNotificationPlaneRemoved = @"notification.planeremoved";
 
 NSString *AGNotificationCollectedPlanes = @"notification.collectedplanes";
 NSString *AGNotificationReceivePlanes = @"notification.receiveplanes";
@@ -35,6 +36,7 @@ NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane
 NSString *AGNotificationSendMessages = @"notification.sendmessages";
 NSString *AGNotificationSentMessage = @"notification.sentmessage";
 
+NSString *AGNotificationViewMessages = @"notification.viewmessages";
 NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesForPlane";
 NSString *AGNotificationUnreadMessagesChangedForPlane = @"notification.unreadMessagesChangedForPlane";
 NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessagesForPlane";
@@ -66,6 +68,10 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     BOOL moreSendMessages;
     NSNumber *sendMessageMutex;
     BOOL sendingMessages;
+    //view messages
+    BOOL moreViewMessages;
+    NSNumber *viewMessageMutex;
+    BOOL viewingMessages;
     //
     NSNumber *viewingPlaneId;
 }
@@ -94,7 +100,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         [notificationCenter addObserver:self selector:@selector(getMessagesForPlane:) name:AGNotificationGetMessagesForPlane object:nil];
         // send messages
         [notificationCenter addObserver:self selector:@selector(sendMessages:) name:AGNotificationSendMessages object:nil];
-        //viewed messages 
+        //viewed messages
+        [notificationCenter addObserver:self selector:@selector(viewMessages:) name:AGNotificationViewMessages object:nil];
         [notificationCenter addObserver:self selector:@selector(viewedMessagesForPlane:) name:AGNotificationViewedMessagesForPlane object:nil];
         [notificationCenter addObserver:self selector:@selector(viewingMessagesForPlane:) name:AGNotificationViewingMessagesForPlane object:nil];
     }
@@ -264,12 +271,23 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [planeManager getPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *planes) {
         if (error == nil) {
             BOOL obtained = NO;
+            NSMutableArray *deletedPlanes = [NSMutableArray arrayWithCapacity:planes.count];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
             for (AGPlane *plane in planes) {
                 if (plane.status.intValue == AGPlaneStatusReplied) {
                     obtained = YES;
-                    break;
+                }
+                if (plane.deletedByO.boolValue || plane.deletedByT.boolValue) {
+                    obtained = YES;
+                    [deletedPlanes addObject:plane];
+                    [dict setObject:plane forKey:@"plane"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRemoved object:self userInfo:dict];
                 }
             }
+            if (deletedPlanes.count) {
+                [[AGCoreData coreData] removeAll:deletedPlanes];
+            }
+            
             if (obtained) {
                 [self obtainedPlanes];
             }
@@ -634,19 +652,22 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     AGPlane *plane = message.plane;
-    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage, BOOL refresh) {
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage, BOOL removed) {
         
         if (error == nil) {
             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+            [dict setObject:plane forKey:@"plane"];
             if (remoteMessage) {
                 [dict setObject:remoteMessage forKey:@"remoteMessage"];
                 [dict setObject:message forKey:@"message"];
-                [dict setObject:plane forKey:@"plane"];
             }
-            if (refresh) {
-                [dict setObject:@"refresh" forKey:@"refresh"];
+            if (removed) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRemoved object:nil userInfo:dict];
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSentMessage object:nil userInfo:dict];
+            else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSentMessage object:nil userInfo:dict];
+            }
+            
             [self sendMessages];
             
         }
@@ -662,6 +683,72 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     
 }
 
+- (void) viewMessages:(NSNotification*) notification
+{
+    BOOL shouldView = NO;
+    @synchronized(viewMessageMutex){
+        if (viewingMessages) {
+            moreViewMessages = YES;
+        }
+        else{
+            viewingMessages = YES;
+            shouldView = YES;
+        }
+    }
+    
+    if (shouldView) {
+        [self viewMessages];
+    }
+    
+}
+
+- (void) viewMessages
+{
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    AGPlane *plane = [controllerUtils.planeController getNextUnviewedPlane];
+    if (plane) {
+        [self viewMessage:plane];
+    }
+    else{
+        @synchronized(viewMessageMutex){
+            moreViewMessages = NO;
+            viewingMessages = NO;
+        }
+    }
+}
+
+- (void) viewMessage:(AGPlane*)plane
+{
+    AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    NSNumber *lastMsgId = nil;
+    if ([plane.accountByOwnerId.accountId isEqualToNumber:accountId]) {
+        lastMsgId = plane.ownerViewedMsgId;
+    }
+    else{
+        lastMsgId = plane.targetViewedMsgId;
+    }
+    NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
+    [planeManager viewedMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
+        if (error) {
+            //should deal with server error
+            @synchronized(viewMessageMutex){
+                moreViewMessages = NO;
+                viewingMessages = NO;
+            }
+        }
+        else{
+            NSNumber *newLastMsgId = [result objectForKey:@"lastMsgId"];
+            if (newLastMsgId == nil) {
+                newLastMsgId = lastMsgId;
+            }
+            [[AGControllerUtils controllerUtils].planeController updateLastMsgId:newLastMsgId plane:plane];
+            [self viewMessages];
+        }
+    }];
+    
+}
+
 - (void)viewedMessagesForPlane:(NSNotification*)notification
 {
     AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
@@ -670,7 +757,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
     //
     if (lastMsgId) {
-        AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewMessages object:nil userInfo:dict];
+        /*AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
         NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
         [planeManager viewedMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
             if (error) {
@@ -682,7 +770,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                     [[AGControllerUtils controllerUtils].planeController updateLastMsgId:lastMsgId plane:plane];
                 }
             }
-        }];
+        }];*/
     }
     
 }

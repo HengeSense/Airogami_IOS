@@ -19,6 +19,7 @@
 #import "AGManagerUtils.h"
 #import "AGCategory+Addition.h"
 #import "AGAppDirector.h"
+#import "AGMessageUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
@@ -145,6 +146,7 @@ static float AGInputTextViewMaxHeight = 100;
         categoryLabel.text = [AGCategory title:plane.category.categoryId];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sentMessage:) name:AGNotificationSentMessage object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(planeRemoved:) name:AGNotificationPlaneRemoved object:nil];
         NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
@@ -511,33 +513,36 @@ static float AGInputTextViewMaxHeight = 100;
     
 }
 
+-(void) planeRemoved:(NSNotification*)notification
+{
+    AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
+    if ([plane isEqual:airogami]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [AGMessageUtils alertMessagePlaneChanged];
+    }
+    
+}
+
 -(void) sentMessage:(NSNotification*)notification
 {
-    NSString *refresh = [notification.userInfo objectForKey:@"refresh"];
-    if (refresh) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else{
-        AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
-        if ([plane isEqual:airogami]) {
-            AGMessage *message = [notification.userInfo objectForKey:@"message"];
-            AGMessage *remoteMessage = [notification.userInfo objectForKey:@"remoteMessage"];
-            
-            if (message) {
-                for (NSBubbleData *bubbleData in messagesData) {
-                    AGMessage *msg = bubbleData.obj;
-                    if ([msg isEqual:message]) {
-                        bubbleData.state = BubbleCellStateSent;
-                        bubbleData.date = remoteMessage.createdTime;
-                        [bubbleTable reloadData];
-                        break;
-                    }
+    AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
+    if ([plane isEqual:airogami]) {
+        AGMessage *message = [notification.userInfo objectForKey:@"message"];
+        AGMessage *remoteMessage = [notification.userInfo objectForKey:@"remoteMessage"];
+        
+        if (message) {
+            for (NSBubbleData *bubbleData in messagesData) {
+                AGMessage *msg = bubbleData.obj;
+                if ([msg isEqual:message]) {
+                    bubbleData.state = BubbleCellStateSent;
+                    bubbleData.date = remoteMessage.createdTime;
+                    [bubbleTable reloadData];
+                    break;
                 }
             }
         }
-        
     }
-    
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

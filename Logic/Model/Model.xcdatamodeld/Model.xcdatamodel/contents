@@ -55,7 +55,7 @@
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createdTime" attributeType="Date" syncable="YES"/>
+        <attribute name="createdTime" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -113,7 +113,7 @@
     </entity>
     <entity name="AGMessage" representedClassName="AGMessage" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="messageId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="state" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -154,7 +154,7 @@
         <attribute name="birthdayUpper" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="deletedByO" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="deletedByT" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
