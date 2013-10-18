@@ -54,6 +54,7 @@ static const int MaxNewPlaneIds = 50;
     return plane;
 }
 
+
 - (void) markDeleted:(AGPlane*)plane
 {
     NSNumber *accountId = [AGAppDirector appDirector].account.accountId;

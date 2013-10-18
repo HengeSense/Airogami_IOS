@@ -35,6 +35,8 @@ extern NSString *AGNotificationViewedMessagesForPlane;
 extern NSString *AGNotificationUnreadMessagesChangedForPlane;
 extern NSString *AGNotificationViewingMessagesForPlane;
 
+@class AGPlane;
+
 @interface AGPlaneNotification: NSObject
 
 +(AGPlaneNotification*) planeNotification;
@@ -42,5 +44,6 @@ extern NSString *AGNotificationViewingMessagesForPlane;
 - (void) obtainedPlanes;
 - (void) collectedPlanes;
 - (void) reset;
+- (void) deletePlane:(AGPlane*)plane;
 
 @end

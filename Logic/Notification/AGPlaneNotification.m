@@ -271,7 +271,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [planeManager getPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *planes) {
         if (error == nil) {
             BOOL obtained = NO;
-            NSMutableArray *deletedPlanes = [NSMutableArray arrayWithCapacity:planes.count];
             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:1];
             for (AGPlane *plane in planes) {
                 if (plane.status.intValue == AGPlaneStatusReplied) {
@@ -279,13 +278,10 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 }
                 if (plane.deletedByO.boolValue || plane.deletedByT.boolValue) {
                     obtained = YES;
-                    [deletedPlanes addObject:plane];
+                    [self deletePlane:plane];
                     [dict setObject:plane forKey:@"plane"];
                     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRemoved object:self userInfo:dict];
                 }
-            }
-            if (deletedPlanes.count) {
-                [[AGCoreData coreData] removeAll:deletedPlanes];
             }
             
             if (obtained) {
@@ -779,6 +775,16 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 {
     AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
     viewingPlaneId = plane.planeId;
+}
+
+- (void) deletePlane:(AGPlane*)plane
+{
+    [[AGControllerUtils controllerUtils].planeController markDeleted:plane];
+    //viewedMessagesForPlane
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
+    //
+    [[AGCoreData coreData] remove:plane];
 }
 
 @end

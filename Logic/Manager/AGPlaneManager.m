@@ -86,7 +86,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             if (errorString) {
                 // not exist
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
-                    [[AGCoreData coreData] remove:message.plane];
+                    [[AGPlaneNotification planeNotification] deletePlane:message.plane];
                 }
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
                 removed = YES;
@@ -204,7 +204,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             if (errorString) {
                 // not exist
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
-                    [[AGCoreData coreData] remove:plane];
+                    [[AGPlaneNotification planeNotification] deletePlane:plane];
                 }
                 NSDictionary *planeJson = [result objectForKey:@"plane"];
                 //changed status, etc
@@ -215,12 +215,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 //error = [AGMessageUtils errorClient];
             }
             else{
-                [planeController markDeleted:plane];
-                //viewedMessagesForPlane
-                NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
-                //
-                [[AGCoreData coreData] remove:plane];
+                [[AGPlaneNotification planeNotification] deletePlane:plane];
             }
             
             [[AGPlaneNotification planeNotification] obtainedPlanes];
