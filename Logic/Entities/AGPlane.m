@@ -2,7 +2,7 @@
 //  AGPlane.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/9/13.
+//  Created by Tianhu Yang on 10/20/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import "AGAccount.h"
 #import "AGCategory.h"
 #import "AGMessage.h"
-#import "AGNewPlane.h"
+#import "AGNeoPlane.h"
 
 
 @implementation AGPlane
@@ -18,6 +18,7 @@
 @dynamic birthdayLower;
 @dynamic birthdayUpper;
 @dynamic city;
+@dynamic clearMsgId;
 @dynamic country;
 @dynamic createdTime;
 @dynamic deleted;
@@ -31,23 +32,25 @@
 @dynamic longitude;
 @dynamic matchCount;
 @dynamic maxMatchCount;
-@dynamic ownerViewedMsgId;
+@dynamic neoMsgId;
+@dynamic neoMsgIdOfO;
+@dynamic neoMsgIdOfT;
+@dynamic ownerInc;
 @dynamic planeId;
 @dynamic province;
 @dynamic sex;
 @dynamic source;
 @dynamic status;
-@dynamic targetViewedMsgId;
+@dynamic targetInc;
 @dynamic unreadMessagesCount;
 @dynamic updateCount;
 @dynamic updatedTime;
-@dynamic ownerInc;
-@dynamic targetInc;
+@dynamic viewedMsgId;
 @dynamic accountByOwnerId;
 @dynamic accountByTargetId;
 @dynamic category;
 @dynamic message;
 @dynamic messages;
-@dynamic newPlane;
+@dynamic neoPlane;
 
 @end

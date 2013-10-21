@@ -15,6 +15,9 @@
 static int AGUploadHttpHandlerDefaultCapacity = 1024;
 
 @interface AGUploadHttpHandler()
+{
+    NSNumber *mutex;
+}
 
 @property(nonatomic, strong) NSMutableURLRequest *request;
 
@@ -61,14 +64,13 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
         request = [[NSMutableURLRequest alloc] init];
         request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
         [request setHTTPMethod:@"POST"];
-        
+        mutex = [NSNumber numberWithBool:YES];
     }
     return self;
 }
 
 - (AGURLConnection*) uploadImage:(UIImage*)image  params:(NSDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block
 {
-    static NSNumber *number;
     NSURL *url = [NSURL URLWithString:AGDataServerUrl];
     NSString *BoundaryConstant = [self generateBoundaryString];
     NSData *body = [self prepare:params  boundary:BoundaryConstant fileParam:@"file" fileType:@"Content-Type: image/jpeg" data:UIImageJPEGRepresentation(image, 1.0)];
@@ -78,7 +80,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     // set Content-Type in HTTP header
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
     AGURLConnection *conn;
-    @synchronized(number){
+    @synchronized(mutex){
         request.URL = url;
         [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
         [request setHTTPBody:body];

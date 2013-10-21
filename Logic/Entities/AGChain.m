@@ -9,7 +9,7 @@
 #import "AGChain.h"
 #import "AGAccount.h"
 #import "AGChainMessage.h"
-#import "AGNewChain.h"
+#import "AGNeoChain.h"
 
 
 @implementation AGChain

@@ -15,14 +15,14 @@
 #import "AGAppDirector.h"
 #import "AGUtils.h"
 
-static const int MaxNewChainIds = 50;
+static const int MaxNeoChainIds = 50;
 
 @interface AGChainController()
 {
     AGCoreData *coreData;
     NSEntityDescription *chainEntityDescription;
     NSEntityDescription *chainMessageEntityDescription;
-    NSEntityDescription *newChainEntityDescription;
+    NSEntityDescription *neoChainEntityDescription;
 }
 
 @end
@@ -35,29 +35,29 @@ static const int MaxNewChainIds = 50;
         coreData = [AGCoreData coreData];
         chainEntityDescription = [NSEntityDescription entityForName:@"AGChain" inManagedObjectContext:coreData. managedObjectContext];
         chainMessageEntityDescription = [NSEntityDescription entityForName:@"AGChainMessage" inManagedObjectContext:coreData. managedObjectContext];
-        newChainEntityDescription = [NSEntityDescription entityForName:@"AGNewChain" inManagedObjectContext:coreData. managedObjectContext];
+        neoChainEntityDescription = [NSEntityDescription entityForName:@"AGNeoChain" inManagedObjectContext:coreData. managedObjectContext];
     }
     return self;
 }
 
-- (NSMutableArray*) saveNewChains:(NSArray*)jsonArray
+- (NSMutableArray*) saveNeoChains:(NSArray*)jsonArray
 {
-    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGNewChain"];
+    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGNeoChain"];
     long long max = LONG_LONG_MIN;
-    for (AGNewChain *newChain in array) {
-        if (newChain.updateInc.longLongValue > max) {
-            max = newChain.updateInc.longLongValue;
+    for (AGNeoChain *neoChain in array) {
+        if (neoChain.updateInc.longLongValue > max) {
+            max = neoChain.updateInc.longLongValue;
         }
-        if (newChain.chain == nil) {
-            AGChain *chain = (AGChain *)[coreData findById:newChain.chainId withEntityName:@"AGChain"];
+        if (neoChain.chain == nil) {
+            AGChain *chain = (AGChain *)[coreData findById:neoChain.chainId withEntityName:@"AGChain"];
             if (chain != nil) {
-                newChain.chain = chain;
+                neoChain.chain = chain;
             }
         }
     }
     
     AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
-    if (accountStat.chainUpdateInc == nil || max > accountStat.chainUpdateInc.longLongValue) {
+    if (max > accountStat.chainUpdateInc.longLongValue) {
         accountStat.chainUpdateInc = [NSNumber numberWithLongLong:max];
     }
     [coreData save];
@@ -89,9 +89,9 @@ static const int MaxNewChainIds = 50;
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
     for (AGChain *chain in array) {
-        AGNewChain *newChain = (AGNewChain *)[coreData findById:chain.chainId withEntityName:@"AGNewChain"];
-        if (newChain != nil && newChain.chain == nil) {
-            newChain.chain = chain;
+        AGNeoChain *neoChain = (AGNeoChain *)[coreData findById:chain.chainId withEntityName:@"AGNeoChain"];
+        if (neoChain != nil && neoChain.chain == nil) {
+            neoChain.chain = chain;
         }
     }
     [coreData save];
@@ -299,16 +299,16 @@ static const int MaxNewChainIds = 50;
     [coreData save];
 }
 
-- (NSArray*) getNewChainIdsForUpdate
+- (NSArray*) getNeoChainIdsForUpdate
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:newChainEntityDescription];
+    [fetchRequest setEntity:neoChainEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain == nil || updateCount > chain.updateCount"];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"chainId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    [fetchRequest setFetchLimit:MaxNewChainIds];
+    [fetchRequest setFetchLimit:MaxNeoChainIds];
     //
     [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"chainId"]];
     //
@@ -324,10 +324,10 @@ static const int MaxNewChainIds = 50;
     return chainIds;
 }
 
-- (AGNewChain*) getNextNewChainForChainMessage
+- (AGNeoChain*) getNextNeoChainForChainMessage
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:newChainEntityDescription];
+    [fetchRequest setEntity:neoChainEntityDescription];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain != nil && updateCount <= chain.updateCount"];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
@@ -335,14 +335,14 @@ static const int MaxNewChainIds = 50;
     [fetchRequest setFetchLimit:1];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    AGNewChain *newChain = nil;
+    AGNeoChain *neoChain = nil;
     if (array.count) {
-        newChain = [array lastObject];
+        neoChain = [array lastObject];
     }
-    return newChain;
+    return neoChain;
 }
 //for pickup
-- (void) addNewChains:(NSArray *)chains
+- (void) addNeoChains:(NSArray *)chains
 {
     AGAccountStat *accountStat = [AGAppDirector appDirector].account.accountStat;
     long long count = accountStat.chainUpdateInc.longLongValue;
@@ -352,17 +352,17 @@ static const int MaxNewChainIds = 50;
         [dict setObject:chain.chainId forKey:@"chainId"];
         [dict setObject:chain.updateCount forKey:@"updateCount"];
         [dict setObject:[NSNumber numberWithLongLong:count] forKey:@"updateInc"];
-        AGNewChain *newChain = (AGNewChain *)[coreData saveOrUpdate:dict withEntityName:@"AGNewChain"];
-        newChain.chain = chain;
+        AGNeoChain *neoChain = (AGNeoChain *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoChain"];
+        neoChain.chain = chain;
     }
     accountStat.chainUpdateInc = [NSNumber numberWithLongLong:count];
     [coreData save];
 }
 
-- (void) removeNewChain:(AGNewChain *)newChain oldUpdateInc:(NSNumber*)updateInc
+- (void) removeNeoChain:(AGNeoChain *)neoChain oldUpdateInc:(NSNumber*)updateInc
 {
-    if ([newChain.updateInc isEqualToNumber:updateInc] && newChain.chain != nil && newChain.updateCount.intValue <= newChain.chain.updateCount.intValue) {
-        [coreData remove:newChain];
+    if ([neoChain.updateInc isEqualToNumber:updateInc] && neoChain.chain != nil && neoChain.updateCount.intValue <= neoChain.chain.updateCount.intValue) {
+        [coreData remove:neoChain];
     }
     
 }

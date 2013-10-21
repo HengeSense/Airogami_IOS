@@ -53,14 +53,22 @@
     CGRect frame = self.view.frame;
     UIView *view = [[UIView alloc] initWithFrame:frame];
     view.userInteractionEnabled = YES;
+    [view addSubview:self.headerView];
+    self.view = view;
     //
     frame.origin.y = self.headerView.bounds.size.height;
     frame.size.height -= frame.origin.y;
-    tv.frame = frame;
+    frame.origin.x = 0.0f;
+    frame.size.width -= frame.origin.x * 2;
+    view = [[UIView alloc] initWithFrame:frame];
+    view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    view.layer.cornerRadius = 5.0f;
+    view.clipsToBounds = YES;
     //
+    frame.origin.x = frame.origin.y = 0;
+    tv.frame = frame;
     [view addSubview:tv];
-    [view addSubview:self.headerView];
-    self.view = view;
+    [self.view addSubview:view];
     
 }
 
@@ -84,6 +92,11 @@
 - (void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    //
+    CGRect frame = tv.superview.frame;
+    frame.size.height += 5.0f;
+    tv.autoresizingMask = UIViewAutoresizingNone;
+    tv.superview.frame = frame;
 }
 
 - (void)viewDidUnload {

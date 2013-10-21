@@ -22,6 +22,7 @@
 
 @interface AGJSONHttpHandler()<NSURLConnectionDelegate>
 {
+    NSNumber *mutex;
 }
 
 @property(nonatomic, strong) NSMutableURLRequest *request;
@@ -49,6 +50,7 @@
         request = [[NSMutableURLRequest alloc] init];
         request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
         request.timeoutInterval = TimeoutInterval;
+        mutex = [NSNumber numberWithBool:YES];
     }
     return self;
 }
@@ -61,7 +63,6 @@
 
 - (AGURLConnection*) start:(NSString*)path params:(NSDictionary*)params device:(BOOL)device context:(id)context block:(AGHttpJSONHandlerFinishBlock)block
 {
-    static NSNumber *number;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGWebServerUrl, path]];
     NSData *body;
     if (params) {
@@ -70,7 +71,7 @@
         body = [content dataUsingEncoding:NSUTF8StringEncoding];
     }
     AGURLConnection *conn;
-    @synchronized(number){
+    @synchronized(mutex){
         request.URL = url;
         if (params) {
             [request setHTTPMethod:@"POST"];

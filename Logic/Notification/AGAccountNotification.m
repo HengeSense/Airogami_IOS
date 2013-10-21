@@ -55,7 +55,7 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
 - (void) obtainAccount:(NSNotification*) notification
 {
     AGAccount *account = [notification.userInfo objectForKey:@"account"];
-    [[AGControllerUtils controllerUtils].accountController addNewAccount:account];
+    [[AGControllerUtils controllerUtils].accountController addNeoAccount:account];
     [self obtainAccounts:notification];
 }
 
@@ -81,9 +81,9 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
 - (void) obtainAccounts
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    AGNewAccount *newAccount = [controllerUtils.accountController getNextNewAccount];
-    if (newAccount) {
-        [self obtainProfilesForAccount:newAccount];
+    AGNeoAccount *neoAccount = [controllerUtils.accountController getNextNeoAccount];
+    if (neoAccount) {
+        [self obtainProfilesForAccount:neoAccount];
     }
     else{
         @synchronized(accountsMutex){
@@ -93,18 +93,19 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
     }
 }
 
-- (void) obtainProfilesForAccount:(AGNewAccount*)newAccount
+- (void) obtainProfilesForAccount:(AGNeoAccount*)neoAccount
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
-    NSNumber *oldUpdateCount = newAccount.updateCount;
-    NSNumber *updateCount = newAccount.account.profile.updateCount;
-    NSDictionary *params = [managerUtils.profileManager paramsForObtainProfile:newAccount.accountId updateCount:updateCount];
+    NSNumber *oldUpdateCount = neoAccount.updateCount;
+    AGProfile *profile = neoAccount.account.profile;
+    NSNumber *updateCount = profile.updateCount;
+    NSDictionary *params = [managerUtils.profileManager paramsForObtainProfile:neoAccount.accountId updateCount:updateCount];
     
     [managerUtils.profileManager obtainProfile:params context:nil block:^(NSError *error, id context, BOOL succeed) {
         if (error == nil) {
-            NSNumber *accountId = newAccount.accountId;
-            [controllerUtils.accountController removeNewAccount:newAccount oldUpdateCount:oldUpdateCount];
+            NSNumber *accountId = neoAccount.accountId;
+            [controllerUtils.accountController removeNeoAccount:neoAccount oldUpdateCount:oldUpdateCount];
             //
             if (succeed) {
                 NSDictionary *dict = [NSDictionary dictionaryWithObject:accountId forKey:@"accountId"];

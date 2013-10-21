@@ -13,7 +13,10 @@
 
 +(void) startWait:(NSString *)message
 {
-    static NSNumber *number;
+    static NSNumber *number = nil;
+    if (number == nil) {
+        number = [NSNumber numberWithBool:YES];
+    }
     static BOOL animating = NO;
     static UIActivityIndicatorView *activityView;
     @synchronized(number){

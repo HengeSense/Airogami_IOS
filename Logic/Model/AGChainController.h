@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AGChain.h"
 #import "AGChainMessage.h"
-#import "AGNewChain.h"
+#import "AGNeoChain.h"
 
 @interface AGChainController : NSObject
 
@@ -17,7 +17,7 @@
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray;
 - (NSMutableArray*) saveChainsForCollect:(NSArray*)jsonArray;
 - (NSMutableArray*) saveChains:(NSArray*)jsonArray forCollect:(BOOL)collected;
-- (NSMutableArray*) saveNewChains:(NSArray*)jsonArray;
+- (NSMutableArray*) saveNeoChains:(NSArray*)jsonArray;
 - (NSMutableArray*) saveOldChains:(NSArray*)jsonArray;
 - (void) increaseUpdateInc;
 - (void) increaseUpdateIncForChat:(AGChain*)chain;
@@ -32,10 +32,10 @@
 //-1 = unknown; 0 = colleted; 1 = obtained; 2 = deleted
 - (int) chainStatus:(NSNumber*)chainId;
 //
-- (NSArray*) getNewChainIdsForUpdate;
-- (AGNewChain*) getNextNewChainForChainMessage;
-- (void) addNewChains:(NSArray*)chains;
-- (void) removeNewChain:(AGNewChain*)chain oldUpdateInc:(NSNumber*)updateInc;
+- (NSArray*) getNeoChainIdsForUpdate;
+- (AGNeoChain*) getNextNeoChainForChainMessage;
+- (void) addNeoChains:(NSArray*)chains;
+- (void) removeNeoChain:(AGNeoChain*)chain oldUpdateInc:(NSNumber*)updateInc;
 //
 - (void) resetForSync;
 - (void) deleteForSync;

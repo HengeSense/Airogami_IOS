@@ -38,6 +38,8 @@
                                                                         NULL,
                                                                         CFSTR(":/?#[]@!$&'()*+,;="),
                                                                         kCFStringEncodingUTF8);
-    return (__bridge NSString *)(encodedString);
+    NSString *component = (__bridge NSString *)(encodedString);
+    CFRelease(encodedString);
+    return component;
 }
 @end

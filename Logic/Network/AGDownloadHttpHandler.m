@@ -13,6 +13,9 @@
 static const int AGDownloadDefaultCapacity = 1024 * 256;
 
 @interface AGDownloadHttpHandler()<NSURLConnectionDelegate>
+{
+    NSNumber *mutex;
+}
 
 @property(nonatomic, strong) NSMutableURLRequest *request;
 
@@ -38,17 +41,16 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     if (self = [super init]) {
         request = [[NSMutableURLRequest alloc] init];
         request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
+        mutex = [NSNumber numberWithBool:YES];
     }
     return self;
 }
 
 - (NSURLConnection*) start:(NSString*)path context:(id)context block:(AGDownloadHttpHandlerFinishBlock)block
 {
-    
-    static NSNumber *number;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", AGDataServerUrl, path]];
     AGURLConnection *conn;
-    @synchronized(number){
+    @synchronized(mutex){
         request.URL = url;
         conn = [[AGURLConnection alloc] initWithRequest:request delegate:self];
         [[AGManagerUtils managerUtils].networkManager addURLConnection:conn];

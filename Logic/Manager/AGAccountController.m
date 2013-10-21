@@ -16,7 +16,7 @@
 @interface AGAccountController()
 {
     AGCoreData *coreData;
-    NSEntityDescription *newAccountEntityDescription;
+    NSEntityDescription *neoAccountEntityDescription;
 }
 
 @end
@@ -29,7 +29,7 @@
 {
     if (self = [super init]) {
         coreData = [AGCoreData coreData];
-        newAccountEntityDescription = [NSEntityDescription entityForName:@"AGNewAccount" inManagedObjectContext:coreData. managedObjectContext];
+        neoAccountEntityDescription = [NSEntityDescription entityForName:@"AGNeoAccount" inManagedObjectContext:coreData. managedObjectContext];
     }
     return self;
 }
@@ -83,49 +83,49 @@
     return (AGAccount*)[coreData findById:accountId withEntityName:@"AGAccount"];
 }
 
-- (void) addNewAccounts:(NSArray *)accounts
+- (void) addNeoAccounts:(NSArray *)accounts
 {
     for (AGAccount *account in accounts) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
         [dict setObject:account.accountId forKey:@"accountId"];
-        NSNumber *number = [NSNumber numberWithLongLong:account.updateCount.longLongValue - 1];
+        NSNumber *number = [NSNumber numberWithInt:account.updateCount.intValue - 1];
         [dict setObject:number forKey:@"updateCount"];
-        AGNewAccount *newAccount = (AGNewAccount *)[coreData saveOrUpdate:dict withEntityName:@"AGNewAccount"];
-        newAccount.account = account;
+        AGNeoAccount *neoAccount = (AGNeoAccount *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoAccount"];
+        neoAccount.account = account;
     }
     [coreData save];
 }
 
-- (void) addNewAccount:(AGAccount *)account
+- (void) addNeoAccount:(AGAccount *)account
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
     [dict setObject:account.accountId forKey:@"accountId"];
     [dict setObject:account.updateCount forKey:@"updateCount"];
-    AGNewAccount *newAccount = (AGNewAccount *)[coreData saveOrUpdate:dict withEntityName:@"AGNewAccount"];
-    newAccount.account = account;
+    AGNeoAccount *neoAccount = (AGNeoAccount *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoAccount"];
+    neoAccount.account = account;
     [coreData save];
 }
 
-- (AGNewAccount*) getNextNewAccount
+- (AGNeoAccount*) getNextNeoAccount
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:newAccountEntityDescription];
+    [fetchRequest setEntity:neoAccountEntityDescription];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"accountId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [fetchRequest setFetchLimit:1];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    AGNewAccount *newAccount= nil;
+    AGNeoAccount *neoAccount= nil;
     if (array.count) {
-        newAccount = [array lastObject];
+        neoAccount = [array lastObject];
     }
-    return newAccount;
+    return neoAccount;
 }
 
-- (void) removeNewAccount:(AGNewAccount *)newAccount oldUpdateCount:(NSNumber*)updateCount
+- (void) removeNeoAccount:(AGNeoAccount *)neoAccount oldUpdateCount:(NSNumber*)updateCount
 {
-    if (newAccount.updateCount.longLongValue == updateCount.longLongValue) {
-        [coreData remove:newAccount];
+    if (neoAccount.updateCount.longLongValue == updateCount.longLongValue) {
+        [coreData remove:neoAccount];
     }
     
 }

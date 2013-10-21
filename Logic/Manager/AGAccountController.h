@@ -11,7 +11,7 @@
 #import "AGAccount.h"
 #import "AGProfile.h"
 #import "AGPlane.h"
-#import "AGNewAccount.h"
+#import "AGNeoAccount.h"
 
 @interface AGAccountController : NSObject
 
@@ -20,10 +20,10 @@
 - (AGProfile *) saveProfile:(NSDictionary*)jsonDictionary;
 - (AGAccountStat*) findAccountStat:(NSNumber *)accountId;
 - (AGAccount*) findAccount:(NSNumber*)accountId;
-- (void) addNewAccounts:(NSArray *)accounts;
-- (void) addNewAccount:(AGAccount *)account;
-- (AGNewAccount*) getNextNewAccount;
-- (void) removeNewAccount:(AGNewAccount *)newAccount oldUpdateCount:(NSNumber*)updateCount;
+- (void) addNeoAccounts:(NSArray *)accounts;
+- (void) addNeoAccount:(AGAccount *)account;
+- (AGNeoAccount*) getNextNeoAccount;
+- (void) removeNeoAccount:(AGNeoAccount *)newAccount oldUpdateCount:(NSNumber*)updateCount;
 - (int) getUnreadMessagesCount;
 - (void) setSynchronizing:(BOOL)sychronizing;
 

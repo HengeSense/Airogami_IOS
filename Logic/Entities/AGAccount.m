@@ -2,7 +2,7 @@
 //  AGAccount.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/15/13.
+//  Created by Tianhu Yang on 10/20/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 #import "AGChain.h"
 #import "AGChainMessage.h"
 #import "AGMessage.h"
+#import "AGNeoAccount.h"
 #import "AGPlane.h"
 #import "AGProfile.h"
 
@@ -25,6 +26,7 @@
 @dynamic chainMessages;
 @dynamic chains;
 @dynamic messages;
+@dynamic neoAccount;
 @dynamic planesForOwnerId;
 @dynamic planesForTargetId;
 @dynamic profile;

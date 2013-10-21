@@ -21,6 +21,13 @@ typedef enum _NSBubbleTypingType
     NSBubbleTypingTypeSomebody = 2
 } NSBubbleTypingType;
 
+typedef enum
+{
+    UIBubbleTableSetDataActionReset = 0,
+    UIBubbleTableSetDataActionPrepend = 1,
+    UIBubbleTableSetDataActionAppend = 2
+} UIBubbleTableSetDataActionEnum;
+
 @interface UIBubbleTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) IBOutlet id<UIBubbleTableViewDataSource> bubbleDataSource;
@@ -34,6 +41,6 @@ typedef enum _NSBubbleTypingType
 //- (void) reloadToBottom;
 //- (void) reloadToBottom:(BOOL)animated;
 - (void) didSelectCellAtIndexPath:(NSIndexPath*) indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType) type;
-- (void)addData:(BOOL)append animated:(BOOL)animated;
+- (void)setData:(UIBubbleTableSetDataActionEnum)action animated:(BOOL)animated;
 
 @end

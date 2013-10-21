@@ -12,7 +12,7 @@
 #import "AGChainMessage.h"
 #import "AGChain.h"
 
-typedef void (^AGGetNewChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *newChains);
+typedef void (^AGGetNeoChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *neoChains);
 typedef void (^AGGetChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *chains);
 typedef void (^AGGetOldChainsBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *oldChains);
 
@@ -26,7 +26,7 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 
 - (void) replyChain:(NSDictionary*)params chain:(AGChain*)chain context:(id)context block:(AGHttpSucceedBlock)block;
 
-- (void) getNewChains:(NSDictionary*) params context:(id)context block:(AGGetNewChainsBlock)block;
+- (void) getNeoChains:(NSDictionary*) params context:(id)context block:(AGGetNeoChainsBlock)block;
 
 - (void) getChains:(NSDictionary*) params context:(id)context block:(AGGetChainsBlock)block;
 
@@ -48,7 +48,7 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 
 - (NSDictionary*)paramsForReplyChain:(NSNumber*)chainId content:(NSString*)content type:(int)type;
 
-- (NSDictionary*)paramsForGetNewChains:(NSNumber*)start;
+- (NSDictionary*)paramsForGetNeoChains:(NSNumber*)start;
 
 - (NSDictionary*)paramsForGetOldChains:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
 

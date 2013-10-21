@@ -59,6 +59,7 @@ static float AGInputTextViewMaxHeight = 80;
     self.descriptionTextView.frame = frame;
     //
     CGPoint point;
+    point.x = 0;
     point.y = frame.size.height;
     point = [self.descriptionTextView convertPoint:point toView:self.scrollView];
     frame = self.contentTextView.frame;
@@ -323,7 +324,7 @@ static float AGInputTextViewMaxHeight = 80;
 - (void) relayout
 {
     CGRect textFrame = self.inputTextView.frame;
-    CGRect frame = self.contentContainer.frame;
+    CGRect frame;
     float diff = textFrame.origin.y * 2;
     CGPoint point = CGPointZero;
     aidedTextView.text = self.inputTextView.text;

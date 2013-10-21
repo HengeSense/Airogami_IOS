@@ -2,14 +2,14 @@
 //  AGAccount.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/15/13.
+//  Created by Tianhu Yang on 10/20/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AGAccountStat, AGAuthenticate, AGChain, AGChainMessage, AGMessage, AGPlane, AGProfile;
+@class AGAccountStat, AGAuthenticate, AGChain, AGChainMessage, AGMessage, AGNeoAccount, AGPlane, AGProfile;
 
 @interface AGAccount : NSManagedObject
 
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSSet *chainMessages;
 @property (nonatomic, retain) NSSet *chains;
 @property (nonatomic, retain) NSSet *messages;
+@property (nonatomic, retain) AGNeoAccount *neoAccount;
 @property (nonatomic, retain) NSSet *planesForOwnerId;
 @property (nonatomic, retain) NSSet *planesForTargetId;
 @property (nonatomic, retain) AGProfile *profile;

@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGNewChain.h"
+#import "AGNeoChain.h"
 #import "AGChain.h"
 
 
-@implementation AGNewChain
+@implementation AGNeoChain
 
 @dynamic chainId;
 @dynamic updateInc;

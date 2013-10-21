@@ -233,7 +233,7 @@ static NSString *SigninOut = @"error.account.signin.out";
                         if (automatic) {
                             NSArray *changedAccounts = [coreData unregisterObserver];
                             if (changedAccounts.count) {
-                                [accountController addNewAccounts:changedAccounts];
+                                [accountController addNeoAccounts:changedAccounts];
                                 NSDictionary *dict = [NSDictionary dictionary];
                                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
                             }

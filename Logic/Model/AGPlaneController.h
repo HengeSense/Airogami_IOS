@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "AGCoreData.h"
 #import "AGMessage.h"
-#import "AGNewPlane.h"
+#import "AGNeoPlane.h"
 
 @interface AGPlaneController : NSObject
 
 - (AGPlane*) savePlane:(NSDictionary*)planeJson;
 - (void) markDeleted:(AGPlane*)plane;
-- (NSMutableArray*) saveNewPlanes:(NSArray*)jsonArray;
+- (NSMutableArray*) saveNeoPlanes:(NSArray*)jsonArray;
 - (NSMutableArray*) savePlanes:(NSArray*)jsonArray;
 - (NSMutableArray*) saveOldPlanes:(NSArray*)jsonArray;
 - (NSNumber*) recentPlaneUpdateIncForCollect;
@@ -27,16 +27,17 @@
 - (NSArray*) getAllPlanesForChat;
 - (void) updateMessage:(AGPlane*)plane;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
-- (NSArray*) getNewPlaneIdsForUpdate;
-- (AGNewPlane*) getNextNewPlaneForMessages;
+- (NSArray*) getNeoPlanesForUpdate;
+- (AGNeoPlane*) getNextNeoPlaneForMessages;
 - (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane;
 - (void) resetForSync;
 - (void) deleteForSync;
 //new means not obtained messages
-- (AGNewPlane*) getNextNewPlaneForChat;
+- (AGNeoPlane*) getNextNeoPlaneForChat;
 - (AGPlane*) getNextUnviewedPlane;
-- (void) addNewPlanesForChat:(NSArray*)planes;
-- (void) removeNewPlaneForChat:(AGNewPlane*)plane oldUpdateInc:(NSNumber*)updateInc;
-- (void) removeNewPlane:(AGNewPlane *)newPlane oldUpdateInc:(NSNumber*)updateInc;
+- (void) addNeoPlanesForChat:(NSArray*)planes;
+- (void) removeNeoPlaneForChat:(AGNeoPlane*)plane oldUpdateInc:(NSNumber*)updateInc;
+- (void) removeNeoPlane:(AGNeoPlane *)newPlane;
+- (void) removeNeoPlanes:(NSArray *)newPlanes;
 
 @end

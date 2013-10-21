@@ -229,6 +229,16 @@ static float AGInputTextViewMaxHeight = 100;
    
 }
 
+- (void) readMessagesForPlane:(NSNotification*)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    NSNumber *planeId = [dict objectForKey:@"planeId"];
+    AGPlane *plane = airogami;
+    if ([planeId isEqual:plane.planeId] == NO) {
+        return;
+    }
+}
+
 - (void) gotMessagesForPlane:(NSNotification*)notification
 {
     NSDictionary *dict = notification.userInfo;
@@ -242,7 +252,7 @@ static float AGInputTextViewMaxHeight = 100;
     NSAssert(action != nil, @"nil action!");
     
     NSArray *messages = [dict objectForKey:@"messages"];
-    if (messages.count == 0) {
+    if (messages.count == 0 && [action isEqual:@"reset"] == NO) {
         return;
     }
     NSNumber *more = [dict objectForKey:@"more"];
@@ -267,25 +277,25 @@ static float AGInputTextViewMaxHeight = 100;
         bubbleData.obj = message;
         [array addObject:bubbleData];
     }
-    BOOL add = YES;
+    UIBubbleTableSetDataActionEnum setDataAction = UIBubbleTableSetDataActionReset;
     if ([action isEqual:@"reset"]) {
         [messagesData removeAllObjects];
-        
+        setDataAction = UIBubbleTableSetDataActionReset;
     }
     else if ([action isEqual:@"append"]){
-        
+        setDataAction = UIBubbleTableSetDataActionAppend;
     }
     else if ([action isEqual:@"prepend"]){
-        add = NO;
+        setDataAction = UIBubbleTableSetDataActionPrepend;
     }
-    if (add) {
+    if (setDataAction == UIBubbleTableSetDataActionAppend) {
         [messagesData addObjectsFromArray:array];
-        [bubbleTable addData:add animated:didInitialized];
+        [bubbleTable setData:setDataAction animated:didInitialized];
     }
     else{
         [array addObjectsFromArray:messagesData];
         messagesData = array;
-        [bubbleTable addData:add animated:NO];
+        [bubbleTable setData:setDataAction animated:NO];
 
     }
 
@@ -329,25 +339,25 @@ static float AGInputTextViewMaxHeight = 100;
         bubbleData.obj = chainMessage;
         [array addObject:bubbleData];
     }
-    BOOL add = YES;
+    UIBubbleTableSetDataActionEnum setDataAction = UIBubbleTableSetDataActionReset;
     if ([action isEqual:@"reset"]) {
         [messagesData removeAllObjects];
-        
+        setDataAction = UIBubbleTableSetDataActionReset;
     }
     else if ([action isEqual:@"append"]){
-        
+        setDataAction = UIBubbleTableSetDataActionAppend;
     }
     else if ([action isEqual:@"prepend"]){
-        add = NO;
+        setDataAction = UIBubbleTableSetDataActionPrepend;
     }
-    if (add) {
+    if (setDataAction == UIBubbleTableSetDataActionAppend) {
         [messagesData addObjectsFromArray:array];
-        [bubbleTable addData:add animated:didInitialized];
+        [bubbleTable setData:setDataAction animated:didInitialized];
     }
     else{
         [array addObjectsFromArray:messagesData];
         messagesData = array;
-        [bubbleTable addData:add animated:NO];
+        [bubbleTable setData:setDataAction animated:NO];
         
     }
     
@@ -412,7 +422,7 @@ static float AGInputTextViewMaxHeight = 100;
 - (void) relayout
 {
     CGRect textFrame = inputTextView.frame;
-    CGRect frame = viewContainer.frame;
+    CGRect frame;
     float diff = textFrame.origin.y * 2;
     CGPoint point = CGPointZero;
     aidedTextView.text = inputTextView.text;
@@ -496,7 +506,7 @@ static float AGInputTextViewMaxHeight = 100;
     sayBubble.state = message.state.intValue;
     sayBubble.obj = message;
     [messagesData addObject:sayBubble];
-    [bubbleTable addData:YES animated:didInitialized];
+    [bubbleTable setData:UIBubbleTableSetDataActionAppend animated:didInitialized];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSendMessages object:nil userInfo:nil];
     //
     /*[managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {

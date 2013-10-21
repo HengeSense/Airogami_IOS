@@ -11,7 +11,7 @@
 
 @class AGAccount;
 
-@interface AGNewAccount : NSManagedObject
+@interface AGNeoAccount : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * accountId;
 @property (nonatomic, retain) NSNumber * updateCount;

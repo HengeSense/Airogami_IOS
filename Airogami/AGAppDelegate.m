@@ -41,7 +41,7 @@ static AGAppDelegate *AppDelegate;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert |UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeNewsstandContentAvailability)];
     //
     NSDictionary *payload = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (payload) {
@@ -129,8 +129,8 @@ static AGAppDelegate *AppDelegate;
     AGAccount *account = appDirector.account;
     NSNumber *accountId = [userInfo objectForKey:@"accountId"];
     if (app.applicationState == UIApplicationStateActive && [accountId isEqualToNumber:account.accountId]) {
-        [appDirector refresh];
-        [[AGManagerUtils managerUtils].audioManager playMessage];
+       [appDirector refresh];
+       [[AGManagerUtils managerUtils].audioManager playMessage];
     }
 
 }

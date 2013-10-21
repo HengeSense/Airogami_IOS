@@ -20,7 +20,7 @@
 static NSString *SendChainPath = @"chain/sendChain.action?";
 static NSString *DeleteChainPath = @"chain/deleteChain.action?";
 static NSString *ReplyChainPath = @"chain/replyChain.action?";
-static NSString *GetNewChainsPath = @"chain/getNewChains.action?";
+static NSString *GetNeoChainsPath = @"chain/getNeoChains.action?";
 static NSString *GetChainsPath = @"chain/getChains.action?";
 static NSString *GetOldChainsPath = @"chain/getOldChains.action?";
 static NSString *ThrowChainPath = @"chain/throwChain.action?";
@@ -123,19 +123,19 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
     return params;
 }
 
-- (void) getNewChains:(NSDictionary*) params context:(id)context block:(AGGetNewChainsBlock)block
+- (void) getNeoChains:(NSDictionary*) params context:(id)context block:(AGGetNeoChainsBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:GetNewChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        NSArray *newChains = nil;
+    [AGJSONHttpHandler request:YES params:params path:GetNeoChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *neoChains = nil;
         if (error) {
             
         }
         else{
             //succeed
-            newChains = [[AGControllerUtils controllerUtils].chainController saveNewChains:[result objectForKey:@"newChains"]];
+            neoChains = [[AGControllerUtils controllerUtils].chainController saveNeoChains:[result objectForKey:@"neoChains"]];
         }
         if (block) {
-            block(error, context, result, newChains);
+            block(error, context, result, neoChains);
         }
         
     }];
@@ -157,7 +157,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
     return params;
 }
 
-- (NSDictionary*)paramsForGetNewChains:(NSNumber*)start
+- (NSDictionary*)paramsForGetNeoChains:(NSNumber*)start
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
     if (start) {
@@ -182,7 +182,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
             NSArray *changedAccounts = [coreData unregisterObserver];
             if (changedAccounts.count) {
                 AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
-                [accountController addNewAccounts:changedAccounts];
+                [accountController addNeoAccounts:changedAccounts];
                 NSDictionary *dict = [NSDictionary dictionary];
                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
             }

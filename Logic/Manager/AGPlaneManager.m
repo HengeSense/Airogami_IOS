@@ -21,7 +21,7 @@ static NSString *DeletePlanePath = @"plane/deletePlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
 static NSString *ThrowPlanePath = @"plane/throwPlane.action?";
 static NSString *PickupPath = @"plane/pickup.action?";
-static NSString *GetNewPlanesPath = @"plane/getNewPlanes.action?";
+static NSString *GetNeoPlanesPath = @"plane/getNeoPlanes.action?";
 static NSString *GetPlanesPath = @"plane/getPlanes.action?";
 static NSString *GetOldPlanesPath = @"plane/getOldPlanes.action?";
 static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
@@ -261,7 +261,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 }
                 NSArray *chains = [[AGControllerUtils controllerUtils].chainController saveChainsForCollect:[result objectForKey:@"chains"]];
                 if (chains.count) {
-                    [[AGControllerUtils controllerUtils].chainController addNewChains:chains];
+                    [[AGControllerUtils controllerUtils].chainController addNeoChains:chains];
                     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
                     [notificationCenter postNotificationName:AGNotificationObtainChainMessages object:self userInfo:nil];
                 }
@@ -279,23 +279,23 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     }];
 }
 
-- (void) getNewPlanes:(NSDictionary*) params context:(id)context block:(AGGetNewPlanesBlock)block
+- (void) getNeoPlanes:(NSDictionary*) params context:(id)context block:(AGGetNeoPlanesBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:GetNewPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        NSArray *newPlanes = nil;
+    [AGJSONHttpHandler request:YES params:params path:GetNeoPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *neoPlanes = nil;
         if (error) {
             
         }
         else{
             //succeed
-            newPlanes = [[AGControllerUtils controllerUtils].planeController saveNewPlanes:[result objectForKey:@"newPlanes"]];
+            neoPlanes = [[AGControllerUtils controllerUtils].planeController saveNeoPlanes:[result objectForKey:@"neoPlanes"]];
             /*for(AGPlane *plane in planes){
                 AGMessage *message = plane.messages.objectEnumerator.nextObject;
                 plane.targetViewedMsgId = message.messageId;
             }*/
         }
         if (block) {
-            block(error, context, result, newPlanes);
+            block(error, context, result, neoPlanes);
         }
         
     }];
@@ -317,7 +317,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             NSArray *changedAccounts = [coreData unregisterObserver];
             if (changedAccounts.count) {
                 AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
-                [accountController addNewAccounts:changedAccounts];
+                [accountController addNeoAccounts:changedAccounts];
                 NSDictionary *dict = [NSDictionary dictionary];
                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
             }
@@ -367,7 +367,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
             for(AGPlane *plane in planes){
                 AGMessage *message = plane.messages.objectEnumerator.nextObject;
-                plane.targetViewedMsgId = message.messageId;
+                plane.viewedMsgId = message.messageId;
             }
             [[AGCoreData coreData] save];
         }
@@ -394,7 +394,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             NSArray *changedAccounts = [coreData unregisterObserver];
             if (changedAccounts.count) {
                 AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
-                [accountController addNewAccounts:changedAccounts];
+                [accountController addNeoAccounts:changedAccounts];
                 NSDictionary *dict = [NSDictionary dictionary];
                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
             }
@@ -440,7 +440,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     }];
 }
 
-- (NSDictionary*)paramsForGetNewPlane:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit
+- (NSDictionary*)paramsForGetNeoPlane:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     if (start) {

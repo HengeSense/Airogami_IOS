@@ -118,12 +118,22 @@ typedef enum {
 
 #pragma mark - Override
 
-
-- (void)addData:(BOOL)append animated:(BOOL)animated
+- (void)setData:(UIBubbleTableSetDataActionEnum)action animated:(BOOL)animated
 {
     // Loading new data
     int count = 0;
-    if (self.bubbleDataSource && (count = [self.bubbleDataSource rowsForBubbleTable:self] - bubbleDataCount) > 0) {
+    if (self.bubbleDataSource) {
+        if(action == UIBubbleTableSetDataActionPrepend || action == UIBubbleTableSetDataActionAppend){
+            count = [self.bubbleDataSource rowsForBubbleTable:self] - bubbleDataCount;
+            if (count < 1 ) {
+                return;
+            }
+        }
+        else if (action == UIBubbleTableSetDataActionReset){
+            count = [self.bubbleDataSource rowsForBubbleTable:self];
+        }
+        
+        
         NSMutableArray *newBubbleSections;
         
         newBubbleSections = [NSMutableArray arrayWithCapacity:count];
@@ -135,10 +145,10 @@ typedef enum {
          
          return [bubbleData1.date compare:bubbleData2.date];
          }];*/
-        
+        NSBubbleData *data;
         NSDate *last = nil;
-        if(append && bubbleDataCount){
-            NSBubbleData *data = [self.bubbleDataSource bubbleTableView:self dataForRow:bubbleDataCount - 1];
+        if(action == UIBubbleTableSetDataActionAppend && bubbleDataCount){
+            data = [self.bubbleDataSource bubbleTableView:self dataForRow:bubbleDataCount - 1];
             last = data.date;
         }
         else{
@@ -146,15 +156,15 @@ typedef enum {
         }
         //
         NSMutableArray *currentSection = nil;
-        if (append) {
+        if (action == UIBubbleTableSetDataActionAppend) {
             count = [self.bubbleDataSource rowsForBubbleTable:self];
         }
         
-        for (int i = append ? bubbleDataCount : 0; i < count; i++)
+        for (int i = action == UIBubbleTableSetDataActionAppend ? bubbleDataCount : 0; i < count; i++)
         {
             id object = [self.bubbleDataSource bubbleTableView:self dataForRow:i];
             assert([object isKindOfClass:[NSBubbleData class]]);
-            NSBubbleData *data = object;
+            data = object;
             NSTimeInterval timeInterval = [data.date timeIntervalSinceDate:last];
             
             if (timeInterval > self.snapInterval || timeInterval < -self.snapInterval)
@@ -175,8 +185,7 @@ typedef enum {
         }
         
         bubbleDataCount = [self.bubbleDataSource rowsForBubbleTable:self];
-        if (append) {
-            count = self.bubbleSections.count;
+        if (action == UIBubbleTableSetDataActionAppend) {
             [self.bubbleSections addObjectsFromArray:newBubbleSections];
             //[self beginUpdates];
             //[self insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(count, newBubbleSections.count)] withRowAnimation:UITableViewRowAnimationNone];
@@ -184,19 +193,30 @@ typedef enum {
             [self reloadData];
             [self scrollToBottom:animated];
         }
-        else{
+        else if(action == UIBubbleTableSetDataActionPrepend){
             count = newBubbleSections.count;
             [self saveSections:count rows:currentSection.count];
             [newBubbleSections addObjectsFromArray:self.bubbleSections];
             self.bubbleSections = newBubbleSections;
-
+            
             //[self insertSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, count)] withRowAnimation:UITableViewRowAnimationNone];
             
             [self reloadData];
             [self restoreCursorIndexPath];
         }
+        else if(action == UIBubbleTableSetDataActionReset)
+        {
+            self.bubbleSections = newBubbleSections;
+            [self reloadData];
+            [self scrollToBottom:animated];
+        }
         
     }
+    
+}
+
+- (void)refresh:(NSDictionary*)dict
+{
     
 }
 
@@ -348,9 +368,15 @@ typedef enum {
 - (void) scrollToBottom:(BOOL)animated
 {
     int section = [self numberOfSections] - 1;
-    int row = [self numberOfRowsInSection:section] - 1;
-    NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
-    [self scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    if (section > -1) {
+        int row = [self numberOfRowsInSection:section] - 1;
+        if (row > -1) {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
+            [self scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+        }
+       
+    }
+    
     
 }
 

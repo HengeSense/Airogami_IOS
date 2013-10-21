@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
-#import "AGNewAccount.h"
+#import "AGNeoAccount.h"
 #import "AGAccount.h"
 
 
-@implementation AGNewAccount
+@implementation AGNeoAccount
 
 @dynamic accountId;
 @dynamic updateCount;

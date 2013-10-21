@@ -15,6 +15,7 @@
 #import "AGAppDirector.h"
 
 static int MessageLimit = 10;
+static int DeleteLimit = 1;
 
 @interface AGMessageController()
 {
@@ -35,16 +36,22 @@ static int MessageLimit = 10;
     return self;
 }
 
+//for the opposite messages
 - (NSMutableArray*) saveMessages:(NSArray*)jsonArray plane:(AGPlane*) plane
 {
     NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGMessage"];
     for (AGMessage *message in array) {
         message.plane = plane;
     }
+    //update neoMsgId
+    AGMessage *message = array.lastObject;
+    if (message) {
+        plane.neoMsgId = message.messageId;
+    }
     [coreData save];
     return array;
 }
-
+//for my message
 - (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary
 {
     AGMessage *message = (AGMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGMessage"];
@@ -102,7 +109,7 @@ static int MessageLimit = 10;
     [fetchRequest setEntity:messageEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and account.accountId != %@ and ((plane.accountByOwnerId.accountId = %@ and messageId > plane.ownerViewedMsgId) or (plane.accountByTargetId.accountId = %@ and messageId > plane.targetViewedMsgId))", planeId, accountId, accountId, accountId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and account.accountId != %@ and messageId > plane.viewedMsgId", planeId, accountId, accountId, accountId];
     [fetchRequest setPredicate:predicate];
     //expression
     NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"messageId"];
@@ -126,19 +133,18 @@ static int MessageLimit = 10;
 -(NSNumber*) viewedMessagesForPlane:(AGPlane*)plane
 {
     AGAccount *account = [AGAppDirector appDirector].account;
-    AGAccountStat *accountStat = account.accountStat;
     NSNumber *lastMsgId = nil;
     //old
     AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
     if (message) {
         if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
-            plane.ownerViewedMsgId = message.messageId;
+            plane.viewedMsgId = message.messageId;
             if (message.messageId.longLongValue > plane.lastMsgIdOfO.longLongValue) {
                 lastMsgId = message.messageId;
             }
         }
         else{
-            plane.targetViewedMsgId = message.messageId;
+            plane.viewedMsgId = message.messageId;
             if (message.messageId.longLongValue > plane.lastMsgIdOfT.longLongValue) {
                 lastMsgId = message.messageId;
             }
@@ -146,18 +152,23 @@ static int MessageLimit = 10;
     }
     [coreData save];
     //new
-    int newCount = [self getUnreadMessageCountForPlane:plane.planeId];
-    int count = accountStat.unreadMessagesCount.intValue + newCount - plane.unreadMessagesCount.intValue;
-    if(count < 0){
-        count = 0;
-    }
-    accountStat.unreadMessagesCount = [NSNumber numberWithInt:count];
-    plane.unreadMessagesCount = [NSNumber numberWithInt:newCount];
-    if (count < 1) {
-        
-    }
-    [coreData save];
+    [self updateMessagesCount:plane];
     return lastMsgId;
+}
+
+//return updated
+-(BOOL) viewedMessagesForPlane:(AGPlane*)plane lastMsgId:(NSNumber*)lastMsgId
+{
+    BOOL updated = NO;
+    if (plane.viewedMsgId.longLongValue < lastMsgId.longLongValue) {
+        plane.viewedMsgId = lastMsgId;
+        updated = YES;
+    }
+    if (updated) {
+        [coreData save];
+        [self updateMessagesCount:plane];
+    }
+    return updated;
 }
 
 //ascending
@@ -204,5 +215,35 @@ static int MessageLimit = 10;
     return message;
 }
 
+-(BOOL) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId
+{
+    [self viewedMessagesForPlane:plane lastMsgId:clearMsgId];
+    //
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:messageEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId <= %@ && messageId > 0 && plane.planeId == %@", clearMsgId, plane.planeId];
+    [fetchRequest setPredicate:predicate];
+    //
+    [fetchRequest setFetchLimit:DeleteLimit];
+    //
+    BOOL updated = NO;
+    while (true) {
+        NSError *error;
+        NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (array.count) {
+            [coreData removeAll:array];
+            updated = YES;
+        }
+        else{
+            break;
+        }
+    }
+    plane.clearMsgId = clearMsgId;
+    [coreData save];
+    
+    //
+    return updated;
+}
 
 @end

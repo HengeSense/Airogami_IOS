@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AGAccount, AGChainMessage, AGNewChain;
+@class AGAccount, AGChainMessage, AGNeoChain;
 
 @interface AGChain : NSManagedObject
 
@@ -34,7 +34,7 @@
 @property (nonatomic, retain) AGAccount *account;
 @property (nonatomic, retain) AGChainMessage *chainMessage;
 @property (nonatomic, retain) NSSet *chainMessages;
-@property (nonatomic, retain) AGNewChain *newChain;
+@property (nonatomic, retain) AGNeoChain *newChain;
 @end
 
 @interface AGChain (CoreDataGeneratedAccessors)

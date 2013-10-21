@@ -30,4 +30,7 @@
 
 - (NSNumber*) viewedMessagesForPlane:(AGPlane*)plane;
 
+//return updated;
+- (BOOL) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId;
+
 @end

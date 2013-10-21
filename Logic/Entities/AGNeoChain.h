@@ -11,7 +11,7 @@
 
 @class AGChain;
 
-@interface AGNewChain : NSManagedObject
+@interface AGNeoChain : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * chainId;
 @property (nonatomic, retain) NSNumber * updateInc;
