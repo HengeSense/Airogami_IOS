@@ -24,8 +24,6 @@ static NSString *GetNeoChainsPath = @"chain/getNeoChains.action?";
 static NSString *GetChainsPath = @"chain/getChains.action?";
 static NSString *GetOldChainsPath = @"chain/getOldChains.action?";
 static NSString *ThrowChainPath = @"chain/throwChain.action?";
-static NSString *ReceiveChainsPath = @"chain/receiveChains.action?";
-static NSString *ObtainChainsPath = @"chain/obtainChains.action?";
 static NSString *ObtainChainMessagesPath = @"chain/obtainChainMessages.action?";
 static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
 
@@ -219,61 +217,6 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
         }
         
     }];
-}
-
-- (void) receiveChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block
-{
-    [AGJSONHttpHandler request:YES params:params path:ReceiveChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        NSArray *chains = [NSArray array];
-        if (error) {
-            
-        }
-        else{
-            //succeed
-            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:YES];
-        }
-        if (block) {
-            block(error, context, result, chains);
-        }
-        
-    }];
-}
-
-- (NSDictionary*)paramsForReceiveChains:(NSNumber*)start
-{
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
-    if (start) {
-        [params setObject:start forKey:@"start"];
-    }
-    return params;
-}
-
-- (void) obtainChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block
-{
-    [AGJSONHttpHandler request:YES params:params path:ObtainChainsPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        NSArray *chains = [NSArray array];
-        if (error) {
-            
-        }
-        else{
-            //succeed
-            chains = [[AGControllerUtils controllerUtils].chainController saveChains:[result objectForKey:@"chains"] forCollect:NO];
-        }
-        if (block) {
-            block(error, context, result, chains);
-        }
-        
-    }];
-}
-
-- (NSDictionary*)paramsForObtainChains:(NSNumber*)start
-{
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
-    if (start) {
-        [params setObject:start forKey:@"start"];
-    }
-    
-    return params;
 }
 
 - (void) throwChain:(NSDictionary*) params chain:(AGChain*)chain context:(id)context block:(AGHttpSucceedBlock)block

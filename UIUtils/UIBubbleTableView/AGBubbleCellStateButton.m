@@ -45,6 +45,12 @@ static NSString *StateButtonSelectedImages[] = { @"", @"", @"" , @"bubbleCellSta
 {
     indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self addSubview:indicator];
+    self.userInteractionEnabled = NO;
+}
+
+-(void) likeReceived
+{
+    
 }
 
 - (void) setFrame:(CGRect)frame
@@ -53,47 +59,12 @@ static NSString *StateButtonSelectedImages[] = { @"", @"", @"" , @"bubbleCellSta
     indicator.center = CGPointMake(frame.size.width / 2, frame.size.height / 2);
 }
 
-- (void) likeReceived
-{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:StateButtonSelectedImages[3]]];
-    CGRect frame = self.bounds;
-    frame.origin = CGPointMake(frame.size.width / 2 - kStateButtonImageWidth / 2.0f, frame.size.height / 2 - kStateButtonImageWidth / 2.0f);
-    frame.size = CGSizeMake(kStateButtonImageWidth, kStateButtonImageWidth);
-    imageView.frame = frame;
-    [self addSubview:imageView];
-    [UIView beginAnimations:@"LikeAnimations" context:(__bridge void *)(imageView)];
-    imageView.transform = CGAffineTransformMakeScale(2, 2);
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(magnifyAnimationDidStop:finished:context:)];
-    [UIView commitAnimations];
-    
-    self.selected = YES;
-    
-}
-
-- (void)magnifyAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-    UIImageView *imageView = (__bridge UIImageView *)(context);
-    [UIView beginAnimations:@"LikeAnimations" context:(__bridge void *)(imageView)];
-    imageView.transform = CGAffineTransformIdentity;
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(minifyAnimationDidStop:finished:context:)];
-    [UIView commitAnimations];
-    
-}
-
-- (void)minifyAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-    UIImageView *imageView = (__bridge UIImageView *)(context);
-    [imageView removeFromSuperview];
-    self.cellState = BubbleCellStateReceivedLiked;
-}
 
 - (void) setCellState:(NSBubbleCellState)state
 {
     cellState = state;
-    if (state != BubbleCellStateSent) {
-        self.userInteractionEnabled = (state == BubbleCellStateSendFailed || state == BubbleCellStateReceivedUnliked );
+    if (state != BubbleCellStateNone) {
+        //self.userInteractionEnabled = (state == BubbleCellStateSendFailed || state == BubbleCellStateReceivedUnliked );
         if (state == BubbleCellStateSending) {
             [self setImage:nil forState:UIControlStateNormal];
             [indicator startAnimating];

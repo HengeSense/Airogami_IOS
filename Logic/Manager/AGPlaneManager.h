@@ -12,7 +12,6 @@
 
 typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message, BOOL removed);
 typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
-typedef void (^AGObtainPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *planes);
 typedef void (^AGGetNeoPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *neoPlanes);
 typedef void (^AGGetOldPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *oldPlanes);
 typedef void (^AGGetPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *planes);
@@ -25,21 +24,21 @@ typedef void (^AGGetPlanesBlock)(NSError *error, id context, NSMutableDictionary
 
 - (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block;
 
+- (void) likePlane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block;
+
 - (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block;
+
+- (void) clearPlane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block;
 
 - (void) deletePlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpDoneBlock)block;
 
 - (void) pickupPlaneAndChain:(NSDictionary*) params context:(id)context block:(AGPickupPlaneAndChainFinishBlock)block;
-
-- (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 
 - (void) getNeoPlanes:(NSDictionary*) params context:(id)context block:(AGGetNeoPlanesBlock)block;
 
 - (void) getPlanes:(NSDictionary*) params context:(id)context block:(AGGetPlanesBlock)block;
 
 - (void) getOldPlanes:(NSDictionary*) params context:(id)context block:(AGGetOldPlanesBlock)block;
-
-- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGObtainPlanesBlock)block;
 
 - (void) obtainMessages:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block;
 

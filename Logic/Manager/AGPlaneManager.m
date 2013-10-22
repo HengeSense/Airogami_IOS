@@ -14,18 +14,19 @@
 #import "AGManagerUtils.h"
 #import "AGNotificationCenter.h"
 #import "AGUIUtils.h"
+#import "AGUtils.h"
 #import "AGAppDirector.h"
 
 static NSString *SendPlanePath = @"plane/sendPlane.action?";
 static NSString *DeletePlanePath = @"plane/deletePlane.action?";
 static NSString *ReplyPlanePath = @"plane/replyPlane.action?";
+static NSString *LikePlanePath = @"plane/likePlane.action?";
+static NSString *ClearPlanePath = @"plane/clearPlane.action?";
 static NSString *ThrowPlanePath = @"plane/throwPlane.action?";
 static NSString *PickupPath = @"plane/pickup.action?";
 static NSString *GetNeoPlanesPath = @"plane/getNeoPlanes.action?";
 static NSString *GetPlanesPath = @"plane/getPlanes.action?";
 static NSString *GetOldPlanesPath = @"plane/getOldPlanes.action?";
-static NSString *ReceivePlanesPath = @"plane/receivePlanes.action?";
-static NSString *ObtainPlanesPath = @"plane/obtainPlanes.action?";
 static NSString *ObtainMessagesPath = @"plane/obtainMessages.action?";
 static NSString *ViewedMessagesPath = @"plane/viewedMessages.action?";
 
@@ -87,9 +88,15 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 // not exist
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
                     [[AGPlaneNotification planeNotification] deletePlane:message.plane];
+                    removed = YES;
+                }
+                NSDictionary *planeJson = [result objectForKey:@"plane"];
+                //changed status, etc
+                if (planeJson) {
+                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
                 }
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
-                removed = YES;
+                
                 //error = [AGMessageUtils errorClient];
             }
             else{
@@ -97,11 +104,11 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 //result = [result objectForKey:AGLogicJSONErrorKey];
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
-                //[[AGControllerUtils controllerUtils].planeController increaseUpdateInc];
                 message.plane.updatedTime = remoteMessage.createdTime;
                 [[AGControllerUtils controllerUtils].planeController updateMessage:message.plane];
                 [[AGCoreData coreData] remove:message];
-                [[AGPlaneNotification planeNotification] obtainedPlanes];
+                //update plane order
+                [[AGPlaneNotification planeNotification] obtainedPlanesReorderForPlane:remoteMessage.plane];
             }
             
         }
@@ -111,6 +118,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
         
     }];
 }
+
 
 - (void) firstReplyPlane:(NSDictionary*)params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block
 {
@@ -154,6 +162,55 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     }];
 }
 
+- (void) likePlane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block
+{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    BOOL byOwner = [plane.accountByOwnerId.accountId isEqual:[AGAppDirector appDirector].account.accountId];
+    [params setObject:plane.planeId forKey:@"planeId"];
+    [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
+    //
+    [AGJSONHttpHandler request:NO params:params path:LikePlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGPlaneNotification planeNotification] deletePlane:plane];
+                    [[AGPlaneNotification planeNotification] obtainedPlanes];
+                }
+                NSDictionary *planeJson = [result objectForKey:@"plane"];
+                //changed status, etc
+                if (planeJson) {
+                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
+                }
+                
+                error = [AGMessageUtils errorClient];
+            }
+            else{
+                //succeed
+                succeed = YES;
+                NSDictionary *dict = [result objectForKey:@"message"];
+                NSString *createdTimeJson = [dict objectForKey:@"createdTime"];
+                NSDate *createdTime = [AGUtils stringToDate:createdTimeJson];
+                [[AGControllerUtils controllerUtils].planeController updateLike:plane createdTime:createdTime];
+                //update plane order
+                [[AGPlaneNotification planeNotification] obtainedPlanesReorderForPlane:plane];
+            }
+            
+            
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+        
+    }];
+}
+
 - (void) throwPlane:(NSDictionary*) params plane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block
 {
     [AGJSONHttpHandler request:YES params:params path:ThrowPlanePath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
@@ -183,6 +240,48 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 [[AGCoreData coreData] remove:plane];
                 [[AGPlaneNotification planeNotification] collectedPlanes];
             }
+            
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+        
+    }];
+}
+
+- (void) clearPlane:(AGPlane*)plane context:(id)context block:(AGHttpSucceedBlock)block
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:1];
+    [params setObject:plane.planeId forKey:@"planeId"];
+    //
+    [AGJSONHttpHandler request:NO params:params path:ClearPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
+            if (errorString) {
+                // not exist
+                if ([errorString isEqual:AGLogicJSONNoneValue]) {
+                    [[AGPlaneNotification planeNotification] deletePlane:plane];
+                    [[AGPlaneNotification planeNotification] obtainedPlanes];
+                }
+                NSDictionary *planeJson = [result objectForKey:@"plane"];
+                //changed status, etc
+                if (planeJson) {
+                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
+                }
+                
+                error = [AGMessageUtils errorClient];
+            }
+            else{
+                //succeed
+                succeed = YES;
+                NSNumber *clearMsgId = [result objectForKey:@"clearMsgId"];
+                [[AGPlaneNotification planeNotification] clearPlane:plane clearMsgId:clearMsgId];
+            }
+            
             
         }
         if (block) {
@@ -352,57 +451,6 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
         if (block) {
             block(error, context, result, oldPlanes);
         }
-        
-    }];
-}
-
-- (void) receivePlanes:(NSDictionary*) params context:(id)context block:(AGHttpFinishBlock)block
-{
-    [AGJSONHttpHandler request:YES params:params path:ReceivePlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        if (error) {
-            
-        }
-        else{
-            //succeed
-            NSArray *planes = [[AGControllerUtils controllerUtils].planeController savePlanes:[result objectForKey:@"planes"]];
-            for(AGPlane *plane in planes){
-                AGMessage *message = plane.messages.objectEnumerator.nextObject;
-                plane.viewedMsgId = message.messageId;
-            }
-            [[AGCoreData coreData] save];
-        }
-        if (block) {
-            block(error, context, result);
-        }
-        
-    }];
-}
-
-- (void) obtainPlanes:(NSDictionary*) params context:(id)context block:(AGObtainPlanesBlock)block
-{
-    [AGJSONHttpHandler request:YES params:params path:ObtainPlanesPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        NSArray *planes = [NSArray array];
-        if (error) {
-            
-        }
-        else{
-            //succeed
-            NSArray *planesJson = [result objectForKey:@"planes"];
-            AGCoreData *coreData = [AGCoreData coreData];
-            [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:planesJson.count];
-            planes = [[AGControllerUtils controllerUtils].planeController savePlanes:planesJson];
-            NSArray *changedAccounts = [coreData unregisterObserver];
-            if (changedAccounts.count) {
-                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
-                [accountController addNeoAccounts:changedAccounts];
-                NSDictionary *dict = [NSDictionary dictionary];
-                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
-            }
-        }
-        if (block) {
-            block(error, context, result, planes);
-        }
-        
     }];
 }
 

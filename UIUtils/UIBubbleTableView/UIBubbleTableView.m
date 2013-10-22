@@ -215,8 +215,17 @@ typedef enum {
     
 }
 
-- (void)refresh:(NSDictionary*)dict
+- (void) refresh:(NSArray*)fields
 {
+    for (id cell in self.visibleCells) {
+        if ([cell isKindOfClass:[UIBubbleTableViewCell class]]) {
+            UIBubbleTableViewCell *bubbleTableViewCell = cell;
+            for (NSString *field in fields) {
+                [bubbleTableViewCell refresh:fields];
+            }
+        }
+        
+    }
     
 }
 
@@ -262,7 +271,7 @@ typedef enum {
     if (scrollView.contentOffset.y >= 0.0f) {
         if (state == UIBubbleTableViewPulling) {
             [self setState:UIBubbleTableViewNormal];
-            [self.bubbleDelegate refresh];
+            [self.bubbleDelegate loadMore];
         
         }
     }

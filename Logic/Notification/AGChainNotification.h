@@ -13,11 +13,9 @@ extern NSString *AGNotificationGetChains;
 extern NSString *AGNotificationChainRefreshed;
 
 extern NSString *AGNotificationCollectedChains;
-extern NSString *AGNotificationReceiveChains;
 extern NSString *AGNotificationGetCollectedChains;
 
 extern NSString *AGNotificationObtainedChains;
-extern NSString *AGNotificationObtainChains;
 extern NSString *AGNotificationGetObtainedChains;
 
 extern NSString *AGNotificationObtainedChainMessagesForChain;

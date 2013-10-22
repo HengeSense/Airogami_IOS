@@ -150,6 +150,15 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
         NSLog(@"obtainedPlanes(one)");
 #endif
     }
+    else if ([action isEqual:@"reorder"]){
+#ifdef IS_DEBUG
+        NSLog(@"obtainedPlanes(reorder)");
+#endif
+        AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
+        assert(plane);
+        [self reorderPlanesForChat:plane];
+        [self obtainedContainPlanes:NO containChains:NO];
+    }
     else{
         [self obtainedContainPlanes:YES containChains:NO];
 #ifdef IS_DEBUG
@@ -158,6 +167,30 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     }
     
 }
+
+- (void) reorderPlanesForChat:(AGPlane*)plane
+{
+    int loc = -1;
+    for (int i = 0; i < planesForChat.count; ++i) {
+        AGPlane *pp = [planesForChat objectAtIndex:i];
+        if ([plane isEqual:pp]) {
+            loc = i;
+            break;
+        }
+    }
+    if (loc != -1) {
+        NSMutableArray *planes = [planesForChat mutableCopy];
+        for (; loc > 0; --loc) {
+            AGPlane *pp = [planes objectAtIndex:loc - 1];
+            if ([pp.updatedTime compare:plane.updatedTime] < 0) {
+                [planes replaceObjectAtIndex:loc withObject:pp];
+                [planes replaceObjectAtIndex:loc - 1 withObject:plane];
+            }
+        }
+        planesForChat = planes;
+    }
+}
+
 
 - (void) obtainedChains:(NSNotification*) notification
 {

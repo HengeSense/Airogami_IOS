@@ -13,7 +13,7 @@
 @implementation AGNeoPlane
 
 @dynamic clearMsgId;
-@dynamic readMsgId;
+@dynamic lastMsgId;
 @dynamic neoMsgId;
 @dynamic planeId;
 @dynamic updateCount;

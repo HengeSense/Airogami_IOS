@@ -13,11 +13,9 @@ extern NSString *AGNotificationPlaneRefreshed;
 extern NSString *AGNotificationPlaneRemoved;
 
 extern NSString *AGNotificationCollectedPlanes;
-extern NSString *AGNotificationReceivePlanes;
 extern NSString *AGNotificationGetCollectedPlanes;
 
 extern NSString *AGNotificationObtainedPlanes;
-extern NSString *AGNotificationObtainPlanes;
 extern NSString *AGNotificationGetObtainedPlanes;
 
 extern NSString *AGNotificationObtainedMessagesForPlane;
@@ -26,6 +24,7 @@ extern NSString *AGNotificationGetObtainedMessages;
 
 extern NSString *AGNotificationGetMessagesForPlane;
 extern NSString *AGNotificationGotMessagesForPlane;
+extern NSString *AGNotificationReadMessagesForPlane;
 
 extern NSString *AGNotificationSendMessages;
 extern NSString *AGNotificationSentMessage;
@@ -41,9 +40,12 @@ extern NSString *AGNotificationViewingMessagesForPlane;
 
 +(AGPlaneNotification*) planeNotification;
 
+- (void) obtainedPlanesReorderForPlane:(AGPlane*)plane;
+- (void) obtainedPlane:(AGPlane*)plane;
 - (void) obtainedPlanes;
 - (void) collectedPlanes;
 - (void) reset;
 - (void) deletePlane:(AGPlane*)plane;
+- (void) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId;
 
 @end

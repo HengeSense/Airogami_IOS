@@ -34,9 +34,6 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 
 - (void) obtainChainMessages:(NSDictionary *)params context:(id)context block:(AGHttpFinishBlock)block;
 
-- (void) receiveChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block;
-
-- (void) obtainChains:(NSDictionary*) params context:(id)context block:(AGChainsBlock)block;
 
 - (void) throwChain:(NSDictionary*) params chain:(AGChain*)chain context:(id)context block:(AGHttpSucceedBlock)block;
 
@@ -53,10 +50,6 @@ typedef void (^AGReplyChainFinishBlock)(NSError *error, id context, AGChainMessa
 - (NSDictionary*)paramsForGetOldChains:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
 
 - (NSDictionary*)paramsForGetChains:(NSArray*)chainIds;
-
-- (NSDictionary*)paramsForReceiveChains:(NSNumber*)start;
-
-- (NSDictionary*)paramsForObtainChains:(NSNumber*)start;
 
 - (NSDictionary*)paramsForThrowChain:(NSNumber*)chainId;
 

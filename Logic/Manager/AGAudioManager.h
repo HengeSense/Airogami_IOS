@@ -10,7 +10,11 @@
 
 @interface AGAudioManager : NSObject
 
-- (void) playMessage;
+- (void) playReceivedMessage;
+
+- (void) playReceivedMessageWhenViewing;
+
+- (void) playSentMessage;
 
 - (void) playNotification;
 

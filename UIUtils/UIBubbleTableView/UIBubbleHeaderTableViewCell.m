@@ -7,6 +7,7 @@
 //
 
 #import "UIBubbleHeaderTableViewCell.h"
+#import "AGUIUtils.h"
 
 @interface UIBubbleHeaderTableViewCell ()
 
@@ -51,11 +52,11 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, [UIBubbleHeaderTableViewCell height])];
     self.label.text = text;
-    self.label.font = [UIFont boldSystemFontOfSize:12];
+    self.label.font = [AGUIUtils themeFont:AGThemeFontStyleHeavy size:12.0f];
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.shadowOffset = CGSizeMake(0, 1);
     self.label.shadowColor = [UIColor whiteColor];
-    self.label.textColor = [UIColor darkGrayColor];
+    self.label.textColor = [UIColor lightGrayColor];
     self.label.backgroundColor = [UIColor clearColor];
     [self addSubview:self.label];
 }

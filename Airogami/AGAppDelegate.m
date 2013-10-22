@@ -130,7 +130,7 @@ static AGAppDelegate *AppDelegate;
     NSNumber *accountId = [userInfo objectForKey:@"accountId"];
     if (app.applicationState == UIApplicationStateActive && [accountId isEqualToNumber:account.accountId]) {
        [appDirector refresh];
-       [[AGManagerUtils managerUtils].audioManager playMessage];
+       [[AGManagerUtils managerUtils].audioManager playNotification];
     }
 
 }

@@ -42,5 +42,6 @@ typedef enum
 //- (void) reloadToBottom:(BOOL)animated;
 - (void) didSelectCellAtIndexPath:(NSIndexPath*) indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType) type;
 - (void)setData:(UIBubbleTableSetDataActionEnum)action animated:(BOOL)animated;
+- (void) refresh:(NSArray*)fields;
 
 @end

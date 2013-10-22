@@ -19,11 +19,9 @@ NSString *AGNotificationPlaneRefreshed = @"notification.planerefreshed";
 NSString *AGNotificationPlaneRemoved = @"notification.planeremoved";
 
 NSString *AGNotificationCollectedPlanes = @"notification.collectedplanes";
-NSString *AGNotificationReceivePlanes = @"notification.receiveplanes";
 NSString *AGNotificationGetCollectedPlanes = @"notification.getcollectedplanes";
 
 NSString *AGNotificationObtainedPlanes = @"notification.obtainedplanes";
-NSString *AGNotificationObtainPlanes = @"notification.obtainplanes";
 NSString *AGNotificationGetObtainedPlanes = @"notification.getobtainedplanes";
 
 NSString *AGNotificationObtainedMessagesForPlane = @"notification.obtainedmessagesforplane";
@@ -32,6 +30,7 @@ NSString *AGNotificationGetObtainedMessages = @"notification.getobtainedmessages
 
 NSString *AGNotificationGetMessagesForPlane = @"notification.getmessagesforplane";
 NSString *AGNotificationGotMessagesForPlane = @"notification.gotmessagesforplane";
+NSString *AGNotificationReadMessagesForPlane = @"notification.readmessagesforplane";
 
 NSString *AGNotificationSendMessages = @"notification.sendmessages";
 NSString *AGNotificationSentMessage = @"notification.sentmessage";
@@ -48,10 +47,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     BOOL moreMessages;
     NSNumber *messageMutex;
     BOOL obtainingMessages;
-    //receive plane
-    BOOL moreReceivePlanes;
-    NSNumber *receivePlaneMutex;
-    BOOL receivingPlanes;
     //get new plane
     BOOL moreGetNeoPlanes;
     NSNumber *getNeoPlaneMutex;
@@ -60,10 +55,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     BOOL moreGetPlanes;
     NSNumber *getPlanesMutex;
     BOOL gettingPlanes;
-    //obtain plane
-    BOOL moreObtainPlanes;
-    NSNumber *obtainPlaneMutex;
-    BOOL obtainingPlanes;
     //send messages
     BOOL moreSendMessages;
     NSNumber *sendMessageMutex;
@@ -86,12 +77,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         
         [notificationCenter addObserver:self selector:@selector(getNeoPlanes:) name:AGNotificationGetNeoPlanes object:nil];
          [notificationCenter addObserver:self selector:@selector(getPlanes:) name:AGNotificationGetPlanes object:nil];
-        //collect
-        [notificationCenter addObserver:self selector:@selector(receivePlanes:) name:AGNotificationReceivePlanes object:nil];
-        //[notificationCenter addObserver:self selector:@selector(collectedPlanes) name:AGNotificationGetCollectedPlanes object:nil];
-        //obtain planes
-        [notificationCenter addObserver:self selector:@selector(obtainPlanes:) name:AGNotificationObtainPlanes object:nil];
-        //[notificationCenter addObserver:self selector:@selector(obtainedPlanes) name:AGNotificationGetObtainedPlanes object:nil];
         //obtain messages
         [notificationCenter addObserver:self selector:@selector(obtainMessages:) name:AGNotificationObtainMessages object:nil];
         //[notificationCenter addObserver:self selector:@selector(obtainedMessages:) name:AGNotificationGetObtainedMessages object:nil];
@@ -107,10 +92,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         
         //
         messageMutex = [NSNumber numberWithBool:YES];
-        receivePlaneMutex = [NSNumber numberWithBool:YES];
         getNeoPlaneMutex = [NSNumber numberWithBool:YES];
         getPlanesMutex = [NSNumber numberWithBool:YES];
-        obtainPlaneMutex = [NSNumber numberWithBool:YES];
         sendMessageMutex = [NSNumber numberWithBool:YES];
         viewMessageMutex = [NSNumber numberWithBool:YES];
     }
@@ -122,18 +105,12 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     //messages
     moreMessages = NO;
     obtainingMessages = NO;
-    //receive plane
-    moreReceivePlanes = NO;
-    receivingPlanes = NO;
     //get new plane
     moreGetNeoPlanes = NO;
     gettingNeoPlanes = NO;
     //get plane
     moreGetPlanes = NO;
     gettingPlanes = NO;
-    //obtain plane
-    moreObtainPlanes = NO;
-    obtainingPlanes = NO;
     //send messages
     moreSendMessages = NO;
     sendingMessages = NO;
@@ -149,6 +126,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     }
     return notificationCenter;
 }
+
+#pragma mark - get neo planes
 
 - (void) getNeoPlanes:(NSNotification*) notification
 {
@@ -210,15 +189,17 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
             //deal with clear and read
             if (neoPlanes.count) {
                 for (AGNeoPlane *neoPlane in neoPlanes) {
+                    AGPlane *plane = neoPlane.plane;
                     //clear
-                    if (neoPlane.plane && neoPlane.clearMsgId.longLongValue > neoPlane.plane.clearMsgId.longLongValue) {
-                        AGPlane *plane = neoPlane.plane;
-                        if ([[AGControllerUtils controllerUtils].messageController clearPlane:plane clearMsgId:neoPlane.clearMsgId]) {
-                            [self gotMessagesForPlane:plane.planeId startId:nil];
-                            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
-                        }
-                        
+                    if (plane && neoPlane.clearMsgId.longLongValue > plane.clearMsgId.longLongValue) {
+                        [self clearPlane:plane clearMsgId:neoPlane.clearMsgId];
+                    }
+                    //read
+                    if (plane && neoPlane.lastMsgId.longLongValue > plane.lastMsgId.longLongValue) {
+                        plane.lastMsgId = neoPlane.lastMsgId;
+                        [[AGCoreData coreData] save];
+                        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReadMessagesForPlane object:nil userInfo:dict];
                     }
                 }
             }
@@ -237,6 +218,12 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     }];
 }
 
+- (void)refreshed
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"plane" forKey:@"source"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRefreshed object:self userInfo:dict];
+}
+
 - (void) gotNeoPlanes
 {
     NSDictionary *dict = [NSDictionary dictionary];
@@ -244,11 +231,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [notificationCenter postNotificationName:AGNotificationGetPlanes object:self userInfo:dict];
 }
 
-- (void)refreshed
-{
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"plane" forKey:@"source"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRefreshed object:self userInfo:dict];
-}
+#pragma mark - get planes
 
 - (void) getPlanes:(NSNotification*) notification
 {
@@ -329,165 +312,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     }];
 }
 
-- (void) receivePlanes:(NSNotification*) notification
-{
-    NSNumber *number = [notification.userInfo objectForKey:@"updateInc"];
-    NSNumber * maxUpdateInc = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForCollect];
-    if (number && number.longLongValue <= maxUpdateInc.longLongValue) {//notified
-        return;
-    }
-    BOOL shouldReceive = NO;
-    @synchronized(receivePlaneMutex){
-        if (receivingPlanes) {
-            moreReceivePlanes = YES;
-        }
-        else{
-            receivingPlanes = YES;
-            shouldReceive = YES;
-        }
-    }
-    
-    if (shouldReceive) {
-        [self receivePlanes];
-    }
-    
-    
-}
-
-- (void) receivePlanes
-{
-    NSNumber * start = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForCollect];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:4];
-    if (start) {
-        [params setObject:start forKey:@"start"];
-    }
-    [[AGManagerUtils managerUtils].planeManager receivePlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
-        if (error == nil) {
-            NSNumber *more = [result objectForKey:@"more"];
-            if (more.boolValue) {
-                [self receivePlanes];
-            }
-            else{
-                //whether has more
-                BOOL shouldReceive= NO;
-                @synchronized(receivePlaneMutex){
-                    if (moreReceivePlanes) {
-                        moreReceivePlanes = NO;
-                        shouldReceive = YES;
-                    }
-                    else{
-                        receivingPlanes = NO;
-                    }
-                }
-                if (shouldReceive) {
-                    [self receivePlanes];
-                }
-            }
-            NSArray *planes = [result objectForKey:@"planes"];
-            if (planes.count) {
-                [self collectedPlanes];
-            }
-            
-        }
-        else{
-            //should deal with server error
-            @synchronized(receivePlaneMutex){
-                moreReceivePlanes = NO;
-                receivingPlanes = NO;
-            }
-        }
-    }];
-}
-
-- (void) collectedPlanes
-{
-    NSDictionary *dict = [NSDictionary dictionary];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:dict];
-    
-}
-
-- (void) obtainPlanes:(NSNotification*) notification
-{
-    NSNumber *number = [notification.userInfo objectForKey:@"updateInc"];
-    NSNumber * maxUpdateInc = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForChat];
-    if (number && number.longLongValue <= maxUpdateInc.longLongValue) {//notified
-        return;
-    }
-    BOOL shouldObtain = NO;
-    @synchronized(obtainPlaneMutex){
-        if (obtainingPlanes) {
-            moreObtainPlanes = YES;
-        }
-        else{
-            obtainingPlanes = YES;
-            shouldObtain = YES;
-        }
-    }
-    
-    if (shouldObtain) {
-        [self obtainPlanes];
-    }
-    
-}
-
-- (void) obtainPlanes
-{
-    NSNumber * start = [[AGControllerUtils controllerUtils].planeController recentPlaneUpdateIncForChat];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:4];
-    if (start) {
-        [params setObject:start forKey:@"start"];
-    }
-    [[AGManagerUtils managerUtils].planeManager obtainPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *planes) {
-        if (error == nil) {
-            NSNumber *more = [result objectForKey:@"more"];
-            if (more.boolValue) {
-                [self obtainPlanes];
-            }
-            else{
-                 //whether has more
-                BOOL shouldObtain = NO;
-                @synchronized(obtainPlaneMutex){
-                    if (moreObtainPlanes) {
-                        moreObtainPlanes = NO;
-                        shouldObtain = YES;
-                    }
-                    else{
-                        obtainingPlanes = NO;
-                    }
-                }
-                if (shouldObtain) {
-                    [self obtainPlanes];
-                }
-            }
-            
-            if (planes.count) {
-                [[AGControllerUtils controllerUtils].planeController addNeoPlanesForChat:planes];
-                [self obtainedPlanes];
-                NSDictionary *dict = [NSDictionary dictionary];
-                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-                [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
-                
-            }
-            
-        }
-        else{
-            //should deal with server error
-            @synchronized(obtainPlaneMutex){
-                moreObtainPlanes = NO;
-                obtainingPlanes = NO;
-            }
-        }
-    }];
-}
-
-- (void) obtainedPlanes
-{
-    NSDictionary *dict = [NSDictionary dictionary];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
-    
-}
+#pragma mark - obtain messages
 
 - (void) obtainMessages:(NSNotification*) notification
 {
@@ -528,7 +353,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
     NSMutableDictionary * params = [NSMutableDictionary dictionaryWithCapacity:2];
     AGPlane *plane = neoPlane.plane;
-    NSNumber *lastMsgId = [controllerUtils.planeController recentMessageForPlane:plane.planeId].messageId;
+    NSNumber *lastMsgId = plane.neoMsgId;
     if (lastMsgId) {
         [params setObject:lastMsgId forKey:@"startId"];
     }
@@ -592,17 +417,23 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
             //
             dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
+            //
+            [[AGManagerUtils managerUtils].audioManager playReceivedMessage];
         }
         else{
             dict = [NSDictionary dictionaryWithObjectsAndKeys:plane, @"plane", nil];
             [notificationCenter postNotificationName:AGNotificationViewedMessagesForPlane object:self userInfo:dict];
             //
-            dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", @"one", @"action", nil];
+            dict = [NSDictionary dictionaryWithObjectsAndKeys:plane, @"plane", @"one", @"action", nil];
             [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
+            //
+            [[AGManagerUtils managerUtils].audioManager playReceivedMessageWhenViewing];
         }
     }
     
 }
+
+#pragma mark - get messages
 
 - (void) getMessagesForPlane:(NSNotification*)notification
 {
@@ -640,6 +471,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }
+
+#pragma mark - send messages
 
 - (void) sendMessages:(NSNotification*) notification
 {
@@ -680,18 +513,13 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     AGPlane *plane = message.plane;
     [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage, BOOL removed) {
-        
         if (error == nil) {
-            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-            [dict setObject:plane forKey:@"plane"];
+            
             if (remoteMessage) {
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
+                [dict setObject:plane forKey:@"plane"];
                 [dict setObject:remoteMessage forKey:@"remoteMessage"];
                 [dict setObject:message forKey:@"message"];
-            }
-            if (removed) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRemoved object:nil userInfo:dict];
-            }
-            else{
                 [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSentMessage object:nil userInfo:dict];
             }
             
@@ -705,10 +533,10 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 sendingMessages = NO;
             }
         }
-        
     }];
-    
 }
+
+#pragma mark - view messages
 
 - (void) viewMessages:(NSNotification*) notification
 {
@@ -726,7 +554,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     if (shouldView) {
         [self viewMessages];
     }
-    
 }
 
 - (void) viewMessages
@@ -773,26 +600,12 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 {
     AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
     NSNumber *lastMsgId = [[AGControllerUtils controllerUtils].messageController viewedMessagesForPlane:plane];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
     //
     if (lastMsgId) {
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewMessages object:nil userInfo:dict];
-        /*AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
-        NSDictionary *params = [planeManager paramsForViewedMessages:plane lastMsgId:lastMsgId];
-        [planeManager viewedMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
-            if (error) {
-                
-            }
-            else{
-                NSNumber *lastMsgId = [result objectForKey:@"lastMsgId"];
-                if (lastMsgId) {
-                    [[AGControllerUtils controllerUtils].planeController updateLastMsgId:lastMsgId plane:plane];
-                }
-            }
-        }];*/
     }
-    
 }
 
 - (void) viewingMessagesForPlane:(NSNotification*)notification
@@ -800,6 +613,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
     viewingPlaneId = plane.planeId;
 }
+
+#pragma mark - others
 
 - (void) deletePlane:(AGPlane*)plane
 {
@@ -809,6 +624,46 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
     //
     [[AGCoreData coreData] remove:plane];
+    //
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRemoved object:nil userInfo:dict];
+}
+
+- (void) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId
+{
+    if ([[AGControllerUtils controllerUtils].messageController clearPlane:plane clearMsgId:clearMsgId]) {
+        [self gotMessagesForPlane:plane.planeId startId:nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
+    }
+}
+
+- (void) collectedPlanes
+{
+    NSDictionary *dict = [NSDictionary dictionary];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationCollectedPlanes object:self userInfo:dict];
+    
+}
+
+- (void) obtainedPlanesReorderForPlane:(AGPlane*)plane
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"reorder", @"action", plane, @"plane", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
+}
+
+- (void) obtainedPlanes
+{
+    NSDictionary *dict = [NSDictionary dictionary];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
+}
+
+- (void) obtainedPlane:(AGPlane*)plane
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"one", @"action", plane.planeId, @"planeId", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
 }
 
 @end

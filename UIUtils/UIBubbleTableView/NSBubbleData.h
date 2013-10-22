@@ -23,12 +23,10 @@ typedef enum _NSBubbleType
 
 typedef enum _NSBubbleCellState
 {
-    BubbleCellStateSending = -2,
-    BubbleCellStateSent = -1,
-    BubbleCellStateSendFailed = 0,
-    BubbleCellStateSentLiked = 1,
-    BubbleCellStateReceivedUnliked = 2,
-    BubbleCellStateReceivedLiked = 3
+    BubbleCellStateNone = -2,
+    BubbleCellStateSending = -1,
+    BubbleCellStateSent = 0,
+    BubbleCellStateSentRead = 1
 } NSBubbleCellState;
 
 #define kBubbleCellStateButtonWidth 40

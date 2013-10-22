@@ -13,7 +13,6 @@
 #import "UIBubbleTableView.h"
 #import "NSBubbleData.h"
 #import "AGBubbleTableViewDelegate.h"
-#import "AGBubbleCellStateButton.h"
 #import "AGManagerUtils.h"
 #import "AGUIUtils.h"
 #import <SDWebImage/UIButton+WebCache.h>
@@ -30,7 +29,6 @@
 @property (nonatomic, retain) UIView *customView;
 @property (nonatomic, retain) UIImageView *bubbleImage;
 @property (nonatomic, retain) UIButton *avatarButton;
-@property (nonatomic, retain) AGBubbleCellStateButton *stateButton;
 
 - (void) setupInternalData;
 
@@ -146,8 +144,8 @@
 
 - (void) stateImageTouched
 {
-    UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
-    switch (self.data.state) {
+    //UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
+    /*switch (self.data.state) {
         case BubbleCellStateSendFailed:
             [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectSendFailed];
             break;
@@ -158,7 +156,7 @@
             break;
         default:
             break;
-    }
+    }*/
 
 }
 
@@ -200,19 +198,29 @@
     self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top, width, height);
     frame = self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
     //state
-    self.stateButton.cellState = self.data.state;
-    if (self.data.state != BubbleCellStateSent) {
-        if (type == BubbleTypeMine) {
-            self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
-            self.stateButton.center = CGPointMake(x - kBubbleCellStateButtonWidth / 2 + 3, y  + self.data.insets.top + height / 2);
-        }
-        else{
-            self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
-            self.stateButton.center = CGPointMake(frame.origin.x + frame.size.width + kBubbleCellStateButtonWidth / 2 - 4, frame.origin.y + frame.size.height / 2);
-        }
-        
+    if (type == BubbleTypeMine) {
+        self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
+        self.stateButton.center = CGPointMake(x - kBubbleCellStateButtonWidth / 2 + 3, y  + self.data.insets.top + height / 2);
+        self.stateButton.cellState = self.data.state;
     }
+    else{
+        self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
+        self.stateButton.center = CGPointMake(frame.origin.x + frame.size.width + kBubbleCellStateButtonWidth / 2 - 4, frame.origin.y + frame.size.height / 2);
+        self.stateButton.cellState = BubbleCellStateNone;
+    }
+    
+}
 
+- (void) refresh:(NSArray*)fields
+{
+    for (NSString *field in fields) {
+        if ([field isEqualToString:@"state"]) {
+            if (self.data.type == BubbleTypeMine){
+                self.stateButton.cellState = self.data.state;
+            }
+            
+        }
+    }
     
 }
 

@@ -2,7 +2,7 @@
 //  AGChainMessage.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/9/13.
+//  Created by Tianhu Yang on 10/21/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -26,5 +26,6 @@
 @dynamic account;
 @dynamic chain;
 @dynamic id;
+@dynamic onChain;
 
 @end

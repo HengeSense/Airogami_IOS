@@ -18,14 +18,12 @@
 - (NSMutableArray*) saveNeoPlanes:(NSArray*)jsonArray;
 - (NSMutableArray*) savePlanes:(NSArray*)jsonArray;
 - (NSMutableArray*) saveOldPlanes:(NSArray*)jsonArray;
-- (NSNumber*) recentPlaneUpdateIncForCollect;
 - (NSArray*) getAllPlanesForCollect;
 - (NSNumber*) recentUpdateInc;
-- (NSNumber*) recentPlaneUpdateIncForChat;
 -(void) increaseUpdateInc;
-- (void) increaseUpdateIncForChat:(AGPlane*)plane;
 - (NSArray*) getAllPlanesForChat;
 - (void) updateMessage:(AGPlane*)plane;
+- (void) updateLike:(AGPlane*)plane createdTime:(NSDate*)createdTime;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
 - (NSArray*) getNeoPlanesForUpdate;
 - (AGNeoPlane*) getNextNeoPlaneForMessages;
@@ -35,8 +33,6 @@
 //new means not obtained messages
 - (AGNeoPlane*) getNextNeoPlaneForChat;
 - (AGPlane*) getNextUnviewedPlane;
-- (void) addNeoPlanesForChat:(NSArray*)planes;
-- (void) removeNeoPlaneForChat:(AGNeoPlane*)plane oldUpdateInc:(NSNumber*)updateInc;
 - (void) removeNeoPlane:(AGNeoPlane *)newPlane;
 - (void) removeNeoPlanes:(NSArray *)newPlanes;
 

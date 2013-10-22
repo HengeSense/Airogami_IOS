@@ -69,7 +69,7 @@
         <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <attribute name="updatedTime" attributeType="Date" indexed="YES" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chains" inverseEntity="AGAccount" syncable="YES"/>
-        <relationship name="chainMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGChainMessage" syncable="YES"/>
+        <relationship name="chainMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGChainMessage" inverseName="onChain" inverseEntity="AGChainMessage" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="chain" inverseEntity="AGChainMessage" syncable="YES"/>
         <relationship name="neoChain" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNeoChain" inverseName="chain" inverseEntity="AGNeoChain" syncable="YES"/>
         <userInfo>
@@ -89,6 +89,7 @@
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="chainMessages" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="chain" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGChain" inverseName="chainMessages" inverseEntity="AGChain" syncable="YES"/>
         <relationship name="id" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="AGChainMessageId" inverseName="chainMessage" inverseEntity="AGChainMessageId" syncable="YES"/>
+        <relationship name="onChain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGChain" inverseName="chainMessage" inverseEntity="AGChain" syncable="YES"/>
         <userInfo>
             <entry key="IdKey1" value="id.accountId"/>
             <entry key="IdKey2" value="id.chainId"/>
@@ -115,9 +116,10 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="messageId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="state" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+        <attribute name="state" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="messages" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="onPlane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="message" inverseEntity="AGPlane" syncable="YES"/>
         <relationship name="plane" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="messages" inverseEntity="AGPlane" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="messageId"/>
@@ -142,9 +144,9 @@
     </entity>
     <entity name="AGNeoPlane" representedClassName="AGNeoPlane" syncable="YES">
         <attribute name="clearMsgId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastMsgId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="neoMsgId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="planeId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="readMsgId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <attribute name="updateInc" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <relationship name="plane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="neoPlane" inverseEntity="AGPlane" syncable="YES"/>
@@ -162,6 +164,7 @@
         <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="deletedByO" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="deletedByT" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastMsgId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lastMsgIdOfO" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lastMsgIdOfT" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -187,7 +190,7 @@
         <relationship name="accountByOwnerId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForOwnerId" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="accountByTargetId" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="planesForTargetId" inverseEntity="AGAccount" syncable="YES"/>
         <relationship name="category" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGCategory" inverseName="planes" inverseEntity="AGCategory" syncable="YES"/>
-        <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGMessage" syncable="YES"/>
+        <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGMessage" inverseName="onPlane" inverseEntity="AGMessage" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="plane" inverseEntity="AGMessage" syncable="YES"/>
         <relationship name="neoPlane" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNeoPlane" inverseName="plane" inverseEntity="AGNeoPlane" syncable="YES"/>
         <userInfo>

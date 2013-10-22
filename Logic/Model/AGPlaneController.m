@@ -41,22 +41,6 @@ static const int MaxNeoPlanes = 50;
     return self;
 }
 
-- (AGPlane*) savePlane:(NSDictionary*)planeJson
-{
-    AGPlane *plane = (AGPlane*)[coreData saveOrUpdate:planeJson withEntityName:@"AGPlane"];
-    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
-    if (plane.viewedMsgId.longLongValue == 0) {
-        if ([accountId isEqualToNumber:plane.accountByOwnerId.accountId]) {
-            plane.viewedMsgId = plane.lastMsgIdOfO;
-        }
-        else{
-            plane.viewedMsgId = plane.lastMsgIdOfT;
-        }
-    }
-    [coreData save];
-    return plane;
-}
-
 
 - (void) markDeleted:(AGPlane*)plane
 {
@@ -113,31 +97,65 @@ static const int MaxNeoPlanes = 50;
     [coreData removeAll:deletedArray];
 }
 
-
-- (NSMutableArray*) savePlanes:(NSArray*)jsonArray
+-(void) initPlane:(AGPlane*)plane
 {
-    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGPlane"];
-    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
-    for (AGPlane *plane in array) {
-        if (plane.viewedMsgId.longLongValue == 0) {
-            if ([accountId isEqualToNumber:plane.accountByOwnerId.accountId]) {
+    if (plane) {
+        NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+        if ([accountId isEqualToNumber:plane.accountByOwnerId.accountId]) {
+            if (plane.neoMsgId.longLongValue == 0) {
+                plane.neoMsgId = plane.lastMsgIdOfO;
+            }
+            if (plane.viewedMsgId.longLongValue == 0) {
                 plane.viewedMsgId = plane.lastMsgIdOfO;
             }
-            else{
+            
+            if (plane.lastMsgId.longLongValue == 0) {
+                plane.lastMsgId = plane.lastMsgIdOfT;
+            }
+            
+        }
+        else{
+            if (plane.neoMsgId.longLongValue == 0) {
+                plane.neoMsgId = plane.lastMsgIdOfT;
+            }
+            if (plane.viewedMsgId.longLongValue == 0) {
                 plane.viewedMsgId = plane.lastMsgIdOfT;
             }
-        }
-        //for pickup planes -9223372036854775785 9223372036854775808
-        for (AGMessage *message in plane.messages) {
-            message.plane = plane;
-            if (message.account == nil) {
-                 message.account = plane.accountByOwnerId;
+            
+            if (plane.lastMsgId.longLongValue == 0) {
+                plane.lastMsgId = plane.lastMsgIdOfO;
             }
         }
         AGNeoPlane *neoPlane = (AGNeoPlane *)[coreData findById:plane.planeId withEntityName:@"AGNeoPlane"];
         if (neoPlane != nil && neoPlane.plane == nil) {
             neoPlane.plane = plane;
         }
+    }
+    
+}
+
+//for change status error
+- (AGPlane*) savePlane:(NSDictionary*)planeJson
+{
+    AGPlane *plane = (AGPlane*)[coreData saveOrUpdate:planeJson withEntityName:@"AGPlane"];
+    [self initPlane:plane];
+    [coreData save];
+    return plane;
+}
+
+- (NSMutableArray*) savePlanes:(NSArray*)jsonArray
+{
+    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGPlane"];
+    for (AGPlane *plane in array) {
+        [self initPlane:plane];
+        //for pickup planes
+        for (AGMessage *message in plane.messages) {
+            message.plane = plane;
+            if (message.account == nil) {
+                 message.account = plane.accountByOwnerId;
+            }
+        }
+        
     }
     [coreData save];
     return array;
@@ -186,11 +204,6 @@ static const int MaxNeoPlanes = 50;
     return array;
 }
 
-- (NSNumber*)recentPlaneUpdateIncForCollect
-{
-    return [self recentPlaneUpdateInc:YES];
-}
-
 - (NSArray*) getAllPlanesForCollect
 {
     AGAccount *account = [AGAppDirector appDirector].account;
@@ -208,10 +221,6 @@ static const int MaxNeoPlanes = 50;
     return array;
 }
 
-- (NSNumber*)recentPlaneUpdateIncForChat
-{
- return [self recentPlaneUpdateInc:NO];
-}
 
 -(void) increaseUpdateInc
 {
@@ -225,21 +234,24 @@ static const int MaxNeoPlanes = 50;
     [coreData save];
 }
 
-- (void) increaseUpdateIncForChat:(AGPlane*)plane
-{
-    NSNumber *maxUpdateInc = [self recentPlaneUpdateIncForChat];
-    if (maxUpdateInc == nil) {
-        maxUpdateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
-    }
-    //plane.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
-    [coreData save];
-}
-
 - (void) updateMessage:(AGPlane*)plane
 {
     AGMessage *message = [self recentMessageForPlane:plane.planeId];
     plane.message = message;
     plane.updatedTime = message.createdTime;
+    [coreData save];
+}
+
+- (void) updateLike:(AGPlane*)plane createdTime:(NSDate *)createdTime
+{
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    plane.updatedTime = createdTime;
+    if ([accountId isEqualToNumber:plane.accountByOwnerId.accountId]) {
+        plane.likedByO = [NSNumber numberWithBool:YES];
+    }
+    else{
+        plane.likedByT = [NSNumber numberWithBool:YES];
+    }
     [coreData save];
 }
 
@@ -288,91 +300,6 @@ static const int MaxNeoPlanes = 50;
     return updateInc;
 }
 
-- (NSNumber*)recentUpdateInc:(BOOL)forNeoPlane
-{
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = forNeoPlane ? neoPlaneEntityDescription : planeEntityDescription;
-    [fetchRequest setEntity:entity];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    
-    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];
-    NSExpression *maxUpdateIncExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
-    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-    [expressionDescription setName:@"maxUpdateInc"];
-    [expressionDescription setExpression:maxUpdateIncExpression];
-    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSNumber *updateInc = nil;
-    if (array.count) {
-        updateInc = [[array objectAtIndex:0] objectForKey:@"maxUpdateInc"];
-    }
-    //check whether empty
-    if (updateInc.longLongValue == 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"updateInc = 0"];
-        
-        fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:planeEntityDescription];
-        fetchRequest.predicate = predicate;
-        array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!array.count) {
-            updateInc = nil;
-        }
-    }
-    return updateInc;
-}
-
-
-- (NSNumber*)recentPlaneUpdateInc:(BOOL)forCollect
-{
-    AGAccount *account = [AGAppDirector appDirector].account;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:planeEntityDescription];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    
-    NSPredicate *predicate;
-    if (forCollect) {
-        predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@", AGPlaneStatusNew, account.accountId];
-    }
-    else{
-        predicate = [NSPredicate predicateWithFormat:@"status >= %d and ((accountByOwnerId.accountId = %@ and deletedByO = 0) or (accountByTargetId.accountId = %@ and deletedByT = 0))", AGPlaneStatusReplied, account.accountId, account.accountId];
-    }
-    
-    [fetchRequest setPredicate:predicate];
-    
-    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];
-    NSExpression *maxUpdateIncExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
-    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-    [expressionDescription setName:@"maxUpdateInc"];
-    [expressionDescription setExpression:maxUpdateIncExpression];
-    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSNumber *updateInc = nil;
-    if (error == nil && array.count) {
-        updateInc = [[array objectAtIndex:0] objectForKey:@"maxUpdateInc"];
-    }
-    //check whether empty
-    if (updateInc.longLongValue == 0) {
-        if (forCollect) {
-            predicate = [NSPredicate predicateWithFormat:@"status = %d and accountByTargetId.accountId = %@ and updateInc = 0", AGPlaneStatusNew, account.accountId];
-        }
-        else{
-            predicate = [NSPredicate predicateWithFormat:@"status = %d and ((accountByOwnerId.accountId = %@ and deletedByO = 0) or (accountByTargetId.accountId = %@ and deletedByT = 0)) and updateInc = 0", AGPlaneStatusReplied, account.accountId, account.accountId];
-        }
-        
-        fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:planeEntityDescription];
-        fetchRequest.predicate = predicate;
-        array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!array.count) {
-            updateInc = nil;
-        }
-    }
-    return updateInc;
-}
 
 - (AGNeoPlane*) getNextNeoPlaneForChat
 {
@@ -392,30 +319,6 @@ static const int MaxNeoPlanes = 50;
     }
     return neoPlane;
 }
-
-- (void) addNeoPlanesForChat:(NSArray *)planes
-{
-    AGAccount *account = [AGAppDirector appDirector].account;
-    for (AGPlane *plane in planes) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-        //[dict setObject:plane forKey:@"plane"];
-        [dict setObject:account.accountId forKey:@"accountId"];
-        [dict setObject:plane.planeId forKey:@"planeId"];
-        //[dict setObject:plane.updateInc forKey:@"updateInc"];
-        AGNeoPlane *neoPlane = (AGNeoPlane *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoPlane"];
-        neoPlane.plane = plane;
-    }
-    [coreData save];
-}
-
-- (void) removeNeoPlaneForChat:(AGNeoPlane *)neoPlane oldUpdateInc:(NSNumber*)updateInc
-{
-    if (neoPlane.updateInc.longLongValue == updateInc.longLongValue) {
-        [coreData remove:neoPlane];
-    }
-
-}
-
 
 - (void) removeNeoPlane:(AGNeoPlane *)neoPlane
 {

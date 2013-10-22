@@ -45,7 +45,7 @@ static int DeleteLimit = 1;
     }
     //update neoMsgId
     AGMessage *message = array.lastObject;
-    if (message) {
+    if (message && message.messageId.longLongValue > plane.neoMsgId.longLongValue) {
         plane.neoMsgId = message.messageId;
     }
     [coreData save];
@@ -130,12 +130,31 @@ static int DeleteLimit = 1;
     return count;
 }
 
+- (AGMessage*) getUnviewedMessageForPlane:(AGPlane*)plane
+{
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:messageEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane.planeId = %@ and messageId != -1 and account.accountId != %@", plane.planeId, accountId];
+    [fetchRequest setPredicate:predicate];
+    //
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"messageId" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    //
+    [fetchRequest setFetchLimit:1];
+    //
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    return array.lastObject;
+}
+
 -(NSNumber*) viewedMessagesForPlane:(AGPlane*)plane
 {
     AGAccount *account = [AGAppDirector appDirector].account;
     NSNumber *lastMsgId = nil;
     //old
-    AGMessage *message = [[AGControllerUtils controllerUtils].planeController recentMessageForPlane:plane.planeId];
+    AGMessage *message = [self getUnviewedMessageForPlane:plane];
     if (message) {
         if ([account.accountId isEqual:plane.accountByOwnerId.accountId]) {
             plane.viewedMsgId = message.messageId;
@@ -149,10 +168,11 @@ static int DeleteLimit = 1;
                 lastMsgId = message.messageId;
             }
         }
+        [coreData save];
+        //new
+        [self updateMessagesCount:plane];
     }
-    [coreData save];
-    //new
-    [self updateMessagesCount:plane];
+    
     return lastMsgId;
 }
 

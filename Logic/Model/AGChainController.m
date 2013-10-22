@@ -105,16 +105,6 @@ static const int MaxNeoChainIds = 50;
     return array;
 }
 
-- (NSMutableArray*) saveChains:(NSArray*)jsonArray forCollect:(BOOL)collected
-{
-    NSMutableArray *array = [coreData saveOrUpdateArray:jsonArray withEntityName:@"AGChain"];
-    for (AGChain *chain in array) {
-        //chain.collected = [NSNumber numberWithChar:collected];
-    }
-    [coreData save];
-    return array;
-}
-
 - (AGChain*) saveChain:(NSDictionary*)chainJson
 {
     AGChain *chain = (AGChain*)[coreData saveOrUpdate:chainJson withEntityName:@"AGChain"];
@@ -130,11 +120,6 @@ static const int MaxNeoChainIds = 50;
         updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
     }
     return updateInc;
-}
-
-- (NSNumber*)recentChainUpdateIncForCollect
-{
-    return [self recentChainUpdateInc:YES];
 }
 
 - (NSArray*) getAllChainsForCollect
@@ -182,49 +167,6 @@ static const int MaxNeoChainIds = 50;
         AGChainMessage *chainMessage = array.lastObject;
         return chainMessage.status.intValue;//status code should start with 0
     }
-}
-
-
-- (NSNumber*)recentChainUpdateIncForChat
-{
-    return [self recentChainUpdateInc:NO];
-}
-
-- (NSNumber*)recentChainUpdateInc:(BOOL)forCollect
-{
-    AGAccount *account = [AGAppDirector appDirector].account;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:chainEntityDescription];
-    [fetchRequest setResultType:NSDictionaryResultType];
-    //SUBQUERY(chainMessages, $chainMessage, $chainMessage.account.accountId = %@ && $chainMessage.status = %d).@count != 0
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"collected = %d && (account.accountId != %@ || passCount > 0)", forCollect, account.accountId];
-    [fetchRequest setPredicate:predicate];
-    
-    NSExpression *keyPathExpression = [NSExpression expressionForKeyPath:@"updateInc"];
-    NSExpression *maxUpdateIncExpression = [NSExpression expressionForFunction:@"max:" arguments:[NSArray arrayWithObject:keyPathExpression]];
-    NSExpressionDescription *expressionDescription = [[NSExpressionDescription alloc] init];
-    [expressionDescription setName:@"maxUpdateInc"];
-    [expressionDescription setExpression:maxUpdateIncExpression];
-    [expressionDescription setExpressionResultType:NSInteger64AttributeType];
-    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:expressionDescription]];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSNumber *updateInc = nil;
-    if (error == nil && array.count) {
-        updateInc = [[array objectAtIndex:0] objectForKey:@"maxUpdateInc"];
-    }
-    //check whether empty
-    if (updateInc.longLongValue == 0) {
-        predicate = [NSPredicate predicateWithFormat:@"collected = %d && (account.accountId != %@ || passCount > 0) && updateInc = 0", forCollect, account.accountId];
-        fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:chainEntityDescription];
-        fetchRequest.predicate = predicate;
-        array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!array.count) {
-            updateInc = nil;
-        }
-    }
-    return updateInc;
 }
 
 - (void) updateChainMessage:(AGChain*)chain
@@ -279,17 +221,6 @@ static const int MaxNeoChainIds = 50;
         updateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
     }
     account.accountStat.chainUpdateInc = [NSNumber numberWithLongLong:updateInc.longLongValue + 1];
-    [coreData save];
-}
-
-- (void) increaseUpdateIncForChat:(AGChain*)chain
-{
-    NSNumber *maxUpdateInc = [self recentChainUpdateIncForChat];
-    if (maxUpdateInc == nil) {
-        maxUpdateInc = [NSNumber numberWithLongLong:LONG_LONG_MIN];
-    }
-    //chain.updateInc = [NSNumber numberWithLongLong:maxUpdateInc.longLongValue + 1];
-    //NSLog(@"%@",  chain.updateInc);
     [coreData save];
 }
 

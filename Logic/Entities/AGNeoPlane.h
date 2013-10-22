@@ -14,7 +14,7 @@
 @interface AGNeoPlane : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * clearMsgId;
-@property (nonatomic, retain) NSNumber * readMsgId;
+@property (nonatomic, retain) NSNumber * lastMsgId;
 @property (nonatomic, retain) NSNumber * neoMsgId;
 @property (nonatomic, retain) NSNumber * planeId;
 @property (nonatomic, retain) NSNumber * updateCount;

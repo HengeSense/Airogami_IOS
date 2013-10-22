@@ -9,8 +9,10 @@
 #import "AGAudioManager.h"
 #include <AudioToolbox/AudioToolbox.h>
 
-static const SystemSoundID ReceivedMessage = 1003;
-static const SystemSoundID Notification = 1307;
+static const SystemSoundID ReceivedMessage = 1307;
+static const SystemSoundID ReceivedMessageWhenViewing = 1003;
+static const SystemSoundID SentMessage = 1004;
+static const SystemSoundID Notification = 1071;
 
 @interface AGAudioManager()
 {
@@ -31,10 +33,20 @@ static const SystemSoundID Notification = 1307;
     return self;
 }
 
-- (void) playMessage
+- (void) playReceivedMessage
 {
     AudioServicesPlayAlertSound(ReceivedMessage);
+}
+
+- (void) playReceivedMessageWhenViewing
+{
+    AudioServicesPlayAlertSound(ReceivedMessageWhenViewing);
     //AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+}
+
+- (void) playSentMessage
+{
+    AudioServicesPlayAlertSound(SentMessage);
 }
 
 - (void) playNotification

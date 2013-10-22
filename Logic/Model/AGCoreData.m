@@ -498,6 +498,7 @@
     [self save];
 }
 
+
 - (NSManagedObject*) create:(Class)class
 {
     return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(class) inManagedObjectContext:managedObjectContext];

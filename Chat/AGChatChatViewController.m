@@ -20,6 +20,7 @@
 #import "AGCategory+Addition.h"
 #import "AGAppDirector.h"
 #import "AGMessageUtils.h"
+#import "AGLikeButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
@@ -146,6 +147,7 @@ static float AGInputTextViewMaxHeight = 100;
         categoryLabel.text = [AGCategory title:plane.category.categoryId];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sentMessage:) name:AGNotificationSentMessage object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readMessagesForPlane:) name:AGNotificationReadMessagesForPlane object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(planeRemoved:) name:AGNotificationPlaneRemoved object:nil];
         NSDictionary *dict = [NSDictionary dictionaryWithObject:plane forKey:@"plane"];
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewedMessagesForPlane object:nil userInfo:dict];
@@ -193,7 +195,7 @@ static float AGInputTextViewMaxHeight = 100;
     // Dispose of any resources that can be recreated.
 }
 
-- (void) refresh
+- (void) loadMore
 {
     if ([airogami isKindOfClass:[AGPlane class]]) {
         AGPlane *plane = airogami;
@@ -237,6 +239,19 @@ static float AGInputTextViewMaxHeight = 100;
     if ([planeId isEqual:plane.planeId] == NO) {
         return;
     }
+    //
+    for (NSBubbleData *bubbleData in messagesData) {
+        AGMessage *message = bubbleData.obj;
+        if (message.state.intValue == BubbleCellStateSent) {
+            if (message.messageId.longLongValue <= message.plane.lastMsgId.longLongValue) {
+                bubbleData.state = BubbleCellStateSentRead;
+            }
+        }
+        else{
+            bubbleData.state = message.state.intValue;
+        }
+    }
+    [bubbleTable refresh:[NSArray arrayWithObject:@"state"]];
 }
 
 - (void) gotMessagesForPlane:(NSNotification*)notification
@@ -273,7 +288,14 @@ static float AGInputTextViewMaxHeight = 100;
         }
         NSBubbleData *bubbleData = [NSBubbleData dataWithText:message.content date:message.createdTime type:bubbleType];
         bubbleData.account = message.account;
-        bubbleData.state = message.state.intValue;
+        if (message.state.intValue == BubbleCellStateSent) {
+            if (message.messageId.longLongValue <= message.plane.lastMsgId.longLongValue) {
+                bubbleData.state = BubbleCellStateSentRead;
+            }
+        }
+        else{
+            bubbleData.state = message.state.intValue;
+        }
         bubbleData.obj = message;
         [array addObject:bubbleData];
     }
@@ -335,7 +357,7 @@ static float AGInputTextViewMaxHeight = 100;
         }
         NSBubbleData *bubbleData = [NSBubbleData dataWithText:chainMessage.content date:chainMessage.createdTime type:bubbleType];
         bubbleData.account = chainMessage.account;
-        bubbleData.state = BubbleCellStateSent;
+        bubbleData.state = BubbleCellStateNone;
         bubbleData.obj = chainMessage;
         [array addObject:bubbleData];
     }
@@ -367,6 +389,20 @@ static float AGInputTextViewMaxHeight = 100;
     [AGChatKeyboardScroll clear];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)likeButton:(AGLikeButton *)sender {
+    [sender likeAnimate];
+    [[AGManagerUtils managerUtils].planeManager likePlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
+        
+    }];
+}
+
+- (IBAction)clearButton:(UIButton *)sender {
+    [[AGManagerUtils managerUtils].planeManager clearPlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
+        
+    }];
+}
+
 
 #pragma mark - UITextView delegate
 
@@ -544,9 +580,12 @@ static float AGInputTextViewMaxHeight = 100;
             for (NSBubbleData *bubbleData in messagesData) {
                 AGMessage *msg = bubbleData.obj;
                 if ([msg isEqual:message]) {
-                    bubbleData.state = BubbleCellStateSent;
+                    bubbleData.state = remoteMessage.state.shortValue;
                     bubbleData.date = remoteMessage.createdTime;
-                    [bubbleTable reloadData];
+                    bubbleData.obj = remoteMessage;
+                    [bubbleTable setData:UIBubbleTableSetDataActionReset animated:NO];
+                    //
+                    [[AGManagerUtils managerUtils].audioManager playSentMessage];
                     break;
                 }
             }
