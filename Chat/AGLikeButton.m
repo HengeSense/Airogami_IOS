@@ -10,8 +10,8 @@
 
 #define kButtonImageWidth 30
 
-static NSString *UnlikedImage = @"bubbleCellStateReceivedUnliked.png";
-static NSString *LikedImage = @"bubbleCellStateReceivedLiked.png";
+static NSString *UnlikedImage = @"chat_chat_unliked.png";
+static NSString *LikedImage = @"chat_chat_liked.png";
 
 @implementation AGLikeButton
 
@@ -56,7 +56,7 @@ static NSString *LikedImage = @"bubbleCellStateReceivedLiked.png";
     imageView.frame = frame;
     [self addSubview:imageView];
     [UIView beginAnimations:@"LikeAnimations" context:(__bridge void *)(imageView)];
-    imageView.transform = CGAffineTransformMakeScale(2, 2);
+    imageView.transform = CGAffineTransformMakeScale(1.5, 1.5);
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(magnifyAnimationDidStop:finished:context:)];
     [UIView commitAnimations];

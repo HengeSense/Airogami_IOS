@@ -25,15 +25,14 @@
 - (void) updateMessage:(AGPlane*)plane;
 - (void) updateLike:(AGPlane*)plane createdTime:(NSDate*)createdTime;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
-- (NSArray*) getNeoPlanesForUpdate;
-- (AGNeoPlane*) getNextNeoPlaneForMessages;
+- (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId;
+- (AGNeoPlane*) getNextNeoPlaneForMessages:(NSNumber*)lastPlaneId;
 - (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane;
 - (void) resetForSync;
 - (void) deleteForSync;
 //new means not obtained messages
-- (AGNeoPlane*) getNextNeoPlaneForChat;
 - (AGPlane*) getNextUnviewedPlane;
 - (void) removeNeoPlane:(AGNeoPlane *)newPlane;
-- (void) removeNeoPlanes:(NSArray *)newPlanes;
+- (void) removeAllNeoPlanes;
 
 @end

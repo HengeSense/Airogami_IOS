@@ -43,8 +43,12 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 
 @interface AGPlaneNotification()
 {
+    //updates
+    BOOL moreUpdates;
+    NSNumber *updateMutex;
+    BOOL gettingUpdates;
     //messages
-    BOOL moreMessages;
+    /*BOOL moreMessages;
     NSNumber *messageMutex;
     BOOL obtainingMessages;
     //get new plane
@@ -54,7 +58,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     //get plane
     BOOL moreGetPlanes;
     NSNumber *getPlanesMutex;
-    BOOL gettingPlanes;
+    BOOL gettingPlanes;*/
     //send messages
     BOOL moreSendMessages;
     NSNumber *sendMessageMutex;
@@ -65,6 +69,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     BOOL viewingMessages;
     //
     NSNumber *viewingPlaneId;
+    //
+    NSNumber *lastPlaneId;
 }
 @end
 
@@ -76,9 +82,9 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         
         [notificationCenter addObserver:self selector:@selector(getNeoPlanes:) name:AGNotificationGetNeoPlanes object:nil];
-         [notificationCenter addObserver:self selector:@selector(getPlanes:) name:AGNotificationGetPlanes object:nil];
+        //[notificationCenter addObserver:self selector:@selector(getPlanes:) name:AGNotificationGetPlanes object:nil];
         //obtain messages
-        [notificationCenter addObserver:self selector:@selector(obtainMessages:) name:AGNotificationObtainMessages object:nil];
+        //[notificationCenter addObserver:self selector:@selector(obtainMessages:) name:AGNotificationObtainMessages object:nil];
         //[notificationCenter addObserver:self selector:@selector(obtainedMessages:) name:AGNotificationGetObtainedMessages object:nil];
         //get messages for plane
         //obtain messages
@@ -91,9 +97,10 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         [notificationCenter addObserver:self selector:@selector(viewingMessagesForPlane:) name:AGNotificationViewingMessagesForPlane object:nil];
         
         //
-        messageMutex = [NSNumber numberWithBool:YES];
+        updateMutex = [NSNumber numberWithBool:YES];
+        /*messageMutex = [NSNumber numberWithBool:YES];
         getNeoPlaneMutex = [NSNumber numberWithBool:YES];
-        getPlanesMutex = [NSNumber numberWithBool:YES];
+        getPlanesMutex = [NSNumber numberWithBool:YES];*/
         sendMessageMutex = [NSNumber numberWithBool:YES];
         viewMessageMutex = [NSNumber numberWithBool:YES];
     }
@@ -103,14 +110,17 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 -(void)reset
 {
     //messages
-    moreMessages = NO;
+    /*moreMessages = NO;
     obtainingMessages = NO;
     //get new plane
     moreGetNeoPlanes = NO;
     gettingNeoPlanes = NO;
     //get plane
     moreGetPlanes = NO;
-    gettingPlanes = NO;
+    gettingPlanes = NO;*/
+    //updates
+    moreUpdates = NO;
+    gettingUpdates = NO;
     //send messages
     moreSendMessages = NO;
     sendingMessages = NO;
@@ -137,18 +147,21 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         return;
     }
     BOOL shouldGet = NO;
-    @synchronized(getNeoPlaneMutex){
-        if (gettingNeoPlanes) {
-            moreGetNeoPlanes = YES;
+    @synchronized(updateMutex){
+        if (gettingUpdates) {
+            moreUpdates = YES;
         }
         else{
-            gettingNeoPlanes = YES;
+            gettingUpdates = YES;
             shouldGet = YES;
         }
     }
     
     if (shouldGet) {
         [self getNeoPlanes];
+    }
+    else{
+        [self refreshed];
     }
     
     
@@ -165,35 +178,16 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         if (error == nil) {
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
-                [self getNeoPlanes];
             }
             else{
-                //whether has more
-                BOOL shouldGet= NO;
-                @synchronized(getNeoPlaneMutex){
-                    if (moreGetNeoPlanes) {
-                        moreGetNeoPlanes = NO;
-                        shouldGet = YES;
-                    }
-                    else{
-                        gettingNeoPlanes = NO;
-                    }
-                }
-                if (shouldGet) {
-                    [self getNeoPlanes];
-                }
-                else{
-                    [self refreshed];
-                }
+                [self refreshed];
             }
+            //
+            [self gotNeoPlanes];
             //deal with clear and read
             if (neoPlanes.count) {
                 for (AGNeoPlane *neoPlane in neoPlanes) {
                     AGPlane *plane = neoPlane.plane;
-                    //clear
-                    if (plane && neoPlane.clearMsgId.longLongValue > plane.clearMsgId.longLongValue) {
-                        [self clearPlane:plane clearMsgId:neoPlane.clearMsgId];
-                    }
                     //read
                     if (plane && neoPlane.lastMsgId.longLongValue > plane.lastMsgId.longLongValue) {
                         plane.lastMsgId = neoPlane.lastMsgId;
@@ -201,17 +195,20 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
                         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationReadMessagesForPlane object:nil userInfo:dict];
                     }
+                    //clear
+                    if (plane && neoPlane.clearMsgId.longLongValue > plane.clearMsgId.longLongValue) {
+                        [self clearPlane:plane clearMsgId:neoPlane.clearMsgId];
+                    }
+                    
                 }
             }
-            //
-            [self gotNeoPlanes];
             
         }
         else{
             //should deal with server error
-            @synchronized(getNeoPlaneMutex){
-                moreGetNeoPlanes = NO;
-                gettingNeoPlanes = NO;
+            @synchronized(updateMutex){
+                moreUpdates = NO;
+                gettingUpdates = NO;
             }
             [self refreshed];
         }
@@ -226,58 +223,29 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 
 - (void) gotNeoPlanes
 {
-    NSDictionary *dict = [NSDictionary dictionary];
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:AGNotificationGetPlanes object:self userInfo:dict];
+    lastPlaneId = nil;
+    [self getPlanes];
 }
 
 #pragma mark - get planes
 
-- (void) getPlanes:(NSNotification*) notification
-{
-    BOOL shouldGet = NO;
-    @synchronized(getPlanesMutex){
-        if (gettingPlanes) {
-            moreGetPlanes = YES;
-        }
-        else{
-            gettingPlanes = YES;
-            shouldGet = YES;
-        }
-    }
-    
-    if (shouldGet) {
-        [self getPlanes];
-    }
-    
-}
-
 - (void) getPlanes
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    NSArray *neoPlanes = [controllerUtils.planeController getNeoPlanesForUpdate];
-    if (neoPlanes.count) {
-        [self getPlanesForNeoPlaneIds:neoPlanes];
+    NSArray *neoPlaneIds = [controllerUtils.planeController getNeoPlaneIdsForUpdate:lastPlaneId];
+    if (neoPlaneIds.count) {
+        lastPlaneId = neoPlaneIds.lastObject;
+        [self getPlanesForNeoPlaneIds:neoPlaneIds];
     }
     else{
-        @synchronized(getPlanesMutex){
-            moreGetPlanes = NO;
-            gettingPlanes = NO;
-        }
-        //
-        NSDictionary *dict = [NSDictionary dictionary];
-        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-        [notificationCenter postNotificationName:AGNotificationObtainMessages object:self userInfo:dict];
+        lastPlaneId = nil;
+        [self obtainMessages];
     }
 }
 
-- (void) getPlanesForNeoPlaneIds:(NSArray*)neoPlanes
+- (void) getPlanesForNeoPlaneIds:(NSArray*)neoPlaneIds
 {
     AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
-    NSMutableArray *neoPlaneIds = [NSMutableArray arrayWithCapacity:neoPlanes.count];
-    for (AGNeoPlane *neoPlane in neoPlanes) {
-        [neoPlaneIds addObject:neoPlane.planeId];
-    }
     NSDictionary *params = [planeManager paramsForGetPlanes:neoPlaneIds];
     [planeManager getPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *planes) {
         if (error == nil) {
@@ -299,14 +267,13 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 [self obtainedPlanes];
             }
             //
-            [[AGControllerUtils controllerUtils].planeController removeNeoPlanes:neoPlanes];
             [self getPlanes];
         }
         else{
             //should deal with server error
-            @synchronized(getNeoPlaneMutex){
-                moreGetNeoPlanes = NO;
-                gettingNeoPlanes = NO;
+            @synchronized(updateMutex){
+                moreUpdates = NO;
+                gettingUpdates = NO;
             }
         }
     }];
@@ -314,36 +281,29 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 
 #pragma mark - obtain messages
 
-- (void) obtainMessages:(NSNotification*) notification
-{
-    BOOL shouldObtain = NO;
-    @synchronized(messageMutex){
-        if (obtainingMessages) {
-            moreMessages = YES;
-        }
-        else{
-            obtainingMessages = YES;
-            shouldObtain = YES;
-        }
-    }
-    
-    if (shouldObtain) {
-        [self obtainMessages];
-    }
-    
-}
-
 - (void) obtainMessages
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    AGNeoPlane *neoPlane = [controllerUtils.planeController getNextNeoPlaneForMessages];
+    AGNeoPlane *neoPlane = [controllerUtils.planeController getNextNeoPlaneForMessages:lastPlaneId];
     if (neoPlane) {
+        lastPlaneId = neoPlane.planeId;
         [self obtainMessagesForPlane:neoPlane];
     }
     else{
-        @synchronized(messageMutex){
-            moreMessages = NO;
-            obtainingMessages = NO;
+        [controllerUtils.planeController removeAllNeoPlanes];
+        //whether has more
+        BOOL shouldGet = NO;
+        @synchronized(updateMutex){
+            if (moreUpdates) {
+                moreUpdates = NO;
+                shouldGet = YES;
+            }
+            else{
+                gettingUpdates = NO;
+            }
+        }
+        if (shouldGet) {
+            [self getNeoPlanes];
         }
     }
 }
@@ -369,30 +329,22 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 [self obtainMessagesForPlane:neoPlane];
             }
             else{
-                // why crash
-                [controllerUtils.planeController removeNeoPlane:neoPlane];
+                [controllerUtils.messageController updateNeoMsgId:neoPlane];
                 [self obtainMessages];
             }
             if (messages.count) {
                 [controllerUtils.planeController updateMessage:plane];
                 //
                 [self obtainedMessages:messages forPlane:plane];
-            
-                //#warning this may be set after plane change status
-                /*NSNumber *lastMsgId = ((AGMessage*)[messages lastObject]).messageId;
-                if (plane.status.intValue == AGPlaneStatusNew) {
-                    plane.viewedMsgId = lastMsgId;
-                    [[AGCoreData coreData] save];
-                }*/
                 
             }
             
         }
         else{
             //should deal with server error
-            @synchronized(messageMutex){
-                moreMessages = NO;
-                obtainingMessages = NO;
+            @synchronized(updateMutex){
+                moreUpdates = NO;
+                gettingUpdates = NO;
             }
         }
     }];
@@ -647,7 +599,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 
 - (void) obtainedPlanesReorderForPlane:(AGPlane*)plane
 {
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"reorder", @"action", plane, @"plane", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"reorder", @"action", plane.planeId, @"planeId", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
 }

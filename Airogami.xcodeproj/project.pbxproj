@@ -49,6 +49,11 @@
 		074679D418160C97002FBACD /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679D318160C97002FBACD /* AGChainMessage.m */; };
 		074679D718160C98002FBACD /* AGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679D618160C98002FBACD /* AGMessage.m */; };
 		074679DA1816F395002FBACD /* AGLikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679D91816F395002FBACD /* AGLikeButton.m */; };
+		074679E01817508E002FBACD /* chat_chat_erase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679DB1817508E002FBACD /* chat_chat_erase@2x.png */; };
+		074679E11817508E002FBACD /* chat_chat_liked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679DC1817508E002FBACD /* chat_chat_liked@2x.png */; };
+		074679E21817508E002FBACD /* chat_chat_read@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679DD1817508E002FBACD /* chat_chat_read@2x.png */; };
+		074679E31817508E002FBACD /* chat_chat_unliked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679DE1817508E002FBACD /* chat_chat_unliked@2x.png */; };
+		074679E41817508E002FBACD /* chat_chat_unread@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679DF1817508E002FBACD /* chat_chat_unread@2x.png */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
 		0750CF9017739146008E28F0 /* write_edit_female_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8A17739146008E28F0 /* write_edit_female_button@2x.png */; };
 		0750CF9117739146008E28F0 /* write_edit_location_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8B17739146008E28F0 /* write_edit_location_button@2x.png */; };
@@ -468,6 +473,11 @@
 		074679D618160C98002FBACD /* AGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessage.m; sourceTree = "<group>"; };
 		074679D81816F395002FBACD /* AGLikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGLikeButton.h; sourceTree = "<group>"; };
 		074679D91816F395002FBACD /* AGLikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGLikeButton.m; sourceTree = "<group>"; };
+		074679DB1817508E002FBACD /* chat_chat_erase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_erase@2x.png"; sourceTree = "<group>"; };
+		074679DC1817508E002FBACD /* chat_chat_liked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_liked@2x.png"; sourceTree = "<group>"; };
+		074679DD1817508E002FBACD /* chat_chat_read@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_read@2x.png"; sourceTree = "<group>"; };
+		074679DE1817508E002FBACD /* chat_chat_unliked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_unliked@2x.png"; sourceTree = "<group>"; };
+		074679DF1817508E002FBACD /* chat_chat_unread@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_unread@2x.png"; sourceTree = "<group>"; };
 		0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_both_button@2x.png"; sourceTree = "<group>"; };
 		0750CF8A17739146008E28F0 /* write_edit_female_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_female_button@2x.png"; sourceTree = "<group>"; };
 		0750CF8B17739146008E28F0 /* write_edit_location_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_location_button@2x.png"; sourceTree = "<group>"; };
@@ -1642,6 +1652,11 @@
 		07918465177E475600D28C0F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				074679DB1817508E002FBACD /* chat_chat_erase@2x.png */,
+				074679DC1817508E002FBACD /* chat_chat_liked@2x.png */,
+				074679DD1817508E002FBACD /* chat_chat_read@2x.png */,
+				074679DE1817508E002FBACD /* chat_chat_unliked@2x.png */,
+				074679DF1817508E002FBACD /* chat_chat_unread@2x.png */,
 				076EE5AF1808A2C600E78F64 /* chat_plane_likes@2x.png */,
 				079C09A8178904950067FED1 /* profile_view_bottom@2x.png */,
 				079C09A9178904950067FED1 /* profile_view_middle@2x.png */,
@@ -1981,12 +1996,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				07072385175EA0260017292A /* MainStoryboard~iPad.storyboard in Resources */,
+				074679E01817508E002FBACD /* chat_chat_erase@2x.png in Resources */,
 				07072386175EA0260017292A /* AGSignStoryboard.storyboard in Resources */,
 				0707238B175EA37C0017292A /* MainStoryboard.storyboard in Resources */,
 				0707239D175EB75C0017292A /* signup_account_normal@2x.png in Resources */,
 				078A348B175FC7B700B5A7EB /* signup_title@2x.png in Resources */,
 				078A34AE1760197F00B5A7EB /* signup_location@2x.png in Resources */,
 				078D951B1761107B00663FDE /* signup_account_name@2x.png in Resources */,
+				074679E11817508E002FBACD /* chat_chat_liked@2x.png in Resources */,
 				078D951C1761107B00663FDE /* signup_account_password@2x.png in Resources */,
 				078D95211761156000663FDE /* signup_profile_email@2x.png in Resources */,
 				078D95221761156000663FDE /* signup_profile_location@2x.png in Resources */,
@@ -2012,6 +2029,7 @@
 				079F8191176C007F004234D0 /* reset_password_prompt@2x.png in Resources */,
 				078A1F5D176CDE2B00A69AE3 /* AGWriteStoryboard.storyboard in Resources */,
 				078A1F5F176CDE6400A69AE3 /* AGCollectStoryboard.storyboard in Resources */,
+				074679E21817508E002FBACD /* chat_chat_read@2x.png in Resources */,
 				078A1F61176CDF0900A69AE3 /* AGChatStoryboard.storyboard in Resources */,
 				078A1F6E176CF09D00A69AE3 /* sign_box_norml@2x.png in Resources */,
 				078A1F6F176CF09D00A69AE3 /* sign_box_signin@2x.png in Resources */,
@@ -2024,6 +2042,7 @@
 				078A1FDC176D355C00A69AE3 /* location.png in Resources */,
 				07B1051F17FE0297000DD694 /* AGChatPlaneHeaderView.xib in Resources */,
 				078A1FDD176D355C00A69AE3 /* location@2x.png in Resources */,
+				074679E31817508E002FBACD /* chat_chat_unliked@2x.png in Resources */,
 				078A1FE2176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.xib in Resources */,
 				078A1FE5176D355C00A69AE3 /* YTImageCropper.xib in Resources */,
 				07B8DC0817710146006922FF /* main_tabbar_bgrd@2x.png in Resources */,
@@ -2153,6 +2172,7 @@
 				0785221B1784A3EC00288D7C /* radar_5@2x.png in Resources */,
 				078522601784E17C00288D7C /* collect_pickup_cancel_button@2x.png in Resources */,
 				078522631784FF0500288D7C /* radar_6@2x.png in Resources */,
+				074679E41817508E002FBACD /* chat_chat_unread@2x.png in Resources */,
 				078522641784FF0500288D7C /* radar_arm@2x.png in Resources */,
 				078522751786223200288D7C /* airogami_title@2x.png in Resources */,
 				078522761786223200288D7C /* Default-568h@2x.png in Resources */,

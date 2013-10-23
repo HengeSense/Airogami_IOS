@@ -28,10 +28,10 @@
 //-1 = unknown; 0 = colleted; 1 = obtained; 2 = deleted
 - (int) chainStatus:(NSNumber*)chainId;
 //
-- (NSArray*) getNeoChainIdsForUpdate;
-- (AGNeoChain*) getNextNeoChainForChainMessage;
+- (NSArray*) getNeoChainIdsForUpdate:(NSNumber*)lastChainId;
+- (AGNeoChain*) getNextNeoChainForChainMessage:(NSNumber*)lastChainId;
 - (void) addNeoChains:(NSArray*)chains;
-- (void) removeNeoChain:(AGNeoChain*)chain oldUpdateInc:(NSNumber*)updateInc;
+- (void) removeAllNeoChains;
 //
 - (void) resetForSync;
 - (void) deleteForSync;

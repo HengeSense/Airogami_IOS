@@ -17,6 +17,7 @@
 #import "AGAppDirector.h"
 
 static const int MaxNeoPlanes = 50;
+static const int DeleteLimit = 100;
 
 @interface AGPlaneController ()
 {
@@ -300,26 +301,6 @@ static const int MaxNeoPlanes = 50;
     return updateInc;
 }
 
-
-- (AGNeoPlane*) getNextNeoPlaneForChat
-{
-    AGAccount *account = [AGAppDirector appDirector].account;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:neoPlaneEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"accountId = %@", account.accountId];
-    [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    [fetchRequest setFetchLimit:1];
-    NSError *error;
-    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    AGNeoPlane *neoPlane = nil;
-    if (array.count) {
-        neoPlane = [array lastObject];
-    }
-    return neoPlane;
-}
-
 - (void) removeNeoPlane:(AGNeoPlane *)neoPlane
 {
     AGPlane *plane = neoPlane.plane;
@@ -329,11 +310,24 @@ static const int MaxNeoPlanes = 50;
     }
 }
 
-- (void) removeNeoPlanes:(NSArray *)neoPlanes
+- (void) removeAllNeoPlanes
 {
-    for (AGNeoPlane *neoPlane in neoPlanes) {
-        [self removeNeoPlane:neoPlane];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:neoPlaneEntityDescription];
+    //
+    [fetchRequest setFetchLimit:DeleteLimit];
+    //
+    while (YES) {
+        NSError *error;
+        NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (array.count) {
+            [coreData removeAll:array];
+        }
+        else{
+            break;
+        }
     }
+    
 }
 
 - (NSArray*) getAllPlanesForChat
@@ -355,34 +349,41 @@ static const int MaxNeoPlanes = 50;
     return array;
 }
 
-- (NSArray*) getNeoPlanesForUpdate
+- (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId
 {
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoPlaneEntityDescription];
-    //[fetchRequest setResultType:NSDictionaryResultType];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane == nil || updateCount > plane.updateCount"];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(plane == nil || updateCount > plane.updateCount) && (%@ == nil || planeId > %@)", lastPlaneId, lastPlaneId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"planeId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    //
     [fetchRequest setFetchLimit:MaxNeoPlanes];
     //
-    //[fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"planeId"]];
+    [fetchRequest setPropertiesToFetch:[NSArray arrayWithObject:@"planeId"]];
     //
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    return array;
+    NSMutableArray *neoPlaneIds = [NSMutableArray arrayWithCapacity:array.count];
+    for (NSDictionary *result in array) {
+        NSNumber *neoPlaneId = [result objectForKey:@"planeId"];
+        [neoPlaneIds addObject:neoPlaneId];
+    }
+    return neoPlaneIds;
 }
 
-- (AGNeoPlane*) getNextNeoPlaneForMessages
+- (AGNeoPlane*) getNextNeoPlaneForMessages:(NSNumber*)lastPlaneId
 {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoPlaneEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane != nil && updateCount <= plane.updateCount && neoMsgId > plane.neoMsgId"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"plane != nil && updateCount <= plane.updateCount && neoMsgId > plane.neoMsgId && (%@ == nil || planeId > %@)", lastPlaneId, lastPlaneId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    //
     [fetchRequest setFetchLimit:1];
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];

@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "AGMessage.h"
 
+@class AGNeoPlane;
+
 @interface AGMessageController : NSObject
 
 - (NSMutableArray*) saveMessages:(NSArray*)jsonArray plane:(AGPlane*) plane;
 
 - (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary;
+
+-(void) updateNeoMsgId:(AGNeoPlane*)neoPlane;
 
 - (void) updateMessagesCount:(AGPlane*)plane;
 

@@ -15,7 +15,7 @@
 #import "AGAppDirector.h"
 
 static int MessageLimit = 10;
-static int DeleteLimit = 1;
+static int DeleteLimit = 100;
 
 @interface AGMessageController()
 {
@@ -57,6 +57,18 @@ static int DeleteLimit = 1;
     AGMessage *message = (AGMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGMessage"];
     [coreData save];
     return message;
+}
+
+//in case of not receive messages for some reason
+-(void) updateNeoMsgId:(AGNeoPlane*)neoPlane
+{
+    AGPlane *plane = neoPlane.plane;
+    if(plane){
+        if (plane.neoMsgId.longLongValue < neoPlane.neoMsgId.longLongValue) {
+            plane.neoMsgId = neoPlane.neoMsgId;
+            [coreData save];
+        }
+    }
 }
 
 - (void) updateMessagesCount:(AGPlane*)plane

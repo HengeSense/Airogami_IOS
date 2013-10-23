@@ -135,7 +135,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" id="qpN-Wq-fOg">
-                                                <rect key="frame" x="53" y="6" width="215" height="33"/>
+                                                <rect key="frame" x="53" y="6" width="214" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -145,20 +145,20 @@
                                                 </connections>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Bu-md-xlX" customClass="AGLikeButton">
-                                                <rect key="frame" x="279" y="8" width="32" height="30"/>
+                                                <rect key="frame" x="280" y="8" width="29" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal">
+                                                <state key="normal" image="chat_chat_unliked.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="likeButton:" destination="JCF-y5-YuP" eventType="touchUpInside" id="FWQ-9A-pVc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="S95-GU-hMB">
-                                                <rect key="frame" x="5" y="8" width="40" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S95-GU-hMB">
+                                                <rect key="frame" x="14" y="10" width="23" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Clear">
+                                                <state key="normal" image="chat_chat_erase.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -466,6 +466,8 @@
     <resources>
         <image name="account_report_button.png" width="31" height="31"/>
         <image name="back_button.png" width="59" height="30"/>
+        <image name="chat_chat_erase.png" width="23" height="26"/>
+        <image name="chat_chat_unliked.png" width="29" height="29"/>
         <image name="profile_description_icon.png" width="20" height="16"/>
         <image name="profile_image_default.png" width="256" height="256"/>
         <image name="profile_location_icon.png" width="14" height="21"/>

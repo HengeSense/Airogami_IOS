@@ -154,9 +154,9 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
 #ifdef IS_DEBUG
         NSLog(@"obtainedPlanes(reorder)");
 #endif
-        AGPlane *plane = [notification.userInfo objectForKey:@"plane"];
-        assert(plane);
-        [self reorderPlanesForChat:plane];
+        NSNumber *planeId = [notification.userInfo objectForKey:@"planeId"];
+        assert(planeId);
+        [self reorderPlanesForChat:planeId];
         [self obtainedContainPlanes:NO containChains:NO];
     }
     else{
@@ -168,12 +168,14 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     
 }
 
-- (void) reorderPlanesForChat:(AGPlane*)plane
+- (void) reorderPlanesForChat:(NSNumber*)planeId
 {
     int loc = -1;
+    AGPlane *plane = nil;
     for (int i = 0; i < planesForChat.count; ++i) {
         AGPlane *pp = [planesForChat objectAtIndex:i];
-        if ([plane isEqual:pp]) {
+        if ([pp.planeId isEqual:planeId]) {
+            plane = pp;
             loc = i;
             break;
         }
@@ -320,7 +322,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGotUnreadMessagesCount object:self userInfo:dict];
     //
-    [dict setObject:@"one" forKey:@"action"];
+    [dict setObject:@"reorder" forKey:@"action"];
     NSNumber *planeId = [dict objectForKey:@"planeId"];
     NSNumber *chainId = [dict objectForKey:@"chainId"];
     if (planeId) {

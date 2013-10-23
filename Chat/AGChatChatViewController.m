@@ -89,10 +89,10 @@ static float AGInputTextViewMaxHeight = 100;
     aidedTextView.hidden = YES;
     [textInputView addSubview:aidedTextView];
     //
-    textInputView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.9f];
+    textInputView.backgroundColor = [UIColor colorWithRed:0 green:16 / 255.0f  blue:22 / 255.0f alpha:.9f];
     aidedTextView.layer.cornerRadius = inputTextView.layer.cornerRadius = 5.0f;
-    aidedTextView.layer.borderColor = inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
-    aidedTextView.layer.borderWidth = inputTextView.layer.borderWidth = 2.0f;
+    //aidedTextView.layer.borderColor = inputTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    //aidedTextView.layer.borderWidth = inputTextView.layer.borderWidth = 2.0f;
     //
     if ([airogami isKindOfClass:[AGChain class]]){
         textInputView.hidden = YES;

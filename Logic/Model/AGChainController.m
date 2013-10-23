@@ -16,6 +16,7 @@
 #import "AGUtils.h"
 
 static const int MaxNeoChainIds = 50;
+static const int DeleteLimit = 100;
 
 @interface AGChainController()
 {
@@ -230,12 +231,12 @@ static const int MaxNeoChainIds = 50;
     [coreData save];
 }
 
-- (NSArray*) getNeoChainIdsForUpdate
+- (NSArray*) getNeoChainIdsForUpdate:(NSNumber*)lastChainId
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoChainEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain == nil || updateCount > chain.updateCount"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(chain == nil || updateCount > chain.updateCount) && (%@ == nil || chainId > %@)", lastChainId, lastChainId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"chainId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -255,13 +256,13 @@ static const int MaxNeoChainIds = 50;
     return chainIds;
 }
 
-- (AGNeoChain*) getNextNeoChainForChainMessage
+- (AGNeoChain*) getNextNeoChainForChainMessage:(NSNumber*)lastChainId
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoChainEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain != nil && updateCount <= chain.updateCount"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain != nil && (%@ == nil || chainId > %@) && updateCount <= chain.updateCount", lastChainId, lastChainId];
     [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"updateInc" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"chainId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [fetchRequest setFetchLimit:1];
     NSError *error;
@@ -290,10 +291,22 @@ static const int MaxNeoChainIds = 50;
     [coreData save];
 }
 
-- (void) removeNeoChain:(AGNeoChain *)neoChain oldUpdateInc:(NSNumber*)updateInc
+- (void) removeAllNeoChains
 {
-    if ([neoChain.updateInc isEqualToNumber:updateInc] && neoChain.chain != nil && neoChain.updateCount.intValue <= neoChain.chain.updateCount.intValue) {
-        [coreData remove:neoChain];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:neoChainEntityDescription];
+    //
+    [fetchRequest setFetchLimit:DeleteLimit];
+    //
+    while (YES) {
+        NSError *error;
+        NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (array.count) {
+            [coreData removeAll:array];
+        }
+        else{
+            break;
+        }
     }
     
 }
