@@ -83,6 +83,13 @@
     return (AGAccount*)[coreData findById:accountId withEntityName:@"AGAccount"];
 }
 
+- (void) increaseCount:(int)count
+{
+    AGHot *hot = [AGAppDirector appDirector].account.hot;
+    hot.likesCount = [NSNumber numberWithInt:hot.likesCount.intValue + count];
+    [coreData save];
+}
+
 - (void) addNeoAccounts:(NSArray *)accounts
 {
     for (AGAccount *account in accounts) {

@@ -11,11 +11,14 @@
 extern NSString *AGNotificationObtainAccounts;
 extern NSString *AGNotificationObtainAccount;
 extern NSString *AGNotificationProfileChanged;
+extern NSString *AGNotificationGetPoints;
+extern NSString *AGNotificationGotPoints;
 
 @interface AGAccountNotification : NSObject
 
 +(AGAccountNotification*) accountNotification;
 
 -(void) reset;
+-(void) increaseLikesCount:(int) count;
 
 @end

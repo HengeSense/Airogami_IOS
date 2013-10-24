@@ -13,13 +13,17 @@
 #import "AGAccount.h"
 #import "AGProfile.h"
 #import "AGUtils.h"
+#import "AGUIUtils.h"
 #import "AGMessage.h"
 #import "AGChain.h"
 #import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
 #import "AGRefreshPulldownHeader.h"
 #import "AGAppDirector.h"
+#import "AGPlane+Addition.h"
 #import <QuartzCore/QuartzCore.h>
+
+static NSString *SmileText = @"text.ui.smile";
 
 @interface AGChatPlaneViewController ()
 {
@@ -31,6 +35,8 @@
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 
 @property(nonatomic, strong) AGRefreshPulldownHeader *pulldownHeader;
+
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 
 @end
 
@@ -111,8 +117,10 @@
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDate) name:AGNotificationUpdateDate object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(obtained:) name:AGNotificationObtained object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotPoints:) name:AGNotificationGotPoints object:nil];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"planes", @"planes", @"chains", @"chains", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetObtained object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGetPoints object:nil userInfo:nil];
     
 }
 
@@ -158,6 +166,12 @@
     for (AGChatPlaneCell *cell in tv.visibleCells) {
         [cell updateDate];
     }
+}
+
+-(void) gotPoints:(NSNotification*)notification
+{
+    NSNumber *likesCount = [notification.userInfo objectForKey:@"likesCount"];
+    self.pointsLabel.text = likesCount.stringValue;
 }
 
 - (void) obtained:(NSNotification*) notification
@@ -268,7 +282,13 @@
         AGMessage *message = plane.message;
         cell.date = plane.updatedTime;
         //cell.timeLabel.text = [AGUtils dateToString:plane.updatedTime];
-        cell.messageLabel.text = message.content;
+        if (message.type.intValue == AGMessageTypeLike) {
+            cell.messageLabel.text = AGLS(SmileText);
+        }
+        else{
+            cell.messageLabel.text = message.content;
+        }
+        
         //count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
         count = plane.unreadMessagesCount.intValue;
     }

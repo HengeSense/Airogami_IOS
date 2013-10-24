@@ -238,22 +238,30 @@ static const int DeleteLimit = 100;
 - (void) updateMessage:(AGPlane*)plane
 {
     AGMessage *message = [self recentMessageForPlane:plane.planeId];
-    plane.message = message;
-    plane.updatedTime = message.createdTime;
-    [coreData save];
+    if (plane.message != message) {
+        plane.message = message;
+        plane.updatedTime = message.createdTime;
+        [coreData save];
+    }
 }
 
-- (void) updateLike:(AGPlane*)plane createdTime:(NSDate *)createdTime
+- (void) updateLike:(AGPlane*)plane
 {
     NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
-    plane.updatedTime = createdTime;
     if ([accountId isEqualToNumber:plane.accountByOwnerId.accountId]) {
         plane.likedByO = [NSNumber numberWithBool:YES];
     }
     else{
         plane.likedByT = [NSNumber numberWithBool:YES];
     }
-    [coreData save];
+    //
+    AGMessage *message = [self recentMessageForPlane:plane.planeId];
+    if (plane.message != message) {
+        plane.message = message;
+        plane.updatedTime = message.createdTime;
+        [coreData save];
+    }
+    
 }
 
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId

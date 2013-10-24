@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AGAppConfig.h"
+#import "AGHot.h"
 
 typedef enum{
     AGAppStatusSign,

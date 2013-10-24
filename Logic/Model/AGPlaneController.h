@@ -23,7 +23,7 @@
 -(void) increaseUpdateInc;
 - (NSArray*) getAllPlanesForChat;
 - (void) updateMessage:(AGPlane*)plane;
-- (void) updateLike:(AGPlane*)plane createdTime:(NSDate*)createdTime;
+- (void) updateLike:(AGPlane*)plane;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
 - (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId;
 - (AGNeoPlane*) getNextNeoPlaneForMessages:(NSNumber*)lastPlaneId;

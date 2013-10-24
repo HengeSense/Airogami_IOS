@@ -176,14 +176,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     }
     [[AGManagerUtils managerUtils].planeManager getNeoPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *neoPlanes) {
         if (error == nil) {
-            NSNumber *more = [result objectForKey:@"more"];
-            if (more.boolValue) {
-            }
-            else{
-                [self refreshed];
-            }
-            //
-            [self gotNeoPlanes];
             //deal with clear and read
             if (neoPlanes.count) {
                 for (AGNeoPlane *neoPlane in neoPlanes) {
@@ -201,6 +193,17 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                     }
                     
                 }
+            }
+            
+            //
+            NSNumber *more = [result objectForKey:@"more"];
+            if (more.boolValue) {
+                [self getNeoPlanes];
+            }
+            else{
+                [self gotNeoPlanes];
+                [self refreshed];
+                
             }
             
         }
@@ -322,7 +325,13 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
     [planeManager obtainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error == nil) {
+            
             NSArray *messages = [controllerUtils.messageController saveMessages:[result objectForKey:@"messages"] plane:plane];
+            if (messages.count) {
+                [controllerUtils.planeController updateMessage:plane];
+                //
+                [self obtainedMessages:messages forPlane:plane];
+            }
             
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
@@ -331,12 +340,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
             else{
                 [controllerUtils.messageController updateNeoMsgId:neoPlane];
                 [self obtainMessages];
-            }
-            if (messages.count) {
-                [controllerUtils.planeController updateMessage:plane];
-                //
-                [self obtainedMessages:messages forPlane:plane];
-                
             }
             
         }
@@ -369,7 +372,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
             //
             dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
-            //
+            //audio
             [[AGManagerUtils managerUtils].audioManager playReceivedMessage];
         }
         else{
@@ -378,7 +381,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
             //
             dict = [NSDictionary dictionaryWithObjectsAndKeys:plane, @"plane", @"one", @"action", nil];
             [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
-            //
+            //audio
             [[AGManagerUtils managerUtils].audioManager playReceivedMessageWhenViewing];
         }
     }
@@ -420,6 +423,13 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
         action = @"prepend";
     }
     dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", planeId, @"planeId", action, @"action", more, @"more", nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
+}
+
+-(void) appendMessages:(NSArray*)messages forPlane:(AGPlane*)plane
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:messages, @"messages", plane.planeId, @"planeId", @"append", @"action", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter postNotificationName:AGNotificationGotMessagesForPlane object:self userInfo:dict];
 }
@@ -476,7 +486,6 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
             }
             
             [self sendMessages];
-            
         }
         else{
             //should deal with server error
@@ -580,13 +589,20 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationPlaneRemoved object:nil userInfo:dict];
 }
 
-- (void) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId
+- (BOOL) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId
 {
-    if ([[AGControllerUtils controllerUtils].messageController clearPlane:plane clearMsgId:clearMsgId]) {
+    BOOL cleared;
+    if ((cleared = [[AGControllerUtils controllerUtils].messageController clearPlane:plane clearMsgId:clearMsgId])) {
         [self gotMessagesForPlane:plane.planeId startId:nil];
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];
+        //audio
+        if ([plane.planeId isEqual:viewingPlaneId]) {
+            [[AGManagerUtils managerUtils].audioManager playErase];
+        }
+        
     }
+    return cleared;
 }
 
 - (void) collectedPlanes
@@ -597,7 +613,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     
 }
 
-- (void) obtainedPlanesReorderForPlane:(AGPlane*)plane
+- (void) obtainedPlanesReorder:(AGPlane*)plane
 {
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"reorder", @"action", plane.planeId, @"planeId", nil];
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];

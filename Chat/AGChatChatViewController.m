@@ -21,14 +21,21 @@
 #import "AGAppDirector.h"
 #import "AGMessageUtils.h"
 #import "AGLikeButton.h"
+#import "AGPlane+Addition.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
 #define kAGChatChatMaxSpacing 50
 
 static float AGInputTextViewMaxHeight = 100;
+static NSString * ClearConfirm = @"message.ui.clear.confirm";
+static NSString * OK = @"message.general.ok";
+static NSString * Cancel = @"message.general.cancel";
 
-@interface AGChatChatViewController()
+static NSString * LikedByOthersImage = @"chat_chat_liked_others.png";
+static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
+
+@interface AGChatChatViewController()<UIAlertViewDelegate>
 {
     __weak IBOutlet UIBubbleTableView *bubbleTable;
     __weak IBOutlet UIView *textInputView;
@@ -38,6 +45,8 @@ static float AGInputTextViewMaxHeight = 100;
     __weak IBOutlet AGResignButton *resignButton;
     __weak IBOutlet UILabel *nameLabel;
     __weak IBOutlet UILabel *categoryLabel;
+    __weak IBOutlet UIButton *clearButton;
+    __weak IBOutlet AGLikeButton *likeButton;
     UITextView *aidedTextView;
     
     NSMutableArray *messagesData;
@@ -145,6 +154,8 @@ static float AGInputTextViewMaxHeight = 100;
             nameLabel.text = plane.accountByOwnerId.profile.fullName;
         }
         categoryLabel.text = [AGCategory title:plane.category.categoryId];
+        likeButton.liked = [plane hasLiked];
+        //
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotMessagesForPlane:) name:AGNotificationGotMessagesForPlane object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sentMessage:) name:AGNotificationSentMessage object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readMessagesForPlane:) name:AGNotificationReadMessagesForPlane object:nil];
@@ -193,6 +204,32 @@ static float AGInputTextViewMaxHeight = 100;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+}
+
+- (void)viewDidUnload {
+    resignButton = nil;
+    nameLabel = nil;
+    categoryLabel = nil;
+    [super viewDidUnload];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if ([airogami isKindOfClass:[AGPlane class]]) {
+        NSDictionary *dict = [NSDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
+    }
+    else if([airogami isKindOfClass:[AGChain class]]){
+        NSDictionary *dict = [NSDictionary dictionary];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
+    }
 }
 
 - (void) loadMore
@@ -286,7 +323,15 @@ static float AGInputTextViewMaxHeight = 100;
         if (account != message.account) {
             bubbleType = BubbleTypeSomeoneElse;
         }
-        NSBubbleData *bubbleData = [NSBubbleData dataWithText:message.content date:message.createdTime type:bubbleType];
+        NSBubbleData *bubbleData = nil;
+        if (message.type.intValue == AGMessageTypeLike) {
+            NSString *name = bubbleType == BubbleTypeMine ? LikedByMeImage : LikedByOthersImage;
+            bubbleData = [NSBubbleData dataWithImage:[UIImage imageNamed:name] date:message.createdTime type:bubbleType];
+        }
+        else{
+            bubbleData = [NSBubbleData dataWithText:message.content date:message.createdTime type:bubbleType];
+        }
+        
         bubbleData.account = message.account;
         if (message.state.intValue == BubbleCellStateSent) {
             if (message.messageId.longLongValue <= message.plane.lastMsgId.longLongValue) {
@@ -318,7 +363,6 @@ static float AGInputTextViewMaxHeight = 100;
         [array addObjectsFromArray:messagesData];
         messagesData = array;
         [bubbleTable setData:setDataAction animated:NO];
-
     }
 
 }
@@ -383,24 +427,6 @@ static float AGInputTextViewMaxHeight = 100;
         
     }
     
-}
-
-- (IBAction)backButton:(UIButton *)sender {
-    [AGChatKeyboardScroll clear];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)likeButton:(AGLikeButton *)sender {
-    [sender likeAnimate];
-    [[AGManagerUtils managerUtils].planeManager likePlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
-        
-    }];
-}
-
-- (IBAction)clearButton:(UIButton *)sender {
-    [[AGManagerUtils managerUtils].planeManager clearPlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
-        
-    }];
 }
 
 
@@ -594,29 +620,43 @@ static float AGInputTextViewMaxHeight = 100;
 
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+//clear confirm
+-(void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [super viewWillDisappear:animated];
-    
-}
-
-- (void)viewDidUnload {
-    resignButton = nil;
-    nameLabel = nil;
-    categoryLabel = nil;
-    [super viewDidUnload];
-}
-
-- (void) dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if ([airogami isKindOfClass:[AGPlane class]]) {
-        NSDictionary *dict = [NSDictionary dictionary];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingMessagesForPlane object:nil userInfo:dict];
-    }
-    else if([airogami isKindOfClass:[AGChain class]]){
-        NSDictionary *dict = [NSDictionary dictionary];
-        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationViewingChainMessagesForChain object:nil userInfo:dict];
+    if (buttonIndex == 1) {
+        [self clear];
     }
 }
+
+- (void) clear
+{
+    clearButton.enabled = NO;
+    [[AGManagerUtils managerUtils].planeManager clearPlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
+        clearButton.enabled = YES;
+    }];
+}
+
+#pragma mark - buttons
+
+- (IBAction)backButton:(UIButton *)sender {
+    [AGChatKeyboardScroll clear];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)likeButton:(AGLikeButton *)sender {
+    [sender likeAnimate];
+    sender.enabled = NO;
+    [[AGManagerUtils managerUtils].planeManager likePlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
+        sender.enabled = YES;
+        AGPlane *plane = airogami;
+        sender.liked = [plane hasLiked];
+    }];
+}
+
+- (IBAction)clearButton:(UIButton *)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:AGLS(ClearConfirm) delegate:self cancelButtonTitle:AGLS(Cancel) otherButtonTitles:AGLS(OK), nil];
+    [alert show];
+}
+
+
 @end

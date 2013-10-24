@@ -114,7 +114,6 @@ static AGAppDelegate *AppDelegate;
         [[AGManagerUtils managerUtils].accountManager  updateDevice];
     }
     
-    
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -130,7 +129,9 @@ static AGAppDelegate *AppDelegate;
     NSNumber *accountId = [userInfo objectForKey:@"accountId"];
     if (app.applicationState == UIApplicationStateActive && [accountId isEqualToNumber:account.accountId]) {
        [appDirector refresh];
+#ifdef IS_DEBUG
        [[AGManagerUtils managerUtils].audioManager playNotification];
+#endif
     }
 
 }

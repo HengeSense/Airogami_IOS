@@ -7,6 +7,7 @@
         <relationship name="authenticate" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAuthenticate" inverseName="account" inverseEntity="AGAuthenticate" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="account" inverseEntity="AGChainMessage" syncable="YES"/>
         <relationship name="chains" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChain" inverseName="account" inverseEntity="AGChain" syncable="YES"/>
+        <relationship name="hot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGHot" inverseName="account" inverseEntity="AGHot" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="account" inverseEntity="AGMessage" syncable="YES"/>
         <relationship name="neoAccount" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNeoAccount" inverseName="account" inverseEntity="AGNeoAccount" syncable="YES"/>
         <relationship name="planesForOwnerId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByOwnerId" inverseEntity="AGPlane" syncable="YES"/>
@@ -112,6 +113,15 @@
             <entry key="IdKeyCount" value="2"/>
         </userInfo>
     </entity>
+    <entity name="AGHot" representedClassName="AGHot" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="hot" inverseEntity="AGAccount" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
+        </userInfo>
+    </entity>
     <entity name="AGMessage" representedClassName="AGMessage" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
@@ -205,7 +215,6 @@
         <attribute name="createdTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="screenName" optional="YES" attributeType="String" syncable="YES"/>
@@ -232,5 +241,6 @@
         <element name="AGNeoPlane" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGPlane" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGProfile" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGHot" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

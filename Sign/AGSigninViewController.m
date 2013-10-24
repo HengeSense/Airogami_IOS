@@ -22,6 +22,7 @@
 #define kAGSigninInputTag_Password 2
 
 #define kAGSigninInputMaxLength_ScreenName AGAccountScreenNameMaxLength
+#define kAGSigninInputMinLength_ScreenName AGAccountScreenNameMinLength
 #define kAGSigninInputMaxLength_Email AGAccountEmailMaxLength
 #define kAGSigninInputMinLength_Password AGAccountPasswordMinLength
 #define kAGSigninInputMaxLength_Password AGAccountPasswordMaxLength
@@ -165,7 +166,7 @@ static NSString * const Signin_Account_Images[] = {@"signin_account_normal.png",
 {
     NSString *error = nil;
     if ([self.nameTextField.text isValidEmail] == NO) {
-        if (self.nameTextField.text.length > kAGSigninInputMaxLength_ScreenName) {
+        if (self.nameTextField.text.length > kAGSigninInputMaxLength_ScreenName || self.nameTextField.text.length < kAGSigninInputMinLength_ScreenName) {
             error = kAGSigninScreenNameInvalid;
         }
         

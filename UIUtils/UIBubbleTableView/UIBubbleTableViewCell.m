@@ -169,9 +169,10 @@
 {
     
     NSBubbleType type = self.data.type;
-    CGFloat width = self.data.view.frame.size.width;
-    CGFloat height = self.data.view.frame.size.height;
-    CGRect frame;
+    CGRect frame = self.data.view.frame;
+    CGFloat width = frame.size.width;
+    CGFloat height = frame.size.height;
+    
     
     //important: make the bubble image not too small
     if (width + self.data.insets.left + self.data.insets.right < 45) {

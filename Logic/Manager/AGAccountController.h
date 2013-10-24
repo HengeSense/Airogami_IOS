@@ -20,6 +20,7 @@
 - (AGProfile *) saveProfile:(NSDictionary*)jsonDictionary;
 - (AGAccountStat*) findAccountStat:(NSNumber *)accountId;
 - (AGAccount*) findAccount:(NSNumber*)accountId;
+- (void) increaseCount:(int)count;
 - (void) addNeoAccounts:(NSArray *)accounts;
 - (void) addNeoAccount:(AGAccount *)account;
 - (AGNeoAccount*) getNextNeoAccount;

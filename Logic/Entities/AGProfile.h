@@ -2,7 +2,7 @@
 //  AGProfile.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 8/15/13.
+//  Created by Tianhu Yang on 10/23/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -20,7 +20,6 @@
 @property (nonatomic, retain) NSDate * createdTime;
 @property (nonatomic, retain) NSString * fullName;
 @property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * likesCount;
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * province;
 @property (nonatomic, retain) NSString * screenName;

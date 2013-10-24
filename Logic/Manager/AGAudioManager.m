@@ -12,6 +12,7 @@
 static const SystemSoundID ReceivedMessage = 1307;
 static const SystemSoundID ReceivedMessageWhenViewing = 1003;
 static const SystemSoundID SentMessage = 1004;
+static const SystemSoundID Erase = 1108;
 static const SystemSoundID Notification = 1071;
 
 @interface AGAudioManager()
@@ -47,6 +48,11 @@ static const SystemSoundID Notification = 1071;
 - (void) playSentMessage
 {
     AudioServicesPlayAlertSound(SentMessage);
+}
+
+- (void) playErase
+{
+    AudioServicesPlayAlertSound(Erase);
 }
 
 - (void) playNotification

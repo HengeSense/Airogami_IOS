@@ -80,6 +80,7 @@
 
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";
+"text.ui.smile" = "(smile)";
 "message.synchronize.title" = "Synchronizing";
 "message.ui.write.edit.age.invalid" = "Start age should be less than end age";
 "title.ui.write.edit.age.start" = "Start age";
@@ -92,11 +93,12 @@
 "text.ui.day" = "d";
 "text.ui.hour" = "h";
 "text.ui.minute" = "m";
+"message.ui.clear.confirm" = "Erase chat content on both sides?";
 
 //notificaion
 "LKRP" = "You got a new plane";//LocKeyReceivedPlane
 "LKRC" = "You got a new chain plane";//LocKeyReceivedChain
 "LKRPM" = "%@: %@";//LocKeyReceivedPlaneMessage
 "LKRCM" = "%@: %@";//LocKeyReceivedChainMessage
-"LKLPM" = "%@ liked your plane";//LocKeyLikedPlaneMessage
+"LKLPM" = "%@ smiled at you";//LocKeyLikedPlaneMessage
 

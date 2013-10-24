@@ -23,6 +23,7 @@
 #import "UIImage+Addition.h"
 #import "AGUIDefines.h"
 #import "AGAppDirector.h"
+#import "AGHot.h"
 
 #define kAGSettingProfileSettingHighlight @"profile_setting_icon_highlight.png"
 #define kAGSettingProfileLocationHighlight @"profile_location_button_highlight.png"
@@ -119,7 +120,7 @@
 {
     AGProfile *profile = [AGAppDirector appDirector].account.profile;
     if (profile) {
-        self.likesLabel.text = [profile.likesCount stringValue];
+        self.likesLabel.text = profile.account.hot.likesCount.stringValue;
         self.nameTextField.text = profile.fullName;
         //[self.screenNameButton setTitle:profile.screenName forState:UIControlStateNormal];
         if (profile.birthday) {

@@ -150,30 +150,36 @@ static void encode(NSMutableString *path, id key, id obj)
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];
     unsigned flag = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit |NSMinuteCalendarUnit;
-    NSDateComponents *dateComponents = [calendar components:flag fromDate:date toDate:now options:0];
     NSString *string = nil;
-    if (dateComponents.year) {
-        string = [NSString stringWithFormat:@"%d %@", dateComponents.year, AGLS(Year)];
-    }
-    else if (dateComponents.month)
-    {
-        string = [NSString stringWithFormat:@"%d %@", dateComponents.month, AGLS(Month)];
-    }
-    else if (dateComponents.day)
-    {
-        string = [NSString stringWithFormat:@"%d %@", dateComponents.day, AGLS(Day)];
-    }
-    else if (dateComponents.hour)
-    {
-        string = [NSString stringWithFormat:@"%d %@", dateComponents.hour, AGLS(Hour)];
-    }
-    else if (dateComponents.minute)
-    {
-        string = [NSString stringWithFormat:@"%d %@", dateComponents.minute, AGLS(Minute)];
+    if ([date compare:now] > 0) {
+        string = [NSString stringWithFormat:@"0 %@", AGLS(Minute)];
     }
     else{
-        string = [NSString stringWithFormat:@"1 %@", AGLS(Minute)];
+        NSDateComponents *dateComponents = [calendar components:flag fromDate:date toDate:now options:0];
+        if (dateComponents.year) {
+            string = [NSString stringWithFormat:@"%d %@", dateComponents.year, AGLS(Year)];
+        }
+        else if (dateComponents.month)
+        {
+            string = [NSString stringWithFormat:@"%d %@", dateComponents.month, AGLS(Month)];
+        }
+        else if (dateComponents.day)
+        {
+            string = [NSString stringWithFormat:@"%d %@", dateComponents.day, AGLS(Day)];
+        }
+        else if (dateComponents.hour)
+        {
+            string = [NSString stringWithFormat:@"%d %@", dateComponents.hour, AGLS(Hour)];
+        }
+        else if (dateComponents.minute)
+        {
+            string = [NSString stringWithFormat:@"%d %@", dateComponents.minute, AGLS(Minute)];
+        }
+        else{
+            string = [NSString stringWithFormat:@"1 %@", AGLS(Minute)];
+        }
     }
+    
     return string;
 }
 

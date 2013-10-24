@@ -10,10 +10,13 @@
 #import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
 #import "AGPlaneNotification.h"
+#import "AGAppDirector.h"
 
 NSString *AGNotificationObtainAccounts = @"notification.obtainAccounts";
 NSString *AGNotificationObtainAccount = @"notification.obtainAccount";
 NSString *AGNotificationProfileChanged = @"notification.profileChanged";
+NSString *AGNotificationGetPoints = @"notification.getpoints";
+NSString *AGNotificationGotPoints = @"notification.gotpoints";
 
 @interface AGAccountNotification()
 {
@@ -30,9 +33,12 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
 - (id) init
 {
     if (self = [super init]) {
+        accountsMutex = [NSNumber numberWithBool:YES];
+        //
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         [notificationCenter addObserver:self selector:@selector(obtainAccounts:) name:AGNotificationObtainAccounts object:nil];
         [notificationCenter addObserver:self selector:@selector(obtainAccount:) name:AGNotificationObtainAccount object:nil];
+        [notificationCenter addObserver:self selector:@selector(gotPoints) name:AGNotificationGetPoints object:nil];
     }
     return self;
 }
@@ -127,6 +133,18 @@ NSString *AGNotificationProfileChanged = @"notification.profileChanged";
     }];
 }
 
+-(void) gotPoints
+{
+    AGHot *hot = [AGAppDirector appDirector].account.hot;
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:hot.likesCount forKey:@"likesCount"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationGotPoints object:self userInfo:dict];
+}
+
+-(void) increaseLikesCount:(int) count
+{
+    [[AGControllerUtils controllerUtils].accountController increaseCount:count];
+    [self gotPoints];
+}
 
 
 @end

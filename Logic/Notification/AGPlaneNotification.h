@@ -40,12 +40,13 @@ extern NSString *AGNotificationViewingMessagesForPlane;
 
 +(AGPlaneNotification*) planeNotification;
 
-- (void) obtainedPlanesReorderForPlane:(AGPlane*)plane;
+- (void) obtainedPlanesReorder:(AGPlane*)plane;
 - (void) obtainedPlane:(AGPlane*)plane;
 - (void) obtainedPlanes;
 - (void) collectedPlanes;
 - (void) reset;
 - (void) deletePlane:(AGPlane*)plane;
-- (void) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId;
+- (BOOL) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId;
+- (void) appendMessages:(NSArray*)messages forPlane:(AGPlane*)plane;
 
 @end

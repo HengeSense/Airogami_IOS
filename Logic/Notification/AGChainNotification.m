@@ -159,11 +159,13 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         if (error == nil) {
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
+                [self getNeoChains];
             }
             else{
+                [self gotNeoChains];
                 [self refreshed];
             }
-            [self gotNeoChains];
+            
         }
         else{
             //should deal with server error
@@ -287,19 +289,18 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     [chainManager obtainChainMessages:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result) {
         if (error == nil) {
             NSArray *chainMessages = [[AGControllerUtils controllerUtils].chainMessageController saveChainMessages:[result objectForKey:@"chainMessages"] chain:chain];
-            
+            if (chainMessages.count) {
+                [controllerUtils.chainController updateChainMessage:chain];
+                //
+                [self obtainedChainMessages:chainMessages forChain:chain];
+            }
+            //more
             NSNumber *more = [result objectForKey:@"more"];
             if (more.boolValue) {
                 [self obtainChainMessagesForChain:neoChain];
             }
             else{
                 [self obtainChainMessages];
-            }
-            if (chainMessages.count) {
-                [controllerUtils.chainController updateChainMessage:chain];
-                //
-                [self obtainedChainMessages:chainMessages forChain:chain];
-                
             }
             
         }

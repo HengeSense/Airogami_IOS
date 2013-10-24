@@ -16,6 +16,8 @@
 
 - (void) playSentMessage;
 
+- (void) playErase;
+
 - (void) playNotification;
 
 @end

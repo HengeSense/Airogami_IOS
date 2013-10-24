@@ -108,7 +108,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 [[AGControllerUtils controllerUtils].planeController updateMessage:message.plane];
                 [[AGCoreData coreData] remove:message];
                 //update plane order
-                [[AGPlaneNotification planeNotification] obtainedPlanesReorderForPlane:remoteMessage.plane];
+                [[AGPlaneNotification planeNotification] obtainedPlanesReorder:remoteMessage.plane];
             }
             
         }
@@ -176,6 +176,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             
         }
         else{
+            AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
             NSString *errorString = [result objectForKey:AGLogicJSONErrorKey];
             if (errorString) {
                 // not exist
@@ -186,7 +187,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 NSDictionary *planeJson = [result objectForKey:@"plane"];
                 //changed status, etc
                 if (planeJson) {
-                    [[AGControllerUtils controllerUtils].planeController savePlane:planeJson];
+                    [controllerUtils.planeController savePlane:planeJson];
                 }
                 
                 error = [AGMessageUtils errorClient];
@@ -195,11 +196,12 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 //succeed
                 succeed = YES;
                 NSDictionary *dict = [result objectForKey:@"message"];
-                NSString *createdTimeJson = [dict objectForKey:@"createdTime"];
-                NSDate *createdTime = [AGUtils stringToDate:createdTimeJson];
-                [[AGControllerUtils controllerUtils].planeController updateLike:plane createdTime:createdTime];
+                AGMessage *message = [controllerUtils.messageController saveMessage:dict];
+                [controllerUtils.planeController updateLike:plane];
                 //update plane order
-                [[AGPlaneNotification planeNotification] obtainedPlanesReorderForPlane:plane];
+                [[AGPlaneNotification planeNotification] obtainedPlanesReorder:plane];
+                //append messages
+                [[AGPlaneNotification planeNotification] appendMessages:[NSArray arrayWithObject:message] forPlane:plane];
             }
             
             

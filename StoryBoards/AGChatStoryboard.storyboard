@@ -156,7 +156,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="S95-GU-hMB">
-                                                <rect key="frame" x="14" y="10" width="23" height="26"/>
+                                                <rect key="frame" x="9" y="10" width="35" height="26"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="chat_chat_erase.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -221,7 +221,9 @@
                         <outlet property="backButton" destination="nrN-5U-mQE" id="BzF-JC-qgr"/>
                         <outlet property="bubbleTable" destination="I0C-fN-tBZ" id="hHn-er-zgp"/>
                         <outlet property="categoryLabel" destination="ICc-8n-nq0" id="RAV-5b-2wg"/>
+                        <outlet property="clearButton" destination="S95-GU-hMB" id="bY7-ii-Ovl"/>
                         <outlet property="inputTextView" destination="qpN-Wq-fOg" id="E9M-4X-dQc"/>
+                        <outlet property="likeButton" destination="0Bu-md-xlX" id="Tgf-RY-gBt"/>
                         <outlet property="nameLabel" destination="cD6-Ut-fN8" id="qO8-Cy-TmY"/>
                         <outlet property="resignButton" destination="3fc-X0-mkI" id="uec-HR-q69"/>
                         <outlet property="textInputView" destination="oaT-nV-FSU" id="bza-PA-4g3"/>
