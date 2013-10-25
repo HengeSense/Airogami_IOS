@@ -416,12 +416,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:planesJson.count];
             planes = [[AGControllerUtils controllerUtils].planeController savePlanes:planesJson];
             NSArray *changedAccounts = [coreData unregisterObserver];
-            if (changedAccounts.count) {
-                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
-                [accountController addNeoAccounts:changedAccounts];
-                NSDictionary *dict = [NSDictionary dictionary];
-                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
-            }
+            [[AGAccountNotification accountNotification] obtainAccountsForAccounts:changedAccounts];
             
             /*for(AGPlane *plane in planes){
                 if (plane.status.intValue == AGPlaneStatusNew) {
@@ -506,10 +501,11 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     return params;
 }
 
-- (NSDictionary*)paramsForGetPlanes:(NSArray*)planeIds
+- (NSDictionary*)paramsForGetPlanes:(NSArray*)planeIds updated:(BOOL)updated
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
     [params setObject:planeIds forKey:@"planeIds"];
+    [params setObject:[NSNumber numberWithBool:updated] forKey:@"updated"];
     
     return params;
 }

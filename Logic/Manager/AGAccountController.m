@@ -11,12 +11,16 @@
 #import "AGAccountStat.h"
 #import "AGManagerUtils.h"
 #import "AGAppDirector.h"
+#import "AGNeoProfile.h"
+#import "AGNeoHot.h"
 
 
 @interface AGAccountController()
 {
     AGCoreData *coreData;
     NSEntityDescription *neoAccountEntityDescription;
+    NSEntityDescription *neoProfileEntityDescription;
+    NSEntityDescription *neoHotEntityDescription;
 }
 
 @end
@@ -30,6 +34,8 @@
     if (self = [super init]) {
         coreData = [AGCoreData coreData];
         neoAccountEntityDescription = [NSEntityDescription entityForName:@"AGNeoAccount" inManagedObjectContext:coreData. managedObjectContext];
+        neoProfileEntityDescription = [NSEntityDescription entityForName:@"AGNeoProfile" inManagedObjectContext:coreData. managedObjectContext];
+        neoHotEntityDescription = [NSEntityDescription entityForName:@"AGNeoHot" inManagedObjectContext:coreData. managedObjectContext];
     }
     return self;
 }
@@ -67,10 +73,37 @@
     if (account) {
         profile = (AGProfile *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGProfile"];
         profile.account = account;
+        //
+        AGNeoProfile *neoProfile = (AGNeoProfile *)[coreData findById:accountId withEntityName:@"AGNeoProfile"];
+        if (neoProfile) {
+            profile.neoProfile = neoProfile;
+        }
         [coreData save];
     }
     
     return profile;
+}
+
+- (AGHot *) saveHot:(NSDictionary*)jsonDictionary
+{
+    AGHot *hot = nil;
+    if (jsonDictionary == nil || [jsonDictionary isEqual:[NSNull null]]) {
+        return hot;
+    }
+    NSNumber *accountId = [jsonDictionary objectForKey:@"accountId"];
+    AGAccount *account = [self findAccount:accountId];
+    if (account) {
+        hot = (AGHot *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGHot"];
+        hot.account = account;
+        //
+        AGNeoHot *neoHot = (AGNeoHot *)[coreData findById:accountId withEntityName:@"AGNeoHot"];
+        if (neoHot) {
+            hot.neoHot = neoHot;
+        }
+        [coreData save];
+    }
+    
+    return hot;
 }
 
 - (AGAccountStat*) findAccountStat:(NSNumber *)accountId
@@ -83,56 +116,97 @@
     return (AGAccount*)[coreData findById:accountId withEntityName:@"AGAccount"];
 }
 
-- (void) increaseCount:(int)count
+- (void) increaseLikesCount:(int)count
 {
     AGHot *hot = [AGAppDirector appDirector].account.hot;
     hot.likesCount = [NSNumber numberWithInt:hot.likesCount.intValue + count];
     [coreData save];
 }
 
-- (void) addNeoAccounts:(NSArray *)accounts
+-(void) addNeoProfiles:(NSArray*)accountIds
 {
-    for (AGAccount *account in accounts) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
-        [dict setObject:account.accountId forKey:@"accountId"];
-        NSNumber *number = [NSNumber numberWithInt:account.updateCount.intValue - 1];
-        [dict setObject:number forKey:@"updateCount"];
-        AGNeoAccount *neoAccount = (AGNeoAccount *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoAccount"];
-        neoAccount.account = account;
+    for (NSNumber *accountId in accountIds) {
+        AGNeoProfile *neoProfile = (AGNeoProfile *)[coreData findById:accountId withEntityName:@"AGNeoProfile"];
+        if (neoProfile) {
+            neoProfile.count = [NSNumber numberWithInt:neoProfile.count.intValue + 1];
+        }
+        else{
+            neoProfile = (AGNeoProfile *)[coreData create:[AGNeoProfile class]];
+            neoProfile.accountId = accountId;
+            
+            //
+            AGProfile *profile = (AGProfile *)[coreData findById:accountId withEntityName:@"AGProfile"];
+            if (profile) {
+                neoProfile.profile = profile;
+            }
+        }
     }
     [coreData save];
 }
 
-- (void) addNeoAccount:(AGAccount *)account
+-(void) addNeoHots:(NSArray*)accountIds
 {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
-    [dict setObject:account.accountId forKey:@"accountId"];
-    [dict setObject:account.updateCount forKey:@"updateCount"];
-    AGNeoAccount *neoAccount = (AGNeoAccount *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoAccount"];
-    neoAccount.account = account;
+    for (NSNumber *accountId in accountIds) {
+        AGNeoHot *neoHot = (AGNeoHot *)[coreData findById:accountId withEntityName:@"AGNeoHot"];
+        if (neoHot) {
+            neoHot.count = [NSNumber numberWithInt:neoHot.count.intValue + 1];
+        }
+        else{
+            neoHot = (AGNeoHot *)[coreData create:[AGNeoHot class]];
+            neoHot.accountId = accountId;
+            //
+            AGHot *hot = (AGHot *)[coreData findById:accountId withEntityName:@"AGHot"];
+            if (hot) {
+                neoHot.hot = hot;
+            }
+        }
+    }
     [coreData save];
 }
 
-- (AGNeoAccount*) getNextNeoAccount
+
+- (AGNeoProfile*) getNextNeoProfile
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:neoAccountEntityDescription];
+    [fetchRequest setEntity:neoProfileEntityDescription];
+    //
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"accountId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     [fetchRequest setFetchLimit:1];
+    //
     NSError *error;
     NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    AGNeoAccount *neoAccount= nil;
-    if (array.count) {
-        neoAccount = [array lastObject];
-    }
-    return neoAccount;
+    AGNeoProfile *neoProfile= array.lastObject;
+    return neoProfile;
 }
 
-- (void) removeNeoAccount:(AGNeoAccount *)neoAccount oldUpdateCount:(NSNumber*)updateCount
+- (AGNeoHot*) getNextNeoHot
 {
-    if (neoAccount.updateCount.longLongValue == updateCount.longLongValue) {
-        [coreData remove:neoAccount];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:neoHotEntityDescription];
+    //
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"accountId" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [fetchRequest setFetchLimit:1];
+    //
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    AGNeoHot *neoHot= array.lastObject;
+    return neoHot;
+}
+
+- (void) removeNeoProfile:(AGNeoProfile *)neoProfile oldCount:(NSNumber*)count
+{
+    if (neoProfile.count.longLongValue == count.longLongValue) {
+        [coreData remove:neoProfile];
+    }
+    
+}
+
+- (void) removeNeoHot:(AGNeoHot *)neoHot oldCount:(NSNumber*)count
+{
+    if (neoHot.count.longLongValue == count.longLongValue) {
+        [coreData remove:neoHot];
     }
     
 }

@@ -13,17 +13,22 @@
 #import "AGAppDirector.h"
 
 NSString *AGNotificationObtainAccounts = @"notification.obtainAccounts";
-NSString *AGNotificationObtainAccount = @"notification.obtainAccount";
+NSString *AGNotificationObtainProfiles = @"notification.obtainProfiles";
+NSString *AGNotificationObtainHots = @"notification.obtainHots";
 NSString *AGNotificationProfileChanged = @"notification.profileChanged";
+NSString *AGNotificationHotChanged = @"notification.hotChanged";
 NSString *AGNotificationGetPoints = @"notification.getpoints";
 NSString *AGNotificationGotPoints = @"notification.gotpoints";
 
 @interface AGAccountNotification()
 {
-    //chain messages
-    BOOL moreAccounts;
-    NSNumber *accountsMutex;
-    BOOL obtainingAccounts;
+    //hots
+    NSNumber *hotsMutex;
+    BOOL obtainingHots;
+    //profiles
+    NSNumber *profilesMutex;
+    BOOL obtainingProfiles;
+    //
 }
 
 @end
@@ -33,11 +38,13 @@ NSString *AGNotificationGotPoints = @"notification.gotpoints";
 - (id) init
 {
     if (self = [super init]) {
-        accountsMutex = [NSNumber numberWithBool:YES];
+        hotsMutex = [NSNumber numberWithBool:YES];
+        profilesMutex = [NSNumber numberWithBool:YES];
         //
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         [notificationCenter addObserver:self selector:@selector(obtainAccounts:) name:AGNotificationObtainAccounts object:nil];
-        [notificationCenter addObserver:self selector:@selector(obtainAccount:) name:AGNotificationObtainAccount object:nil];
+        [notificationCenter addObserver:self selector:@selector(obtainProfiles:) name:AGNotificationObtainProfiles object:nil];
+        [notificationCenter addObserver:self selector:@selector(obtainHots:) name:AGNotificationObtainHots object:nil];
         [notificationCenter addObserver:self selector:@selector(gotPoints) name:AGNotificationGetPoints object:nil];
     }
     return self;
@@ -45,8 +52,8 @@ NSString *AGNotificationGotPoints = @"notification.gotpoints";
 
 -(void) reset
 {
-    moreAccounts = NO;
-    obtainingAccounts = NO;
+    obtainingHots = NO;
+    obtainingProfiles = NO;
 }
 
 +(AGAccountNotification*) accountNotification
@@ -58,81 +65,174 @@ NSString *AGNotificationGotPoints = @"notification.gotpoints";
     return accountNotification;
 }
 
-- (void) obtainAccount:(NSNotification*) notification
-{
-    AGAccount *account = [notification.userInfo objectForKey:@"account"];
-    [[AGControllerUtils controllerUtils].accountController addNeoAccount:account];
-    [self obtainAccounts:notification];
-}
-
 - (void) obtainAccounts:(NSNotification*) notification
 {
+    [self obtainProfiles:notification];
+    [self obtainHots:notification];
+}
+
+- (void) obtainAccountsForAccounts:(NSArray*)accounts
+{
+    if (accounts.count) {
+        NSMutableArray *accountIds = [NSMutableArray arrayWithCapacity:accounts.count];
+        for (AGAccount *account in accounts) {
+            [accountIds addObject:account.accountId];
+        }
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:accountIds forKey:@"accountIds"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
+    }
+}
+
+#pragma mark - profiles
+
+- (void) obtainProfiles:(NSNotification*) notification
+{
+    NSArray *accountIds = [notification.userInfo objectForKey:@"accountIds"];
+    AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
+    [accountController addNeoProfiles:accountIds];
+    //
     BOOL shouldObtain = NO;
-    @synchronized(accountsMutex){
-        if (obtainingAccounts) {
-            moreAccounts = YES;
+    @synchronized(profilesMutex){
+        if (obtainingProfiles) {
         }
         else{
-            obtainingAccounts = YES;
+            obtainingProfiles = YES;
             shouldObtain = YES;
         }
     }
     
     if (shouldObtain) {
-        [self obtainAccounts];
+        [self obtainProfiles];
     }
 }
 
 
-- (void) obtainAccounts
+- (void) obtainProfiles
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    AGNeoAccount *neoAccount = [controllerUtils.accountController getNextNeoAccount];
-    if (neoAccount) {
-        [self obtainProfilesForAccount:neoAccount];
+    AGNeoProfile *neoProfile = [controllerUtils.accountController getNextNeoProfile];
+    if (neoProfile) {
+        [self obtainProfile:neoProfile];
     }
     else{
-        @synchronized(accountsMutex){
-            moreAccounts = NO;
-            obtainingAccounts = NO;
+        @synchronized(profilesMutex){
+            obtainingProfiles = NO;
         }
     }
 }
 
-- (void) obtainProfilesForAccount:(AGNeoAccount*)neoAccount
+- (void) obtainProfile:(AGNeoProfile *)neoProfile
 {
-    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
-    NSNumber *oldUpdateCount = neoAccount.updateCount;
-    AGProfile *profile = neoAccount.account.profile;
+    AGProfile *profile = neoProfile.profile;
     NSNumber *updateCount = profile.updateCount;
-    NSDictionary *params = [managerUtils.profileManager paramsForObtainProfile:neoAccount.accountId updateCount:updateCount];
-    
+    NSNumber *oldCount = neoProfile.count;
+    NSDictionary *params = [managerUtils.profileManager paramsForObtainProfile:neoProfile.accountId updateCount:updateCount];
+    //
     [managerUtils.profileManager obtainProfile:params context:nil block:^(NSError *error, id context, BOOL succeed) {
         if (error == nil) {
-            NSNumber *accountId = neoAccount.accountId;
-            [controllerUtils.accountController removeNeoAccount:neoAccount oldUpdateCount:oldUpdateCount];
             //
             if (succeed) {
-                NSDictionary *dict = [NSDictionary dictionaryWithObject:accountId forKey:@"accountId"];
+                NSDictionary *dict = [NSDictionary dictionaryWithObject:neoProfile.accountId forKey:@"accountId"];
                 NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
                 [notificationCenter postNotificationName:AGNotificationObtainedPlanes object:self userInfo:dict];
                 [notificationCenter postNotificationName:AGNotificationProfileChanged object:self userInfo:dict];
             }
-            
             //
-            [self obtainAccounts];
+            [[AGControllerUtils controllerUtils].accountController removeNeoProfile:neoProfile oldCount:oldCount];
+            //
+            [self obtainProfiles];
         }
         else{
             //should deal with server error
-            @synchronized(accountsMutex){
-                moreAccounts = NO;
-                obtainingAccounts = NO;
+            @synchronized(profilesMutex){
+                obtainingProfiles = NO;
             }
         }
     }];
 }
 
+#pragma mark - hots
+
+- (void) obtainHots:(NSNotification*) notification
+{
+    NSArray *accountIds = [notification.userInfo objectForKey:@"accountIds"];
+    AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
+    [accountController addNeoHots:accountIds];
+    //
+    BOOL shouldObtain = NO;
+    @synchronized(hotsMutex){
+        if (obtainingHots) {
+
+        }
+        else{
+            obtainingHots = YES;
+            shouldObtain = YES;
+        }
+    }
+    
+    if (shouldObtain) {
+        [self obtainHots];
+    }
+}
+
+- (void) obtainHots
+{
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    AGNeoHot *neoHot = [controllerUtils.accountController getNextNeoHot];
+    if (neoHot) {
+        [self obtainHot:neoHot];
+    }
+    else{
+        @synchronized(hotsMutex){
+            obtainingHots = NO;
+        }
+    }
+}
+
+- (void) obtainHot:(AGNeoHot *)neoHot
+{
+    AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
+    AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
+    AGHot *hot = neoHot.hot;
+    NSNumber *updateCount = hot.updateCount;
+    NSNumber *oldCount = neoHot.count;
+    NSDictionary *params = [managerUtils.profileManager paramsForObtainHot:neoHot.accountId updateCount:updateCount];
+    //
+    [managerUtils.profileManager obtainHot:params context:nil block:^(NSError *error, id context, BOOL succeed) {
+        if (error == nil) {
+            //
+            if (succeed) {
+                NSDictionary *dict = [NSDictionary dictionaryWithObject:neoHot.accountId forKey:@"accountId"];
+                NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+                [notificationCenter postNotificationName:AGNotificationHotChanged object:self userInfo:dict];
+                AGAccount *account = [AGAppDirector appDirector].account;
+                if ([neoHot.accountId isEqualToNumber:account.accountId]) {
+                    [self gotPoints];
+                }
+            }
+            //
+            [controllerUtils.accountController removeNeoHot:neoHot oldCount:oldCount];
+            //
+            [self obtainHots];
+        }
+        else{
+            //should deal with server error
+            @synchronized(hotsMutex){
+                obtainingHots = NO;
+            }
+        }
+    }];
+}
+
+- (void) obtainHotForMe
+{
+    NSNumber *accountId = [AGAppDirector appDirector].account.accountId;
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSArray arrayWithObject:accountId] forKey:@"accountIds"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainHots object:self userInfo:dict];
+}
+
+#pragma mark - points
 -(void) gotPoints
 {
     AGHot *hot = [AGAppDirector appDirector].account.hot;
@@ -142,7 +242,7 @@ NSString *AGNotificationGotPoints = @"notification.gotpoints";
 
 -(void) increaseLikesCount:(int) count
 {
-    [[AGControllerUtils controllerUtils].accountController increaseCount:count];
+    [[AGControllerUtils controllerUtils].accountController increaseLikesCount:count];
     [self gotPoints];
 }
 

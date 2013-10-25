@@ -25,7 +25,7 @@
 - (void) updateMessage:(AGPlane*)plane;
 - (void) updateLike:(AGPlane*)plane;
 - (AGMessage*) recentMessageForPlane:(NSNumber*)planeId;
-- (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId;
+- (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId  updated:(BOOL)updated;
 - (AGNeoPlane*) getNextNeoPlaneForMessages:(NSNumber*)lastPlaneId;
 - (void) updateLastMsgId:(NSNumber*)lastMsgId plane:(AGPlane*) plane;
 - (void) resetForSync;

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong, nonatomic) NSString *badge;
 @property (strong, nonatomic) NSDate *date;
+@property (weak, nonatomic) IBOutlet UIImageView *likedImageView;
 
 - (void) updateDate;
 

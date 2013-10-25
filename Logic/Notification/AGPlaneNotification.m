@@ -12,6 +12,7 @@
 #import "AGNumber.h"
 #import "AGAccountStat.h"
 #import "AGAppDirector.h"
+#import "AGAccountNotification.h"
 
 NSString *AGNotificationGetNeoPlanes = @"notification.getneoplanes";
 NSString *AGNotificationGetPlanes = @"notification.getplanes";
@@ -71,6 +72,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
     NSNumber *viewingPlaneId;
     //
     NSNumber *lastPlaneId;
+    BOOL updated;
 }
 @end
 
@@ -227,6 +229,7 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 - (void) gotNeoPlanes
 {
     lastPlaneId = nil;
+    updated = NO;
     [self getPlanes];
 }
 
@@ -235,21 +238,28 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 - (void) getPlanes
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    NSArray *neoPlaneIds = [controllerUtils.planeController getNeoPlaneIdsForUpdate:lastPlaneId];
+    NSArray *neoPlaneIds = [controllerUtils.planeController getNeoPlaneIdsForUpdate:lastPlaneId updated:updated];
     if (neoPlaneIds.count) {
         lastPlaneId = neoPlaneIds.lastObject;
         [self getPlanesForNeoPlaneIds:neoPlaneIds];
     }
     else{
         lastPlaneId = nil;
-        [self obtainMessages];
+        if (updated == NO) {
+            updated = YES;
+            [self getPlanes];
+        }
+        else{
+            [self obtainMessages];
+        }
+    
     }
 }
 
 - (void) getPlanesForNeoPlaneIds:(NSArray*)neoPlaneIds
 {
     AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
-    NSDictionary *params = [planeManager paramsForGetPlanes:neoPlaneIds];
+    NSDictionary *params = [planeManager paramsForGetPlanes:neoPlaneIds updated:updated];
     [planeManager getPlanes:params context:nil block:^(NSError *error, id context, NSMutableDictionary *result, NSArray *planes) {
         if (error == nil) {
             BOOL obtained = NO;
@@ -331,6 +341,13 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
                 [controllerUtils.planeController updateMessage:plane];
                 //
                 [self obtainedMessages:messages forPlane:plane];
+                //update account when liked
+                for (AGMessage *message in messages) {
+                    if (message.type.intValue == AGMessageTypeLike) {
+                        [[AGAccountNotification accountNotification] obtainHotForMe];
+                        break;
+                    }
+                }
             }
             
             NSNumber *more = [result objectForKey:@"more"];
@@ -591,8 +608,8 @@ NSString *AGNotificationViewingMessagesForPlane = @"notification.viewingMessages
 
 - (BOOL) clearPlane:(AGPlane*)plane clearMsgId:(NSNumber*)clearMsgId
 {
-    BOOL cleared;
-    if ((cleared = [[AGControllerUtils controllerUtils].messageController clearPlane:plane clearMsgId:clearMsgId])) {
+    BOOL cleared = NO;
+    if (clearMsgId && (cleared = [[AGControllerUtils controllerUtils].messageController clearPlane:plane clearMsgId:clearMsgId])) {
         [self gotMessagesForPlane:plane.planeId startId:nil];
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:plane.planeId, @"planeId", nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationUnreadMessagesChangedForPlane object:nil userInfo:dict];

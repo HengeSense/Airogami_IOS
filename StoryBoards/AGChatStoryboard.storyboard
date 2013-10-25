@@ -51,15 +51,20 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="I will come in half an hour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sx6-Z7-5Gw">
-                                            <rect key="frame" x="70" y="32" width="228" height="21"/>
+                                            <rect key="frame" x="70" y="32" width="204" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                             <color key="textColor" red="0.63921568630000003" green="0.74901960779999999" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_plane_liked.png" id="ztH-aa-bqt">
+                                            <rect key="frame" x="288" y="44" width="14" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="likedImageView" destination="ztH-aa-bqt" id="clW-xW-ECz"/>
                                     <outlet property="messageLabel" destination="Sx6-Z7-5Gw" id="Eh7-fY-ZuF"/>
                                     <outlet property="nameLabel" destination="l1w-W7-xat" id="GZQ-lP-R1u"/>
                                     <outlet property="profileImageView" destination="R0z-pT-wLs" id="u8X-hn-PyD"/>
@@ -470,6 +475,7 @@
         <image name="back_button.png" width="59" height="30"/>
         <image name="chat_chat_erase.png" width="23" height="26"/>
         <image name="chat_chat_unliked.png" width="29" height="29"/>
+        <image name="chat_plane_liked.png" width="14" height="14"/>
         <image name="profile_description_icon.png" width="20" height="16"/>
         <image name="profile_image_default.png" width="256" height="256"/>
         <image name="profile_location_icon.png" width="14" height="21"/>

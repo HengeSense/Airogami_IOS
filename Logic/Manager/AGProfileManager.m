@@ -21,6 +21,7 @@
 
 static NSString *EditProfilePath = @"account/editProfile.action?";
 static NSString *ObtainProfilePath= @"account/obtainProfile.action?";
+static NSString *ObtainHotPath= @"account/obtainHot.action?";
 
 
 @implementation AGProfileManager
@@ -174,6 +175,35 @@ static NSString *ObtainProfilePath= @"account/obtainProfile.action?";
 }
 
 - (NSDictionary*) paramsForObtainProfile:(NSNumber*)accountId updateCount:(NSNumber*)updateCount
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:accountId forKey:@"accountId"];
+    if(updateCount){
+        [params setObject:updateCount forKey:@"updateCount"];
+    }
+    return params;
+}
+
+- (void) obtainHot:(NSDictionary *)params context:(id)context block:(AGHttpSucceedBlock)block
+{
+    [AGJSONHttpHandler request:YES params:params path:ObtainHotPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        BOOL succeed = NO;
+        if (error) {
+            
+        }
+        else{
+            NSDictionary *hotJson = [result objectForKey:@"hot"];
+            AGHot *hot = [[AGControllerUtils controllerUtils].accountController saveHot:hotJson];
+            succeed = hot != nil;
+            
+        }
+        if (block) {
+            block(error, context, succeed);
+        }
+    }];
+}
+
+- (NSDictionary*) paramsForObtainHot:(NSNumber*)accountId updateCount:(NSNumber*)updateCount
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     [params setObject:accountId forKey:@"accountId"];

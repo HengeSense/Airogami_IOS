@@ -231,12 +231,14 @@ static const int DeleteLimit = 100;
     [coreData save];
 }
 
-- (NSArray*) getNeoChainIdsForUpdate:(NSNumber*)lastChainId
+#pragma mark - neoChain
+
+- (NSArray*) getNeoChainIdsForUpdate:(NSNumber*)lastChainId updated:(BOOL)updated
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoChainEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(chain == nil || updateCount > chain.updateCount) && (%@ == nil || chainId > %@)", lastChainId, lastChainId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"((%d == 0 && chain == nil) || (%d != 0 && chain != nil && updateCount > chain.updateCount)) && (%@ == nil || chainId > %@)",updated, updated, lastChainId, lastChainId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"chainId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -260,7 +262,7 @@ static const int DeleteLimit = 100;
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoChainEntityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain != nil && (%@ == nil || chainId > %@) && updateCount <= chain.updateCount", lastChainId, lastChainId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"chain != nil && (%@ == nil || chainId > %@) && updateCount <= chain.updateCount && (chain.chainMessage == nil || updatedTime > chain.chainMessage.createdTime)", lastChainId, lastChainId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"chainId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
@@ -280,12 +282,12 @@ static const int DeleteLimit = 100;
     long long count = accountStat.chainUpdateInc.longLongValue;
     for (AGChain *chain in chains) {
         ++count;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
-        [dict setObject:chain.chainId forKey:@"chainId"];
-        [dict setObject:chain.updateCount forKey:@"updateCount"];
-        [dict setObject:[NSNumber numberWithLongLong:count] forKey:@"updateInc"];
-        AGNeoChain *neoChain = (AGNeoChain *)[coreData saveOrUpdate:dict withEntityName:@"AGNeoChain"];
+        AGNeoChain *neoChain = (AGNeoChain *)[coreData create:[AGNeoChain class]];
         neoChain.chain = chain;
+        neoChain.chainId = chain.chainId;
+        neoChain.updateCount = chain.updateCount;
+        neoChain.updatedTime = chain.updatedTime;
+        neoChain.updateInc = [NSNumber numberWithLongLong:count];
     }
     accountStat.chainUpdateInc = [NSNumber numberWithLongLong:count];
     [coreData save];

@@ -2,7 +2,7 @@
 //  AGAccount.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/23/13.
+//  Created by Tianhu Yang on 10/24/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -19,12 +19,12 @@
 @property (nonatomic, retain) AGAuthenticate *authenticate;
 @property (nonatomic, retain) NSSet *chainMessages;
 @property (nonatomic, retain) NSSet *chains;
+@property (nonatomic, retain) AGHot *hot;
 @property (nonatomic, retain) NSSet *messages;
 @property (nonatomic, retain) AGNeoAccount *neoAccount;
 @property (nonatomic, retain) NSSet *planesForOwnerId;
 @property (nonatomic, retain) NSSet *planesForTargetId;
 @property (nonatomic, retain) AGProfile *profile;
-@property (nonatomic, retain) AGHot *hot;
 @end
 
 @interface AGAccount (CoreDataGeneratedAccessors)

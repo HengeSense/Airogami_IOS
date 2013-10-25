@@ -44,17 +44,6 @@ static const int ChainMessageLimit = 10;
     return chainMessage;
 }
 
-- (AGChainMessage*) updateChainMessage:(NSDictionary*)jsonDictionary forChain:(AGChain*)chain
-{
-    AGChainMessage *chainMessage = (AGChainMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGChainMessage"];
-    if (chainMessage) {
-        chainMessage.chain = chain;
-        //chain.collected = [NSNumber numberWithBool:chainMessage.status.intValue == AGChainMessageStatusNew];
-    }
-    [coreData save];
-    return chainMessage;
-}
-
 - (AGChainMessage*) saveChainMessage:(NSDictionary*)jsonDictionary
 {
     AGChainMessage *chainMessage = (AGChainMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGChainMessage"];

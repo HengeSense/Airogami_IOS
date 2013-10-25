@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *AGNotificationObtainAccounts;
-extern NSString *AGNotificationObtainAccount;
+extern NSString *AGNotificationObtainProfiles;
+extern NSString *AGNotificationObtainHots;
 extern NSString *AGNotificationProfileChanged;
+extern NSString *AGNotificationHotChanged;
 extern NSString *AGNotificationGetPoints;
 extern NSString *AGNotificationGotPoints;
 
@@ -19,6 +21,8 @@ extern NSString *AGNotificationGotPoints;
 +(AGAccountNotification*) accountNotification;
 
 -(void) reset;
+- (void) obtainAccountsForAccounts:(NSArray*)accounts;
+- (void) obtainHotForMe;
 -(void) increaseLikesCount:(int) count;
 
 @end

@@ -2,14 +2,13 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AGAccount" representedClassName="AGAccount" syncable="YES">
         <attribute name="accountId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="-1" syncable="YES"/>
         <relationship name="accountStat" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGAccountStat" inverseName="account" inverseEntity="AGAccountStat" syncable="YES"/>
         <relationship name="authenticate" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAuthenticate" inverseName="account" inverseEntity="AGAuthenticate" syncable="YES"/>
         <relationship name="chainMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChainMessage" inverseName="account" inverseEntity="AGChainMessage" syncable="YES"/>
         <relationship name="chains" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGChain" inverseName="account" inverseEntity="AGChain" syncable="YES"/>
         <relationship name="hot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGHot" inverseName="account" inverseEntity="AGHot" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGMessage" inverseName="account" inverseEntity="AGMessage" syncable="YES"/>
-        <relationship name="neoAccount" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNeoAccount" inverseName="account" inverseEntity="AGNeoAccount" syncable="YES"/>
         <relationship name="planesForOwnerId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByOwnerId" inverseEntity="AGPlane" syncable="YES"/>
         <relationship name="planesForTargetId" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AGPlane" inverseName="accountByTargetId" inverseEntity="AGPlane" syncable="YES"/>
         <relationship name="profile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGProfile" inverseName="account" inverseEntity="AGProfile" syncable="YES"/>
@@ -118,6 +117,7 @@
         <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="hot" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="neoHot" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNeoHot" inverseName="hot" inverseEntity="AGNeoHot" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="accountId"/>
         </userInfo>
@@ -135,21 +135,22 @@
             <entry key="IdKey" value="messageId"/>
         </userInfo>
     </entity>
-    <entity name="AGNeoAccount" representedClassName="AGNeoAccount" syncable="YES">
-        <attribute name="accountId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
-        <attribute name="updateCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="neoAccount" inverseEntity="AGAccount" syncable="YES"/>
-        <userInfo>
-            <entry key="IdKey" value="accountId"/>
-        </userInfo>
-    </entity>
     <entity name="AGNeoChain" representedClassName="AGNeoChain" syncable="YES">
         <attribute name="chainId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="updateCount" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <attribute name="updatedTime" attributeType="Date" syncable="YES"/>
         <attribute name="updateInc" attributeType="Integer 64" indexed="YES" syncable="YES"/>
         <relationship name="chain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGChain" inverseName="neoChain" inverseEntity="AGChain" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="chainId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGNeoHot" representedClassName="AGNeoHot" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="count" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="hot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGHot" inverseName="neoHot" inverseEntity="AGHot" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
         </userInfo>
     </entity>
     <entity name="AGNeoPlane" representedClassName="AGNeoPlane" syncable="YES">
@@ -162,6 +163,14 @@
         <relationship name="plane" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGPlane" inverseName="neoPlane" inverseEntity="AGPlane" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="planeId"/>
+        </userInfo>
+    </entity>
+    <entity name="AGNeoProfile" representedClassName="AGNeoProfile" syncable="YES">
+        <attribute name="accountId" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="count" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="profile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AGProfile" inverseName="neoProfile" inverseEntity="AGProfile" syncable="YES"/>
+        <userInfo>
+            <entry key="IdKey" value="accountId"/>
         </userInfo>
     </entity>
     <entity name="AGPlane" representedClassName="AGPlane" syncable="YES">
@@ -223,6 +232,7 @@
         <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updateCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="account" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AGAccount" inverseName="profile" inverseEntity="AGAccount" syncable="YES"/>
+        <relationship name="neoProfile" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="AGNeoProfile" inverseName="profile" inverseEntity="AGNeoProfile" syncable="YES"/>
         <userInfo>
             <entry key="IdKey" value="accountId"/>
         </userInfo>
@@ -235,12 +245,13 @@
         <element name="AGChain" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGChainMessage" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGChainMessageId" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGHot" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGMessage" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGNeoAccount" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGNeoChain" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGNeoPlane" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGPlane" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGProfile" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGHot" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGNeoProfile" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGNeoHot" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

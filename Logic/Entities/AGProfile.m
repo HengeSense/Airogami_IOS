@@ -2,12 +2,13 @@
 //  AGProfile.m
 //  Airogami
 //
-//  Created by Tianhu Yang on 10/23/13.
+//  Created by Tianhu Yang on 10/24/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
 #import "AGProfile.h"
 #import "AGAccount.h"
+#import "AGNeoProfile.h"
 
 
 @implementation AGProfile
@@ -27,5 +28,6 @@
 @dynamic status;
 @dynamic updateCount;
 @dynamic account;
+@dynamic neoProfile;
 
 @end

@@ -38,6 +38,7 @@ static NSString *SmileText = @"text.ui.smile";
 
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 
+
 @end
 
 @implementation AGChatPlaneViewController
@@ -288,7 +289,8 @@ static NSString *SmileText = @"text.ui.smile";
         else{
             cell.messageLabel.text = message.content;
         }
-        
+        //cell.likedImageView.hidden = NO;
+        cell.likedImageView.hidden = ![plane isLiked];
         //count = [[AGControllerUtils controllerUtils].messageController getUnreadMessageCountForPlane:plane.planeId];
         count = plane.unreadMessagesCount.intValue;
     }

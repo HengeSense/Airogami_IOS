@@ -1,8 +1,8 @@
 //
-//  AGNewChain.h
+//  AGNeoChain.h
 //  Airogami
 //
-//  Created by Tianhu Yang on 9/25/13.
+//  Created by Tianhu Yang on 10/24/13.
 //  Copyright (c) 2013 Airogami. All rights reserved.
 //
 
@@ -14,8 +14,9 @@
 @interface AGNeoChain : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * chainId;
-@property (nonatomic, retain) NSNumber * updateInc;
 @property (nonatomic, retain) NSNumber * updateCount;
+@property (nonatomic, retain) NSNumber * updateInc;
+@property (nonatomic, retain) NSDate * updatedTime;
 @property (nonatomic, retain) AGChain *chain;
 
 @end

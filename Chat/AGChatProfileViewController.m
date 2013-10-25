@@ -50,9 +50,10 @@
     //
     [self initData];
     //
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:account forKey:@"account"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccount object:self userInfo:dict];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSArray arrayWithObject:account.accountId] forKey:@"accountIds"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileChanged:) name:AGNotificationProfileChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hotChanged:) name:AGNotificationHotChanged object:nil];
     //
     //[account.profile addObserver:self forKeyPath:<#(NSString *)#> options:<#(NSKeyValueObservingOptions)#> context:<#(void *)#>]
 }
@@ -87,6 +88,14 @@
 }
 
 - (void)profileChanged:(NSNotification*)notification
+{
+    NSNumber *accountId = [notification.userInfo objectForKey:@"accountId"];
+    if ([accountId isEqualToNumber:account.accountId]) {
+        [self initData];
+    }
+}
+
+- (void)hotChanged:(NSNotification*)notification
 {
     NSNumber *accountId = [notification.userInfo objectForKey:@"accountId"];
     if ([accountId isEqualToNumber:account.accountId]) {

@@ -232,11 +232,7 @@ static NSString *SigninOut = @"error.account.signin.out";
                         AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
                         if (automatic) {
                             NSArray *changedAccounts = [coreData unregisterObserver];
-                            if (changedAccounts.count) {
-                                [accountController addNeoAccounts:changedAccounts];
-                                NSDictionary *dict = [NSDictionary dictionary];
-                                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
-                            }
+                            [[AGAccountNotification accountNotification] obtainAccountsForAccounts:changedAccounts];
                         }
                         else{
                             [appConfig updateAppAccount:appDirector.account password:password];

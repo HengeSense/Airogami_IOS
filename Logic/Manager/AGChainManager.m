@@ -178,12 +178,7 @@ static NSString *ViewedChainMessagesPath = @"chain/viewedChainMessages.action?";
             [coreData registerObserverForEntityName:@"AGAccount" forKey:@"updateCount" count:chainsJson.count];
             chains = [[AGControllerUtils controllerUtils].chainController saveChains:chainsJson];
             NSArray *changedAccounts = [coreData unregisterObserver];
-            if (changedAccounts.count) {
-                AGAccountController *accountController = [AGControllerUtils controllerUtils].accountController;
-                [accountController addNeoAccounts:changedAccounts];
-                NSDictionary *dict = [NSDictionary dictionary];
-                [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationObtainAccounts object:self userInfo:dict];
-            }
+            [[AGAccountNotification accountNotification] obtainAccountsForAccounts:changedAccounts];
         }
         if (block) {
             block(error, context, result, chains);

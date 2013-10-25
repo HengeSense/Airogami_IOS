@@ -357,13 +357,13 @@ static const int DeleteLimit = 100;
     return array;
 }
 
-- (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId
+- (NSArray*) getNeoPlaneIdsForUpdate:(NSNumber*)lastPlaneId updated:(BOOL)updated
 {
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:neoPlaneEntityDescription];
     [fetchRequest setResultType:NSDictionaryResultType];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(plane == nil || updateCount > plane.updateCount) && (%@ == nil || planeId > %@)", lastPlaneId, lastPlaneId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"((%d == 0 && plane == nil) || (%d != 0 && plane != nil && updateCount > plane.updateCount)) && (%@ == nil || planeId > %@)", updated, updated, lastPlaneId, lastPlaneId];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"planeId" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];

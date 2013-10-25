@@ -14,8 +14,6 @@
 
 - (AGChainMessage*) saveChainMessage:(NSDictionary*)jsonDictionary;
 - (AGChainMessage*) saveChainMessage:(NSDictionary*)jsonDictionary forChain:(AGChain*)chain;
-//update chain.collected
-- (AGChainMessage*) updateChainMessage:(NSDictionary*)jsonDictionary forChain:(AGChain*)chain;
 - (NSMutableArray*) saveChainMessages:(NSArray*)jsonArray chain:(AGChain*) chain;
 //descending
 - (NSDictionary*) getChainMessagesForChain:(NSNumber *)chainId startTime:(NSDate *)startTime;

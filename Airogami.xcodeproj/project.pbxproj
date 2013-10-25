@@ -34,7 +34,6 @@
 		0707238F175EA8670017292A /* AGSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707238E175EA8670017292A /* AGSignupViewController.m */; };
 		0707239D175EB75C0017292A /* signup_account_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0707239B175EB75C0017292A /* signup_account_normal@2x.png */; };
 		070BCC1117CC350400BB97B7 /* AGChainMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070BCC1017CC350400BB97B7 /* AGChainMessageController.m */; };
-		0716A0B917F3637700E95840 /* AGNeoChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0B817F3637700E95840 /* AGNeoChain.m */; };
 		0716A0CB17F6591500E95840 /* AGSynchronize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0CA17F6591400E95840 /* AGSynchronize.m */; };
 		0716A0D417F7759700E95840 /* AGViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0716A0D317F7759700E95840 /* AGViewManager.m */; };
 		0716A0D917F8AF6100E95840 /* collect_get_more_planes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0716A0D817F8AF6100E95840 /* collect_get_more_planes@2x.png */; };
@@ -45,7 +44,6 @@
 		0743FF9117DD0CA1005A9261 /* AGPlaneNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF8E17DD0CA1005A9261 /* AGPlaneNotification.m */; };
 		0743FF9417DD475F005A9261 /* AGAccountNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF9317DD475F005A9261 /* AGAccountNotification.m */; };
 		0743FF9717DD534C005A9261 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF9517DD534C005A9261 /* Model.xcdatamodeld */; };
-		0743FF9D17DD5958005A9261 /* AGNeoAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743FF9C17DD5958005A9261 /* AGNeoAccount.m */; };
 		074679D418160C97002FBACD /* AGChainMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679D318160C97002FBACD /* AGChainMessage.m */; };
 		074679D718160C98002FBACD /* AGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679D618160C98002FBACD /* AGMessage.m */; };
 		074679DA1816F395002FBACD /* AGLikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679D91816F395002FBACD /* AGLikeButton.m */; };
@@ -57,9 +55,13 @@
 		074679E7181844AC002FBACD /* AGPlane+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679E6181844AC002FBACD /* AGPlane+Addition.m */; };
 		074679E9181887B4002FBACD /* chat_chat_liked_others@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679E8181887B4002FBACD /* chat_chat_liked_others@2x.png */; };
 		074679EB18189812002FBACD /* chat_chat_liked_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074679EA18189812002FBACD /* chat_chat_liked_mine@2x.png */; };
-		074679EE1818ADB1002FBACD /* AGProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679ED1818ADB1002FBACD /* AGProfile.m */; };
-		074679F11818ADB2002FBACD /* AGHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679F01818ADB2002FBACD /* AGHot.m */; };
-		074679F41818ADB2002FBACD /* AGAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679F31818ADB2002FBACD /* AGAccount.m */; };
+		074679FA1819B429002FBACD /* AGNeoChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679F91819B429002FBACD /* AGNeoChain.m */; };
+		07467A001819C0A7002FBACD /* AGHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 074679FF1819C0A7002FBACD /* AGHot.m */; };
+		07467A091819C0A8002FBACD /* AGAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A081819C0A8002FBACD /* AGAccount.m */; };
+		07467A0C1819C0A8002FBACD /* AGProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A0B1819C0A8002FBACD /* AGProfile.m */; };
+		07467A0F1819D529002FBACD /* AGNeoHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A0E1819D529002FBACD /* AGNeoHot.m */; };
+		07467A121819D52A002FBACD /* AGNeoProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A111819D52A002FBACD /* AGNeoProfile.m */; };
+		07467A14181A04E5002FBACD /* chat_plane_liked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07467A13181A04E5002FBACD /* chat_plane_liked@2x.png */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
 		0750CF9017739146008E28F0 /* write_edit_female_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8A17739146008E28F0 /* write_edit_female_button@2x.png */; };
 		0750CF9117739146008E28F0 /* write_edit_location_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8B17739146008E28F0 /* write_edit_location_button@2x.png */; };
@@ -444,8 +446,6 @@
 		070723A1175EBB440017292A /* AGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGDefines.h; sourceTree = "<group>"; };
 		070BCC0F17CC350400BB97B7 /* AGChainMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGChainMessageController.h; sourceTree = "<group>"; };
 		070BCC1017CC350400BB97B7 /* AGChainMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGChainMessageController.m; sourceTree = "<group>"; };
-		0716A0B717F3637700E95840 /* AGNeoChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNeoChain.h; sourceTree = "<group>"; };
-		0716A0B817F3637700E95840 /* AGNeoChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNeoChain.m; sourceTree = "<group>"; };
 		0716A0C917F6591400E95840 /* AGSynchronize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSynchronize.h; sourceTree = "<group>"; };
 		0716A0CA17F6591400E95840 /* AGSynchronize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSynchronize.m; sourceTree = "<group>"; };
 		0716A0D217F7759700E95840 /* AGViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGViewManager.h; sourceTree = "<group>"; };
@@ -463,8 +463,6 @@
 		0743FF9217DD475F005A9261 /* AGAccountNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccountNotification.h; sourceTree = "<group>"; };
 		0743FF9317DD475F005A9261 /* AGAccountNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccountNotification.m; sourceTree = "<group>"; };
 		0743FF9617DD534C005A9261 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		0743FF9B17DD5958005A9261 /* AGNeoAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNeoAccount.h; sourceTree = "<group>"; };
-		0743FF9C17DD5958005A9261 /* AGNeoAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNeoAccount.m; sourceTree = "<group>"; };
 		07444996176F8727001CDFB2 /* YTTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTabBar.h; sourceTree = "<group>"; };
 		07444997176F8727001CDFB2 /* YTTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTabBar.m; sourceTree = "<group>"; };
 		07444998176F8727001CDFB2 /* YTTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTabBarController.h; sourceTree = "<group>"; };
@@ -486,12 +484,19 @@
 		074679E6181844AC002FBACD /* AGPlane+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGPlane+Addition.m"; sourceTree = "<group>"; };
 		074679E8181887B4002FBACD /* chat_chat_liked_others@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_liked_others@2x.png"; sourceTree = "<group>"; };
 		074679EA18189812002FBACD /* chat_chat_liked_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_liked_mine@2x.png"; sourceTree = "<group>"; };
-		074679EC1818ADB1002FBACD /* AGProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfile.h; sourceTree = "<group>"; };
-		074679ED1818ADB1002FBACD /* AGProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfile.m; sourceTree = "<group>"; };
-		074679EF1818ADB2002FBACD /* AGHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGHot.h; sourceTree = "<group>"; };
-		074679F01818ADB2002FBACD /* AGHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGHot.m; sourceTree = "<group>"; };
-		074679F21818ADB2002FBACD /* AGAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccount.h; sourceTree = "<group>"; };
-		074679F31818ADB2002FBACD /* AGAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccount.m; sourceTree = "<group>"; };
+		074679F81819B429002FBACD /* AGNeoChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNeoChain.h; sourceTree = "<group>"; };
+		074679F91819B429002FBACD /* AGNeoChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNeoChain.m; sourceTree = "<group>"; };
+		074679FE1819C0A7002FBACD /* AGHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGHot.h; sourceTree = "<group>"; };
+		074679FF1819C0A7002FBACD /* AGHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGHot.m; sourceTree = "<group>"; };
+		07467A071819C0A8002FBACD /* AGAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAccount.h; sourceTree = "<group>"; };
+		07467A081819C0A8002FBACD /* AGAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAccount.m; sourceTree = "<group>"; };
+		07467A0A1819C0A8002FBACD /* AGProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGProfile.h; sourceTree = "<group>"; };
+		07467A0B1819C0A8002FBACD /* AGProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGProfile.m; sourceTree = "<group>"; };
+		07467A0D1819D529002FBACD /* AGNeoHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNeoHot.h; sourceTree = "<group>"; };
+		07467A0E1819D529002FBACD /* AGNeoHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNeoHot.m; sourceTree = "<group>"; };
+		07467A101819D52A002FBACD /* AGNeoProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNeoProfile.h; sourceTree = "<group>"; };
+		07467A111819D52A002FBACD /* AGNeoProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGNeoProfile.m; sourceTree = "<group>"; };
+		07467A13181A04E5002FBACD /* chat_plane_liked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_plane_liked@2x.png"; sourceTree = "<group>"; };
 		0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_both_button@2x.png"; sourceTree = "<group>"; };
 		0750CF8A17739146008E28F0 /* write_edit_female_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_female_button@2x.png"; sourceTree = "<group>"; };
 		0750CF8B17739146008E28F0 /* write_edit_location_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_location_button@2x.png"; sourceTree = "<group>"; };
@@ -1309,10 +1314,6 @@
 				078DEE7517BD596F00A969A1 /* AGCategory.m */,
 				078DEE7D17BD59D900A969A1 /* AGAuthenticate.h */,
 				078DEE7E17BD59D900A969A1 /* AGAuthenticate.m */,
-				0743FF9B17DD5958005A9261 /* AGNeoAccount.h */,
-				0743FF9C17DD5958005A9261 /* AGNeoAccount.m */,
-				0716A0B717F3637700E95840 /* AGNeoChain.h */,
-				0716A0B817F3637700E95840 /* AGNeoChain.m */,
 				07B1052018033ADD000DD694 /* AGAccountStat.h */,
 				07B1052118033ADD000DD694 /* AGAccountStat.m */,
 				076EE5A618088A3A00E78F64 /* AGChain.h */,
@@ -1325,12 +1326,18 @@
 				074679D318160C97002FBACD /* AGChainMessage.m */,
 				074679D518160C98002FBACD /* AGMessage.h */,
 				074679D618160C98002FBACD /* AGMessage.m */,
-				074679EC1818ADB1002FBACD /* AGProfile.h */,
-				074679ED1818ADB1002FBACD /* AGProfile.m */,
-				074679F21818ADB2002FBACD /* AGAccount.h */,
-				074679F31818ADB2002FBACD /* AGAccount.m */,
-				074679EF1818ADB2002FBACD /* AGHot.h */,
-				074679F01818ADB2002FBACD /* AGHot.m */,
+				074679F81819B429002FBACD /* AGNeoChain.h */,
+				074679F91819B429002FBACD /* AGNeoChain.m */,
+				074679FE1819C0A7002FBACD /* AGHot.h */,
+				074679FF1819C0A7002FBACD /* AGHot.m */,
+				07467A071819C0A8002FBACD /* AGAccount.h */,
+				07467A081819C0A8002FBACD /* AGAccount.m */,
+				07467A0A1819C0A8002FBACD /* AGProfile.h */,
+				07467A0B1819C0A8002FBACD /* AGProfile.m */,
+				07467A0D1819D529002FBACD /* AGNeoHot.h */,
+				07467A0E1819D529002FBACD /* AGNeoHot.m */,
+				07467A101819D52A002FBACD /* AGNeoProfile.h */,
+				07467A111819D52A002FBACD /* AGNeoProfile.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1666,6 +1673,7 @@
 		07918465177E475600D28C0F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07467A13181A04E5002FBACD /* chat_plane_liked@2x.png */,
 				074679E8181887B4002FBACD /* chat_chat_liked_others@2x.png */,
 				074679DB1817508E002FBACD /* chat_chat_erase@2x.png */,
 				074679EA18189812002FBACD /* chat_chat_liked_mine@2x.png */,
@@ -2206,6 +2214,7 @@
 				078522A217875F0F00288D7C /* profile_location_button_highlight@2x.png in Resources */,
 				078522A317875F0F00288D7C /* profile_location_button@2x.png in Resources */,
 				078522A417875F0F00288D7C /* profile_password_icon_box_highlight@2x.png in Resources */,
+				07467A14181A04E5002FBACD /* chat_plane_liked@2x.png in Resources */,
 				078522A517875F0F00288D7C /* profile_password_icon_box@2x.png in Resources */,
 				078522A917875FA900288D7C /* profile_password_email@2x.png in Resources */,
 				078522B21787A23F00288D7C /* AGCommonStoryboard.storyboard in Resources */,
@@ -2284,7 +2293,6 @@
 				079F8187176BEC9A004234D0 /* AGDefines.m in Sources */,
 				078A1F64176CE4C400A69AE3 /* AGRootViewController.m in Sources */,
 				078A1F81176CF3A000A69AE3 /* AGSignViewController.m in Sources */,
-				074679EE1818ADB1002FBACD /* AGProfile.m in Sources */,
 				078A1F8A176CFA4000A69AE3 /* AGTabBarViewController.m in Sources */,
 				078A1FD5176D355C00A69AE3 /* DCRoundSwitch.m in Sources */,
 				078A1FD6176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m in Sources */,
@@ -2294,7 +2302,6 @@
 				078A1FDE176D355C00A69AE3 /* SPGooglePlacesAutocompletePlace.m in Sources */,
 				078A1FDF176D355C00A69AE3 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
 				07B1052218033ADD000DD694 /* AGAccountStat.m in Sources */,
-				074679F11818ADB2002FBACD /* AGHot.m in Sources */,
 				078A1FE0176D355C00A69AE3 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				078A1FE1176D355C00A69AE3 /* SPGooglePlacesAutocompleteViewController.m in Sources */,
 				078A1FE3176D355C00A69AE3 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
@@ -2319,12 +2326,14 @@
 				074679D718160C98002FBACD /* AGMessage.m in Sources */,
 				07918459177E3C0D00D28C0F /* UIBubbleTableView.m in Sources */,
 				0791845A177E3C0D00D28C0F /* UIBubbleTableViewCell.m in Sources */,
+				07467A091819C0A8002FBACD /* AGAccount.m in Sources */,
 				0791845B177E3C0D00D28C0F /* UIBubbleTypingTableViewCell.m in Sources */,
 				07918468177E4A7300D28C0F /* AGChatChatViewController.m in Sources */,
 				0791846B177E4B1F00D28C0F /* AGChatPlaneViewController.m in Sources */,
 				076EE5A818088A3A00E78F64 /* AGChain.m in Sources */,
 				07918495177E5B9400D28C0F /* AGSlideSegue.m in Sources */,
 				07918496177E5B9400D28C0F /* AGUIDefines.m in Sources */,
+				07467A0F1819D529002FBACD /* AGNeoHot.m in Sources */,
 				07918498177E5B9400D28C0F /* AGUIUtils.m in Sources */,
 				078E9AB1177F8212006D7059 /* AGChatKeyboardScroll.m in Sources */,
 				078E9AB2177F8212006D7059 /* AGKeyboardResize.m in Sources */,
@@ -2333,6 +2342,7 @@
 				0792A308178376670057197F /* AGBubbleCellStateButton.m in Sources */,
 				078522551784B12500288D7C /* AGChatPlaneCell.m in Sources */,
 				078522581784B40A00288D7C /* AGCollectPlaneNumberView.m in Sources */,
+				07467A0C1819C0A8002FBACD /* AGProfile.m in Sources */,
 				0785225B1784C4FE00288D7C /* AGCollectPlanePickupView.m in Sources */,
 				07B1051817FCB8C7000DD694 /* AGWaitView.m in Sources */,
 				0785225E1784D25B00288D7C /* CALayer+Pause.m in Sources */,
@@ -2344,6 +2354,7 @@
 				079C099B1788DC610067FED1 /* AGSettingProfilePasswordViewController.m in Sources */,
 				078A5C65178B722C000FB7FF /* AGChatProfileViewController.m in Sources */,
 				078A5C76178B95B1000FB7FF /* AGImageButton.m in Sources */,
+				07467A001819C0A7002FBACD /* AGHot.m in Sources */,
 				078A5C77178B95B1000FB7FF /* AGPhotoView.m in Sources */,
 				074679E7181844AC002FBACD /* AGPlane+Addition.m in Sources */,
 				078A5C78178B95B1000FB7FF /* AGProfileImageButton.m in Sources */,
@@ -2361,6 +2372,7 @@
 				076B15D217B088C1005BD910 /* AGProfileManager.m in Sources */,
 				076B15D317B088C1005BD910 /* AGCoreData.m in Sources */,
 				076B15D417B088C1005BD910 /* AGDownloadHttpHandler.m in Sources */,
+				07467A121819D52A002FBACD /* AGNeoProfile.m in Sources */,
 				076B15D517B088C1005BD910 /* AGJSONHttpHandler.m in Sources */,
 				076B15D617B088C1005BD910 /* AGUploadHttpHandler.m in Sources */,
 				076B15D717B088C1005BD910 /* AGURLConnection.m in Sources */,
@@ -2388,6 +2400,7 @@
 				078DEE7617BD596F00A969A1 /* AGCategory.m in Sources */,
 				078DEE7C17BD596F00A969A1 /* AGChainMessageId.m in Sources */,
 				078DEE7F17BD59D900A969A1 /* AGAuthenticate.m in Sources */,
+				074679FA1819B429002FBACD /* AGNeoChain.m in Sources */,
 				078DEE8417BECAFF00A969A1 /* AGMessageController.m in Sources */,
 				078DEE8A17BEE7EE00A969A1 /* AGNumber.m in Sources */,
 				078DEE9917C2B2C700A969A1 /* CJSONDeserializer.m in Sources */,
@@ -2402,10 +2415,7 @@
 				0743FF9117DD0CA1005A9261 /* AGPlaneNotification.m in Sources */,
 				0743FF9417DD475F005A9261 /* AGAccountNotification.m in Sources */,
 				0743FF9717DD534C005A9261 /* Model.xcdatamodeld in Sources */,
-				0743FF9D17DD5958005A9261 /* AGNeoAccount.m in Sources */,
-				074679F41818ADB2002FBACD /* AGAccount.m in Sources */,
 				07C489A517E2390A00DB605F /* AGAudioManager.m in Sources */,
-				0716A0B917F3637700E95840 /* AGNeoChain.m in Sources */,
 				0716A0CB17F6591500E95840 /* AGSynchronize.m in Sources */,
 				0716A0D417F7759700E95840 /* AGViewManager.m in Sources */,
 				07B1051A17FCB8C7000DD694 /* UIView+Addition.m in Sources */,

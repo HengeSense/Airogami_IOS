@@ -46,7 +46,7 @@ typedef void (^AGGetPlanesBlock)(NSError *error, id context, NSMutableDictionary
 
 - (NSDictionary*)paramsForGetNeoPlane:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
 
-- (NSDictionary*)paramsForGetPlanes:(NSArray*)planeIds;
+- (NSDictionary*)paramsForGetPlanes:(NSArray*)planeIds updated:(BOOL)updated;
 
 - (NSDictionary*)paramsForGetOldPlanes:(NSNumber*)start end:(NSNumber*)end limit:(NSNumber*)limit;
 

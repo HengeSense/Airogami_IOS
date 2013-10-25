@@ -61,6 +61,8 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     NSNumber *viewingChainId;
     //
     NSNumber *lastChainId;
+    BOOL updated;
+    BOOL obtainChainMessageOnly;
 }
 
 @end
@@ -96,6 +98,7 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         /*chainMessageMutex = [NSNumber numberWithBool:YES];
         getNeoChainMutex = [NSNumber numberWithBool:YES];
         getChainsMutex = [NSNumber numberWithBool:YES];*/
+        obtainChainMessageOnly = NO;
         updateMutex = [NSNumber numberWithBool:YES];
         viewChainMessageMutex = [NSNumber numberWithBool:YES];
         
@@ -195,14 +198,21 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
 - (void) getChains
 {
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
-    NSArray *neoChainIds = [controllerUtils.chainController getNeoChainIdsForUpdate:lastChainId];
+    NSArray *neoChainIds = [controllerUtils.chainController getNeoChainIdsForUpdate:lastChainId updated:updated];
     if (neoChainIds.count) {
         lastChainId = neoChainIds.lastObject;
         [self getChainsForNeoChainIds:neoChainIds];
     }
     else{
         lastChainId = nil;
-        [self obtainChainMessages];
+        if (updated) {
+            [self obtainChainMessages];
+        }
+        else{
+            updated = YES;
+            [self getChains];
+        }
+        
     }
 }
 
@@ -234,6 +244,7 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
     @synchronized(updateMutex){
         if (gettingUpdates) {
             moreUpdates = YES;
+            obtainChainMessageOnly = YES;
         }
         else{
             gettingUpdates = YES;
@@ -259,17 +270,28 @@ NSString *AGNotificationUnreadChainMessagesChangedForChain = @"notification.unre
         [[AGControllerUtils controllerUtils].chainController removeAllNeoChains];
         //whether has more
         BOOL shouldGet = NO;
+        BOOL forChainMessageOnly = NO;
         @synchronized(updateMutex){
             if (moreUpdates) {
                 moreUpdates = NO;
                 shouldGet = YES;
+                if (obtainChainMessageOnly) {
+                    obtainChainMessageOnly = NO;
+                    forChainMessageOnly = YES;
+                }
             }
             else{
                 gettingUpdates = NO;
             }
         }
         if (shouldGet) {
-            [self getNeoChains];
+            if (forChainMessageOnly) {
+                [self obtainChainMessages];
+            }
+            else{
+                [self getNeoChains];
+            }
+            
         }
     }
 }
