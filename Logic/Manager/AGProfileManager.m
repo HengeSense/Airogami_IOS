@@ -66,7 +66,7 @@ static NSString *ObtainHotPath= @"account/obtainHot.action?";
         [dict setObject:block forKey:@"Block"];
     }
     
-    [[AGUploadHttpHandler handler] uploadImage:image params:params context:dict block:^(NSError *error, id dict) {
+    [[AGUploadHttpHandler handler] uploadData:UIImageJPEGRepresentation(image, 1.0) type:AGContentTypeImage params:params context:dict block:^(NSError *error, id dict) {
         
         if (error) {
 #ifdef IS_DEBUG
@@ -108,8 +108,7 @@ static NSString *ObtainHotPath= @"account/obtainHot.action?";
                 //[params removeObjectForKey:@"tokens"];
                 NSString *tokensString = [result objectForKey:@"tokens"];
                 if (tokensString && [tokensString isEqual:[NSNull null]] == NO) {
-                    result = [NSJSONSerialization JSONObjectWithData:[tokensString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-                    NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
+                    NSMutableDictionary *tokens = [NSJSONSerialization JSONObjectWithData:[tokensString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                     if (tokens && [tokens isEqual:[NSNull null]] == NO) {
                         [self uploadIcons:tokens image:image context:context block:^(NSError *error, id context) {
                             BOOL imageDone = NO;

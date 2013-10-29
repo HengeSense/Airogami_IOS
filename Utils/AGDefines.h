@@ -21,12 +21,27 @@ typedef enum{
     AGCategoryUnknown
 } AGPlaneCategoryEnum;
 
+//content type
+typedef enum{
+    AGContentTypeAudio = 12,
+    AGContentTypeImage = 13
+}AGContentTypeEnum;
+
 typedef enum{
     AGMessageTypeLike = 10,
     AGMessageTypeText,
-    AGMessageTypeAudio,
-    AGMessageTypeImage,
+    AGMessageTypeAudio = AGContentTypeAudio,
+    AGMessageTypeImage = AGContentTypeImage,
 } AGMessageTypeEnum;
+
+typedef enum
+{
+    AGSendStateNone = -2,
+    AGSendStateSending = -1,
+    AGSendStateSent = 0,
+    AGSendStateFailed = 1,
+    AGSendStateRead = 2
+} AGSendStateEnum;
 
 typedef enum{
     AGPlaneStatusNew = 0,
@@ -97,6 +112,7 @@ extern  NSString * AGLogicJSONSucceedKey;
 extern  NSString * AGLogicJSONErrorKey;
 extern  NSString * AGLogicJSONAccountStatLeftKey;
 extern  NSString * AGLogicJSONNoneValue;
+extern  NSString * AGLogicJSONDataValue;
 
 extern  NSString * AGLogicAccountEmailKey;
 extern  NSString * AGLogicAccountPasswordKey;

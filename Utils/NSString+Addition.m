@@ -42,4 +42,21 @@
     CFRelease(encodedString);
     return component;
 }
+
+- (NSString*) reverseString
+{
+    int len = self.length;
+    
+    // auto released string
+    NSMutableString * reversedStr = [NSMutableString stringWithCapacity:len];
+    
+    // quick-and-dirty implementation
+    while ( len > 0 )
+    {
+        [reversedStr appendString:[NSString stringWithFormat:@"%C", [self characterAtIndex:--len]]];
+    }
+    
+    return reversedStr;
+}
+
 @end

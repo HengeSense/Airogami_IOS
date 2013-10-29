@@ -170,6 +170,16 @@
                                                     <action selector="clearButton:" destination="JCF-y5-YuP" eventType="touchUpInside" id="Qdk-OW-JgY"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="310-J8-FXP">
+                                                <rect key="frame" x="214" y="7" width="46" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Image">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addImage:" destination="JCF-y5-YuP" eventType="touchUpInside" id="qaz-LI-QKU"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </view>
                                 </subviews>

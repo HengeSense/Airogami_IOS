@@ -22,6 +22,7 @@
 #import "AGMessageUtils.h"
 #import "AGLikeButton.h"
 #import "AGPlane+Addition.h"
+#import "AGImagePicker.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kAGChatChatMessageMaxLength AGAccountMessageContentMaxLength
@@ -31,11 +32,13 @@ static float AGInputTextViewMaxHeight = 100;
 static NSString * ClearConfirm = @"message.ui.clear.confirm";
 static NSString * OK = @"message.general.ok";
 static NSString * Cancel = @"message.general.cancel";
+static NSString * ResendConfirm = @"title.ui.chat.resend.confirm";
 
 static NSString * LikedByOthersImage = @"chat_chat_liked_others.png";
 static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
+static int ResendTag = 1;
 
-@interface AGChatChatViewController()<UIAlertViewDelegate>
+@interface AGChatChatViewController()<UIAlertViewDelegate, UIActionSheetDelegate, AGImagePickerDelegate>
 {
     __weak IBOutlet UIBubbleTableView *bubbleTable;
     __weak IBOutlet UIView *textInputView;
@@ -54,6 +57,7 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     NSBubbleData *selectedBubbleData;
     
     BOOL didInitialized;
+    AGImagePicker *imagePicker;
 }
 
 @end
@@ -279,9 +283,9 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     //
     for (NSBubbleData *bubbleData in messagesData) {
         AGMessage *message = bubbleData.obj;
-        if (message.state.intValue == BubbleCellStateSent) {
+        if (message.state.intValue == AGSendStateSent) {
             if (message.messageId.longLongValue <= message.plane.lastMsgId.longLongValue) {
-                bubbleData.state = BubbleCellStateSentRead;
+                bubbleData.state = AGSendStateRead;
             }
         }
         else{
@@ -333,9 +337,9 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
         }
         
         bubbleData.account = message.account;
-        if (message.state.intValue == BubbleCellStateSent) {
+        if (message.state.intValue == AGSendStateSent) {
             if (message.messageId.longLongValue <= message.plane.lastMsgId.longLongValue) {
-                bubbleData.state = BubbleCellStateSentRead;
+                bubbleData.state = AGSendStateRead;
             }
         }
         else{
@@ -401,7 +405,7 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
         }
         NSBubbleData *bubbleData = [NSBubbleData dataWithText:chainMessage.content date:chainMessage.createdTime type:bubbleType];
         bubbleData.account = chainMessage.account;
-        bubbleData.state = BubbleCellStateNone;
+        bubbleData.state = AGSendStateNone;
         bubbleData.obj = chainMessage;
         [array addObject:bubbleData];
     }
@@ -545,11 +549,17 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
 - (void)bubbleTableView:(UIBubbleTableView *)tableView didSelectCellAtIndexPath:(NSIndexPath*)indexPath bubbleData:(NSBubbleData*)bubbleData type:(UIBubbleTableViewCellSelectType) type
 {
     selectedBubbleData = bubbleData;
+    UIActionSheet *actionSheet = nil;
     switch (type) {
         case UIBubbleCellSelectAvatar:
             [self performSegueWithIdentifier:@"ToProfile" sender:self];
             break;
-            
+        case UIBubbleCellSelectSendFailed:
+            //
+            actionSheet = [[UIActionSheet alloc] initWithTitle:AGLS(ResendConfirm) delegate:self cancelButtonTitle:AGLS(Cancel) destructiveButtonTitle:nil otherButtonTitles:AGLS(OK), nil];
+            actionSheet.tag = ResendTag;
+            [actionSheet showInView:self.view];
+            break;
         default:
             break;
     }
@@ -570,18 +580,6 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     [messagesData addObject:sayBubble];
     [bubbleTable setData:UIBubbleTableSetDataActionAppend animated:didInitialized];
     [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSendMessages object:nil userInfo:nil];
-    //
-    /*[managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *message,BOOL refresh) {
-        if (message) {
-            sayBubble.state = BubbleCellStateSent;
-            sayBubble.date = message.createdTime;
-            [bubbleTable reloadData];
-        }
-        if (refresh) {
-            
-        }
-        
-    }];*/
     
 }
 
@@ -606,18 +604,52 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
             for (NSBubbleData *bubbleData in messagesData) {
                 AGMessage *msg = bubbleData.obj;
                 if ([msg isEqual:message]) {
-                    bubbleData.state = remoteMessage.state.shortValue;
-                    bubbleData.date = remoteMessage.createdTime;
-                    bubbleData.obj = remoteMessage;
-                    [bubbleTable setData:UIBubbleTableSetDataActionReset animated:NO];
-                    //
-                    [[AGManagerUtils managerUtils].audioManager playSentMessage];
+                    if(remoteMessage){
+                        bubbleData.state = remoteMessage.state.shortValue;
+                        bubbleData.date = remoteMessage.createdTime;
+                        bubbleData.obj = remoteMessage;
+                        [bubbleTable setData:UIBubbleTableSetDataActionReset animated:NO];
+                        //
+                        [[AGManagerUtils managerUtils].audioManager playSentMessage];
+                    }
+                    else{
+                        bubbleData.state = message.state.shortValue;
+                        [bubbleTable refresh:[NSArray arrayWithObject:@"state"]];
+                    }
+                    
                     break;
                 }
             }
         }
     }
 
+}
+
+//resend confirm and image picker
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == ResendTag) {
+        if (buttonIndex == 0) {
+            [[AGMessageNotification messageNotification] resendMessage:selectedBubbleData.obj];
+            selectedBubbleData.state = AGSendStateSending;
+            [bubbleTable refresh:[NSArray arrayWithObject:@"state"]];
+        }
+    }
+    else{
+        imagePicker = [[AGImagePicker alloc] init];
+        imagePicker.delegate = self;
+        switch (buttonIndex) {
+            case 0:
+                [imagePicker pick:self type:AGImagePickerType_Camera];
+                break;
+            case 1:
+                [imagePicker pick:self type:AGImagePickerType_Library];
+                break;
+            default:
+                break;
+        }
+    }
+   
 }
 
 //clear confirm
@@ -634,6 +666,14 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     [[AGManagerUtils managerUtils].planeManager clearPlane:airogami context:nil block:^(NSError *error, id context, BOOL succeed) {
         clearButton.enabled = YES;
     }];
+}
+
+- (void) imagePicker:(AGImagePicker *)imagePicker_ didFinish:(BOOL)finished image:(UIImage *)image
+{
+    if (finished) {
+        
+    }
+    imagePicker = nil;
 }
 
 #pragma mark - buttons
@@ -658,5 +698,8 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     [alert show];
 }
 
+- (IBAction)addImage:(UIButton *)sender {
+    [AGUIUtils actionSheetForPickImages:self view:self.view];
+}
 
 @end

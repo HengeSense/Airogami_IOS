@@ -311,6 +311,8 @@ static NSString *AgeImages[] = {@"write_edit_age_button.png", @"write_edit_age_s
 
 - (IBAction)ageButtonTouched:(UIButton *)sender {
     
+    [self sexButtonFold];
+    //
     agePicker.end = birthdayLower;
     agePicker.start = birthdayUpper;
     //

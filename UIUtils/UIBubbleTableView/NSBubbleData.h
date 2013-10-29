@@ -21,13 +21,6 @@ typedef enum _NSBubbleType
     BubbleTypeSomeoneElse = 1
 } NSBubbleType;
 
-typedef enum _NSBubbleCellState
-{
-    BubbleCellStateNone = -2,
-    BubbleCellStateSending = -1,
-    BubbleCellStateSent = 0,
-    BubbleCellStateSentRead = 1
-} NSBubbleCellState;
 
 #define kBubbleCellStateButtonWidth 40
 
@@ -40,7 +33,7 @@ typedef enum _NSBubbleCellState
 @property (nonatomic, strong) UIImage *avatar;
 @property (nonatomic, strong) AGAccount *account;
 @property (nonatomic, strong) id obj;
-@property (nonatomic, assign) NSBubbleCellState state;
+@property (nonatomic, assign) AGSendStateEnum state;
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;

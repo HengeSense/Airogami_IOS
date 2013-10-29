@@ -44,6 +44,11 @@
 
 - (void) setImageUrl:(NSURL *)url placeImage:(UIImage *)placeImage
 {
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
+    if (image) {
+        placeImage = image;
+    }
     [self setImageWithURL:url forState:UIControlStateNormal placeholderImage:placeImage options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 #ifdef IS_DEBUG
         if (error) {

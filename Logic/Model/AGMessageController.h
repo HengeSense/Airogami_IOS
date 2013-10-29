@@ -30,6 +30,8 @@
 
 - (AGMessage*) getNextUnsentMessage;
 
+- (AGMessage*) getNextUnsentDataMessage;
+
 - (int) getUnreadMessageCountForPlane:(NSNumber *)planeId;
 
 - (NSNumber*) viewedMessagesForPlane:(AGPlane*)plane;

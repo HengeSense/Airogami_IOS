@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (Addition)
--(BOOL) isValidEmail;
+- (BOOL) isValidEmail;
 - (BOOL)isNumeric;
 - (NSString*) encodeURIComponent;
+- (NSString*) reverseString;
 @end

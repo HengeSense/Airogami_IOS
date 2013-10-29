@@ -78,7 +78,6 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     [params setObject:message.type forKey:@"messageVO.type"];
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         AGMessage *remoteMessage = nil;
-        BOOL removed = NO;
         if (error) {
             
         }
@@ -88,7 +87,11 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 // not exist
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
                     [[AGPlaneNotification planeNotification] deletePlane:message.plane];
-                    removed = YES;
+                }
+                else if ([errorString isEqual:AGLogicJSONDataValue]){
+#ifdef IS_DEBUG
+                    NSLog(@"data upload error");
+#endif
                 }
                 NSDictionary *planeJson = [result objectForKey:@"plane"];
                 //changed status, etc
@@ -97,11 +100,10 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 }
                 [[AGPlaneNotification planeNotification] obtainedPlanes];
                 
-                //error = [AGMessageUtils errorClient];
+                error = [AGMessageUtils errorClient];
             }
             else{
                 //succeed
-                //result = [result objectForKey:AGLogicJSONErrorKey];
                 NSDictionary *dict = [result objectForKey:@"message"];
                 remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
                 message.plane.updatedTime = remoteMessage.createdTime;
@@ -112,8 +114,13 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             }
             
         }
+        //failed
+        if (remoteMessage == nil) {
+            message.state = [NSNumber numberWithShort:AGSendStateFailed];
+            [[AGCoreData coreData] save];
+        }
         if (block) {
-            block(error, context, remoteMessage, removed);
+            block(error, context, remoteMessage);
         }
         
     }];
@@ -135,6 +142,11 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 // not exist
                 if ([errorString isEqual:AGLogicJSONNoneValue]) {
                     [[AGCoreData coreData] remove:plane];
+                }
+                else if ([errorString isEqual:AGLogicJSONDataValue]){
+#ifdef IS_DEBUG
+                    NSLog(@"data upload error");
+#endif
                 }
                 [[AGPlaneNotification planeNotification] collectedPlanes];
                 [AGMessageUtils alertMessagePlaneChanged];
@@ -573,7 +585,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     message.plane = plane;
     message.content = content;
     message.type = [NSNumber numberWithInt:type];
-    message.state = [NSNumber numberWithInt:BubbleCellStateSending];
+    message.state = [NSNumber numberWithInt:AGSendStateSending];
     [coreData save];
     return message;
 }

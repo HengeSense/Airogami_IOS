@@ -10,8 +10,9 @@
 const int AGDeviceType = 1;
 const int AGApplicationVersion = 1;
 //http://192.168.0.6:8080/
-NSString* AGWebServerUrl = @"http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/";//http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/
-NSString* AGDataServerUrl = @"https://airogami-user-bucket.s3-us-west-2.amazonaws.com/";
+NSString* AGWebServerUrl = @"http://192.168.0.6:8080/";
+//NSString* AGWebServerUrl = @"http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/";//http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/
+NSString* AGDataServerUrl = @"https://airogami.s3.amazonaws.com/";
 
 const CGSize AGAccountIconSizeMedium = {512, 512};
 const CGSize AGAccountIconSizeSmall = {128, 128};
@@ -40,7 +41,7 @@ NSString * AGAccountShoutNothing = @"text.ui.shout.nothing";
 //plane
 NSString *AGPlaneSendPlaneOK = @"message.plane.sendplane.ok";
 NSString *AGPlaneSendPlaneLimit = @"message.plane.sendplane.limit";
-//logic
+//json
 NSString * AGLogicJSONStatusKey = @"status";
 NSString * AGLogicJSONMessageKey = @"message";
 NSString * AGLogicJSONResultKey = @"result";
@@ -48,6 +49,7 @@ NSString * AGLogicJSONSucceedKey = @"succeed";
 NSString * AGLogicJSONErrorKey = @"error";
 NSString * AGLogicJSONAccountStatLeftKey = @"accountStatLeft";
 NSString * AGLogicJSONNoneValue = @"none";
+NSString * AGLogicJSONDataValue = @"data";
 int AGLogicJSONStatusNotSignin = 1;
 int AGLogicJSONStatusSigninElsewhere = 2;
 int AGLogicJSONStatusInput = 101;

@@ -11,7 +11,7 @@
 #import "NSBubbleData.h"
 
 @interface AGBubbleCellStateButton : UIButton
-@property(nonatomic, assign) NSBubbleCellState cellState;
+@property(nonatomic, assign) AGSendStateEnum cellState;
 
 - (void) likeReceived;
 @end

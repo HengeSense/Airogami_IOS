@@ -125,6 +125,7 @@
     <entity name="AGMessage" representedClassName="AGMessage" syncable="YES">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdTime" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageId" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="state" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -248,10 +249,10 @@
         <element name="AGHot" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGMessage" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGNeoChain" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGNeoHot" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGNeoPlane" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AGNeoProfile" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGPlane" positionX="0" positionY="0" width="0" height="0"/>
         <element name="AGProfile" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGNeoProfile" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AGNeoHot" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

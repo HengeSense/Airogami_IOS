@@ -10,7 +10,7 @@
 #import "AGDefines.h"
 #import "AGMessage.h"
 
-typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message, BOOL removed);
+typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message);
 typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
 typedef void (^AGGetNeoPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *neoPlanes);
 typedef void (^AGGetOldPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *oldPlanes);

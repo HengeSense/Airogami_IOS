@@ -94,6 +94,7 @@
 "text.ui.hour" = "h";
 "text.ui.minute" = "m";
 "message.ui.clear.confirm" = "Erase chat content on both sides?";
+"title.ui.chat.resend.confirm" = "Resend this message?";
 
 //notificaion
 "LKRP" = "You got a new plane";//LocKeyReceivedPlane

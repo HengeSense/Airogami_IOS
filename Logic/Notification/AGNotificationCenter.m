@@ -55,6 +55,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
         [AGPlaneNotification planeNotification];
         [AGChainNotification chainNotification];
         [AGAccountNotification accountNotification];
+        [AGMessageNotification messageNotification];
     }
     return notificationCenter;
 }
@@ -353,6 +354,7 @@ NSString *AGNotificationGotUnreadMessagesCount = @"notification.gotUnreadMessage
     [[AGAccountNotification accountNotification] reset];
     [[AGPlaneNotification planeNotification] reset];
     [[AGChainNotification chainNotification] reset];
+    [[AGMessageNotification messageNotification] reset];
 }
 
 - (void) kickoff

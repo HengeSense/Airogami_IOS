@@ -230,7 +230,29 @@ static int DeleteLimit = 100;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:messageEntityDescription];
     //
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId = -1"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId = -1 && state == %d && type == %d", AGSendStateSending, AGMessageTypeText];
+    [fetchRequest setPredicate:predicate];
+    //
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdTime" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    //
+    [fetchRequest setFetchLimit:1];
+    //
+    AGMessage* message = nil;
+    NSError *error;
+    NSArray *array = [coreData.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count) {
+        message = array.lastObject;
+    }
+    return message;
+}
+
+- (AGMessage*) getNextUnsentDataMessage
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:messageEntityDescription];
+    //
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId = -1 && state == %d && type != %d", AGSendStateSending, AGMessageTypeText];
     [fetchRequest setPredicate:predicate];
     //
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"createdTime" ascending:YES];

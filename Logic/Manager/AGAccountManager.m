@@ -94,8 +94,7 @@ static NSString *SigninOut = @"error.account.signin.out";
                     appDirector.account = [[AGControllerUtils controllerUtils].accountController saveAccount:accountJson];
                     [appConfig updateAppAccount:appDirector.account password:password];
                     
-                    result = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-                    NSMutableDictionary *tokens = [result objectForKey:AGLogicJSONResultKey];
+                    NSMutableDictionary *tokens = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"tokens"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
                     if (tokens) {
                         [[AGManagerUtils managerUtils].profileManager uploadIcons:tokens image:context context:nil block:^(NSError *error, id context) {
                             if (block) {

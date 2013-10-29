@@ -108,7 +108,12 @@
         self.avatarButton.hidden = NO;
         if (data.account) {
             NSURL *url = [[AGManagerUtils managerUtils].dataManager accountIconUrl:data.account.accountId small:YES];
-            [self.avatarButton setImageWithURL:url forState:UIControlStateNormal placeholderImage:[AGUIDefines profileDefaultImage] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
+            if (image) {
+                image = [AGUIDefines profileDefaultImage];
+            }
+            [self.avatarButton setImageWithURL:url forState:UIControlStateNormal placeholderImage:image options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 #ifdef IS_DEBUG
                 if (error) {
                     NSLog(@"UIBubbleTableViewCell.setData: %@", error);
@@ -144,19 +149,13 @@
 
 - (void) stateImageTouched
 {
-    //UIBubbleTableView * btv = (UIBubbleTableView *) self.superview;
-    /*switch (self.data.state) {
-        case BubbleCellStateSendFailed:
-            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectSendFailed];
-            break;
-        
-        case BubbleCellStateReceivedUnliked:
-            [self.stateButton likeReceived];
-            [btv didSelectCellAtIndexPath:[btv indexPathForCell:self] bubbleData:self.data  type:UIBubbleCellSelectReceivedLike];
+    switch (self.data.state) {
+        case AGSendStateFailed:
+            [bubbleTableView didSelectCellAtIndexPath:[bubbleTableView indexPathForCell:self] bubbleData:self.data type:UIBubbleCellSelectSendFailed];
             break;
         default:
             break;
-    }*/
+    }
 
 }
 
@@ -207,7 +206,7 @@
     else{
         self.stateButton.frame = CGRectMake(0, 0 , kBubbleCellStateButtonWidth, kBubbleCellStateButtonWidth);
         self.stateButton.center = CGPointMake(frame.origin.x + frame.size.width + kBubbleCellStateButtonWidth / 2 - 4, frame.origin.y + frame.size.height / 2);
-        self.stateButton.cellState = BubbleCellStateNone;
+        self.stateButton.cellState = AGSendStateNone;
     }
     
 }

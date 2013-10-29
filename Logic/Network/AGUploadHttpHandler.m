@@ -13,6 +13,7 @@
 #import "AGManagerUtils.h"
 
 static int AGUploadHttpHandlerDefaultCapacity = 1024;
+static NSString *ContentTypes[] = {@"Content-Type: audio/ogg", @"Content-Type: image/jpeg"};
 
 @interface AGUploadHttpHandler()
 {
@@ -69,11 +70,12 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
     return self;
 }
 
-- (AGURLConnection*) uploadImage:(UIImage*)image  params:(NSDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block
+- (AGURLConnection*) uploadData:(NSData*)data type:(AGContentTypeEnum)type params:(NSDictionary*)params context:(id)context block:(AGHttpUploadHandlerFinishBlock)block
 {
+    assert(type >= AGContentTypeAudio && type <= AGContentTypeImage);
     NSURL *url = [NSURL URLWithString:AGDataServerUrl];
     NSString *BoundaryConstant = [self generateBoundaryString];
-    NSData *body = [self prepare:params  boundary:BoundaryConstant fileParam:@"file" fileType:@"Content-Type: image/jpeg" data:UIImageJPEGRepresentation(image, 1.0)];
+    NSData *body = [self prepare:params  boundary:BoundaryConstant fileParam:@"file" fileType:ContentTypes[type - AGContentTypeAudio] data:data];
     // set the content-length
     NSString *postLength = [NSString stringWithFormat:@"%d", [body length]];
     
@@ -110,7 +112,7 @@ static int AGUploadHttpHandlerDefaultCapacity = 1024;
         [body appendData:[[NSString stringWithFormat:@"%@\r\n", [params objectForKey:param]] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
-    // add image data
+    // add data
    //
     if (data) {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];

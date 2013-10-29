@@ -26,11 +26,6 @@ extern NSString *AGNotificationGetMessagesForPlane;
 extern NSString *AGNotificationGotMessagesForPlane;
 extern NSString *AGNotificationReadMessagesForPlane;
 
-extern NSString *AGNotificationSendMessages;
-extern NSString *AGNotificationSentMessage;
-
-extern NSString *AGNotificationViewMessages;
-extern NSString *AGNotificationViewedMessagesForPlane;
 extern NSString *AGNotificationUnreadMessagesChangedForPlane;
 extern NSString *AGNotificationViewingMessagesForPlane;
 

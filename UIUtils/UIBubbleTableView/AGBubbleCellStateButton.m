@@ -10,7 +10,7 @@
 
 #define kStateButtonImageWidth 30
 
-static NSString *StateButtonImages[] = { @"chat_chat_unread.png", @"chat_chat_read.png", @"bubbleCellStateReceivedUnliked.png" , @"bubbleCellStateReceivedLiked.png"};
+static NSString *StateButtonImages[] = { @"chat_chat_unread.png", @"chat_chat_send_failed.png", @"chat_chat_read.png", @"bubbleCellStateReceivedUnliked.png" , @"bubbleCellStateReceivedLiked.png"};
 static NSString *StateButtonSelectedImages[] = { @"", @"", @"" , @"bubbleCellStateReceivedLiked_large.png"};
 
 @interface AGBubbleCellStateButton()
@@ -60,12 +60,13 @@ static NSString *StateButtonSelectedImages[] = { @"", @"", @"" , @"bubbleCellSta
 }
 
 
-- (void) setCellState:(NSBubbleCellState)state
+- (void) setCellState:(AGSendStateEnum)state
 {
+    assert(state >= AGSendStateNone && state <= AGSendStateRead);
     cellState = state;
-    if (state != BubbleCellStateNone) {
-        //self.userInteractionEnabled = (state == BubbleCellStateSendFailed || state == BubbleCellStateReceivedUnliked );
-        if (state == BubbleCellStateSending) {
+    if (state != AGSendStateNone) {
+        self.userInteractionEnabled = (state == AGSendStateFailed);
+        if (state == AGSendStateSending) {
             [self setImage:nil forState:UIControlStateNormal];
             [indicator startAnimating];
         }
