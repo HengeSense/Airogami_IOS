@@ -7,15 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AGProfileImageButton.h"
-#import "AGProfileImage.h"
+#import "AGMessage+Addition.h"
 
-typedef void (^AGMessageDataTokenBlock)(NSError *error, id context, NSDictionary *token);
+typedef void (^AGMessageDataTokenBlock)(NSError *error, id context, NSArray *tokens, NSNumber *msgDataInc);
 
 @interface AGDataManger : NSObject
 
-- (NSURL*) accountIconUrl:(NSNumber*)accountId small:(BOOL) small;
-- (NSURL*) messageDataUrl:(NSNumber*)accountId msgDataInc:(NSNumber*)msgDataInc type:(AGMessageTypeEnum) type;
 - (void) messageDataToken:(NSDictionary *)params context:(id)context block:(AGMessageDataTokenBlock)block;
 - (void) uploadData:(NSData *)data params:(NSDictionary *)params type:(AGContentTypeEnum)type context:(id)context block:(AGHttpDoneBlock)block;
 - (NSDictionary*)paramsForMessageDataToken:(NSNumber*)type;

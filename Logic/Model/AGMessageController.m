@@ -52,9 +52,12 @@ static int DeleteLimit = 100;
     return array;
 }
 //for my message
-- (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary
+- (AGMessage*) saveRemoteMessage:(NSDictionary*)jsonDictionary message:(AGMessage*)message
 {
-    AGMessage *message = (AGMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGMessage"];
+    message.messageId = [jsonDictionary objectForKey:@"messageId"];
+    message.state = [NSNumber numberWithShort:AGSendStateSent];
+    message = (AGMessage *)[coreData saveOrUpdate:jsonDictionary withEntityName:@"AGMessage"];
+    message.plane.updatedTime = message.createdTime;
     [coreData save];
     return message;
 }

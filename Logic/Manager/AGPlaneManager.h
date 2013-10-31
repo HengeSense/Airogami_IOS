@@ -10,7 +10,7 @@
 #import "AGDefines.h"
 #import "AGMessage.h"
 
-typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context, AGMessage *message);
+typedef void (^AGReplyPlaneFinishBlock)(NSError *error, id context);
 typedef void (^AGPickupPlaneAndChainFinishBlock)(NSError *error, id context, NSNumber *count);
 typedef void (^AGGetNeoPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *neoPlanes);
 typedef void (^AGGetOldPlanesBlock)(NSError *error, id context, NSMutableDictionary *result, NSArray *oldPlanes);
@@ -59,5 +59,7 @@ typedef void (^AGGetPlanesBlock)(NSError *error, id context, NSMutableDictionary
 - (NSDictionary*)paramsForViewedMessages:(AGPlane*)plane lastMsgId:(NSNumber*)lastMsgId;
 
 - (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content type:(int)type;
+
+- (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content imageSize:(CGSize)size;
 
 @end

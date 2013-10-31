@@ -15,7 +15,7 @@
 
 - (NSMutableArray*) saveMessages:(NSArray*)jsonArray plane:(AGPlane*) plane;
 
-- (AGMessage*) saveMessage:(NSDictionary*)jsonDictionary;
+- (AGMessage*) saveRemoteMessage:(NSDictionary*)jsonDictionary message:(AGMessage*)message;
 
 -(void) updateNeoMsgId:(AGNeoPlane*)neoPlane;
 

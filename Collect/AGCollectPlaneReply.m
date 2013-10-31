@@ -126,7 +126,7 @@ static float AGInputTextViewMaxHeight = 80;
     self.ageLabel.text = [AGUtils birthdayToAge:profile.birthday];
     self.sexImageView.image = [AGUIDefines sexSymbolImage:profile.sex.intValue == AGAccountSexTypeMale];
     //
-    [self.profileImageButton setImageWithAccountId:profile.accountId];
+    [self.profileImageButton setImageWithAccount:profile.account];
     //
     self.nameLabel.text = profile.fullName;
     if(profile.shout.length){

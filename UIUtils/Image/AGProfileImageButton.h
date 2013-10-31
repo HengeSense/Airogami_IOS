@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AGImageButton.h"
-
+#import "AGAccount+Addition.h"
 
 @interface AGProfileImageButton : AGImageButton
 
 @property(nonatomic, strong) NSURL *mediumUrl;
 
-- (void) setImageWithAccountId:(NSNumber *)accountId;
+- (void) setImageWithAccount:(AGAccount*)account;
 
 @end

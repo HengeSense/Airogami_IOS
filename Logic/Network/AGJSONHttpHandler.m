@@ -1,4 +1,4 @@
-//
+ //
 //  AGHttpHandler.m
 //  Airogami
 //
@@ -157,12 +157,13 @@
     //
     [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     [connection cancel];
+    /* called in cancel
     NSError *error = [AGMessageUtils errorServer];
     AGHttpJSONHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if(block){
         block(error,context, nil);
-    }
+    }*/
     
 }
 

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGAccount+Addition.h"
 
 @interface AGProfileImage : UIImageView
 
-- (void) setImageWithAccountId:(NSNumber*)accountId;
+- (void) setImageWithAccount:(AGAccount*)account;
 
 @end

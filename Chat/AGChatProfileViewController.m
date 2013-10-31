@@ -82,7 +82,7 @@
             self.descriptionLabel.textColor = [UIColor lightGrayColor];
             self.descriptionLabel.text = NSLocalizedString(AGAccountShoutNothing, AGAccountShoutNothing);
         }
-        [self.profileImageButton setImageWithAccountId:profile.accountId];
+        [self.profileImageButton setImageWithAccount:profile.account];
     }
     
 }

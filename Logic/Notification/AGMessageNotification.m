@@ -11,9 +11,10 @@
 #import "AGControllerUtils.h"
 #import "AGManagerUtils.h"
 #import "AGPlaneNotification.h"
+#import "SDImageCache+Addition.h"
 
 NSString *AGNotificationSendMessages = @"notification.sendmessages";
-NSString *AGNotificationSendMessageData = @"notification.sendmessagedata";
+NSString *AGNotificationSendDataMessages = @"notification.senddatamessages";
 NSString *AGNotificationSentMessage = @"notification.sentmessage";
 
 NSString *AGNotificationViewMessages = @"notification.viewmessages";
@@ -44,7 +45,7 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         // send messages
         [notificationCenter addObserver:self selector:@selector(sendMessages:) name:AGNotificationSendMessages object:nil];
-        [notificationCenter addObserver:self selector:@selector(sendMessageDatum:) name:AGNotificationSendMessageData object:nil];
+        [notificationCenter addObserver:self selector:@selector(sendDataMessages:) name:AGNotificationSendDataMessages object:nil];
         //viewed messages
         [notificationCenter addObserver:self selector:@selector(viewMessages:) name:AGNotificationViewMessages object:nil];
         [notificationCenter addObserver:self selector:@selector(viewedMessagesForPlane:) name:AGNotificationViewedMessagesForPlane object:nil];
@@ -118,14 +119,12 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     AGPlane *plane = message.plane;
-    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage) {
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
         [dict setObject:plane forKey:@"plane"];
         [dict setObject:message forKey:@"message"];
         if (error == nil) {
             //succeed
-            [dict setObject:remoteMessage forKey:@"remoteMessage"];
-            
             [self sendMessages];
         }
         else{
@@ -173,7 +172,7 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
     AGControllerUtils *controllerUtils = [AGControllerUtils controllerUtils];
     AGMessage *message = [controllerUtils.messageController getNextUnsentDataMessage];
     if (message) {
-        [self sendDataMessage:message];
+        [self messageDataToken:message];
     }
     else{
         @synchronized(sendDataMessageMutex){
@@ -185,27 +184,94 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
 
 -(void) messageDataToken:(AGMessage*)message
 {
-    
+    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+    NSDictionary *params = [dataManager paramsForMessageDataToken:message.type];
+    [dataManager messageDataToken:params context:nil block:^(NSError *error, id context, NSArray *tokens, NSNumber *msgDataInc) {
+        if (error == nil) {
+            message.link = msgDataInc.stringValue;
+            [[AGCoreData coreData] save];
+            if (message.type.intValue == AGMessageTypeImage) {
+                [self uploadMessageImages:message small:[tokens objectAtIndex:1] medium:[tokens objectAtIndex:0]];
+            }
+            
+        }
+        else{
+            //should deal with server error
+            @synchronized(sendDataMessageMutex){
+                moreSendDataMessage = NO;
+                sendingDataMessage = NO;
+            }
+        }
+#ifdef IS_DEBUG
+        if (error) {
+            NSLog(@"get messageDataToken: error=%@", error);
+        }
+#endif
+    }];
 }
 
--(void) uploadMessageData:(AGMessage*)message
+-(void) uploadMessageImages:(AGMessage*)message small:(NSDictionary*)small medium:(NSDictionary*)medium
 {
+    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
+    NSString *key = [message messageDataKey:NO];
+    UIImage *image = nil;
+    image = [[SDImageCache imageCache] imageFromDiskCacheForKey:key];
+    CGSize size = image.size;
+    NSLog(@"uploadMessageImages(medium): size.width=%f", size.width);
     
+    [dataManager uploadData:UIImageJPEGRepresentation(image, 1.0f) params:medium type:message.type.shortValue context:nil block:^(NSError *error, id context) {
+        if (error == nil) {
+            NSString *key = [message messageDataKey:YES];
+            UIImage *image = nil;
+            image = [[SDImageCache imageCache] imageFromDiskCacheForKey:key];
+            CGSize size = image.size;
+            NSLog(@"uploadMessageImages(small): size.width=%f", size.width);
+            //
+            [dataManager uploadData:UIImageJPEGRepresentation(image, 1.0f) params:small type:message.type.shortValue context:nil block:^(NSError *error, id context){
+                if (error == nil) {
+                    [self sendDataMessage:message];
+                }
+                else{
+                    //should deal with server error
+                    @synchronized(sendDataMessageMutex){
+                        moreSendDataMessage = NO;
+                        sendingDataMessage = NO;
+                    }
+                }
+#ifdef IS_DEBUG
+                if (error) {
+                     NSLog(@"uploadMessageImages(small): error=%@", error);
+                }
+#endif
+            }];
+            
+        }
+        else {
+            //should deal with server error
+            @synchronized(sendDataMessageMutex){
+                moreSendDataMessage = NO;
+                sendingDataMessage = NO;
+            }
+        }
+#ifdef IS_DEBUG
+        if (error) {
+            NSLog(@"uploadMessageImages(medium): error=%@", error);
+        }
+#endif
+    }];
 }
 
 - (void) sendDataMessage:(AGMessage*)message
 {
     AGManagerUtils *managerUtils = [AGManagerUtils managerUtils];
     AGPlane *plane = message.plane;
-    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context, AGMessage *remoteMessage) {
+    [managerUtils.planeManager replyPlane:message context:nil block:^(NSError *error, id context) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:3];
         [dict setObject:plane forKey:@"plane"];
         [dict setObject:message forKey:@"message"];
         if (error == nil) {
-            //succeed
-            [dict setObject:remoteMessage forKey:@"remoteMessage"];
-            
-            [self sendMessages];
+            //succeed      
+            [self sendDataMessages];
         }
         else{
             //should deal with server error
@@ -216,6 +282,11 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
         }
         //
         [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSentMessage object:nil userInfo:dict];
+#ifdef IS_DEBUG
+        if (error) {
+            NSLog(@"sendDataMessage: error=%@", error);
+        }
+#endif
     }];
 }
 
@@ -223,7 +294,7 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
 {
     message.state = [NSNumber numberWithShort:AGSendStateSending];
     [[AGCoreData coreData] save];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSendMessageData object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AGNotificationSendDataMessages object:nil userInfo:nil];
 }
 
 #pragma mark - view messages

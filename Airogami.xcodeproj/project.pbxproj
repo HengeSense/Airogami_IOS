@@ -64,8 +64,12 @@
 		07467A16181AF41D002FBACD /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07467A15181AF41D002FBACD /* SDWebImage.framework */; };
 		07467A18181F25FD002FBACD /* chat_chat_send_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07467A17181F25FD002FBACD /* chat_chat_send_failed@2x.png */; };
 		07467A1B181F270D002FBACD /* AGMessageNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A1A181F270D002FBACD /* AGMessageNotification.m */; };
-		07467A1E181F3D59002FBACD /* AGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A1D181F3D59002FBACD /* AGMessage.m */; };
 		07467A21181F3E17002FBACD /* AGImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A20181F3E17002FBACD /* AGImagePicker.m */; };
+		07467A241820370E002FBACD /* SDImageCache+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A231820370E002FBACD /* SDImageCache+Addition.m */; };
+		07467A27182073C7002FBACD /* AGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A26182073C7002FBACD /* AGMessage.m */; };
+		07467A2A182080D0002FBACD /* AGMessage+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A29182080D0002FBACD /* AGMessage+Addition.m */; };
+		07467A2D1820818E002FBACD /* AGAccount+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A2C1820818E002FBACD /* AGAccount+Addition.m */; };
+		07467A331821BA0F002FBACD /* AGChatChatViewController+Aided.m in Sources */ = {isa = PBXBuildFile; fileRef = 07467A321821BA0F002FBACD /* AGChatChatViewController+Aided.m */; };
 		0750CF8F17739146008E28F0 /* write_edit_both_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */; };
 		0750CF9017739146008E28F0 /* write_edit_female_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8A17739146008E28F0 /* write_edit_female_button@2x.png */; };
 		0750CF9117739146008E28F0 /* write_edit_location_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0750CF8B17739146008E28F0 /* write_edit_location_button@2x.png */; };
@@ -497,10 +501,18 @@
 		07467A17181F25FD002FBACD /* chat_chat_send_failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_chat_send_failed@2x.png"; sourceTree = "<group>"; };
 		07467A19181F270D002FBACD /* AGMessageNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGMessageNotification.h; sourceTree = "<group>"; };
 		07467A1A181F270D002FBACD /* AGMessageNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessageNotification.m; sourceTree = "<group>"; };
-		07467A1C181F3D59002FBACD /* AGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGMessage.h; sourceTree = "<group>"; };
-		07467A1D181F3D59002FBACD /* AGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessage.m; sourceTree = "<group>"; };
 		07467A1F181F3E17002FBACD /* AGImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGImagePicker.h; sourceTree = "<group>"; };
 		07467A20181F3E17002FBACD /* AGImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGImagePicker.m; sourceTree = "<group>"; };
+		07467A221820370E002FBACD /* SDImageCache+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDImageCache+Addition.h"; sourceTree = "<group>"; };
+		07467A231820370E002FBACD /* SDImageCache+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDImageCache+Addition.m"; sourceTree = "<group>"; };
+		07467A25182073C7002FBACD /* AGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGMessage.h; sourceTree = "<group>"; };
+		07467A26182073C7002FBACD /* AGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGMessage.m; sourceTree = "<group>"; };
+		07467A28182080D0002FBACD /* AGMessage+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGMessage+Addition.h"; sourceTree = "<group>"; };
+		07467A29182080D0002FBACD /* AGMessage+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGMessage+Addition.m"; sourceTree = "<group>"; };
+		07467A2B1820818E002FBACD /* AGAccount+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGAccount+Addition.h"; sourceTree = "<group>"; };
+		07467A2C1820818E002FBACD /* AGAccount+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGAccount+Addition.m"; sourceTree = "<group>"; };
+		07467A311821BA0F002FBACD /* AGChatChatViewController+Aided.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGChatChatViewController+Aided.h"; sourceTree = "<group>"; };
+		07467A321821BA0F002FBACD /* AGChatChatViewController+Aided.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGChatChatViewController+Aided.m"; sourceTree = "<group>"; };
 		0750CF8917739146008E28F0 /* write_edit_both_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_both_button@2x.png"; sourceTree = "<group>"; };
 		0750CF8A17739146008E28F0 /* write_edit_female_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_female_button@2x.png"; sourceTree = "<group>"; };
 		0750CF8B17739146008E28F0 /* write_edit_location_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write_edit_location_button@2x.png"; sourceTree = "<group>"; };
@@ -1336,8 +1348,8 @@
 				07467A0E1819D529002FBACD /* AGNeoHot.m */,
 				07467A101819D52A002FBACD /* AGNeoProfile.h */,
 				07467A111819D52A002FBACD /* AGNeoProfile.m */,
-				07467A1C181F3D59002FBACD /* AGMessage.h */,
-				07467A1D181F3D59002FBACD /* AGMessage.m */,
+				07467A25182073C7002FBACD /* AGMessage.h */,
+				07467A26182073C7002FBACD /* AGMessage.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1576,6 +1588,8 @@
 				079642F417AC7042007B47C8 /* UIImage+Addition.m */,
 				07467A1F181F3E17002FBACD /* AGImagePicker.h */,
 				07467A20181F3E17002FBACD /* AGImagePicker.m */,
+				07467A221820370E002FBACD /* SDImageCache+Addition.h */,
+				07467A231820370E002FBACD /* SDImageCache+Addition.m */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -1617,6 +1631,10 @@
 				078DEE3117B98EBD00A969A1 /* AGCategory+Addition.m */,
 				074679E5181844AC002FBACD /* AGPlane+Addition.h */,
 				074679E6181844AC002FBACD /* AGPlane+Addition.m */,
+				07467A28182080D0002FBACD /* AGMessage+Addition.h */,
+				07467A29182080D0002FBACD /* AGMessage+Addition.m */,
+				07467A2B1820818E002FBACD /* AGAccount+Addition.h */,
+				07467A2C1820818E002FBACD /* AGAccount+Addition.m */,
 			);
 			path = Gneneral;
 			sourceTree = "<group>";
@@ -1808,6 +1826,8 @@
 				0791846A177E4B1F00D28C0F /* AGChatPlaneViewController.m */,
 				07918466177E4A7300D28C0F /* AGChatChatViewController.h */,
 				07918467177E4A7300D28C0F /* AGChatChatViewController.m */,
+				07467A311821BA0F002FBACD /* AGChatChatViewController+Aided.h */,
+				07467A321821BA0F002FBACD /* AGChatChatViewController+Aided.m */,
 				078522531784B12500288D7C /* AGChatPlaneCell.h */,
 				078522541784B12500288D7C /* AGChatPlaneCell.m */,
 				078A5C63178B722C000FB7FF /* AGChatProfileViewController.h */,
@@ -2274,6 +2294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07467A241820370E002FBACD /* SDImageCache+Addition.m in Sources */,
 				07072336175E8C2F0017292A /* main.m in Sources */,
 				0707233A175E8C2F0017292A /* AGAppDelegate.m in Sources */,
 				0707238F175EA8670017292A /* AGSignupViewController.m in Sources */,
@@ -2287,8 +2308,8 @@
 				079F8187176BEC9A004234D0 /* AGDefines.m in Sources */,
 				078A1F64176CE4C400A69AE3 /* AGRootViewController.m in Sources */,
 				078A1F81176CF3A000A69AE3 /* AGSignViewController.m in Sources */,
+				07467A27182073C7002FBACD /* AGMessage.m in Sources */,
 				078A1F8A176CFA4000A69AE3 /* AGTabBarViewController.m in Sources */,
-				07467A1E181F3D59002FBACD /* AGMessage.m in Sources */,
 				078A1FD5176D355C00A69AE3 /* DCRoundSwitch.m in Sources */,
 				078A1FD6176D355C00A69AE3 /* DCRoundSwitchKnobLayer.m in Sources */,
 				07467A21181F3E17002FBACD /* AGImagePicker.m in Sources */,
@@ -2356,6 +2377,7 @@
 				078A5C7B178B99F7000FB7FF /* AGSettingNotificationViewController.m in Sources */,
 				078A5C7F178C8536000FB7FF /* CustomBadge.m in Sources */,
 				07C48F3617A6EE22000D03A8 /* AGSettingProfileScreenNameViewController.m in Sources */,
+				07467A2A182080D0002FBACD /* AGMessage+Addition.m in Sources */,
 				079642F517AC7042007B47C8 /* UIImage+Addition.m in Sources */,
 				076B159117AED9A8005BD910 /* AGWaitUtils.m in Sources */,
 				076B15CC17B088C1005BD910 /* AGLocation.m in Sources */,
@@ -2381,6 +2403,7 @@
 				0702F6D117B4325700B4EBB3 /* AGMessageUtils.m in Sources */,
 				0702F6D217B4325700B4EBB3 /* AGUIErrorAnimation.m in Sources */,
 				0702F6DE17B45C3600B4EBB3 /* AGAppConfig.m in Sources */,
+				07467A2D1820818E002FBACD /* AGAccount+Addition.m in Sources */,
 				0702F6E117B45D7C00B4EBB3 /* AGAppAccount.m in Sources */,
 				074679DA1816F395002FBACD /* AGLikeButton.m in Sources */,
 				0702F6E417B55C3B00B4EBB3 /* AGObject.m in Sources */,
@@ -2411,6 +2434,7 @@
 				0743FF9117DD0CA1005A9261 /* AGPlaneNotification.m in Sources */,
 				0743FF9417DD475F005A9261 /* AGAccountNotification.m in Sources */,
 				0743FF9717DD534C005A9261 /* Model.xcdatamodeld in Sources */,
+				07467A331821BA0F002FBACD /* AGChatChatViewController+Aided.m in Sources */,
 				07C489A517E2390A00DB605F /* AGAudioManager.m in Sources */,
 				0716A0CB17F6591500E95840 /* AGSynchronize.m in Sources */,
 				0716A0D417F7759700E95840 /* AGViewManager.m in Sources */,

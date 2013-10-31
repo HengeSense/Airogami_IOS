@@ -26,20 +26,29 @@ typedef enum _NSBubbleType
 
 @interface NSBubbleData : NSObject
 
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, retain) NSDate *date;
+@property (nonatomic, retain) NSString *content;
+@property (nonatomic, retain) UIImage *image;
+@property (nonatomic, retain) NSString *imageKey;
+@property (nonatomic, retain) NSURL *imageURL;
 @property (readonly, nonatomic) NSBubbleType type;
-@property (readonly, nonatomic, strong) UIView *view;
 @property (readonly, nonatomic) UIEdgeInsets insets;
-@property (nonatomic, strong) UIImage *avatar;
-@property (nonatomic, strong) AGAccount *account;
-@property (nonatomic, strong) id obj;
+@property (nonatomic, retain) UIImage *avatar;
+@property (nonatomic, retain) AGAccount *account;
+@property (nonatomic, retain) id obj;
 @property (nonatomic, assign) AGSendStateEnum state;
+@property (nonatomic, assign) CGSize size;
+@property (nonatomic, assign) BOOL interactive;
 
++ (UIFont *) font;
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
+//- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
-+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
++ (id)dataWithImageURL:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type;
++ (id)dataWithImageKey:(NSString *)imageKey url:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type;
++ (id)dataWithImage:(UIImage *)image size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type;
+//- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
+//+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
 
 @end

@@ -169,13 +169,14 @@ static NSString *ContentTypes[] = {@"Content-Type: audio/ogg", @"Content-Type: i
     //
     [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     [connection cancel];
-    NSError *error = [AGMessageUtils errorServer];
+    /*called in cancel
+     NSError *error = [AGMessageUtils errorServer];
     AGHttpUploadHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     //NSLog(@"%@", desc);
     id context = [connection valueForKey:@"Context"];
     if(block){
         block(error, context);
-    }
+    }*/
     
 }
 

@@ -15,6 +15,7 @@
 #import "AGBubbleTableViewDelegate.h"
 #import "AGManagerUtils.h"
 #import "AGUIUtils.h"
+#import "SDImageCache+Addition.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
 #define kMineLeftCapWidth 22
@@ -27,6 +28,8 @@
 @interface UIBubbleTableViewCell ()
 
 @property (nonatomic, retain) UIView *customView;
+@property (nonatomic, retain) UILabel *label;
+@property (nonatomic, retain) UIButton *contentButton;
 @property (nonatomic, retain) UIImageView *bubbleImage;
 @property (nonatomic, retain) UIButton *avatarButton;
 
@@ -36,6 +39,8 @@
 
 @implementation UIBubbleTableViewCell
 
+@synthesize label;
+@synthesize contentButton;
 @synthesize data = _data;
 @synthesize customView = _customView;
 @synthesize bubbleImage = _bubbleImage;
@@ -75,6 +80,18 @@
     [self.stateButton addTarget:self action:@selector(stateImageTouched) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.stateButton];
     self.backgroundColor = [UIColor clearColor];
+    //label
+    label = [[UILabel alloc] init];
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.font = NSBubbleData.font;
+    label.backgroundColor = [UIColor clearColor];
+    [self.contentView addSubview:label];
+    //contentButton
+    contentButton = [[UIButton alloc] init];
+    contentButton.layer.cornerRadius = 5.0;
+    contentButton.layer.masksToBounds = YES;
+    [self.contentView addSubview:contentButton];
 }
 
 - (void)setFrame:(CGRect)frame
@@ -107,7 +124,7 @@
     if (self.showAvatar) {
         self.avatarButton.hidden = NO;
         if (data.account) {
-            NSURL *url = [[AGManagerUtils managerUtils].dataManager accountIconUrl:data.account.accountId small:YES];
+            NSURL *url = [data.account accountIconUrl:YES];
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
             UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
             if (image) {
@@ -132,10 +149,9 @@
     {
         self.avatarButton.hidden = YES;
     }
-    
-    [self.customView removeFromSuperview];
-    self.customView = self.data.view;
-    [self.contentView addSubview:self.customView];
+    //
+    label.hidden = contentButton.hidden = YES;
+    //
     if (type == BubbleTypeSomeoneElse)
     {
         self.bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:kSomeoneLeftCapWidth topCapHeight:kSomeoneTopCapWidth];
@@ -143,6 +159,35 @@
     }
     else {
         self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:kMineLeftCapWidth topCapHeight:kMineTopCapWidth];
+    }
+    //set image
+    UIImage *image = nil;
+    if (data.imageKey) {
+        image = [[SDImageCache imageCache] imageFromDiskCacheForKey:self.data.imageKey];
+    }
+    else if(data.image){
+        image = data.image;
+    }
+    //
+    if (image) {
+        [contentButton setImage:image forState:UIControlStateNormal];
+        contentButton.hidden = NO;
+        self.customView = contentButton;
+    }
+    else if(data.imageURL){
+        contentButton.hidden = NO;
+        self.customView = contentButton;
+        [contentButton setImageWithURL:self.data.imageURL forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+#ifdef IS_DEBUG
+            if (error) {
+                NSLog(@"initWithImageKey: error=%@", error);
+            }
+#endif
+        }];
+    }
+    else{
+        label.hidden = NO;
+        self.customView = label;
     }
     //[self setupInternalData];
 }
@@ -168,7 +213,7 @@
 {
     
     NSBubbleType type = self.data.type;
-    CGRect frame = self.data.view.frame;
+    CGRect frame = CGRectMake(0, 0, self.data.size.width, self.data.size.height);
     CGFloat width = frame.size.width;
     CGFloat height = frame.size.height;
     
@@ -191,10 +236,10 @@
         
         self.avatarButton.frame = CGRectMake(avatarX, avatarY, kAvartarHeight, kAvartarHeight);
         
-        CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.view.frame.size.height) - kCellSpacing;
+        CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.size.height) - kCellSpacing;
         if (delta > 0) y = delta;
     }
-        
+    
     self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top, width, height);
     frame = self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
     //state

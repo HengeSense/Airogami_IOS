@@ -74,8 +74,15 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     BOOL byOwner = [message.plane.accountByOwnerId.accountId isEqual:[AGAppDirector appDirector].account.accountId];
     [params setObject:message.plane.planeId forKey:@"planeId"];
     [params setObject:[NSNumber numberWithBool:byOwner] forKey:@"byOwner"];
-    [params setObject:message.content forKey:@"messageVO.content"];
+    if (message.content) {
+        [params setObject:message.content forKey:@"messageVO.content"];
+    }
+    if (message.link) {
+        [params setObject:message.link forKey:@"messageVO.link"];
+    }
     [params setObject:message.type forKey:@"messageVO.type"];
+    [params setObject:message.prop forKey:@"messageVO.prop"];
+    
     [AGJSONHttpHandler request:NO params:params path:ReplyPlanePath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
         AGMessage *remoteMessage = nil;
         if (error) {
@@ -105,10 +112,9 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             else{
                 //succeed
                 NSDictionary *dict = [result objectForKey:@"message"];
-                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
-                message.plane.updatedTime = remoteMessage.createdTime;
+                assert(dict && [dict isKindOfClass:[NSNull class]] == NO);
+                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveRemoteMessage:dict message:message];
                 [[AGControllerUtils controllerUtils].planeController updateMessage:message.plane];
-                [[AGCoreData coreData] remove:message];
                 //update plane order
                 [[AGPlaneNotification planeNotification] obtainedPlanesReorder:remoteMessage.plane];
             }
@@ -120,7 +126,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             [[AGCoreData coreData] save];
         }
         if (block) {
-            block(error, context, remoteMessage);
+            block(error, context);
         }
         
     }];
@@ -155,9 +161,8 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
             else{
                 //succeed
                 NSDictionary *dict = [result objectForKey:@"message"];
-                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveMessage:dict];
+                remoteMessage = [[AGControllerUtils controllerUtils].messageController saveRemoteMessage:dict message:nil];
                 plane.status = [NSNumber numberWithInt:AGPlaneStatusReplied];
-                plane.updatedTime = remoteMessage.createdTime;
                 [[AGCoreData coreData] save];
                 //
                 [[AGControllerUtils controllerUtils].planeController updateMessage:plane];
@@ -208,7 +213,7 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
                 //succeed
                 succeed = YES;
                 NSDictionary *dict = [result objectForKey:@"message"];
-                AGMessage *message = [controllerUtils.messageController saveMessage:dict];
+                AGMessage *message = [controllerUtils.messageController saveRemoteMessage:dict message:nil];
                 [controllerUtils.planeController updateLike:plane];
                 //update plane order
                 [[AGPlaneNotification planeNotification] obtainedPlanesReorder:plane];
@@ -585,6 +590,22 @@ static NSString *AGPlanePickupLimit = @"message.plane.pickup.limit";
     message.plane = plane;
     message.content = content;
     message.type = [NSNumber numberWithInt:type];
+    message.state = [NSNumber numberWithInt:AGSendStateSending];
+    [coreData save];
+    return message;
+}
+
+- (AGMessage*)messageForReplyPlane:(AGPlane*)plane content:(NSString*)content imageSize:(CGSize)size
+{
+    AGCoreData *coreData = [AGCoreData coreData];
+    AGMessage *message = (AGMessage *)[coreData create:[AGMessage class]];
+    message.account = [AGAppDirector appDirector].account;
+    message.messageId = [NSNumber numberWithInt:-1];
+    message.createdTime = [NSDate dateWithTimeIntervalSinceNow:0];
+    message.plane = plane;
+    message.content = content;
+    message.imageSize = size;
+    message.type = [NSNumber numberWithInt:AGMessageTypeImage];
     message.state = [NSNumber numberWithInt:AGSendStateSending];
     [coreData save];
     return message;

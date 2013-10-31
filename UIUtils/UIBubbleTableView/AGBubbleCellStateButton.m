@@ -10,7 +10,7 @@
 
 #define kStateButtonImageWidth 30
 
-static NSString *StateButtonImages[] = { @"chat_chat_unread.png", @"chat_chat_send_failed.png", @"chat_chat_read.png", @"bubbleCellStateReceivedUnliked.png" , @"bubbleCellStateReceivedLiked.png"};
+static NSString *StateButtonImages[] = { @"chat_chat_send_failed.png", @"chat_chat_unread.png", @"chat_chat_read.png", @"bubbleCellStateReceivedUnliked.png" , @"bubbleCellStateReceivedLiked.png"};
 static NSString *StateButtonSelectedImages[] = { @"", @"", @"" , @"bubbleCellStateReceivedLiked_large.png"};
 
 @interface AGBubbleCellStateButton()

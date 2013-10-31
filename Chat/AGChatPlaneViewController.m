@@ -307,7 +307,7 @@ static NSString *SmileText = @"text.ui.smile";
         count = cm.unreadChainMessagesCount.intValue;
     }
     
-    [cell.profileImageView setImageWithAccountId:profile.accountId];
+    [cell.profileImageView setImageWithAccount:profile.account];
     cell.nameLabel.text = profile.fullName;
     if (count == 0) {
         cell.badge = @"";

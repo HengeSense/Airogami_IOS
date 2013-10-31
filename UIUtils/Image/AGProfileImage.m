@@ -55,10 +55,9 @@
     self.clipsToBounds = YES;
 }
 
-- (void) setImageWithAccountId:(NSNumber*)accountId
+- (void) setImageWithAccount:(AGAccount*)account
 {
-    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
-    NSURL *url = [dataManager accountIconUrl:accountId small:YES];
+    NSURL *url = [account accountIconUrl:YES];
     [self setImageWithURL:url placeholderImage:[AGUIDefines profileDefaultImage] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 #ifdef IS_DEBUG
         if (error) {

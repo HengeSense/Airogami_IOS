@@ -11,7 +11,7 @@
 @class AGMessage;
 
 extern NSString *AGNotificationSendMessages;
-extern NSString *AGNotificationSendMessageData;
+extern NSString *AGNotificationSendDataMessages;
 extern NSString *AGNotificationSentMessage;
 
 extern NSString *AGNotificationViewMessages;

@@ -107,12 +107,13 @@ static const int AGDownloadDefaultCapacity = 1024 * 256;
     //
     [[AGManagerUtils managerUtils].networkManager removeURLConnection:connection];
     [connection cancel];
+    /* called in cancel
     NSError *error = [AGMessageUtils errorServer];
     AGDownloadHttpHandlerFinishBlock block = [connection valueForKey:@"ResultBlock"];
     id context = [connection valueForKey:@"Context"];
     if (block) {
         block(error, nil, context);
-    }
+    }*/
     
 }
 

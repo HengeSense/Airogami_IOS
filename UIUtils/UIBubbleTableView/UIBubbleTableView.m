@@ -314,7 +314,7 @@ typedef enum {
     }
     
     NSBubbleData *data = [[self.bubbleSections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row - 1];
-    return MAX(data.insets.top + data.view.frame.size.height + data.insets.bottom, self.showAvatars ? kAvartarHeight + kAvatarMargin : 0) + kCellSpacing;
+    return MAX(data.insets.top + data.size.height + data.insets.bottom, self.showAvatars ? kAvartarHeight + kAvatarMargin : 0) + kCellSpacing;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

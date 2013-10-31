@@ -48,12 +48,11 @@
     
 }
 
-- (void) setImageWithAccountId:(NSNumber *)accountId
+- (void) setImageWithAccount:(AGAccount*)account
 {
-    AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
-    NSURL *url = [dataManager accountIconUrl:accountId small:YES];
+    NSURL *url = [account accountIconUrl:YES];
     [self setImageUrl:url placeImage:[AGUIDefines profileDefaultImage]];
-    url = [dataManager accountIconUrl:accountId small:NO];
+    url = [account accountIconUrl:NO];
     self.mediumUrl = url;
 }
 

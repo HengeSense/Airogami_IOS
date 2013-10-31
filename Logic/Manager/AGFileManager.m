@@ -17,7 +17,6 @@ static NSURL *rootUrl;
 
 @implementation AGFileManager
 
-
 -(id) init
 {
     if (self = [super init]) {

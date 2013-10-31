@@ -14,69 +14,57 @@
 
 #define kConstrainedWidth 190
 
+#define kMaxImageWidth 90
+
 @implementation NSBubbleData
 
 #pragma mark - Properties
 
+@synthesize content = _content;
 @synthesize date = _date;
 @synthesize type = _type;
-@synthesize view = _view;
+@synthesize image = _image;
+@synthesize imageKey = _imageKey;
+@synthesize imageURL = _imageURL;
 @synthesize insets = _insets;
 @synthesize avatar = _avatar;
 @synthesize state = _state;
-@synthesize account;
-@synthesize obj;
+@synthesize account = _account;
+@synthesize obj = _obj;
+@synthesize size = _size;
+@synthesize interactive = _interactive;
 
-#pragma mark - Lifecycle
-
-#if !__has_feature(objc_arc)
-- (void)dealloc
-{
-    [_date release];
-	_date = nil;
-    [_view release];
-    _view = nil;
-    
-    self.avatar = nil;
-
-    [super dealloc];
-}
-#endif
 
 #pragma mark - Text bubble
 
 const UIEdgeInsets textInsetsMine = {10, 19 , 11, 22};
 const UIEdgeInsets textInsetsSomeone = {10, 25, 11, 20};
 
++(UIFont *) font
+{
+    static UIFont *font;
+    if (font == nil) {
+        font = [AGUIUtils themeFont:AGThemeFontStyleMedium size:15.0f];
+    }
+    return font;
+}
+
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
-#if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithText:text date:date type:type] autorelease];
-#else
     return [[NSBubbleData alloc] initWithText:text date:date type:type];
-#endif    
 }
 
 - (id)initWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    UIFont *font = [AGUIUtils themeFont:AGThemeFontStyleMedium size:15.0f];
-
-    CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(kConstrainedWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
-
-    //label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    label.numberOfLines = 0;
-    label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.text = (text ? text : @"");
-    label.font = font;
-    label.backgroundColor = [UIColor clearColor];
-    
-#if !__has_feature(objc_arc)
-    [label autorelease];
-#endif
-    
-    UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
-    return [self initWithView:label date:date type:type insets:insets];
+    if (self = [super init]) {
+        _content = text;
+        _type = type;
+        _date = date;
+        _insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
+        //
+        _size = [(text ? text : @"") sizeWithFont:NSBubbleData.font constrainedToSize:CGSizeMake(kConstrainedWidth, 9999) lineBreakMode:NSLineBreakByWordWrapping];
+    }
+    return self;
 }
 
 #pragma mark - Image bubble
@@ -86,62 +74,64 @@ const UIEdgeInsets imageInsetsSomeone = {10, 25, 11, 20};
 
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {
-#if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithImage:image date:date type:type] autorelease];
-#else
-    return [[NSBubbleData alloc] initWithImage:image date:date type:type];
-#endif    
+    NSBubbleData *bubbleData = [[NSBubbleData alloc] initWithImage:image date:date type:type];
+    return bubbleData;
+}
+
++ (id)dataWithImageKey:(NSString *)imageKey url:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
+{
+    return [[NSBubbleData alloc] initWithObject:imageKey url:url size:size date:date type:type];
+}
+
++ (id)dataWithImage:(UIImage *)image size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
+{
+    return [[NSBubbleData alloc] initWithObject:image url:nil size:size date:date type:type];
+}
+
++ (id)dataWithImageURL:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
+{
+    return [[NSBubbleData alloc] initWithObject:nil url:url size:size date:date type:type];
+}
+
+- (id)initWithObject:(id)object url:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
+{
+    if (self = [super init]) {
+        if (size.width > size.height)
+        {
+            size.height /= (size.width / kMaxImageWidth);
+            size.width = kMaxImageWidth;
+        }
+        else{
+            size.width /= (size.height / kMaxImageWidth);
+            size.height = kMaxImageWidth;
+        }
+        _size = size;
+        if ([object isKindOfClass:[NSString class]]) {
+            _imageKey = object;
+        }
+        else if([object isKindOfClass:[UIImage class]]){
+            _image = object;
+        }
+        _imageURL = url;
+        _date = date;
+        _type = type;
+        _insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
+        _interactive = YES;
+    }
+    
+    return self;
 }
 
 - (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {
-    CGSize size = image.size;
-    if (size.width > 220)
-    {
-        size.height /= (size.width / 220);
-        size.width = 220;
-    }
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    imageView.image = image;
-    imageView.layer.cornerRadius = 5.0;
-    imageView.layer.masksToBounds = YES;
-
-    
-#if !__has_feature(objc_arc)
-    [imageView autorelease];
-#endif
-    
-    UIEdgeInsets insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-    return [self initWithView:imageView date:date type:type insets:insets];       
-}
-
-#pragma mark - Custom view bubble
-
-+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets
-{
-#if !__has_feature(objc_arc)
-    return [[[NSBubbleData alloc] initWithView:view date:date type:type insets:insets] autorelease];
-#else
-    return [[NSBubbleData alloc] initWithView:view date:date type:type insets:insets];
-#endif    
-}
-
-- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets  
-{
-    self = [super init];
-    if (self)
-    {
-#if !__has_feature(objc_arc)
-        _view = [view retain];
-        _date = [date retain];
-#else
-        _view = view;
-        _date = date;
-#endif
+    if (self = [super init]) {
+        _size = image.size;
+        _image = image;
         _type = type;
-        _insets = insets;
+        _date = date;
+        _insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
     }
+    
     return self;
 }
 

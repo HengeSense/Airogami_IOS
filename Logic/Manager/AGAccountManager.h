@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AGAccount.h"
+#import "AGAccount+Addition.h"
 #import "AGProfile.h"
 #import "AGDefines.h"
 

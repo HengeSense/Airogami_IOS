@@ -136,7 +136,7 @@
         [self.locationButton setTitle:[self.location toString] forState:UIControlStateNormal];
         self.descriptionTextView.text = profile.shout;
         self.emailTextField.text = profile.account.authenticate.email;
-        [self.profileImageButton setImageWithAccountId:profile.accountId];
+        [self.profileImageButton setImageWithAccount:profile.account];
     }
 }
 

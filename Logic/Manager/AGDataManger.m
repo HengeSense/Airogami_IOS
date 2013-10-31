@@ -13,42 +13,18 @@
 #import "AGJSONHttpHandler.h"
 #import "AGMessageUtils.h"
 #import "AGUploadHttpHandler.h"
-
-static NSString *AGContentTypes[] = {@".audio", @".jpg"};
+#import "AGAccount.h"
 
 static NSString *MessageDataPath = @"data/messageDataToken.action?";
 static NSString *ChainDataPath = @"data/chainDataToken.action?";
 
 @implementation AGDataManger
 
-//accounts/reversed accountId/account/icon ...
-- (NSURL*) accountIconUrl:(NSNumber*)accountId small:(BOOL) small
-{
-    NSString *suffix;
-    if (small) {
-        suffix = @"";
-    }
-    else{
-        suffix = @"-medium";
-    }
-    
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@accounts/%@/account/icon%@.jpg", AGDataServerUrl, accountId.stringValue.reverseString, suffix]];
-}
-
-//accounts/reversed accountId/messageData/reversed msgDataInc
-- (NSURL*) messageDataUrl:(NSNumber*)accountId msgDataInc:(NSNumber*)msgDataInc type:(AGMessageTypeEnum) type
-{
-    assert(type >= AGMessageTypeAudio && type <= AGMessageTypeImage);
-    NSURL *url = nil;
-    NSString *suffix = AGContentTypes[type - AGMessageTypeAudio];
-    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@accounts/%@/messageData/%@%@", AGDataServerUrl, accountId.stringValue.reverseString, msgDataInc.stringValue.reverseString, suffix]];
-    return url;
-}
-
 - (void) messageDataToken:(NSDictionary *)params context:(id)context block:(AGMessageDataTokenBlock)block
 {
-    [AGJSONHttpHandler request:YES params:params path:MessageDataPath prompt:@"" context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
-        NSDictionary *token = nil;
+    [AGJSONHttpHandler request:YES params:params path:MessageDataPath prompt:nil context:context block:^(NSError *error, id context, NSMutableDictionary *result) {
+        NSArray *tokens = nil;
+        NSNumber *msgDataInc = nil;
         if (error) {
             //[AGMessageUtils alertMessageWithFilteredError:error];
         }
@@ -61,13 +37,26 @@ static NSString *ChainDataPath = @"data/chainDataToken.action?";
                 //succeed
                 NSString *tokenString = [result objectForKey:@"token"];
                 if (tokenString && [tokenString isEqual:[NSNull null]] == NO) {
-                    token = [NSJSONSerialization JSONObjectWithData:[tokenString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                    NSDictionary *token = [NSJSONSerialization JSONObjectWithData:[tokenString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                    tokens = [NSArray arrayWithObject:token];
                 }
+                else{
+                    NSString *smallString = [result objectForKey:@"small"];
+                    assert(smallString && [smallString isEqual:[NSNull null]] == NO);
+                    NSString *mediumString = [result objectForKey:@"medium"];
+                    assert(mediumString && [mediumString isEqual:[NSNull null]] == NO);
+                    //
+                    NSDictionary *small = [NSJSONSerialization JSONObjectWithData:[smallString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                    NSDictionary *medium = [NSJSONSerialization JSONObjectWithData:[mediumString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                    tokens = [NSArray arrayWithObjects:medium, small, nil];
+                }
+                
+                msgDataInc = [result objectForKey:@"msgDataInc"];
             }
             
         }
         if (block) {
-            block(error, context, token);
+            block(error, context, tokens, msgDataInc);
         }
         
     }];
@@ -95,12 +84,12 @@ static NSString *ChainDataPath = @"data/chainDataToken.action?";
         
         if (error) {
 #ifdef IS_DEBUG
-            NSLog(@"uploadData Error: %@", error.userInfo);
+            //NSLog(@"uploadData Error: %@", error.userInfo);
 #endif
         }
         else{
 #ifdef IS_DEBUG
-            NSLog(@"uploadData successfully");
+            NSLog(@"DataManager:uploadData successfully");
 #endif
         }
         if (block) {

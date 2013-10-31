@@ -38,8 +38,8 @@ typedef enum
 {
     AGSendStateNone = -2,
     AGSendStateSending = -1,
-    AGSendStateSent = 0,
-    AGSendStateFailed = 1,
+    AGSendStateFailed = 0,
+    AGSendStateSent = 1,
     AGSendStateRead = 2
 } AGSendStateEnum;
 

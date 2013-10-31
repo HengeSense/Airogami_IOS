@@ -80,7 +80,7 @@
 
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";
-"text.ui.smile" = "(smile)";
+"text.ui.smile" = "[smile]";
 "message.synchronize.title" = "Synchronizing";
 "message.ui.write.edit.age.invalid" = "Start age should be less than end age";
 "title.ui.write.edit.age.start" = "Start age";
