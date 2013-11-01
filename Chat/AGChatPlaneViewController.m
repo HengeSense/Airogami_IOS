@@ -23,7 +23,8 @@
 #import "AGPlane+Addition.h"
 #import <QuartzCore/QuartzCore.h>
 
-static NSString *SmileText = @"text.ui.smile";
+static NSString *SmileText = @"text.ui.chat.plane.smile";
+static NSString *ImageText = @"text.ui.chat.plane.image";
 
 @interface AGChatPlaneViewController ()
 {
@@ -286,6 +287,9 @@ static NSString *SmileText = @"text.ui.smile";
         if (message.type.intValue == AGMessageTypeLike) {
             cell.messageLabel.text = AGLS(SmileText);
         }
+        else if (message.type.intValue == AGMessageTypeImage){
+            cell.messageLabel.text = AGLS(ImageText);
+        }
         else{
             cell.messageLabel.text = message.content;
         }
@@ -301,7 +305,13 @@ static NSString *SmileText = @"text.ui.smile";
         cell.date = chain.updatedTime;
         //cell.timeLabel.text = [AGUtils dateToString:chain.updatedTime];
         AGChainMessage *chainMessage = chain.chainMessage;
-        cell.messageLabel.text = chainMessage.content;
+        if (chainMessage.type.intValue == AGMessageTypeImage){
+            cell.messageLabel.text = AGLS(ImageText);
+        }
+        else{
+            cell.messageLabel.text = chainMessage.content;
+        }
+        
         //count = [[AGControllerUtils controllerUtils].chainMessageController getUnreadChainMessageCountForChain:chain.chainId];
         AGChainMessage *cm = [[AGControllerUtils controllerUtils].chainMessageController getChainMessageForChain:chain.chainId];
         count = cm.unreadChainMessagesCount.intValue;

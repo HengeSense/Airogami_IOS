@@ -28,9 +28,8 @@ typedef enum _NSBubbleType
 
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic, retain) NSString *content;
-@property (nonatomic, retain) UIImage *image;
-@property (nonatomic, retain) NSString *imageKey;
-@property (nonatomic, retain) NSURL *imageURL;
+@property (nonatomic, retain) id small;
+@property (nonatomic, retain) id medium;
 @property (readonly, nonatomic) NSBubbleType type;
 @property (readonly, nonatomic) UIEdgeInsets insets;
 @property (nonatomic, retain) UIImage *avatar;
@@ -45,10 +44,7 @@ typedef enum _NSBubbleType
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type;
 //- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type;
-+ (id)dataWithImageURL:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type;
-+ (id)dataWithImageKey:(NSString *)imageKey url:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type;
-+ (id)dataWithImage:(UIImage *)image size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type;
-//- (id)initWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
-//+ (id)dataWithView:(UIView *)view date:(NSDate *)date type:(NSBubbleType)type insets:(UIEdgeInsets)insets;
++ (id)dataWithImageURL:(NSURL*)url mediumUrl:(NSURL*)mediumUrl size:(CGSize)size text:(NSString*)text date:(NSDate *)date type:(NSBubbleType)type;
++ (id)dataWithImage:(UIImage *)image mediumImage:(UIImage*)mediumImage text:(NSString*)text date:(NSDate *)date type:(NSBubbleType)type;
 
 @end

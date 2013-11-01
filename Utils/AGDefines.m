@@ -7,11 +7,17 @@
 //
 #import "AGDefines.h"
 
+#define remote
+
 const int AGDeviceType = 1;
 const int AGApplicationVersion = 1;
-//http://192.168.0.6:8080/
-//NSString* AGWebServerUrl = @"http://192.168.0.6:8080/";
+
+#ifdef remote
 NSString* AGWebServerUrl = @"http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/";//http://ec2-50-112-76-55.us-west-2.compute.amazonaws.com/airogami/
+#else
+//http://192.168.0.6:8080/
+NSString* AGWebServerUrl = @"http://192.168.0.6:8080/";
+#endif
 NSString* AGDataServerUrl = @"https://airogami.s3.amazonaws.com/";
 
 const CGSize AGAccountIconSizeMedium = {512, 512};

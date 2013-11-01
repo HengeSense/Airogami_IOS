@@ -13,7 +13,7 @@
 #import "AGUIUtils.h"
 #import "AGDefines.h"
 #import "AGLikeButton.h"
-#import "AGImagePicker.h"
+#import "AGImageTextPicker.h"
 #import "UIImage+Addition.h"
 #import "AGChatChatViewController+Aided.h"
 #import <QuartzCore/QuartzCore.h>
@@ -29,7 +29,7 @@ static NSString * ResendConfirm = @"title.ui.chat.resend.confirm";
 
 static int ResendTag = 1;
 
-@interface AGChatChatViewController()<UIAlertViewDelegate, UIActionSheetDelegate, AGImagePickerDelegate>
+@interface AGChatChatViewController()<UIAlertViewDelegate, UIActionSheetDelegate, AGImageTextPickerDelegate>
 {
     __weak IBOutlet UIView *textInputView;
     __weak IBOutlet UIButton *backButton;
@@ -41,7 +41,7 @@ static int ResendTag = 1;
     UITextView *aidedTextView;
     
     NSBubbleData *selectedBubbleData;
-    AGImagePicker *imagePicker;
+    AGImageTextPicker *imagePicker;
 }
 
 @end
@@ -367,7 +367,7 @@ static int ResendTag = 1;
         }
     }
     else{
-        imagePicker = [[AGImagePicker alloc] init];
+        imagePicker = [AGImageTextPicker imageTextPicker];
         imagePicker.delegate = self;
         switch (buttonIndex) {
             case 0:
@@ -391,11 +391,11 @@ static int ResendTag = 1;
     }
 }
 
-- (void) imagePicker:(AGImagePicker *)imagePicker_ didFinish:(BOOL)finished image:(UIImage *)image
+- (void) imageTextPicker:(AGImageTextPicker *)imagePicker_ didFinish:(BOOL)finished image:(UIImage *)image text:(NSString *)text
 {
     if (finished) {
         NSArray *images = [image scaledImages];
-        [self sendImages:images];
+        [self sendImages:images text:text];
     }
     imagePicker = nil;
 }

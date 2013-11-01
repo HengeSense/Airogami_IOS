@@ -213,17 +213,17 @@ NSString *AGNotificationViewedMessagesForPlane = @"notification.viewedMessagesFo
 -(void) uploadMessageImages:(AGMessage*)message small:(NSDictionary*)small medium:(NSDictionary*)medium
 {
     AGDataManger *dataManager = [AGManagerUtils managerUtils].dataManager;
-    NSString *key = [message messageDataKey:NO];
+    NSURL *url = [message messageLocalImageURL:NO];
     UIImage *image = nil;
-    image = [[SDImageCache imageCache] imageFromDiskCacheForKey:key];
+    image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
     CGSize size = image.size;
     NSLog(@"uploadMessageImages(medium): size.width=%f", size.width);
     
     [dataManager uploadData:UIImageJPEGRepresentation(image, 1.0f) params:medium type:message.type.shortValue context:nil block:^(NSError *error, id context) {
         if (error == nil) {
-            NSString *key = [message messageDataKey:YES];
+             NSURL *url = [message messageLocalImageURL:YES];
             UIImage *image = nil;
-            image = [[SDImageCache imageCache] imageFromDiskCacheForKey:key];
+            image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url.absoluteString];
             CGSize size = image.size;
             NSLog(@"uploadMessageImages(small): size.width=%f", size.width);
             //

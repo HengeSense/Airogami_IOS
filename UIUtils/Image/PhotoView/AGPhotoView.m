@@ -7,16 +7,20 @@
 //
 
 #import "AGPhotoView.h"
+#import "AGPhotoScrollView.h"
+#import "AGPhotoLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 static NSString *DownloadDone = @"1";
 static NSString *DownloadNo = @"0";
 
-@interface AGPhotoView()
+@interface AGPhotoView()<AGPhotoScrollViewDelegate>
 {
     JPRadialProgressView *progressView;
     NSMutableString  *download;
     id source;
+    //text
+    AGPhotoLabel *label;
 }
 @property(nonatomic, assign) CGRect originalFrame;
 
@@ -38,7 +42,21 @@ static NSString *DownloadNo = @"0";
     return self;
 }
 
-- (void) preview:(UIImage*)sImage url:(NSURL*)url soure:(id)aSource
+- (void) preview:(UIImage*)sImage medium:(id)medium soure:(id)aSource text:(NSString*)text
+{
+    if (text.length) {
+        UIWindow *window = [[UIApplication sharedApplication].delegate window];
+        CGRect frame = window.bounds;
+        label = [[AGPhotoLabel alloc] initWithFrame:frame];
+        label.text = text;
+        frame.size.height = [label sizeThatFits:frame.size].height;
+        label.frame = frame;
+    }
+    
+    [self preview:sImage medium:medium soure:aSource];
+}
+
+- (void) preview:(UIImage*)sImage medium:(id)medium soure:(id)aSource
 {
     source = aSource;
     self.userInteractionEnabled = NO;
@@ -46,10 +64,14 @@ static NSString *DownloadNo = @"0";
     [window addSubview:self];
     
     NSMutableString *finished = download;
-    if (url == nil) {
+    if (medium == nil) {
         self.image = sImage;
     }
-    else{
+    else if([medium isKindOfClass:[UIImage class]]){
+        self.image = medium;
+    }
+    else if([medium isKindOfClass:[NSURL class]]){
+        NSURL *url = medium;
         SDImageCache *imageCache = [SDImageCache sharedImageCache];
         UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
         if (image == nil) {
@@ -116,11 +138,9 @@ static NSString *DownloadNo = @"0";
 -(void)showDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:window.bounds];
-    scrollView.maximumZoomScale = 2.0f;
-    scrollView.minimumZoomScale = 1.0f;
+    AGPhotoScrollView *scrollView = [[AGPhotoScrollView alloc] initWithFrame:window.bounds];
+    scrollView.photoScrollViewDelegate = self;
     scrollView.delegate = self;
-    scrollView.backgroundColor = [UIColor blackColor];
     CGRect bounds = self.bounds;
     bounds.size = [self adjustSize];
     self.bounds = bounds;
@@ -134,15 +154,49 @@ static NSString *DownloadNo = @"0";
         progressView.center = progressView.superview.center;
     }
     self.userInteractionEnabled = YES;
-    
+    //text
+    if (label) {
+        [scrollView addSubview:label];
+        label.center = scrollView.center;
+    }
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	return self;
 }
 
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+// keep view in center when image is small than scrollView
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
+    UIView *subView = [scrollView.subviews objectAtIndex:0];
+    
+    CGFloat offsetX = (scrollView.bounds.size.width > scrollView.contentSize.width)?
+    (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0.0;
+    
+    CGFloat offsetY = (scrollView.bounds.size.height > scrollView.contentSize.height)?
+    (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0.0;
+    
+    subView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX,
+                                 scrollView.contentSize.height * 0.5 + offsetY);
+    
+}
+
+-(void) scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view
+{
+    label.hidden = YES;
+}
+
+- (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    //text
+    label.hidden = scrollView.zoomScale != 1.0f;
+}
+
+- (void) dismiss
+{
+    //text
+    label.hidden = YES;
+    //
     self.userInteractionEnabled = NO;
     UIScrollView *scrollView = (UIScrollView *) self.superview;
     scrollView.zoomScale = 1.0f;
@@ -151,6 +205,7 @@ static NSString *DownloadNo = @"0";
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(dismissDidStop:finished:context:)];
     [UIView commitAnimations];
+    
 }
 
 -(void) dismissDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context

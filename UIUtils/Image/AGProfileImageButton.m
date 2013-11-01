@@ -43,7 +43,7 @@
         
         AGPhotoView *photoView = [[AGPhotoView alloc] initWithFrame:frame];
         
-        [photoView preview:self.imageView.image url:mediumUrl soure:self];
+        [photoView preview:self.imageView.image medium:mediumUrl soure:self];
     }
     
 }

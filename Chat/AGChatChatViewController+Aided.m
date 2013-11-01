@@ -98,6 +98,7 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     }
     AGAccount * account = [AGAppDirector appDirector].account;
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
+    NSURL *small = nil, *medium = nil;
     for (AGMessage *message in messages) {
         NSBubbleType bubbleType = BubbleTypeMine;
         if (account != message.account) {
@@ -110,11 +111,19 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
         }
         else if (message.type.intValue == AGMessageTypeImage){
             if (bubbleType == BubbleTypeMine) {
-                bubbleData = [NSBubbleData dataWithImageKey:[message messageDataKey:YES] url:[message messageImageUrl:YES] size:message.imageSize date:message.createdTime type:bubbleType];
+                small = [message messageLocalImageURL:YES];
+                medium = [message messageLocalImageURL:NO];
+                if ([[SDImageCache sharedImageCache] diskImageExistsWithKey:small.absoluteString] == NO) {
+                    small = [message messageImageURL:YES];
+                    medium = [message messageImageURL:NO];
+                }
+                bubbleData = [NSBubbleData dataWithImageURL:[message messageLocalImageURL:YES] mediumUrl:[message messageLocalImageURL:NO]  size:message.imageSize text:message.content date:message.createdTime type:bubbleType];
             }
             else{
-                bubbleData = [NSBubbleData dataWithImageURL:[message messageImageUrl:YES] size:message.imageSize date:message.createdTime type:bubbleType];
+                small = [message messageImageURL:YES];
+                medium = [message messageImageURL:NO];
             }
+             bubbleData = [NSBubbleData dataWithImageURL:small mediumUrl:medium size:message.imageSize text:message.content date:message.createdTime type:bubbleType];
         }
         else{
             bubbleData = [NSBubbleData dataWithText:message.content date:message.createdTime type:bubbleType];
@@ -238,18 +247,18 @@ static NSString * LikedByMeImage = @"chat_chat_liked_mine.png";
     
 }
 
--(void) sendImages:(NSArray*)images
+-(void) sendImages:(NSArray*)images text:(NSString*)text
 {
     AGPlaneManager *planeManager = [AGManagerUtils managerUtils].planeManager;
     AGPlane *plane = airogami;
     UIImage *mediumImage = [images objectAtIndex:0];
     UIImage *smallImage = [images objectAtIndex:1];
-    AGMessage *message = [planeManager messageForReplyPlane:plane content:inputTextView.text imageSize:mediumImage.size];
+    AGMessage *message = [planeManager messageForReplyPlane:plane content:text imageSize:mediumImage.size];
     //
-    [[SDImageCache imageCache] storeImage:mediumImage forKey:[message messageDataKey:NO]];
-    [[SDImageCache imageCache] storeImage:[images objectAtIndex:1] forKey:[message messageDataKey:YES]];
+    [[SDImageCache sharedImageCache] storeImage:mediumImage forKey:[message messageLocalImageURL:NO].absoluteString];
+    [[SDImageCache sharedImageCache] storeImage:smallImage forKey:[message messageLocalImageURL:YES].absoluteString];
     //
-    NSBubbleData *sayBubble = [NSBubbleData dataWithImage:smallImage size:message.imageSize date:message.createdTime type:BubbleTypeMine];
+    NSBubbleData *sayBubble = [NSBubbleData dataWithImage:smallImage mediumImage:mediumImage text:message.content date:message.createdTime type:BubbleTypeMine];
     sayBubble.account = [AGAppDirector appDirector].account;
     sayBubble.state = message.state.intValue;
     sayBubble.obj = message;

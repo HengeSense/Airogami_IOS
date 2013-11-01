@@ -11,6 +11,6 @@
 @interface AGChatChatViewController (Aided)
 
 -(void) send;
--(void) sendImages:(NSArray*)images;
+-(void) sendImages:(NSArray*)images text:(NSString*)text;
 -(void) clear;
 @end

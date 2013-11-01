@@ -16,6 +16,7 @@
 #import "AGManagerUtils.h"
 #import "AGUIUtils.h"
 #import "SDImageCache+Addition.h"
+#import "AGPhotoView.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
 #define kMineLeftCapWidth 22
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) UIButton *contentButton;
 @property (nonatomic, retain) UIImageView *bubbleImage;
 @property (nonatomic, retain) UIButton *avatarButton;
+@property (nonatomic, strong) NSNumber *done;
 
 - (void) setupInternalData;
 
@@ -48,6 +50,7 @@
 @synthesize avatarButton = _avatarButton;
 @synthesize stateButton = _stateButton;
 @synthesize bubbleTableView;
+@synthesize done;
 
 - (id) init
 {
@@ -91,7 +94,10 @@
     contentButton = [[UIButton alloc] init];
     contentButton.layer.cornerRadius = 5.0;
     contentButton.layer.masksToBounds = YES;
+    [contentButton addTarget:self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:contentButton];
+    //
+    done = [NSNumber numberWithBool:YES];
 }
 
 - (void)setFrame:(CGRect)frame
@@ -101,19 +107,22 @@
     if (self.data && CGRectEqualToRect(rect, frame) == NO) {
         [self setupInternalData];
     }
-
 }
 
-#if !__has_feature(objc_arc)
-- (void) dealloc
+
+- (void) buttonClicked
 {
-    self.data = nil;
-    self.customView = nil;
-    self.bubbleImage = nil;
-    self.avatarButton = nil;
-    [super dealloc];
+    if (done.boolValue) {
+        done = [NSNumber numberWithBool:NO];
+        UIWindow *window = [[UIApplication sharedApplication].delegate window];
+        [window endEditing:YES];
+        CGRect frame = [contentButton.imageView convertRect:contentButton.imageView.bounds toView:window];
+        
+        AGPhotoView *photoView = [[AGPhotoView alloc] initWithFrame:frame];
+        [photoView preview:contentButton.imageView.image medium:self.data.medium soure:self text:self.data.content];
+    }
+    
 }
-#endif
 
 
 - (void)setData:(NSBubbleData *)data
@@ -127,7 +136,8 @@
             NSURL *url = [data.account accountIconUrl:YES];
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
             UIImage *image = [imageCache imageFromDiskCacheForKey:url.absoluteString];
-            if (image) {
+            //UIImage *image = [imageCache imageFromMemoryCacheForKey:url.absoluteString];
+            if (image == nil) {
                 image = [AGUIDefines profileDefaultImage];
             }
             [self.avatarButton setImageWithURL:url forState:UIControlStateNormal placeholderImage:image options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
@@ -150,6 +160,7 @@
         self.avatarButton.hidden = YES;
     }
     //
+    label.text = data.content;
     label.hidden = contentButton.hidden = YES;
     //
     if (type == BubbleTypeSomeoneElse)
@@ -162,11 +173,8 @@
     }
     //set image
     UIImage *image = nil;
-    if (data.imageKey) {
-        image = [[SDImageCache imageCache] imageFromDiskCacheForKey:self.data.imageKey];
-    }
-    else if(data.image){
-        image = data.image;
+    if([data.small isKindOfClass:[UIImage class]]){
+        image = data.small;
     }
     //
     if (image) {
@@ -174,10 +182,10 @@
         contentButton.hidden = NO;
         self.customView = contentButton;
     }
-    else if(data.imageURL){
+    else if([data.small isKindOfClass:[NSURL class]]){
         contentButton.hidden = NO;
         self.customView = contentButton;
-        [contentButton setImageWithURL:self.data.imageURL forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [contentButton setImageWithURL:data.small forState:UIControlStateNormal placeholderImage:nil options:SDWebImageProgressiveDownload completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 #ifdef IS_DEBUG
             if (error) {
                 NSLog(@"initWithImageKey: error=%@", error);

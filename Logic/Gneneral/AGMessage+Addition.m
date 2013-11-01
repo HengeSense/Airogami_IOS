@@ -12,13 +12,13 @@
 
 //static NSString *AGContentTypes[] = {@".audio", @".jpg"};
 
-static NSString *AGImageSizes[] = {@"medium", @""};
+static NSString *AGImageSizes[] = {@"-medium", @""};
 
 @implementation AGMessage (Addition)
 
 
 //accounts/reversed accountId/messagedata/reversed msgDataInc
-- (NSURL*) messageImageUrl:(BOOL)small
+- (NSURL*) messageImageURL:(BOOL)small
 {
     assert(self.type.shortValue == AGMessageTypeImage);
     NSURL *url = nil;
@@ -27,10 +27,10 @@ static NSString *AGImageSizes[] = {@"medium", @""};
 }
 
 //for save images
-- (NSString*) messageDataKey:(BOOL)small
+- (NSURL*) messageLocalImageURL:(BOOL)small
 {
-    NSString *key = [NSString stringWithFormat:@"%@%@", self.objectID.URIRepresentation.absoluteString, AGImageSizes[small]];
-    return key;
+    NSURL *url = [self.objectID.URIRepresentation URLByAppendingPathComponent:AGImageSizes[small]];
+    return url;
 }
 
 -(CGSize) imageSize

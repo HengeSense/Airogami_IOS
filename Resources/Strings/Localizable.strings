@@ -80,7 +80,8 @@
 
 //UI
 "text.ui.shout.nothing" = "This guy didn't say anything";
-"text.ui.smile" = "[smile]";
+"text.ui.chat.plane.smile" = "[smile]";
+"text.ui.chat.plane.image" = "[image]";
 "message.synchronize.title" = "Synchronizing";
 "message.ui.write.edit.age.invalid" = "Start age should be less than end age";
 "title.ui.write.edit.age.start" = "Start age";
@@ -100,6 +101,8 @@
 "LKRP" = "You got a new plane";//LocKeyReceivedPlane
 "LKRC" = "You got a new chain plane";//LocKeyReceivedChain
 "LKRPM" = "%@: %@";//LocKeyReceivedPlaneMessage
+"LKRPIM" = "%@ sent you an image";//LocKeyReceivedPlaneImageMessage
 "LKRCM" = "%@: %@";//LocKeyReceivedChainMessage
+"LKRCIM" = "%@ sent you an image";//LocKeyReceivedChainImageMessage
 "LKLPM" = "%@ smiled at you";//LocKeyLikedPlaneMessage
 

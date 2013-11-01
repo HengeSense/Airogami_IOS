@@ -10,6 +10,6 @@
 
 @interface SDImageCache (Addition)
 
-+(SDImageCache*) imageCache;
++(SDImageCache*) imageCache1;
 
 @end

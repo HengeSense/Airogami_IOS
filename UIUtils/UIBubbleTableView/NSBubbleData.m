@@ -23,9 +23,8 @@
 @synthesize content = _content;
 @synthesize date = _date;
 @synthesize type = _type;
-@synthesize image = _image;
-@synthesize imageKey = _imageKey;
-@synthesize imageURL = _imageURL;
+@synthesize small = _small;
+@synthesize medium = _medium;
 @synthesize insets = _insets;
 @synthesize avatar = _avatar;
 @synthesize state = _state;
@@ -69,31 +68,29 @@ const UIEdgeInsets textInsetsSomeone = {10, 25, 11, 20};
 
 #pragma mark - Image bubble
 
-const UIEdgeInsets imageInsetsMine = {10, 19 , 11, 22};
-const UIEdgeInsets imageInsetsSomeone = {10, 25, 11, 20};
+const UIEdgeInsets likeImageInsetsMine = {10, 19 , 11, 22};
+const UIEdgeInsets likeImageInsetsSomeone = {10, 25, 11, 20};
 
 + (id)dataWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
 {
-    NSBubbleData *bubbleData = [[NSBubbleData alloc] initWithImage:image date:date type:type];
+    NSBubbleData *bubbleData = [[NSBubbleData alloc] initWithSmall:image medium:nil size:image.size text:nil date:date type:type];
     return bubbleData;
 }
 
-+ (id)dataWithImageKey:(NSString *)imageKey url:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
++ (id)dataWithImage:(UIImage *)image mediumImage:(UIImage*)mediumImage text:(NSString*)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    return [[NSBubbleData alloc] initWithObject:imageKey url:url size:size date:date type:type];
+    return [[NSBubbleData alloc] initWithSmall:image medium:mediumImage size:image.size text:text date:date type:type];
 }
 
-+ (id)dataWithImage:(UIImage *)image size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
++ (id)dataWithImageURL:(NSURL*)url mediumUrl:(NSURL*)mediumUrl size:(CGSize)size text:(NSString*)text date:(NSDate *)date type:(NSBubbleType)type
 {
-    return [[NSBubbleData alloc] initWithObject:image url:nil size:size date:date type:type];
+    return [[NSBubbleData alloc] initWithSmall:url medium:mediumUrl size:size text:text date:date type:type];
 }
 
-+ (id)dataWithImageURL:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
-{
-    return [[NSBubbleData alloc] initWithObject:nil url:url size:size date:date type:type];
-}
+const UIEdgeInsets imageInsetsMine = {14, 15, 14, 22};
+const UIEdgeInsets imageInsetsSomeone = {14, 21, 14, 14};
 
-- (id)initWithObject:(id)object url:(NSURL*)url size:(CGSize)size date:(NSDate *)date type:(NSBubbleType)type
+- (id)initWithSmall:(id)small medium:(id)medium size:(CGSize)size text:(NSString*)text date:(NSDate *)date type:(NSBubbleType)type
 {
     if (self = [super init]) {
         if (size.width > size.height)
@@ -105,34 +102,18 @@ const UIEdgeInsets imageInsetsSomeone = {10, 25, 11, 20};
             size.width /= (size.height / kMaxImageWidth);
             size.height = kMaxImageWidth;
         }
+        _content = text;
         _size = size;
-        if ([object isKindOfClass:[NSString class]]) {
-            _imageKey = object;
-        }
-        else if([object isKindOfClass:[UIImage class]]){
-            _image = object;
-        }
-        _imageURL = url;
+        _small = small;
+        _medium = medium;
         _date = date;
         _type = type;
         _insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-        _interactive = YES;
+        _interactive = medium != nil;
     }
     
     return self;
 }
 
-- (id)initWithImage:(UIImage *)image date:(NSDate *)date type:(NSBubbleType)type
-{
-    if (self = [super init]) {
-        _size = image.size;
-        _image = image;
-        _type = type;
-        _date = date;
-        _insets = (type == BubbleTypeMine ? imageInsetsMine : imageInsetsSomeone);
-    }
-    
-    return self;
-}
 
 @end

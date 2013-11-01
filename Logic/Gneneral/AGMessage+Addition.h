@@ -12,6 +12,6 @@
 
 @property(nonatomic, assign) CGSize imageSize;
 
-- (NSURL*) messageImageUrl:(BOOL)small;
-- (NSString*) messageDataKey:(BOOL)small;
+- (NSURL*) messageImageURL:(BOOL)small;
+- (NSURL*) messageLocalImageURL:(BOOL)small;
 @end

@@ -10,7 +10,7 @@
 
 @implementation SDImageCache (Addition)
 
-+(SDImageCache*) imageCache
++(SDImageCache*) imageCache1
 {
     static SDImageCache *imageCache;
     if (imageCache == nil) {
